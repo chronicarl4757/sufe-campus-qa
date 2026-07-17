@@ -4,8 +4,8 @@ import re
 
 from sufe_qa.schema import Chunk
 
-ARTICLE_RE = re.compile(r"(?m)^(第[一二三四五六七八九十百千零\d]+条)")
-SECTION_RE = re.compile(r"(?m)^([一二三四五六七八九十]+[、．.])")
+ARTICLE_RE = re.compile(r"(?m)^[ \u3000]*(第[一二三四五六七八九十百千零\d]+条)")
+SECTION_RE = re.compile(r"(?m)^[ \u3000]*([一二三四五六七八九十]+[、．.])")
 
 
 def _structural_units(text: str) -> list[tuple[str, str]]:
@@ -41,6 +41,9 @@ def _pack(text: str, max_chars: int, overlap: int) -> list[str]:
 def split_document(
     text: str, doc_id: str, metadata: dict, max_chars: int = 480, overlap: int = 50
 ) -> list[Chunk]:
+    # overlap >= max_chars 时 _pack 的 start 不再前进，会死循环，入口直接拒绝
+    if overlap >= max_chars:
+        raise ValueError(f"overlap({overlap}) 必须小于 max_chars({max_chars})")
     chunks: list[Chunk] = []
     idx = 0
     for heading, unit in _structural_units(text):

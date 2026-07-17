@@ -23,7 +23,7 @@ def test_plain_text_respects_max_chars():
     text = "这是一段没有结构的正文。" * 200  # ~2400 字
     chunks = split_document(text, "doc2", {}, max_chars=480, overlap=50)
     assert len(chunks) >= 5
-    assert all(len(c.text) <= 480 + 50 for c in chunks)
+    assert all(len(c.text) <= 480 for c in chunks)
     # 重叠: 相邻块共享尾部/首部片段
     assert chunks[0].text[-20:] in chunks[1].text
 
@@ -31,3 +31,17 @@ def test_plain_text_respects_max_chars():
 def test_metadata_propagated():
     chunks = split_document(POLICY, "doc3", {"title": "t", "category": "奖助学金"})
     assert all(c.metadata["category"] == "奖助学金" for c in chunks)
+
+
+def test_overlap_ge_max_chars_rejected():
+    import pytest
+
+    with pytest.raises(ValueError, match="overlap"):
+        split_document("文本", "d", {}, max_chars=100, overlap=100)
+
+
+def test_indented_articles_still_split():
+    text = "　　第一条 缩进内容一。\n\u3000\u3000第二条 缩进内容二。"
+    chunks = split_document(text, "d", {})
+    headings = [c.heading_path for c in chunks]
+    assert "第一条" in headings and "第二条" in headings
