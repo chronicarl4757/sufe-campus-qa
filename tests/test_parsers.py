@@ -42,6 +42,7 @@ def test_parse_md_passthrough(tmp_path):
     p.write_text("# 学工指南\n内容正文。", encoding="utf-8")
     doc = parse_file(p)
     assert "学工指南" in doc.text
+    assert doc.title == "学工指南"  # md 以首个一级标题为文档标题
 
 
 def test_unsupported_suffix(tmp_path):

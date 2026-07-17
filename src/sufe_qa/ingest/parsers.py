@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -83,9 +84,12 @@ def parse_file(path: Path) -> ParsedDoc:
             return parse_pdf(path)
         if suffix == ".docx":
             return parse_docx(path)
-        return ParsedDoc(
-            title=path.stem,
-            text=path.read_text(encoding="utf-8", errors="replace").strip(),
-        )
+        text = path.read_text(encoding="utf-8", errors="replace").strip()
+        # md 以首个一级标题为文档标题，无则回退文件名
+        title = path.stem
+        m = re.search(r"(?m)^#\s+(.+)$", text)
+        if m:
+            title = m.group(1).strip()
+        return ParsedDoc(title=title, text=text)
     except Exception as e:
         raise ParseError(f"解析失败: {path.name}: {e}") from e
