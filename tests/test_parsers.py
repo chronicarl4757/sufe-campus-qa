@@ -41,7 +41,7 @@ def test_parse_md_passthrough(tmp_path):
     p = tmp_path / "note.md"
     p.write_text("# 学工指南\n内容正文。", encoding="utf-8")
     doc = parse_file(p)
-    assert "学工指南" in doc.text
+    assert "内容正文" in doc.text  # H1 已提为 title，正文不再含标题行
     assert doc.title == "学工指南"  # md 以首个一级标题为文档标题
 
 

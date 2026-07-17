@@ -6,6 +6,7 @@ from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
 
+from sufe_qa.config import CATEGORIES
 from sufe_qa.ingest.parsers import ParseError, parse_file
 from sufe_qa.schema import DocMeta, append_manifest, doc_id_from, load_manifest, sha256_text
 
@@ -38,7 +39,11 @@ class InboxReport:
 def ingest_inbox(
     inbox_dir: Path, corpus_dir: Path, manifest_path: Path, category: str, publisher: str
 ) -> InboxReport:
-    existing_hashes = {m.content_hash for m in load_manifest(manifest_path).values()}
+    # 入口先校验：非法 category（含 "../escape" 路径穿越）在写盘前拒绝
+    if category not in CATEGORIES:
+        raise ValueError(f"非法分类: {category}")
+    existing_by_id = load_manifest(manifest_path)
+    existing_hashes = {m.content_hash for m in existing_by_id.values()}
     added, dup, empty, error, quarantined = 0, 0, 0, 0, []
     new_metas: list[DocMeta] = []
 
@@ -58,23 +63,29 @@ def ingest_inbox(
         if scan_sensitive(doc.text):
             quarantined.append(path.name)
             continue
-        content_hash = sha256_text(doc.text)
+        # hash 对齐最终落盘内容，保证 manifest 与磁盘文件一致
+        final = f"# {doc.title}\n\n{doc.text}\n"
+        content_hash = sha256_text(final)
         if content_hash in existing_hashes:
             dup += 1
             continue
-        slug = slugify(doc.title)
-        rel_path = Path(category) / f"{slug}.md"
+        doc_id = doc_id_from(f"inbox/{path.name}")
+        if doc_id in existing_by_id:
+            # 同文档更新（doc_id 由来源路径锚定）：沿用旧路径原地覆盖，不留孤儿文件
+            rel_path = Path(existing_by_id[doc_id].file_path)
+        else:
+            slug = slugify(doc.title)
+            rel_path = Path(category) / f"{slug}.md"
+            if (corpus_dir / rel_path).exists():
+                # slug 撞车防御：走到这里 content_hash 必为新（相同则上面已判重），
+                # 即目标文件属于另一份内容不同的文档，追加哈希尾 6 位区分
+                rel_path = Path(category) / f"{slug}-{content_hash[-6:]}.md"
         out_path = corpus_dir / rel_path
-        if out_path.exists():
-            # slug 撞车防御：走到这里 content_hash 必为新（相同则上面已判重），
-            # 即目标文件属于另一份内容不同的文档，追加哈希尾 6 位区分
-            rel_path = Path(category) / f"{slug}-{content_hash[-6:]}.md"
-            out_path = corpus_dir / rel_path
         out_path.parent.mkdir(parents=True, exist_ok=True)
-        out_path.write_text(f"# {doc.title}\n\n{doc.text}\n", encoding="utf-8")
+        out_path.write_text(final, encoding="utf-8")
         new_metas.append(
             DocMeta(
-                doc_id=doc_id_from(f"inbox/{path.name}"),
+                doc_id=doc_id,
                 title=doc.title,
                 source_url=f"inbox/{path.name}",
                 publisher=publisher,

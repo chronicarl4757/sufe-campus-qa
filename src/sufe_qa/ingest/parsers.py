@@ -85,11 +85,13 @@ def parse_file(path: Path) -> ParsedDoc:
         if suffix == ".docx":
             return parse_docx(path)
         text = path.read_text(encoding="utf-8", errors="replace").strip()
-        # md 以首个一级标题为文档标题，无则回退文件名
+        # md 以首个一级标题为文档标题，并从正文剔除该行（避免落盘后双 H1）；
+        # 无 H1 时回退文件名、正文原样
         title = path.stem
         m = re.search(r"(?m)^#\s+(.+)$", text)
         if m:
             title = m.group(1).strip()
+            text = re.sub(r"(?m)^#\s+.+\n?", "", text, count=1).strip()
         return ParsedDoc(title=title, text=text)
     except Exception as e:
         raise ParseError(f"解析失败: {path.name}: {e}") from e
