@@ -49,3 +49,34 @@ def test_unsupported_suffix(tmp_path):
     p.write_bytes(b"x")
     with pytest.raises(ValueError, match="不支持"):
         parse_file(p)
+
+
+def test_parse_html_gbk_fallback(tmp_path):
+    html = "<html><head><title>奖学金通知</title></head><body><p>申请条件如下</p></body></html>"
+    p = tmp_path / "gbk.html"
+    p.write_bytes(html.encode("gb18030"))
+    doc = parse_file(p)
+    assert "申请条件" in doc.text
+
+
+def test_parse_docx_includes_tables(tmp_path):
+    from docx import Document
+
+    p = tmp_path / "table.docx"
+    d = Document()
+    d.add_paragraph("标准如下：")
+    t = d.add_table(rows=1, cols=2)
+    t.rows[0].cells[0].text = "国家奖学金"
+    t.rows[0].cells[1].text = "8000元"
+    d.save(str(p))
+    doc = parse_file(p)
+    assert "8000元" in doc.text
+
+
+def test_corrupt_pdf_raises_parse_error(tmp_path):
+    from sufe_qa.ingest.parsers import ParseError
+
+    p = tmp_path / "bad.pdf"
+    p.write_bytes(b"not a pdf at all")
+    with pytest.raises(ParseError):
+        parse_file(p)
