@@ -47,8 +47,9 @@ def ingest_inbox(
             continue
         try:
             doc = parse_file(path)
-        except ParseError:
-            # 脏文件（如损坏的 pdf）计数跳过，不中断整批收集
+        except (ParseError, ValueError):
+            # 脏文件（如损坏的 pdf）或不支持后缀（用户误投，如 .exe/.zip）
+            # 都按错误计数跳过，不中断整批收集
             error += 1
             continue
         if not doc.text:

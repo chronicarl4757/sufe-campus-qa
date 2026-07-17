@@ -64,3 +64,16 @@ def test_ingest_corrupt_file_counted_not_crash(tmp_path):
     (inbox / "good.md").write_text("正常文件", encoding="utf-8")
     report = ingest_inbox(inbox, corpus, manifest, category="其他", publisher="手动投放")
     assert report.added == 1 and report.skipped_error == 1
+
+
+def test_ingest_unsupported_suffix_counted_not_crash(tmp_path):
+    inbox, corpus, manifest = (
+        tmp_path / "inbox",
+        tmp_path / "corpus",
+        tmp_path / "corpus/manifest.jsonl",
+    )
+    inbox.mkdir()
+    (inbox / "x.exe").write_bytes(b"MZ")
+    (inbox / "good.md").write_text("正常文件", encoding="utf-8")
+    report = ingest_inbox(inbox, corpus, manifest, category="其他", publisher="手动投放")
+    assert report.added == 1 and report.skipped_error == 1

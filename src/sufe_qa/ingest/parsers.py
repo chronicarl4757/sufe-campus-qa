@@ -71,8 +71,8 @@ def parse_docx(path: Path) -> ParsedDoc:
 def parse_file(path: Path) -> ParsedDoc:
     """按后缀分发解析。
 
-    不支持的后缀抛 ValueError（属于编程错误）；文件损坏等脏数据统一
-    包装为 ParseError，下游 inbox 只需 except ParseError。
+    不支持的后缀抛 ValueError；文件损坏等脏数据统一包装为 ParseError。
+    下游 inbox 对两者都按错误计数跳过。
     """
     suffix = path.suffix.lower()
     if suffix not in (".html", ".htm", ".pdf", ".docx", ".md"):
