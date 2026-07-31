@@ -3,6 +3,17 @@ import pytest
 from sufe_qa.ingest.parsers import parse_file, parse_html
 
 
+def test_parse_html_breadcrumb_title_first_segment():
+    # 高校 CMS 面包屑标题"文章名|栏目|… - 站名"，取首段为文章名
+    html = (
+        "<html><head><title>关于印发《研究生招生工作管理规定》的通知"
+        "|管理规定|招生信息 - 上海财经大学研究生院</title></head>"
+        "<body><article><p>第一条 为规范研究生招生工作，制定本规定。</p></article></body></html>"
+    )
+    doc = parse_html(html, "fallback")
+    assert doc.title == "关于印发《研究生招生工作管理规定》的通知"
+
+
 def test_parse_html_extracts_text_and_title():
     html = """<html><head><title>关于开展2025年奖学金评审的通知</title></head>
     <body><article><p>各学院：现将评审安排通知如下。</p><p>申请条件如下。</p></article></body></html>"""

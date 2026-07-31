@@ -37,8 +37,15 @@ class InboxReport:
 
 
 def ingest_inbox(
-    inbox_dir: Path, corpus_dir: Path, manifest_path: Path, category: str, publisher: str
+    inbox_dir: Path,
+    corpus_dir: Path,
+    manifest_path: Path,
+    category: str,
+    publisher: str,
+    source_urls: dict[str, str] | None = None,
 ) -> InboxReport:
+    """收集 inbox 文件入库。source_urls：文件名 -> 真实来源 URL（爬虫入口用）；
+    提供后 doc_id 与 source_url 锚定真实 URL，重爬同 URL 视为同文档原地更新。"""
     # 入口先校验：非法 category（含 "../escape" 路径穿越）在写盘前拒绝
     if category not in CATEGORIES:
         raise ValueError(f"非法分类: {category}")
@@ -69,7 +76,7 @@ def ingest_inbox(
         if content_hash in existing_hashes:
             dup += 1
             continue
-        doc_id = doc_id_from(f"inbox/{path.name}")
+        doc_id = doc_id_from((source_urls or {}).get(path.name, f"inbox/{path.name}"))
         if doc_id in existing_by_id:
             # 同文档更新（doc_id 由来源路径锚定）：沿用旧路径原地覆盖，不留孤儿文件
             rel_path = Path(existing_by_id[doc_id].file_path)
@@ -87,7 +94,7 @@ def ingest_inbox(
             DocMeta(
                 doc_id=doc_id,
                 title=doc.title,
-                source_url=f"inbox/{path.name}",
+                source_url=(source_urls or {}).get(path.name, f"inbox/{path.name}"),
                 publisher=publisher,
                 publish_date=doc.publish_date,
                 category=category,

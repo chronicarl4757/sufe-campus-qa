@@ -20,7 +20,7 @@ class Settings:
     manifest_path: Path
     embedding_model: str = "BAAI/bge-m3"
     collection_name: str = "sufe_campus_qa"
-    llm_model: str = "deepseek-chat"
+    llm_model: str = "deepseek-v4-flash"
     llm_base_url: str = "https://api.deepseek.com"
     vector_top_k: int = 20
     bm25_top_k: int = 20

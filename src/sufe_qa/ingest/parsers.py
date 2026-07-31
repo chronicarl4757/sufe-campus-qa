@@ -28,6 +28,21 @@ def _read_html_text(path: Path) -> str:
     return raw.decode("utf-8", errors="replace")
 
 
+_TITLE_RE = re.compile(r"<title[^>]*>(.*?)</title>", re.S | re.I)
+
+
+def _breadcrumb_title(raw: str) -> str | None:
+    """高校 CMS 常用面包屑标题"文章名|栏目|… - 站名"，首段才是文章名；
+    只在 <title> 含分隔符时出手，其余情况交给 trafilatura。"""
+    m = _TITLE_RE.search(raw)
+    if not m:
+        return None
+    t = re.sub(r"\s+", " ", m.group(1)).strip()
+    if "|" not in t and "｜" not in t:
+        return None
+    return re.split(r"[|｜]", t)[0].strip() or None
+
+
 def parse_html(raw: str, fallback_title: str) -> ParsedDoc:
     import trafilatura
 
@@ -37,6 +52,7 @@ def parse_html(raw: str, fallback_title: str) -> ParsedDoc:
     if meta and meta.title:
         # 空白标题不覆盖 fallback
         title = meta.title.strip() or fallback_title
+    title = _breadcrumb_title(raw) or title
     # trafilatura 不同版本的 metadata 可能没有 date 属性或为 None，统一兜底
     date = getattr(meta, "date", None) or "unknown"
     return ParsedDoc(title=title, text=text.strip(), publish_date=date)

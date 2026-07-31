@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>上财校务问答 · SUFE Campus Archive</title>
+<link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+
+<header class="masthead">
+  <p class="masthead-en">SUFE CAMPUS ARCHIVE &amp; ENQUIRY OFFICE</p>
+  <h1 class="masthead-title">上财校务问答</h1>
+  <p class="masthead-sub">上海财经大学校园公开资料 · 智能检索答复系统</p>
+  <div class="wwx" aria-hidden="true"><span class="wwx-thick"></span><span class="wwx-thin"></span></div>
+</header>
+
+<div class="layout">
+
+  <aside class="rail" aria-label="档案信息">
+    <section class="rail-block">
+      <p class="rail-label">在库档案</p>
+      <p class="rail-count"><span id="doc-count">—</span><span class="rail-count-unit">件</span></p>
+    </section>
+    <section class="rail-block">
+      <p class="rail-label">分类索引</p>
+      <ul class="rail-cats" id="categories"><li class="rail-loading">清点中…</li></ul>
+    </section>
+    <section class="rail-block">
+      <p class="rail-label">知识库更新</p>
+      <p class="rail-date" id="updated-at">—</p>
+    </section>
+    <section class="rail-block rail-note">
+      <p>本系统仅依据已收录的学校公开资料作答，逐条注明出处；查无依据者，恕不作答。</p>
+    </section>
+  </aside>
+
+  <main class="main">
+    <div class="thread" id="thread" aria-live="polite">
+      <div class="empty" id="empty">
+        <div class="empty-seal" aria-hidden="true">
+          <svg viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="2.5" stroke-dasharray="4 5"/>
+            <text x="50" y="57" text-anchor="middle" class="empty-seal-char">档</text>
+          </svg>
+        </div>
+        <p class="empty-title">尚无来件</p>
+        <p class="empty-hint">就评优、奖助、推免、学工等校园事务发问，本处按在库档案逐条引据答复。</p>
+        <div class="empty-examples" id="examples"></div>
+      </div>
+    </div>
+
+    <form class="dock" id="dock">
+      <input class="dock-input" id="input" type="text" autocomplete="off"
+             placeholder="请就校园事务发问，例如：推免预报名的申请条件是什么？" aria-label="提问">
+      <button class="dock-btn" id="send" type="submit">呈报</button>
+    </form>
+  </main>
+
+</div>
+
+<footer class="footer">
+  <p>答复由智能系统依据公开资料生成，仅供查阅参考，具体执行以学校职能部门正式文件为准。</p>
+  <p class="footer-en">GENERATED FROM PUBLIC ARCHIVES · REFER TO OFFICIAL DOCUMENTS</p>
+</footer>
+
+<script src="/static/app.js"></script>
+</body>
+</html>

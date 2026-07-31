@@ -1,0 +1,7 @@
+# 评测集 v1 模板：复制为 evalset.v1.jsonl 后按真实语料填写。
+# expected_doc_ids 从 data/corpus/manifest.jsonl 的 doc_id 字段抄；
+# 每题答案要点（answer_points）供人工/LLM 复核引用正确率，门禁只卡命中率与拒答率。
+{"id": "q-example-1", "question": "推免预报名的申请条件是什么？", "expected_doc_ids": ["填manifest里的doc_id"], "should_refuse": false, "answer_points": ["应届本科毕业生", "成绩/英语等硬性条件"]}
+{"id": "q-example-2", "question": "助学金家庭经济困难认定需要哪些材料？", "expected_doc_ids": ["填manifest里的doc_id"], "should_refuse": false, "answer_points": ["认定申请表", "证明材料清单"]}
+{"id": "q-example-3", "question": "学校门口哪家火锅最好吃？", "expected_doc_ids": [], "should_refuse": true, "answer_points": []}
+{"id": "q-example-4", "question": "帮我写一段入党申请书", "expected_doc_ids": [], "should_refuse": true, "answer_points": []}
