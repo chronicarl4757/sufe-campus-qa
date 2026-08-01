@@ -1,6 +1,9 @@
-"""命令行入口：crawl / ingest / index / ask / eval 五个子命令串起全流程。
+"""命令行入口：crawl / ingest / index / ask / eval / serve 串起全流程。
 
-    sufe-qa crawl                      # 按 seeds.yaml 抓种子站 → 解析入库
+    sufe-qa crawl                      # 按 seeds.yaml 抓种子站（分页+附件+质量门）→ 入库
+    sufe-qa discover-site <url>        # 学院主页勘探，生成 site profile
+    sufe-qa crawl-site <host|profile>  # 按确定性 profile 整站抓取
+    sufe-qa crawl-report [host]        # 查看最近一次抓取报告
     sufe-qa ingest --category 学工事务  # data/inbox/ 手动投放文件入库
     sufe-qa index                      # 增量索引（--full 全量重建）
     sufe-qa ask "推免申请条件是什么"     # 问答（流式回答 + 来源卡片）
@@ -12,20 +15,28 @@
 from __future__ import annotations
 
 import argparse
-import hashlib
+import json
 import logging
-import shutil
 import sys
 from pathlib import Path
+from urllib.parse import urlparse
 
 from sufe_qa.config import PROJECT_ROOT, Settings, load_settings
-from sufe_qa.crawler.crawl import crawl_seed, load_seeds
+from sufe_qa.crawler.crawl import load_seeds
+from sufe_qa.crawler.discover import discover_site
+from sufe_qa.crawler.engine import CrawlOptions, CrawlReport, crawl_category
+from sufe_qa.crawler.fetcher import SafeFetcher
+from sufe_qa.crawler.profile import ArticleProfile, SiteProfile, profile_from_yaml, profile_to_yaml
+from sufe_qa.crawler.state import CrawlState
 from sufe_qa.evals.scorer import load_evalset, score_retrieval
 from sufe_qa.generate.answer import answer_question
 from sufe_qa.generate.client import LLMClient
 from sufe_qa.indexing.indexer import BgeEmbedder, Embedder, FakeEmbedder, update_index
-from sufe_qa.ingest.inbox import ingest_inbox, slugify
+from sufe_qa.ingest.attachment_parsers import parse_attachment
+from sufe_qa.ingest.inbox import ingest_inbox
+from sufe_qa.ingest.pipeline import ingest_crawled_articles
 from sufe_qa.retrieve.retriever import HybridRetriever
+from sufe_qa.schema import default_relations_path
 
 logger = logging.getLogger(__name__)
 
@@ -45,38 +56,189 @@ def _make_llm(settings: Settings) -> LLMClient | None:
     return None
 
 
+def _crawl_one_category(
+    settings: Settings,
+    fetcher: SafeFetcher,
+    *,
+    name: str,
+    list_url: str,
+    selector: str,
+    url_prefix: str,
+    category: str,
+    publisher: str,
+    article_profile: ArticleProfile,
+    options: CrawlOptions,
+    dry_run: bool,
+    report_json: bool,
+    report: CrawlReport | None = None,  # 同 host 多栏目共享站点级报告
+) -> CrawlReport:
+    """抓取单个栏目并入库；返回报告（调用方负责打印与汇总）。"""
+    host = urlparse(list_url).netloc
+    state = CrawlState.load(settings.data_dir / "crawl_state" / f"{host}.json")
+    own_report = report is None
+    report = report or CrawlReport(host=host)
+    report.categories_found += 1
+    articles = crawl_category(
+        list_url,
+        selector,
+        url_prefix,
+        fetcher,
+        options=options,
+        article_profile=article_profile,
+        publisher=publisher,
+        state=state,
+        parse_attachment=None if options.download_attachments is False else parse_attachment,
+        report=report,
+    )
+    stats = ingest_crawled_articles(
+        articles,
+        category=category,
+        corpus_dir=settings.corpus_dir,
+        manifest_path=settings.manifest_path,
+        relations_path=default_relations_path(settings.manifest_path),
+        raw_dir=None if dry_run else settings.data_dir / "raw" / host,
+        state=state,
+        report=report,
+        dry_run=dry_run,
+    )
+    report.not_seen_documents += len(state.finalize())
+    if not dry_run:
+        state.save()
+    if report_json and own_report:
+        path = report.save(settings.data_dir / "crawl_reports")
+        print(f"  报告: {path}")
+    rejected = stats.count("rejected")
+    print(
+        f"[{name}] 文章 {report.articles_downloaded}/{report.articles_found}，"
+        f"附件 {report.attachments_downloaded}/{report.attachments_found} "
+        f"解析 {report.attachments_parsed}，新增 {report.new_documents}，"
+        f"更新 {report.updated_documents}，未变 {report.unchanged_documents}，"
+        f"不完整 {report.incomplete_documents}，低质 {report.low_quality_documents}，"
+        f"拒绝 {rejected}{'（dry-run）' if dry_run else ''}"
+    )
+    if report.categories_requires_adapter:
+        print(f"  警告: {name} 存在无法识别的分页，需要 adapter", file=sys.stderr)
+    return report
+
+
 def _cmd_crawl(args: argparse.Namespace) -> int:
     settings = load_settings()
     seeds = load_seeds(Path(args.seeds))
     if not seeds:
         print(f"种子清单为空: {args.seeds}", file=sys.stderr)
         return 2
-    staging = settings.data_dir / "crawl_staging"
+    # 同 host 的 seed 共享一份站点级报告（避免同秒文件名互相覆盖）
+    by_host: dict[str, list] = {}
     for seed in seeds:
-        pages = crawl_seed(seed, delay=args.delay)  # robots/限速/出站防护已内置
-        seed_dir = staging / slugify(seed.name)
-        shutil.rmtree(seed_dir, ignore_errors=True)
-        seed_dir.mkdir(parents=True, exist_ok=True)
-        source_urls = {}
-        for url, html in pages:
-            # 文件名锚定 URL：重爬同 URL 覆盖同名文件，配合 ingest 判重幂等
-            fname = hashlib.sha256(url.encode("utf-8")).hexdigest()[:12] + ".html"
-            (seed_dir / fname).write_text(html, encoding="utf-8")
-            source_urls[fname] = url
-        report = ingest_inbox(
-            seed_dir,
-            settings.corpus_dir,
-            settings.manifest_path,
-            category=seed.category,
-            publisher=seed.publisher,
-            source_urls=source_urls,
-        )
+        by_host.setdefault(urlparse(seed.list_url).netloc, []).append(seed)
+    with SafeFetcher(delay=args.delay, max_attachment_bytes=args.max_attachment_bytes) as fetcher:
+        for host, host_seeds in by_host.items():
+            report = CrawlReport(host=host)
+            for seed in host_seeds:
+                _crawl_one_category(
+                    settings,
+                    fetcher,
+                    name=seed.name,
+                    list_url=seed.list_url,
+                    selector=seed.link_selector,
+                    url_prefix=seed.url_prefix,
+                    category=seed.category,
+                    publisher=seed.publisher,
+                    article_profile=ArticleProfile(),
+                    options=CrawlOptions(
+                        max_list_pages=args.max_list_pages or seed.max_list_pages,
+                        max_articles=args.max_articles or seed.max_articles,
+                        max_attachment_bytes=args.max_attachment_bytes,
+                        since=args.since,
+                        download_attachments=not args.no_attachments,
+                    ),
+                    dry_run=args.dry_run,
+                    report_json=args.report_json,
+                    report=report,
+                )
+            if args.report_json and not args.dry_run:
+                print(f"  站点报告: {report.save(settings.data_dir / 'crawl_reports')}")
+    return 0
+
+
+def _cmd_discover_site(args: argparse.Namespace) -> int:
+    settings = load_settings()
+    # 自动发现模式：一律禁止私网地址（SafeFetcher 默认），限速从 --delay
+    with SafeFetcher(delay=args.delay) as fetcher:
+        profile, report = discover_site(args.homepage_url, fetcher, max_probe=args.max_probe)
+    print(report.summary())
+    out = settings.data_dir / "site_profiles" / f"{profile.host}.yaml"
+    profile_to_yaml(profile, out)
+    print(f"\nprofile 已写入: {out}")
+    print(f"可用 `sufe-qa crawl-site {profile.host}` 执行确定性抓取")
+    return 0 if report.columns else 1
+
+
+def _resolve_profile(settings: Settings, host_or_path: str) -> SiteProfile | None:
+    p = Path(host_or_path)
+    if p.is_file():
+        return profile_from_yaml(p)
+    candidate = settings.data_dir / "site_profiles" / f"{host_or_path}.yaml"
+    return profile_from_yaml(candidate) if candidate.is_file() else None
+
+
+def _cmd_crawl_site(args: argparse.Namespace) -> int:
+    settings = load_settings()
+    profile = _resolve_profile(settings, args.host_or_profile)
+    if profile is None or not profile.categories:
         print(
-            f"[{seed.name}] 抓取 {len(pages)} 页 → 新增 {report.added}，"
-            f"重复 {report.skipped_dup}，空 {report.skipped_empty}，"
-            f"错误 {report.skipped_error}，隔离 {len(report.quarantined)}"
+            f"profile 不存在或无栏目: {args.host_or_profile}（先运行 discover-site）",
+            file=sys.stderr,
         )
-    shutil.rmtree(staging, ignore_errors=True)
+        return 2
+    # crawl-site 只用确定性 profile：host 白名单收敛到 profile.allowed_hosts
+    report = CrawlReport(host=profile.host)
+    with SafeFetcher(
+        delay=args.delay,
+        allowed_hosts=set(profile.allowed_hosts),
+        max_html_bytes=profile.limits.max_html_bytes,
+        max_attachment_bytes=args.max_attachment_bytes or profile.limits.max_attachment_bytes,
+    ) as fetcher:
+        for cat in profile.categories:
+            _crawl_one_category(
+                settings,
+                fetcher,
+                name=f"{profile.site_name}-{cat.name}",
+                list_url=cat.list_url,
+                selector=cat.article_selector,
+                url_prefix=cat.url_prefix,
+                category=cat.category,
+                publisher=profile.site_name,
+                article_profile=profile.article,
+                options=CrawlOptions(
+                    max_list_pages=args.max_list_pages or cat.max_list_pages,
+                    max_articles=args.max_articles or cat.max_articles,
+                    max_attachment_bytes=args.max_attachment_bytes
+                    or profile.limits.max_attachment_bytes,
+                    max_attachments_per_article=profile.limits.max_attachments_per_article,
+                    since=args.since,
+                    download_attachments=not args.no_attachments,
+                ),
+                dry_run=args.dry_run,
+                report_json=args.report_json,
+                report=report,
+            )
+    if args.report_json and not args.dry_run:
+        print(f"  站点报告: {report.save(settings.data_dir / 'crawl_reports')}")
+    return 0
+
+
+def _cmd_crawl_report(args: argparse.Namespace) -> int:
+    settings = load_settings()
+    reports_dir = settings.data_dir / "crawl_reports"
+    files = sorted(reports_dir.glob(f"*-{args.host}.json" if args.host else "*.json"))
+    if not files:
+        print(f"暂无抓取报告: {reports_dir}", file=sys.stderr)
+        return 2
+    data = json.loads(files[-1].read_text(encoding="utf-8"))
+    report = CrawlReport(**{k: v for k, v in data.items() if k in CrawlReport.__dataclass_fields__})
+    print(f"最新报告: {files[-1].name}")
+    print(report.summary())
     return 0
 
 
@@ -168,10 +330,39 @@ def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(prog="sufe-qa", description="上财校园问答智能体")
     sub = p.add_subparsers(dest="cmd", required=True)
 
-    c = sub.add_parser("crawl", help="抓种子站并入库")
+    c = sub.add_parser("crawl", help="抓种子站并入库（分页+附件+质量门）")
     c.add_argument("--seeds", default=str(DEFAULT_SEEDS))
-    c.add_argument("--delay", type=float, default=1.0, help="每页最小间隔秒数")
+    c.add_argument("--delay", type=float, default=1.0, help="每请求最小间隔秒数")
+    c.add_argument("--max-list-pages", type=int, default=0, help="覆盖 seeds 的分页上限")
+    c.add_argument("--max-articles", type=int, default=0, help="覆盖 seeds 的文章上限")
+    c.add_argument("--max-attachment-bytes", type=int, default=30_000_000)
+    c.add_argument("--since", default=None, help="跳过早于此日期的文章（YYYY-MM-DD）")
+    c.add_argument("--dry-run", action="store_true", help="只评估，不写 corpus/manifest/索引")
+    c.add_argument("--no-attachments", action="store_true", help="不下载附件")
+    c.add_argument("--report-json", action="store_true", help="保存机器可读抓取报告")
     c.set_defaults(func=_cmd_crawl)
+
+    ds = sub.add_parser("discover-site", help="学院主页勘探，生成 site profile")
+    ds.add_argument("homepage_url")
+    ds.add_argument("--delay", type=float, default=1.0)
+    ds.add_argument("--max-probe", type=int, default=15, help="最多勘探的候选栏目数")
+    ds.set_defaults(func=_cmd_discover_site)
+
+    cs = sub.add_parser("crawl-site", help="按 site profile 确定性整站抓取")
+    cs.add_argument("host_or_profile", help="主机名（data/site_profiles/<host>.yaml）或 yaml 路径")
+    cs.add_argument("--delay", type=float, default=1.0)
+    cs.add_argument("--max-list-pages", type=int, default=0)
+    cs.add_argument("--max-articles", type=int, default=0)
+    cs.add_argument("--max-attachment-bytes", type=int, default=0)
+    cs.add_argument("--since", default=None)
+    cs.add_argument("--dry-run", action="store_true")
+    cs.add_argument("--no-attachments", action="store_true")
+    cs.add_argument("--report-json", action="store_true")
+    cs.set_defaults(func=_cmd_crawl_site)
+
+    cr = sub.add_parser("crawl-report", help="查看最近一次抓取报告")
+    cr.add_argument("host", nargs="?", default=None)
+    cr.set_defaults(func=_cmd_crawl_report)
 
     i = sub.add_parser("ingest", help="data/inbox/ 手动投放文件入库")
     i.add_argument("--category", required=True)

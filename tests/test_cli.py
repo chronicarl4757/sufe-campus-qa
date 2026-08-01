@@ -70,18 +70,47 @@ def test_eval_command_gate(settings, tmp_path, capsys):
 
 
 def test_crawl_glues_pages_into_corpus(settings, tmp_path, monkeypatch):
-    pages = [
-        (
-            "https://gs.sufe.edu.cn/Home/Detail/8001",
-            "<html><body><article><h1>推免通知</h1><p>" + DOC_TEXT + "</p></article></body></html>",
-        )
-    ]
-    monkeypatch.setattr(cli, "crawl_seed", lambda seed, delay: pages)
+    """crawl 走新引擎：stub SafeFetcher 返回列表页+文章页，验证入库与 doc_id 锚定。"""
+    from sufe_qa.crawler.fetcher import FetchResult
+
+    article_url = "https://gs.sufe.edu.cn/Home/Detail/8001"
+    list_url = "https://gs.sufe.edu.cn/Home/List/31"
+    routes = {
+        list_url: FetchResult(
+            requested_url=list_url,
+            final_url=list_url,
+            status_code=200,
+            content=f'<html><body><div class="blog-content"><a href="{article_url}">推免通知</a></div></body></html>'.encode(),
+        ),
+        article_url: FetchResult(
+            requested_url=article_url,
+            final_url=article_url,
+            status_code=200,
+            content=f"<html><body><article><h1>推免通知</h1><p>{DOC_TEXT}</p></article></body></html>".encode(),
+        ),
+    }
+
+    class StubFetcher:
+        def __init__(self, *a, **kw):
+            pass
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *exc):
+            pass
+
+        def fetch(self, url, kind="html", headers=None):
+            return routes.get(url) or FetchResult(
+                requested_url=url, final_url=url, status="http_error", status_code=404, error="404"
+            )
+
+    monkeypatch.setattr(cli, "SafeFetcher", StubFetcher)
     seeds = tmp_path / "seeds.yaml"
     seeds.write_text(
         "seeds:\n"
         "  - name: 测试种子\n"
-        "    list_url: https://gs.sufe.edu.cn/Home/List/31\n"
+        f"    list_url: {list_url}\n"
         '    link_selector: ".blog-content a"\n'
         "    url_prefix: https://gs.sufe.edu.cn/Home/Detail/\n"
         "    category: 推免升学\n"
@@ -92,8 +121,13 @@ def test_crawl_glues_pages_into_corpus(settings, tmp_path, monkeypatch):
     manifest = load_manifest(settings.manifest_path)
     assert len(manifest) == 1
     meta = next(iter(manifest.values()))
-    assert meta.source_url == "https://gs.sufe.edu.cn/Home/Detail/8001"
-    assert meta.doc_id == doc_id_from("https://gs.sufe.edu.cn/Home/Detail/8001")
+    assert meta.source_url == article_url
+    assert meta.doc_id == doc_id_from(article_url)
     assert meta.category == "推免升学"
-    # 暂存目录已清理
-    assert not (settings.data_dir / "crawl_staging").exists()
+    assert meta.quality_status == "accepted"
+    assert meta.document_type == "article"
+    # 抓取状态已持久化，raw 缓存已落地
+    assert (settings.data_dir / "crawl_state" / "gs.sufe.edu.cn.json").is_file()
+    assert (
+        settings.data_dir / "raw" / "gs.sufe.edu.cn" / "articles" / f"{meta.doc_id}.html"
+    ).is_file()
