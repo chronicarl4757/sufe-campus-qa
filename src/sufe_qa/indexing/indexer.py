@@ -1,22 +1,33 @@
-"""增量索引：以 manifest 的 content_hash 为准，与 Chroma 中已索引内容做 diff。
+"""按文档用途分 collection 的增量/全量索引。
 
-- manifest 有、Chroma 没有（或 hash 不同）→ 切分、嵌入、upsert
-- Chroma 有、manifest 没有 → delete
-- 两侧 hash 一致 → 不动（幂等，重复运行是 no-op）
+索引器只读取 manifest 和 corpus，不让 adapter 直接写向量库。主问答、公示名单
+分别维护自己的 Chroma 与 BM25 语料；新闻、活动、宣传和不完整文档没有默认索引。
 """
 
 from __future__ import annotations
 
 import hashlib
-from dataclasses import dataclass
+import json
+import shutil
+import uuid
+from dataclasses import dataclass, field, replace
+from datetime import datetime, timezone
+from pathlib import Path
 from typing import Protocol
 
 import chromadb
 
 from sufe_qa.config import Settings
-from sufe_qa.ingest.quality import classify_document, default_boost
+from sufe_qa.indexing.collections import (
+    MAIN_QA_COLLECTION,
+    PUBLIC_LIST_COLLECTION,
+    collection_for_kind,
+    collection_name_for,
+)
+from sufe_qa.ingest.classification import classify_document_kind
+from sufe_qa.ingest.quality import default_boost
 from sufe_qa.ingest.splitter import split_document
-from sufe_qa.schema import load_manifest
+from sufe_qa.schema import DocMeta, load_manifest
 
 
 class Embedder(Protocol):
@@ -57,72 +68,317 @@ class IndexReport:
     updated_docs: int
     deleted_docs: int
     total_chunks: int
+    collection_counts: dict[str, int] = field(default_factory=dict)
+    skipped_docs: int = 0
+    backup_path: str | None = None
+
+
+@dataclass(frozen=True)
+class LegacyMigrationReport:
+    source_collection: str
+    migrated_chunks: int
+    skipped_chunks: int
+    target_counts: dict[str, int] = field(default_factory=dict)
+
+
+@dataclass(frozen=True)
+class _Indexable:
+    meta: DocMeta
+    text: str
+    document_kind: str
+    collection_key: str
+
+
+def _document_kind(meta: DocMeta, text: str) -> str:
+    """兼容旧 manifest：旧行没有新 kind 时按正文补推断；显式隔离值不提升。"""
+    kind = (getattr(meta, "document_kind", "") or "").strip().lower()
+    if kind and kind != "incomplete":
+        return kind
+    inferred = classify_document_kind(
+        meta.title,
+        text,
+        quality_status=str(meta.quality_status or "accepted"),
+        has_valid_attachment=meta.document_type == "attachment",
+    )
+    return "manual" if inferred == "incomplete" else inferred
+
+
+def _load_indexable(settings: Settings) -> tuple[dict[str, _Indexable], int]:
+    out: dict[str, _Indexable] = {}
+    skipped = 0
+    for doc_id, meta in load_manifest(settings.manifest_path).items():
+        if str(meta.quality_status or "accepted") != "accepted" or not meta.file_path:
+            skipped += 1
+            continue
+        path = settings.corpus_dir / meta.file_path
+        if not path.is_file():
+            skipped += 1
+            continue
+        text = path.read_text(encoding="utf-8")
+        kind = _document_kind(meta, text)
+        collection_key = collection_for_kind(kind)
+        if collection_key is None:
+            skipped += 1
+            continue
+        out[doc_id] = _Indexable(meta, text, kind, collection_key)
+    return out, skipped
+
+
+def _chunk_metadata(item: _Indexable, collection_name: str) -> dict[str, str | int | float | bool]:
+    meta = item.meta
+    return {
+        "doc_id": meta.doc_id,
+        "content_hash": meta.content_hash,
+        "title": meta.title,
+        "category": meta.category,
+        "source_url": meta.source_url,
+        "publisher": meta.publisher,
+        "publish_date": meta.publish_date,
+        "document_type": meta.document_type,
+        "document_kind": item.document_kind,
+        "source_type": meta.source_type or "unknown",
+        "source_section": meta.source_section or "",
+        "scope_unit": meta.scope_unit or "",
+        "policy_name": meta.policy_name or "",
+        "topic_key": meta.topic_key or "",
+        "validity_status": meta.validity_status or "unknown_validity",
+        "validity_confidence": float(meta.validity_confidence or 0.0),
+        "effective_date": meta.effective_date or "unknown",
+        "valid_until": meta.valid_until or "unknown",
+        "revision_year": int(meta.revision_year or 0),
+        "parent_doc_id": meta.parent_doc_id or "",
+        "index_collection": collection_name,
+        # 只影响门控后的排序，不参与 vector_min_similarity 判定。
+        "boost": default_boost(item.document_kind),
+    }
+
+
+def _upsert_item(col, item: _Indexable, embedder: Embedder, collection_name: str) -> int:
+    base_metadata = _chunk_metadata(item, collection_name)
+    chunks = split_document(item.text, item.meta.doc_id, base_metadata)
+    if not chunks:
+        return 0
+    embeddings = embedder.encode([f"{item.meta.title}\n{c.text}" for c in chunks])
+    col.upsert(
+        ids=[c.chunk_id for c in chunks],
+        embeddings=embeddings,
+        documents=[c.text for c in chunks],
+        metadatas=[{**c.metadata, "heading_path": c.heading_path} for c in chunks],
+    )
+    return len(chunks)
+
+
+def _existing_by_collection(client, settings: Settings) -> dict[str, dict[str, str]]:
+    existing: dict[str, dict[str, str]] = {}
+    for key in (MAIN_QA_COLLECTION, PUBLIC_LIST_COLLECTION):
+        col = client.get_or_create_collection(
+            collection_name_for(settings, key), metadata={"hnsw:space": "cosine"}
+        )
+        rows = col.get(include=["metadatas"]).get("metadatas") or []
+        existing[key] = {
+            str(row["doc_id"]): str(row.get("content_hash", ""))
+            for row in rows
+            if row and row.get("doc_id")
+        }
+    return existing
+
+
+def _write_index_metadata(settings: Settings, index_dir: Path) -> None:
+    index_dir.mkdir(parents=True, exist_ok=True)
+    data = {
+        "schema_version": settings.collection_schema_version,
+        "created_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "legacy_collection": settings.legacy_collection_name,
+        "collections": {
+            MAIN_QA_COLLECTION: {
+                "name": settings.collection_name,
+                "document_kinds": sorted(
+                    {"policy", "procedure", "faq", "annual_notice", "form", "manual", "service_guide"}
+                ),
+            },
+            PUBLIC_LIST_COLLECTION: {
+                "name": settings.public_list_collection_name,
+                "document_kinds": ["public_list"],
+            },
+        },
+    }
+    (index_dir / "index_metadata.json").write_text(
+        json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
+
+
+def _build_incremental(settings: Settings, embedder: Embedder, index_dir: Path) -> IndexReport:
+    client = chromadb.PersistentClient(path=str(index_dir))
+    cols = {
+        key: client.get_or_create_collection(
+            collection_name_for(settings, key), metadata={"hnsw:space": "cosine"}
+        )
+        for key in (MAIN_QA_COLLECTION, PUBLIC_LIST_COLLECTION)
+    }
+    manifest, skipped = _load_indexable(settings)
+    desired = {
+        key: {doc_id: item for doc_id, item in manifest.items() if item.collection_key == key}
+        for key in cols
+    }
+    existing = _existing_by_collection(client, settings)
+    existing_global = {doc_id for rows in existing.values() for doc_id in rows}
+    desired_global = set(manifest)
+    deleted_global: set[str] = set()
+    changed_global: set[str] = set()
+    added_global: set[str] = set()
+    updated_global: set[str] = set()
+    total_chunks = 0
+    collection_counts: dict[str, int] = {}
+
+    for key, col in cols.items():
+        present = existing[key]
+        wanted = desired[key]
+        deleted = set(present) - set(wanted)
+        changed = {
+            doc_id for doc_id, item in wanted.items() if present.get(doc_id) != item.meta.content_hash
+        }
+        for doc_id in deleted | (changed & set(present)):
+            col.delete(where={"doc_id": doc_id})
+        deleted_global.update(deleted)
+        changed_global.update(changed)
+        added_global.update(changed - existing_global)
+        updated_global.update(changed & existing_global)
+        for doc_id in changed:
+            total_chunks += _upsert_item(
+                col,
+                wanted[doc_id],
+                embedder,
+                collection_name_for(settings, key),
+            )
+        collection_counts[key] = col.count()
+
+    # doc_id 从主库迁移到公示库（或反向）时，旧 collection 已删除，新增也计为更新。
+    deleted_global -= desired_global
+    _write_index_metadata(settings, index_dir)
+    return IndexReport(
+        added_docs=len(added_global),
+        updated_docs=len(updated_global),
+        deleted_docs=len(deleted_global),
+        total_chunks=total_chunks,
+        collection_counts=collection_counts,
+        skipped_docs=skipped,
+    )
+
+
+def _build_full(settings: Settings, embedder: Embedder, index_dir: Path) -> IndexReport:
+    client = chromadb.PersistentClient(path=str(index_dir))
+    cols = {
+        key: client.get_or_create_collection(
+            collection_name_for(settings, key), metadata={"hnsw:space": "cosine"}
+        )
+        for key in (MAIN_QA_COLLECTION, PUBLIC_LIST_COLLECTION)
+    }
+    manifest, skipped = _load_indexable(settings)
+    chunks = 0
+    counts: dict[str, int] = {}
+    for key, col in cols.items():
+        items = [item for item in manifest.values() if item.collection_key == key]
+        for item in items:
+            chunks += _upsert_item(col, item, embedder, collection_name_for(settings, key))
+        counts[key] = col.count()
+    _write_index_metadata(settings, index_dir)
+    return IndexReport(
+        added_docs=len(manifest),
+        updated_docs=0,
+        deleted_docs=0,
+        total_chunks=chunks,
+        collection_counts=counts,
+        skipped_docs=skipped,
+    )
+
+
+def _cleanup_staging(path: Path) -> None:
+    if path.exists():
+        shutil.rmtree(path)
 
 
 def update_index(settings: Settings, embedder: Embedder, full: bool = False) -> IndexReport:
+    """增量更新或原子全量重建两个业务 collection。"""
+    if not full:
+        return _build_incremental(settings, embedder, settings.chroma_dir)
+
+    settings.chroma_dir.parent.mkdir(parents=True, exist_ok=True)
+    staging = settings.chroma_dir.parent / f".{settings.chroma_dir.name}.staging-{uuid.uuid4().hex}"
+    backup: Path | None = None
+    try:
+        report = _build_full(settings, embedder, staging)
+        if settings.chroma_dir.exists():
+            backup = settings.chroma_dir.parent / (
+                f".{settings.chroma_dir.name}.previous-{uuid.uuid4().hex}"
+            )
+            settings.chroma_dir.rename(backup)
+        staging.rename(settings.chroma_dir)
+    except Exception:
+        _cleanup_staging(staging)
+        if backup is not None and not settings.chroma_dir.exists() and backup.exists():
+            backup.rename(settings.chroma_dir)
+        raise
+    return replace(report, backup_path=str(backup) if backup else None)
+
+
+def migrate_legacy_collection(settings: Settings) -> LegacyMigrationReport:
+    """把旧单 collection 中可判定的文档复制到新 collection。
+
+    旧 collection 永不删除、永不改写；无法判定用途的 chunk 进入 skipped，等待
+    重新从 manifest/corpus 建库，而不是冒险把它放进主问答索引。
+    """
     client = chromadb.PersistentClient(path=str(settings.chroma_dir))
-    if full:
-        try:
-            client.delete_collection(settings.collection_name)
-        except ValueError:
-            pass  # collection 尚不存在，忽略
-    col = client.get_or_create_collection(
-        settings.collection_name, metadata={"hnsw:space": "cosine"}
-    )
+    try:
+        legacy = client.get_collection(settings.legacy_collection_name)
+    except ValueError:
+        return LegacyMigrationReport(settings.legacy_collection_name, 0, 0, {})
 
-    # 质量门：仅 quality_status == "accepted" 的文档进入索引；
-    # 被拒/隔离文档视同不在 manifest，已从索引存在的会被同步删除
-    manifest = {
-        d: m
-        for d, m in load_manifest(settings.manifest_path).items()
-        if m.quality_status == "accepted"
+    data = legacy.get(include=["documents", "metadatas", "embeddings"])
+    ids = data.get("ids") or []
+    documents = data.get("documents") or []
+    metadatas = data.get("metadatas") or []
+    embeddings = data.get("embeddings")
+    if embeddings is None:
+        embeddings = []
+    target_rows: dict[str, list[tuple[str, list[float], str, dict]]] = {
+        MAIN_QA_COLLECTION: [],
+        PUBLIC_LIST_COLLECTION: [],
     }
-    existing = col.get(include=["metadatas"]).get("metadatas") or []
-    existing_hash = {m["doc_id"]: m["content_hash"] for m in existing if m}
-
-    deleted = [d for d in existing_hash if d not in manifest]
-    changed = [d for d, meta in manifest.items() if existing_hash.get(d) != meta.content_hash]
-    added = [d for d in changed if d not in existing_hash]
-    updated = [d for d in changed if d in existing_hash]
-
-    for doc_id in set(deleted) | set(updated):
-        col.delete(where={"doc_id": doc_id})
-
-    total = 0
-    for doc_id in changed:
-        meta = manifest[doc_id]
-        text = (settings.corpus_dir / meta.file_path).read_text(encoding="utf-8")
-        chunk_meta = {
-            "doc_id": meta.doc_id,
-            "content_hash": meta.content_hash,
-            "title": meta.title,
-            "category": meta.category,
-            "source_url": meta.source_url,
-            "publisher": meta.publisher,
-            "publish_date": meta.publish_date,
-            "document_type": meta.document_type,
-            # 检索排序权重（§十二）：policy/procedure 等 1.1，news/event 0.85；
-            # 只影响门控后的排序，不参与 vector_min_similarity 门控判定
-            "boost": default_boost(classify_document(meta.title, text)),
-        }
-        chunks = split_document(text, doc_id, chunk_meta)
-        if not chunks:
+    skipped = 0
+    for chunk_id, text, metadata, embedding in zip(
+        ids, documents, metadatas, embeddings, strict=True
+    ):
+        meta = metadata or {}
+        kind = (meta.get("document_kind") or "").strip().lower()
+        if not kind:
+            kind = classify_document_kind(str(meta.get("title", "")), text or "")
+        key = collection_for_kind(kind)
+        if key is None:
+            skipped += 1
             continue
-        # 嵌入时给 chunk 加标题前缀（contextual header）：PDF 附件正文多以"我院"
-        # 自称，裸 chunk 不含机构名，向量路无法区分各学院同名模板文件；
-        # 库存文档仍是原文，前缀只用于向量计算
-        embeddings = embedder.encode([f"{meta.title}\n{c.text}" for c in chunks])
-        col.upsert(
-            ids=[c.chunk_id for c in chunks],
-            embeddings=embeddings,
-            documents=[c.text for c in chunks],
-            metadatas=[{**c.metadata, "heading_path": c.heading_path} for c in chunks],
-        )
-        total += len(chunks)
+        target_meta = {
+            **meta,
+            "document_kind": kind,
+            "index_collection": collection_name_for(settings, key),
+        }
+        target_rows[key].append((chunk_id, embedding, text, target_meta))
 
-    return IndexReport(
-        added_docs=len(added),
-        updated_docs=len(updated),
-        deleted_docs=len(deleted),
-        total_chunks=total,
-    )
+    counts: dict[str, int] = {}
+    migrated = 0
+    for key, rows in target_rows.items():
+        if not rows:
+            counts[key] = 0
+            continue
+        col = client.get_or_create_collection(
+            collection_name_for(settings, key), metadata={"hnsw:space": "cosine"}
+        )
+        col.upsert(
+            ids=[row[0] for row in rows],
+            embeddings=[row[1] for row in rows],
+            documents=[row[2] for row in rows],
+            metadatas=[row[3] for row in rows],
+        )
+        migrated += len(rows)
+        counts[key] = col.count()
+    _write_index_metadata(settings, settings.chroma_dir)
+    return LegacyMigrationReport(settings.legacy_collection_name, migrated, skipped, counts)

@@ -33,7 +33,14 @@ from sufe_qa.crawler.state import CrawlState
 from sufe_qa.evals.scorer import load_evalset, score_retrieval
 from sufe_qa.generate.answer import answer_question
 from sufe_qa.generate.client import LLMClient
-from sufe_qa.indexing.indexer import BgeEmbedder, Embedder, FakeEmbedder, update_index
+from sufe_qa.indexing.indexer import (
+    BgeEmbedder,
+    Embedder,
+    FakeEmbedder,
+    migrate_legacy_collection,
+    update_index,
+)
+from sufe_qa.indexing.collections import MAIN_QA_COLLECTION, PUBLIC_LIST_COLLECTION
 from sufe_qa.ingest.attachment_parsers import parse_attachment
 from sufe_qa.ingest.inbox import ingest_inbox
 from sufe_qa.ingest.pipeline import ingest_crawled_articles
@@ -264,17 +271,30 @@ def _cmd_ingest(args: argparse.Namespace) -> int:
 
 def _cmd_index(args: argparse.Namespace) -> int:
     settings = load_settings()
+    if args.migrate_legacy:
+        report = migrate_legacy_collection(settings)
+        print(
+            f"迁移源 {report.source_collection}：复制 {report.migrated_chunks} chunks，"
+            f"隔离 {report.skipped_chunks} chunks；旧 collection 保留"
+        )
+        return 0
     report = update_index(settings, _make_embedder(settings, args.fake_embed), full=args.full)
     print(
         f"新增 {report.added_docs} 篇，更新 {report.updated_docs} 篇，"
-        f"删除 {report.deleted_docs} 篇，共 {report.total_chunks} chunks"
+        f"删除 {report.deleted_docs} 篇，共 {report.total_chunks} chunks，"
+        f"主问答 {report.collection_counts.get(MAIN_QA_COLLECTION, 0)} chunks，"
+        f"公示 {report.collection_counts.get(PUBLIC_LIST_COLLECTION, 0)} chunks"
     )
+    if report.backup_path:
+        print(f"旧索引备份: {report.backup_path}")
     return 0
 
 
 def _cmd_ask(args: argparse.Namespace) -> int:
     settings = load_settings()
-    retriever = HybridRetriever(settings, _make_embedder(settings, args.fake_embed))
+    retriever = HybridRetriever(
+        settings, _make_embedder(settings, args.fake_embed), collection=args.collection
+    )
     ans = answer_question(args.question, settings, retriever, llm=_make_llm(settings))
     for token in ans.stream:
         print(token, end="", flush=True)
@@ -397,11 +417,18 @@ def build_parser() -> argparse.ArgumentParser:
 
     x = sub.add_parser("index", help="增量索引")
     x.add_argument("--full", action="store_true", help="全量重建")
+    x.add_argument("--migrate-legacy", action="store_true", help="从旧单 collection 复制可判定文档")
     x.add_argument("--fake-embed", action="store_true", help=argparse.SUPPRESS)
     x.set_defaults(func=_cmd_index)
 
     a = sub.add_parser("ask", help="提问")
     a.add_argument("question")
+    a.add_argument(
+        "--collection",
+        choices=[MAIN_QA_COLLECTION, PUBLIC_LIST_COLLECTION],
+        default=MAIN_QA_COLLECTION,
+        help="检索 collection；公示名单必须显式选择 public_list",
+    )
     a.add_argument("--fake-embed", action="store_true", help=argparse.SUPPRESS)
     a.set_defaults(func=_cmd_ask)
 

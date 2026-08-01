@@ -7,6 +7,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from sufe_qa.config import CATEGORIES
+from sufe_qa.ingest.classification import classify_document_kind, normalize_policy_name
 from sufe_qa.ingest.parsers import ParseError, parse_file
 from sufe_qa.schema import DocMeta, append_manifest, doc_id_from, load_manifest, sha256_text
 
@@ -90,6 +91,7 @@ def ingest_inbox(
         out_path = corpus_dir / rel_path
         out_path.parent.mkdir(parents=True, exist_ok=True)
         out_path.write_text(final, encoding="utf-8")
+        document_kind = classify_document_kind(doc.title, doc.text)
         new_metas.append(
             DocMeta(
                 doc_id=doc_id,
@@ -101,6 +103,9 @@ def ingest_inbox(
                 fetched_at=datetime.now(timezone.utc).isoformat(timespec="seconds"),
                 content_hash=content_hash,
                 file_path=rel_path.as_posix(),
+                document_kind="manual" if document_kind == "incomplete" else document_kind,
+                policy_name=normalize_policy_name(doc.title),
+                source_type="manual_upload",
             )
         )
         existing_hashes.add(content_hash)
