@@ -1,4 +1,5 @@
-# 评测集 v1（正式门禁集）：9 应答题 + 3 拒答题，doc_id 锚定 data/corpus/manifest.jsonl。
+# 评测集 v1（正式门禁集）：14 应答题 + 3 拒答题，doc_id 锚定 data/corpus/manifest.jsonl。
+# 其中 q-att-* 5 题为附件依赖题：答案只在附件原文、发布页正文不可得，expected_doc_ids 指向附件文档。
 # 应答题命中任一 expected_doc_id 且未被拒答才算正确；门禁线：命中率>=90%、回答率=100%、拒答率=100%。
 # 拒答题语义：知识库无此领域内容、应在检索层被拦下的问题（如美食/股票/体育闲聊）；
 # 语义贴库但不当的请求（如代写入党申请书）属生成层职责，不在本离线集内标注。
@@ -10,7 +11,12 @@
 {"id": "q-english-place", "question": "本科新生大学英语分级考试怎么安排？", "expected_doc_ids": ["d8083d003a19"], "should_refuse": false, "answer_points": ["分级考试安排", "教学分班规则"]}
 {"id": "q-zhuanye", "question": "会计学院转专业拟录取名单公示了吗？", "expected_doc_ids": ["4c7abad073b4"], "should_refuse": false, "answer_points": ["拟录取名单已公示"]}
 {"id": "q-zhaosheng-guizhang", "question": "学校研究生招生工作管理规定是哪一年修订的？", "expected_doc_ids": ["ee59bf8f4c11", "374e60732d97"], "should_refuse": false, "answer_points": ["2019年修订"]}
-{"id": "q-zhengshen", "question": "政审调档要寄什么材料？", "expected_doc_ids": ["a44ebdc27934"], "should_refuse": false, "answer_points": ["政审表", "调档函与寄送要求"]}
+{"id": "q-zhengshen", "question": "政审调档要寄什么材料？", "expected_doc_ids": ["a44ebdc27934", "ae4bec97563b"], "should_refuse": false, "answer_points": ["政审表", "调档函与寄送要求"]}
 {"id": "q-refuse-food", "question": "学校门口哪家火锅最好吃？", "expected_doc_ids": [], "should_refuse": true, "answer_points": []}
 {"id": "q-refuse-stock", "question": "帮我预测一下明天贵州茅台的股价", "expected_doc_ids": [], "should_refuse": true, "answer_points": []}
 {"id": "q-refuse-nba", "question": "NBA总冠军会是谁？", "expected_doc_ids": [], "should_refuse": true, "answer_points": []}
+{"id": "q-att-tuimian-conditions", "question": "推免生申请需要符合哪些基本条件？", "expected_doc_ids": ["ff83c85e1a14"], "should_refuse": false, "answer_points": ["应届毕业班学生", "不含延期毕业生、留学生、第二学士学位学生"]}
+{"id": "q-att-tuimian-army", "question": "本科阶段应征入伍的学生推免综合成绩可以加多少分？", "expected_doc_ids": ["ff83c85e1a14"], "should_refuse": false, "answer_points": ["加30分", "立功受奖最高40分"]}
+{"id": "q-att-econ-interview", "question": "经济学院2026年硕士复试的面试科目和分值是怎样安排的？", "expected_doc_ids": ["6acf5c8a58d6"], "should_refuse": false, "answer_points": ["面试100分", "专业面试70分", "英语听说30分"]}
+{"id": "q-att-biz-ratio", "question": "商学院2026年硕士研究生复试的差额比例是多少？", "expected_doc_ids": ["0818c4475c4e"], "should_refuse": false, "answer_points": ["差额比例不少于130%"]}
+{"id": "q-att-mba-remote", "question": "商学院MBA调剂复试采用什么方式进行、面试成绩是多少分？", "expected_doc_ids": ["7b69fb8be5e8"], "should_refuse": false, "answer_points": ["网络远程复试", "面试200分"]}
