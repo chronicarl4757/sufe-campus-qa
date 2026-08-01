@@ -18,6 +18,7 @@ from urllib.parse import urldefrag, urlparse, urlunparse
 from sufe_qa.crawler.engine import CrawledArticle, CrawlReport, DownloadedAttachment
 from sufe_qa.crawler.state import CrawlState
 from sufe_qa.ingest.inbox import scan_sensitive, slugify
+from sufe_qa.ingest.classification import classify_document_kind, normalize_policy_name
 from sufe_qa.ingest.quality import assess_document
 from sufe_qa.schema import (
     DocMeta,
@@ -112,6 +113,9 @@ def ingest_crawled_articles(
     state: CrawlState | None = None,
     report: CrawlReport | None = None,
     dry_run: bool = False,
+    source_type: str = "unknown",
+    source_section: str = "",
+    scope_unit: str = "",
 ) -> IngestStats:
     """把一批抓取结果落库。dry_run=True 时只评估与计数，不写任何文件。"""
     stats = IngestStats()
@@ -156,7 +160,18 @@ def ingest_crawled_articles(
                 report.sensitive_quarantined += 1
             stats.add(doc_id, "quarantined", "正文命中敏感信息", art.title)
             if not dry_run:
-                metas.append(_audit_meta(doc_id, art, category, src, "quarantined"))
+                metas.append(
+                    _audit_meta(
+                        doc_id,
+                        art,
+                        category,
+                        src,
+                        "quarantined",
+                        source_type=source_type,
+                        source_section=source_section,
+                        scope_unit=scope_unit,
+                    )
+                )
                 _drop_old_file(corpus_dir, existing.get(doc_id))
             continue
 
@@ -169,7 +184,18 @@ def ingest_crawled_articles(
                 continue
             stats.add(doc_id, "rejected", ";".join(quality.reasons) or quality.status, art.title)
             if not dry_run:
-                metas.append(_audit_meta(doc_id, art, category, src, quality.status))
+                metas.append(
+                    _audit_meta(
+                        doc_id,
+                        art,
+                        category,
+                        src,
+                        quality.status,
+                        source_type=source_type,
+                        source_section=source_section,
+                        scope_unit=scope_unit,
+                    )
+                )
                 _drop_old_file(corpus_dir, old)
             continue
 
@@ -203,6 +229,12 @@ def ingest_crawled_articles(
                         parse_status="ok",
                         quality_status="accepted",
                         text_hash=sha256_text(_squash(art.body_text)),
+                        document_kind=classify_document_kind(art.title, art.body_text),
+                        policy_name=normalize_policy_name(art.title),
+                        source_type=source_type,
+                        source_section=source_section,
+                        scope_unit=scope_unit,
+                        validity_status="unknown_validity",
                     )
                 )
             action = "updated" if old else "new"
@@ -233,6 +265,9 @@ def ingest_crawled_articles(
                 state=state,
                 raw_dir=raw_dir,
                 dry_run=dry_run,
+                source_type=source_type,
+                source_section=source_section,
+                scope_unit=scope_unit,
             )
 
     if not dry_run:
@@ -246,7 +281,15 @@ def ingest_crawled_articles(
 
 
 def _audit_meta(
-    doc_id: str, art: CrawledArticle, category: str, src: str, quality_status: str
+    doc_id: str,
+    art: CrawledArticle,
+    category: str,
+    src: str,
+    quality_status: str,
+    *,
+    source_type: str,
+    source_section: str,
+    scope_unit: str,
 ) -> DocMeta:
     """被拒/隔离文档的审计行：content_hash 置空使其不会也无法被索引。"""
     return DocMeta(
@@ -264,6 +307,11 @@ def _audit_meta(
         parse_status="ok",
         quality_status=quality_status,
         text_hash=sha256_text(_squash(art.body_text)),
+        document_kind="incomplete",
+        source_type=source_type,
+        source_section=source_section,
+        scope_unit=scope_unit,
+        validity_status="unknown_validity",
     )
 
 
@@ -307,6 +355,9 @@ def _ingest_attachment(
     state: CrawlState | None,
     raw_dir: Path | None,
     dry_run: bool,
+    source_type: str,
+    source_section: str,
+    scope_unit: str,
 ) -> None:
     if att.status == "duplicate":
         # 本轮内同 binary 的另一 URL：关系挂到首个 canonical 文档，不重复嵌入
@@ -372,6 +423,11 @@ def _ingest_attachment(
                     quality_status=parse_status,
                     binary_hash=att.binary_hash,
                     text_hash=text_hash,
+                    document_kind="incomplete",
+                    source_type="attachment",
+                    source_section=source_section,
+                    scope_unit=scope_unit,
+                    validity_status="unknown_validity",
                 )
             )
         relations.append(DocRelation(parent_doc_id=parent_doc_id, child_doc_id=att_doc_id))
@@ -403,6 +459,11 @@ def _ingest_attachment(
                     quality_status="quarantined",
                     binary_hash=att.binary_hash,
                     text_hash=text_hash,
+                    document_kind="incomplete",
+                    source_type="attachment",
+                    source_section=source_section,
+                    scope_unit=scope_unit,
+                    validity_status="unknown_validity",
                 )
             )
         return
@@ -459,6 +520,15 @@ def _ingest_attachment(
                     quality_status="accepted",
                     binary_hash=att.binary_hash,
                     text_hash=text_hash,
+                    document_kind=(
+                        classify_document_kind(parent.title, text, has_valid_attachment=True)
+                        or "manual"
+                    ),
+                    policy_name=normalize_policy_name(parent.title),
+                    source_type="attachment",
+                    source_section=source_section,
+                    scope_unit=scope_unit,
+                    validity_status="unknown_validity",
                 )
             )
         action = "updated" if old else "new"
@@ -496,4 +566,24 @@ def _refresh_att_meta(
         quality_status="accepted",
         binary_hash=att.binary_hash,
         text_hash=old.text_hash,
+        document_kind=old.document_kind,
+        policy_name=old.policy_name,
+        document_number=old.document_number,
+        effective_date=old.effective_date,
+        valid_until=old.valid_until,
+        revision_year=old.revision_year,
+        supersedes=old.supersedes,
+        superseded_by=old.superseded_by,
+        applicable_student_type=old.applicable_student_type,
+        applicable_school_year=old.applicable_school_year,
+        source_type=old.source_type or "attachment",
+        source_section=old.source_section,
+        scope_unit=old.scope_unit,
+        topic_key=old.topic_key,
+        validity_status=old.validity_status,
+        validity_confidence=old.validity_confidence,
+        validity_evidence=old.validity_evidence,
+        relation_confidence=old.relation_confidence,
+        relation_evidence=old.relation_evidence,
+        index_collection=old.index_collection,
     )

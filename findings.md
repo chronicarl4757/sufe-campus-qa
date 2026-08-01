@@ -34,3 +34,9 @@
 - 固定分母为 150：0 条 answerable、37 条 partially_answerable、113 条 not_answerable。
 - 当前被场景归类的有效语料文档为 63 篇；就业、宿舍后勤、信息化、图书馆、医疗医保没有现有文档。
 - 该 baseline 的 `index_fingerprint` 为 `not_indexed`，因为审计在双 collection 迁移前直接读取 manifest/corpus。
+
+## 数据模型阶段
+
+- `DocMeta` 已向后兼容扩展来源、文档用途、主题、适用对象、版本状态/证据、关系置信度和 `index_collection` 字段。
+- `document_kind` 使用显式语义分类；policy/procedure/faq/annual_notice/form/manual/service_guide 与 public_list、归档类型分开。
+- 仅标题年份相似的制度保持 `unknown_validity`；“自某日起施行/同时废止/修订”等明确文本才产生高置信 `supersedes` 关系。

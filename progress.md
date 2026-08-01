@@ -11,4 +11,6 @@
 - 固定题库已完成：150 条、11 个场景配额，commit `c1b9ba7`。
 - before 覆盖审计已完成：commit `aa6e59f`；当前场景语料 63 篇，问题状态 0/37/113（answerable/partial/not）。
 - 全套回归测试已验证：240 passed，1 个既有依赖警告。
-- 下一步：先写版本状态、显式文档类型/collection 和多父 relations 的失败测试，再进入 Adapter。
+- 文档类型/来源/版本证据/关系模型已完成，commit 待随 collection 阶段一并记录；新增流水线元数据测试通过。
+- 当前完整测试：245 passed，1 个既有依赖警告。
+- 下一步：实现主问答/公示双 collection、原子 full rebuild 和按 collection 隔离的 BM25。

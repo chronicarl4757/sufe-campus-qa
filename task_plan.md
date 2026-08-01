@@ -7,8 +7,8 @@
 ## 阶段
 
 - [completed] 1. 固定题库、现状覆盖审计与 before 报告
-- [in_progress] 2. 文档类型、来源、版本证据和多父关系模型
-- [pending] 3. 主问答/公示双 collection、迁移和独立 BM25
+- [completed] 2. 文档类型、来源、版本证据和多父关系模型
+- [in_progress] 3. 主问答/公示双 collection、迁移和独立 BM25
 - [pending] 4. Adapter 契约、Wp3、JWC、XSC、研究生院
 - [pending] 5. 通用 orchestrator、垂直切片抓取与 after 报告
 - [pending] 6. 定向补抓、P0/P1 扩展和学院细则

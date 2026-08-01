@@ -40,6 +40,26 @@ class DocMeta:
     quality_status: str = "accepted"  # accepted | incomplete_document | low_quality | quarantined
     binary_hash: str | None = None  # 附件二进制 sha256（截断）
     text_hash: str = ""  # 标准化正文 hash（与 content_hash 的落盘文本区分：用于跨格式复用）
+    document_kind: str = "incomplete"
+    policy_name: str = ""
+    document_number: str = ""
+    effective_date: str = "unknown"
+    valid_until: str = "unknown"
+    revision_year: int | None = None
+    supersedes: tuple[str, ...] = ()
+    superseded_by: tuple[str, ...] = ()
+    applicable_student_type: str = ""
+    applicable_school_year: str = ""
+    source_type: str = "unknown"
+    source_section: str = ""
+    scope_unit: str = ""
+    topic_key: str = ""
+    validity_status: str = "unknown_validity"
+    validity_confidence: float = 0.0
+    validity_evidence: str = ""
+    relation_confidence: float = 0.0
+    relation_evidence: str = ""
+    index_collection: str = "none"
 
     def __post_init__(self) -> None:
         if self.category not in CATEGORIES:
@@ -113,6 +133,9 @@ class DocRelation:
     parent_doc_id: str
     child_doc_id: str
     relation: str = "attachment_of"
+    evidence: str = ""
+    confidence: float = 1.0
+    created_at: str = ""
 
 
 def default_relations_path(manifest_path: Path) -> Path:
