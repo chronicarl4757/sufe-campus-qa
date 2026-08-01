@@ -82,3 +82,27 @@ def test_update_and_delete(tmp_path):
     s.manifest_path.write_text("\n".join(keep) + "\n", encoding="utf-8")
     r = update_index(s, FakeEmbedder())
     assert r.updated_docs == 1 and r.deleted_docs == 1 and r.added_docs == 0
+
+
+def test_embeds_title_prefixed_chunk(tmp_path):
+    """嵌入向量必须带标题前缀（contextual header），库存文档保持原文。"""
+    import chromadb
+
+    class RecordingEmbedder(FakeEmbedder):
+        def __init__(self) -> None:
+            super().__init__()
+            self.seen: list[str] = []
+
+        def encode(self, texts):
+            self.seen.extend(texts)
+            return super().encode(texts)
+
+    s = _settings(tmp_path)
+    _write_doc(s, "docA", "奖助学金", "a.md", "第一条 奖学金标准。", "奖学金办法", "sha256:aaaa")
+    emb = RecordingEmbedder()
+    update_index(s, emb)
+    assert emb.seen and all(t.startswith("奖学金办法\n") for t in emb.seen)
+    # 库存文档保持原文（不带标题前缀）
+    col = chromadb.PersistentClient(path=str(s.chroma_dir)).get_collection(s.collection_name)
+    docs = col.get(include=["documents"])["documents"]
+    assert docs and all(not d.startswith("奖学金办法\n") for d in docs)

@@ -14,6 +14,7 @@ from typing import Protocol
 import chromadb
 
 from sufe_qa.config import Settings
+from sufe_qa.ingest.quality import classify_document, default_boost
 from sufe_qa.ingest.splitter import split_document
 from sufe_qa.schema import load_manifest
 
@@ -69,7 +70,13 @@ def update_index(settings: Settings, embedder: Embedder, full: bool = False) -> 
         settings.collection_name, metadata={"hnsw:space": "cosine"}
     )
 
-    manifest = load_manifest(settings.manifest_path)
+    # 质量门：仅 quality_status == "accepted" 的文档进入索引；
+    # 被拒/隔离文档视同不在 manifest，已从索引存在的会被同步删除
+    manifest = {
+        d: m
+        for d, m in load_manifest(settings.manifest_path).items()
+        if m.quality_status == "accepted"
+    }
     existing = col.get(include=["metadatas"]).get("metadatas") or []
     existing_hash = {m["doc_id"]: m["content_hash"] for m in existing if m}
 
@@ -93,11 +100,18 @@ def update_index(settings: Settings, embedder: Embedder, full: bool = False) -> 
             "source_url": meta.source_url,
             "publisher": meta.publisher,
             "publish_date": meta.publish_date,
+            "document_type": meta.document_type,
+            # 检索排序权重（§十二）：policy/procedure 等 1.1，news/event 0.85；
+            # 只影响门控后的排序，不参与 vector_min_similarity 门控判定
+            "boost": default_boost(classify_document(meta.title, text)),
         }
         chunks = split_document(text, doc_id, chunk_meta)
         if not chunks:
             continue
-        embeddings = embedder.encode([c.text for c in chunks])
+        # 嵌入时给 chunk 加标题前缀（contextual header）：PDF 附件正文多以"我院"
+        # 自称，裸 chunk 不含机构名，向量路无法区分各学院同名模板文件；
+        # 库存文档仍是原文，前缀只用于向量计算
+        embeddings = embedder.encode([f"{meta.title}\n{c.text}" for c in chunks])
         col.upsert(
             ids=[c.chunk_id for c in chunks],
             embeddings=embeddings,

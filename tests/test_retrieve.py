@@ -130,3 +130,52 @@ def test_search_recency_reranks_identical_relevance(settings):
     hits = HybridRetriever(settings, FakeEmbedder()).search("推免申请 条件")
     assert hits[0].doc_id == doc_id_from("test/new.md")
     assert hits[0].publish_date == "2026-01-01"
+
+
+def test_search_doc_type_boost(settings):
+    """相关性相同时政策类文档排在新闻类之前（§十二 类型权重）。"""
+    from sufe_qa.schema import DocMeta, append_manifest
+
+    body = "推免申请的学生应为应届本科毕业生，品德良好，遵纪守法，身心健康，成绩优秀。"
+    docs = (
+        ("news.md", "学院推免工作新闻", f"学院举行推免工作宣讲会，调研情况如下。{body}"),
+        ("policy.md", "推免工作管理办法", body),
+    )
+    for fname, title, text in docs:
+        (settings.corpus_dir / fname).parent.mkdir(parents=True, exist_ok=True)
+        (settings.corpus_dir / fname).write_text(f"# {title}\n\n{text}\n", encoding="utf-8")
+    append_manifest(
+        settings.manifest_path,
+        [
+            DocMeta(
+                doc_id=doc_id_from(f"test/{fname}"),
+                title=title,
+                source_url=f"test/{fname}",
+                publisher="测试单位",
+                publish_date="2026-01-01",
+                category="学工事务",
+                fetched_at="2026-07-31T00:00:00+00:00",
+                content_hash=f"sha256:{fname}",
+                file_path=fname,
+            )
+            for fname, title, _ in docs
+        ],
+    )
+    update_index(settings, FakeEmbedder())
+
+    hits = HybridRetriever(settings, FakeEmbedder()).search("推免申请 条件")
+    assert hits[0].doc_id == doc_id_from("test/policy.md")
+
+
+def test_search_per_doc_chunk_cap(settings):
+    """单文档最多占 max_chunks_per_doc 个槽位，其余来源得以进入 top-N（多样性截留）。"""
+    big = "推免申请条件：应届本科毕业生，品德良好，遵纪守法，身心健康，成绩优秀。\n" * 150
+    other = "助学金申请条件：家庭经济困难学生可提出推免申请以外的资助申请，按学年评审。\n" * 5
+    _seed(settings, {"big.md": big, "other.md": other})
+    r = HybridRetriever(settings, FakeEmbedder())
+    hits = r.search("推免 申请 条件 助学金")
+    big_id = doc_id_from("inbox/big.md")
+    other_id = doc_id_from("inbox/other.md")
+    big_hits = [h for h in hits if h.doc_id == big_id]
+    assert 0 < len(big_hits) <= settings.max_chunks_per_doc
+    assert other_id in {h.doc_id for h in hits}

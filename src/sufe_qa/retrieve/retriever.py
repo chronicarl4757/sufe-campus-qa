@@ -123,17 +123,31 @@ class HybridRetriever:
             bm_ids = [self._bm25_ids[i] for i in ranked[: s.bm25_top_k] if scores[i] > 0]
 
         fused = rrf_fuse([vec_ids, bm_ids], s.rrf_k)
-        # 时效重排：先按 RRF 超取 2 倍，再乘时效权重截断。
+        # 时效重排：先按 RRF 超取 3 倍（为多样性截留留出余量），再乘时效权重。
         # 相关性主导、新度决胜：同主题新旧文件并存时新版优先进入生成上下文。
-        candidates = sorted(fused, key=lambda cid: fused[cid], reverse=True)[: s.fusion_top_n * 2]
-        top_ids = sorted(
+        candidates = sorted(fused, key=lambda cid: fused[cid], reverse=True)[: s.fusion_top_n * 3]
+        ranked = sorted(
             candidates,
             key=lambda cid: (
                 fused[cid]
                 * recency_weight(str(self._store.get(cid, ("", {}))[1].get("publish_date", "")))
+                # 文档类型权重（§十二）：政策/规程 1.1、新闻/活动 0.85，只调排序不过门控
+                * float(self._store.get(cid, ("", {}))[1].get("boost", 1.0) or 1.0)
             ),
             reverse=True,
-        )[: s.fusion_top_n]
+        )
+        # 多样性截留：同一文档最多占 max_chunks_per_doc 个槽位，
+        # 避免长文档多 chunk 或同模板兄弟文档挤掉其他有效来源
+        top_ids: list[str] = []
+        per_doc: dict[str, int] = {}
+        for cid in ranked:
+            doc = str(self._store.get(cid, ("", {}))[1].get("doc_id", ""))
+            if per_doc.get(doc, 0) >= s.max_chunks_per_doc:
+                continue
+            per_doc[doc] = per_doc.get(doc, 0) + 1
+            top_ids.append(cid)
+            if len(top_ids) >= s.fusion_top_n:
+                break
 
         hits: list[Hit] = []
         for cid in top_ids:

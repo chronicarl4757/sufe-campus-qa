@@ -26,6 +26,9 @@ class Settings:
     bm25_top_k: int = 20
     rrf_k: int = 60
     fusion_top_n: int = 8
+    # 最终 top-N 中同一文档的 chunk 数上限：防止单文档/同模板兄弟文档霸占全部
+    # 生成上下文槽位（长 PDF FAQ、各学院同名"复试办法"的真实故障形态）
+    max_chunks_per_doc: int = 3
     vector_min_similarity: float = (
         0.5  # 以 data/eval/evalset.v1.jsonl 标定：应答题最低 0.55，垃圾问题最高 0.47
     )
