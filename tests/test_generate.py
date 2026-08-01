@@ -50,8 +50,9 @@ class _BoomLLM:
 def test_build_messages_numbers_sources():
     msgs = build_messages("推免条件？", [_hit("d1", title="推免办法"), _hit("d2", title="细则")])
     assert "严禁编造" in msgs[0]["content"]
+    assert "以发布日期最新者为准" in msgs[0]["content"]  # 时效冲突规则
     user = msgs[1]["content"]
-    assert "[1] 《推免办法》 第一条" in user
+    assert "[1] 《推免办法》 第一条（测试单位，发布于 unknown）" in user
     assert "[2] 《细则》 第一条" in user
     assert "推免条件？" in user
 

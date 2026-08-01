@@ -24,6 +24,7 @@ class SourceCard:
     title: str
     publisher: str
     source_url: str
+    publish_date: str = "unknown"
 
 
 @dataclass
@@ -51,6 +52,7 @@ class Answer:
                         title=h.title,
                         publisher=h.publisher,
                         source_url=h.source_url,
+                        publish_date=h.publish_date,
                     )
                 )
             mapping[pos] = doc_to_card[h.doc_id]

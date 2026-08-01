@@ -118,7 +118,8 @@ def _cmd_ask(args: argparse.Namespace) -> int:
     if not ans.refused:
         print("\n来源：")
         for card in ans.sources():
-            print(f"  [{card.index}] {card.title}（{card.publisher}）{card.source_url}")
+            date = f"，{card.publish_date}" if card.publish_date != "unknown" else ""
+            print(f"  [{card.index}] {card.title}（{card.publisher}{date}）{card.source_url}")
     return 0
 
 

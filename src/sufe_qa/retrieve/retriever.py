@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import re
 from dataclasses import dataclass
+from datetime import date
 
 import chromadb
 
@@ -47,6 +48,7 @@ class Hit:
     text: str
     rrf_score: float
     vector_similarity: float | None  # 未进入向量路 top-k 时为 None
+    publish_date: str = "unknown"
 
 
 def is_confident(hits: list[Hit], min_similarity: float) -> bool:
@@ -54,6 +56,21 @@ def is_confident(hits: list[Hit], min_similarity: float) -> bool:
     return any(
         h.vector_similarity is not None and h.vector_similarity >= min_similarity for h in hits
     )
+
+
+def recency_weight(publish_date: str, today: date | None = None) -> float:
+    """时效权重：当年 1.0，每早一年 ×0.85，下限 0.4；日期未知取 0.7。
+
+    政策类信息年年更新（招生/推免/评审办法），作为相关性之上的乘性调节，
+    避免旧版文件凭词面命中压过新版。相关性仍是主导：旧文档要胜出，
+    RRF 得分需高出 1/weight 倍。
+    """
+    today = today or date.today()
+    m = re.match(r"(\d{4})", publish_date or "")
+    if not m:
+        return 0.7
+    years_old = max(0, today.year - int(m.group(1)))
+    return max(0.4, 0.85**years_old)
 
 
 class HybridRetriever:
@@ -106,7 +123,17 @@ class HybridRetriever:
             bm_ids = [self._bm25_ids[i] for i in ranked[: s.bm25_top_k] if scores[i] > 0]
 
         fused = rrf_fuse([vec_ids, bm_ids], s.rrf_k)
-        top_ids = sorted(fused, key=lambda cid: fused[cid], reverse=True)[: s.fusion_top_n]
+        # 时效重排：先按 RRF 超取 2 倍，再乘时效权重截断。
+        # 相关性主导、新度决胜：同主题新旧文件并存时新版优先进入生成上下文。
+        candidates = sorted(fused, key=lambda cid: fused[cid], reverse=True)[: s.fusion_top_n * 2]
+        top_ids = sorted(
+            candidates,
+            key=lambda cid: (
+                fused[cid]
+                * recency_weight(str(self._store.get(cid, ("", {}))[1].get("publish_date", "")))
+            ),
+            reverse=True,
+        )[: s.fusion_top_n]
 
         hits: list[Hit] = []
         for cid in top_ids:
@@ -123,6 +150,7 @@ class HybridRetriever:
                     text=text,
                     rrf_score=fused[cid],
                     vector_similarity=vec_sim.get(cid),
+                    publish_date=str(meta.get("publish_date", "unknown")),
                 )
             )
         return hits

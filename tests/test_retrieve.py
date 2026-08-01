@@ -9,6 +9,7 @@ from sufe_qa.retrieve.retriever import (
     Hit,
     HybridRetriever,
     is_confident,
+    recency_weight,
     rrf_fuse,
     tokenize,
 )
@@ -86,3 +87,46 @@ def test_is_confident_threshold():
     assert is_confident(hits, 0.45)
     assert not is_confident(hits, 0.6)
     assert not is_confident([_hit("c", None)], 0.45)
+
+
+def test_recency_weight_decay():
+    from datetime import date
+
+    today = date(2026, 7, 31)
+    assert recency_weight("2026-03-01", today) == 1.0
+    assert recency_weight("2025-06-01", today) == pytest.approx(0.85)
+    assert recency_weight("2024-01-01", today) == pytest.approx(0.85**2)
+    assert recency_weight("2010-01-01", today) == 0.4  # 下限
+    assert recency_weight("unknown", today) == 0.7
+    assert recency_weight("", today) == 0.7
+    assert recency_weight("2030-01-01", today) == 1.0  # 未来日期按当年
+
+
+def test_search_recency_reranks_identical_relevance(settings):
+    """相关性相同时新版文档排在旧版之前（政策年更场景）。"""
+    from sufe_qa.schema import DocMeta, append_manifest
+
+    body = "推免申请的学生应为应届本科毕业生，品德良好，遵纪守法，身心健康，成绩优秀。"
+    for fname, date in (("old.md", "2015-01-01"), ("new.md", "2026-01-01")):
+        (settings.corpus_dir / fname).parent.mkdir(parents=True, exist_ok=True)
+        (settings.corpus_dir / fname).write_text(f"# 推免办法\n\n{body}\n", encoding="utf-8")
+    metas = [
+        DocMeta(
+            doc_id=doc_id_from(f"test/{fname}"),
+            title="推免办法",
+            source_url=f"test/{fname}",
+            publisher="测试单位",
+            publish_date=date,
+            category="学工事务",
+            fetched_at="2026-07-31T00:00:00+00:00",
+            content_hash=f"sha256:{fname}",
+            file_path=fname,
+        )
+        for fname, date in (("old.md", "2015-01-01"), ("new.md", "2026-01-01"))
+    ]
+    append_manifest(settings.manifest_path, metas)
+    update_index(settings, FakeEmbedder())
+
+    hits = HybridRetriever(settings, FakeEmbedder()).search("推免申请 条件")
+    assert hits[0].doc_id == doc_id_from("test/new.md")
+    assert hits[0].publish_date == "2026-01-01"

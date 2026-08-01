@@ -133,6 +133,7 @@ def create_app(
                             "title": c.title,
                             "publisher": c.publisher,
                             "source_url": c.source_url,
+                            "publish_date": c.publish_date,
                         }
                         for c in cards
                     ],

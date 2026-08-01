@@ -1,6 +1,64 @@
 import pytest
 
-from sufe_qa.ingest.parsers import parse_file, parse_html
+from sufe_qa.ingest.parsers import _strip_nav_soup, parse_file, parse_html
+
+
+def test_strip_nav_soup_removes_giant_nav_line():
+    giant = (
+        "上财首页 English 首页 教职员工 师资队伍 专职辅导员 行政人员 特聘教授 "
+        "师资风采 科学研究 科研成果 科研项目 科研机构 讲座会议预告 期刊目录 本科生培养"
+    )
+    body = "经济学院2025年博士研究生综合考核方案\n第一条 坚持公平公正原则。"
+    assert _strip_nav_soup(f"{giant}\n{body}") == body
+    # 无站点标志词的短词大行不剥（可能是正文列举）
+    not_nav = "苹果 香蕉 橙子 西瓜 葡萄 桃子 李子 杏子 樱桃 草莓"
+    assert _strip_nav_soup(f"{not_nav}\n{body}").startswith(not_nav)
+
+
+def test_strip_nav_soup_removes_boilerplate():
+    nav_head = "\n".join(["邮箱", "信息门户", "上财首页", "English", "师资队伍", "科学研究"])
+    nav_tail = "\n".join(["上一篇", "扫码关注我们", "通知公告"])
+    body = "第一条 为规范研究生招生工作，制定本规定。\n第二条 招生工作应遵循公平原则。"
+    assert _strip_nav_soup(f"{nav_head}\n{body}\n{nav_tail}") == body
+
+
+def test_strip_nav_soup_keeps_short_content_lines():
+    # 正文开头的偶发短行（不足连续 5 行）不剥
+    text = "总则\n第一条 为规范招生工作，制定本规定。\n第二条 内容如下。"
+    assert _strip_nav_soup(text) == text
+
+
+def test_strip_nav_soup_removes_mid_body_nav_block():
+    # gs 站面包屑"首页 / 管理规定"打断头尾连续块后，中段残留的子菜单导航块
+    mid_nav = "\n".join(
+        ["招生信息", "通知公告", "硕士生招生", "博士生招生", "港澳台招生", "招生简章",
+         "管理规定", "公示专栏", "历史数据", "硕士生招生", "博士生招生", "2026硕士招生专题"]
+    )
+    text = (
+        f"上海财经大学研究生院\n首页\n/ 管理规定\n{mid_nav}\n"
+        "关于印发《XX办法》的通知\n发布时间：2025-07-28"
+    )
+    out = _strip_nav_soup(text)
+    assert "通知公告" not in out
+    assert "硕士生招生" not in out
+    assert "关于印发《XX办法》的通知" in out
+    assert "发布时间：2025-07-28" in out
+    # 中段无机构菜单词汇的连续短行块（如录取名单）不剥
+    names = "\n".join(["张三", "李四", "王五", "赵六", "陈七", "林八", "黄九", "周十"])
+    name_text = f"录取名单如下：\n{names}\n以上名单公示五天。"
+    assert _strip_nav_soup(name_text) == name_text
+
+
+def test_parse_html_strips_nav_but_keeps_body():
+    nav = "".join(f"<li>{w}</li>" for w in ["邮箱", "信息门户", "上财首页", "English", "师资队伍"])
+    html = (
+        f"<html><head><title>考核方案</title></head><body>"
+        f"<ul>{nav}</ul><article><p>经济学院2025年博士研究生综合考核方案如下。</p>"
+        f"<p>第一条 坚持公平公正。</p></article></body></html>"
+    )
+    doc = parse_html(html, "fallback")
+    assert "邮箱" not in doc.text
+    assert "考核方案" in doc.text
 
 
 def test_parse_html_breadcrumb_title_first_segment():

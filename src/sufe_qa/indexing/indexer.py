@@ -92,6 +92,7 @@ def update_index(settings: Settings, embedder: Embedder, full: bool = False) -> 
             "category": meta.category,
             "source_url": meta.source_url,
             "publisher": meta.publisher,
+            "publish_date": meta.publish_date,
         }
         chunks = split_document(text, doc_id, chunk_meta)
         if not chunks:

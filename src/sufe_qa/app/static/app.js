@@ -127,11 +127,12 @@ function renderSources(card, cards) {
   if (!cards.length) return;
   const box = el(`<section class="attachments"><p class="attachments-title">附件 · 依据档案</p></section>`);
   for (const c of cards) {
+    const date = c.publish_date && c.publish_date !== "unknown" ? ` · ${c.publish_date}` : "";
     const a = el(`
       <a class="file-card" id="src-${c.index}" href="${escapeHtml(c.source_url)}"
          target="_blank" rel="noopener">
         <span class="file-no">〔${c.index}〕</span>
-        <div><h4>${escapeHtml(c.title)}</h4><p>${escapeHtml(c.publisher)}</p></div>
+        <div><h4>${escapeHtml(c.title)}</h4><p>${escapeHtml(c.publisher)}${escapeHtml(date)}</p></div>
         <span class="file-arrow">→</span>
       </a>`);
     box.appendChild(a);

@@ -72,11 +72,15 @@ data/
 
 ## 开发
 
-- `uv run pytest`：56 项测试，全程 FakeEmbedder/FakeLLM 离线可跑
+- `uv run pytest`：63 项测试，全程 FakeEmbedder/FakeLLM 离线可跑
 - `uv run ruff check && uv run ruff format`
 - CLI 的 `--fake-embed` 为离线开发开关（确定性假向量，索引与问答需同用）
-- 种子站扩展：`_wp3` 站（教务处/学生处等）列表页为 JS 渲染，需适配其
-  generalQuery 接口；过渡期可将网页另存/PDF 投 `data/inbox/`
+- 种子站 24 个（`seeds.yaml`）：研究生院/商学院为自建站，各学院 _wp3 站走
+  静态列表链接（部分模板 href 用单引号，BeautifulSoup 选择器天然兼容）；
+  教务处列表页为 generalQuery 接口 JS 渲染（未逆向），以首页为种子；
+  career 就业网为招聘系统不抓——相关政策可投 `data/inbox/`
+- 换 embedding 模型：改 `config.py` 的 `embedding_model` + `index --full` 重建
+
 
 ## 部署（HF Spaces）
 

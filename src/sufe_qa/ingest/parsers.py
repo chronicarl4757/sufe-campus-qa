@@ -30,6 +30,84 @@ def _read_html_text(path: Path) -> str:
 
 _TITLE_RE = re.compile(r"<title[^>]*>(.*?)</title>", re.S | re.I)
 
+# 导航样板行：短且无句读/括号（菜单项 "校友风采/暑期师资班/研究生暑期学校" 长短不一）
+_NAV_LINE = re.compile(r"^[^\s。，；：、！？.,;:!?()（）《》【】\[\]{}]{1,15}$")
+# 机构菜单词汇：导航块判定的必要证据；正文/名单不含此类词，防止误剥
+_NAV_MARKER = re.compile(
+    r"首页|English|信息门户|邮箱|师资队伍|导航|关注我们|扫码|校友|学院简介"
+    r"|科学研究|本科生培养|研究生培养|组织机构|学院领导|党建工作|新闻中心|通知公告"
+)
+
+
+def _is_giant_nav_line(line: str) -> bool:
+    """整行由空格分隔的短链接词组成且含站点标志词（_wp3 导航菜单的常见抽取形态）。"""
+    toks = line.split()
+    if len(toks) < 8:
+        return False
+    short = sum(1 for t in toks if len(t) <= 6)
+    return short / len(toks) >= 0.7 and bool(_NAV_MARKER.search(line))
+
+
+def _nav_run(lines: list[str], min_len: int) -> int:
+    """从头量出导航样板块长度：短无标点行连续 >=min_len 且块内含机构菜单词汇。"""
+    run = 0
+    for line in lines:
+        if _NAV_LINE.match(line.strip()):
+            run += 1
+        else:
+            break
+    if run >= min_len and any(_NAV_MARKER.search(line) for line in lines[:run]):
+        return run
+    return 0
+
+
+def _strip_mid_runs(lines: list[str], min_len: int = 8) -> list[str]:
+    """剥掉正文中段残留的导航行块：连续 >=min_len 短行且含机构菜单词汇。
+
+    中段阈值高于头尾（面包屑行会打断头尾连续块，如 gs 站"首页 / 管理规定"），
+    短名单/条款等正文达不到 8 行连续短行且含菜单词的双重条件。
+    """
+    out, i, n = [], 0, len(lines)
+    while i < n:
+        if not _NAV_LINE.match(lines[i].strip()):
+            out.append(lines[i])
+            i += 1
+            continue
+        j = i
+        while j < n and _NAV_LINE.match(lines[j].strip()):
+            j += 1
+        if not (j - i >= min_len and any(_NAV_MARKER.search(l) for l in lines[i:j])):
+            out.extend(lines[i:j])
+        i = j
+    return out
+
+
+def _strip_nav_soup(text: str, head_min: int = 5, tail_min: int = 3) -> str:
+    """剥掉 _wp3 站正文的导航样板。
+
+    三种形态：①单行巨型导航行（头 4 行/尾 2 行内判定即剥）；
+    ②连续多行短导航行（头 >=head_min 行、尾 >=tail_min 行且含机构菜单词汇才剥）；
+    ③中段残留导航块（>=8 连续短行且含菜单词，如 gs 站面包屑后的子菜单块）。
+    阈值与词汇证据双重条件，保证不误伤正文短行、条款列表与名单类正文。
+    """
+    lines = text.split("\n")
+    kill = set()
+    for idx in range(min(4, len(lines))):
+        if _is_giant_nav_line(lines[idx].strip()):
+            kill.add(idx)
+    for idx in range(max(0, len(lines) - 2), len(lines)):
+        if _is_giant_nav_line(lines[idx].strip()):
+            kill.add(idx)
+    lines = [l for i, l in enumerate(lines) if i not in kill]
+
+    head = _nav_run(lines, head_min)
+    if head:
+        del lines[:head]
+    tail = _nav_run(lines[::-1], tail_min)
+    if tail:
+        del lines[len(lines) - tail :]
+    return "\n".join(_strip_mid_runs(lines))
+
 
 def _breadcrumb_title(raw: str) -> str | None:
     """高校 CMS 常用面包屑标题"文章名|栏目|… - 站名"，首段才是文章名；
@@ -55,7 +133,7 @@ def parse_html(raw: str, fallback_title: str) -> ParsedDoc:
     title = _breadcrumb_title(raw) or title
     # trafilatura 不同版本的 metadata 可能没有 date 属性或为 None，统一兜底
     date = getattr(meta, "date", None) or "unknown"
-    return ParsedDoc(title=title, text=text.strip(), publish_date=date)
+    return ParsedDoc(title=title, text=_strip_nav_soup(text.strip()), publish_date=date)
 
 
 def parse_pdf(path: Path) -> ParsedDoc:
