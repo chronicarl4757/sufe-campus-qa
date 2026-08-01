@@ -27,3 +27,10 @@
 |---|---:|---|
 | zsh 变量 `path` 覆盖 `PATH`，导致 `mkdir/git` 未找到 | 1 | 使用 `worktree_target` 显式变量和绝对路径重试；未产生仓库变更 |
 | 设计文档补丁缺少行首 `+` | 2 | 拆分补丁并用 `git diff --check` 验证；设计文档已成功提交 |
+
+## Baseline 覆盖审计
+
+- 已生成 `data/coverage/sufe_coverage_before.json` 和 `.md`，题库版本为 `sufe-question-bank.v1`。
+- 固定分母为 150：0 条 answerable、37 条 partially_answerable、113 条 not_answerable。
+- 当前被场景归类的有效语料文档为 63 篇；就业、宿舍后勤、信息化、图书馆、医疗医保没有现有文档。
+- 该 baseline 的 `index_fingerprint` 为 `not_indexed`，因为审计在双 collection 迁移前直接读取 manifest/corpus。
