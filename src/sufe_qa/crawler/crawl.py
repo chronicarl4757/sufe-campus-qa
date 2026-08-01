@@ -16,7 +16,6 @@ from __future__ import annotations
 
 import logging
 import time
-import urllib.robotparser
 from dataclasses import dataclass
 from pathlib import Path
 from urllib.parse import urljoin, urlparse
@@ -26,6 +25,7 @@ import yaml
 from bs4 import BeautifulSoup
 
 from sufe_qa.config import CATEGORIES
+from sufe_qa.crawler.fetcher import RobotsCache as _RobotsCache
 
 logger = logging.getLogger(__name__)
 
@@ -40,11 +40,15 @@ class Seed:
     url_prefix: str  # 只跟进此前缀的链接
     category: str
     publisher: str
-    max_pages: int = 20
+    max_articles: int = 20  # 单栏目最多抓取文章数
+    max_list_pages: int = 5  # 单栏目最多翻页数
+    max_pages: int | None = None  # 旧字段别名（实际限文章数），仅为兼容旧 seeds.yaml
 
     def __post_init__(self) -> None:
         if self.category not in CATEGORIES:
             raise ValueError(f"非法分类: {self.category}")
+        if self.max_pages is not None:  # 旧配置归一到 max_articles
+            object.__setattr__(self, "max_articles", self.max_pages)
 
 
 def load_seeds(path: Path) -> list[Seed]:
@@ -53,58 +57,11 @@ def load_seeds(path: Path) -> list[Seed]:
     return [Seed(**s) for s in data.get("seeds") or []]
 
 
-class _RobotsCache:
-    """按 netloc 缓存 robots 规则；用带超时的 httpx 拉取，替代 robotparser.read()。
-
-    状态语义（依据 RFC 9309）：
-    - 404：站点无 robots.txt，全站放行；
-    - 401/403：robots.txt 访问被拒，视为全站禁止抓取；
-    - 其他 4xx/5xx、网络异常（含超时）：保守策略，视为禁止抓取（can_fetch=False）。
-    """
-
-    def __init__(self, client: httpx.Client, ua: str = UA):
-        self._client = client
-        self._ua = ua
-        self._cache: dict[str, urllib.robotparser.RobotFileParser | None] = {}
-
-    def _load(self, url: str) -> urllib.robotparser.RobotFileParser | None:
-        parsed = urlparse(url)
-        netloc = parsed.netloc
-        if netloc in self._cache:
-            return self._cache[netloc]
-        rp = urllib.robotparser.RobotFileParser()
-        try:
-            # 用目标页面自己的 scheme 拼 robots URL（被测站点可能是 http）
-            r = self._client.get(f"{parsed.scheme}://{netloc}/robots.txt")
-        except httpx.HTTPError:
-            self._cache[netloc] = None  # 网络异常/超时：保守不抓
-            return None
-        if r.status_code == 404:
-            rp.parse([])  # 无 robots = 全放行（RFC 9309）
-        elif r.status_code in (401, 403):
-            rp.parse(["User-agent: *", "Disallow: /"])  # 401/403 = 全站禁止
-        elif r.status_code >= 400:
-            self._cache[netloc] = None  # 其他 4xx/5xx：保守不抓
-            return None
-        else:
-            rp.parse(r.text.splitlines())
-        self._cache[netloc] = rp
-        return rp
-
-    def can_fetch(self, url: str) -> bool:
-        rp = self._load(url)
-        return rp is not None and rp.can_fetch(self._ua, url)
-
-    def crawl_delay(self, url: str) -> float | None:
-        rp = self._load(url)
-        return rp.crawl_delay(self._ua) if rp else None
-
-
 def extract_links(html: str, seed: Seed) -> list[str]:
     """从列表页 HTML 提取文章链接。
 
     相对 URL 按 list_url 补全；跳过空 href 与纯锚点（#...）；按 url_prefix 过滤、
-    保序去重、截断到 max_pages。
+    保序去重、截断到 max_articles。
     """
     soup = BeautifulSoup(html, "html.parser")
     out: list[str] = []
@@ -115,7 +72,7 @@ def extract_links(html: str, seed: Seed) -> list[str]:
         full = urljoin(seed.list_url, str(href))
         if full.startswith(seed.url_prefix):
             out.append(full)
-    return list(dict.fromkeys(out))[: seed.max_pages]
+    return list(dict.fromkeys(out))[: seed.max_articles]
 
 
 def crawl_seed(
