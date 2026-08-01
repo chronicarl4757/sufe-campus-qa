@@ -1,0 +1,27 @@
+{
+ "host": "gs.sufe.edu.cn",
+ "started_at": "2026-08-01T10:23:19+00:00",
+ "categories_found": 3,
+ "list_pages_fetched": 7,
+ "categories_requires_adapter": 0,
+ "articles_found": 42,
+ "articles_downloaded": 42,
+ "attachments_found": 41,
+ "attachments_downloaded": 38,
+ "attachments_parsed": 38,
+ "scanned_pdfs": 0,
+ "legacy_docs_unparsed": 0,
+ "incomplete_documents": 0,
+ "low_quality_documents": 1,
+ "sensitive_quarantined": 0,
+ "duplicate_attachments": 0,
+ "new_documents": 0,
+ "updated_documents": 35,
+ "unchanged_documents": 44,
+ "not_seen_documents": 62,
+ "final_indexed": 79,
+ "failures": [],
+ "notes": [
+  "https://gs.sufe.edu.cn/Home/Detail/7977: 附件 23 个，截断到 20 个"
+ ]
+}
