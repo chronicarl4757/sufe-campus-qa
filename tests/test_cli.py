@@ -32,6 +32,32 @@ def test_help_exits_zero(capsys):
     assert e.value.code == 0
 
 
+def test_coverage_audit_writes_json_and_markdown(settings, tmp_path):
+    json_path = tmp_path / "coverage.json"
+    markdown_path = tmp_path / "coverage.md"
+    assert (
+        cli.main(
+            [
+                "coverage-audit",
+                "--question-bank",
+                "data/eval/sufe_question_bank.jsonl",
+                "--manifest",
+                str(settings.manifest_path),
+                "--corpus",
+                str(settings.corpus_dir),
+                "--output-json",
+                str(json_path),
+                "--output-md",
+                str(markdown_path),
+            ]
+        )
+        == 0
+    )
+    assert json_path.is_file()
+    assert markdown_path.is_file()
+    assert "本科教务" in markdown_path.read_text(encoding="utf-8")
+
+
 def test_offline_end_to_end(settings, capsys):
     assert cli.main(["ingest", "--category", "学工事务", "--publisher", "研究生院"]) == 0
     assert cli.main(["index", "--fake-embed"]) == 0

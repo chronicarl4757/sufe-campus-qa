@@ -22,6 +22,8 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 from sufe_qa.config import PROJECT_ROOT, Settings, load_settings
+from sufe_qa.coverage.audit import audit_manifest
+from sufe_qa.coverage.reports import write_coverage_report
 from sufe_qa.crawler.crawl import load_seeds
 from sufe_qa.crawler.discover import discover_site
 from sufe_qa.crawler.engine import CrawlOptions, CrawlReport, crawl_category
@@ -311,6 +313,30 @@ def _cmd_eval(args: argparse.Namespace) -> int:
     return 1 if failures else 0
 
 
+def _cmd_coverage_audit(args: argparse.Namespace) -> int:
+    settings = load_settings()
+    manifest_path = Path(args.manifest) if args.manifest else settings.manifest_path
+    corpus_dir = Path(args.corpus) if args.corpus else settings.corpus_dir
+    report = audit_manifest(
+        manifest_path=manifest_path,
+        corpus_dir=corpus_dir,
+        question_bank_path=Path(args.question_bank),
+        retriever_config={
+            "similarity_threshold": settings.vector_min_similarity,
+            "vector_top_k": settings.vector_top_k,
+            "bm25_top_k": settings.bm25_top_k,
+            "fusion_top_n": settings.fusion_top_n,
+        },
+        index_fingerprint=args.index_fingerprint,
+        embedding_model=settings.embedding_model,
+    )
+    write_coverage_report(report, Path(args.output_json), Path(args.output_md))
+    print(f"覆盖审计 JSON: {args.output_json}")
+    print(f"覆盖审计 Markdown: {args.output_md}")
+    print(f"题目 {len(report.question_results)} 条，语料文档 {report.corpus_document_count} 篇")
+    return 0
+
+
 def _cmd_serve(args: argparse.Namespace) -> int:
     settings = load_settings()
     import uvicorn
@@ -386,6 +412,21 @@ def build_parser() -> argparse.ArgumentParser:
     e.add_argument("--min-refusal", type=float, default=1.0, help="拒答正确率达标线")
     e.add_argument("--fake-embed", action="store_true", help=argparse.SUPPRESS)
     e.set_defaults(func=_cmd_eval)
+
+    ca = sub.add_parser("coverage-audit", help="生成固定题库分母的语料覆盖审计")
+    ca.add_argument("--question-bank", required=True)
+    ca.add_argument("--manifest", default="")
+    ca.add_argument("--corpus", default="")
+    ca.add_argument(
+        "--output-json",
+        default=str(PROJECT_ROOT / "data" / "coverage" / "sufe_coverage_before.json"),
+    )
+    ca.add_argument(
+        "--output-md",
+        default=str(PROJECT_ROOT / "data" / "coverage" / "sufe_coverage_before.md"),
+    )
+    ca.add_argument("--index-fingerprint", default="not_indexed")
+    ca.set_defaults(func=_cmd_coverage_audit)
 
     s = sub.add_parser("serve", help="启动 Web 问答界面")
     s.add_argument("--host", default="127.0.0.1")
