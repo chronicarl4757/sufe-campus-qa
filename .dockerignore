@@ -17,6 +17,9 @@ __pycache__/
 data/inbox/
 data/crawl_staging/
 data/feedback.jsonl
+# 抓取缓存与状态（可重建，运行时不需要；data/raw 未入 git 更不应入镜像）
+data/raw/
+data/crawl_state/
 
 # 开发期产物，运行服务不需要
 tests/

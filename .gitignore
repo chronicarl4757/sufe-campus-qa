@@ -6,3 +6,9 @@ data/inbox/*
 !data/inbox/.gitkeep
 .ruff_cache/
 .pytest_cache/
+# 原始抓取缓存（PDF/DOCX 原件，体积大，可随时重抓）
+data/raw/
+# 增量抓取状态（随机运行变化）
+data/crawl_state/
+# Chroma 瞬态日志
+data/chroma_db/*-journal
