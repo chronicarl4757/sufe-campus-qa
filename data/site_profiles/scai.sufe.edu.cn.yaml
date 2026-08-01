@@ -1,0 +1,106 @@
+site_name: 上海财经大学计算机与人工智能学院
+root_url: https://scai.sufe.edu.cn/
+allowed_hosts:
+- scai.sufe.edu.cn
+cms_type: wp3
+categories:
+- name: 本科生培养
+  list_url: https://scai.sufe.edu.cn/bkspy/list.htm
+  category: 学工事务
+  article_selector: .news_title.line1 a
+  url_prefix: https://scai.sufe.edu.cn/
+  max_list_pages: 10
+  max_articles: 200
+- name: 研究生培养
+  list_url: https://scai.sufe.edu.cn/yjspy/list.htm
+  category: 学工事务
+  article_selector: .ljxx a
+  url_prefix: https://scai.sufe.edu.cn/
+  max_list_pages: 10
+  max_articles: 200
+- name: 科学研究 Research
+  list_url: https://scai.sufe.edu.cn/17906/list.htm
+  category: 其他
+  article_selector: .news_imgs a
+  url_prefix: https://scai.sufe.edu.cn/
+  max_list_pages: 10
+  max_articles: 200
+- name: 产教研融合
+  list_url: https://scai.sufe.edu.cn/sxjd/list.htm
+  category: 其他
+  article_selector: .ljxx a
+  url_prefix: https://scai.sufe.edu.cn/
+  max_list_pages: 10
+  max_articles: 200
+- name: 学生风采
+  list_url: https://scai.sufe.edu.cn/xsfc/list.htm
+  category: 学工事务
+  article_selector: .ljxx a
+  url_prefix: https://scai.sufe.edu.cn/
+  max_list_pages: 10
+  max_articles: 200
+- name: 智研档案
+  list_url: https://scai.sufe.edu.cn/zyda/list.htm
+  category: 其他
+  article_selector: .news_imgs a
+  url_prefix: https://scai.sufe.edu.cn/
+  max_list_pages: 10
+  max_articles: 200
+- name: 院领导
+  list_url: https://scai.sufe.edu.cn/yldhywwyh/list.htm
+  category: 其他
+  article_selector: .ljxx a
+  url_prefix: https://scai.sufe.edu.cn/
+  max_list_pages: 10
+  max_articles: 200
+- name: 人才培养 Talents
+  list_url: https://scai.sufe.edu.cn/17905/list.htm
+  category: 学工事务
+  article_selector: .news_title.line1 a
+  url_prefix: https://scai.sufe.edu.cn/
+  max_list_pages: 10
+  max_articles: 200
+- name: 教工之家
+  list_url: https://scai.sufe.edu.cn/jgzj/list.htm
+  category: 其他
+  article_selector: .ljxx a
+  url_prefix: https://scai.sufe.edu.cn/
+  max_list_pages: 10
+  max_articles: 200
+- name: 学院概况 About Scai
+  list_url: https://scai.sufe.edu.cn/17903/list.htm
+  category: 其他
+  article_selector: .ljxx a
+  url_prefix: https://scai.sufe.edu.cn/
+  max_list_pages: 10
+  max_articles: 200
+- name: 院长寄语
+  list_url: https://scai.sufe.edu.cn/yzjy/list.htm
+  category: 其他
+  article_selector: .ljxx a
+  url_prefix: https://scai.sufe.edu.cn/
+  max_list_pages: 10
+  max_articles: 200
+- name: 招聘公告
+  list_url: https://scai.sufe.edu.cn/18321/list.htm
+  category: 实习就业
+  article_selector: .ljxx a
+  url_prefix: https://scai.sufe.edu.cn/
+  max_list_pages: 10
+  max_articles: 200
+article:
+  title_selectors:
+  - .arti_title
+  - h1
+  date_selectors:
+  - .arti_update
+  - .arti_metas
+  - .arti_publisher
+  content_selectors:
+  - .wp_articlecontent
+  - .wp_entry
+  - .article_content
+limits:
+  max_html_bytes: 5000000
+  max_attachment_bytes: 30000000
+  max_attachments_per_article: 20
