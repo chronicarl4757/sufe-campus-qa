@@ -33,6 +33,7 @@ from sufe_qa.generate.answer import answer_question
 from sufe_qa.generate.client import LLMClient
 from sufe_qa.indexing.indexer import BgeEmbedder, Embedder, FakeEmbedder, update_index
 from sufe_qa.ingest.attachment_parsers import parse_attachment
+from sufe_qa.ingest.curated import ingest_curated
 from sufe_qa.ingest.inbox import ingest_inbox
 from sufe_qa.ingest.pipeline import ingest_crawled_articles
 from sufe_qa.retrieve.retriever import HybridRetriever
@@ -260,6 +261,20 @@ def _cmd_ingest(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_ingest_curated(args: argparse.Namespace) -> int:
+    settings = load_settings()
+    report = ingest_curated(
+        settings.data_dir / "curated", settings.corpus_dir, settings.manifest_path
+    )
+    print(
+        f"新增 {report.added}，更新 {report.updated}，未变 {report.unchanged}，"
+        f"跳过 {len(report.skipped)}"
+    )
+    for name in report.skipped:
+        print(f"  跳过（空文件或无正文）: {name}", file=sys.stderr)
+    return 0
+
+
 def _cmd_index(args: argparse.Namespace) -> int:
     settings = load_settings()
     report = update_index(settings, _make_embedder(settings, args.fake_embed), full=args.full)
@@ -368,6 +383,11 @@ def build_parser() -> argparse.ArgumentParser:
     i.add_argument("--category", required=True)
     i.add_argument("--publisher", default="手动投放")
     i.set_defaults(func=_cmd_ingest)
+
+    ic = sub.add_parser(
+        "ingest-curated", help="data/curated/ 人工精编指南入库（解析 front matter）"
+    )
+    ic.set_defaults(func=_cmd_ingest_curated)
 
     x = sub.add_parser("index", help="增量索引")
     x.add_argument("--full", action="store_true", help="全量重建")
