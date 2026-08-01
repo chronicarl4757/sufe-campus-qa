@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+from dataclasses import replace
 
 import pytest
 from fastapi.testclient import TestClient
@@ -108,3 +109,98 @@ def test_feedback_appends_jsonl(client, tmp_path, monkeypatch):
         ]
         is False
     )
+
+
+@pytest.fixture
+def client_factory(tmp_path, monkeypatch):
+    """可定制 settings 与 LLM 的 app 工厂。"""
+
+    def make(llm=None, **over):
+        monkeypatch.setenv("SUFE_QA_DATA_DIR", str(tmp_path))
+        settings = replace(load_settings(), **over)
+        (settings.inbox_dir / "tuimian.md").write_text(DOC, encoding="utf-8")
+        ingest_inbox(
+            settings.inbox_dir, settings.corpus_dir, settings.manifest_path, "学工事务", "研究生院"
+        )
+        update_index(settings, FakeEmbedder())
+        app = create_app(
+            settings,
+            retriever=HybridRetriever(settings, FakeEmbedder()),
+            llm=llm or FakeLLM(1),
+        )
+        return TestClient(app)
+
+    return make
+
+
+class _BoomStreamLLM:
+    """流中途抛错，模拟 DeepSeek 连接中断。"""
+
+    def stream_chat(self, messages):
+        yield "前半段"
+        raise RuntimeError("模拟断流")
+
+
+def test_ask_overlong_question_rejected(client):
+    r = client.post("/api/ask", json={"question": "长" * 600})
+    assert "问题过长" in r.text  # 业务上限 500 字，走 SSE error
+    r2 = client.post("/api/ask", json={"question": "长" * 2100})
+    assert r2.status_code == 422  # 传输层硬上限，直接 422
+
+
+def test_ask_rate_limited(client_factory):
+    client = client_factory(rate_limit_per_minute=2)
+    for _ in range(2):
+        assert "event: meta" in client.post("/api/ask", json={"question": QUESTION}).text
+    r = client.post("/api/ask", json={"question": QUESTION})
+    assert "请求过于频繁" in r.text
+
+
+def test_ask_concurrency_gate(client_factory):
+    client = client_factory(max_concurrent_llm=1)
+    assert client.app.state.llm_sem.acquire(blocking=False)  # 占住唯一的并发位
+    try:
+        r = client.post("/api/ask", json={"question": QUESTION})
+        assert "当前咨询人数较多" in r.text
+    finally:
+        client.app.state.llm_sem.release()
+    r = client.post("/api/ask", json={"question": QUESTION})
+    assert "event: done" in r.text  # 释放后恢复
+
+
+def test_ask_stream_break_emits_error_event(client_factory):
+    client = client_factory(llm=_BoomStreamLLM())
+    ev = _events(client.post("/api/ask", json={"question": QUESTION}).text)
+    assert ev["token"][0]["text"] == "前半段"
+    assert "模拟断流" in ev["error"][0]["message"]
+    assert "done" not in ev
+    # 并发闸在 finally 释放：后续请求不被卡死
+    assert "event: meta" in client.post("/api/ask", json={"question": QUESTION}).text
+
+
+def test_ask_sources_carry_citation_check(client):
+    ev = _events(client.post("/api/ask", json={"question": QUESTION}).text)
+    assert ev["sources"][0]["citation_check"]["ok"] is True
+
+
+def test_ask_invalid_citation_flagged(client_factory):
+    class BadCiteLLM:
+        def stream_chat(self, messages):
+            yield "依据资料[1]与[99]，结论成立。"
+
+    client = client_factory(llm=BadCiteLLM())
+    ev = _events(client.post("/api/ask", json={"question": QUESTION}).text)
+    check = ev["sources"][0]["citation_check"]
+    assert check["ok"] is False and check["invalid_refs"] == [99]
+
+
+def test_ask_refusal_citation_check_skipped(client):
+    ev = _events(client.post("/api/ask", json={"question": "qwerty asdfg zxcvb"}).text)
+    assert ev["sources"][0]["citation_check"] is None
+
+
+def test_feedback_question_truncated(client, tmp_path):
+    r = client.post("/api/feedback", json={"question": "问" * 900, "answer": "a", "rating": "up"})
+    assert r.json() == {"ok": True}
+    line = (tmp_path / "feedback.jsonl").read_text(encoding="utf-8").strip().splitlines()[-1]
+    assert len(json.loads(line)["question"]) == 500

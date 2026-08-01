@@ -206,6 +206,7 @@ async function ask(question) {
       } else if (event === "sources") {
         card.dataset.cards = JSON.stringify(data.cards);
         card.dataset.citeMap = JSON.stringify(data.cite_map || {});
+        card.dataset.citeCheck = JSON.stringify(data.citation_check || null);
       } else if (event === "done") {
         doneData = data;
       } else if (event === "error") {
@@ -234,6 +235,13 @@ async function ask(question) {
   const citeMap = JSON.parse(card.dataset.citeMap || "{}");
   renderAnswerText(bodyEl, citeMap);
   renderSources(card, cards);
+  // 后端引文核验未通过（编号越界或无引用）时降级提示，以来源卡片为准
+  const citeCheck = JSON.parse(card.dataset.citeCheck || "null");
+  if (citeCheck && !citeCheck.ok) {
+    bodyEl.appendChild(
+      el(`<div class="cite-warn">引文核验未通过：回答中出现无法对应的来源编号，请以来源卡片与原文为准。</div>`)
+    );
+  }
   renderFoot(card, question, meta, doneData || { total_ms: 0 });
 
   // 盖印：答复完成的签名时刻

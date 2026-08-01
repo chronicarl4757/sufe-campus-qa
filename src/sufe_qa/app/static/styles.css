@@ -382,3 +382,16 @@ body {
   .caret { animation: none; }
   .file-card.flash { animation: none; }
 }
+
+/* ---------- 引文核验警示 ---------- */
+.cite-warn {
+  margin-top: 14px;
+  padding: 10px 14px;
+  border: 1px solid var(--vermilion);
+  border-left-width: 4px;
+  background: var(--paper-raised);
+  color: var(--vermilion-deep);
+  font-family: var(--font-fangsong);
+  font-size: 13.5px;
+  border-radius: 2px;
+}

@@ -3,7 +3,7 @@ from __future__ import annotations
 from pathlib import Path
 
 from sufe_qa.config import Settings
-from sufe_qa.generate.answer import REFUSAL_TEMPLATE, answer_question
+from sufe_qa.generate.answer import REFUSAL_TEMPLATE, answer_question, validate_citations
 from sufe_qa.generate.client import FakeLLM
 from sufe_qa.generate.prompt import build_messages
 from sufe_qa.retrieve.retriever import Hit
@@ -77,3 +77,16 @@ def test_answer_streams_and_dedupes_source_cards(tmp_path):
     assert [c.title for c in cards] == ["推免办法", "细则"]
     assert [c.index for c in cards] == [1, 2]  # 展示序号连续
     assert cite_map == {1: 1, 2: 1, 3: 2}  # prompt 引文编号 → 卡片序号
+
+
+def test_validate_citations():
+    ok = validate_citations("申请须为应届毕业生[1]，并获推荐资格[2]。", 2)
+    assert ok.ok and ok.has_citation and ok.invalid_refs == []
+    # 编号越界（模型幻觉出 [99]）判不通过
+    bad = validate_citations("依据资料[1]与[99]可得。", 2)
+    assert not bad.ok and bad.invalid_refs == [99]
+    # 全文无引用判不通过；[ 3 ] 空白变体可识别
+    none = validate_citations("没有任何引用的回答。", 2)
+    assert not none.ok and not none.has_citation
+    spaced = validate_citations("见资料[ 2 ]。", 2)
+    assert spaced.ok

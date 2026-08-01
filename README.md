@@ -44,13 +44,16 @@ sufe-qa serve                    # Web 界面：http://127.0.0.1:7860
 
 ## 评测
 
+正式评测集 `data/eval/evalset.v1.jsonl`（9 应答题 + 3 拒答题，doc_id 锚定 manifest）随仓库提供：
+
 ```bash
-cp data/eval/evalset.example.jsonl data/eval/evalset.v1.jsonl
-# 按 manifest.jsonl 里的 doc_id 填写题目后：
-sufe-qa eval                     # 检索命中率 + 拒答正确率，不达标退出码 1
+sufe-qa eval   # 检索命中率 / 应答题回答率 / 拒答正确率，任一不达标退出码 1
 ```
 
-达标线（M2）：检索命中率 ≥ 90%，拒答正确率 = 100%。引用正确率需 LLM 判分，由
+达标线（M2）：检索命中率 ≥ 90%，应答题回答率 = 100%，拒答正确率 = 100%；空评测集
+或缺少应答/拒答样本直接判失败，应答题被门控拦下视同作答失败。拒答题语义为"知识库
+无此领域内容"；语义贴库的不当请求（如代写）由生成层拒答，不在离线集内。自定义评测集
+可复制 `evalset.example.jsonl`（支持 `#` 注释行），引用正确率需 LLM 判分，由
 answer_points 字段人工复核。
 
 ## 目录
@@ -72,7 +75,7 @@ data/
 
 ## 开发
 
-- `uv run pytest`：63 项测试，全程 FakeEmbedder/FakeLLM 离线可跑
+- `uv run pytest`：82 项测试，全程 FakeEmbedder/FakeLLM 离线可跑
 - `uv run ruff check && uv run ruff format`
 - CLI 的 `--fake-embed` 为离线开发开关（确定性假向量，索引与问答需同用）
 - 种子站 24 个（`seeds.yaml`）：研究生院/商学院为自建站，各学院 _wp3 站走
@@ -84,7 +87,9 @@ data/
 
 ## 部署（HF Spaces）
 
-Docker SDK（根目录 `Dockerfile` 已备好）：`DEEPSEEK_API_KEY` 存 Spaces Secrets；
+Docker SDK（根目录 `Dockerfile` 已备好）：依赖按 `uv.lock` 锁定安装，容器以非 root
+用户运行，`.dockerignore` 排除 `.env`/`.venv`/缓存与 `data/inbox` 等本地投放态文件
+（语料与索引随 git 提交、正常入镜像）。`DEEPSEEK_API_KEY` 存 Spaces Secrets；
 `data/corpus` 与 `data/chroma_db` 随 git 提交，启动只读加载；BGE-M3 首次启动下载
 （约 2GB），开 Spaces 持久存储挂 `/data` 复用缓存。本地/自有服务器：
 `docker build -t sufe-qa . && docker run -p 7860:7860 sufe-qa`。

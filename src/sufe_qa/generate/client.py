@@ -16,7 +16,11 @@ class DeepSeekClient:
     def __init__(self, settings: Settings):
         from openai import OpenAI  # 仅此处置允许 import
 
-        self._client = OpenAI(api_key=get_api_key(), base_url=settings.llm_base_url)
+        self._client = OpenAI(
+            api_key=get_api_key(),
+            base_url=settings.llm_base_url,
+            timeout=settings.llm_timeout,  # 缺省 SDK 超时过长，显式收口防悬挂
+        )
         self._model = settings.llm_model
 
     def stream_chat(self, messages: list[dict[str, str]]) -> Iterator[str]:

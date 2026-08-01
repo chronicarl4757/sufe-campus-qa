@@ -1,0 +1,16 @@
+# 评测集 v1（正式门禁集）：9 应答题 + 3 拒答题，doc_id 锚定 data/corpus/manifest.jsonl。
+# 应答题命中任一 expected_doc_id 且未被拒答才算正确；门禁线：命中率>=90%、回答率=100%、拒答率=100%。
+# 拒答题语义：知识库无此领域内容、应在检索层被拦下的问题（如美食/股票/体育闲聊）；
+# 语义贴库但不当的请求（如代写入党申请书）属生成层职责，不在本离线集内标注。
+{"id": "q-tuimian-apply", "question": "推免预报名需要满足哪些申请条件？", "expected_doc_ids": ["f900e2c94b7f"], "should_refuse": false, "answer_points": ["应届本科毕业生", "获得本科高校推荐资格", "各学院自定条件"]}
+{"id": "q-tuimian-list", "question": "2026年推免名单公示了吗？", "expected_doc_ids": ["ec97cb99d0b2"], "should_refuse": false, "answer_points": ["名单已公示", "公示渠道与时间"]}
+{"id": "q-shenqing-kaohe", "question": "博士研究生申请考核制的实施办法是怎样的？", "expected_doc_ids": ["4b5d82daeea6", "31abd3e97a2c", "6316c8fee1fd"], "should_refuse": false, "answer_points": ["申请考核流程", "材料与考核环节"]}
+{"id": "q-dangtuan", "question": "研究生新生党团组织关系怎么转接？", "expected_doc_ids": ["e4939049e910"], "should_refuse": false, "answer_points": ["转接流程", "所需介绍信或线上操作"]}
+{"id": "q-tiaoji", "question": "2026年硕士调剂复试考生名单出来了吗？", "expected_doc_ids": ["7f0702a08178"], "should_refuse": false, "answer_points": ["名单已发布"]}
+{"id": "q-english-place", "question": "本科新生大学英语分级考试怎么安排？", "expected_doc_ids": ["d8083d003a19"], "should_refuse": false, "answer_points": ["分级考试安排", "教学分班规则"]}
+{"id": "q-zhuanye", "question": "会计学院转专业拟录取名单公示了吗？", "expected_doc_ids": ["4c7abad073b4"], "should_refuse": false, "answer_points": ["拟录取名单已公示"]}
+{"id": "q-zhaosheng-guizhang", "question": "学校研究生招生工作管理规定是哪一年修订的？", "expected_doc_ids": ["ee59bf8f4c11", "374e60732d97"], "should_refuse": false, "answer_points": ["2019年修订"]}
+{"id": "q-zhengshen", "question": "政审调档要寄什么材料？", "expected_doc_ids": ["a44ebdc27934"], "should_refuse": false, "answer_points": ["政审表", "调档函与寄送要求"]}
+{"id": "q-refuse-food", "question": "学校门口哪家火锅最好吃？", "expected_doc_ids": [], "should_refuse": true, "answer_points": []}
+{"id": "q-refuse-stock", "question": "帮我预测一下明天贵州茅台的股价", "expected_doc_ids": [], "should_refuse": true, "answer_points": []}
+{"id": "q-refuse-nba", "question": "NBA总冠军会是谁？", "expected_doc_ids": [], "should_refuse": true, "answer_points": []}

@@ -139,9 +139,11 @@ def _cmd_eval(args: argparse.Namespace) -> int:
         print(f"  [{mark}] {row.id} {kind} | {row.question}")
     if report.hit_rate is not None:
         print(f"检索命中率: {report.hit_rate:.1%}（达标线 {args.min_hit:.0%}）")
+    if report.answer_rate is not None:
+        print(f"应答题回答率: {report.answer_rate:.1%}（达标线 {args.min_answer:.0%}）")
     if report.refusal_rate is not None:
         print(f"拒答正确率: {report.refusal_rate:.1%}（达标线 {args.min_refusal:.0%}）")
-    failures = report.gate_failures(args.min_hit, args.min_refusal)
+    failures = report.gate_failures(args.min_hit, args.min_refusal, args.min_answer)
     for f in failures:
         print(f"门禁未过: {f}", file=sys.stderr)
     return 1 if failures else 0
@@ -189,6 +191,7 @@ def build_parser() -> argparse.ArgumentParser:
     e = sub.add_parser("eval", help="评测集打分 + 门禁")
     e.add_argument("--evalset", default=str(DEFAULT_EVALSET))
     e.add_argument("--min-hit", type=float, default=0.9, help="检索命中率达标线")
+    e.add_argument("--min-answer", type=float, default=1.0, help="应答题回答率达标线")
     e.add_argument("--min-refusal", type=float, default=1.0, help="拒答正确率达标线")
     e.add_argument("--fake-embed", action="store_true", help=argparse.SUPPRESS)
     e.set_defaults(func=_cmd_eval)

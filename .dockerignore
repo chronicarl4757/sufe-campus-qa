@@ -1,0 +1,23 @@
+# 密钥与本地环境（.dockerignore 与 .gitignore 独立，必须显式排除）
+.env
+.env.*
+!.env.example
+.venv/
+
+# 版本控制与工具缓存
+.git/
+.gitignore
+__pycache__/
+**/__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+
+# 运行时/投放态数据（语料与索引随 git 提交、需入镜像，不排除）
+data/inbox/
+data/crawl_staging/
+data/feedback.jsonl
+
+# 开发期产物，运行服务不需要
+tests/
+docs/

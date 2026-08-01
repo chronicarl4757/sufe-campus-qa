@@ -26,7 +26,27 @@ class Settings:
     bm25_top_k: int = 20
     rrf_k: int = 60
     fusion_top_n: int = 8
-    vector_min_similarity: float = 0.45
+    vector_min_similarity: float = (
+        0.5  # 以 data/eval/evalset.v1.jsonl 标定：应答题最低 0.55，垃圾问题最高 0.47
+    )
+    llm_timeout: float = 60.0  # DeepSeek 请求超时（秒），防止流式连接悬挂
+    max_question_chars: int = 500  # 问题长度上限，超出直接拒绝
+    rate_limit_per_minute: int = 12  # 单 IP 每分钟问答/反馈请求上限
+    max_concurrent_llm: int = 8  # 全局 LLM 并发闸，保护配额与成本
+
+
+def _env_int(name: str, default: int) -> int:
+    try:
+        return int(os.getenv(name, ""))
+    except ValueError:
+        return default
+
+
+def _env_float(name: str, default: float) -> float:
+    try:
+        return float(os.getenv(name, ""))
+    except ValueError:
+        return default
 
 
 def load_settings() -> Settings:
@@ -38,6 +58,10 @@ def load_settings() -> Settings:
         inbox_dir=data_dir / "inbox",
         chroma_dir=data_dir / "chroma_db",
         manifest_path=data_dir / "corpus" / "manifest.jsonl",
+        llm_timeout=_env_float("SUFE_QA_LLM_TIMEOUT", 60.0),
+        max_question_chars=_env_int("SUFE_QA_MAX_QUESTION_CHARS", 500),
+        rate_limit_per_minute=_env_int("SUFE_QA_RATE_LIMIT_PER_MINUTE", 12),
+        max_concurrent_llm=_env_int("SUFE_QA_MAX_CONCURRENT_LLM", 8),
     )
     s.corpus_dir.mkdir(parents=True, exist_ok=True)
     s.inbox_dir.mkdir(parents=True, exist_ok=True)

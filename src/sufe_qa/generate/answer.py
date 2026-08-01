@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from collections.abc import Iterator
 from dataclasses import dataclass
 
@@ -14,6 +15,31 @@ REFUSAL_TEMPLATE = (
     "未在已收录的学校官方资料中找到可靠依据，为避免误导不作回答。\n"
     "建议直接查询相关职能部门官网（教务处/研究生院/学生工作部）或到行政楼现场咨询。"
 )
+
+_CITE_RE = re.compile(r"\[\s*(\d{1,2})\s*\]")
+
+
+@dataclass(frozen=True)
+class CitationCheck:
+    """回答文本的引用校验结果；ok = 有引用且所有编号都在资料范围内。"""
+
+    ok: bool
+    has_citation: bool
+    invalid_refs: list[int]
+
+
+def validate_citations(text: str, n_refs: int) -> CitationCheck:
+    """后端强制校验 [n] 引用：编号必须落在 1..n_refs（prompt 资料编号范围）。
+
+    引用从"提示词约定"升级为可检测约束：越界编号（如 [99]）与全文无引用
+    都判不通过，由服务端记录并随 sources 事件告知前端降级提示。
+    论断是否真被资料支撑需 LLM 判分，属评测层职责，不在此校验。
+    """
+    refs = [int(m.group(1)) for m in _CITE_RE.finditer(text)]
+    invalid = sorted({r for r in refs if r < 1 or r > n_refs})
+    return CitationCheck(
+        ok=bool(refs) and not invalid, has_citation=bool(refs), invalid_refs=invalid
+    )
 
 
 @dataclass(frozen=True)

@@ -76,7 +76,7 @@ def _strip_mid_runs(lines: list[str], min_len: int = 8) -> list[str]:
         j = i
         while j < n and _NAV_LINE.match(lines[j].strip()):
             j += 1
-        if not (j - i >= min_len and any(_NAV_MARKER.search(l) for l in lines[i:j])):
+        if not (j - i >= min_len and any(_NAV_MARKER.search(ln) for ln in lines[i:j])):
             out.extend(lines[i:j])
         i = j
     return out
@@ -98,7 +98,7 @@ def _strip_nav_soup(text: str, head_min: int = 5, tail_min: int = 3) -> str:
     for idx in range(max(0, len(lines) - 2), len(lines)):
         if _is_giant_nav_line(lines[idx].strip()):
             kill.add(idx)
-    lines = [l for i, l in enumerate(lines) if i not in kill]
+    lines = [ln for i, ln in enumerate(lines) if i not in kill]
 
     head = _nav_run(lines, head_min)
     if head:
