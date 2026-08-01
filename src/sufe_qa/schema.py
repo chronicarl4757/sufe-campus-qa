@@ -28,6 +28,18 @@ class DocMeta:
     fetched_at: str
     content_hash: str
     file_path: str  # 相对 corpus_dir 的路径
+    # ---- 附件与关系字段（均有默认值，旧版 JSONL 可直接加载）----
+    document_type: str = "article"  # article | attachment
+    parent_doc_id: str | None = None  # 附件所属文章（首个父级；多父见 relations.jsonl）
+    source_page_url: str = ""  # 附件来源文章页 URL
+    download_url: str | None = None  # 附件最终下载 URL
+    attachment_name: str | None = None
+    attachment_index: int | None = None  # 在文章内的附件序号（1 起）
+    mime_type: str | None = None
+    parse_status: str = "ok"  # ok | scanned_pdf | legacy_doc_unparsed | unsupported_mime ...
+    quality_status: str = "accepted"  # accepted | incomplete_document | low_quality | quarantined
+    binary_hash: str | None = None  # 附件二进制 sha256（截断）
+    text_hash: str = ""  # 标准化正文 hash（与 content_hash 的落盘文本区分：用于跨格式复用）
 
     def __post_init__(self) -> None:
         if self.category not in CATEGORIES:
@@ -88,4 +100,49 @@ def load_manifest(manifest_path: Path) -> dict[str, DocMeta]:
                 logger.warning("跳过 manifest 坏行 %s:%d", manifest_path, lineno)
                 continue
             out[d["doc_id"]] = DocMeta(**d)
+    return out
+
+
+# ---------- 文档多对多关系（附件被多篇文章引用） ----------
+
+
+@dataclass(frozen=True)
+class DocRelation:
+    """文章-附件引用关系；child.parent_doc_id 只记首个父级，完整多父关系在本文件。"""
+
+    parent_doc_id: str
+    child_doc_id: str
+    relation: str = "attachment_of"
+
+
+def default_relations_path(manifest_path: Path) -> Path:
+    return manifest_path.with_name("relations.jsonl")
+
+
+def append_relations(relations_path: Path, rels: list[DocRelation]) -> None:
+    """追加关系记录（JSONL，单写者假设同 manifest）；自动去重已存在关系。"""
+    existing = load_relations(relations_path)
+    relations_path.parent.mkdir(parents=True, exist_ok=True)
+    with relations_path.open("a", encoding="utf-8") as f:
+        for r in rels:
+            if r in existing:
+                continue
+            f.write(json.dumps(asdict(r), ensure_ascii=False) + "\n")
+            existing.add(r)
+
+
+def load_relations(relations_path: Path) -> set[DocRelation]:
+    """全量关系集合；坏行跳过。文件不存在返回空集。"""
+    if not relations_path.exists():
+        return set()
+    out: set[DocRelation] = set()
+    with relations_path.open(encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if not line:
+                continue
+            try:
+                out.add(DocRelation(**json.loads(line)))
+            except (json.JSONDecodeError, TypeError):
+                logger.warning("跳过 relations 坏行 %s", relations_path)
     return out

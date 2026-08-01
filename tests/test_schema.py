@@ -1,8 +1,18 @@
 import dataclasses
+import json
 
 import pytest
 
-from sufe_qa.schema import DocMeta, append_manifest, doc_id_from, load_manifest, sha256_text
+from sufe_qa.schema import (
+    DocMeta,
+    DocRelation,
+    append_manifest,
+    append_relations,
+    doc_id_from,
+    load_manifest,
+    load_relations,
+    sha256_text,
+)
 
 
 def _meta(content_hash: str = "sha256:a", title: str = "细则") -> DocMeta:
@@ -54,3 +64,51 @@ def test_load_manifest_skips_corrupt_lines(tmp_path):
 
 def test_load_manifest_missing_file(tmp_path):
     assert load_manifest(tmp_path / "nope.jsonl") == {}
+
+
+def test_load_manifest_legacy_line_gets_defaults(tmp_path):
+    # 旧版 10 字段行（无附件/质量字段）必须仍能加载，新字段取默认值
+    p = tmp_path / "manifest.jsonl"
+    legacy = {
+        "doc_id": "ab12cd34ef56",
+        "title": "旧记录",
+        "source_url": "https://x.sufe.edu.cn/old",
+        "publisher": "学生工作部",
+        "publish_date": "2024-01-01",
+        "category": "学工事务",
+        "fetched_at": "2024-01-02T00:00:00",
+        "content_hash": "sha256:9",
+        "file_path": "学工事务/old.md",
+    }
+    p.write_text(json.dumps(legacy, ensure_ascii=False) + "\n", encoding="utf-8")
+    m = load_manifest(p)["ab12cd34ef56"]
+    assert m.document_type == "article" and m.parent_doc_id is None
+    assert m.parse_status == "ok" and m.quality_status == "accepted" and m.text_hash == ""
+
+
+def test_manifest_extended_fields_roundtrip(tmp_path):
+    p = tmp_path / "manifest.jsonl"
+    m = dataclasses.replace(
+        _meta(),
+        document_type="attachment",
+        parent_doc_id="p1",
+        download_url="https://x.sufe.edu.cn/f.pdf",
+        parse_status="scanned_pdf",
+        quality_status="accepted",
+        binary_hash="sha256:bin",
+        text_hash="sha256:txt",
+    )
+    append_manifest(p, [m])
+    loaded = load_manifest(p)[m.doc_id]
+    assert loaded.document_type == "attachment" and loaded.parent_doc_id == "p1"
+    assert loaded.parse_status == "scanned_pdf" and loaded.text_hash == "sha256:txt"
+
+
+def test_relations_append_load_and_dedup(tmp_path):
+    p = tmp_path / "relations.jsonl"
+    r1, r2 = DocRelation("a1", "att1"), DocRelation("a2", "att1")  # 同附件多父
+    append_relations(p, [r1, r2])
+    append_relations(p, [r1])  # 重复追加不产生重复行
+    rels = load_relations(p)
+    assert rels == {r1, r2}
+    assert len(p.read_text(encoding="utf-8").strip().splitlines()) == 2
