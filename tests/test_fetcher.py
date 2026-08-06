@@ -204,3 +204,24 @@ def test_gbk_text_decoding():
     f = _fetcher(handler)
     res = f.fetch(f"http://{HOST}/gbk")
     assert res.ok and res.text() == "推免办法"
+
+
+def test_post_marker_sends_post_with_xhr_header():
+    """post+https:// 前缀：转为 POST 并带 X-Requested-With，安全检查链不变。"""
+    seen = {}
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        if request.url.path == "/robots.txt":
+            return httpx.Response(404)
+        seen["method"] = request.method
+        seen["xhr"] = request.headers.get("x-requested-with")
+        return httpx.Response(
+            200, text='{"code":200}', headers={"Content-Type": "application/json"}
+        )
+
+    f = _fetcher(handler)
+    res = f.fetch(f"post+https://{HOST}/career/news/search/tzgg/1/20")
+    assert res.ok
+    assert seen["method"] == "POST"
+    assert seen["xhr"] == "XMLHttpRequest"
+    assert res.requested_url == f"https://{HOST}/career/news/search/tzgg/1/20"

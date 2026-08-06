@@ -141,3 +141,25 @@ def test_adapter_engine_uses_inline_jwc_page_without_refetching():
     assert len(articles) == 1
     assert articles[0].title == "办事流程"
     assert [call for call in fetcher.calls if call[0] == url] == [(url, "html")]
+
+
+def test_title_include_filter_narrows_wide_section(tmp_path):
+    """财务处宽栏目：title_include 只保留学生缴费相关文章。"""
+    from sufe_qa.crawler.adapter_engine import _filter_listing_titles
+    from sufe_qa.crawler.adapters import ListingResult, PageSpec, SectionSpec
+
+    section = SectionSpec(
+        section_id="cwc-xxgg",
+        name="通知公告",
+        list_url="https://cwc.sufe.edu.cn/xxgg_2982/list.htm",
+        category="学工事务",
+        publisher="财务处",
+        source_type="official_department",
+        metadata={"title_include": "缴费|学费|收费"},
+    )
+    specs = [
+        PageSpec(url=f"https://cwc.sufe.edu.cn/a/{i}", section_id=section.section_id, title_hint=t)
+        for i, t in enumerate(["2026级本科新设专业学费标准的公示", "科研经费报销培训通知"])
+    ]
+    listing = _filter_listing_titles(ListingResult(article_pages=specs), section)
+    assert [s.title_hint for s in listing.article_pages] == ["2026级本科新设专业学费标准的公示"]

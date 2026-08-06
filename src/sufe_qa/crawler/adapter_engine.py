@@ -7,13 +7,15 @@
 from __future__ import annotations
 
 import hashlib
+import re
 from collections import deque
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from typing import Callable, Protocol
 from urllib.parse import urlencode, urlparse, urlunparse
 
 from sufe_qa.crawler.adapters import (
     ArticleSpec,
+    ListingResult,
     PageContent,
     PageSpec,
     SectionSpec,
@@ -66,6 +68,23 @@ def _synthetic_parent_url(section: SectionSpec, attachment_url: str) -> str:
     )
     query["source_attachment"] = token
     return urlunparse(parsed._replace(query=urlencode(query)))
+
+
+def _filter_listing_titles(listing: ListingResult, section: SectionSpec) -> ListingResult:
+    """按栏目 metadata 的 title_include/title_exclude 正则收窄文章入口（如财务处宽栏目）。"""
+    include = section.metadata.get("title_include")
+    exclude = section.metadata.get("title_exclude")
+    if not include and not exclude:
+        return listing
+    inc = re.compile(include) if include else None
+    exc = re.compile(exclude) if exclude else None
+    kept = [
+        spec
+        for spec in listing.article_pages
+        if (inc is None or inc.search(spec.title_hint or ""))
+        and (exc is None or not exc.search(spec.title_hint or ""))
+    ]
+    return replace(listing, article_pages=kept)
 
 
 def _failed_article(url: str, publisher: str, status: str, error: str) -> CrawledArticle:
@@ -208,6 +227,7 @@ def crawl_adapter_section(
             break
         list_contents[page.final_url] = page
         listing = adapter.parse_listing(page, section)
+        listing = _filter_listing_titles(listing, section)
         if listing.page_hash in seen_hashes:
             break
         seen_hashes.add(listing.page_hash)

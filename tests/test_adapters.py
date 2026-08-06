@@ -198,3 +198,95 @@ def test_business_school_adapter_reuses_wp3_contract():
     assert isinstance(adapter, Wp3Adapter)
     pages = list(adapter.iter_list_pages(_section()))
     assert pages[0].page_kind == "listing"
+
+
+def test_wp3_inline_article_flag_turns_list_page_into_article():
+    """lib 等站规则栏目：metadata inline_article=true 时栏目页本身作为正文页。"""
+    section = SectionSpec(
+        section_id="lib-8365",
+        name="借阅规则",
+        list_url="https://lib.sufe.edu.cn/8365/list.htm",
+        category="学工事务",
+        publisher="图书馆",
+        source_type="official_department",
+        metadata={"inline_article": "true"},
+    )
+    html = """
+    <html><body><div class="wp_articlecontent">
+    <p>第一条 本校读者凭校园卡借阅图书，本科生每人最多可借 15 册，借期 30 天，可续借两次。</p>
+    </div></body></html>
+    """
+    adapter = Wp3Adapter(publisher="图书馆")
+    result = adapter.parse_listing(_page(section.list_url, html), section)
+    assert result.stop_reason == "inline_article"
+    assert [p.url for p in result.article_pages] == ["https://lib.sufe.edu.cn/8365/list.htm"]
+    assert result.article_pages[0].title_hint == "借阅规则"
+
+
+CAREER_LIST_JSON = """
+{"code":200,"data":{"pageNum":1,"pages":2,"total":3,"list":[
+ {"newsId":101,"releaseMode":"以内容形式发布","newsTitle":"毕业去向登记指南","releaseDate":"2026-05-01"},
+ {"newsId":102,"releaseMode":"以链接形式发布","newsTitle":"某招聘会","releaseDate":"2026-05-02"},
+ {"newsId":103,"releaseMode":"以PDF文档形式发布","newsTitle":"就业手续一览","releaseDate":"2026-05-03"}
+]}}
+"""
+
+CAREER_ARTICLE_JSON = """
+{"code":200,"data":{"newsTitle":"毕业去向登记指南","releaseDate":"2026-05-01",
+ "newsFrom":"就业指导中心","newsContent":"<p>毕业生应于离校前完成毕业去向登记。</p>",
+ "newsAttach":"[{\\"fileName\\":\\"毕业去向登记表.docx\\",\\"attachUrl\\":\\"/download/fileDownload/103\\"}]"}}
+"""
+
+
+def _career_section() -> SectionSpec:
+    return SectionSpec(
+        section_id="career-tzgg",
+        name="通知公告",
+        list_url="https://career.sufe.edu.cn/career/news/search/tzgg",
+        category="实习就业",
+        publisher="就业指导中心",
+        source_type="official_department",
+    )
+
+
+def test_career_adapter_parses_json_listing_and_skips_external_links():
+    from sufe_qa.crawler.adapters import CareerAdapter
+
+    adapter = CareerAdapter()
+    section = _career_section()
+    result = adapter.parse_listing(
+        _page(section.list_url, CAREER_LIST_JSON, mime="application/json"), section
+    )
+    urls = [p.url for p in result.article_pages]
+    assert urls == [
+        "post+https://career.sufe.edu.cn/career/news/data/tzgg/101",
+        "post+https://career.sufe.edu.cn/career/news/data/tzgg/103",
+    ]
+    assert result.total_pages == 2
+    assert result.next_page and result.next_page.url.endswith("/search/tzgg/2/20")
+
+
+def test_career_adapter_parses_json_article_with_api_attachments():
+    from sufe_qa.crawler.adapters import CareerAdapter
+
+    adapter = CareerAdapter()
+    section = _career_section()
+    spec = PageSpec(
+        url="post+https://career.sufe.edu.cn/career/news/data/tzgg/101",
+        section_id=section.section_id,
+        page_kind="article",
+        title_hint="",
+        publisher_hint=section.publisher,
+        category=section.category,
+        source_type=section.source_type,
+    )
+    article = adapter.parse_article(
+        _page(spec.url, CAREER_ARTICLE_JSON, mime="application/json"), spec
+    )
+    assert article.title == "毕业去向登记指南"
+    assert article.publish_date == "2026-05-01"
+    assert "毕业去向登记" in article.body_text
+    assert [a.requested_url for a in article.attachments] == [
+        "https://career.sufe.edu.cn/download/fileDownload/103"
+    ]
+    assert article.attachments[0].anchor_text == "毕业去向登记表.docx"

@@ -371,3 +371,28 @@ def test_pagination_first_page_failure_incomplete():
 def test_find_next_page_url_none_on_plain_page():
     url, js = find_next_page_url("<html><body><p>hi</p></body></html>", f"{BASE}list.htm")
     assert url is None and not js
+
+
+def test_discover_attachments_finds_pdfsrc_player_and_sudyfile_title():
+    """gongkai/cwc 的内嵌 PDF：div/span[pdfsrc]，文件名在 sudyfile-attr。"""
+    from bs4 import BeautifulSoup
+
+    from sufe_qa.crawler.article import discover_attachments
+
+    html = """
+    <div class="wp_articlecontent">
+      <div class="wp_pdf_player" pdfsrc="/_upload/article/files/ab/cd/policy.pdf"
+           sudyfile-attr="{'title':'上海财经大学学生宿舍管理办法.pdf'}"></div>
+      <span pdfsrc="/_upload/article/files/ef/gh/rules.docx"></span>
+    </div>
+    """
+    cands = discover_attachments(
+        BeautifulSoup(html, "html.parser"),
+        "https://gongkai.sufe.edu.cn/a3/38/c13790a41784/page.htm",
+    )
+    urls = {c.requested_url: c for c in cands}
+    assert "https://gongkai.sufe.edu.cn/_upload/article/files/ab/cd/policy.pdf" in urls
+    assert "https://gongkai.sufe.edu.cn/_upload/article/files/ef/gh/rules.docx" in urls
+    assert urls[
+        "https://gongkai.sufe.edu.cn/_upload/article/files/ab/cd/policy.pdf"
+    ].anchor_text == ("上海财经大学学生宿舍管理办法.pdf")

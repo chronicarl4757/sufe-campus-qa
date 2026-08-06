@@ -216,7 +216,14 @@ class SafeFetcher:
 
         headers 可传 If-None-Match / If-Modified-Since 做条件请求；304 返回
         status="not_modified"（ok=False，由调用方按“未变化”处理，不计失败）。
+
+        ``post+https://`` 前缀表示该地址只能通过 POST JSON 接口获取（如就业平台
+        的 XHR API）；此时以 POST + X-Requested-With 请求，安全检查链不变。
         """
+        method = "GET"
+        if url.startswith("post+"):
+            method, url = "POST", url[5:]
+            headers = {**(headers or {}), "X-Requested-With": "XMLHttpRequest"}
         res = FetchResult(requested_url=url)
         limit = self._max_html if kind == "html" else self._max_att
         current, seen = url, {url}
@@ -228,7 +235,7 @@ class SafeFetcher:
             try:
                 # 流式响应：先拿状态/头决定重定向，再限量读体
                 with self._client.stream(
-                    "GET", current, follow_redirects=False, headers=headers
+                    method, current, follow_redirects=False, headers=headers
                 ) as r:
                     if r.is_redirect:
                         loc = r.headers.get("location")

@@ -7,6 +7,7 @@ Adapter 只负责把 HTTP 返回的 ``PageContent`` 转成栏目、分页和文�
 
 from __future__ import annotations
 
+import json
 import re
 from dataclasses import dataclass, field
 from hashlib import sha256
@@ -327,7 +328,38 @@ class BaseAdapter:
     def _accept_article_url(self, url: str) -> bool:
         return False
 
+    def _inline_listing(
+        self, page: PageContent, section: SectionSpec, min_len: int = 20
+    ) -> ListingResult | None:
+        """栏目页本身即正文（静态说明页/附件集合页）；无正文时返回 None。"""
+        soup = BeautifulSoup(page.text(), "html.parser")
+        content = soup.select_one("#wp_column_article .wp_articlecontent, .wp_articlecontent")
+        if content is None or len(_clean(content.get_text(" ", strip=True))) < min_len:
+            return None
+        inline = PageSpec(
+            url=page.final_url or page.requested_url,
+            section_id=section.section_id,
+            page_kind="article",
+            title_hint=section.name,
+            publisher_hint=section.publisher or self.publisher,
+            category=section.category,
+            source_type=section.source_type,
+            scope_unit=section.scope_unit,
+            metadata={"inline": "true"},
+        )
+        return ListingResult(
+            article_pages=[inline],
+            current_page=1,
+            total_pages=1,
+            total_records=1,
+            page_hash=sha256(re.sub(r"\s+", "", page.text()).encode("utf-8")).hexdigest(),
+            stop_reason="inline_article",
+        )
+
     def parse_listing(self, page: PageContent, section: SectionSpec) -> ListingResult:
+        if section.metadata.get("inline_article") == "true":
+            if (inline := self._inline_listing(page, section)) is not None:
+                return inline
         soup = BeautifulSoup(page.text(), "html.parser")
         pages: list[PageSpec] = []
         seen: set[str] = set()
@@ -449,7 +481,13 @@ class Wp3Adapter(BaseAdapter):
     )
     article_profile = ArticleProfile(
         title_selectors=[".arti_title", ".col_title h2", "h1"],
-        date_selectors=[".arti_update", ".arti_metas", ".col_metas"],
+        date_selectors=[
+            ".arti_update",
+            ".arti_metas",
+            ".col_metas",
+            "span.arti-update",
+            ".arti-update",
+        ],
         content_selectors=[".wp_articlecontent", ".wp_entry", ".article_content"],
     )
 
@@ -463,31 +501,13 @@ class JwcAdapter(Wp3Adapter):
     def parse_listing(self, page: PageContent, section: SectionSpec) -> ListingResult:
         soup = BeautifulSoup(page.text(), "html.parser")
         content = soup.select_one("#wp_column_article .wp_articlecontent, .wp_articlecontent")
-        if content and (
-            section.name in {"办事流程", "常用下载", "学生类制度"}
-            or len(_clean(content.get_text(" ", strip=True))) >= 20
-        ):
-            inline = PageSpec(
-                url=page.final_url or page.requested_url,
-                section_id=section.section_id,
-                page_kind="article",
-                title_hint=section.name,
-                publisher_hint=section.publisher or self.publisher,
-                category=section.category,
-                source_type=section.source_type,
-                scope_unit=section.scope_unit,
-                metadata={"inline": "true"},
-            )
-            return ListingResult(
-                article_pages=[inline],
-                current_page=1,
-                total_pages=1,
-                total_records=1,
-                page_hash=sha256(re.sub(r"\s+", "", page.text()).encode("utf-8")).hexdigest(),
-                stop_reason="inline_article",
-            )
-        base = super().parse_listing(page, section)
-        return base
+        if section.name in {"办事流程", "常用下载", "学生类制度"}:
+            if (inline := self._inline_listing(page, section, min_len=1)) is not None:
+                return inline
+        elif content is not None and len(_clean(content.get_text(" ", strip=True))) >= 20:
+            if (inline := self._inline_listing(page, section)) is not None:
+                return inline
+        return super().parse_listing(page, section)
 
 
 class GraduateSchoolAdapter(BaseAdapter):
@@ -549,23 +569,144 @@ class BusinessSchoolAdapter(Wp3Adapter):
         )
 
 
-class CareerAdapter(Wp3Adapter):
-    """就业服务平台适配器：沿用 wp3 结构，栏目发现只保留手续/政策/下载。"""
+_CAREER_SEARCH_RE = re.compile(r"/career/news/search/([A-Za-z0-9_]+)")
+_CAREER_HOST = "https://career.sufe.edu.cn"
+_CAREER_PAGE_SIZE = 20
+
+
+class CareerAdapter(BaseAdapter):
+    """就业服务平台：自研 Java 应用，列表与正文均走 POST JSON XHR 接口。
+
+    列表：POST /career/news/search/{newstype}/{page}/{size}
+    正文：POST /career/news/data/{newstype}/{newsId}
+    URL 以 ``post+`` 前缀标记，由 SafeFetcher 转成带 X-Requested-With 的 POST。
+    ``以链接形式发布`` 的帖子正文是外链（多为公众号/政府网站），跳过不抓。
+    """
 
     def __init__(
         self, *, publisher: str = "就业指导中心", scope_unit: str = "毕业生", **kwargs
     ) -> None:
         super().__init__(publisher=publisher, scope_unit=scope_unit, **kwargs)
 
+    def _news_type(self, section: SectionSpec) -> str:
+        if match := _CAREER_SEARCH_RE.search(section.list_url):
+            return match.group(1)
+        return section.metadata.get("news_type", "tzgg")
+
+    def _search_url(self, news_type: str, page: int) -> str:
+        return f"post+{_CAREER_HOST}/career/news/search/{news_type}/{page}/{_CAREER_PAGE_SIZE}"
+
     def discover_sections(self, homepage: PageContent) -> list[SectionSpec]:
-        sections = super().discover_sections(homepage)
-        return [
-            section
-            for section in sections
-            if any(
-                word in section.name for word in ("就业", "手续", "下载", "政策", "指南", "公示")
+        return []
+
+    def iter_list_pages(self, section: SectionSpec) -> Iterator[PageSpec]:
+        yield PageSpec(
+            url=self._search_url(self._news_type(section), 1),
+            section_id=section.section_id,
+            page_index=1,
+            publisher_hint=section.publisher,
+            category=section.category,
+            source_type=section.source_type,
+            scope_unit=section.scope_unit,
+        )
+
+    def parse_listing(self, page: PageContent, section: SectionSpec) -> ListingResult:
+        news_type = self._news_type(section)
+        try:
+            payload = json.loads(page.text()).get("data") or {}
+        except json.JSONDecodeError:
+            return ListingResult(stop_reason="invalid_json")
+        items = payload.get("list") or []
+        current = int(payload.get("pageNum") or 1)
+        total_pages = payload.get("pages")
+        specs: list[PageSpec] = []
+        for item in items:
+            if (item.get("releaseMode") or "") == "以链接形式发布":
+                continue
+            news_id = item.get("newsId")
+            if not news_id:
+                continue
+            specs.append(
+                PageSpec(
+                    url=f"post+{_CAREER_HOST}/career/news/data/{news_type}/{news_id}",
+                    section_id=section.section_id,
+                    page_kind="article",
+                    title_hint=_clean(str(item.get("newsTitle") or "")),
+                    publisher_hint=section.publisher,
+                    category=section.category,
+                    source_type=section.source_type,
+                    scope_unit=section.scope_unit,
+                    metadata={"release_date": str(item.get("releaseDate") or "")},
+                )
             )
-        ]
+        next_page = None
+        if total_pages and current < int(total_pages):
+            next_page = PageSpec(
+                url=self._search_url(news_type, current + 1),
+                section_id=section.section_id,
+                page_index=current + 1,
+                publisher_hint=section.publisher,
+                category=section.category,
+                source_type=section.source_type,
+                scope_unit=section.scope_unit,
+            )
+        return ListingResult(
+            article_pages=specs,
+            current_page=current,
+            total_pages=int(total_pages) if total_pages else None,
+            total_records=payload.get("total"),
+            next_page=next_page,
+            page_hash=sha256(re.sub(r"\s+", "", page.text()).encode("utf-8")).hexdigest(),
+            stop_reason="no_next_page" if next_page is None else "next_page",
+        )
+
+    def parse_article(self, page: PageContent, spec: PageSpec) -> ArticleSpec:
+        try:
+            payload = json.loads(page.text()).get("data") or {}
+        except json.JSONDecodeError:
+            payload = {}
+        title = _clean(str(payload.get("newsTitle") or "")) or spec.title_hint or "就业平台材料"
+        publish_date = str(payload.get("releaseDate") or "") or spec.metadata.get(
+            "release_date", ""
+        )
+        publish_date = publish_date if re.match(r"\d{4}-\d{2}-\d{2}", publish_date) else "unknown"
+        content_html = str(payload.get("newsContent") or "")
+        body = ""
+        if content_html.strip():
+            body = _clean(BeautifulSoup(content_html, "html.parser").get_text("\n", strip=True))
+        attachments: list[AttachmentCandidate] = []
+        raw_attach = str(payload.get("newsAttach") or "").strip()
+        if raw_attach:
+            try:
+                files = json.loads(raw_attach)
+            except json.JSONDecodeError:
+                files = []
+            for entry in files if isinstance(files, list) else []:
+                attach_url = str((entry or {}).get("attachUrl") or "").strip()
+                if not attach_url:
+                    continue
+                attachments.append(
+                    AttachmentCandidate(
+                        source_page_url=spec.url,
+                        requested_url=urljoin(_CAREER_HOST, attach_url),
+                        anchor_text=_clean(str((entry or {}).get("fileName") or "")),
+                        candidate_score=1.0,
+                        discovery_reason=["api_attach"],
+                    )
+                )
+        return ArticleSpec(
+            page=spec,
+            title=title,
+            publish_date=publish_date,
+            publisher=str(payload.get("newsFrom") or "") or self.publisher,
+            body_text=body,
+            html=content_html,
+            attachments=attachments,
+            breadcrumbs=[],
+            source_type=spec.source_type or self.source_type,
+            category=spec.category,
+            scope_unit=spec.scope_unit or self.scope_unit,
+        )
 
 
 class NicServiceAdapter(Wp3Adapter):

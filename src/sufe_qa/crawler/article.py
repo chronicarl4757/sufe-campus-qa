@@ -139,6 +139,15 @@ def _clean_title(text: str) -> str:
     return re.sub(r"\s+", " ", (text or "")).strip()
 
 
+_SUDYFILE_TITLE_RE = re.compile(r"'title'\s*:\s*'([^']+)'")
+
+
+def _sudyfile_title(attr: str) -> str:
+    """wp3 sudyfile-attr="{'title':'xxx.pdf'}" 中的真实文件名。"""
+    match = _SUDYFILE_TITLE_RE.search(attr or "")
+    return _clean_title(match.group(1)) if match else ""
+
+
 def _strip_view_counts(text: str) -> str:
     """剥阅读计数行（每次访问都变，会让 content_hash 抖动出伪更新）。"""
     lines = [ln for ln in _VIEW_COUNT_RE.sub("", text).split("\n")]
@@ -325,9 +334,12 @@ def discover_attachments(soup: BeautifulSoup, page_url: str) -> list[AttachmentC
         )
 
     for a in soup.find_all("a", href=True):
+        anchor = _clean_title(a.get_text(" ", strip=True))
+        if not anchor:
+            anchor = _sudyfile_title(str(a.get("sudyfile-attr") or ""))
         add(
             str(a["href"]),
-            _clean_title(a.get_text(" ", strip=True)),
+            anchor,
             embedded=False,
             has_download_attr=a.has_attr("download"),
         )
@@ -335,6 +347,14 @@ def discover_attachments(soup: BeautifulSoup, page_url: str) -> list[AttachmentC
         for el in soup.find_all(tag):
             if el.get(attr):
                 add(str(el[attr]), "", embedded=True, has_download_attr=False)
+    # wp3 内嵌 PDF 播放器：正式制度常以 div/span[pdfsrc] 挂载，文件名在 sudyfile-attr
+    for el in soup.select("[pdfsrc]"):
+        add(
+            str(el.get("pdfsrc") or ""),
+            _sudyfile_title(str(el.get("sudyfile-attr") or "")),
+            embedded=True,
+            has_download_attr=False,
+        )
 
     return sorted(cands.values(), key=lambda c: c.candidate_score, reverse=True)
 
