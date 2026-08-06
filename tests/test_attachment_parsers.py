@@ -132,6 +132,15 @@ def test_parse_pdf_corrupt_returns_parse_failed_without_raising():
     assert r.notes  # 记录原因
 
 
+def test_parse_pdf_over_page_limit_is_explicitly_quarantined_from_index():
+    r = parse_attachment("超大档案.pdf", _make_pdf([_LONG_PAGE] * 301))
+    assert r.fmt == "pdf"
+    assert r.page_count == 301
+    assert r.parse_status == "pdf_too_large"
+    assert r.text == ""
+    assert any("安全解析上限" in note for note in r.notes)
+
+
 # ---------- DOCX ----------
 
 

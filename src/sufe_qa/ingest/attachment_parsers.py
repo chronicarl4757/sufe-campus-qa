@@ -33,6 +33,10 @@ _MAX_SHEET_ROWS = 2000
 _READ_ONLY_BYTES = 5 * 1024 * 1024
 # LibreOffice 转换超时（秒）
 _SOFFICE_TIMEOUT = 60
+# 公开站点偶尔把数千页名单/扫描档案挂在制度栏目下。逐页抽取这类文件会
+# 长时间占用采集进程，且通常不具备校务问答价值；先保留原始二进制并进入
+# incomplete/审计流，避免把超大附件误当作已解析正文。
+_MAX_PDF_PAGES = 300
 
 
 @dataclass
@@ -43,7 +47,7 @@ class AttachmentParseResult:
     char_count: int
     page_count: int | None  # PDF 页数
     sheet_count: int | None  # XLSX 工作表数
-    parse_status: str  # ok | scanned_pdf | legacy_doc_unparsed | unsupported_format | parse_failed
+    parse_status: str  # ok | scanned_pdf | pdf_too_large | legacy_doc_unparsed | unsupported_format | parse_failed
     notes: list[str] = field(default_factory=list)
 
 
@@ -85,8 +89,15 @@ def _extract_pdf(result: AttachmentParseResult, content: bytes) -> None:
 
     doc = fitz.open(stream=content, filetype="pdf")
     try:
-        pages = [page.get_text().strip() for page in doc]
         result.page_count = doc.page_count
+        if result.page_count > _MAX_PDF_PAGES:
+            result.parse_status = "pdf_too_large"
+            result.notes.append(
+                f"PDF 共 {result.page_count} 页，超过安全解析上限 {_MAX_PDF_PAGES} 页；"
+                "已保留原始附件，待人工或专用离线流程处理"
+            )
+            return
+        pages = [page.get_text().strip() for page in doc]
     finally:
         doc.close()
     result.text = "\n".join(p for p in pages if p).strip()
