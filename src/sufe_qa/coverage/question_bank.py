@@ -111,8 +111,7 @@ class QuestionBank:
 
 def _hash_rows(rows: list[dict]) -> str:
     canonical = "\n".join(
-        json.dumps(row, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
-        for row in rows
+        json.dumps(row, ensure_ascii=False, sort_keys=True, separators=(",", ":")) for row in rows
     )
     return "sha256:" + hashlib.sha256(canonical.encode("utf-8")).hexdigest()
 

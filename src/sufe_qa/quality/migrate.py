@@ -31,9 +31,7 @@ def _validate(staging: Path, expected_count: int) -> None:
     manifest_path = staging / "manifest.jsonl"
     manifest = load_manifest(manifest_path)
     if len(manifest) != expected_count:
-        raise ValueError(
-            f"staging manifest 文档数不一致: {len(manifest)} != {expected_count}"
-        )
+        raise ValueError(f"staging manifest 文档数不一致: {len(manifest)} != {expected_count}")
     for meta in manifest.values():
         if not meta.file_path:
             if meta.content_hash:

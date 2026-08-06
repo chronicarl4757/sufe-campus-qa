@@ -202,7 +202,9 @@ def _increment_page_url(url: str, page_number: int) -> str:
             pairs[index] = (key, str(page_number))
             return urlunparse(parsed._replace(query=urlencode(pairs)))
     filename = parsed.path.rsplit("/", 1)[-1]
-    match = re.match(r"(?P<stem>list|index|default)(?P<num>\d*)\.(?P<ext>htm|html|shtml)$", filename, re.I)
+    match = re.match(
+        r"(?P<stem>list|index|default)(?P<num>\d*)\.(?P<ext>htm|html|shtml)$", filename, re.I
+    )
     if match:
         new_name = f"{match.group('stem')}{page_number}.{match.group('ext')}"
         return urlunparse(parsed._replace(path=parsed.path[: -len(filename)] + new_name))
@@ -253,7 +255,9 @@ class BaseAdapter:
             if not isinstance(anchor, Tag):
                 continue
             name = _clean(anchor.get_text(" ", strip=True))
-            url = _same_host(homepage.final_url or homepage.requested_url, str(anchor.get("href", "")))
+            url = _same_host(
+                homepage.final_url or homepage.requested_url, str(anchor.get("href", ""))
+            )
             if not url or not name or url in seen:
                 continue
             if any(word in name for word in _DROP_SECTION_WORDS):
@@ -295,7 +299,9 @@ class BaseAdapter:
             containers.extend(node for node in soup.select(selector) if isinstance(node, Tag))
         return list(dict.fromkeys(containers))
 
-    def _article_page_for_anchor(self, anchor: Tag, section: SectionSpec, base_url: str) -> PageSpec | None:
+    def _article_page_for_anchor(
+        self, anchor: Tag, section: SectionSpec, base_url: str
+    ) -> PageSpec | None:
         url = _same_host(base_url, str(anchor.get("href", "")))
         if not url:
             return None
@@ -327,14 +333,18 @@ class BaseAdapter:
         seen: set[str] = set()
         for container in self._listing_containers(soup):
             for anchor in container.find_all("a", href=True):
-                spec = self._article_page_for_anchor(anchor, section, page.final_url or page.requested_url)
+                spec = self._article_page_for_anchor(
+                    anchor, section, page.final_url or page.requested_url
+                )
                 if spec and spec.url not in seen:
                     pages.append(spec)
                     seen.add(spec.url)
         current = _page_number(page.final_url or page.requested_url)
         total_pages = self._extract_total_pages(soup, page.text())
         total_records = _pagination_value(soup, _TOTAL_RECORDS_RE, page.text())
-        next_url = self._find_next_url(soup, page.final_url or page.requested_url, current, total_pages)
+        next_url = self._find_next_url(
+            soup, page.final_url or page.requested_url, current, total_pages
+        )
         next_page = None
         if next_url and (total_pages is None or current < total_pages):
             next_page = PageSpec(
@@ -374,7 +384,14 @@ class BaseAdapter:
         self, soup: BeautifulSoup, current_url: str, current_page: int, total_pages: int | None
     ) -> str | None:
         for anchor in soup.find_all("a", href=True):
-            if _clean(anchor.get_text(" ", strip=True)).lower() in {"下一页", "下页", "next", "next page", "›", "»"}:
+            if _clean(anchor.get_text(" ", strip=True)).lower() in {
+                "下一页",
+                "下页",
+                "next",
+                "next page",
+                "›",
+                "»",
+            }:
                 if url := _same_host(current_url, str(anchor.get("href", ""))):
                     return url
         if total_pages is not None and current_page < total_pages:
@@ -484,7 +501,9 @@ class GraduateSchoolAdapter(BaseAdapter):
         content_selectors=[".content", ".detail", "article", ".v_news_content"],
     )
 
-    def __init__(self, *, publisher: str = "研究生院", scope_unit: str = "研究生", **kwargs) -> None:
+    def __init__(
+        self, *, publisher: str = "研究生院", scope_unit: str = "研究生", **kwargs
+    ) -> None:
         super().__init__(publisher=publisher, scope_unit=scope_unit, **kwargs)
 
     def _accept_article_url(self, url: str) -> bool:
@@ -495,7 +514,9 @@ class GraduateSchoolAdapter(BaseAdapter):
         sections: list[SectionSpec] = []
         seen: set[str] = set()
         for anchor in soup.select("nav a, .navbar a, .programme-list a, header a"):
-            url = _same_host(homepage.final_url or homepage.requested_url, str(anchor.get("href", "")))
+            url = _same_host(
+                homepage.final_url or homepage.requested_url, str(anchor.get("href", ""))
+            )
             name = _clean(anchor.get_text(" ", strip=True))
             if not url or not name or not re.search(r"/Home/List/\d+", url) or url in seen:
                 continue
@@ -531,7 +552,9 @@ class BusinessSchoolAdapter(Wp3Adapter):
 class CareerAdapter(Wp3Adapter):
     """就业服务平台适配器：沿用 wp3 结构，栏目发现只保留手续/政策/下载。"""
 
-    def __init__(self, *, publisher: str = "就业指导中心", scope_unit: str = "毕业生", **kwargs) -> None:
+    def __init__(
+        self, *, publisher: str = "就业指导中心", scope_unit: str = "毕业生", **kwargs
+    ) -> None:
         super().__init__(publisher=publisher, scope_unit=scope_unit, **kwargs)
 
     def discover_sections(self, homepage: PageContent) -> list[SectionSpec]:
@@ -539,7 +562,9 @@ class CareerAdapter(Wp3Adapter):
         return [
             section
             for section in sections
-            if any(word in section.name for word in ("就业", "手续", "下载", "政策", "指南", "公示"))
+            if any(
+                word in section.name for word in ("就业", "手续", "下载", "政策", "指南", "公示")
+            )
         ]
 
 
@@ -557,10 +582,18 @@ class NicServiceAdapter(Wp3Adapter):
     article_profile = ArticleProfile(
         title_selectors=[".service-title", ".detail-title", "h1", "h2"],
         date_selectors=[".publish-date", ".date", ".time"],
-        content_selectors=[".service-content", ".tab-pane", ".faq", ".wp_articlecontent", "article"],
+        content_selectors=[
+            ".service-content",
+            ".tab-pane",
+            ".faq",
+            ".wp_articlecontent",
+            "article",
+        ],
     )
 
-    def __init__(self, *, publisher: str = "网络信息中心", scope_unit: str = "学生", **kwargs) -> None:
+    def __init__(
+        self, *, publisher: str = "网络信息中心", scope_unit: str = "学生", **kwargs
+    ) -> None:
         super().__init__(publisher=publisher, scope_unit=scope_unit, **kwargs)
 
     def _accept_article_url(self, url: str) -> bool:
@@ -572,7 +605,9 @@ class NicServiceAdapter(Wp3Adapter):
         seen: set[str] = set()
         selectors = ".service-card a, .service-item a, .service-list a, .tab-pane a[data-url]"
         for anchor in soup.select(selectors):
-            spec = self._article_page_for_anchor(anchor, section, page.final_url or page.requested_url)
+            spec = self._article_page_for_anchor(
+                anchor, section, page.final_url or page.requested_url
+            )
             if spec and spec.url not in seen:
                 pages.append(spec)
                 seen.add(spec.url)

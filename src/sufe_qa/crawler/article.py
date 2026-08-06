@@ -204,9 +204,7 @@ def _extract_title(
     return _url_filename_title(url) or url, "none", True
 
 
-def _extract_date(
-    soup: BeautifulSoup, meta, profile: ArticleProfile, raw: str
-) -> DateEvidence:
+def _extract_date(soup: BeautifulSoup, meta, profile: ArticleProfile, raw: str) -> DateEvidence:
     candidates: list[tuple[int, str, str, float]] = []
     # 页面明确标注的发布日期是最高置信来源。先解析它，同时继续收集其他来源，
     # 这样可以报告冲突而不是静默覆盖。

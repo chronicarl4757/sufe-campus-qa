@@ -142,9 +142,7 @@ def _article_meta(
         text_hash=sha256_text(_squash(art.body_text)),
         document_kind=document_kind,
         policy_name=normalize_policy_name(art.title),
-        topic_key=standardize_topic_key(
-            art.title, normalize_policy_name(art.title), scope_unit
-        ),
+        topic_key=standardize_topic_key(art.title, normalize_policy_name(art.title), scope_unit),
         source_type=source_type,
         source_section=source_section,
         scope_unit=scope_unit,
@@ -213,9 +211,7 @@ def ingest_crawled_articles(
                 continue
             att_src = _normalize_doc_url(att.final_url or att.requested_url)
             att_doc_id = doc_id_from(att_src)
-            att_kind = classify_document_kind(
-                att.filename, text, has_valid_attachment=True
-            )
+            att_kind = classify_document_kind(att.filename, text, has_valid_attachment=True)
             attachment_kinds[att_doc_id] = att_kind
             candidate = LifecycleCandidate(
                 doc_id=att_doc_id,
@@ -842,9 +838,7 @@ def _refresh_att_meta(
         relation_evidence=old.relation_evidence,
         index_collection=old.index_collection,
         publish_date_evidence=old.publish_date_evidence or parent.publish_date_evidence,
-        publish_date_confidence=max(
-            old.publish_date_confidence, parent.publish_date_confidence
-        ),
+        publish_date_confidence=max(old.publish_date_confidence, parent.publish_date_confidence),
         date_conflict=old.date_conflict or parent.date_conflict,
         temporal_class=lifecycle.temporal_class,
         series_key=lifecycle.series_key,

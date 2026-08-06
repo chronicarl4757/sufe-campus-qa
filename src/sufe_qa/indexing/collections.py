@@ -24,9 +24,7 @@ HISTORICAL_KINDS: Final = frozenset(
 ISOLATED_KINDS: Final = frozenset({"news", "event", "promotion", "incomplete"})
 
 
-def collection_for_kind(
-    document_kind: str | None, retention_status: str = "active"
-) -> str | None:
+def collection_for_kind(document_kind: str | None, retention_status: str = "active") -> str | None:
     """返回逻辑 collection key；隔离文档返回 ``None``。"""
     kind = (document_kind or "incomplete").strip().lower()
     retention = (retention_status or "archived").strip().lower()

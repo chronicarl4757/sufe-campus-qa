@@ -17,14 +17,18 @@ class StubFetcher:
             "https://gs.sufe.edu.cn/Home/List/49": FetchResult(
                 requested_url="https://gs.sufe.edu.cn/Home/List/49",
                 final_url="https://gs.sufe.edu.cn/Home/List/49",
-                content='<div class="single-blog-item"><div class="blog-content"><a href="/Home/Detail/8001">研究生选课通知</a></div></div>'.encode("utf-8"),
+                content='<div class="single-blog-item"><div class="blog-content"><a href="/Home/Detail/8001">研究生选课通知</a></div></div>'.encode(
+                    "utf-8"
+                ),
                 mime_type="text/html",
                 status_code=200,
             ),
             "https://gs.sufe.edu.cn/Home/Detail/8001": FetchResult(
                 requested_url="https://gs.sufe.edu.cn/Home/Detail/8001",
                 final_url="https://gs.sufe.edu.cn/Home/Detail/8001",
-                content="<html><head><title>研究生选课通知|培养工作</title></head><body><h1>研究生选课通知</h1><div class=content>研究生选课条件、材料和办理流程说明，适用于在校研究生。</div></body></html>".encode("utf-8"),
+                content="<html><head><title>研究生选课通知|培养工作</title></head><body><h1>研究生选课通知</h1><div class=content>研究生选课条件、材料和办理流程说明，适用于在校研究生。</div></body></html>".encode(
+                    "utf-8"
+                ),
                 mime_type="text/html",
                 status_code=200,
             ),
@@ -95,7 +99,9 @@ def test_authority_runner_wires_adapter_to_ingest_and_source_metadata(tmp_path, 
     assert meta.scope_unit == "研究生"
 
 
-def test_retry_attachments_replays_saved_raw_articles_without_refetching_html(tmp_path, monkeypatch):
+def test_retry_attachments_replays_saved_raw_articles_without_refetching_html(
+    tmp_path, monkeypatch
+):
     data = tmp_path / "data"
     settings = Settings(
         data_dir=data,
@@ -168,4 +174,7 @@ def test_retry_attachments_replays_saved_raw_articles_without_refetching_html(tm
         ),
     )
     assert reports[0].attachments_downloaded == 1
-    assert any(meta.document_type == "attachment" for meta in load_manifest(settings.manifest_path).values())
+    assert any(
+        meta.document_type == "attachment"
+        for meta in load_manifest(settings.manifest_path).values()
+    )

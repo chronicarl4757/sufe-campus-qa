@@ -141,9 +141,9 @@ def test_indexer_separates_main_public_and_archived_documents(tmp_path):
     assert report.added_docs == 3
     assert {m["doc_id"] for m in main.get(include=["metadatas"])["metadatas"]} == {main_id}
     assert {m["doc_id"] for m in public.get(include=["metadatas"])["metadatas"]} == {public_id}
-    assert {
-        m["doc_id"] for m in historical.get(include=["metadatas"])["metadatas"]
-    } == {historical_id}
+    assert {m["doc_id"] for m in historical.get(include=["metadatas"])["metadatas"]} == {
+        historical_id
+    }
     assert all(
         m["index_collection"] == settings.collection_name
         for m in main.get(include=["metadatas"])["metadatas"]
@@ -246,9 +246,9 @@ def test_retriever_can_explicitly_query_historical_collection(tmp_path):
     update_index(settings, FakeEmbedder())
 
     assert HybridRetriever(settings, FakeEmbedder()).search("2020年复试流程") == []
-    hits = HybridRetriever(
-        settings, FakeEmbedder(), collection=HISTORICAL_COLLECTION
-    ).search("2020年复试流程")
+    hits = HybridRetriever(settings, FakeEmbedder(), collection=HISTORICAL_COLLECTION).search(
+        "2020年复试流程"
+    )
     assert hits and {hit.doc_id for hit in hits} == {historical_id}
 
 

@@ -56,7 +56,14 @@ def _add(settings, doc_id, title, kind, status, text=""):
 
 def test_quality_gates_check_files_collections_and_fixed_question_results(tmp_path):
     settings = _settings(tmp_path)
-    _add(settings, "main", "缓考办理办法", "policy", "active", "# 缓考办理办法\n\n申请条件、材料和办理流程。\n")
+    _add(
+        settings,
+        "main",
+        "缓考办理办法",
+        "policy",
+        "active",
+        "# 缓考办理办法\n\n申请条件、材料和办理流程。\n",
+    )
     _add(
         settings,
         "historical",

@@ -99,9 +99,7 @@ def _base_retention(
         "promotion",
         "incomplete",
     }:
-        return LifecycleDecision(
-            temporal_class, series_key, "archived", "isolated_document_kind"
-        )
+        return LifecycleDecision(temporal_class, series_key, "archived", "isolated_document_kind")
     if time_policy == "archive_only":
         return LifecycleDecision(temporal_class, series_key, "archived", "archive_only")
     if time_policy == "all_history":
@@ -109,9 +107,7 @@ def _base_retention(
     # 正式制度、办事指南等长期文档不能因为它恰好出现在年度通知栏目中而被时间窗淘汰。
     # 时间窗只约束年度通知、公示和其他有明确时效的内容。
     if temporal_class == "enduring":
-        return LifecycleDecision(
-            temporal_class, series_key, "active", "enduring_document"
-        )
+        return LifecycleDecision(temporal_class, series_key, "active", "enduring_document")
 
     published = _parse_date(candidate.publish_date)
     if published is None:
@@ -123,9 +119,7 @@ def _base_retention(
         )
     age = _school_year_start(evaluated_at) - _school_year_start(published)
     if age < 0:
-        return LifecycleDecision(
-            temporal_class, series_key, "archived", "future_publish_date"
-        )
+        return LifecycleDecision(temporal_class, series_key, "archived", "future_publish_date")
     windows = {
         "recent_5_school_years": (4, "outside_recent_5_school_years"),
         "recent_2_school_years": (1, "outside_recent_2_school_years"),
@@ -161,7 +155,9 @@ def resolve_lifecycle(
             decision = decisions[candidate.doc_id]
             decisions[candidate.doc_id] = replace(
                 decision,
-                retention_status=("active" if candidate.doc_id == canonical.doc_id else "historical"),
+                retention_status=(
+                    "active" if candidate.doc_id == canonical.doc_id else "historical"
+                ),
                 retention_reason=(
                     decision.retention_reason
                     if candidate.doc_id == canonical.doc_id

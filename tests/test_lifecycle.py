@@ -47,14 +47,9 @@ def test_series_key_normalizes_school_year_batch_and_week_ranges():
 
 def test_temporal_class_is_independent_from_document_kind_position():
     assert temporal_class_for("policy", "上海财经大学研究生学籍管理规定") == "enduring"
+    assert temporal_class_for("annual_notice", "上海财经大学2025年硕士研究生复试通知") == "annual"
     assert (
-        temporal_class_for("annual_notice", "上海财经大学2025年硕士研究生复试通知")
-        == "annual"
-    )
-    assert (
-        temporal_class_for(
-            "public_list", "2025-2026学年第一学期研究生课程调停课情况公示"
-        )
+        temporal_class_for("public_list", "2025-2026学年第一学期研究生课程调停课情况公示")
         == "recurring_public"
     )
     assert temporal_class_for("promotion", "2025年研究生招生宣讲会") == "ephemeral"
@@ -93,9 +88,15 @@ def test_enduring_policy_is_not_archived_by_annual_section_window():
 
 def test_annual_window_archives_old_and_selects_one_active_series_version():
     records = [
-        _candidate("old", "上海财经大学2019年硕士研究生复试录取办法", "annual_notice", "2019-03-01"),
-        _candidate("prior", "上海财经大学2024年硕士研究生复试录取办法", "annual_notice", "2024-03-01"),
-        _candidate("latest", "上海财经大学2025年硕士研究生复试录取办法", "annual_notice", "2025-03-01"),
+        _candidate(
+            "old", "上海财经大学2019年硕士研究生复试录取办法", "annual_notice", "2019-03-01"
+        ),
+        _candidate(
+            "prior", "上海财经大学2024年硕士研究生复试录取办法", "annual_notice", "2024-03-01"
+        ),
+        _candidate(
+            "latest", "上海财经大学2025年硕士研究生复试录取办法", "annual_notice", "2025-03-01"
+        ),
     ]
     decisions = resolve_lifecycle(
         records,

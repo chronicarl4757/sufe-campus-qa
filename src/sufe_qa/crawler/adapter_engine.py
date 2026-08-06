@@ -59,7 +59,11 @@ def _page_content(result: FetchResult) -> PageContent:
 def _synthetic_parent_url(section: SectionSpec, attachment_url: str) -> str:
     token = hashlib.sha256(attachment_url.encode("utf-8")).hexdigest()[:16]
     parsed = urlparse(section.list_url)
-    query = dict(parsed.query and [pair.split("=", 1) for pair in parsed.query.split("&") if "=" in pair] or [])
+    query = dict(
+        parsed.query
+        and [pair.split("=", 1) for pair in parsed.query.split("&") if "=" in pair]
+        or []
+    )
     query["source_attachment"] = token
     return urlunparse(parsed._replace(query=urlencode(query)))
 
@@ -141,7 +145,9 @@ def _article_to_crawled(
             )
             downloaded.append(attachment)
             if attachment.status not in {"ok", "duplicate"}:
-                errors.append(f"附件 {candidate.requested_url}: {attachment.status} {attachment.error}")
+                errors.append(
+                    f"附件 {candidate.requested_url}: {attachment.status} {attachment.error}"
+                )
     return CrawledArticle(
         requested_url=article.page.url,
         final_url=article.page.url,
@@ -267,7 +273,11 @@ def crawl_adapter_section(
             articles.append(_failed_article(spec.url, section.publisher, page.status, page.error))
             continue
         article = adapter.parse_article(page, spec)
-        if options.since and article.publish_date != "unknown" and article.publish_date < options.since:
+        if (
+            options.since
+            and article.publish_date != "unknown"
+            and article.publish_date < options.since
+        ):
             continue
         if state:
             state.update(

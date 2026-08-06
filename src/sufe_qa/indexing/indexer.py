@@ -174,9 +174,7 @@ def _load_indexable(settings: Settings) -> tuple[dict[str, _Indexable], int]:
             continue
         group_ids = {item.meta.doc_id for item in group}
         declared = {
-            item.meta.canonical_doc_id
-            for item in group
-            if item.meta.canonical_doc_id in group_ids
+            item.meta.canonical_doc_id for item in group if item.meta.canonical_doc_id in group_ids
         }
         canonical_id = (
             next(iter(declared))
@@ -283,9 +281,12 @@ def _write_index_metadata(
     embedding_device = str(getattr(embedder, "device", "legacy-unknown"))
     embedding_precision = str(getattr(embedder, "precision", "legacy-unknown"))
     test_only = bool(getattr(embedder, "test_only", False))
-    manifest_fingerprint = "sha256:" + hashlib.sha256(
-        settings.manifest_path.read_bytes() if settings.manifest_path.is_file() else b""
-    ).hexdigest()
+    manifest_fingerprint = (
+        "sha256:"
+        + hashlib.sha256(
+            settings.manifest_path.read_bytes() if settings.manifest_path.is_file() else b""
+        ).hexdigest()
+    )
     fingerprint_payload = json.dumps(
         {
             "collection_schema_version": settings.collection_schema_version,
@@ -310,7 +311,15 @@ def _write_index_metadata(
             MAIN_QA_COLLECTION: {
                 "name": settings.collection_name,
                 "document_kinds": sorted(
-                    {"policy", "procedure", "faq", "annual_notice", "form", "manual", "service_guide"}
+                    {
+                        "policy",
+                        "procedure",
+                        "faq",
+                        "annual_notice",
+                        "form",
+                        "manual",
+                        "service_guide",
+                    }
                 ),
             },
             PUBLIC_LIST_COLLECTION: {
@@ -358,7 +367,9 @@ def _build_incremental(settings: Settings, embedder: Embedder, index_dir: Path) 
         wanted = desired[key]
         deleted = set(present) - set(wanted)
         changed = {
-            doc_id for doc_id, item in wanted.items() if present.get(doc_id) != item.meta.content_hash
+            doc_id
+            for doc_id, item in wanted.items()
+            if present.get(doc_id) != item.meta.content_hash
         }
         for doc_id in deleted | (changed & set(present)):
             col.delete(where={"doc_id": doc_id})

@@ -100,9 +100,7 @@ def test_jwc_adapter_treats_static_process_page_as_article_with_attachments():
     assert len(listing.article_pages) == 1
     assert listing.article_pages[0].metadata["inline"] == "true"
 
-    article = adapter.parse_article(
-        _page(section.list_url, html), listing.article_pages[0]
-    )
+    article = adapter.parse_article(_page(section.list_url, html), listing.article_pages[0])
     assert article.title == "办事流程"
     assert len(article.attachments) == 2
     assert article.source_type == "official_department"
@@ -128,9 +126,7 @@ def test_graduate_school_adapter_parses_home_list_detail_and_query_pagination():
     """
     adapter = GraduateSchoolAdapter()
     result = adapter.parse_listing(_page(section.list_url, html), section)
-    assert [p.url for p in result.article_pages] == [
-        "https://gs.sufe.edu.cn/Home/Detail/8001"
-    ]
+    assert [p.url for p in result.article_pages] == ["https://gs.sufe.edu.cn/Home/Detail/8001"]
     assert result.next_page is not None
     assert result.next_page.url.endswith("?page=2")
     assert result.total_pages == 13

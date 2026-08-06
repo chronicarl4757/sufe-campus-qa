@@ -56,9 +56,7 @@ def _fixture(tmp_path):
         corpus,
         raw,
         evaluated_at=date(2026, 8, 6),
-        time_policies={
-            ("上海财经大学研究生院", "招生通知"): "recent_5_school_years"
-        },
+        time_policies={("上海财经大学研究生院", "招生通知"): "recent_5_school_years"},
     )
     return data, corpus, raw, report
 
@@ -97,9 +95,7 @@ def test_clean_rebuild_atomically_swaps_and_keeps_archived_audit_row(tmp_path):
     assert active_path.read_bytes().endswith(b"\n")
     assert not active_path.read_bytes().endswith(b"\n\n")
     assert all(line == line.rstrip() for line in active_path.read_text().splitlines())
-    assert manifest["active"].content_hash == sha256_text(
-        active_path.read_text(encoding="utf-8")
-    )
+    assert manifest["active"].content_hash == sha256_text(active_path.read_text(encoding="utf-8"))
     assert manifest["old"].retention_status == "archived"
     assert manifest["old"].file_path == ""
     assert manifest["old"].content_hash == ""
@@ -110,9 +106,7 @@ def test_clean_rebuild_atomically_swaps_and_keeps_archived_audit_row(tmp_path):
         corpus,
         raw,
         evaluated_at=date(2026, 8, 6),
-        time_policies={
-            ("上海财经大学研究生院", "招生通知"): "recent_5_school_years"
-        },
+        time_policies={("上海财经大学研究生院", "招生通知"): "recent_5_school_years"},
     )
     after_old = next(item for item in after.decisions if item.doc_id == "old")
     assert after_old.document_kind == "annual_notice"

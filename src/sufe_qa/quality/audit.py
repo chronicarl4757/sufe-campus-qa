@@ -173,9 +173,7 @@ def audit_corpus(
     children_by_parent: dict[str, set[str]] = {}
     for relation in relations:
         if relation.relation == "attachment_of":
-            children_by_parent.setdefault(relation.parent_doc_id, set()).add(
-                relation.child_doc_id
-            )
+            children_by_parent.setdefault(relation.parent_doc_id, set()).add(relation.child_doc_id)
     valid_attachment_ids = {
         doc_id
         for doc_id, meta in manifest.items()
@@ -188,9 +186,7 @@ def audit_corpus(
         for doc_id, meta in manifest.items()
         if meta.document_type == "article"
         and any(marker in bodies[doc_id] for marker in _ATTACHMENT_REFERENCES)
-        and not (
-            children_by_parent.get(doc_id, set()) & valid_attachment_ids
-        )
+        and not (children_by_parent.get(doc_id, set()) & valid_attachment_ids)
     }
     dates: dict[str, tuple[str, str, float, bool]] = {}
     kinds: dict[str, str] = {}
@@ -252,9 +248,7 @@ def audit_corpus(
 
     parent_ids_by_child: dict[str, set[str]] = {}
     for relation in relations:
-        parent_ids_by_child.setdefault(relation.child_doc_id, set()).add(
-            relation.parent_doc_id
-        )
+        parent_ids_by_child.setdefault(relation.child_doc_id, set()).add(relation.parent_doc_id)
     for doc_id, meta in manifest.items():
         if meta.document_type != "attachment":
             continue
@@ -271,9 +265,7 @@ def audit_corpus(
         parent_meta, parent_lifecycle = max(
             parent_candidates,
             key=lambda item: (
-                {"archived": 0, "historical": 1, "active": 2}.get(
-                    item[1].retention_status, 0
-                ),
+                {"archived": 0, "historical": 1, "active": 2}.get(item[1].retention_status, 0),
                 item[0].publish_date,
                 item[0].doc_id,
             ),
@@ -310,11 +302,7 @@ def audit_corpus(
             for parent_id in parent_ids_by_child.get(doc_id, set())
             if parent_id in lifecycle
         )
-        if (
-            decision.retention_status == "archived"
-            and not raw_available
-            and not retained_parent
-        ):
+        if decision.retention_status == "archived" and not raw_available and not retained_parent:
             reasons.append("archived_without_raw")
         decisions.append(
             QualityDecision(
@@ -368,9 +356,7 @@ def audit_corpus(
             for meta in manifest.values()
         ),
         active_documents=sum(item.retention_status == "active" for item in decisions),
-        historical_documents=sum(
-            item.retention_status == "historical" for item in decisions
-        ),
+        historical_documents=sum(item.retention_status == "historical" for item in decisions),
         archived_documents=sum(item.retention_status == "archived" for item in decisions),
         year_title_count=year_titles,
         year_title_ratio=(year_titles / len(manifest) if manifest else 0.0),
@@ -393,11 +379,11 @@ def audit_corpus(
         ),
         collection_contamination_count=contamination,
         unknown_type_count=sum(item.document_kind == "incomplete" for item in decisions),
-        archived_without_raw_count=sum("archived_without_raw" in item.reasons for item in decisions),
-        main_qa_documents=sum(item.index_collection == "main_qa" for item in decisions),
-        public_list_documents=sum(
-            item.index_collection == "public_list" for item in decisions
+        archived_without_raw_count=sum(
+            "archived_without_raw" in item.reasons for item in decisions
         ),
+        main_qa_documents=sum(item.index_collection == "main_qa" for item in decisions),
+        public_list_documents=sum(item.index_collection == "public_list" for item in decisions),
         historical_collection_documents=sum(
             item.index_collection == "historical" for item in decisions
         ),
@@ -437,9 +423,7 @@ def render_quality_markdown(report: DataQualityAudit) -> str:
     return "\n".join(rows) + "\n"
 
 
-def write_quality_audit(
-    report: DataQualityAudit, json_path: Path, markdown_path: Path
-) -> None:
+def write_quality_audit(report: DataQualityAudit, json_path: Path, markdown_path: Path) -> None:
     json_path.parent.mkdir(parents=True, exist_ok=True)
     markdown_path.parent.mkdir(parents=True, exist_ok=True)
     json_path.write_text(report.to_json(), encoding="utf-8")

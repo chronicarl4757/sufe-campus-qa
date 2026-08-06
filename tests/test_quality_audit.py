@@ -127,9 +127,7 @@ def test_quality_audit_is_read_only_and_records_evidence_backed_decisions(tmp_pa
     assert decisions[policy_id].retention_status == "active"
     assert decisions[unknown_id].document_kind == "incomplete"
     assert decisions[unknown_id].retention_status == "archived"
-    series = [
-        item for item in report.decisions if "硕士研究生复试通知" in item.title
-    ]
+    series = [item for item in report.decisions if "硕士研究生复试通知" in item.title]
     assert sum(item.retention_status == "active" for item in series) == 1
     assert sum(item.retention_status == "historical" for item in series) == 2
     assert {item.canonical_doc_id for item in series} == {
@@ -205,9 +203,7 @@ def test_shared_attachment_is_retained_when_any_parent_is_active(tmp_path):
         corpus,
         data / "raw",
         evaluated_at=date(2026, 8, 6),
-        time_policies={
-            ("上海财经大学研究生院", "招生通知"): "recent_5_school_years"
-        },
+        time_policies={("上海财经大学研究生院", "招生通知"): "recent_5_school_years"},
     )
     decision = next(item for item in report.decisions if item.doc_id == attachment_id)
     assert decision.retention_status == "active"
@@ -245,9 +241,7 @@ def test_unparsed_attachment_with_no_corpus_text_stays_archived(tmp_path):
         corpus,
         data / "raw",
         evaluated_at=date(2026, 8, 6),
-        time_policies={
-            ("上海财经大学教务处", "办事流程"): "all_history"
-        },
+        time_policies={("上海财经大学教务处", "办事流程"): "all_history"},
     )
     decision = report.decisions[0]
     assert decision.document_kind == "incomplete"
@@ -284,9 +278,7 @@ def test_explicit_superseded_policy_routes_to_historical(tmp_path):
         corpus,
         data / "raw",
         evaluated_at=date(2026, 8, 6),
-        time_policies={
-            ("上海财经大学研究生院", "学籍管理规定"): "all_history"
-        },
+        time_policies={("上海财经大学研究生院", "学籍管理规定"): "all_history"},
     )
     decision = next(item for item in report.decisions if item.doc_id == doc_id)
     assert decision.retention_status == "historical"
@@ -309,9 +301,7 @@ def test_article_requiring_missing_attachment_is_archived_as_incomplete(tmp_path
         corpus,
         data / "raw",
         evaluated_at=date(2026, 8, 6),
-        time_policies={
-            ("上海财经大学研究生院", "招生通知"): "recent_5_school_years"
-        },
+        time_policies={("上海财经大学研究生院", "招生通知"): "recent_5_school_years"},
     )
     decision = next(item for item in report.decisions if item.doc_id == doc_id)
     assert decision.document_kind == "incomplete"

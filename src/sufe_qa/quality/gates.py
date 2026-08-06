@@ -163,8 +163,7 @@ def verify_clean_pipeline(
     retained = [
         meta
         for meta in manifest.values()
-        if meta.retention_status in {"active", "historical"}
-        and meta.quality_status == "accepted"
+        if meta.retention_status in {"active", "historical"} and meta.quality_status == "accepted"
     ]
     materialized_ids = {meta.doc_id for meta in materialized}
     isolated_materialized = sorted(
@@ -181,9 +180,7 @@ def verify_clean_pipeline(
             and meta.series_key
         ):
             active_annual[meta.series_key].append(meta.doc_id)
-    duplicate_active_series = {
-        key: ids for key, ids in active_annual.items() if len(ids) > 1
-    }
+    duplicate_active_series = {key: ids for key, ids in active_annual.items() if len(ids) > 1}
 
     children_by_parent: dict[str, set[str]] = defaultdict(set)
     for relation in relations:
@@ -193,12 +190,12 @@ def verify_clean_pipeline(
     for meta in materialized:
         if meta.document_type != "article":
             continue
-        text = (settings.corpus_dir / meta.file_path).read_text(
-            encoding="utf-8", errors="replace"
-        )
+        text = (settings.corpus_dir / meta.file_path).read_text(encoding="utf-8", errors="replace")
         if not any(marker in text for marker in _ATTACHMENT_REFERENCES):
             continue
-        if not any(child in materialized_ids for child in children_by_parent.get(meta.doc_id, set())):
+        if not any(
+            child in materialized_ids for child in children_by_parent.get(meta.doc_id, set())
+        ):
             attachment_reference_violations.append(meta.doc_id)
 
     attachments = [meta for meta in manifest.values() if meta.document_type == "attachment"]
@@ -226,30 +223,23 @@ def verify_clean_pipeline(
         ),
         "active_annual_series_duplicates": duplicate_active_series,
         "unknown_validity_main_documents": sum(
-            meta.index_collection == "main_qa"
-            and meta.validity_status == "unknown_validity"
+            meta.index_collection == "main_qa" and meta.validity_status == "unknown_validity"
             for meta in manifest.values()
         ),
     }
     attachment_stats = {
         "total": len(attachments),
         "parsed_and_materialized": len(parsed_attachments),
-        "parse_success_rate": (
-            len(parsed_attachments) / len(attachments) if attachments else 1.0
-        ),
+        "parse_success_rate": (len(parsed_attachments) / len(attachments) if attachments else 1.0),
         "article_reference_violations": attachment_reference_violations,
-        "relation_count": sum(
-            relation.relation == "attachment_of" for relation in relations
-        ),
+        "relation_count": sum(relation.relation == "attachment_of" for relation in relations),
     }
     gates = {
         "corpus_integrity": not missing_files and not file_hash_errors,
         "valid_body_ratio": corpus["valid_body_ratio"] >= 0.98,
         "isolated_content_removed": not isolated_materialized,
         "annual_series_canonical": not duplicate_active_series,
-        "collection_isolation": all(
-            not item["invalid_documents"] for item in collections.values()
-        ),
+        "collection_isolation": all(not item["invalid_documents"] for item in collections.values()),
         "attachment_completeness": not attachment_reference_violations,
         "question_authoritative_hits": coverage["authoritative_hits"] >= 120,
         "question_answerability": coverage["answerable"] >= 120,

@@ -29,7 +29,10 @@ sources:
 
 
 def test_authoritative_source_file_contains_vertical_slice_sites():
-    sources = {source.source_id: source for source in load_authority_sources("data/sources/sufe_authoritative.yaml")}
+    sources = {
+        source.source_id: source
+        for source in load_authority_sources("data/sources/sufe_authoritative.yaml")
+    }
     assert {"jwc", "xsc", "gs"} <= sources.keys()
     assert sources["jwc"].adapter_name == "jwc"
     assert sources["xsc"].adapter_name == "wp3"
