@@ -424,7 +424,7 @@
 | 518c7dd3f80e | 关于印发《上海财经大学中西部基层单位就业毕业生学费和国家助学贷款代偿管理办法》的通知 | policy | unknown | historical | historical | explicit_superseded_validity |
 | 51de830ef85e | 2024-2025学年第二学期9至16周上财研究生课程调停课情况公示 | public_list | 2025-07-01 | active | public_list | recent_5_school_years |
 | 5220cf43e76b | 9903a61e-8740-4c78-809d-fe160d8ddad5.pdf | procedure | unknown | active | main_qa | all_history |
-| 52a785d3df9c | bb74c415-f49b-4bb8-9f0b-3830b36fb8cc.pdf | procedure | unknown | active | main_qa | all_history |
+| 52a785d3df9c | bb74c415-f49b-4bb8-9f0b-3830b36fb8cc.pdf | policy | unknown | active | main_qa | all_history; document_kind_reclassified |
 | 52adeb77cdbd | 上海财经大学2024年公派留学校内推荐候选人公示（博士学位项目） | public_list | 2024-03-11 | active | public_list | recent_5_school_years |
 | 52ffd1430785 | 上海财经大学外国语学院2018年通过夏令营选拔外校推荐免试硕士研究生候选人名单 | public_list | 2017-07-07 | archived | none | outside_recent_5_school_years |
 | 53414f855008 | 关于2017年度国际组织人才培养基地班（国际金融&#183;商务&#183;法律）考核名单和考试安排的通知 | public_list | 2017-09-07 | archived | none | outside_recent_5_school_years |

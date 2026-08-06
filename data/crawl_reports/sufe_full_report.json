@@ -1,6 +1,6 @@
 {
   "schema_version": "1",
-  "evaluated_at": "2026-08-06T09:24:12+00:00",
+  "evaluated_at": "2026-08-06T09:50:36+00:00",
   "corpus": {
     "manifest_documents": 1293,
     "materialized_documents": 573,
@@ -24,19 +24,19 @@
   "collections": {
     "main_qa": {
       "name": "sufe_qa_main_v2",
-      "chunk_count": 1732,
+      "chunk_count": 1727,
       "document_count": 231,
       "invalid_documents": []
     },
     "public_list": {
       "name": "sufe_qa_public_list_v2",
-      "chunk_count": 1094,
+      "chunk_count": 1044,
       "document_count": 192,
       "invalid_documents": []
     },
     "historical": {
       "name": "sufe_qa_historical_v2",
-      "chunk_count": 1203,
+      "chunk_count": 1189,
       "document_count": 150,
       "invalid_documents": []
     }

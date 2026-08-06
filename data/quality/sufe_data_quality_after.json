@@ -1,7 +1,7 @@
 {
   "schema_version": "1",
   "evaluated_at": "2026-08-06",
-  "manifest_fingerprint": "sha256:bbb3427fe4058175f0a25d00ab6c268ee556f6292d31b5e795a52f49818422cf",
+  "manifest_fingerprint": "sha256:750555f35381974c385eb5133683cd19016a96253471a6fbb4ece231176fb235",
   "total_documents": 1293,
   "accepted_documents": 1132,
   "materialized_documents": 573,
@@ -9489,7 +9489,7 @@
       "date_confidence": 0.0,
       "date_conflict": false,
       "before_document_kind": "procedure",
-      "document_kind": "procedure",
+      "document_kind": "policy",
       "temporal_class": "enduring",
       "series_key": "上海财经大学学生处|本科生|bb74c415-f49b-4bb8-9f0b-3830b36fb8cc",
       "retention_status": "active",
@@ -9498,7 +9498,8 @@
       "index_collection": "main_qa",
       "raw_available": true,
       "reasons": [
-        "all_history"
+        "all_history",
+        "document_kind_reclassified"
       ]
     },
     {

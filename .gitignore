@@ -12,3 +12,9 @@ data/raw/
 data/crawl_state/
 # Chroma 瞬态日志
 data/chroma_db/*-journal
+
+# 原子迁移/索引产生的本地恢复备份与中断 staging
+data/.corpus.previous-*/
+data/.corpus.staging-*/
+data/.chroma_db.previous-*/
+data/.chroma_db.staging-*/
