@@ -163,6 +163,16 @@ def append_relations(relations_path: Path, rels: list[DocRelation]) -> None:
             existing.add(r)
 
 
+def save_relations(relations_path: Path, rels: set[DocRelation]) -> None:
+    """全量覆写关系文件（先写临时文件再替换，避免崩溃留半文件）。"""
+    relations_path.parent.mkdir(parents=True, exist_ok=True)
+    tmp = relations_path.with_suffix(relations_path.suffix + ".tmp")
+    with tmp.open("w", encoding="utf-8") as f:
+        for r in sorted(rels, key=lambda r: (r.relation, r.parent_doc_id, r.child_doc_id)):
+            f.write(json.dumps(asdict(r), ensure_ascii=False) + "\n")
+    tmp.replace(relations_path)
+
+
 def load_relations(relations_path: Path) -> set[DocRelation]:
     """全量关系集合；坏行跳过。文件不存在返回空集。"""
     if not relations_path.exists():

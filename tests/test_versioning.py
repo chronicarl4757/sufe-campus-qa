@@ -66,9 +66,15 @@ def test_explicit_effective_and_repeal_words_produce_evidence():
             VersionCandidate(
                 "new",
                 "学生奖学金办法（修订）",
-                "自2025年9月1日起施行，同时废止原办法。",
+                "自2025年9月1日起施行，同时废止原《学生奖学金办法》。",
+                publish_date="2025-09-01",
             ),
-            VersionCandidate("old", "学生奖学金办法", "原办法正文"),
+            VersionCandidate(
+                "old",
+                "学生奖学金办法",
+                "原办法正文",
+                publish_date="2024-09-01",
+            ),
         ]
     )
     result = next(relation for relation in relations if relation.relation == "supersedes")
@@ -76,6 +82,88 @@ def test_explicit_effective_and_repeal_words_produce_evidence():
     assert result.target_doc_id == "old"
     assert result.confidence >= 0.9
     assert "同时废止" in result.evidence
+
+
+def test_parent_child_pair_never_forms_version_relation():
+    """文章与自己的附件是同一逻辑文档，不得互为新旧版本。"""
+    relations = infer_version_relations(
+        [
+            VersionCandidate(
+                "article",
+                "关于印发《上海财经大学研究生招生工作管理规定》的通知",
+                "自发布之日起施行",
+                publish_date="2019-10-29",
+            ),
+            VersionCandidate(
+                "attach",
+                "关于印发《上海财经大学研究生招生工作管理规定》的通知.pdf",
+                "上海财经大学研究生招生工作管理规定 自发布之日起施行",
+                publish_date="2019-10-29",
+                document_type="attachment",
+                parent_doc_id="article",
+            ),
+        ]
+    )
+    assert not any(relation.relation == "supersedes" for relation in relations)
+
+
+def test_academic_replace_text_is_not_version_evidence():
+    """论文正文里的"替代经典牛顿法"不构成制度版本证据。"""
+    relations = infer_version_relations(
+        [
+            VersionCandidate(
+                "new",
+                "人才培养",
+                "该方法替代经典牛顿法中的 Hessian 矩阵，提升计算效率。",
+                publish_date="2025-03-01",
+            ),
+            VersionCandidate(
+                "old",
+                "人才培养",
+                "培养方案正文",
+                publish_date="2024-03-01",
+            ),
+        ]
+    )
+    assert not any(relation.relation == "supersedes" for relation in relations)
+
+
+def test_unknown_date_cannot_supersede_even_with_strong_words():
+    """任一日期未知时不得建立 supersedes，保持 unknown_validity。"""
+    relations = infer_version_relations(
+        [
+            VersionCandidate(
+                "new",
+                "学生奖学金办法（修订）",
+                "自2025年9月1日起施行，同时废止原《学生奖学金办法》。",
+            ),
+            VersionCandidate("old", "学生奖学金办法", "原办法正文"),
+        ]
+    )
+    assert not any(relation.relation == "supersedes" for relation in relations)
+    assert all(relation.status == "unknown_validity" for relation in relations)
+
+
+def test_revision_notice_mentioning_policy_name_supersedes():
+    relations = infer_version_relations(
+        [
+            VersionCandidate(
+                "new",
+                "关于修订学生奖学金评选办法的通知",
+                "现修订学生奖学金评选办法，具体申请条件和材料如下。",
+                publish_date="2025-08-01",
+            ),
+            VersionCandidate(
+                "old",
+                "学生奖学金评选办法",
+                "原办法正文",
+                publish_date="2024-08-01",
+            ),
+        ]
+    )
+    result = next(relation for relation in relations if relation.relation == "supersedes")
+    assert result.source_doc_id == "new"
+    assert result.target_doc_id == "old"
 
 
 def test_version_reconciliation_persists_relations_and_evidence(tmp_path):
@@ -127,3 +215,55 @@ def test_version_reconciliation_persists_relations_and_evidence(tmp_path):
     assert any(r.relation == "supersedes" and r.parent_doc_id == "new" for r in rels)
     assert current["new"].validity_status == "current"
     assert current["new"].validity_evidence
+
+
+def test_reconcile_rebuild_clears_stale_relations_and_validity(tmp_path):
+    """rebuild 模式：清除历史误判的 supersedes 关系与版本字段后从零重算。"""
+    from sufe_qa.ingest.version_reconcile import reconcile_versions
+    from sufe_qa.schema import (
+        DocRelation,
+        append_manifest,
+        append_relations,
+        load_manifest,
+        load_relations,
+    )
+
+    corpus = tmp_path / "corpus"
+    corpus.mkdir(parents=True)
+    (corpus / "a.md").write_text("# 办法\n\n正文\n", encoding="utf-8")
+    rows = [
+        DocMeta(
+            doc_id="a",
+            title="学生奖学金办法",
+            source_url="https://xsc.sufe.edu.cn/a",
+            publisher="学生处",
+            publish_date="2024-08-01",
+            category="奖助学金",
+            fetched_at="2024-08-01",
+            content_hash="sha256:a",
+            file_path="a.md",
+            document_kind="policy",
+            validity_status="superseded",
+            validity_confidence=0.95,
+            validity_evidence="历史误判",
+            superseded_by=("ghost",),
+        )
+    ]
+    manifest = corpus / "manifest.jsonl"
+    relations = corpus / "relations.jsonl"
+    append_manifest(manifest, rows)
+    append_relations(
+        relations,
+        [
+            DocRelation(parent_doc_id="ghost", child_doc_id="a", relation="supersedes"),
+            DocRelation(parent_doc_id="a", child_doc_id="att", relation="attachment_of"),
+        ],
+    )
+    report = reconcile_versions(manifest, corpus, relations, rebuild=True)
+    current = load_manifest(manifest)
+    rels = load_relations(relations)
+    assert report.relation_count == 0
+    assert current["a"].validity_status == "unknown_validity"
+    assert not current["a"].superseded_by
+    assert not any(r.relation == "supersedes" for r in rels)
+    assert any(r.relation == "attachment_of" for r in rels)

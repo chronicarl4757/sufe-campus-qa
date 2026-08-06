@@ -296,12 +296,13 @@ def _cmd_crawl_authoritative(args: argparse.Namespace) -> int:
     return 0
 
 
-def _cmd_reconcile_versions(_args: argparse.Namespace) -> int:
+def _cmd_reconcile_versions(args: argparse.Namespace) -> int:
     settings = load_settings()
     report = reconcile_versions(
         settings.manifest_path,
         settings.corpus_dir,
         default_relations_path(settings.manifest_path),
+        rebuild=args.rebuild,
     )
     print(
         f"版本关系：候选主题组 {report.candidate_groups}，明确关系 {report.relation_count}，"
@@ -490,10 +491,7 @@ def _cmd_rebuild_clean_corpus(args: argparse.Namespace) -> int:
             "未传 --apply，未修改 corpus"
         )
         return 0
-    print(
-        f"干净 corpus 已切换：保留正文 {result.retained_files}，"
-        f"归档 {result.archived_documents}"
-    )
+    print(f"干净 corpus 已切换：保留正文 {result.retained_files}，归档 {result.archived_documents}")
     print(f"旧 corpus 备份: {result.backup_path}")
     return 0
 
@@ -616,6 +614,11 @@ def build_parser() -> argparse.ArgumentParser:
     ac.set_defaults(func=_cmd_crawl_authoritative)
 
     vr = sub.add_parser("reconcile-versions", help="根据正文证据回溯制度版本关系")
+    vr.add_argument(
+        "--rebuild",
+        action="store_true",
+        help="清空既有版本派生字段与 supersedes 关系后从零重算（修正历史误判）",
+    )
     vr.set_defaults(func=_cmd_reconcile_versions)
 
     ra = sub.add_parser("retry-attachments", help="从原始文章缓存定向重放附件")
@@ -706,9 +709,7 @@ def build_parser() -> argparse.ArgumentParser:
     )
     qg.add_argument(
         "--missing-sources",
-        default=str(
-            PROJECT_ROOT / "data" / "crawl_reports" / "sufe_missing_sources.json"
-        ),
+        default=str(PROJECT_ROOT / "data" / "crawl_reports" / "sufe_missing_sources.json"),
     )
     qg.set_defaults(func=_cmd_quality_gates)
 

@@ -6,7 +6,47 @@ from dataclasses import dataclass, replace
 from pathlib import Path
 
 from sufe_qa.ingest.versioning import VersionCandidate, infer_version_relations
-from sufe_qa.schema import DocMeta, DocRelation, append_manifest, append_relations, load_manifest
+from sufe_qa.schema import (
+    DocMeta,
+    DocRelation,
+    append_manifest,
+    append_relations,
+    load_manifest,
+    load_relations,
+    save_relations,
+)
+
+_VERSION_DERIVED_DEFAULTS = {
+    "validity_status": "unknown_validity",
+    "validity_confidence": 0.0,
+    "validity_evidence": "",
+    "relation_confidence": 0.0,
+    "relation_evidence": "",
+    "supersedes": (),
+    "superseded_by": (),
+}
+
+
+def _reset_version_fields(manifest_path: Path, relations_path: Path) -> None:
+    """清空全部版本派生字段并删除既有 supersedes 关系，供确定性重算。"""
+    manifest = load_manifest(manifest_path)
+    resets = []
+    for meta in manifest.values():
+
+        def _dirty(field: str, default: object) -> bool:
+            value = getattr(meta, field)
+            if isinstance(default, tuple):
+                return tuple(value) != default
+            return value != default
+
+        if any(_dirty(field, default) for field, default in _VERSION_DERIVED_DEFAULTS.items()):
+            resets.append(replace(meta, **_VERSION_DERIVED_DEFAULTS))
+    if resets:
+        append_manifest(manifest_path, resets)
+    relations = load_relations(relations_path)
+    kept = {r for r in relations if r.relation != "supersedes"}
+    if len(kept) != len(relations):
+        save_relations(relations_path, kept)
 
 
 @dataclass(frozen=True)
@@ -21,8 +61,16 @@ def reconcile_versions(
     manifest_path: Path,
     corpus_dir: Path,
     relations_path: Path,
+    *,
+    rebuild: bool = False,
 ) -> VersionReconcileReport:
-    """仅凭正文明确证据升级 current/superseded；年份相似保持 unknown_validity。"""
+    """仅凭正文明确证据升级 current/superseded；年份相似保持 unknown_validity。
+
+    rebuild=True 时先清空全部版本派生字段并删除既有 supersedes 关系，
+    再从零确定性重算——用于修正历史误判，保证结果只取决于当前推断规则。
+    """
+    if rebuild:
+        _reset_version_fields(manifest_path, relations_path)
     manifest = load_manifest(manifest_path)
     candidates: list[VersionCandidate] = []
     for meta in manifest.values():
@@ -39,6 +87,8 @@ def reconcile_versions(
                 publish_date=meta.publish_date,
                 policy_name=meta.policy_name,
                 topic_key=meta.topic_key,
+                document_type=meta.document_type,
+                parent_doc_id=meta.parent_doc_id or None,
             )
         )
     groups = {}
