@@ -1,0 +1,43 @@
+{
+  "schema_version": "2",
+  "created_at": "2026-08-06T09:21:20+00:00",
+  "embedding_model": "BAAI/bge-m3",
+  "embedding_backend": "sentence-transformers",
+  "embedding_device": "cuda",
+  "embedding_precision": "float16",
+  "test_only": false,
+  "manifest_fingerprint": "sha256:bbb3427fe4058175f0a25d00ab6c268ee556f6292d31b5e795a52f49818422cf",
+  "index_fingerprint": "sha256:79966f8ba46600dac08fced6ffc3cbf643146debb02f172648679dc0f68fb7ae",
+  "legacy_collection": "sufe_campus_qa",
+  "collections": {
+    "main_qa": {
+      "name": "sufe_qa_main_v2",
+      "document_kinds": [
+        "annual_notice",
+        "faq",
+        "form",
+        "manual",
+        "policy",
+        "procedure",
+        "service_guide"
+      ]
+    },
+    "public_list": {
+      "name": "sufe_qa_public_list_v2",
+      "document_kinds": [
+        "public_list"
+      ]
+    },
+    "historical": {
+      "name": "sufe_qa_historical_v2",
+      "document_kinds": [
+        "annual_notice",
+        "form",
+        "manual",
+        "policy",
+        "procedure",
+        "service_guide"
+      ]
+    }
+  }
+}

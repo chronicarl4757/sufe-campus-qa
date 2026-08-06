@@ -1,0 +1,107 @@
+{
+  "schema_version": "1",
+  "evaluated_at": "2026-08-06T09:24:12+00:00",
+  "corpus": {
+    "manifest_documents": 1293,
+    "materialized_documents": 573,
+    "retained_documents": 573,
+    "valid_body_ratio": 1.0,
+    "missing_files": [],
+    "file_hash_errors": [],
+    "isolated_materialized": [],
+    "duplicate_text_groups": [],
+    "duplicate_document_rate": 0.0,
+    "active_annual_series_duplicates": {},
+    "unknown_validity_main_documents": 211
+  },
+  "attachments": {
+    "total": 270,
+    "parsed_and_materialized": 213,
+    "parse_success_rate": 0.7888888888888889,
+    "article_reference_violations": [],
+    "relation_count": 270
+  },
+  "collections": {
+    "main_qa": {
+      "name": "sufe_qa_main_v2",
+      "chunk_count": 1732,
+      "document_count": 231,
+      "invalid_documents": []
+    },
+    "public_list": {
+      "name": "sufe_qa_public_list_v2",
+      "chunk_count": 1094,
+      "document_count": 192,
+      "invalid_documents": []
+    },
+    "historical": {
+      "name": "sufe_qa_historical_v2",
+      "chunk_count": 1203,
+      "document_count": 150,
+      "invalid_documents": []
+    }
+  },
+  "crawl_sites": {
+    "gs.sufe.edu.cn": {
+      "report_file": "2026-08-01-1400-gs.sufe.edu.cn.json",
+      "categories_found": 8,
+      "list_pages_fetched": 0,
+      "articles_found": 137,
+      "articles_downloaded": 137,
+      "attachments_found": 284,
+      "attachments_downloaded": 246,
+      "attachments_parsed": 244,
+      "incomplete_documents": 0,
+      "low_quality_documents": 0,
+      "final_indexed": 377
+    },
+    "jwc.sufe.edu.cn": {
+      "report_file": "2026-08-01-1311-jwc.sufe.edu.cn.json",
+      "categories_found": 4,
+      "list_pages_fetched": 4,
+      "articles_found": 5,
+      "articles_downloaded": 3,
+      "attachments_found": 73,
+      "attachments_downloaded": 35,
+      "attachments_parsed": 32,
+      "incomplete_documents": 2,
+      "low_quality_documents": 2,
+      "final_indexed": 13
+    },
+    "xsc.sufe.edu.cn": {
+      "report_file": "2026-08-01-1312-xsc.sufe.edu.cn.json",
+      "categories_found": 3,
+      "list_pages_fetched": 5,
+      "articles_found": 15,
+      "articles_downloaded": 0,
+      "attachments_found": 0,
+      "attachments_downloaded": 9,
+      "attachments_parsed": 9,
+      "incomplete_documents": 1,
+      "low_quality_documents": 0,
+      "final_indexed": 23
+    }
+  },
+  "coverage": {
+    "question_bank_version": "sufe-question-bank.v1",
+    "question_bank_hash": "sha256:8a5ab6a1110531cd443d9e652a1032f4e97d25d0f083bf9728429a0c28c352f9",
+    "total": 150,
+    "answerable": 0,
+    "partially_answerable": 60,
+    "not_answerable": 90,
+    "authoritative_hits": 60,
+    "wrong_department_hits": 0
+  },
+  "gates": {
+    "corpus_integrity": true,
+    "valid_body_ratio": true,
+    "isolated_content_removed": true,
+    "annual_series_canonical": true,
+    "collection_isolation": true,
+    "attachment_completeness": true,
+    "question_authoritative_hits": false,
+    "question_answerability": false,
+    "wrong_department_hits": true
+  },
+  "passed": false
+}

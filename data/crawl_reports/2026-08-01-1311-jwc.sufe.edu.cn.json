@@ -1,0 +1,38 @@
+{
+ "host": "jwc.sufe.edu.cn",
+ "started_at": "2026-08-01T13:11:23+00:00",
+ "categories_found": 4,
+ "list_pages_fetched": 4,
+ "categories_requires_adapter": 0,
+ "articles_found": 5,
+ "articles_downloaded": 3,
+ "attachments_found": 73,
+ "attachments_downloaded": 35,
+ "attachments_parsed": 32,
+ "scanned_pdfs": 0,
+ "legacy_docs_unparsed": 0,
+ "incomplete_documents": 2,
+ "low_quality_documents": 2,
+ "sensitive_quarantined": 0,
+ "duplicate_attachments": 0,
+ "new_documents": 13,
+ "updated_documents": 0,
+ "unchanged_documents": 0,
+ "not_seen_documents": 0,
+ "final_indexed": 13,
+ "failures": [
+  {
+   "url": "https://jwc.sufe.edu.cn/25/03/c5126a206083/page.htm",
+   "stage": "attachment",
+   "status": "unsupported_mime",
+   "reason": "附件请求返回 text/html（疑似错误页或查看器）"
+  },
+  {
+   "url": "https://jwc.sufe.edu.cn/52/38/c5126a217656/page.htm",
+   "stage": "attachment",
+   "status": "unsupported_mime",
+   "reason": "附件请求返回 text/html（疑似错误页或查看器）"
+  }
+ ],
+ "notes": []
+}

@@ -1,0 +1,2114 @@
+{
+ "host": "gs.sufe.edu.cn",
+ "started_at": "2026-08-01T13:12:33+00:00",
+ "categories_found": 20,
+ "list_pages_fetched": 144,
+ "categories_requires_adapter": 0,
+ "articles_found": 808,
+ "articles_downloaded": 803,
+ "attachments_found": 347,
+ "attachments_downloaded": 0,
+ "attachments_parsed": 0,
+ "scanned_pdfs": 0,
+ "legacy_docs_unparsed": 0,
+ "incomplete_documents": 0,
+ "low_quality_documents": 146,
+ "sensitive_quarantined": 1,
+ "duplicate_attachments": 0,
+ "new_documents": 619,
+ "updated_documents": 0,
+ "unchanged_documents": 42,
+ "not_seen_documents": 0,
+ "final_indexed": 661,
+ "failures": [
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndCWGFQNUlOVzZxb3RHbWlGbnV3OXdBVzlELUpQSlBUUTZKM21za1NHb3RyU193Q3Q4My01WWMtcDJhZDdWTU5R",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndCWGFQNUlOVzZxb3RHbWlGbnV3OXdBVzlELUpQSlBUUTZKM21za1NHb3RyU193Q3Q4My01WWMtcDJhZDdWTU5R"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFBSGJ2a1dhbTZoODlDaDNWMjZ3b2dCQjlXcklLWkNTVjZMMHpvZ1RqeDctWEtzRG9jMC1NTVFfYzNNZTdJUk53",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFBSGJ2a1dhbTZoODlDaDNWMjZ3b2dCQjlXcklLWkNTVjZMMHpvZ1RqeDctWEtzRG9jMC1NTVFfYzNNZTdJUk53"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndOVk5QSWJhV3I2OFlYeTJsRHFsb1plRDlLcmRfWlBTbHFKZ0dFclEybC1yaTc3WElveC01ZEhfYzNMTGU5QVpB",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndOVk5QSWJhV3I2OFlYeTJsRHFsb1plRDlLcmRfWlBTbHFKZ0dFclEybC1yaTc3WElveC01ZEhfYzNMTGU5QVpB"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndSV1BmeE1PRzc1OVlIeGpsM3J4WVlKWElUNmN2VWJHZ2pkM2pvblF6bC1xeVg1Q290bnE1VkFfc3ZOTGJJVE1B",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndSV1BmeE1PRzc1OVlIeGpsM3J4WVlKWElUNmN2VWJHZ2pkM2pvblF6bC1xeVg1Q290bnE1VkFfc3ZOTGJJVE1B"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFkV05QZ2RhRHo4bzRYeWlneS14ZHdNQzlhdEpfVk1TQUhmZ0d0M1NEa3ZyM0x3WDRoaV9jUVRfWnVmTGJZUk9n",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFkV05QZ2RhRHo4bzRYeWlneS14ZHdNQzlhdEpfVk1TQUhmZ0d0M1NEa3ZyM0x3WDRoaV9jUVRfWnVmTGJZUk9n"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE0R1Bfd2VPRHI1LUlPajNGcTVsOXNNQ05IOEtxTkRHQTZBaFc0bUhtOHNfQ0R4WHQ4MC04WVJySjZkZHVNVFpn",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE0R1Bfd2VPRHI1LUlPajNGcTVsOXNNQ05IOEtxTkRHQTZBaFc0bUhtOHNfQ0R4WHQ4MC04WVJySjZkZHVNVFpn"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFjRU5QSVdPVG44OG9MMzJWLTZ4WXdJQ29QNUlfVk9HdzNiMFcwbUhEcC1xeURfWDl0bThjRkItYzZlZTdSSFlR",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFjRU5QSVdPVG44OG9MMzJWLTZ4WXdJQ29QNUlfVk9HdzNiMFcwbUhEcC1xeURfWDl0bThjRkItYzZlZTdSSFlR"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFSUk5LOUthajZzcGRPcTFBaV9rb29MV3RHdEt2RkRIZ3lPMVR3clFtWXJyaTc4VW90bnJjTVJfY2ljS2VZV05n",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFSUk5LOUthajZzcGRPcTFBaV9rb29MV3RHdEt2RkRIZ3lPMVR3clFtWXJyaTc4VW90bnJjTVJfY2ljS2VZV05n"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFWVU9QTklPbS10LUlieDJWdnN3dDROQ0liLWRxQVpUd3lKM3pzalRtWjdxaUNxWDlvMS1wQVRfcHlmTGVGRlpn",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFWVU9QTklPbS10LUlieDJWdnN3dDROQ0liLWRxQVpUd3lKM3pzalRtWjdxaUNxWDlvMS1wQVRfcHlmTGVGRlpn"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFJR09fNFpORzZ1bzRPZzJsN3B3dHNBWGRmNUlmRVpUMTJKMDIxM1EyMHNxaU91RGR3enFwVkdxY0NjZHU1TU1R",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFJR09fNFpORzZ1bzRPZzJsN3B3dHNBWGRmNUlmRVpUMTJKMDIxM1EyMHNxaU91RGR3enFwVkdxY0NjZHU1TU1R"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFjSGJ2dExPVDZwLWRTcWp3eTRrZDVjWFlTdEpLTklTZ3VOMGp3Z0htd3AtM2VwVzlvMS1wTVVxODNKZk9VWE9n",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFjSGJ2dExPVDZwLWRTcWp3eTRrZDVjWFlTdEpLTklTZ3VOMGp3Z0htd3AtM2VwVzlvMS1wTVVxODNKZk9VWE9n"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE5U2J2NVBOR3otcFlTcjJsNjdsb2hjQnRhc2NmZExTZ0dCMTJCekh6b3VxU1Q0Q1lvOV9NWVRfOEdlZS1RVFpn",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE5U2J2NVBOR3otcFlTcjJsNjdsb2hjQnRhc2NmZExTZ0dCMTJCekh6b3VxU1Q0Q1lvOV9NWVRfOEdlZS1RVFpn"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndBSFBQMGVORy10OTlEeTNRaXh3dHRaVzRUNEpxSkxTRjJJaFQxeFMyMG9yeTc4WDQ5Z3JKWVEtTXpLZi1CRk9n",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndBSFBQMGVORy10OTlEeTNRaXh3dHRaVzRUNEpxSkxTRjJJaFQxeFMyMG9yeTc4WDQ5Z3JKWVEtTXpLZi1CRk9n"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFFRVBmNGNibW42OVlUd2oxenVrZGxkV0liN0t2SkNHUUNQZ0dnZ0cyY3BxWEtxWElnd3JaZEEtODZmS2U0VE13",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFFRVBmNGNibW42OVlUd2oxenVrZGxkV0liN0t2SkNHUUNQZ0dnZ0cyY3BxWEtxWElnd3JaZEEtODZmS2U0VE13"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFGVGJ2d1lQR3FoOElPajNGbTdsb2tMV3RLcktxWkxUZ0NPMFd0MlEyMTVfSE90RFlveF9KSkgtY3FZZU9RVVlB",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFGVGJ2d1lQR3FoOElPajNGbTdsb2tMV3RLcktxWkxUZ0NPMFd0MlEyMTVfSE90RFlveF9KSkgtY3FZZU9RVVlB"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFWYWFmMGRiVHl1OTRmd2lGaXdsOXRhWGRTcWNhVk5TRm1OMW1BZ1EyMHZxbmVyRDk5bS1wQVFfWjdKTE9BV01n",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFWYWFmMGRiVHl1OTRmd2lGaXdsOXRhWGRTcWNhVk5TRm1OMW1BZ1EyMHZxbmVyRDk5bS1wQVFfWjdKTE9BV01n"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE5WFA2c2ZPbWY3b0lHbTJWLTV3TmxaQjk3NmQ2Wk9HbG5ZaDJBaEdUdDRyaUdxRG9waF9KbEJfczZZZTdaQU13",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE5WFA2c2ZPbWY3b0lHbTJWLTV3TmxaQjk3NmQ2Wk9HbG5ZaDJBaEdUdDRyaUdxRG9waF9KbEJfczZZZTdaQU13"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE1UU5LZ2RPMml2ODliMjJsX3BsNDFiRGRLb0txWWNId2lCMG1FbkgyOHEteUwtVXRwZ19KY1ZyY21jZkxWQU1B",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE1UU5LZ2RPMml2ODliMjJsX3BsNDFiRGRLb0txWWNId2lCMG1FbkgyOHEteUwtVXRwZ19KY1ZyY21jZkxWQU1B"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndOUU9LdElPVHVyb295a2oxdTVsWWNBQ043NUlfWWNFbG1OMXo0aFRXZ2lxblA2RFlZMnFwRVdfY0RLTHJSRU5R",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndOUU9LdElPVHVyb295a2oxdTVsWWNBQ043NUlfWWNFbG1OMXo0aFRXZ2lxblA2RFlZMnFwRVdfY0RLTHJSRU5R"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFaYU5haFBORG44cElEMjMxLTh3NG9PV3RiOElxRkNHVnFQMUdsd0d6NThyblg2WG9zeXFKa1FyWm5PZHJVVU93",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFaYU5haFBORG44cElEMjMxLTh3NG9PV3RiOElxRkNHVnFQMUdsd0d6NThyblg2WG9zeXFKa1FyWm5PZHJVVU93"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFZSGJfNFdhbXl2OElUM2psbnVrTnBaQ05Pc0pQQWZIMXlOaDJGeFNEbC0teUh4V0lzeXE4TWRyc3ZOZU9kSE1B",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFZSGJfNFdhbXl2OElUM2psbnVrTnBaQ05Pc0pQQWZIMXlOaDJGeFNEbC0teUh4V0lzeXE4TWRyc3ZOZU9kSE1B"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndkVU9LOUthV3F2OElPazFBaS15dDBLV05YOEpxWk1HQW5maFc4bEdHOS0tWFA1WDRZMnJNVVYtNW1SZWVSQU5B",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndkVU9LOUthV3F2OElPazFBaS15dDBLV05YOEpxWk1HQW5maFc4bEdHOS0tWFA1WDRZMnJNVVYtNW1SZWVSQU5B"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndCVWFxNVBQVDMtb05DbjFGNl94b2tMRElPdkpLcFBIUW1PMEQ1elR6cDctWFd1RGRzdy1KUWRfNTNMZWJVV05B",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndCVWFxNVBQVDMtb05DbjFGNl94b2tMRElPdkpLcFBIUW1PMEQ1elR6cDctWFd1RGRzdy1KUWRfNTNMZWJVV05B"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndVQmFQd2JiMjZyOG9EMTNWaTdsZDVhRDlYLWNLcENFdy1LMTJ3bUhEMTdxM1A0Q0lreC01UkctSnpOS2VORU9n",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndVQmFQd2JiMjZyOG9EMTNWaTdsZDVhRDlYLWNLcENFdy1LMTJ3bUhEMTdxM1A0Q0lreC01UkctSnpOS2VORU9n"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndjR1BLc2VQR3F1ODRTaGlsenVrb1lCWFlIM2RfWk5FZzZJM2owalNUc3BxeVh3V2RobF9aa1EtTW5MS3U4VE1B",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndjR1BLc2VQR3F1ODRTaGlsenVrb1lCWFlIM2RfWk5FZzZJM2owalNUc3BxeVh3V2RobF9aa1EtTW5MS3U4VE1B"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndkUmJxZ2FORHI4OXRlbTJRanJ4WWRkRHRYNWRhb1lTQXVOMUdnZ1N6MG9vWGY3RG9zeDhNRkctODZRZXVCRk13",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndkUmJxZ2FORHI4OXRlbTJRanJ4WWRkRHRYNWRhb1lTQXVOMUdnZ1N6MG9vWGY3RG9zeDhNRkctODZRZXVCRk13"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE0Qk5LOFpPV2Y5OFlhbDIxaS13WXhhQzlHc0s2ZEtHZ3VJM3owbEdHWl9fU09zRGRwbnFzWkRfTXpLZWVWRVpB",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE0Qk5LOFpPV2Y5OFlhbDIxaS13WXhhQzlHc0s2ZEtHZ3VJM3owbEdHWl9fU09zRGRwbnFzWkRfTXpLZWVWRVpB"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndKYlBQSVdQR2VxcFlDbWpsbTVrSTFlVzliNmRxVk5HZ3lPMHp3Z1Rqb3RvWFg0Q04wMHE4VVVfc3lkZU9kRU13",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndKYlBQSVdQR2VxcFlDbWpsbTVrSTFlVzliNmRxVk5HZ3lPMHp3Z1Rqb3RvWFg0Q04wMHE4VVVfc3lkZU9kRU13"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFCVU5QNGZibWlwb3RDaTJseS1rTjRPWE5IOUlxSk9HUW1JMFdnblREa3BfWEtxV2Q5bDhKTkI5c2pNZDdZVU5n",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFCVU5QNGZibWlwb3RDaTJseS1rTjRPWE5IOUlxSk9HUW1JMFdnblREa3BfWEtxV2Q5bDhKTkI5c2pNZDdZVU5n"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFaVU5mOFphV2Y1b0lUdzJ3dTdrSWtJQm9UNEs2Qk9FZ0dOM200a0htOHVySEQ3VTl0bnE1ZEdyTW1aZU9VV1pn",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFaVU5mOFphV2Y1b0lUdzJ3dTdrSWtJQm9UNEs2Qk9FZ0dOM200a0htOHVySEQ3VTl0bnE1ZEdyTW1aZU9VV1pn"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFNRE9QTVliVzJvcE5PbDNsNjRsZHNLWE5Tc0pmVVpHUS1KMDJoMFREMG8tWFhfRG9rdy1NWVQtOG5KZjdJVU13",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFNRE9QTVliVzJvcE5PbDNsNjRsZHNLWE5Tc0pmVVpHUS1KMDJoMFREMG8tWFhfRG9rdy1NWVQtOG5KZjdJVU13"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndSYVBfc1pQejM3OElIeWp3eXd3WWdKRDlYMktfWkpUUTZCMWoxMEdEb3ZyU1hfWFkwel9KVVdxWnFSZXVGRE1n",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndSYVBfc1pQejM3OElIeWp3eXd3WWdKRDlYMktfWkpUUTZCMWoxMEdEb3ZyU1hfWFkwel9KVVdxWnFSZXVGRE1n"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndCU1BfMGNPam4tOE5lcmlnM3BrTm9BRDlQMktxVlBIQUdCZ3o0a0hEc3EteVh3VTk4eXI1a1gtTXFhZHJGQlp3",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndCU1BfMGNPam4tOE5lcmlnM3BrTm9BRDlQMktxVlBIQUdCZ3o0a0hEc3EteVh3VTk4eXI1a1gtTXFhZHJGQlp3"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFRSFBQa1pOV3VwOEkzMzMxX3RsdHRjQ2RLb0lQVk5IQW1NMUcxeEdUMGlxQzZwRDlvMl9aVkFfNXViZnVJUllR",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFRSFBQa1pOV3VwOEkzMzMxX3RsdHRjQ2RLb0lQVk5IQW1NMUcxeEdUMGlxQzZwRDlvMl9aVkFfNXViZnVJUllR"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFGWGJfOVBhRHVvOU5Ta2lGQzl3NGtNRG9IMkt2RklHUTZQMUdvckcya3ZfaV84WEkxZ3FNSVZySjJSS2VOTU53",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFGWGJfOVBhRHVvOU5Ta2lGQzl3NGtNRG9IMkt2RklHUTZQMUdvckcya3ZfaV84WEkxZ3FNSVZySjJSS2VOTU53"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndkUlBLdE1ibS1xLWRhbWlBaV94dHBaREliX2RxdE1IZ2lNMWpvaFRUc3QteS1wV2RoaXI1aEgtSnVSSy1SSFl3",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndkUlBLdE1ibS1xLWRhbWlBaV94dHBaREliX2RxdE1IZ2lNMWpvaFRUc3QteS1wV2RoaXI1aEgtSnVSSy1SSFl3"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndWUWFmTk5QR2FvOUlhaDFGcTh4WTBNV05Xb2RxSkxHd0NNMUc5MFRXZ2pyQ0dwVTkweC1NVVM5OERLSy1GTU5n",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndWUWFmTk5QR2FvOUlhaDFGcTh4WTBNV05Xb2RxSkxHd0NNMUc5MFRXZ2pyQ0dwVTkweC1NVVM5OERLSy1GTU5n"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndBRWF2b2ZhV21yb29HbGlWeXh4NHNLVzllcUlLTVpHbHVCaHpsMkhEMHJxM1NwVzk5bS1wZEdfTWlhZmU5QU93",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndBRWF2b2ZhV21yb29HbGlWeXh4NHNLVzllcUlLTVpHbHVCaHpsMkhEMHJxM1NwVzk5bS1wZEdfTWlhZmU5QU93"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndWV09mdElOVHlxcFlQd2lGX3BsdG9PRGRldEphc2ZIQXFJMXo1elRUNHNxWFg5RDkwMC1NSkEtOHllZjdaRU13",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndWV09mdElOVHlxcFlQd2lGX3BsdG9PRGRldEphc2ZIQXFJMXo1elRUNHNxWFg5RDkwMC1NSkEtOHllZjdaRU13"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndSUVBhZ1pQVDZvLUl6MjJsRy1sNFlJV05lc0tfQk1HbDZPMEcwblEyMTQtU0w3RDR0bXJjRVQtWnZKZmVRVU53",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndSUVBhZ1pQVDZvLUl6MjJsRy1sNFlJV05lc0tfQk1HbDZPMEcwblEyMTQtU0w3RDR0bXJjRVQtWnZKZmVRVU53"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFjQU9mMGFhVDJxODQzMmpWbnJ3b1lLVzktdGNQRlBIRjZMZ21weFNtb3NfaWJfRDlnM19NRVdyTS1SS3VRWE1R",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFjQU9mMGFhVDJxODQzMmpWbnJ3b1lLVzktdGNQRlBIRjZMZ21weFNtb3NfaWJfRDlnM19NRVdyTS1SS3VRWE1R"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndJQk9QOGViMi1wLWRmMWpsRzV3OTFaVzRiLWNQQk5HQXlMMXprcVRXWjdvU1d1RGRzOV9NUVJxYzJmZnVkSE53",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndJQk9QOGViMi1wLWRmMWpsRzV3OTFaVzRiLWNQQk5HQXlMMXprcVRXWjdvU1d1RGRzOV9NUVJxYzJmZnVkSE53"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndjR2JfNUtQbW1xOTRIM2oxeTV4NG9KQ1lTckpxWkNTRjJLMXoxMFRtMHByQ0xfRDQwOS1zTkVfNXVaTGVKRE1B",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndjR2JfNUtQbW1xOTRIM2oxeTV4NG9KQ1lTckpxWkNTRjJLMXoxMFRtMHByQ0xfRDQwOS1zTkVfNXVaTGVKRE1B"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndJQU9faE1OR21yOHRQMzN3dnV3ZHNQQ3Rhc2NhRkpIQXJiMW13cUcyWl9yU0gtVXR3eF84UkUtODdMZHVkQ05B",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndJQU9faE1OR21yOHRQMzN3dnV3ZHNQQ3Rhc2NhRkpIQXJiMW13cUcyWl9yU0gtVXR3eF84UkUtODdMZHVkQ05B"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE5VU82OU5PbXV2OWRIMjNsanFsb1plRG9IX0pxY2VHd3FOM2p3a1NHY3FfQzd3WG9veF84VVYtTXlmTE9KQ053",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE5VU82OU5PbXV2OWRIMjNsanFsb1plRG9IX0pxY2VHd3FOM2p3a1NHY3FfQzd3WG9veF84VVYtTXlmTE9KQ053"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFOU2FmNGJQbWVwOXRPa2lGaTZsb1pkV0liNEtxUk1FbG1OaDJ0eFNHZ3VfaTctWG81aXJaWkVxc0NSZUxGQk5B",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFOU2FmNGJQbWVwOXRPa2lGaTZsb1pkV0liNEtxUk1FbG1OaDJ0eFNHZ3VfaTctWG81aXJaWkVxc0NSZUxGQk5B"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFNR2FxdElPVzJ1OFlIeTMxeTlrSXhkRDlfOUlQWk5IQWlOZ2pweFEyY29yaWFxVXQwOV9wUVQ5cy1aZU9GR1pB",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFNR2FxdElPVzJ1OFlIeTMxeTlrSXhkRDlfOUlQWk5IQWlOZ2pweFEyY29yaWFxVXQwOV9wUVQ5cy1aZU9GR1pB"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE4SE82bFBPMmV1cElTazJRLTZ4WVpiQzlPcUp2VktTUTdZMzJweEdENTVxM2Y1RG90bnFKVkctcDJkTHU5Tk1n",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE4SE82bFBPMmV1cElTazJRLTZ4WVpiQzlPcUp2VktTUTdZMzJweEdENTVxM2Y1RG90bnFKVkctcDJkTHU5Tk1n"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndKV1BQbE1PR2VnOVkyajNBcnNsWTRPQzlUNkk2Uk5Hd3JhM3o0akdXb3BxM2V1WEl3OXFNSWMtWjZhZHVCRFlB",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndKV1BQbE1PR2VnOVkyajNBcnNsWTRPQzlUNkk2Uk5Hd3JhM3o0akdXb3BxM2V1WEl3OXFNSWMtWjZhZHVCRFlB"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndkYVBLdEtPR3l2OVlhcmpsaTR4ZDBNQ2RYX2RxRWJHbG5mMG1zbUdXZDdxQ1A4WHQxZzhjWVFfOHZLSy1OTllB",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndkYVBLdEtPR3l2OVlhcmpsaTR4ZDBNQ2RYX2RxRWJHbG5mMG1zbUdXZDdxQ1A4WHQxZzhjWVFfOHZLSy1OTllB"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE1VU9QcE1PRG45cElHbmoxR3hsNGNJQzk2dEphSWNIZ25haEc1eFFtc3RyQ0Q4WFlreHJjWkUtWjdOTGVOQVp3",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE1VU9QcE1PRG45cElHbmoxR3hsNGNJQzk2dEphSWNIZ25haEc1eFFtc3RyQ0Q4WFlreHJjWkUtWjdOTGVOQVp3"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE4RU5QNFphbXotLU5Ha2pRdnV3dG9OV05hb2NhSk5TQXlMMUd4eEdXOHNvU1R4V0k5aThaUWNfOENkTExWQU1n",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE4RU5QNFphbXotLU5Ha2pRdnV3dG9OV05hb2NhSk5TQXlMMUd4eEdXOHNvU1R4V0k5aThaUWNfOENkTExWQU1n"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFBR1BmaExPVHI1LWRidzJWbTh3NDhMRE5TdEo2dE1TUURZMW0xMlRXNHVxbkt1VW8xbjhKSkRfcy1jZS04Uk53",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFBR1BmaExPVHI1LWRidzJWbTh3NDhMRE5TdEo2dE1TUURZMW0xMlRXNHVxbkt1VW8xbjhKSkRfcy1jZS04Uk53"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFCVFBxOUxiVG1nOW9LaTMxRHF3dGtCV29Pdkp2Y1lHVnFCMW0wa1R6NTUteS1zRDQ0OHFzTVdfNW5NTHVSQllB",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFCVFBxOUxiVG1nOW9LaTMxRHF3dGtCV29Pdkp2Y1lHVnFCMW0wa1R6NTUteS1zRDQ0OHFzTVdfNW5NTHVSQllB"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFFR1Bma2FibW1zcElhaGlRdTdrdG9LRHREN0lmQktTZ3lNMHo1elNHd3VxSFh4RHQxbC1aZERfc21RTGJOSE1n",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFFR1Bma2FibW1zcElhaGlRdTdrdG9LRHREN0lmQktTZ3lNMHo1elNHd3VxSFh4RHQxbC1aZERfc21RTGJOSE1n"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndNR05mc1hPVHVvb0lEMWpsdnRsNHBiRGRiNkpLQk9HZzdiMDJCeEgyOTRfQ0RfVW93MF9jSVdfTXlhS2JGTU93",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndNR05mc1hPVHVvb0lEMWpsdnRsNHBiRGRiNkpLQk9HZzdiMDJCeEgyOTRfQ0RfVW93MF9jSVdfTXlhS2JGTU93"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE5YWF2Z1pQR2I3OVlHbWpWcTh4bzRCQ2RUNUlfQWVUd0dCMDJweFNtdC1yQ2VyQ3RneXFzTVItcG5OZWVCR093",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE5YWF2Z1pQR2I3OVlHbWpWcTh4bzRCQ2RUNUlfQWVUd0dCMDJweFNtdC1yQ2VyQ3RneXFzTVItcG5OZWVCR093"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFGWE9mNVBQbTZvOXRidzNnanFrSVlBQ3RfOGRxSVlUUTZMMWoxM1QyNS1vU0x3VW9rMF9aTkhxc3pMS2JWRU53",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFGWE9mNVBQbTZvOXRidzNnanFrSVlBQ3RfOGRxSVlUUTZMMWoxM1QyNS1vU0x3VW9rMF9aTkhxc3pMS2JWRU53"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndSUlBmSWRPbXV1OWRlcjNBX3V4b2tJV29MNmNQSkpHUWpmaDJCeFRtb3Nybkw4VTk4Ml9aTVhfSjdMS3VkRU1B",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndSUlBmSWRPbXV1OWRlcjNBX3V4b2tJV29MNmNQSkpHUWpmaDJCeFRtb3Nybkw4VTk4Ml9aTVhfSjdMS3VkRU1B"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndkWE9mbExhR3FncEllbTNGeV93OXNMRHRQN0phWVpUVm5hMW14MEh6NThyeV85RFlsbXFzVVNfYzZhTHJNV05n",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndkWE9mbExhR3FncEllbTNGeV93OXNMRHRQN0phWVpUVm5hMW14MEh6NThyeV85RFlsbXFzVVNfYzZhTHJNV05n"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFkV05ma1dhR3l2OGRIeGlsN3F5NDllRFlXb0k2Sk9FbHVOMFRzclRqbDdvSFNzWDloaS01VVFySjZaZDdWRU5R",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFkV05ma1dhR3l2OGRIeGlsN3F5NDllRFlXb0k2Sk9FbHVOMFRzclRqbDdvSFNzWDloaS01VVFySjZaZDdWRU5R"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE5V09Qa1lhR3FyLWRUd2pRanBsZDRJRE5fM0lxWklHbDJQaHo0aEdHZ3JxM1d0RDRkbl81Y1dfOHJOZU9OQU5R",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE5V09Qa1lhR3FyLWRUd2pRanBsZDRJRE5fM0lxWklHbDJQaHo0aEdHZ3JxM1d0RDRkbl81Y1dfOHJOZU9OQU5R"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndSVU92OVBQVHo1OEl6MzJsdTZ3SWdQQ05DcktxWWNIbDZOaFdvbVNHZDRfU1R4VW9jejhjVkVfOEhLZXVkTk9n",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndSVU92OVBQVHo1OEl6MzJsdTZ3SWdQQ05DcktxWWNIbDZOaFdvbVNHZDRfU1R4VW9jejhjVkVfOEhLZXVkTk9n"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndOU082c1pORzM4b0kzd2lRdXhsWTRBRG9XdmRxVklIUTZCMWpva1N6d3RxSER3V2RndzhKRVRfTTNPZXVWTlp3",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndOU082c1pORzM4b0kzd2lRdXhsWTRBRG9XdmRxVklIUTZCMWpva1N6d3RxSER3V2RndzhKRVRfTTNPZXVWTlp3"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFCVk9mNGJPbXItOTRhajNncV94TmtQWE5mMmQ2b1lIZ3JiZ0dnbkdHY3NvWFR3RDRzMHFwUVYtczNLZXVjUVlR",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFCVk9mNGJPbXItOTRhajNncV94TmtQWE5mMmQ2b1lIZ3JiZ0dnbkdHY3NvWFR3RDRzMHFwUVYtczNLZXVjUVlR"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFFQmJhZ1lPR2lnOElMeTJWRzlsb29NQzlILUlfQk9Id3lBaFR4M0gyY3VxQzc5Q05nd3JNRVNxY3pOZXVORk1n",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFFQmJhZ1lPR2lnOElMeTJWRzlsb29NQzlILUlfQk9Id3lBaFR4M0gyY3VxQzc5Q05nd3JNRVNxY3pOZXVORk1n"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndCWGFLNGFOR2Fnb3REd2psbTR4bzFkQnRmOElmSktHVjdZZ2oxMlQyWjVxbkQ4WFloaXJKaEJxWnljZWVSSFpn",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndCWGFLNGFOR2Fnb3REd2psbTR4bzFkQnRmOElmSktHVjdZZ2oxMlQyWjVxbkQ4WFloaXJKaEJxWnljZWVSSFpn"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE0RWJ2OFdPbW1wcFlHbmp3enB4WVplV0lPdkpfRVlUbDJCZ2praEd6cDUtaUtyRDQxbHJaVWRxOEdjZkxJV1pn",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE0RWJ2OFdPbW1wcFlHbmp3enB4WVplV0lPdkpfRVlUbDJCZ2praEd6cDUtaUtyRDQxbHJaVWRxOEdjZkxJV1pn"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFaWGJmMGFQR2ItbzlQeGp3enBrdGxiWDRhcWRxTkNHbHVOMDJFbEhtMHFvQ1d1V1l3eDhaVVJyc3VmTHU0Ulp3",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFaWGJmMGFQR2ItbzlQeGp3enBrdGxiWDRhcWRxTkNHbHVOMDJFbEhtMHFvQ1d1V1l3eDhaVVJyc3VmTHU0Ulp3"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndjSFBfOGVOR3F1OW9ieTNRaTZsWVphRHRQOEphVlBHZy1PaFd3bFNXdDRySEw4V284el9zTkJySm1aTExKRU93",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndjSFBfOGVOR3F1OW9ieTNRaTZsWVphRHRQOEphVlBHZy1PaFd3bFNXdDRySEw4V284el9zTkJySm1aTExKRU93"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE0QWF2b2FPRHlzOG9YeDJRLXh3TnNNQzlQN0k2SkRUbHVMM3pvbEgyWXZfQ2FwRFljenI1WVRxcHFhS2VVUk5B",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE0QWF2b2FPRHlzOG9YeDJRLXh3TnNNQzlQN0k2SkRUbHVMM3pvbEgyWXZfQ2FwRFljenI1WVRxcHFhS2VVUk5B"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFBSE5hbE1iMnF2b29UeWlsNjh4WTVaQ1lIX0p2VVlHUUdLMVRvZ1NXb29xSGY4WG8xbXJNUkhfNXFaZmVGQU93",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFBSE5hbE1iMnF2b29UeWlsNjh4WTVaQ1lIX0p2VVlHUUdLMVRvZ1NXb29xSGY4WG8xbXJNUkhfNXFaZmVGQU93"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFaWFB2d2RQMno1OHRIMTJReTdrWW9MQzk2b0lfQWVIbG5jMVdFblQya3Utbkw4VTQweXFKTWRxY0NaZXU0UVp3",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFaWFB2d2RQMno1OHRIMTJReTdrWW9MQzk2b0lfQWVIbG5jMVdFblQya3Utbkw4VTQweXFKTWRxY0NaZXU0UVp3"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFKWE5QSWZhVHFxb0llaTFWLS1rSXhiRE5QMkpxQkRUd2lPZ3pwMkdXbDVxM1QtWE5neHI1SkJyTUNiZnJRVE93",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFKWE5QSWZhVHFxb0llaTFWLS1rSXhiRE5QMkpxQkRUd2lPZ3pwMkdXbDVxM1QtWE5neHI1SkJyTUNiZnJRVE93"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFZR05QNFlPem4tODlha2lsdTZ4Tm9KRG9iOUtfRk9HUTdhMVQ0akdXa3BxQzctQ0kwMC1zRWQtSjJlZTdOR01B",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFZR05QNFlPem4tODlha2lsdTZ4Tm9KRG9iOUtfRk9HUTdhMVQ0akdXa3BxQzctQ0kwMC1zRWQtSjJlZTdOR01B"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFSVGFmTVpOR2F1ODRXaTNnaXhsWWNPQ0lQN0txQkxFZ2lJMFRwM1FtcDVvU1dwVTl0bC1zVVNyTXpLTGVCTlp3",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFSVGFmTVpOR2F1ODRXaTNnaXhsWWNPQ0lQN0txQkxFZ2lJMFRwM1FtcDVvU1dwVTl0bC1zVVNyTXpLTGVCTlp3"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFVRU9QNFhQV2FzcE5DbjJGdnR3WTBLV3RYMks2ZENIRnpkaHpzalN6bDgtWEtyQ29ZMnJaQkJfOEdiTGVaQk5B",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFVRU9QNFhQV2FzcE5DbjJGdnR3WTBLV3RYMks2ZENIRnpkaHpzalN6bDgtWEtyQ29ZMnJaQkJfOEdiTGVaQk5B"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndkUk9mMGNhVDM2OFkzMTJ3dnJ3NGtNRG9iNElhb1pHMXFQZzJ4elRXaDdfaWI5V050aDhKQWNyTXlhZHJWRU5R",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndkUk9mMGNhVDM2OFkzMTJ3dnJ3NGtNRG9iNElhb1pHMXFQZzJ4elRXaDdfaWI5V050aDhKQWNyTXlhZHJWRU5R"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFVRFB2d1pPbXo4OElMMzFRcTZ4ZHdQWFlUM2RfWVpIQS1NMUdsMEhEb3ItU1gtRHQ5aDhKRWRycG1mZnJOQ05B",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFVRFB2d1pPbXo4OElMMzFRcTZ4ZHdQWFlUM2RfWVpIQS1NMUdsMEhEb3ItU1gtRHQ5aDhKRWRycG1mZnJOQ05B"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndWVE82aE1QR3V1OUlUeTJsbTV3WVlNQzlTc0k2Y2ZIUTZOMFRzbkdXeDUtWE9zRDlobThKZ1ItOHlSZUxNUVpB",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndWVE82aE1QR3V1OUlUeTJsbTV3WVlNQzlTc0k2Y2ZIUTZOMFRzbkdXeDUtWE9zRDlobThKZ1ItOHlSZUxNUVpB"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFRRE5meExPV2o2ODlQMzJseTZsNGtMQ2RXdElhQk1HQW1PaFdzakcyd29vWFN1V29nMi1wQWNyTW1aZjdNWE5R",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFRRE5meExPV2o2ODlQMzJseTZsNGtMQ2RXdElhQk1HQW1PaFdzakcyd29vWFN1V29nMi1wQWNyTW1aZjdNWE5R"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE5YVB2cEtORHlnLUlYMjJBLTZrSTFjWGRIX0lQRklHZzZKaDI1ekhHa3BfSERfV1lzMF81aERfWjdKZDdZUlp3",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE5YVB2cEtORHlnLUlYMjJBLTZrSTFjWGRIX0lQRklHZzZKaDI1ekhHa3BfSERfV1lzMF81aERfWjdKZDdZUlp3"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndNQVBQTWNhVzZoOW9ieTJGN3B4WWdOQnQ2dGRmWlBHUXVPZ3owaFEybF9xbk90VzkwMnI1a1E5cHVhZU9kQk5B",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndNQVBQTWNhVzZoOW9ieTJGN3B4WWdOQnQ2dGRmWlBHUXVPZ3owaFEybF9xbk90VzkwMnI1a1E5cHVhZU9kQk5B"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFKYk9xd1pOV2lyLVlHaTIxaTZ3WWNBRHRPdmN2WWNUUS1OaFdvalRXZ29fQ0w0RDRwbXI1WVFxczJaSy1STllB",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFKYk9xd1pOV2lyLVlHaTIxaTZ3WWNBRHRPdmN2WWNUUS1OaFdvalRXZ29fQ0w0RDRwbXI1WVFxczJaSy1STllB"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndRSGFQa1pPenFvbzliMTJWRy13OXNLQ0lHdElLZE1IRjJQZ0c4a0cyNHZyWFg1Q1k0MXE4TVZfc0RKZi1aQ05R",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndRSGFQa1pPenFvbzliMTJWRy13OXNLQ0lHdElLZE1IRjJQZ0c4a0cyNHZyWFg1Q1k0MXE4TVZfc0RKZi1aQ05R"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFKUmI2a2ZhRG11cDRTaDJGN3F4b1pjQjk3NUlLQklTQXZmMVcxMlREb2lfbkQ5RFl3enI1RkUtOHliSzdWRE1R",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFKUmI2a2ZhRG11cDRTaDJGN3F4b1pjQjk3NUlLQklTQXZmMVcxMlREb2lfbkQ5RFl3enI1RkUtOHliSzdWRE1R"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFZRFB2NGFPbXVwOG95aTJWLTV3WWRaVzlfNWNxc2ZTbG1JaFRra1REc2pyaTc3RDRsbnI1ZEctYzdMSy1VVFpn",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFZRFB2NGFPbXVwOG95aTJWLTV3WWRaVzlfNWNxc2ZTbG1JaFRra1REc2pyaTc3RDRsbnI1ZEctYzdMSy1VVFpn"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE5YU9meE1QR2V2LVllazFBanB3OTRKWGRmNWRhdElId0NOMDJFa0dXY2pyQ183RG9waV9aY1UtOHlkTE9CR1l3",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE5YU9meE1QR2V2LVllazFBanB3OTRKWGRmNWRhdElId0NOMDJFa0dXY2pyQ183RG9waV9aY1UtOHlkTE9CR1l3"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndOUk82OGVPbXo4OTRQeDJsN3B4WTlaQ3RPdks2dEpTUUNJM20wa1Ftb2otbkw5V0lnMHJaZ1NfWjZmTHVVUlpn",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndOUk82OGVPbXo4OTRQeDJsN3B4WTlaQ3RPdks2dEpTUUNJM20wa1Ftb2otbkw5V0lnMHJaZ1NfWjZmTHVVUlpn"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFNRWJheE5ibW1zb3RTaTJ3LXd5b3dJQzlENGNmWWNTZzZKMXpwMkgyOHBxQ0g0V3RwaThKSkRfOC1SZk9jVE9n",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFNRWJheE5ibW1zb3RTaTJ3LXd5b3dJQzlENGNmWWNTZzZKMXpwMkgyOHBxQ0g0V3RwaThKSkRfOC1SZk9jVE9n"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFRRGJ2cElhR3V0OFlUeDNRdS14TjFlQzlINEtfRVlIQW5iaDIxM1F6MTRvQ0R3Q29jdy1aZ1Q5cG1iZi1ORVpn",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFRRGJ2cElhR3V0OFlUeDNRdS14TjFlQzlINEtfRVlIQW5iaDIxM1F6MTRvQ0R3Q29jdy1aZ1Q5cG1iZi1ORVpn"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndkU09Qa1pQMjM1OGRQMWlGMndrbzROQ05IOGRxc2NHMW1JaHo0aVNtaDUteVA3WG9abnJKTkE5c19KTGJJUU93",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndkU09Qa1pQMjM1OGRQMWlGMndrbzROQ05IOGRxc2NHMW1JaHo0aVNtaDUteVA3WG9abnJKTkE5c19KTGJJUU93"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndRRFBLa2VQRDJxcDllamlnanV5b3NKQm9YOUs2cEtUdzdkaHpvclRXWjhyQ1Q4RHRvMHE1Z1ZfczNKS3U4VE1B",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndRRFBLa2VQRDJxcDllamlnanV5b3NKQm9YOUs2cEtUdzdkaHpvclRXWjhyQ1Q4RHRvMHE1Z1ZfczNKS3U4VE1B"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE1WFBhZ2VhR21ob0l5bTNsR3d3SWhaQjlTdkpfSVpFZ3ZiZ0c0aVRHY3RxQ2I2WDQ0MV84SkhfYzNPZnJOTlp3",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE1WFBhZ2VhR21ob0l5bTNsR3d3SWhaQjlTdkpfSVpFZ3ZiZ0c0aVRHY3RxQ2I2WDQ0MV84SkhfYzNPZnJOTlp3"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndkVk82OU1hR2FvOTlDcjFWanNsb2hkQ0lYLUs2QWNFd2lMMVQwbEh6d2kteTZxWFk5bF9jRkItOG1ZSy04UU5B",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndkVk82OU1hR2FvOTlDcjFWanNsb2hkQ0lYLUs2QWNFd2lMMVQwbEh6d2kteTZxWFk5bF9jRkItOG1ZSy04UU5B"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFBR09fc1hQVDM1OUlhazMxNndsOTVlQ29PdmRmRk9UUTZPMHpvZ1NEMHRfaTd4RDR0bThNVkhyc2pMTE9aRU53",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFBR09fc1hQVDM1OUlhazMxNndsOTVlQ29PdmRmRk9UUTZPMHpvZ1NEMHRfaTd4RDR0bThNVkhyc2pMTE9aRU53"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndCVE92SVlPR2FwOFlTbDMxanF4WXNJQzlfN2NhTkxIMTJBMUdsMFN6MTUtWGV0Q053OHJNWVg5cHFmTHJZUVp3",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndCVE92SVlPR2FwOFlTbDMxanF4WXNJQzlfN2NhTkxIMTJBMUdsMFN6MTUtWGV0Q053OHJNWVg5cHFmTHJZUVp3"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE5U2F2a2ZiajZ2OGREd2oxdS14NDRPWE5fNkphUktHUXlKZ2prcVNHZDgteWZfVzR3M19aTkFfczZlSy1OQU1B",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE5U2F2a2ZiajZ2OGREd2oxdS14NDRPWE5fNkphUktHUXlKZ2prcVNHZDgteWZfVzR3M19aTkFfczZlSy1OQU1B"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFRR09hOUlPRzZxcDRTaDNWaXh5bzFkQnRmNWRxTktFbG1BaDJvcVF6a3ZfaUw0RG9rMHJNTWNyTW5NZHJOQU1R",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFRR09hOUlPRzZxcDRTaDNWaXh5bzFkQnRmNWRxTktFbG1BaDJvcVF6a3ZfaUw0RG9rMHJNTWNyTW5NZHJOQU1R"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE5YmFLc1liMjc4b3RDazNRLXhsNHhkQ3RUM0pmRklIZ3VKMVd3akgyOTdfQ1Q3V29jd3E1WVRycHFZZUxJVU1R",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE5YmFLc1liMjc4b3RDazNRLXhsNHhkQ3RUM0pmRklIZ3VKMVd3akgyOTdfQ1Q3V29jd3E1WVRycHFZZUxJVU1R"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFCUmJ2a2ViVDZwcEkyazIxanR4NHBkQjRUN2NhWWZIMXFNaFdFaVFqdDQtM0RfRDQ0eS01VVEtSjdKZXJaRE5R",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFCUmJ2a2ViVDZwcEkyazIxanR4NHBkQjRUN2NhWWZIMXFNaFdFaVFqdDQtM0RfRDQ0eS01VVEtSjdKZXJaRE5R"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndNRVBxd1hPMm41OE5HbTJnenF4bzFiRFlUX0lmSktTUURiMFdBblNENG9xblN0VTQ5bC01Y1ZxOHlkSzdGRVlB",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndNRVBxd1hPMm41OE5HbTJnenF4bzFiRFlUX0lmSktTUURiMFdBblNENG9xblN0VTQ5bC01Y1ZxOHlkSzdGRVlB"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndjRU5Qc2RPR2o5cE5PbWlseTlsNHRjV0lUMmNmWWVHQXlBZ0c0ckdEMG9xeV83WFlnei1zWkVfcG1aZk9WR01n",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndjRU5Qc2RPR2o5cE5PbWlseTlsNHRjV0lUMmNmWWVHQXlBZ0c0ckdEMG9xeV83WFlnei1zWkVfcG1aZk9WR01n"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFaYWF2NGNQR21yb05iMzFBenJ5NGtMQ0lIX2NQWWVHUXVKZ0R3aEhHZDQtaUg4V2R3M19jWkI5c21lZXU0VFl3",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFaYWF2NGNQR21yb05iMzFBenJ5NGtMQ0lIX2NQWWVHUXVKZ0R3aEhHZDQtaUg4V2R3M19jWkI5c21lZXU0VFl3"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE5UU9LOGVQMmVwcFlMMjJWNl9rSThMQ29MN0lhUWNIRnVKM21vbFNHa3VfQ2VyRFlvMi04SVJfczZSZmJKSFlR",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE5UU9LOGVQMmVwcFlMMjJWNl9rSThMQ29MN0lhUWNIRnVKM21vbFNHa3VfQ2VyRFlvMi04SVJfczZSZmJKSFlR"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFCV05hOGFibS1nODllbTJWLV93SThQQ0lLc0lQZE1IbG5haHowaUdXbDRxU185V3Q5bnFzVVZfcG1lZDdGSE9n",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFCV05hOGFibS1nODllbTJWLV93SThQQ0lLc0lQZE1IbG5haHowaUdXbDRxU185V3Q5bnFzVVZfcG1lZDdGSE9n"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFkU09Qb2ViVzJwbzRPazJWRzRsZDBBQ2RDcmNhb1pUZ0dBMUc4a0gyOHRvSEtyWG94bnJjVVNfTXpMZU85RU13",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFkU09Qb2ViVzJwbzRPazJWRzRsZDBBQ2RDcmNhb1pUZ0dBMUc4a0gyOHRvSEtyWG94bnJjVVNfTXpMZU85RU13"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE4QU5LNGJhRzJyLUlHbDJ3cTR5NDhBRDlmMmQ2dENHMXpjaEc4alNHWjVySEx4WG80eC04WVc5OGlaZUxGR05B",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE4QU5LNGJhRzJyLUlHbDJ3cTR5NDhBRDlmMmQ2dENHMXpjaEc4alNHWjVySEx4WG80eC04WVc5OGlaZUxGR05B"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndRRU9Qa2JibXI3OG8zMjFWM3V3bzlhWDlmOUtfSkNFMXFMZ0RsM1NHc3BxSFA4V293M181TWRxY19MTHVOTll3",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndRRU9Qa2JibXI3OG8zMjFWM3V3bzlhWDlmOUtfSkNFMXFMZ0RsM1NHc3BxSFA4V293M181TWRxY19MTHVOTll3"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFSU05Qb1hPejM4OW9MMjJWdnNsdHNJQ05IN0s2UkNUZ0dKMERvbkd6NG9xaVQ3V285bS01UVFySm5KZWJFVU5B",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFSU05Qb1hPejM4OW9MMjJWdnNsdHNJQ05IN0s2UkNUZ0dKMERvbkd6NG9xaVQ3V285bS01UVFySm5KZWJFVU5B"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndWYk92OU1hbTJ0cElPa2lnLTVrbzBPQnRDdEt2SkNIMW1NMFQxMlRqeDdfaVd1RFk0MjhNVVQ5NXZNZmVGQlpn",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndWYk92OU1hbTJ0cElPa2lnLTVrbzBPQnRDdEt2SkNIMW1NMFQxMlRqeDdfaVd1RFk0MjhNVVQ5NXZNZmVGQlpn"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndNRE5LZ2ZQRzM4ODQybWoxX3J3SWxlRGRLcWNxVkpIRnFQZ21BakcyOGlfWGYtWDRrM3Fwa1FxcG1iS3JJWE53",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndNRE5LZ2ZQRzM4ODQybWoxX3J3SWxlRGRLcWNxVkpIRnFQZ21BakcyOGlfWGYtWDRrM3Fwa1FxcG1iS3JJWE53"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndOV092OUxianVwcDRTbDMxRzl5OTRCWGRXcWQ2TklUd0dOMW1rbEdUa2pyeUx4Q28wMnI1UkFfODNNZHJWRFpn",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndOV092OUxianVwcDRTbDMxRzl5OTRCWGRXcWQ2TklUd0dOMW1rbEdUa2pyeUx4Q28wMnI1UkFfODNNZHJWRFpn"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFSVU9mNUlPajc3OU5PajNnM3F5dGtJWE5mMklQVWJHQXJmMFdBakcybDRxaWI1RG9vOS01RVNyc3FhZXJOTU1R",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFSVU9mNUlPajc3OU5PajNnM3F5dGtJWE5mMklQVWJHQXJmMFdBakcybDRxaWI1RG9vOS01RVNyc3FhZXJOTU1R"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFBR05md2VhajM3ODRLbTMxLTl3OXBhVzRUNElhWklIdzNZaFdza1RXWjdxQ0g2RHRvMS1KWkc5OERNTHVCQVp3",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFBR05md2VhajM3ODRLbTMxLTl3OXBhVzRUNElhWklIdzNZaFdza1RXWjdxQ0g2RHRvMS1KWkc5OERNTHVCQVp3"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndjQk5mb2JPV2o1OUlHaDJGRHV3ZHhjQ0lYN0phVk5Ud3pZMERraVNtc29yM1A4Q0l4Zy1aTkRfTXFZZmVkTk1B",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndjQk5mb2JPV2o1OUlHaDJGRHV3ZHhjQ0lYN0phVk5Ud3pZMERraVNtc29yM1A4Q0l4Zy1aTkRfTXFZZmVkTk1B"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFCYlBQc1pibWlwOUl6MjN3X3R5NHNKRG9iLWQ2dENFMXpmM2pva1N6d3BxeWJfWDl0Z19KVVc5OEdiZXJGQk5n",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFCYlBQc1pibWlwOUl6MjN3X3R5NHNKRG9iLWQ2dENFMXpmM2pva1N6d3BxeWJfWDl0Z19KVVc5OEdiZXJGQk5n"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFVQU92c2VibXI1OU5lbjNGLThrZHdBV3RDc0lhcE1HZzNiMTJFbVMyNTQtaUx3V0k4d184TkVyc2pLZk9FV053",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFVQU92c2VibXI1OU5lbjNGLThrZHdBV3RDc0lhcE1HZzNiMTJFbVMyNTQtaUx3V0k4d184TkVyc2pLZk9FV053"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndjSFBQc1hhV183OE5HaDNWbTRsb3NMV3RQLWRmQWNIZ0NLaFdnZ1RtcC1ySEw1VTl4bjhNSkE5c0RNZXVkSFlB",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndjSFBQc1hhV183OE5HaDNWbTRsb3NMV3RQLWRmQWNIZ0NLaFdnZ1RtcC1ySEw1VTl4bjhNSkE5c0RNZXVkSFlB"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFCVWFQaE1PRHo3OUlTcjFRenV3dG9KQ2Q3NUpxUk9UUXVLMW13akd6MGlfaWF1VTRabF9aTVEtY0RPZi1WTVpn",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFCVWFQaE1PRHo3OUlTcjFRenV3dG9KQ2Q3NUpxUk9UUXVLMW13akd6MGlfaWF1VTRabF9aTVEtY0RPZi1WTVpn"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndNRE5hZ2JQMnl0OHRHajFGenB4SWdJV3Qtb0lQSkxHUWphZ0dnalNUc3VyU2F1RHRveDhKSVJxcG5NZi1RV01n",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndNRE5hZ2JQMnl0OHRHajFGenB4SWdJV3Qtb0lQSkxHUWphZ0dnalNUc3VyU2F1RHRveDhKSVJxcG5NZi1RV01n"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFaUVBfMGJPbWl1OVkybTFGM3Bsb2NKQnRHcWRhZEpTVnVKZzIwaVRHMHVxU1R3WFk4M184UWRxNTdLTGU1SE53",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFaUVBfMGJPbWl1OVkybTFGM3Bsb2NKQnRHcWRhZEpTVnVKZzIwaVRHMHVxU1R3WFk4M184UWRxNTdLTGU1SE53"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFJQmJmZ1dOR3VobzlQMjNWNjVsZHhiQzRLdmNxTkpUbDdmMUd3bFEyZ3ZxaTc5WFljOHFwSkg5c2lRS3VGSFp3",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFJQmJmZ1dOR3VobzlQMjNWNjVsZHhiQzRLdmNxTkpUbDdmMUd3bFEyZ3ZxaTc5WFljOHFwSkg5c2lRS3VGSFp3"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFKUU92MU1QRzZwOTRIM2lncS1sdHBkV05QNklLRktFZ3VNMWpwelRqb3FyU2FzRG9vMV9aQVM5cDdLZjdSQk93",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFKUU92MU1QRzZwOTRIM2lncS1sdHBkV05QNklLRktFZ3VNMWpwelRqb3FyU2FzRG9vMV9aQVM5cDdLZjdSQk93"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE5U05mMU1OVDc4OTR5cTJnLS1rb3BhRGRldEl2QlBIZzZCMERzblQyNHVxblNwVzRnMHE1RVgtSjJaZk9NUk5n",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE5U05mMU1OVDc4OTR5cTJnLS1rb3BhRGRldEl2QlBIZzZCMERzblQyNHVxblNwVzRnMHE1RVgtSjJaZk9NUk5n"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndjRFBQSVdQVzMtb29LaWpsQ194NDBBV05QNUphRWJFd3VJMUdnalRXY3JvWEw4Q2QxbF81QVYtNW1kZmJVVFp3",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndjRFBQSVdQVzMtb29LaWpsQ194NDBBV05QNUphRWJFd3VJMUdnalRXY3JvWEw4Q2QxbF81QVYtNW1kZmJVVFp3"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFWVU9QMUlhRHV0ODlPampRaTd4dDBMQnRmM2N2WklHVjNkMHpraUhHaDdfSEwtQ0lveDhaSkdxOG5NZnVkQk53",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFWVU9QMUlhRHV0ODlPampRaTd4dDBMQnRmM2N2WklHVjNkMHpraUhHaDdfSEwtQ0lveDhaSkdxOG5NZnVkQk53"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFWVFA2d2VQRzMtOW9XaTJ3eTZ5OXdMQjRiOWNQSlBTZzdmMTJCM1RHMS0taUtzRFlaaDhNRVQtc0NZZi1kRU5B",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFWVFA2d2VQRzMtOW9XaTJ3eTZ5OXdMQjRiOWNQSlBTZzdmMTJCM1RHMS0taUtzRFlaaDhNRVQtc0NZZi1kRU5B"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndBQU92MUlPbWlvOWRhazNWdTVsWWRhRHRMMkpfZElIMXlPMTI5eFREd3QtaTZ1V0k4OXE1TVFxNW1aS2JVVU1R",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndBQU92MUlPbWlvOWRhazNWdTVsWWRhRHRMMkpfZElIMXlPMTI5eFREd3QtaTZ1V0k4OXE1TVFxNW1aS2JVVU1R"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFJQVB2dE5PR3I1LVllazMxQzV4NHNKRElYNklxY1pUd19mMERsMlRqd3VyQzZ0WFlZMl84WkctWm5OSy1GR1lB",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFJQVB2dE5PR3I1LVllazMxQzV4NHNKRElYNklxY1pUd19mMERsMlRqd3VyQzZ0WFlZMl84WkctWm5OSy1GR1lB"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndVR1B2Z2ZibWFyOGRlaTNWN3F3NGxhWElQOWNxVVpTZ0NCZ20wcVNtMG8teTZxRFk4OThKUWMtOHZPZUxaQU5n",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndVR1B2Z2ZibWFyOGRlaTNWN3F3NGxhWElQOWNxVVpTZ0NCZ20wcVNtMG8teTZxRFk4OThKUWMtOHZPZUxaQU5n"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFJRU9hZ2VOV3I3cFlLZzN3cV9rWThOWDRPcWNhVWVUUUdBMWpwMlNUNThxbmV1WDRkaV9jRWRfNXVmTHVaQ013",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFJRU9hZ2VOV3I3cFlLZzN3cV9rWThOWDRPcWNhVWVUUUdBMWpwMlNUNThxbmV1WDRkaV9jRWRfNXVmTHVaQ013"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndkU09QTWZiVHVxb3RhbmlnMl9sb3BhV29iNkk2RWZTUUNOZ21wMlNUMHZySFd0WG9nM3JaTVItSjZjZi1KTlp3",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndkU09QTWZiVHVxb3RhbmlnMl9sb3BhV29iNkk2RWZTUUNOZ21wMlNUMHZySFd0WG9nM3JaTVItSjZjZi1KTlp3"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE5V2F2dElPbWF2OG9laDJBX3R4WWRiV0lQLUt2SkxHUXlOM200bkdXWWlyQ1dzWEl4Z3JKVWRyTUNhTHJWQU1B",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE5V2F2dElPbWF2OG9laDJBX3R4WWRiV0lQLUt2SkxHUXlOM200bkdXWWlyQ1dzWEl4Z3JKVWRyTUNhTHJWQU1B"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndSVU5LOU5ORDZoLU5ha2lneXh5b3BkQ05fLUtfZERTRm5maFdod1RUc3ByU1g1RGRwbHJaaEdycHljZi1OR013",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndSVU5LOU5ORDZoLU5ha2lneXh5b3BkQ05fLUtfZERTRm5maFdod1RUc3ByU1g1RGRwbHJaaEdycHljZi1OR013"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFKUlBfTk1QVDZ2LUlLcmlRdnB5NDhQWGRmN0o2Wk9UZ0NPMEc0blMyb3VyQzc0RFlZeXI1Y1EtOEdmZUxSRk1B",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFKUlBfTk1QVDZ2LUlLcmlRdnB5NDhQWGRmN0o2Wk9UZ0NPMEc0blMyb3VyQzc0RFlZeXI1Y1EtOEdmZUxSRk1B"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFCYk9mNGRPMno5bzRLbTJ3MjZrZHhkQ05EM0s2TlBUMXlBaHp3blN6d3EteUQ3WHQxbl9aZEE5c21lS2VKRFp3",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFCYk9mNGRPMno5bzRLbTJ3MjZrZHhkQ05EM0s2TlBUMXlBaHp3blN6d3EteUQ3WHQxbl9aZEE5c21lS2VKRFp3"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndNRGJmMUxOV2Y4OG9LbTMxR193b3hkWE5ldkpLWk9TZ19kaFdGeFN6MTdyQ2I2VW9vM3E1Z1ZfWnpMZmVWR05R",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndNRGJmMUxOV2Y4OG9LbTMxR193b3hkWE5ldkpLWk9TZ19kaFdGeFN6MTdyQ2I2VW9vM3E1Z1ZfWnpMZmVWR05R"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndOUk5QbExPRHlzOE5PbTIxSHV3b3RiQnRYOGQ2QkNUZy1KM3pva1Rtd3ZyU0Q2Q1k5aHFzRkUtc3JOTGVkRFlB",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndOUk5QbExPRHlzOE5PbTIxSHV3b3RiQnRYOGQ2QkNUZy1KM3pva1Rtd3ZyU0Q2Q1k5aHFzRkUtc3JOTGVkRFlB"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFFR092MFdiMjc5OVlhajJRaTlrb2dPRE5fN2NhY1pFbG1LMzJod1MyeF9fQy1yV1ljMHE1a2RxOHVlZkxSQ01n",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFFR092MFdiMjc5OVlhajJRaTlrb2dPRE5fN2NhY1pFbG1LMzJod1MyeF9fQy1yV1ljMHE1a2RxOHVlZkxSQ01n"
+  },
+  {
+   "url": "https://www.shmeea.edu.cn/download/20221209/07.pdf",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://www.shmeea.edu.cn/download/20221209/07.pdf"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFCVk5mSVpPajJoOVlDbjFBdXh5bzFiRHRMX0txZENTQUdQMzIxeFNHY3FfQ1QtWFlkaHJaVVgtTUdjZWJWQlp3",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFCVk5mSVpPajJoOVlDbjFBdXh5bzFiRHRMX0txZENTQUdQMzIxeFNHY3FfQ1QtWFlkaHJaVVgtTUdjZWJWQlp3"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndOVlBQb2JhVDc1OVlEd2psX3V5bzRPQzlYX2Rxc1pFZ2lCaDI4bEdEbDdfQ2VyRFlzMy1aTkg5cHZPS2VRV1pn",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndOVlBQb2JhVDc1OVlEd2psX3V5bzRPQzlYX2Rxc1pFZ2lCaDI4bEdEbDdfQ2VyRFlzMy1aTkg5cHZPS2VRV1pn"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndOYmFheElibWVyLUllazFBdnR3OTRNQ2RUNWRfQk9Udy1LMXpweFRqd3RxWENwWFlrOF9aRWMtYzZSZHVaRFlB",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndOYmFheElibWVyLUllazFBdnR3OTRNQ2RUNWRfQk9Udy1LMXpweFRqd3RxWENwWFlrOF9aRWMtYzZSZHVaRFlB"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndjSFBhdEtQVzc4cFlTbmlseXd4SXhjRG9YNGRhc2NIdy1OMDJFZ1Ntc3ZvSFdzWE5zeHJNTkVxOHFhZDdaSE1n",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndjSFBhdEtQVzc4cFlTbmlseXd4SXhjRG9YNGRhc2NIdy1OMDJFZ1Ntc3ZvSFdzWE5zeHJNTkVxOHFhZDdaSE1n"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndjRVBha1hhV2FycDRYMTNWcnRrdG9BQ2RTcUtxc1pFbDdhMURzZ1RtNTRybmV0VTR3OV9jVWMtY2lSZWVaTVpn",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndjRVBha1hhV2FycDRYMTNWcnRrdG9BQ2RTcUtxc1pFbDdhMURzZ1RtNTRybmV0VTR3OV9jVWMtY2lSZWVaTVpn"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE4QmJfMUthV3FncDRhcWlsbnR5dDRNRDlDb0tfRkNHQV9iMFcwaEhtdDVvQ2Y0WDQwel9aUVhxODdPZWVFUU5n",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE4QmJfMUthV3FncDRhcWlsbnR5dDRNRDlDb0tfRkNHQV9iMFcwaEhtdDVvQ2Y0WDQwel9aUVhxODdPZWVFUU5n"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFaVFBhNGJieno3OGRUMzN3M3VsWThNQ29QOUpLUk1Fd19kaEdBclQyc3BfaV8tV0kxbDhKa1Zfc3pLZC1SRk5n",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFaVFBhNGJieno3OGRUMzN3M3VsWThNQ29QOUpLUk1Fd19kaEdBclQyc3BfaV8tV0kxbDhKa1Zfc3pLZC1SRk5n"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFKYlBQSWFQbWo4LVkzeTJWLV94ZDRCWDRXdGRxcElFbDdhMVd0elREdC1fblQ4VzQ4enJaTkFfWnJNS2JKQU1B",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFKYlBQSWFQbWo4LVkzeTJWLV94ZDRCWDRXdGRxcElFbDdhMVd0elREdC1fblQ4VzQ4enJaTkFfWnJNS2JKQU1B"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFaVVA2a2JPajMtLVlhajFWcnFrSVlBQzlYNktfVWJHRm1OMzJzbVQycDgtU0w2RFlobXFKRVFyc3VjS2JFV01n",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFaVVA2a2JPajMtLVlhajFWcnFrSVlBQzlYNktfVWJHRm1OMzJzbVQycDgtU0w2RFlobXFKRVFyc3VjS2JFV01n"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFZQmJ2eE5iMm1xOG9EdzFWNjlrSXdORE5iNUlLUlBFZzJMMUdweFNEd3JvSFhfQ044dzhaY2MtTW5PZHJKSE1B",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFZQmJ2eE5iMm1xOG9EdzFWNjlrSXdORE5iNUlLUlBFZzJMMUdweFNEd3JvSFhfQ044dzhaY2MtTW5PZHJKSE1B"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFBQk9fd2FienVvODRhZzNsRHF4ZDBOWDRUNEs2Tk1Ud3VQMEd4MkhHOTdfQ0g5V04weC1wZ1dyTTNKZU81SE9n",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFBQk9fd2FienVvODRhZzNsRHF4ZDBOWDRUNEs2Tk1Ud3VQMEd4MkhHOTdfQ0g5V04weC1wZ1dyTTNKZU81SE9n"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndjQVBmMGZhV3VoOHRhbDFBLTh4WWtNRHQ2dktxWWNIZ21BMFR3alNEc3ZyQ0xfV29oaHE1VkRyWnllS2JFVU5B",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndjQVBmMGZhV3VoOHRhbDFBLTh4WWtNRHQ2dktxWWNIZ21BMFR3alNEc3ZyQ0xfV29oaHE1VkRyWnllS2JFVU5B"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFCYWJxNGFiam10OElDbDJnLV94dG9LQjlMOWR2WVlFd21QMFR3a0dXc2pfSFg4Q28xbnFKTVZyczNPS3JKQ1lB",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFCYWJxNGFiam10OElDbDJnLV94dG9LQjlMOWR2WVlFd21QMFR3a0dXc2pfSFg4Q28xbnFKTVZyczNPS3JKQ1lB"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndCU2FLd2JORHY1b296Mmp3Mnh5b29LVzlIMks2SWZHZ3JkZ21vbFQyOTdxeWF0VzRzMjhaQkRfNXJMTHVCTlp3",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndCU2FLd2JORHY1b296Mmp3Mnh5b29LVzlIMks2SWZHZ3JkZ21vbFQyOTdxeWF0VzRzMjhaQkRfNXJMTHVCTlp3"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFSYWJmSk1QRzJoOElPbDNRcnF3TnNQVzlfN0l2SkRTVjZJaEc5eFRXd3RybkQ0WEl0bnE4TkdfNTJRZS1NVU1R",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFSYWJmSk1QRzJoOElPbDNRcnF3TnNQVzlfN0l2SkRTVjZJaEc5eFRXd3RybkQ0WEl0bnE4TkdfNTJRZS1NVU1R"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFJSGFheElPMmVnOWRTcjFBeTlsOXdLQzktb2Nhc2ZUbDdhZzI0aFR6b3RxaTdfRDR4bjhjSkRxNXliZk9CQ1l3",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFJSGFheElPMmVnOWRTcjFBeTlsOXdLQzktb2Nhc2ZUbDdhZzI0aFR6b3RxaTdfRDR4bjhjSkRxNXliZk9CQ1l3"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFjR05mbE5PRG42cEllaDJGenVrSXNLV29UNElLZFBUbDdiZ0Rwd0gyd2ktU1g2WFlvOS1aSkVfY21jZTdOR05n",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFjR05mbE5PRG42cEllaDJGenVrSXNLV29UNElLZFBUbDdiZ0Rwd0gyd2ktU1g2WFlvOS1aSkVfY21jZTdOR05n"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFWU09mcElOVG11bzRha2psbnN3SW9QRFlPcUphRWJUZzdiZ20xMlFtOS1vU0d1WFl3MXFwY1VxczNKZWVVVU1B",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFWU09mcElOVG11bzRha2psbnN3SW9QRFlPcUphRWJUZzdiZ20xMlFtOS1vU0d1WFl3MXFwY1VxczNKZWVVVU1B"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE4Qk5hd1hhanFvOG9PaTNnaTZ3NFlCWDlhb2NLb1pFdzdjMUQ0Z1MydDVxbktwV0lobHFzTVZxNXljZmJOQVlR",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE4Qk5hd1hhanFvOG9PaTNnaTZ3NFlCWDlhb2NLb1pFdzdjMUQ0Z1MydDVxbktwV0lobHFzTVZxNXljZmJOQVlR"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndCU1BhNFlORy1yOTREM2lBeTZrWWdKWDRTdmNxY2NUUW5jaFQ1MlNXMHNyQ0Q5Q1l3M3I1SVZfSjNMTGJOQVlR",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndCU1BhNFlORy1yOTREM2lBeTZrWWdKWDRTdmNxY2NUUW5jaFQ1MlNXMHNyQ0Q5Q1l3M3I1SVZfSjNMTGJOQVlR"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndCWE9mTVpQbXotb0l5aDNnenB3NDlaVzlMMklQRktTRnVBMWpseFNUd2pxaUg1V3QxbC1jVkVyY3FZZU9WQ01B",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndCWE9mTVpQbXotb0l5aDNnenB3NDlaVzlMMklQRktTRnVBMWpseFNUd2pxaUg1V3QxbC1jVkVyY3FZZU9WQ01B"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE4RVA2d2VPV21vOVl6dzN3cnR5b1lPRE5iNEpLdENUMTdhZ3pvblNXaDVvSEQ1RFljeF9KWVEtTXlSTHU1Tk1n",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE4RVA2d2VPV21vOVl6dzN3cnR5b1lPRE5iNEpLdENUMTdhZ3pvblNXaDVvSEQ1RFljeF9KWVEtTXlSTHU1Tk1n"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFGUmJfc2VhRHY2cGRlcTIxenVrSXNJWGRfLWNxZE5FbDNkMHp0ekd6NGotU0NyRFlZMXI1bEVxNXZPTExKSE1B",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFGUmJfc2VhRHY2cGRlcTIxenVrSXNJWGRfLWNxZE5FbDNkMHp0ekd6NGotU0NyRFlZMXI1bEVxNXZPTExKSE1B"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFBSE9LNGFORzJ2OWRhcjIxX3R5OWxlQjlhdklfWk1TRnJmZ0QwbkdHd3AtU2VwVTQ1bV9zWVRxOERLTE9VV1p3",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFBSE9LNGFORzJ2OWRhcjIxX3R5OWxlQjlhdklfWk1TRnJmZ0QwbkdHd3AtU2VwVTQ1bV9zWVRxOERLTE9VV1p3"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFSYWJ2Z1hQR2V1ODQyaWpsLTdsNDVjQjRHdktxb2JUMW1OMFc0cVQya2lxM1g4VzlzeDhNTVhfOEROTGVSTllB",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFSYWJ2Z1hQR2V1ODQyaWpsLTdsNDVjQjRHdktxb2JUMW1OMFc0cVQya2lxM1g4VzlzeDhNTVhfOEROTGVSTllB"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndWUmFxeE5hbXo5cDlQM2psMi13OTBBRHRIMko2ZEpFZ3ZZMW1FblNHc3NxaUg4RFlwZy1wUkVyTTNMTHJNVFlR",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndWUmFxeE5hbXo5cDlQM2psMi13OTBBRHRIMko2ZEpFZ3ZZMW1FblNHc3NxaUg4RFlwZy1wUkVyTTNMTHJNVFlR"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFWWGFQcEtOV3lnb29QdzJsbThsOXNORE5iOEt2Qk9FbHZiMFc0aFFtOHRfWENzVTR0bjhaUVYtcy1ZTHVVUVpn",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFWWGFQcEtOV3lnb29QdzJsbThsOXNORE5iOEt2Qk9FbHZiMFc0aFFtOHRfWENzVTR0bjhaUVYtcy1ZTHVVUVpn"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFjR2FQTWVPanFwbzRDcTMxaV9sb29MQnRUM0o2Y1pId0dJMUR3aEhHc29fU0dzVXRveS04SkVxc0RMSy05QllR",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFjR2FQTWVPanFwbzRDcTMxaV9sb29MQnRUM0o2Y1pId0dJMUR3aEhHc29fU0dzVXRveS04SkVxc0RMSy05QllR"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFWYVA2dEtPV2ItOUlTZ2psbTVrdHdMV05INGNmQVlFd0NKM3p3cUdXZDcteUN0VW9aaHJaZ1VyTV9LZjdKQ1lB",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFWYVA2dEtPV2ItOUlTZ2psbTVrdHdMV05INGNmQVlFd0NKM3p3cUdXZDcteUN0VW9aaHJaZ1VyTV9LZjdKQ1lB"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFCUk5QOUthR3FyOEliMWpWRHN4OTBQWFlPcktxSktTUTdmMTJFclR6NS1yaUdwVzlwaV9aQWMtYzNLS2JVUk93",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFCUk5QOUthR3FyOEliMWpWRHN4OTBQWFlPcktxSktTUTdmMTJFclR6NS1yaUdwVzlwaV9aQWMtYzNLS2JVUk93"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFKYmFxc2ZhbTM1OG9HcjJRM3V4b1phV29QNElmQlBIZzNjaFdzclQyb3BySEw4VXRzeC1waEQtTXpOZXJNWE13",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFKYmFxc2ZhbTM1OG9HcjJRM3V4b1phV29QNElmQlBIZzNjaFdzclQyb3BySEw4VXRzeC1waEQtTXpOZXJNWE13"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndVRU9fMVBhV2VxOGRDajJGRzRrdDFlQ2RMLWRfSk9FbG5kMFRsekd6MHBvWFdwRDQwOXI4TVVycHVSZS1SRE5B",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndVRU9fMVBhV2VxOGRDajJGRzRrdDFlQ2RMLWRfSk9FbG5kMFRsekd6MHBvWFdwRDQwOXI4TVVycHVSZS1SRE5B"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFKU09QMUxOVy10OTlhaWp3aXd5bzFaQ29ILUlxQkpHUV9iMWpwd1NtOG9xaWVyV0k0OV9abEFfSm5MZC1ZVE1n",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFKU09QMUxOVy10OTlhaWp3aXd5bzFaQ29ILUlxQkpHUV9iMWpwd1NtOG9xaWVyV0k0OV9abEFfSm5MZC1ZVE1n"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFKVU9LNFhOVHFwcDRIeTJGeTd4OWtQQ1lQN2NxZERId19jZ0RwM0dUd3AtM09wVzRvMXJaWVhxOGlSTGVWR01R",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFKVU9LNFhOVHFwcDRIeTJGeTd4OWtQQ1lQN2NxZERId19jZ0RwM0dUd3AtM09wVzRvMXJaWVhxOGlSTGVWR01R"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndOVk82Z2FPMm45cGRha2oxcXd5b1lKRDlTcWRxdE9HQTZKM2owZ1Nqa3RyWFRfV1kwdy1aSkItYzNKZU9NV01B",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndOVk82Z2FPMm45cGRha2oxcXd5b1lKRDlTcWRxdE9HQTZKM2owZ1Nqa3RyWFRfV1kwdy1aSkItYzNKZU9NV01B"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFjQVBQbFBhbXo5LUlYd2lGbS1sNGtCQjlQNmR2ZE9UVjZOM2prblR6d3UtaWZ3VTRneS1NSVRfWjdKTE80V01B",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFjQVBQbFBhbXo5LUlYd2lGbS1sNGtCQjlQNmR2ZE9UVjZOM2prblR6d3UtaWZ3VTRneS1NSVRfWjdKTE80V01B"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFSYlBfSWZQV2loOFlLaTMxaTV4ZGtQRDlYNWQ2SkxIQS1BMVRzblRUcDQteWFwQ29jMS1jRVhfTW5KS2VFV013",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFSYlBfSWZQV2loOFlLaTMxaTV4ZGtQRDlYNWQ2SkxIQS1BMVRzblRUcDQteWFwQ29jMS1jRVhfTW5KS2VFV013"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndKUWFQa2JhbTM2OU5DcjJ3aTRrSW9JQ2RlcWNhQVlFMXlPaFdFZ0dENGlvQzZxV28xZzhjTVZxWm1kZkxGRk9n",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndKUWFQa2JhbTM2OU5DcjJ3aTRrSW9JQ2RlcWNhQVlFMXlPaFdFZ0dENGlvQzZxV28xZzhjTVZxWm1kZkxGRk9n"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndKVU9hc2ZhbTZ0b0lXcjNGdTZrSTVhQ3RYNUlxWWVIUXlLaEd3bVNUdF8teVQ3VzlvOC01Y2RfYzdPTExJV1lB",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndKVU9hc2ZhbTZ0b0lXcjNGdTZrSTVhQ3RYNUlxWWVIUXlLaEd3bVNUdF8teVQ3VzlvOC01Y2RfYzdPTExJV1lB"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndWV2JfTk5PV3Y2OE5lZzNncnN4SWNOQzlmNmQ2VWJUZ0dCaEdvbFNHeDVyWEt0V3R3ei01Y1hfc2laS2VSTVlR",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndWV2JfTk5PV3Y2OE5lZzNncnN4SWNOQzlmNmQ2VWJUZ0dCaEdvbFNHeDVyWEt0V3R3ei01Y1hfc2laS2VSTVlR"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndNQVBfTWViMnY2OElHcTJsbS1sZDFhQ05MNUpfQWNHUXVOaEdrcUhEMHVyM1h4Q054bS04RVVyTXZLS3VCTU1B",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndNQVBfTWViMnY2OElHcTJsbS1sZDFhQ05MNUpfQWNHUXVOaEdrcUhEMHVyM1h4Q054bS04RVVyTXZLS3VCTU1B"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndkYmJmNFdPejJvOElEeGpsMjd4b3NOQ29YNklmWk9TUUdCMTJBaVNXaF9yQ2VzQ1lzOV84RVMtcHJNTExSRk13",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndkYmJmNFdPejJvOElEeGpsMjd4b3NOQ29YNklmWk9TUUdCMTJBaVNXaF9yQ2VzQ1lzOV84RVMtcHJNTExSRk13"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFKUVBhOGZPRHF1OEliMjNBcTVrdHNKQ2RQNEtxcE5UbHVMMW04blNHMHMteWZ3Q2R3OC1NVVMtOHJMZWVCRVp3",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFKUVBhOGZPRHF1OEliMjNBcTVrdHNKQ2RQNEtxcE5UbHVMMW04blNHMHMteWZ3Q2R3OC1NVVMtOHJMZWVCRVp3"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndKYWFLd1dPR242cDlHbmlGanV5dDVkRGRLckpxQk9FbDZMaHpwM1NtWW9yM1Q5V0k1aS1zRkgtWnpOTE9WRlpn",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndKYWFLd1dPR242cDlHbmlGanV5dDVkRGRLckpxQk9FbDZMaHpwM1NtWW9yM1Q5V0k1aS1zRkgtWnpOTE9WRlpn"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFJQmFmc1phbTZzOHRQdzFRX3VsZDRORE5YNUlhTktTVjZNaDJ3bFRtNHByWFQtVzQ0enI4UkdxOHFmS2VkQk1B",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFJQmFmc1phbTZzOHRQdzFRX3VsZDRORE5YNUlhTktTVjZNaDJ3bFRtNHByWFQtVzQ0enI4UkdxOHFmS2VkQk1B"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFkU2JfMU1hbW45OVkzdzNWdTV3ZDRJQ1lTcklfVVpHbHphaFd3cVEycDVxaUg0RGRobnI4RWNfc3lmTHVOTU5n",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFkU2JfMU1hbW45OVkzdzNWdTV3ZDRJQ1lTcklfVVpHbHphaFd3cVEycDVxaUg0RGRobnI4RWNfc3lmTHVOTU5n"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndCVVA2c2FPenl2cDlmeTNRenF4b29OVzlQNkpxTktHVjNjZ0R4MFFqdDhfU1dxRDQxaHJjSVRyTTZZZWJJWE5n",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndCVVA2c2FPenl2cDlmeTNRenF4b29OVzlQNkpxTktHVjNjZ0R4MFFqdDhfU1dxRDQxaHJjSVRyTTZZZWJJWE5n"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFWYWFmSWRQem42LUkzM2lscThrTm9OWGQ3NWNxSVpHbDZNaFd4eFRUa3ByQzZzV29ZdzhaSkJfcHJPZS1KR1lR",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFWYWFmSWRQem42LUkzM2lscThrTm9OWGQ3NWNxSVpHbDZNaFd4eFRUa3ByQzZzV29ZdzhaSkJfcHJPZS1KR1lR"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE0RWI2OFhQajc4cElLZ2psX3F3TjBLV05YMkphTWZHVnpjaFdna1RXc3JfU1NzWDlnenJaQkRfY3ZMZU9VV05R",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE0RWI2OFhQajc4cElLZ2psX3F3TjBLV05YMkphTWZHVnpjaFdna1RXc3JfU1NzWDlnenJaQkRfY3ZMZU9VV05R"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndjSFB2c1pPRHotbzlhbGp3eTh3WWtBWDk3X0s2dEpHMTdiZ21FaFNtMGpvQzc2WElZeXJaRVI5c0NiZmU1Rk13",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndjSFB2c1pPRHotbzlhbGp3eTh3WWtBWDk3X0s2dEpHMTdiZ21FaFNtMGpvQzc2WElZeXJaRVI5c0NiZmU1Rk13"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndKV1BfMGFQem42b3RTbTFWaV93STRNRG9IOEpmQklIRnpiMDIxMlNHOHVybkw0WHR4bXFNRVJyY19KZi1jWE93",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndKV1BfMGFQem42b3RTbTFWaV93STRNRG9IOEpmQklIRnpiMDIxMlNHOHVybkw0WHR4bXFNRVJyY19KZi1jWE93"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE1V2Fxc2VienI3OVlQMjJ3aTZsNHBkRHRmNUlxZE5IRm1LMEQwaFNtOG9yeVh3V1kwdzhaWkJxWnpOZDdSTVp3",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE1V2Fxc2VienI3OVlQMjJ3aTZsNHBkRHRmNUlxZE5IRm1LMEQwaFNtOG9yeVh3V1kwdzhaWkJxWnpOZDdSTVp3"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFGYk92bExPR183OElQMzNncnF5NFlQRDlDb0pQRkRTUUNCaFQxd0dUNHVxU0g5WDRoaV81a1NfcHFlZWVGQU9n",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFGYk92bExPR183OElQMzNncnF5NFlQRDlDb0pQRkRTUUNCaFQxd0dUNHVxU0g5WDRoaV81a1NfcHFlZWVGQU9n"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE5VlBfNU5QVDZ0OUlHaTNnX3R3NFlBWDRQOUlfZERIVm1NMUcxeEhEcC1yeUg5RG9nd3FKY1ItczJSZmJGR01B",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE5VlBfNU5QVDZ0OUlHaTNnX3R3NFlBWDRQOUlfZERIVm1NMUcxeEhEcC1yeUg5RG9nd3FKY1ItczJSZmJGR01B"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE5U1BfOUxQMi11ODRDcjJGMjdsWVlOQ3Qtc0phRkNFZ2lLMXo0akh6NTdxaWV0V0k4OHFzUVFfSjJlZDdJUU5R",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE5U1BfOUxQMi11ODRDcjJGMjdsWVlOQ3Qtc0phRkNFZ2lLMXo0akh6NTdxaWV0V0k4OHFzUVFfSjJlZDdJUU5R"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFJQmFQSWZOVHI5OTRHajNGenFrWW9CQ2RmOUpxRVpTVjZQaEc4Z1NHZC1yWFR4Q29rOC1wa1dxNTJkZXJOQ01B",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFJQmFQSWZOVHI5OTRHajNGenFrWW9CQ2RmOUpxRVpTVjZQaEc4Z1NHZC1yWFR4Q29rOC1wa1dxNTJkZXJOQ01B"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFFR05Lc2ZhV21zLVl5aWlReV94TmtQWFlPckl2RWVUbDZQMUd3bEgyOHBfblg3Q2Q4eXJaQWQtcy1mZmVSTk5n",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFFR05Lc2ZhV21zLVl5aWlReV94TmtQWFlPckl2RWVUbDZQMUd3bEgyOHBfblg3Q2Q4eXJaQWQtcy1mZmVSTk5n"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFBR092NU1OVDJzcElXbDNGdnR4b2hlVzlIMmNQY2JTZ0RkMHp3aEhEdDRyWGVyV1lzM184RkRfSjNKZWVOTU9n",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFBR092NU1OVDJzcElXbDNGdnR4b2hlVzlIMmNQY2JTZ0RkMHp3aEhEdDRyWGVyV1lzM184RkRfSjNKZWVOTU9n"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndVRWF2bFBPajJvOFlMMTNWRHJsdDBCRFlXdmNhWVpUVnZkMFdGMlRUdC1vQ0gtRDlzMy1KZEU5OC1iTGU4UlpB",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndVRWF2bFBPajJvOFlMMTNWRHJsdDBCRFlXdmNhWVpUVnZkMFdGMlRUdC1vQ0gtRDlzMy1KZEU5OC1iTGU4UlpB"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndRRE5hNU1OV21zODRPbjJRcV93NGNCV3Q3NUphb2VUbDdjaEQwZ1NHaC1vU193VW9rOV9KTVZfNW5NZS1NV013",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndRRE5hNU1OV21zODRPbjJRcV93NGNCV3Q3NUphb2VUbDdjaEQwZ1NHaC1vU193VW9rOV9KTVZfNW5NZS1NV013"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFBQWJ2Z1dhRG44OGRlaTMxNjZsb2dMWE5Tb2RhZE5IQWlMMEQxMkd6dDhySGY4Q05vMHFwa1M5NXZLTExKTU5n",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFBQWJ2Z1dhRG44OGRlaTMxNjZsb2dMWE5Tb2RhZE5IQWlMMEQxMkd6dDhySGY4Q05vMHFwa1M5NXZLTExKTU5n"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndjSFBhZ2JiVDc1bzREd2lGLXdrTnRiWFlMN0lfY2ZIQUNPMW1GM1QyaDRvWFh4RHR4Z3E1a1RxcHFZS2VkTU13",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndjSFBhZ2JiVDc1bzREd2lGLXdrTnRiWFlMN0lfY2ZIQUNPMW1GM1QyaDRvWFh4RHR4Z3E1a1RxcHFZS2VkTU13"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE5VmJhOGZQMjZ1bzREdzFGbTZsNHBhQ3RYNGNxb1lTRjdkMHp3bFNtOGotWFdxRDRkZ19aSWMtWnJNS3JKR1lR",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE5VmJhOGZQMjZ1bzREdzFGbTZsNHBhQ3RYNGNxb1lTRjdkMHp3bFNtOGotWFdxRDRkZ19aSWMtWnJNS3JKR1lR"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFWVE9fOFlOV3F0b0lQMWoxMjV5b1lJWDlXcUl2RVlUUXZiaERralQyWXJxeTc3VTRwaV9zTVQ5c0hKZjdVVU13",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFWVE9fOFlOV3F0b0lQMWoxMjV5b1lJWDlXcUl2RVlUUXZiaERralQyWXJxeTc3VTRwaV9zTVQ5c0hKZjdVVU13"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFVQlB2b1lQbV81OG9HaDJsLTd3WXdLRDlIN2Rxb1pHQXJkMXprblQyY3FxM0Q4VzlwbV9jSVQtSnVjSy1GSE5B",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFVQlB2b1lQbV81OG9HaDJsLTd3WXdLRDlIN2Rxb1pHQXJkMXprblQyY3FxM0Q4VzlwbV9jSVQtSnVjSy1GSE5B"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFKVk9mbEtQRG41OElPazIxX3RrWTBORDliOElhQWJTZzdkMUR4elNtd2pyWFg2Q3RnMS01QWRxcG1kZnU0VVl3",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFKVk9mbEtQRG41OElPazIxX3RrWTBORDliOElhQWJTZzdkMUR4elNtd2pyWFg2Q3RnMS01QWRxcG1kZnU0VVl3"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFKVmF2b2VPRDJ1LVlHazIxeXh3NFlQRHQ3MklhSk9HMTNZMzJna1QyY2pyblQ3WFl4Zy04WWRfOC1jZWU0UVpn",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFKVmF2b2VPRDJ1LVlHazIxeXh3NFlQRHQ3MklhSk9HMTNZMzJna1QyY2pyblQ3WFl4Zy04WWRfOC1jZWU0UVpn"
+  },
+  {
+   "url": "http://www.moe.gov.cn/srcsite/A09/moe_763/202010/W020201013618024624427.xlsx",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: http://www.moe.gov.cn/srcsite/A09/moe_763/202010/W020201013618024624427.xlsx"
+  },
+  {
+   "url": "http://www.moe.gov.cn/srcsite/A09/moe_763/202010/W020201013618024634176.docx",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: http://www.moe.gov.cn/srcsite/A09/moe_763/202010/W020201013618024634176.docx"
+  },
+  {
+   "url": "http://www.moe.gov.cn/srcsite/A09/moe_763/202010/W020201013618024630587.docx",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: http://www.moe.gov.cn/srcsite/A09/moe_763/202010/W020201013618024630587.docx"
+  },
+  {
+   "url": "http://www.moe.gov.cn/srcsite/A09/moe_763/201909/W020190930610945261959.docx",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: http://www.moe.gov.cn/srcsite/A09/moe_763/201909/W020190930610945261959.docx"
+  },
+  {
+   "url": "https://gs.sufe.edu.cn/Home/Detail/6828",
+   "stage": "attachment",
+   "status": "unsupported_mime",
+   "reason": "附件请求返回 text/html（疑似错误页或查看器）"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndSVlBhc2RQR21zcElYeGlRdTVsNFlLV0lHdEpmVktTVnlQMTJGd0hEb3ItU1QtRDk4eV81bERfOGpMZHVaRU1B",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndSVlBhc2RQR21zcElYeGlRdTVsNFlLV0lHdEpmVktTVnlQMTJGd0hEb3ItU1QtRDk4eV81bERfOGpMZHVaRU1B"
+  },
+  {
+   "url": "http://econ.shufe.edu.cn/_upload/article/files/41/24/c5e6e9354806a94b6c449f053b66/153d9e9d-db7d-45b1-957f-1aa55c9a9123.doc",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: http://econ.shufe.edu.cn/_upload/article/files/41/24/c5e6e9354806a94b6c449f053b66/153d9e9d-db7d-45b1-957f-1aa55c9a9123.doc"
+  },
+  {
+   "url": "http://econ.shufe.edu.cn/_upload/article/files/41/24/c5e6e9354806a94b6c449f053b66/ada9f273-2213-42f5-a8b7-8c939a7aadc2.doc",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: http://econ.shufe.edu.cn/_upload/article/files/41/24/c5e6e9354806a94b6c449f053b66/ada9f273-2213-42f5-a8b7-8c939a7aadc2.doc"
+  },
+  {
+   "url": "http://econ.shufe.edu.cn/_upload/article/files/41/24/c5e6e9354806a94b6c449f053b66/c5002450-b0de-4c41-950c-fc2f54603d49.doc",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: http://econ.shufe.edu.cn/_upload/article/files/41/24/c5e6e9354806a94b6c449f053b66/c5002450-b0de-4c41-950c-fc2f54603d49.doc"
+  },
+  {
+   "url": "http://econ.shufe.edu.cn/_upload/article/files/41/24/c5e6e9354806a94b6c449f053b66/8df26e89-ef9e-4c1e-ac1f-ff07cb9611ba.docx",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: http://econ.shufe.edu.cn/_upload/article/files/41/24/c5e6e9354806a94b6c449f053b66/8df26e89-ef9e-4c1e-ac1f-ff07cb9611ba.docx"
+  },
+  {
+   "url": "http://sa.shufe.edu.cn/_upload/article/files/f3/f1/98ef75cb4204ae650e9de6bf3be4/2b3c0051-21e1-42be-bd27-60983a8938f7.doc",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: http://sa.shufe.edu.cn/_upload/article/files/f3/f1/98ef75cb4204ae650e9de6bf3be4/2b3c0051-21e1-42be-bd27-60983a8938f7.doc"
+  },
+  {
+   "url": "http://sa.shufe.edu.cn/_upload/article/files/f3/f1/98ef75cb4204ae650e9de6bf3be4/3edc041b-0b36-46d6-8e48-6d68d3a18be9.docx",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: http://sa.shufe.edu.cn/_upload/article/files/f3/f1/98ef75cb4204ae650e9de6bf3be4/3edc041b-0b36-46d6-8e48-6d68d3a18be9.docx"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFGYWJhOGRhbWYtcElXbGlGaXd4NFlPQ0liMmRfWlBUdzZMZ0RsMlNHNHUtblQtRG9veXJKTkFyc2lRSy1aQ01n",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFGYWJhOGRhbWYtcElXbGlGaXd4NFlPQ0liMmRfWlBUdzZMZ0RsMlNHNHUtblQtRG9veXJKTkFyc2lRSy1aQ01n"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFkUmJhd1hOVDJocE5haWpnaTd4bzBOQ3RhcWRxWklHMTJOMFdBblRUc3JfaVN0V2RwaDhjUWRyY25LZWJSQ01R",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFkUmJhd1hOVDJocE5haWpnaTd4bzBOQ3RhcWRxWklHMTJOMFdBblRUc3JfaVN0V2RwaDhjUWRyY25LZWJSQ01R"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndCVWJfTVdQVzZnODlPaDJ3MjR3SXdOWE5Tb0o2dFBHMW5iMW13clNXOTRvWENzRFk0eC1KWVYtWnpPS2VZVVlR",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndCVWJfTVdQVzZnODlPaDJ3MjR3SXdOWE5Tb0o2dFBHMW5iMW13clNXOTRvWENzRFk0eC1KWVYtWnpPS2VZVVlR"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndBSGJ2eFBQbXF1b0kyazJ3aTlsZHNLQm9iNmRhSVpTUWpjMG00bVRtdF8taVdyV29jMl9KQkE5NXZOS3JKRk13",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndBSGJ2eFBQbXF1b0kyazJ3aTlsZHNLQm9iNmRhSVpTUWpjMG00bVRtdF8taVdyV29jMl9KQkE5NXZOS3JKRk13"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFkU2JxdE1PMnI2OW9lbWpsbXh5bzRPV29TcUtfZExHVm1KMHo0bEgyWXRxaTc3Q29ZeF9wa1M5czNLZU9ZVVp3",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFkU2JxdE1PMnI2OW9lbWpsbXh5bzRPV29TcUtfZExHVm1KMHo0bEgyWXRxaTc3Q29ZeF9wa1M5czNLZU9ZVVp3"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndOUU5ha1dPbXVncFl6MjIxMjZ3TmxhWGRDcWRhY2ZHUTJQMFdCeFRHeDhxeUg4V290Z3JaTVI5c0NmZi1SQVl3",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndOUU5ha1dPbXVncFl6MjIxMjZ3TmxhWGRDcWRhY2ZHUTJQMFdCeFRHeDhxeUg4V290Z3JaTVI5c0NmZi1SQVl3"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFRQU9fa1hhRzZxcFlYeDFReTZ3TnNLRG9iMklfWWJTQS1MMFdoeEhHbDVyQ0w4Q0k5aHJjSkctTXlSZkxWTk13",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFRQU9fa1hhRzZxcFlYeDFReTZ3TnNLRG9iMklfWWJTQS1MMFdoeEhHbDVyQ0w4Q0k5aHJjSkctTXlSZkxWTk13"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndKWGI2Z1dPR212bzR5azNRenNrbzRMRFlLdktfWk5FZzZCMVRzbVFtd3ZxSFN0VTRaZzhNRkJxYzJhS2VNVE5B",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndKWGI2Z1dPR212bzR5azNRenNrbzRMRFlLdktfWk5FZzZCMVRzbVFtd3ZxSFN0VTRaZzhNRkJxYzJhS2VNVE5B"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFCV09md1hiMml2cDlIdzFWcXhsWTBMQzktcko2c2JTQUdPZ3pvcVRXc3RxU1g3WEloZ19aUVI5c3VaSy1BUk1n",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFCV09md1hiMml2cDlIdzFWcXhsWTBMQzktcko2c2JTQUdPZ3pvcVRXc3RxU1g3WEloZ19aUVI5c3VaSy1BUk1n"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE5V09fcEtQR2I1b0lYMzNWbS14dDVjRHRLc2RfVkpTUW1BMUd4MEgyZ2lybkQ5WGR4aS1NRWNfTXZOS2VRUk1B",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE5V09fcEtQR2I1b0lYMzNWbS14dDVjRHRLc2RfVkpTUW1BMUd4MEgyZ2lybkQ5WGR4aS1NRWNfTXZOS2VRUk1B"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndVSE5QeE5hbXlwcGRmMjNnX3BrSWtNQ2RUOWNQY2JTQUhZaEdoMlEyZ29fU2ItRDl4aC01VVVfTUhLZnVZVU93",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndVSE5QeE5hbXlwcGRmMjNnX3BrSWtNQ2RUOWNQY2JTQUhZaEdoMlEyZ29fU2ItRDl4aC01VVVfTUhLZnVZVU93"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndNRFBmb1libXFzLUl6MWpsLTVrSTRBWE43MklmZElHZ3VQZ3o0cVR6a3NxM09xRGQ4eXFKRkItWnFmZmJJVFpn",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndNRFBmb1libXFzLUl6MWpsLTVrSTRBWE43MklmZElHZ3VQZ3o0cVR6a3NxM09xRGQ4eXFKRkItWnFmZmJJVFpn"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndSYk9Ld2FPR183OGRmeGlRaTdrbzRMQzlHcWRxQkNTZ3pmMHpweFNXWXEtbld0Q2RvejhaRkFxNXFmZWU1Rlp3",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndSYk9Ld2FPR183OGRmeGlRaTdrbzRMQzlHcWRxQkNTZ3pmMHpweFNXWXEtbld0Q2RvejhaRkFxNXFmZWU1Rlp3"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndWUmJmd2VPR2lob05UMTNnaTVrSXNORElhb0lmVWJTUUdMMVdrblNHWXRyU1dzQ1lveXI1WWRfWnlkS2JRUVp3",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndWUmJmd2VPR2lob05UMTNnaTVrSXNORElhb0lmVWJTUUdMMVdrblNHWXRyU1dzQ1lveXI1WWRfWnlkS2JRUVp3"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndSYmI2Z1lQV3lnOXRPaTMxbTR3SXdQRG9QOWNxVktTZzJCMFR0eFNta3VyeV94Q04xaS1zWVRyczZmTHJKQVl3",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndSYmI2Z1lQV3lnOXRPaTMxbTR3SXdQRG9QOWNxVktTZzJCMFR0eFNta3VyeV94Q04xaS1zWVRyczZmTHJKQVl3"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFGV2FmNFhPRzZxb3RTbDJsRy1rSWNJRElUOUs2UVlHRnlCM21zaFFtcDVfQ1Q4WDlnMV9KbEhfSjNLZi1WSFp3",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFGV2FmNFhPRzZxb3RTbDJsRy1rSWNJRElUOUs2UVlHRnlCM21zaFFtcDVfQ1Q4WDlnMV9KbEhfSjNLZi1WSFp3"
+  },
+  {
+   "url": "http://www.moe.gov.cn/srcsite/A09/moe_763/201909/W020190930610945256782.xlsx",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: http://www.moe.gov.cn/srcsite/A09/moe_763/201909/W020190930610945256782.xlsx"
+  },
+  {
+   "url": "http://www.moe.gov.cn/srcsite/A09/moe_763/201909/W020190930610945265677.docx",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: http://www.moe.gov.cn/srcsite/A09/moe_763/201909/W020190930610945265677.docx"
+  },
+  {
+   "url": "http://www.moe.gov.cn/srcsite/A09/moe_763/201909/W020190930610945261959.docx",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: http://www.moe.gov.cn/srcsite/A09/moe_763/201909/W020190930610945261959.docx"
+  },
+  {
+   "url": "https://gs.sufe.edu.cn/Home/Detail/6552",
+   "stage": "attachment",
+   "status": "unsupported_mime",
+   "reason": "附件请求返回 text/html（疑似错误页或查看器）"
+  },
+  {
+   "url": "https://gs.sufe.edu.cn/Home/Detail/6307",
+   "stage": "attachment",
+   "status": "unsupported_mime",
+   "reason": "附件请求返回 text/html（疑似错误页或查看器）"
+  },
+  {
+   "url": "https://gs.sufe.edu.cn/Home/Detail/6027",
+   "stage": "attachment",
+   "status": "unsupported_mime",
+   "reason": "附件请求返回 text/html（疑似错误页或查看器）"
+  },
+  {
+   "url": "http://gs.shufe.edu.cn/yanyan/ueditor/server/upload/uploadfiles/2013-01-18-199acf2d7c-3425-49c9-86ff-5ca4cdd766c2.pdf",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: http://gs.shufe.edu.cn/yanyan/ueditor/server/upload/uploadfiles/2013-01-18-199acf2d7c-3425-49c9-86ff-5ca4cdd766c2.pdf"
+  },
+  {
+   "url": "http://iba.shufe.edu.cn/wcm.files/upload/CMSgsgl/201705/201705151102008.doc",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: http://iba.shufe.edu.cn/wcm.files/upload/CMSgsgl/201705/201705151102008.doc"
+  },
+  {
+   "url": "http://iba.shufe.edu.cn/wcm.files/upload/CMSgsgl/201705/201705151102021.doc",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: http://iba.shufe.edu.cn/wcm.files/upload/CMSgsgl/201705/201705151102021.doc"
+  },
+  {
+   "url": "http://iba.shufe.edu.cn/wcm.files/upload/CMSgsgl/201705/201705151100019.doc",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: http://iba.shufe.edu.cn/wcm.files/upload/CMSgsgl/201705/201705151100019.doc"
+  },
+  {
+   "url": "http://iba.shufe.edu.cn/wcm.files/upload/CMSgsgl/201705/201705151100037.doc",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: http://iba.shufe.edu.cn/wcm.files/upload/CMSgsgl/201705/201705151100037.doc"
+  },
+  {
+   "url": "http://iba.shufe.edu.cn/wcm.files/upload/CMSgsgl/201705/201705151100052.docx",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: http://iba.shufe.edu.cn/wcm.files/upload/CMSgsgl/201705/201705151100052.docx"
+  },
+  {
+   "url": "http://econ.shufe.edu.cn/kindeditor-4.1.10/attached/file/20170509/20170509162954_34584.doc",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: http://econ.shufe.edu.cn/kindeditor-4.1.10/attached/file/20170509/20170509162954_34584.doc"
+  },
+  {
+   "url": "http://econ.shufe.edu.cn/kindeditor-4.1.10/attached/file/20170509/20170509163018_39058.doc",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: http://econ.shufe.edu.cn/kindeditor-4.1.10/attached/file/20170509/20170509163018_39058.doc"
+  },
+  {
+   "url": "http://econ.shufe.edu.cn/kindeditor-4.1.10/attached/file/20170509/20170509163030_48800.doc",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: http://econ.shufe.edu.cn/kindeditor-4.1.10/attached/file/20170509/20170509163030_48800.doc"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE0RU9meE5QR2FwOElQeDMxSHBrSWNBQnRMOEt2ZExHQTZQZ0drZ1RHWjdvSFR3Q280OXJaa2RxOHJPZi1kTllB",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE0RU9meE5QR2FwOElQeDMxSHBrSWNBQnRMOEt2ZExHQTZQZ0drZ1RHWjdvSFR3Q280OXJaa2RxOHJPZi1kTllB"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFWWGJhOUlPMmFnb295bjMxdnJ5NGdPRE5hdmRxTVlFZ3VCMFRzZ1QyOHRyQ1g5WEk1aXFzTVFfY3ljS3U1R053",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFWWGJhOUlPMmFnb295bjMxdnJ5NGdPRE5hdmRxTVlFZ3VCMFRzZ1QyOHRyQ1g5WEk1aXFzTVFfY3ljS3U1R053"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFFQmFQSVpOV2lzLVlLa2oxeTV4WXNOWDlfOUlxcERUZzdZZ0RwMkdEc3FyeUN1Q29zM19NWkJfcG1kZnVNWFpn",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFFQmFQSVpOV2lzLVlLa2oxeTV4WXNOWDlfOUlxcERUZzdZZ0RwMkdEc3FyeUN1Q29zM19NWkJfcG1kZnVNWFpn"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndJR2FQTkxOVy10OW9LbGoxSHVsdHRlV29YNmN2Rk1TUURiM21seFNHOHEtaUQ4WElZeDhaUkhfSjNOZnVkR01R",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndJR2FQTkxOVy10OW9LbGoxSHVsdHRlV29YNmN2Rk1TUURiM21seFNHOHEtaUQ4WElZeDhaUkhfSjNOZnVkR01R"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFOVE9mNU5PenlobzlDbjIxcTV5NGNLWDRXb2RxUktUUS1BM21rbUgybDhyeWV1V28weHJKZ1ctSnFlTE9ZWE9n",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFOVE9mNU5PenlobzlDbjIxcTV5NGNLWDRXb2RxUktUUS1BM21rbUgybDhyeWV1V28weHJKZ1ctSnFlTE9ZWE9n"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndOV05LOUxiVzJxcDRHZzJsNjdsNDBBV3RLdmRxVWNTVnlKM200aUdUNTdxbmY3Q05nMHJNSkQ5c0RLZWVVUVlB",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndOV05LOUxiVzJxcDRHZzJsNjdsNDBBV3RLdmRxVWNTVnlKM200aUdUNTdxbmY3Q05nMHJNSkQ5c0RLZWVVUVlB"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndOV05LOUxiVzJxcDRHZzJsNjdsNDBBV3RLdmRxVWNTVnlKM200aUdUNTdxbmY3Q05nMHJNSkQ5c0RLZWVVUVlB",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndOV05LOUxiVzJxcDRHZzJsNjdsNDBBV3RLdmRxVWNTVnlKM200aUdUNTdxbmY3Q05nMHJNSkQ5c0RLZWVVUVlB"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndCU05Qa1pQRHlvb3RUMjJRaTdsWWxiWDlXcUt2VkxTZ3FMMFc1eFMyMTVyeWI1VW94aV9wZ1Ffc19OTE9BWFpn",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndCU05Qa1pQRHlvb3RUMjJRaTdsWWxiWDlXcUt2VkxTZ3FMMFc1eFMyMTVyeWI1VW94aV9wZ1Ffc19OTE9BWFpn"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndSV05Ld1dPVy12OElXbDNsNl9sdHRiQ1lLb0k2ZE9HUTZQM21rblFtOS1xM1Q5VW80eF81Y1hycHZNZC1VVFl3",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndSV05Ld1dPVy12OElXbDNsNl9sdHRiQ1lLb0k2ZE9HUTZQM21rblFtOS1xM1Q5VW80eF81Y1hycHZNZC1VVFl3"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndCU05Qa1pQRHlvb3RUMjJRaTdsWWxiWDlXcUt2VkxTZ3FMMFc1eFMyMTVyeWI1VW94aV9wZ1Ffc19OTE9BWFpn",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndCU05Qa1pQRHlvb3RUMjJRaTdsWWxiWDlXcUt2VkxTZ3FMMFc1eFMyMTVyeWI1VW94aV9wZ1Ffc19OTE9BWFpn"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndCU05Qa1pQRHlvb3RUMjJRaTdsWWxiWDlXcUt2VkxTZ3FMMFc1eFMyMTVyeWI1VW94aV9wZ1Ffc19OTE9BWFpn",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndCU05Qa1pQRHlvb3RUMjJRaTdsWWxiWDlXcUt2VkxTZ3FMMFc1eFMyMTVyeWI1VW94aV9wZ1Ffc19OTE9BWFpn"
+  },
+  {
+   "url": "http://gs.shufe.edu.cn/yanyan/ueditor/server/upload/uploadfiles/2013-01-17-42b83d2da8-463f-478e-a617-e46c4cb2d012.pdf",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: http://gs.shufe.edu.cn/yanyan/ueditor/server/upload/uploadfiles/2013-01-17-42b83d2da8-463f-478e-a617-e46c4cb2d012.pdf"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFOVU9xdExQMjctcEkyaDFBenJ3OTROQm9YM0p2VkxHbHFKaFdzakhtWXZfWEw1RFkxaDhjVkEtTUhMS3JSR1pn",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFOVU9xdExQMjctcEkyaDFBenJ3OTROQm9YM0p2VkxHbHFKaFdzakhtWXZfWEw1RFkxaDhjVkEtTUhMS3JSR1pn"
+  },
+  {
+   "url": "http://gs.shufe.edu.cn/yanyan/ueditor/server/upload/uploadfiles/2013-01-18-54aa2e962c-3b21-496d-8cc9-9c70ec2b0c20.doc",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: http://gs.shufe.edu.cn/yanyan/ueditor/server/upload/uploadfiles/2013-01-18-54aa2e962c-3b21-496d-8cc9-9c70ec2b0c20.doc"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndWYU5QTVpiem10ODlTazMxcnN3ZHNNQnQ3N0o2Y1lHZzJQZ0Q0clNqNHQtbkwtWDR4aS1Ka2Nfc0hPZC01SE13",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndWYU5QTVpiem10ODlTazMxcnN3ZHNNQnQ3N0o2Y1lHZzJQZ0Q0clNqNHQtbkwtWDR4aS1Ka2Nfc0hPZC01SE13"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndCU1BLNFlPRHI4b0lQMjNncXd5OTFiRE5YNmRxVkpHQTZMMVdzbkd6b3ItblQ1V29vM3JKVWRfOF9MZmJWSE5R",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndCU1BLNFlPRHI4b0lQMjNncXd5OTFiRE5YNmRxVkpHQTZMMVdzbkd6b3ItblQ1V29vM3JKVWRfOF9MZmJWSE5R"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFCV09fMGFiV3VwOElieWp3X3JrWXBaQnQtdklLQk9UZzJOaEdwMkhHaDRfSFN0WGRvMl9wTWRyc0RKZmU0UlpB",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFCV09fMGFiV3VwOElieWp3X3JrWXBaQnQtdklLQk9UZzJOaEdwMkhHaDRfSFN0WGRvMl9wTWRyc0RKZmU0UlpB"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndVQWFQTWVPR3I1LVlEMTFGRHVrZHNJRGRMOUtxUkxUZ19jZzJ3bkhHY3NyM1dxWDl4aS1jWVNfcHpLTE9jUk1R",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndVQWFQTWVPR3I1LVlEMTFGRHVrZHNJRGRMOUtxUkxUZ19jZzJ3bkhHY3NyM1dxWDl4aS1jWVNfcHpLTE9jUk1R"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFFR05mOFdQVDc2LWRDbTNBcnJ4WTllRDlHc0p2QlBHQTJBZ3p4elRHWl9xeUt0VTQwOHJKaEVxcDZZZHJFUVl3",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFFR05mOFdQVDc2LWRDbTNBcnJ4WTllRDlHc0p2QlBHQTJBZ3p4elRHWl9xeUt0VTQwOHJKaEVxcDZZZHJFUVl3"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFOYU5mNVBQMmItcDRIM2pWcXd5dDFjQ3RTdEtxZE5TVnlBMERvakdHa3NyWFh3VTlzOHI1QVFyc25OS3U1QVpB",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFOYU5mNVBQMmItcDRIM2pWcXd5dDFjQ3RTdEtxZE5TVnlBMERvakdHa3NyWFh3VTlzOHI1QVFyc25OS3U1QVpB"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFjRGFmb1dQV2Y3LWRIMjMxbXh4dHRhVzlEN0pQVVlFdzJLM21zbVRqd3EtaTZ1Q045Zy1zRVgtTUhOS3JJUVpB",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFjRGFmb1dQV2Y3LWRIMjMxbXh4dHRhVzlEN0pQVVlFdzJLM21zbVRqd3EtaTZ1Q045Zy1zRVgtTUhOS3JJUVpB"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE0R09feExhR2I5cDlieTJBcTZ4Tm9LV0lQMktfZEpIZ0dQMURzaUhqbDdyWEN1Q1lvMnE1UVVxOHpNZUxaRllB",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE0R09feExhR2I5cDlieTJBcTZ4Tm9LV0lQMktfZEpIZ0dQMURzaUhqbDdyWEN1Q1lvMnE1UVVxOHpNZUxaRllB"
+  },
+  {
+   "url": "http://gs.shufe.edu.cn/yanyan/ueditor/server/upload/uploadfiles/2015-06-28-47664a8305-fab6-4624-a317-4b3fd431a319.zip",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: http://gs.shufe.edu.cn/yanyan/ueditor/server/upload/uploadfiles/2015-06-28-47664a8305-fab6-4624-a317-4b3fd431a319.zip"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFGYmF2dFBPenFyLVlQMTIxdTlrb3NLREliN0lmVVlIQW5jMUdzcUcyMHFvSEw0WE4xaHJNRkFfSjZlTGU0VU1R",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFGYmF2dFBPenFyLVlQMTIxdTlrb3NLREliN0lmVVlIQW5jMUdzcUcyMHFvSEw0WE4xaHJNRkFfSjZlTGU0VU1R"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFaV2FQZ2ZPbW1wOVlDaDNsN3NrWWtPV05UX2RxTVlIQXVQZ2oxM0d6NHJyaWVxV0lZOS1aTkctczZlSzdRVVl3",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFaV2FQZ2ZPbW1wOVlDaDNsN3NrWWtPV05UX2RxTVlIQXVQZ2oxM0d6NHJyaWVxV0lZOS1aTkctczZlSzdRVVl3"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFKWGFLbE5iMjc1ODRPa2pRdTZ5NFpjV3RDdklhWWNHZy1LMTJBaUhtNHRyQzc0WDlveC04WkRxczJjS2VCQ093",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFKWGFLbE5iMjc1ODRPa2pRdTZ5NFpjV3RDdklhWWNHZy1LMTJBaUhtNHRyQzc0WDlveC04WkRxczJjS2VCQ093"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndCYk82d2RiMmFvOW9TbGpRcS14NGNKRGRIM2NLc1lHd3FNZ0d0eFNqa29fQ194WGRvMF9KQkI5NXJPS3VSQlpn",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndCYk82d2RiMmFvOW9TbGpRcS14NGNKRGRIM2NLc1lHd3FNZ0d0eFNqa29fQ194WGRvMF9KQkI5NXJPS3VSQlpn"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndCUlBmb2FhanV2OUlDbGlGaTV4SWtJQnRINUpfZFBIUS1PMHpvaUd6MTVxM1NxVzlzM3JNWVVfTUhKTExGRFpB",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndCUlBmb2FhanV2OUlDbGlGaTV4SWtJQnRINUpfZFBIUS1PMHpvaUd6MTVxM1NxVzlzM3JNWVVfTUhKTExGRFpB"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndjRVA2d1dPVzc3LUlieGpWeTl4WXRjQ1lYOGNxY1lTbHJmZzI5d1RteDdyWEQ4VW9nMS1aQkctWnVZZS1RUVlR",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndjRVA2d1dPVzc3LUlieGpWeTl4WXRjQ1lYOGNxY1lTbHJmZzI5d1RteDdyWEQ4VW9nMS1aQkctWnVZZS1RUVlR"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFRR05mMGVibTM5LVl6eTNRdnR3NHhlVzRiM2RhWWJTUXlJMG00Z1RHZDUteWZ4RDRneXJaa1g5OEhPZkxGRlpB",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFRR05mMGVibTM5LVl6eTNRdnR3NHhlVzRiM2RhWWJTUXlJMG00Z1RHZDUteWZ4RDRneXJaa1g5OEhPZkxGRlpB"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE5V09mc1lPR2o3ODRMMTMxdnVsb3hiQjlTdEk2b2NHMTNmM2oxeFF6a29yQ1A0Q28wOHJaWkE5cDJmSy1kQ05B",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE5V09mc1lPR2o3ODRMMTMxdnVsb3hiQjlTdEk2b2NHMTNmM2oxeFF6a29yQ1A0Q28wOHJaWkE5cDJmSy1kQ05B"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFWYk9LNGNPajc3b05hajJndnV4NG9CV3RQOElLQkNTQXlBMzJBbEdXWXNfSGVxRDRZeDhNWkQtSjZSS2VaRk5n",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFWYk9LNGNPajc3b05hajJndnV4NG9CV3RQOElLQkNTQXlBMzJBbEdXWXNfSGVxRDRZeDhNWkQtSjZSS2VaRk5n"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFFRE5mOFlPV3lobzREdzNWLTR3OXhkWDlMM0pLQWVUZ0dQZzJGMEcyc2otU0x4VXQ5ZzhjTVItNW1kS3JWTk1n",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFFRE5mOFlPV3lobzREdzNWLTR3OXhkWDlMM0pLQWVUZ0dQZzJGMEcyc2otU0x4VXQ5ZzhjTVItNW1kS3JWTk1n"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndKVE5md2ZPRzZ0ODlPamoxdnJ3b2dQV29UOUo2Rk1HRnFJaFR0elNXeDdyWFdwV050Z3JaTWQtNXVaZWVSSE9n",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndKVE5md2ZPRzZ0ODlPamoxdnJ3b2dQV29UOUo2Rk1HRnFJaFR0elNXeDdyWFdwV050Z3JaTWQtNXVaZWVSSE9n"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndjSE9LaE5iajZxOTlhaGlsR3h4TndBQ2RUM2Rxb2JHQURkMW1CeFMybF9yeUxfWGRwbXFNWWNxWjZlTE81Rk9n",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndjSE9LaE5iajZxOTlhaGlsR3h4TndBQ2RUM2Rxb2JHQURkMW1CeFMybF9yeUxfWGRwbXFNWWNxWjZlTE81Rk9n"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndRQmI2Z1lPMnI2LWRieDJsNjlsWWNPWDRQX0s2SVpIZ0RZZzI0bVR6NHNfQ0Q3VTR3OV84VVZfODNPSy1GRE53",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndRQmI2Z1lPMnI2LWRieDJsNjlsWWNPWDRQX0s2SVpIZ0RZZzI0bVR6NHNfQ0Q3VTR3OV84VVZfODNPSy1GRE53"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFJRGFQdE1hV210OUlLcTJGdnJ3OWtPQm9MNUlLVVpUUTJPMVdoM0cyeC1fWFA3WDQwMl9NWkQ5c3lSTHVKRFlB",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFJRGFQdE1hV210OUlLcTJGdnJ3OWtPQm9MNUlLVVpUUTJPMVdoM0cyeC1fWFA3WDQwMl9NWkQ5c3lSTHVKRFlB"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFRQVBfTk5PVzctOU5hbDJWR3h4ZDRLQ3RmNkl2VkpUUV9hZ2owcUh6c2pvSFdzVzQ4ei04UWNxOGliZnVGRU5R",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFRQVBfTk5PVzctOU5hbDJWR3h4ZDRLQ3RmNkl2VkpUUV9hZ2owcUh6c2pvSFdzVzQ4ei04UWNxOGliZnVGRU5R"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE1WE9QNGFQbXVvOTlDaGlWcnBrWTBPRElXdGRhWklIdzZLMFdwMlQya3ZfSEQ4VTRZMF9zVkctc3ZNZTdKQk53",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE1WE9QNGFQbXVvOTlDaGlWcnBrWTBPRElXdGRhWklIdzZLMFdwMlQya3ZfSEQ4VTRZMF9zVkctc3ZNZTdKQk53"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFCU1Bmb1hQVHloOE5QeWlGcTd4WXRkRE43N0txb2JUd25ZM2pvakdUeDVvSFg5V2R3MXJKZ1FfOHZKZnVWSFpB",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFCU1Bmb1hQVHloOE5QeWlGcTd4WXRkRE43N0txb2JUd25ZM2pvakdUeDVvSFg5V2R3MXJKZ1FfOHZKZnVWSFpB"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE5VmJxOFphR2o4bzQyaWlWMl9sNGNLRE5UX2RhWkRUd3JZMXpwMFN6NTVyblA4WElveHFwTkVySjJmSy05SFp3",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE5VmJxOFphR2o4bzQyaWlWMl9sNGNLRE5UX2RhWkRUd3JZMXpwMFN6NTVyblA4WElveHFwTkVySjJmSy05SFp3"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFCV09Qb2FQRzJ1b05TaTJWN3NrbzllQzlQOUs2c2ZUVm5kMVc4ckhHZ3ByaUg2V1lzMjhKUkJyWnFaTHJaRU9n",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFCV09Qb2FQRzJ1b05TaTJWN3NrbzllQzlQOUs2c2ZUVm5kMVc4ckhHZ3ByaUg2V1lzMjhKUkJyWnFaTHJaRU9n"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFJQU9ha2NPanVvOXRlaWlWanF4dGtCWE5UNElLdE9TVnVOaFc4aFRHOGlvU1A3WGR0Z3FzRVZfSnFhZU9jUlpn",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFJQU9ha2NPanVvOXRlaWlWanF4dGtCWE5UNElLdE9TVnVOaFc4aFRHOGlvU1A3WGR0Z3FzRVZfSnFhZU9jUlpn"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndjSGJha2ZiVzJvOG95aDN3eTR3NG9LQ1lIOUpQSkxUZ25jMUR3a1F6NTVxM1Q0V29abnE4RWRxc25LTHVkQU5B",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndjSGJha2ZiVzJvOG95aDN3eTR3NG9LQ1lIOUpQSkxUZ25jMUR3a1F6NTVxM1Q0V29abnE4RWRxc25LTHVkQU5B"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFKUk9QSWRiMm42b05laGpWNjR3dHdCWFlhdklLRk9TRnVPMUcxeEh6NHByeVQ5RFk1Z3I1WkQ5OHVhZWVVVE1B",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFKUk9QSWRiMm42b05laGpWNjR3dHdCWFlhdklLRk9TRnVPMUcxeEh6NHByeVQ5RFk1Z3I1WkQ5OHVhZWVVVE1B"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndSV2I2NUlPR3F1cGRHbjFRdV94TnBlVzRHb0l2ZEpTRjdmZ3pra1NXY3BySFdxQ0ljdy1aZ1Zyc21kZS1NUU1B",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndSV2I2NUlPR3F1cGRHbjFRdV94TnBlVzRHb0l2ZEpTRjdmZ3pra1NXY3BySFdxQ0ljdy1aZ1Zyc21kZS1NUU1B"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndSYVBLa2NQR2Y5b0l6MTN3LTVsWWdPQjk2b0pLVkRFbHpmMURvaFRqeDVfSGY4RDQ1aXE1a1RxczNKS3VGTk5R",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndSYVBLa2NQR2Y5b0l6MTN3LTVsWWdPQjk2b0pLVkRFbHpmMURvaFRqeDVfSGY4RDQ1aXE1a1RxczNKS3VGTk5R"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFaUVBQcFBOR3F1cDlhZzNBeTdsb2RlQzlHb0tfSkNIRm5ZZ0drbEhtcDhxM1B3VW81aHJNUVRfNXlSZU9NUlpn",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFaUVBQcFBOR3F1cDlhZzNBeTdsb2RlQzlHb0tfSkNIRm5ZZ0drbEhtcDhxM1B3VW81aHJNUVRfNXlSZU9NUlpn"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndVQlA2Z2NiVy1wbzRTbTNWanBrb2hlV29hc2RhZE1TQUdJMUdFbkgydDQtblAtQ045bV84SVRyYzNKTHU1TVl3",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndVQlA2Z2NiVy1wbzRTbTNWanBrb2hlV29hc2RhZE1TQUdJMUdFbkgydDQtblAtQ045bV84SVRyYzNKTHU1TVl3"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE0QmJxd2FibXFoOW8yaWlsMjl4NHNQRG9XcktxdExHZ3pjZ21vclRtZDhyeUw4RDRvMXJKZEgtOC1mS3VORVp3",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE0QmJxd2FibXFoOW8yaWlsMjl4NHNQRG9XcktxdExHZ3pjZ21vclRtZDhyeUw4RDRvMXJKZEgtOC1mS3VORVp3"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFKV1BxNFhhV2lzcFlDbmp3cS1sWXBhV05MM0s2UVpFd2lKMGp3a1REa2pvSFQ4RG93ODhaRVMtTUdjTGVWSFlR",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFKV1BxNFhhV2lzcFlDbmp3cS1sWXBhV05MM0s2UVpFd2lKMGp3a1REa2pvSFQ4RG93ODhaRVMtTUdjTGVWSFlR"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndBRE5hZ2ViMjc3OXRmMjFGRzd4NGRhRFlYNklLdElTQTJJMFRrblFqNTRxQ0QtVXRzeThjUkFfTUdjS3U4UU13",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndBRE5hZ2ViMjc3OXRmMjFGRzd4NGRhRFlYNklLdElTQTJJMFRrblFqNTRxQ0QtVXRzeThjUkFfTUdjS3U4UU13"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndjR1Bxd1dQbXFxOFlUMjFWNjV3b1lQRE5UM0pxSktFZzNkMXpzbUhHa2pvWGY0Q3RobS1aVVctY21aZDdWTk1B",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndjR1Bxd1dQbXFxOFlUMjFWNjV3b1lQRE5UM0pxSktFZzNkMXpzbUhHa2pvWGY0Q3RobS1aVVctY21aZDdWTk1B"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFCU09hOUtQV2VwcE5iMmpsX3J3dDRJWElYNEphb2ZUZ2lKZzJ4M1RtcC1fblg2VzR0aThaQVFfOG1SZWVVUll3",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFCU09hOUtQV2VwcE5iMmpsX3J3dDRJWElYNEphb2ZUZ2lKZzJ4M1RtcC1fblg2VzR0aThaQVFfOG1SZWVVUll3"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndBQVBLZ1dhRHlzOU5UM2lsanF4NGRiQnRfOGNLQklHd0NLMTJ0M1FtMThfaVg2WFkwenJNRVJyc3JOZmVWTlp3",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndBQVBLZ1dhRHlzOU5UM2lsanF4NGRiQnRfOGNLQklHd0NLMTJ0M1FtMThfaVg2WFkwenJNRVJyc3JOZmVWTlp3"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFKYlB2MFphanY2OUlMMjNRcnJ3bzhBWFlHdEpxSkRHVnFKMzJ0MEdXd3RfU184RDRrMXFNWkQtWm1RZWJNWE5n",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFKYlB2MFphanY2OUlMMjNRcnJ3bzhBWFlHdEpxSkRHVnFKMzJ0MEdXd3RfU184RDRrMXFNWkQtWm1RZWJNWE5n"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndSWFA2OGNPRzJvcElXajMxRzlrWXdLRFlhdEtxQVpIQUNCaFQ0Z1NtdC1yU0Q1VW9jMV9KTVZxY0dSTGJOQ05R",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndSWFA2OGNPRzJvcElXajMxRzlrWXdLRFlhdEtxQVpIQUNCaFQ0Z1NtdC1yU0Q1VW9jMV9KTVZxY0dSTGJOQ05R"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndCWGFxZ1piejZnLWRlcTNsMl94NGNPRElMN2N2VWJHMXlOaDI5elRHb3BvSFN0V1k0eS01VVItc3ViZHVWQ09n",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndCWGFxZ1piejZnLWRlcTNsMl94NGNPRElMN2N2VWJHMXlOaDI5elRHb3BvSFN0V1k0eS01VVItc3ViZHVWQ09n"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFZSGJxOFliMnlycFlLcjFBaV94SXdPWGREN2RfWklFZy1NMURselQyOThxbkQ0V0kxbF9NVVctY3pLZC1RVE53",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFZSGJxOFliMnlycFlLcjFBaV94SXdPWGREN2RfWklFZy1NMURselQyOThxbkQ0V0kxbF9NVVctY3pLZC1RVE53"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndRRWFhdElQMmI4cDlEM2p3LTh3NGhhQm9UOWRxSk1TRnJiZ21ra1N6NTRxQ0Q5VW9jMF9zWkEtY21jZkxWR01R",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndRRWFhdElQMmI4cDlEM2p3LTh3NGhhQm9UOWRxSk1TRnJiZ21ra1N6NTRxQ0Q5VW9jMF9zWkEtY21jZkxWR01R"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFZQk9Qc2ZiejJvcE5ieDNWaTZsZDBCREliNkpmRWZUZy1JZzJCM1QyOS1ybld1V2RnOC1wZ1FfY2lZZi04VFpn",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFZQk9Qc2ZiejJvcE5ieDNWaTZsZDBCREliNkpmRWZUZy1JZzJCM1QyOS1ybld1V2RnOC1wZ1FfY2lZZi04VFpn"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFGU2JfSWFQajZncE5UMWlGdnRsWWRiV0lINkpLWlBUd0RZMVd3blF6b2pyQ2JfRG9oaDhaVVVyTWlkZU9RV1pB",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFGU2JfSWFQajZncE5UMWlGdnRsWWRiV0lINkpLWlBUd0RZMVd3blF6b2pyQ2JfRG9oaDhaVVVyTWlkZU9RV1pB"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndRR09mMU5hRzZ1cElIeDMxenB5dHNPWGRXc0txTk1TVnFMMG0xMlRHd3Rybkw4RHRzMnJKY1EtWm1RZnVkTVlR",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndRR09mMU5hRzZ1cElIeDMxenB5dHNPWGRXc0txTk1TVnFMMG0xMlRHd3Rybkw4RHRzMnJKY1EtWm1RZnVkTVlR"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFjQU82a1hiMnVxLVlIMjJ3cTV5NDBPQm9LdElmZFBHQUdQZ20walNUNHBfU09wRFlzMjhjVVgtOHpMSzdaRU5n",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFjQU82a1hiMnVxLVlIMjJ3cTV5NDBPQm9LdElmZFBHQUdQZ20walNUNHBfU09wRFlzMjhjVVgtOHpMSzdaRU5n"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndWYVBQb2JhR21nb29DajFGSHRrb2dKWGRIN0lhRkNTZ2lLaHp4d0d6NGktU0w2RDQ0MS01TVY5cy1kZk9jV1lB",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndWYVBQb2JhR21nb29DajFGSHRrb2dKWGRIN0lhRkNTZ2lLaHp4d0d6NGktU0w2RDQ0MS01TVY5cy1kZk9jV1lB"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFkV09maEtPR3o2cFlXZ2oxQzd3dDVjWE5MLWRhcExHbHFBMVdnaFMycF8tU0RfV29neC1aSkc5cy1RZi1kTllB",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFkV09maEtPR3o2cFlXZ2oxQzd3dDVjWE5MLWRhcExHbHFBMVdnaFMycF8tU0RfV29neC1aSkc5cy1RZi1kTllB"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFGVlB2NUtORHVwLU5IeDFGeTR3TndMREliM0lmQkxUMTdmMzJ3clN6c3ZyQ2YtRDk5bHJNRVRxWjdNSy05RE5B",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFGVlB2NUtORHVwLU5IeDFGeTR3TndMREliM0lmQkxUMTdmMzJ3clN6c3ZyQ2YtRDk5bHJNRVRxWjdNSy05RE5B"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE5YWFmdE1iV2FoOElTbjFWNl95bzRBQ3RHc0lfVVlIVm1BMW1nbFQyWjQtM1Q3WDRwaV9NWkFxYzJZZU9GRE1n",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE5YWFmdE1iV2FoOElTbjFWNl95bzRBQ3RHc0lfVVlIVm1BMW1nbFQyWjQtM1Q3WDRwaV9NWkFxYzJZZU9GRE1n"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndjQlBhZ2JQbW1zOVlIM2lsNndrZHdMRE4tdEo2c2NFZ3FMaFc4aVQya28taWFyV29rMHJNRVYtNTdKZjdaTVlB",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndjQlBhZ2JQbW1zOVlIM2lsNndrZHdMRE4tdEo2c2NFZ3FMaFc4aVQya28taWFyV29rMHJNRVYtNTdKZjdaTVlB"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFWVE5mc1pOVzM3OW9Pa2lnM3B4b2RiRDRhdGN2RWVUZ3pZMUdGM0dEa3YtblA4Q04weS04TkdySjNLZkxGSE1R",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFWVE5mc1pOVzM3OW9Pa2lnM3B4b2RiRDRhdGN2RWVUZ3pZMUdGM0dEa3YtblA4Q04weS04TkdySjNLZkxGSE1R"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndOUVBmOFpiVHI2ODREdzFRMjR3NGtCRDlLcktfZERTVm1KMDJzakcyeDhvQ0w1RG8wMl9wbEQtcDZkZkxKQ05n",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndOUVBmOFpiVHI2ODREdzFRMjR3NGtCRDlLcktfZERTVm1KMDJzakcyeDhvQ0w1RG8wMl9wbEQtcDZkZkxKQ05n"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndCVmFQNGJQMjZvOWRTZ2lWcTR5bzVhQ3RXb2N2WWVHMXlOMUdBalRUMThxU0dyVTlvMnJaRVVycDZjTE81QllB",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndCVmFQNGJQMjZvOWRTZ2lWcTR5bzVhQ3RXb2N2WWVHMXlOMUdBalRUMThxU0dyVTlvMnJaRVVycDZjTE81QllB"
+  },
+  {
+   "url": "http://gs.shufe.edu.cn/yanyan/ueditor/server/upload/uploadfiles/2013-01-14-027d44af08-929f-4fd3-adc1-1a403acec3e2.xls",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: http://gs.shufe.edu.cn/yanyan/ueditor/server/upload/uploadfiles/2013-01-14-027d44af08-929f-4fd3-adc1-1a403acec3e2.xls"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndCVk9fOGFORHVob0lhZ2pRMjZ3NGNBQm9PdGRmVkxUbDZCMUdrblNHOG9fWEtzWGRoaF84UWNfNXJKS2VSQU53",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndCVk9fOGFORHVob0lhZ2pRMjZ3NGNBQm9PdGRmVkxUbDZCMUdrblNHOG9fWEtzWGRoaF84UWNfNXJKS2VSQU53"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndkWE9mOGZPbWYtOGRIMTMxR3drSVphQ0lYX0o2RVpHUW5jMW1vaVNteDVxQzZ1VW81bS04RVdfTTdLZmJGRU9n",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndkWE9mOGZPbWYtOGRIMTMxR3drSVphQ0lYX0o2RVpHUW5jMW1vaVNteDVxQzZ1VW81bS04RVdfTTdLZmJGRU9n"
+  },
+  {
+   "url": "https://gs.sufe.edu.cn/Home/Detail/7094",
+   "stage": "attachment",
+   "status": "unsupported_mime",
+   "reason": "附件请求返回 text/html（疑似错误页或查看器）"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFSWGJ2dE1QV2VycEkzMTJsbnB3ZGtOV0lIX0lhZEtFd19iaERzbVNXY3ZyeWY2Q0loZ19jRkQ5ODdKZmJZWFpB",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFSWGJ2dE1QV2VycEkzMTJsbnB3ZGtOV0lIX0lhZEtFd19iaERzbVNXY3ZyeWY2Q0loZ19jRkQ5ODdKZmJZWFpB"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFSVk9LOUlhR243cDRHZzNWcTR3STFlRDlYNUtxQWNHUXVLMVcxM1Rqd3ZfaUg1WHRzOF9KQkdyc0dmZXVFV1l3",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFSVk9LOUlhR243cDRHZzNWcTR3STFlRDlYNUtxQWNHUXVLMVcxM1Rqd3ZfaUg1WHRzOF9KQkdyc0dmZXVFV1l3"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE5VmJ2NUliMno4cDRiM2lsdTdsb2dMQ1lIMkp2VWZTUXFKZ0dnaVN6MHYtU0g3Vzl4aHFwRkU5c2pPZnVJV013",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE5VmJ2NUliMno4cDRiM2lsdTdsb2dMQ1lIMkp2VWZTUXFKZ0dnaVN6MHYtU0g3Vzl4aHFwRkU5c2pPZnVJV013"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFNRWJmTWNQajZxOG95aGlBeXhsdDBKRHRUOWRhdERUMTdjMTJnaUdHMV8tUzc4VW85bi1wSkdxYzZlZkxWTVpn",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFNRWJmTWNQajZxOG95aGlBeXhsdDBKRHRUOWRhdERUMTdjMTJnaUdHMV8tUzc4VW85bi1wSkdxYzZlZkxWTVpn"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFCV05ma1pQbWFzOU5TbjFWcTl3OTFjV3RfOEk2Y2ZIVjdiM21zZ0dUb3FxbkNwWDk4MnJaZEFyTXlRZDdSSFl3",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFCV05ma1pQbWFzOU5TbjFWcTl3OTFjV3RfOEk2Y2ZIVjdiM21zZ0dUb3FxbkNwWDk4MnJaZEFyTXlRZDdSSFl3"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFFQmFmSkthRzJwcElXcTIxN3JsdDVhQ1lPdElhQk1UUXlCMGpzbEdHZDUtM2Y5V0ljejhaRWMtTUNaZkxSR05B",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFFQmFmSkthRzJwcElXcTIxN3JsdDVhQ1lPdElhQk1UUXlCMGpzbEdHZDUtM2Y5V0ljejhaRWMtTUNaZkxSR05B"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFKVWJ2Z1hPVHV2OFlDcTNBLTZ4WXRhV29INElhVWJFZzJJaEQ1M0d6b3AtaUg2WElaaC1zSVNfSnFaZWU1Rk53",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFKVWJ2Z1hPVHV2OFlDcTNBLTZ4WXRhV29INElhVWJFZzJJaEQ1M0d6b3AtaUg2WElaaC1zSVNfSnFaZWU1Rk53"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFSVk9LOUlhR243cDRHZzNWcTR3STFlRDlYNUtxQWNHUXVLMVcxM1Rqd3ZfaUg1WHRzOF9KQkdyc0dmZXVFV1l3",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFSVk9LOUlhR243cDRHZzNWcTR3STFlRDlYNUtxQWNHUXVLMVcxM1Rqd3ZfaUg1WHRzOF9KQkdyc0dmZXVFV1l3"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFSVk9LOUlhR243cDRHZzNWcTR3STFlRDlYNUtxQWNHUXVLMVcxM1Rqd3ZfaUg1WHRzOF9KQkdyc0dmZXVFV1l3",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFSVk9LOUlhR243cDRHZzNWcTR3STFlRDlYNUtxQWNHUXVLMVcxM1Rqd3ZfaUg1WHRzOF9KQkdyc0dmZXVFV1l3"
+  },
+  {
+   "url": "https://www.csc.edu.cn/attached/file/20180712/20180712145318_7824.pdf",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://www.csc.edu.cn/attached/file/20180712/20180712145318_7824.pdf"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndCWFBxNGJhRG41OGRlajFRenN4b1lBRGRiOElmQkxTZ21PaHpzaVNHWXEteVA4Q0ljODhKRkJxNTdKZnVkSE13",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndCWFBxNGJhRG41OGRlajFRenN4b1lBRGRiOElmQkxTZ21PaHpzaVNHWXEteVA4Q0ljODhKRkJxNTdKZnVkSE13"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndKUlB2b1pQRy11b29meTNnenNrSXBaRGRQNkpxSk1IbHpmMFdBalRHZ3JyaS1wRGRvM19aRkdfOHZKZXVZV09n",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndKUlB2b1pQRy11b29meTNnenNrSXBaRGRQNkpxSk1IbHpmMFdBalRHZ3JyaS1wRGRvM19aRkdfOHZKZXVZV09n"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFSVk9LOUlhR243cDRHZzNWcTR3STFlRDlYNUtxQWNHUXVLMVcxM1Rqd3ZfaUg1WHRzOF9KQkdyc0dmZXVFV1l3",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFSVk9LOUlhR243cDRHZzNWcTR3STFlRDlYNUtxQWNHUXVLMVcxM1Rqd3ZfaUg1WHRzOF9KQkdyc0dmZXVFV1l3"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFSVk9LOUlhR243cDRHZzNWcTR3STFlRDlYNUtxQWNHUXVLMVcxM1Rqd3ZfaUg1WHRzOF9KQkdyc0dmZXVFV1l3",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFSVk9LOUlhR243cDRHZzNWcTR3STFlRDlYNUtxQWNHUXVLMVcxM1Rqd3ZfaUg1WHRzOF9KQkdyc0dmZXVFV1l3"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFSVk9LOUlhR243cDRHZzNWcTR3STFlRDlYNUtxQWNHUXVLMVcxM1Rqd3ZfaUg1WHRzOF9KQkdyc0dmZXVFV1l3",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFSVk9LOUlhR243cDRHZzNWcTR3STFlRDlYNUtxQWNHUXVLMVcxM1Rqd3ZfaUg1WHRzOF9KQkdyc0dmZXVFV1l3"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFCVk9Qc1pPVy1xcDlIMWoxcV9rWThNQ1lQOElxRk9HZy1BMFc5M0dUd3BfSFRfRDRZMnFKRVVfcy1iSzdJV01B",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFCVk9Qc1pPVy1xcDlIMWoxcV9rWThNQ1lQOElxRk9HZy1BMFc5M0dUd3BfSFRfRDRZMnFKRVVfcy1iSzdJV01B"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE0R1BfZ1dQMnF1LVl5ZzIxLTdrb2tLV3RhcWQ2SkNFd19ZZ21vaEdXa3FxWEt1RFljMV9jSWMtTW1ZTHJWSE5n",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjE0R1BfZ1dQMnF1LVl5ZzIxLTdrb2tLV3RhcWQ2SkNFd19ZZ21vaEdXa3FxWEt1RFljMV9jSWMtTW1ZTHJWSE5n"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFSVk9LOUlhR243cDRHZzNWcTR3STFlRDlYNUtxQWNHUXVLMVcxM1Rqd3ZfaUg1WHRzOF9KQkdyc0dmZXVFV1l3",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFSVk9LOUlhR243cDRHZzNWcTR3STFlRDlYNUtxQWNHUXVLMVcxM1Rqd3ZfaUg1WHRzOF9KQkdyc0dmZXVFV1l3"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFCUWJ2SWFhVHVnOVlHbGp3dnFsNGtBRDRMM0lhVk1IQXVKMUQ0blNEa2lvU183RFk0enFNWkdxc21hZS1aRU1R",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYjFCUWJ2SWFhVHVnOVlHbGp3dnFsNGtBRDRMM0lhVk1IQXVKMUQ0blNEa2lvU183RFk0enFNWkdxc21hZS1aRU1R"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndOVGFmNUthRzc2OG8ybjIxcnF4b3NJRG9IN0k2dEpIdy1KaEc1M0hqc3JyaVdxV3RobXI1a1FyczZkSy1OQ05B",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndOVGFmNUthRzc2OG8ybjIxcnF4b3NJRG9IN0k2dEpIdy1KaEc1M0hqc3JyaVdxV3RobXI1a1FyczZkSy1OQ05B"
+  },
+  {
+   "url": "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndOVGFmNUthRzc2OG8ybjIxcnF4b3NJRG9IN0k2dEpIdy1KaEc1M0hqc3JyaVdxV3RobXI1a1FyczZkSy1OQ05B",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://ssd.sufe.edu.cn/index.php?mod=pdf&path=a2YtcUltMGNqYnBPYndOVGFmNUthRzc2OG8ybjIxcnF4b3NJRG9IN0k2dEpIdy1KaEc1M0hqc3JyaVdxV3RobXI1a1FyczZkSy1OQ05B"
+  }
+ ],
+ "notes": []
+}

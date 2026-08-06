@@ -1,0 +1,158 @@
+{
+ "host": "gs.sufe.edu.cn",
+ "started_at": "2026-08-01T14:00:29+00:00",
+ "categories_found": 8,
+ "list_pages_fetched": 0,
+ "categories_requires_adapter": 0,
+ "articles_found": 137,
+ "articles_downloaded": 137,
+ "attachments_found": 284,
+ "attachments_downloaded": 246,
+ "attachments_parsed": 244,
+ "scanned_pdfs": 2,
+ "legacy_docs_unparsed": 0,
+ "incomplete_documents": 0,
+ "low_quality_documents": 0,
+ "sensitive_quarantined": 4,
+ "duplicate_attachments": 12,
+ "new_documents": 202,
+ "updated_documents": 137,
+ "unchanged_documents": 38,
+ "not_seen_documents": 0,
+ "final_indexed": 377,
+ "failures": [
+  {
+   "url": "https://www.shmeea.edu.cn/download/20221209/07.pdf",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://www.shmeea.edu.cn/download/20221209/07.pdf"
+  },
+  {
+   "url": "http://www.moe.gov.cn/srcsite/A09/moe_763/202010/W020201013618024624427.xlsx",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: http://www.moe.gov.cn/srcsite/A09/moe_763/202010/W020201013618024624427.xlsx"
+  },
+  {
+   "url": "http://www.moe.gov.cn/srcsite/A09/moe_763/202010/W020201013618024634176.docx",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: http://www.moe.gov.cn/srcsite/A09/moe_763/202010/W020201013618024634176.docx"
+  },
+  {
+   "url": "http://www.moe.gov.cn/srcsite/A09/moe_763/202010/W020201013618024630587.docx",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: http://www.moe.gov.cn/srcsite/A09/moe_763/202010/W020201013618024630587.docx"
+  },
+  {
+   "url": "http://www.moe.gov.cn/srcsite/A09/moe_763/201909/W020190930610945261959.docx",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: http://www.moe.gov.cn/srcsite/A09/moe_763/201909/W020190930610945261959.docx"
+  },
+  {
+   "url": "http://econ.shufe.edu.cn/_upload/article/files/41/24/c5e6e9354806a94b6c449f053b66/153d9e9d-db7d-45b1-957f-1aa55c9a9123.doc",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: http://econ.shufe.edu.cn/_upload/article/files/41/24/c5e6e9354806a94b6c449f053b66/153d9e9d-db7d-45b1-957f-1aa55c9a9123.doc"
+  },
+  {
+   "url": "http://econ.shufe.edu.cn/_upload/article/files/41/24/c5e6e9354806a94b6c449f053b66/ada9f273-2213-42f5-a8b7-8c939a7aadc2.doc",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: http://econ.shufe.edu.cn/_upload/article/files/41/24/c5e6e9354806a94b6c449f053b66/ada9f273-2213-42f5-a8b7-8c939a7aadc2.doc"
+  },
+  {
+   "url": "http://econ.shufe.edu.cn/_upload/article/files/41/24/c5e6e9354806a94b6c449f053b66/c5002450-b0de-4c41-950c-fc2f54603d49.doc",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: http://econ.shufe.edu.cn/_upload/article/files/41/24/c5e6e9354806a94b6c449f053b66/c5002450-b0de-4c41-950c-fc2f54603d49.doc"
+  },
+  {
+   "url": "http://econ.shufe.edu.cn/_upload/article/files/41/24/c5e6e9354806a94b6c449f053b66/8df26e89-ef9e-4c1e-ac1f-ff07cb9611ba.docx",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: http://econ.shufe.edu.cn/_upload/article/files/41/24/c5e6e9354806a94b6c449f053b66/8df26e89-ef9e-4c1e-ac1f-ff07cb9611ba.docx"
+  },
+  {
+   "url": "http://sa.shufe.edu.cn/_upload/article/files/f3/f1/98ef75cb4204ae650e9de6bf3be4/2b3c0051-21e1-42be-bd27-60983a8938f7.doc",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: http://sa.shufe.edu.cn/_upload/article/files/f3/f1/98ef75cb4204ae650e9de6bf3be4/2b3c0051-21e1-42be-bd27-60983a8938f7.doc"
+  },
+  {
+   "url": "http://sa.shufe.edu.cn/_upload/article/files/f3/f1/98ef75cb4204ae650e9de6bf3be4/3edc041b-0b36-46d6-8e48-6d68d3a18be9.docx",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: http://sa.shufe.edu.cn/_upload/article/files/f3/f1/98ef75cb4204ae650e9de6bf3be4/3edc041b-0b36-46d6-8e48-6d68d3a18be9.docx"
+  },
+  {
+   "url": "http://www.moe.gov.cn/srcsite/A09/moe_763/201909/W020190930610945256782.xlsx",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: http://www.moe.gov.cn/srcsite/A09/moe_763/201909/W020190930610945256782.xlsx"
+  },
+  {
+   "url": "http://www.moe.gov.cn/srcsite/A09/moe_763/201909/W020190930610945265677.docx",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: http://www.moe.gov.cn/srcsite/A09/moe_763/201909/W020190930610945265677.docx"
+  },
+  {
+   "url": "http://www.moe.gov.cn/srcsite/A09/moe_763/201909/W020190930610945261959.docx",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: http://www.moe.gov.cn/srcsite/A09/moe_763/201909/W020190930610945261959.docx"
+  },
+  {
+   "url": "http://gs.shufe.edu.cn/yanyan/ueditor/server/upload/uploadfiles/2013-01-18-199acf2d7c-3425-49c9-86ff-5ca4cdd766c2.pdf",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: http://gs.shufe.edu.cn/yanyan/ueditor/server/upload/uploadfiles/2013-01-18-199acf2d7c-3425-49c9-86ff-5ca4cdd766c2.pdf"
+  },
+  {
+   "url": "http://econ.shufe.edu.cn/kindeditor-4.1.10/attached/file/20170509/20170509162954_34584.doc",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: http://econ.shufe.edu.cn/kindeditor-4.1.10/attached/file/20170509/20170509162954_34584.doc"
+  },
+  {
+   "url": "http://econ.shufe.edu.cn/kindeditor-4.1.10/attached/file/20170509/20170509163018_39058.doc",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: http://econ.shufe.edu.cn/kindeditor-4.1.10/attached/file/20170509/20170509163018_39058.doc"
+  },
+  {
+   "url": "http://econ.shufe.edu.cn/kindeditor-4.1.10/attached/file/20170509/20170509163030_48800.doc",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: http://econ.shufe.edu.cn/kindeditor-4.1.10/attached/file/20170509/20170509163030_48800.doc"
+  },
+  {
+   "url": "http://gs.shufe.edu.cn/yanyan/ueditor/server/upload/uploadfiles/2013-01-17-42b83d2da8-463f-478e-a617-e46c4cb2d012.pdf",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: http://gs.shufe.edu.cn/yanyan/ueditor/server/upload/uploadfiles/2013-01-17-42b83d2da8-463f-478e-a617-e46c4cb2d012.pdf"
+  },
+  {
+   "url": "http://gs.shufe.edu.cn/yanyan/ueditor/server/upload/uploadfiles/2013-01-18-54aa2e962c-3b21-496d-8cc9-9c70ec2b0c20.doc",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: http://gs.shufe.edu.cn/yanyan/ueditor/server/upload/uploadfiles/2013-01-18-54aa2e962c-3b21-496d-8cc9-9c70ec2b0c20.doc"
+  },
+  {
+   "url": "http://gs.shufe.edu.cn/yanyan/ueditor/server/upload/uploadfiles/2015-06-28-47664a8305-fab6-4624-a317-4b3fd431a319.zip",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: http://gs.shufe.edu.cn/yanyan/ueditor/server/upload/uploadfiles/2015-06-28-47664a8305-fab6-4624-a317-4b3fd431a319.zip"
+  },
+  {
+   "url": "https://www.csc.edu.cn/attached/file/20180712/20180712145318_7824.pdf",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://www.csc.edu.cn/attached/file/20180712/20180712145318_7824.pdf"
+  }
+ ],
+ "notes": []
+}
