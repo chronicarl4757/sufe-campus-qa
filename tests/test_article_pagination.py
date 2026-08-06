@@ -62,6 +62,22 @@ def test_date_never_falls_back_to_fetch_time():
     assert meta.publish_date == "unknown"
 
 
+def test_labeled_date_outranks_conflicting_generic_selector_with_evidence():
+    html = """
+    <html><body>
+      <div class="sidebar-date">历史推荐：2015-06-20</div>
+      <article><h1>研究生复试通知</h1><p>发布时间：2025-05-09</p>
+      <p>本通知包含申请条件、材料清单、办理流程和咨询方式。</p></article>
+    </body></html>
+    """
+    profile = ArticleProfile(date_selectors=[".sidebar-date"], content_selectors=["article"])
+    meta = parse_article(html, "https://gs.sufe.edu.cn/Home/Detail/5850", profile)
+    assert meta.publish_date == "2025-05-09"
+    assert meta.publish_date_evidence == "发布时间：2025-05-09"
+    assert meta.publish_date_confidence == 1.0
+    assert meta.date_conflict is True
+
+
 # ---------------- 标题回退链 ----------------
 
 

@@ -23,6 +23,9 @@ def test_ingest_persists_source_and_document_kind_metadata(tmp_path):
         attachments=[],
         status="ok",
         errors=[],
+        publish_date_evidence="发布时间：2025-09-01",
+        publish_date_confidence=1.0,
+        date_conflict=False,
     )
     corpus = tmp_path / "corpus"
     ingest_crawled_articles(
@@ -41,3 +44,6 @@ def test_ingest_persists_source_and_document_kind_metadata(tmp_path):
     assert meta.source_section == "办事流程"
     assert meta.scope_unit == "上海财经大学教务处"
     assert meta.validity_status == "unknown_validity"
+    assert meta.publish_date_evidence == "发布时间：2025-09-01"
+    assert meta.publish_date_confidence == 1.0
+    assert meta.date_conflict is False

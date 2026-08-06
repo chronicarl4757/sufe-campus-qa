@@ -60,6 +60,9 @@ class DocMeta:
     relation_confidence: float = 0.0
     relation_evidence: str = ""
     index_collection: str = "none"
+    publish_date_evidence: str = ""
+    publish_date_confidence: float = 0.0
+    date_conflict: bool = False
 
     def __post_init__(self) -> None:
         if self.category not in CATEGORIES:

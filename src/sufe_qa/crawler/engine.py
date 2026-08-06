@@ -58,6 +58,9 @@ class CrawledArticle:
     etag: str | None = None
     last_modified: str | None = None
     html_hash: str = ""
+    publish_date_evidence: str = ""
+    publish_date_confidence: float = 0.0
+    date_conflict: bool = False
 
 
 @dataclass
@@ -351,6 +354,9 @@ def crawl_category(
             etag=res.etag,
             last_modified=res.last_modified,
             html_hash=html_hash,
+            publish_date_evidence=meta.publish_date_evidence,
+            publish_date_confidence=meta.publish_date_confidence,
+            date_conflict=meta.date_conflict,
         )
         if state:
             state.update(

@@ -32,7 +32,7 @@ ATTACH_EXTS = {
     ".rar",
     ".7z",
 }
-ATTACH_TEXT_RE = re.compile(r"附件|下载|点击下载|申请表|材料|名单|细则|办法|通知|表格|文件")
+ATTACH_TEXT_RE = re.compile(r"附件|下载|点击下载|申请表|材料|名单|细则|办法|通知|表格|文件|指南")
 ATTACH_PATH_RE = re.compile(
     r"/_upload/|/upload/|/files/|/download/|/system/resource/|download\.jsp|fileId="
     r"|mod=pdf|op=getstream|viewer\.html",
@@ -46,7 +46,8 @@ _VIEW_COUNT_RE = re.compile(
     r"^\s*(阅读量|浏览量|阅读数|浏览次数|点击数|访问量)\s*[:：]?\s*\d+\s*$", re.M
 )
 _DATE_LABEL_RE = re.compile(
-    r"(?:发布日期|发布时间|发稿时间|时间|日期)\s*[:：]?\s*(20\d{2}\s*[-/.年]\s*\d{1,2}\s*[-/.月]\s*\d{1,2})"
+    r"(?:发布日期|发布时间|发稿时间)\s*[:：]?\s*"
+    r"(20\d{2}\s*[-/.年]\s*\d{1,2}\s*[-/.月]\s*\d{1,2})"
 )
 _PUBLISHER_RE = re.compile(r"(?:来源|发布单位|发布机构)\s*[:：]\s*([一-龥A-Za-z0-9（）()·]{2,30})")
 
@@ -100,6 +101,14 @@ class AttachmentCandidate:
     discovery_reason: list[str]
 
 
+@dataclass(frozen=True)
+class DateEvidence:
+    value: str
+    evidence: str = ""
+    confidence: float = 0.0
+    conflict: bool = False
+
+
 @dataclass
 class ArticleMeta:
     title: str
@@ -110,6 +119,9 @@ class ArticleMeta:
     attachments: list[AttachmentCandidate]
     title_source: str  # profile_selector|og|h1|trafilatura|html_title|url_filename|none
     low_quality_title: bool
+    publish_date_evidence: str = ""
+    publish_date_confidence: float = 0.0
+    date_conflict: bool = False
 
 
 def _normalize_date(text: str) -> str:
@@ -192,22 +204,37 @@ def _extract_title(
     return _url_filename_title(url) or url, "none", True
 
 
-def _extract_date(soup: BeautifulSoup, meta, profile: ArticleProfile, raw: str) -> str:
+def _extract_date(
+    soup: BeautifulSoup, meta, profile: ArticleProfile, raw: str
+) -> DateEvidence:
+    candidates: list[tuple[int, str, str, float]] = []
+    # 页面明确标注的发布日期是最高置信来源。先解析它，同时继续收集其他来源，
+    # 这样可以报告冲突而不是静默覆盖。
+    for match in _DATE_LABEL_RE.finditer(raw):
+        value = _normalize_date(match.group(1))
+        if value != "unknown":
+            candidates.append((0, value, re.sub(r"\s+", "", match.group(0)), 1.0))
     for sel in profile.date_selectors:
         try:
             el = soup.select_one(sel)
         except Exception:
             continue
         if el and (d := _normalize_date(el.get_text(" ", strip=True))) != "unknown":
-            return d
+            candidates.append((1, d, _clean_title(el.get_text(" ", strip=True)), 0.9))
     if meta is not None:
         d = _normalize_date(str(getattr(meta, "date", "") or ""))
         if d != "unknown":
-            return d
-    m = _DATE_LABEL_RE.search(raw)
-    if m:
-        return _normalize_date(m.group(1))
-    return "unknown"
+            candidates.append((2, d, f"metadata.date={d}", 0.75))
+    if not candidates:
+        return DateEvidence("unknown")
+    candidates.sort(key=lambda item: item[0])
+    _, value, evidence, confidence = candidates[0]
+    return DateEvidence(
+        value=value,
+        evidence=evidence,
+        confidence=confidence,
+        conflict=len({candidate[1] for candidate in candidates if candidate[3] >= 0.9}) > 1,
+    )
 
 
 def _extract_breadcrumbs(soup: BeautifulSoup) -> list[str]:
@@ -249,6 +276,7 @@ def _score_candidate(
     score = 0.0
     reasons: list[str] = []
     path = urlparse(url).path.lower()
+    url_lower = url.lower()
     if any(path.endswith(ext) for ext in ATTACH_EXTS):
         score += 0.5
         reasons.append("extension")
@@ -258,7 +286,7 @@ def _score_candidate(
     if anchor and ATTACH_TEXT_RE.search(anchor):
         score += 0.3
         reasons.append("anchor_text")
-    if ATTACH_PATH_RE.search(url):
+    if ATTACH_PATH_RE.search(url_lower) or ATTACH_PATH_RE.search(path):
         score += 0.3
         reasons.append("url_path")
     if embedded:
@@ -329,17 +357,21 @@ def parse_article(
     soup = BeautifulSoup(html, "html.parser")
     body, meta = _extract_body(soup, html, profile)
     title, title_source, url_low = _extract_title(soup, html, meta, profile, url)
+    publish_date = _extract_date(soup, meta, profile, html)
     publisher = default_publisher
     m = _PUBLISHER_RE.search(html)
     if m:
         publisher = m.group(1).strip()
     return ArticleMeta(
         title=title,
-        publish_date=_extract_date(soup, meta, profile, html),
+        publish_date=publish_date.value,
         publisher=publisher,
         breadcrumbs=_extract_breadcrumbs(soup),
         body_text=body,
         attachments=discover_attachments(soup, url),
         title_source=title_source,
         low_quality_title=url_low or is_low_quality_title(title),
+        publish_date_evidence=publish_date.evidence,
+        publish_date_confidence=publish_date.confidence,
+        date_conflict=publish_date.conflict,
     )
