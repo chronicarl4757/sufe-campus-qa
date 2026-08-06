@@ -91,6 +91,7 @@ class BenchmarkReport:
     total: int
     scored: int  # 计入可答率的普通题数
     answerable: int
+    answerable_offdomain: int
     partially_answerable: int
     not_answerable: int
     refusal_gate_refused: int
@@ -206,6 +207,10 @@ def evaluate_item(item: BenchmarkItem, hits: list[Hit], min_similarity: float) -
             )
         if not unsupported and (not expected_domains or matched):
             status = "answerable"
+        elif not unsupported:
+            # 要点齐备但域名偏离：多为题库期望域名过窄或跨部门转载，
+            # 单独成桶便于人工复核，不与「缺要点」混为一谈。
+            status = "answerable_offdomain"
         else:
             status = "partially_answerable"
     return BenchmarkResult(
@@ -230,7 +235,10 @@ def run_benchmark(
         results.append(evaluate_item(item, hits, settings.vector_min_similarity))
 
     normal = [
-        r for r in results if r.status in {"answerable", "partially_answerable", "not_answerable"}
+        r
+        for r in results
+        if r.status
+        in {"answerable", "answerable_offdomain", "partially_answerable", "not_answerable"}
     ]
     by_scene: dict[str, dict[str, int]] = defaultdict(lambda: defaultdict(int))
     for r in results:
@@ -244,6 +252,7 @@ def run_benchmark(
         total=len(results),
         scored=len(normal),
         answerable=sum(1 for r in normal if r.status == "answerable"),
+        answerable_offdomain=sum(1 for r in normal if r.status == "answerable_offdomain"),
         partially_answerable=sum(1 for r in normal if r.status == "partially_answerable"),
         not_answerable=sum(1 for r in normal if r.status == "not_answerable"),
         refusal_gate_refused=sum(1 for r in results if r.status == "gate_refused"),

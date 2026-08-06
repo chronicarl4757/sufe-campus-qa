@@ -116,6 +116,22 @@ def test_evaluate_partial_on_missing_point_or_domain():
     assert any("域名偏离" in reason for reason in r.missing_reasons)
 
 
+def test_evaluate_offdomain_when_points_complete_but_domain_mismatch():
+    """要点齐备但命中非期望职能部门：单独成桶供人工复核题库或来源。"""
+    item = BenchmarkItem(
+        id="q4",
+        question="q",
+        scene="s",
+        expected_domains=("jwc.sufe.edu.cn",),
+        expected_answer_points=("申请条件",),
+    )
+    hits = [_hit("d1", url="https://gongkai.sufe.edu.cn/x", text="申请条件：应届本科毕业生")]
+    r = evaluate_item(item, hits, 0.5)
+    assert r.status == "answerable_offdomain"
+    assert r.supported_points == ("申请条件",)
+    assert r.matched_domains == ()
+
+
 def test_evaluate_refusal_and_clarification_status():
     refusal = BenchmarkItem(id="r1", question="r", scene="s", should_refuse=True)
     assert evaluate_item(refusal, [_hit("d1", sim=0.1)], 0.5).status == "gate_refused"

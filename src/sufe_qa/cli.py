@@ -472,11 +472,12 @@ def _cmd_benchmark_probe(args: argparse.Namespace) -> int:
         _json.dumps(report.to_dict(), ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
     )
     rate = report.answerable / report.scored if report.scored else 0.0
+    offdomain = report.answerable_offdomain / report.scored if report.scored else 0.0
     partial = report.partially_answerable / report.scored if report.scored else 0.0
     print(f"题目 {report.total} 条（计入可答率 {report.scored} 条）")
     print(
-        f"可答 {report.answerable}（{rate:.1%}）| 部分可答 {report.partially_answerable}（{partial:.1%}）"
-        f" | 不可答 {report.not_answerable}"
+        f"可答 {report.answerable}（{rate:.1%}）| 可答但域名偏离 {report.answerable_offdomain}（{offdomain:.1%}）"
+        f" | 部分可答 {report.partially_answerable}（{partial:.1%}） | 不可答 {report.not_answerable}"
     )
     print(
         f"拒答题：门控拦下 {report.refusal_gate_refused}，需生成层确认 {report.refusal_generation_required}"
