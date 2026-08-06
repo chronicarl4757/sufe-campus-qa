@@ -114,4 +114,3 @@ historical historical policy/procedure/annual_notice/form/manual/service_guide
 - 旧 schema 无法分类文档进入隔离，不再变成 manual。
 - raw、附件多父关系和历史查询能力不丢失。
 - 固定问题库前后使用相同 hash、检索配置和阈值；清理后核心问题可回答率不得下降。
-

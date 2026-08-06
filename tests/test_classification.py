@@ -44,4 +44,3 @@ def test_public_list_and_promotion_precede_generic_notice_rules():
         )
         == "promotion"
     )
-

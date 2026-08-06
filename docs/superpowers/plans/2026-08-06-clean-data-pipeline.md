@@ -332,4 +332,3 @@ git add data/quality data/coverage data/crawl_reports/sufe_full_report.json \
   data/corpus/manifest.jsonl data/corpus/relations.jsonl
 git commit -m "data: migrate SUFE corpus to clean lifecycle view"
 ```
-
