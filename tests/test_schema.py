@@ -97,11 +97,21 @@ def test_manifest_extended_fields_roundtrip(tmp_path):
         quality_status="accepted",
         binary_hash="sha256:bin",
         text_hash="sha256:txt",
+        temporal_class="annual",
+        series_key="研究生院|研究生|硕士复试录取办法",
+        retention_status="historical",
+        retention_reason="prior_annual_series_version",
+        canonical_doc_id="canonical-2025",
     )
     append_manifest(p, [m])
     loaded = load_manifest(p)[m.doc_id]
     assert loaded.document_type == "attachment" and loaded.parent_doc_id == "p1"
     assert loaded.parse_status == "scanned_pdf" and loaded.text_hash == "sha256:txt"
+    assert loaded.temporal_class == "annual"
+    assert loaded.series_key.endswith("硕士复试录取办法")
+    assert loaded.retention_status == "historical"
+    assert loaded.retention_reason == "prior_annual_series_version"
+    assert loaded.canonical_doc_id == "canonical-2025"
 
 
 def test_relations_append_load_and_dedup(tmp_path):

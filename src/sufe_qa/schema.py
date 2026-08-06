@@ -63,6 +63,12 @@ class DocMeta:
     publish_date_evidence: str = ""
     publish_date_confidence: float = 0.0
     date_conflict: bool = False
+    temporal_class: str = "undated"
+    series_key: str = ""
+    # 旧 schema 无生命周期证据时默认归档，必须经迁移审计后才能进入新索引。
+    retention_status: str = "archived"
+    retention_reason: str = "legacy_unreviewed"
+    canonical_doc_id: str = ""
 
     def __post_init__(self) -> None:
         if self.category not in CATEGORIES:
