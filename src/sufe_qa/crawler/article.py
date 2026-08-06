@@ -310,7 +310,10 @@ def discover_attachments(soup: BeautifulSoup, page_url: str) -> list[AttachmentC
         raw_url = (raw_url or "").strip()
         if not raw_url or raw_url.startswith(("#", "javascript:", "mailto:", "tel:")):
             return
-        full = urldefrag(urljoin(page_url, raw_url))[0]
+        try:
+            full = urldefrag(urljoin(page_url, raw_url))[0]
+        except ValueError:
+            return  # 畸形 URL（非法 netloc 等）：单个坏属性不应拖垮整页解析
         if not full.startswith(("http://", "https://")):
             return
         score, reasons = _score_candidate(full, anchor, embedded, has_download_attr)

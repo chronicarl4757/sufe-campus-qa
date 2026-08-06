@@ -150,7 +150,7 @@ _HIGH_VALUE_SECTION_WORDS = (
 )
 _DROP_SECTION_WORDS = ("新闻", "校友", "党建", "领导", "师资", "科研", "讲座", "活动")
 _WP3_ARTICLE_RE = re.compile(
-    r"/(?:[0-9a-z]{1,8}/){2,4}page\.htm$|/info/\d+\.htm$|/\d+\.htm$",
+    r"/(?:[0-9a-z]{1,16}/){2,4}page\.htm$|/info/\d+\.htm$|/\d+\.htm$",
     re.I,
 )
 _GS_ARTICLE_RE = re.compile(r"/Home/Detail/\d+", re.I)
@@ -478,6 +478,7 @@ class Wp3Adapter(BaseAdapter):
         ".wp_column_article .wp_entry",
         ".col_news_list .wp_entry",
         ".col_news_list",
+        ".webplus-list",
     )
     article_profile = ArticleProfile(
         title_selectors=[".arti_title", ".col_title h2", "h1"],
