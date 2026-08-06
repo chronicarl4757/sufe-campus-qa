@@ -25,7 +25,7 @@ def _fixture(tmp_path):
     rows = []
     for doc_id, year, kind in (("active", 2025, "annual_notice"), ("old", 2018, "annual_notice")):
         title = f"上海财经大学{year}年硕士研究生复试通知"
-        text = f"# {title}\n\n{year}年复试申请条件、材料和办理流程。\n"
+        text = f"# {title}\n\n{year}年复试申请条件、材料和办理流程。\n\n"
         rel = f"推免升学/{doc_id}.md"
         path = corpus / rel
         path.parent.mkdir(parents=True, exist_ok=True)
@@ -93,6 +93,12 @@ def test_clean_rebuild_atomically_swaps_and_keeps_archived_audit_row(tmp_path):
     manifest = load_manifest(corpus / "manifest.jsonl")
     assert manifest["active"].retention_status == "active"
     assert manifest["active"].file_path
+    active_path = corpus / manifest["active"].file_path
+    assert active_path.read_bytes().endswith(b"\n")
+    assert not active_path.read_bytes().endswith(b"\n\n")
+    assert manifest["active"].content_hash == sha256_text(
+        active_path.read_text(encoding="utf-8")
+    )
     assert manifest["old"].retention_status == "archived"
     assert manifest["old"].file_path == ""
     assert manifest["old"].content_hash == ""

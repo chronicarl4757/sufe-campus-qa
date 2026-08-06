@@ -100,10 +100,9 @@ def rebuild_clean_corpus(
                 raise ValueError(f"应保留文档正文不存在: {doc_id} {meta.file_path}")
             target = staging / meta.file_path
             target.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copy2(source, target)
-            content_hash = sha256_text(
-                target.read_text(encoding="utf-8", errors="replace")
-            )
+            text = source.read_text(encoding="utf-8", errors="replace").rstrip("\r\n") + "\n"
+            target.write_text(text, encoding="utf-8")
+            content_hash = sha256_text(text)
             migrated.append(replace(meta, content_hash=content_hash, **updates))
         append_manifest(staging / "manifest.jsonl", migrated)
         relations = corpus_dir / "relations.jsonl"
@@ -127,4 +126,3 @@ def rebuild_clean_corpus(
             shutil.rmtree(staging)
         raise
     return CleanRebuildResult(True, len(manifest), retained, archived, backup)
-
