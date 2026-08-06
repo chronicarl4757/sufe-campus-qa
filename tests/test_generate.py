@@ -41,6 +41,9 @@ class _StubRetriever:
     def search(self, question: str) -> list[Hit]:
         return self._hits
 
+    def search_routed(self, question: str) -> list[Hit]:
+        return self._hits
+
 
 class _BoomLLM:
     def stream_chat(self, messages):

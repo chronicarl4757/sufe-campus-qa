@@ -157,10 +157,10 @@ def test_search_doc_type_boost(settings):
                 publish_date="2026-01-01",
                 category="学工事务",
                 fetched_at="2026-07-31T00:00:00+00:00",
-                    content_hash=f"sha256:{fname}",
-                    file_path=fname,
-                    retention_status="active",
-                    retention_reason="test_fixture",
+                content_hash=f"sha256:{fname}",
+                file_path=fname,
+                retention_status="active",
+                retention_reason="test_fixture",
             )
             for fname, title, _ in docs
         ],
@@ -183,3 +183,31 @@ def test_search_per_doc_chunk_cap(settings):
     big_hits = [h for h in hits if h.doc_id == big_id]
     assert 0 < len(big_hits) <= settings.max_chunks_per_doc
     assert other_id in {h.doc_id for h in hits}
+
+
+def test_route_collections_intent():
+    from sufe_qa.retrieve.retriever import route_collections
+
+    assert route_collections("会计学院转专业拟录取名单公示了吗？") == ("main_qa", "public_list")
+    assert route_collections("推免申请条件是什么？") == ("main_qa",)
+    assert route_collections("这份办法的上一版规定了什么？") == ("main_qa", "historical")
+    assert route_collections("该文件是否已被废止？") == ("main_qa", "historical")
+
+
+def test_search_routed_finds_public_list_only_with_intent(settings):
+    _seed(
+        settings,
+        {
+            "gongshi.md": "# 会计学院转专业拟录取名单公示\n\n现将 2026 年会计学院转专业拟录取名单予以公示，公示期三天，如有异议请联系教务办。\n"
+            * 3,
+            "banfa.md": "# 转专业管理办法\n\n第一条 学生申请转专业应符合下列条件：品行良好，无违纪记录。\n"
+            * 3,
+        },
+    )
+    r = HybridRetriever(settings, FakeEmbedder())
+    routed = r.search_routed("会计学院转专业拟录取名单公示了吗？")
+    assert any("公示" in h.title for h in routed)
+    # 无意图时只查主问答库，公示文档不出现
+    plain = r.search("转专业申请条件")
+    assert plain
+    assert all("公示" not in h.title for h in plain)

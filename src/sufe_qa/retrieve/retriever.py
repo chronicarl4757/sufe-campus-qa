@@ -10,13 +10,33 @@ import chromadb
 
 from sufe_qa.config import Settings
 from sufe_qa.indexing.collections import (
+    HISTORICAL_COLLECTION,
     MAIN_QA_COLLECTION,
+    PUBLIC_LIST_COLLECTION,
     collection_key_for_name,
     collection_name_for,
 )
 from sufe_qa.indexing.indexer import Embedder
 
 _WORD_RE = re.compile(r"\w+")
+
+# 命中这些意图时才把对应 collection 合入检索；默认只查主问答库。
+_PUBLIC_LIST_INTENT_RE = re.compile(r"公示|名单|拟录取|录取结果|获评|获奖名单")
+_HISTORICAL_INTENT_RE = re.compile(
+    r"旧版|历史版本|上一版|修订前|废止|失效|曾经规定|原来的规定|往年|哪一版"
+)
+# 次级 collection 合入的命中上限，避免公示/历史内容挤占主问答证据位
+SECONDARY_COLLECTION_TOP_N = 3
+
+
+def route_collections(question: str) -> tuple[str, ...]:
+    """按问题意图选择检索的 collection；主问答库始终在首位。"""
+    collections = [MAIN_QA_COLLECTION]
+    if _PUBLIC_LIST_INTENT_RE.search(question):
+        collections.append(PUBLIC_LIST_COLLECTION)
+    if _HISTORICAL_INTENT_RE.search(question):
+        collections.append(HISTORICAL_COLLECTION)
+    return tuple(collections)
 
 
 def tokenize(text: str) -> list[str]:
@@ -107,9 +127,7 @@ class HybridRetriever:
         view = self._views.get(key)
         if view is None:
             name = collection_name_for(self._settings, key)
-            col = self._client.get_or_create_collection(
-                name, metadata={"hnsw:space": "cosine"}
-            )
+            col = self._client.get_or_create_collection(name, metadata={"hnsw:space": "cosine"})
             view = _CollectionView(key=key, name=name, col=col)
             self._views[key] = view
         return view
@@ -128,6 +146,24 @@ class HybridRetriever:
         view.store = {cid: (d, m or {}) for cid, d, m in zip(ids, docs, metas, strict=True)}
         view.bm25_ids = ids
         view.bm25 = BM25Okapi([tokenize(d) for d in docs]) if docs else None
+
+    def search_routed(self, question: str) -> list[Hit]:
+        """按问题意图检索多个 collection 并合并：主问答全量，次级 capped。"""
+        collections = route_collections(question)
+        if len(collections) == 1:
+            return self.search(question)
+        merged: list[Hit] = []
+        seen: set[str] = set()
+        for rank, key in enumerate(collections):
+            hits = self.search(question, collection=key)
+            if rank > 0:
+                hits = hits[:SECONDARY_COLLECTION_TOP_N]
+            for hit in hits:
+                if hit.chunk_id in seen:
+                    continue
+                seen.add(hit.chunk_id)
+                merged.append(hit)
+        return merged
 
     def search(self, question: str, collection: str | None = None) -> list[Hit]:
         s = self._settings

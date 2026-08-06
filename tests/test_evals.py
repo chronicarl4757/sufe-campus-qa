@@ -30,6 +30,9 @@ class _StubRetriever:
     def search(self, question: str) -> list[Hit]:
         return self._m.get(question, [])
 
+    def search_routed(self, question: str) -> list[Hit]:
+        return self.search(question)
+
 
 def _settings():
     from sufe_qa.config import Settings

@@ -97,7 +97,7 @@ def score_retrieval(
 ) -> EvalReport:
     rows: list[EvalRow] = []
     for item in items:
-        hits = retriever.search(item.question)
+        hits = retriever.search_routed(item.question)
         refused = not is_confident(hits, settings.vector_min_similarity)
         if item.should_refuse:
             rows.append(EvalRow(item.id, item.question, hit=None, refused=refused, correct=refused))

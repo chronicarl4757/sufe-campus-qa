@@ -95,7 +95,7 @@ def answer_question(
     llm: LLMClient | None = None,
 ) -> Answer:
     """低置信直接拒答（不走 LLM）；llm 缺省才构造 DeepSeekClient，便于测试注入。"""
-    hits = retriever.search(question)
+    hits = retriever.search_routed(question)
     if not hits or not is_confident(hits, settings.vector_min_similarity):
         return Answer(question=question, refused=True, hits=[], stream=iter([REFUSAL_TEMPLATE]))
     llm = llm or DeepSeekClient(settings)
