@@ -183,6 +183,9 @@ def _section_id(url: str, name: str) -> str:
 
 
 def _is_attachment_url(url: str, text: str = "") -> bool:
+    # 文章/栏目页永远不是文件附件：锚文本含「材料/下载」的 page.htm 只是站内链接
+    if urlparse(url).path.lower().endswith((".htm", ".html", ".shtml")):
+        return False
     return bool(_ATTACH_RE.search(url) or re.search(r"下载|申请表|表格|材料|附件", text or ""))
 
 

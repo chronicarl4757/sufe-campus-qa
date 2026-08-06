@@ -163,3 +163,13 @@ def test_title_include_filter_narrows_wide_section(tmp_path):
     ]
     listing = _filter_listing_titles(ListingResult(article_pages=specs), section)
     assert [s.title_hint for s in listing.article_pages] == ["2026级本科新设专业学费标准的公示"]
+
+
+def test_is_attachment_url_rejects_htm_pages_with_material_anchor():
+    """hq 办事指南列表把锚文本含「材料/下载」的 page.htm/list.htm 误判为附件。"""
+    from sufe_qa.crawler.adapters import _is_attachment_url
+
+    assert not _is_attachment_url("https://hq.sufe.edu.cn/f8/cf/c20020a260303/page.htm", "住宿申请材料")
+    assert not _is_attachment_url("https://hq.sufe.edu.cn/19990/list.htm", "常用下载")
+    assert _is_attachment_url("https://hq.sufe.edu.cn/_upload/files/a.pdf", "住宿申请材料")
+    assert _is_attachment_url("https://hq.sufe.edu.cn/download.jsp?fileId=1", "表格")
