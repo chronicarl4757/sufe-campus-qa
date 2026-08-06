@@ -55,6 +55,12 @@ from sufe_qa.ingest.attachment_parsers import parse_attachment
 from sufe_qa.ingest.inbox import ingest_inbox
 from sufe_qa.ingest.pipeline import ingest_crawled_articles
 from sufe_qa.ingest.version_reconcile import reconcile_versions
+from sufe_qa.quality.audit import (
+    audit_corpus,
+    load_quality_audit,
+    write_quality_audit,
+)
+from sufe_qa.quality.migrate import rebuild_clean_corpus
 from sufe_qa.retrieve.retriever import HybridRetriever
 from sufe_qa.schema import default_relations_path
 
@@ -446,6 +452,51 @@ def _cmd_coverage_audit(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_quality_audit(args: argparse.Namespace) -> int:
+    settings = load_settings()
+    manifest_path = Path(args.manifest) if args.manifest else settings.manifest_path
+    corpus_dir = Path(args.corpus) if args.corpus else settings.corpus_dir
+    raw_root = Path(args.raw) if args.raw else settings.data_dir / "raw"
+    policies = {
+        (source.publisher, section.name): section.time_policy
+        for source in load_authority_sources(Path(args.sources))
+        for section in source.sections
+    }
+    report = audit_corpus(
+        manifest_path,
+        corpus_dir,
+        raw_root,
+        time_policies=policies,
+    )
+    write_quality_audit(report, Path(args.output_json), Path(args.output_md))
+    print(f"质量审计 JSON: {args.output_json}")
+    print(f"质量审计 Markdown: {args.output_md}")
+    print(
+        f"文档 {report.total_documents}，标题含年份 {report.year_title_ratio:.1%}，"
+        f"旧年度通知归档候选 {report.old_annual_count}，日期修正 {report.date_correction_count}"
+    )
+    return 0
+
+
+def _cmd_rebuild_clean_corpus(args: argparse.Namespace) -> int:
+    settings = load_settings()
+    corpus_dir = Path(args.corpus) if args.corpus else settings.corpus_dir
+    report = load_quality_audit(Path(args.audit))
+    result = rebuild_clean_corpus(report, corpus_dir, apply=args.apply)
+    if not result.applied:
+        print(
+            f"预览：保留正文 {result.retained_files}，归档 {result.archived_documents}；"
+            "未传 --apply，未修改 corpus"
+        )
+        return 0
+    print(
+        f"干净 corpus 已切换：保留正文 {result.retained_files}，"
+        f"归档 {result.archived_documents}"
+    )
+    print(f"旧 corpus 备份: {result.backup_path}")
+    return 0
+
+
 def _cmd_serve(args: argparse.Namespace) -> int:
     settings = load_settings()
     import uvicorn
@@ -570,6 +621,27 @@ def build_parser() -> argparse.ArgumentParser:
     )
     ca.add_argument("--index-fingerprint", default="not_indexed")
     ca.set_defaults(func=_cmd_coverage_audit)
+
+    qa = sub.add_parser("quality-audit", help="只读审计日期、类型、年度系列和生命周期")
+    qa.add_argument("--sources", default=str(DEFAULT_AUTHORITY_SOURCES))
+    qa.add_argument("--manifest", default="")
+    qa.add_argument("--corpus", default="")
+    qa.add_argument("--raw", default="")
+    qa.add_argument(
+        "--output-json",
+        default=str(PROJECT_ROOT / "data" / "quality" / "sufe_data_quality_before.json"),
+    )
+    qa.add_argument(
+        "--output-md",
+        default=str(PROJECT_ROOT / "data" / "quality" / "sufe_data_quality_before.md"),
+    )
+    qa.set_defaults(func=_cmd_quality_audit)
+
+    rc = sub.add_parser("rebuild-clean-corpus", help="按质量审计原子重建干净 corpus")
+    rc.add_argument("--audit", required=True)
+    rc.add_argument("--corpus", default="")
+    rc.add_argument("--apply", action="store_true", help="确认执行原子切换；默认仅预览")
+    rc.set_defaults(func=_cmd_rebuild_clean_corpus)
 
     s = sub.add_parser("serve", help="启动 Web 问答界面")
     s.add_argument("--host", default="127.0.0.1")

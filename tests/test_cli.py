@@ -58,6 +58,34 @@ def test_coverage_audit_writes_json_and_markdown(settings, tmp_path):
     assert "本科教务" in markdown_path.read_text(encoding="utf-8")
 
 
+def test_quality_audit_and_clean_rebuild_preview_do_not_mutate_corpus(settings, tmp_path):
+    assert cli.main(["ingest", "--category", "学工事务", "--publisher", "研究生院"]) == 0
+    json_path = tmp_path / "quality.json"
+    markdown_path = tmp_path / "quality.md"
+    assert (
+        cli.main(
+            [
+                "quality-audit",
+                "--manifest",
+                str(settings.manifest_path),
+                "--corpus",
+                str(settings.corpus_dir),
+                "--raw",
+                str(settings.data_dir / "raw"),
+                "--output-json",
+                str(json_path),
+                "--output-md",
+                str(markdown_path),
+            ]
+        )
+        == 0
+    )
+    before = settings.manifest_path.read_bytes()
+    assert cli.main(["rebuild-clean-corpus", "--audit", str(json_path)]) == 0
+    assert settings.manifest_path.read_bytes() == before
+    assert json_path.is_file() and markdown_path.is_file()
+
+
 def test_offline_end_to_end(settings, capsys):
     assert cli.main(["ingest", "--category", "学工事务", "--publisher", "研究生院"]) == 0
     assert cli.main(["index", "--fake-embed"]) == 0
