@@ -31,6 +31,9 @@ GROUNDABLE_KINDS = {
 }
 # 年度通知只接受近三学年（高频问题的答案不能来自过期通知）
 _ANNUAL_NOTICE_MAX_AGE_YEARS = 3
+# 域名复核：命中任一上财官方子站均可作为依据（题库期望域名常只写主管
+# 部门，但学籍/成绩/论文/推免本科研究生两边都有权回答，学院细则也是有效证据）
+OFFICIAL_DOMAIN_SUFFIX = ".sufe.edu.cn"
 
 
 @dataclass(frozen=True)
@@ -125,3 +128,43 @@ def ground_bank(
                 fn.write(json.dumps(item, ensure_ascii=False) + "\n")
                 n_needs += 1
     return n_grounded, n_needs
+
+
+def curate_bank_domains(
+    bank_path: Path,
+    probe_report_path: Path,
+    *,
+    out_path: Path | None = None,
+) -> tuple[int, int]:
+    """域名复核：offdomain 题的命中域名全是上财官方子站时，扩写 expected_domains。
+
+    返回 (复核扩写条数, 仍需人工复核条数)。扩写条目记录 domain_review 备注，
+    全程 git diff 可查；命中站外域名的题保持原样，留人工判断。
+    """
+    results = {
+        r["id"]: r for r in json.loads(probe_report_path.read_text(encoding="utf-8"))["results"]
+    }
+    n_curated = n_manual = 0
+    out_lines: list[str] = []
+    for raw in bank_path.read_text(encoding="utf-8").splitlines():
+        line = raw.strip()
+        if not line or line.startswith("#"):
+            out_lines.append(raw)
+            continue
+        item = json.loads(line)
+        result = results.get(item["id"])
+        if result is None or result["status"] != "answerable_offdomain":
+            out_lines.append(json.dumps(item, ensure_ascii=False))
+            continue
+        hit_domains = sorted({h["domain"] for h in result.get("top_hits") or () if h.get("domain")})
+        if hit_domains and all(d.endswith(OFFICIAL_DOMAIN_SUFFIX) for d in hit_domains):
+            old = sorted(item.get("expected_domains") or ())
+            item["expected_domains"] = sorted(set(old) | set(hit_domains))
+            item["domain_review"] = f"auto_extended: {old} → {item['expected_domains']}"
+            n_curated += 1
+        else:
+            n_manual += 1
+        out_lines.append(json.dumps(item, ensure_ascii=False))
+    target = out_path or bank_path
+    target.write_text("\n".join(out_lines) + "\n", encoding="utf-8")
+    return n_curated, n_manual

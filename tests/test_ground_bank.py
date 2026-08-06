@@ -98,3 +98,46 @@ def test_ground_bank_writes_both_files(tmp_path):
     assert n2["status"] == "needs_docs"
     assert n2["suggested_departments"] == ["nic.sufe.edu.cn"]
     assert "语料缺口" in n2["missing_reason"]
+
+
+def test_curate_bank_domains_extends_official_hits_only(tmp_path):
+    from sufe_qa.coverage.ground_bank import curate_bank_domains
+
+    bank = tmp_path / "bank.jsonl"
+    bank.write_text(
+        '{"id": "1", "question": "a", "expected_domains": ["jwc.sufe.edu.cn"]}\n'
+        '{"id": "2", "question": "b", "expected_domains": ["jwc.sufe.edu.cn"]}\n'
+        '{"id": "3", "question": "c", "expected_domains": ["jwc.sufe.edu.cn"]}\n',
+        encoding="utf-8",
+    )
+    report = tmp_path / "report.json"
+    report.write_text(
+        json.dumps(
+            {
+                "results": [
+                    {
+                        "id": "1",
+                        "status": "answerable_offdomain",
+                        "top_hits": [{"domain": "gs.sufe.edu.cn"}, {"domain": "ssd.sufe.edu.cn"}],
+                    },
+                    {
+                        "id": "2",
+                        "status": "answerable_offdomain",
+                        "top_hits": [{"domain": "example.com"}],
+                    },
+                    {"id": "3", "status": "answerable", "top_hits": []},
+                ]
+            },
+            ensure_ascii=False,
+        ),
+        encoding="utf-8",
+    )
+    n_curated, n_manual = curate_bank_domains(bank, report)
+    assert (n_curated, n_manual) == (1, 1)
+    items = [json.loads(line) for line in bank.read_text(encoding="utf-8").splitlines()]
+    assert items[0]["expected_domains"] == ["gs.sufe.edu.cn", "jwc.sufe.edu.cn", "ssd.sufe.edu.cn"]
+    assert "auto_extended" in items[0]["domain_review"]
+    # 站外命中与 already-answerable 保持原样
+    assert items[1]["expected_domains"] == ["jwc.sufe.edu.cn"]
+    assert "domain_review" not in items[1]
+    assert "domain_review" not in items[2]

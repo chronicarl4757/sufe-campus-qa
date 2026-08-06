@@ -502,6 +502,16 @@ def _cmd_ground_benchmark(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_curate_benchmark_domains(args: argparse.Namespace) -> int:
+    from sufe_qa.coverage.ground_bank import curate_bank_domains
+
+    n_curated, n_manual = curate_bank_domains(Path(args.bank), Path(args.probe_report))
+    print(f"域名复核扩写 {n_curated} 条（详见 git diff 的 domain_review 备注）")
+    print(f"仍需人工复核 {n_manual} 条（命中站外域名，未改动）")
+    print("扩写后需重新运行 benchmark-probe 再固化")
+    return 0
+
+
 def _cmd_quality_audit(args: argparse.Namespace) -> int:
     settings = load_settings()
     manifest_path = Path(args.manifest) if args.manifest else settings.manifest_path
@@ -756,6 +766,18 @@ def build_parser() -> argparse.ArgumentParser:
     )
     gb.add_argument("--current-year", type=int, default=2026)
     gb.set_defaults(func=_cmd_ground_benchmark)
+
+    cd = sub.add_parser(
+        "curate-benchmark-domains", help="域名复核：官方子站命中扩写 expected_domains"
+    )
+    cd.add_argument(
+        "--bank", default=str(PROJECT_ROOT / "data" / "eval" / "sufe_benchmark_v2.jsonl")
+    )
+    cd.add_argument(
+        "--probe-report",
+        default=str(PROJECT_ROOT / "data" / "coverage" / "sufe_benchmark_v2_report.json"),
+    )
+    cd.set_defaults(func=_cmd_curate_benchmark_domains)
 
     qa = sub.add_parser("quality-audit", help="只读审计日期、类型、年度系列和生命周期")
     qa.add_argument("--sources", default=str(DEFAULT_AUTHORITY_SOURCES))
