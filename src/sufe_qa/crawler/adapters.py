@@ -571,7 +571,8 @@ class BusinessSchoolAdapter(Wp3Adapter):
 
 _CAREER_SEARCH_RE = re.compile(r"/career/news/search/([A-Za-z0-9_]+)")
 _CAREER_HOST = "https://career.sufe.edu.cn"
-_CAREER_PAGE_SIZE = 20
+# 该接口 pageSize > 10 返回 403“需要登录”，实测上限为 10
+_CAREER_PAGE_SIZE = 10
 
 
 class CareerAdapter(BaseAdapter):
@@ -688,7 +689,8 @@ class CareerAdapter(BaseAdapter):
                 attachments.append(
                     AttachmentCandidate(
                         source_page_url=spec.url,
-                        requested_url=urljoin(_CAREER_HOST, attach_url),
+                        # attachUrl 是应用相对路径，必须补 /career 上下文前缀
+                        requested_url=urljoin(_CAREER_HOST + "/career/", attach_url.lstrip("/")),
                         anchor_text=_clean(str((entry or {}).get("fileName") or "")),
                         candidate_score=1.0,
                         discovery_reason=["api_attach"],

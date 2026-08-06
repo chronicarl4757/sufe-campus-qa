@@ -162,3 +162,221 @@ sources:
         category: 学工事务
         scene: 国际交流
         time_policy: all_history
+
+  # ---- 2026-08-06 覆盖驱动扩展：就业/信息化/图书馆/后勤/医疗/财务/国际交流 ----
+  - id: career
+    adapter: career
+    homepage: https://career.sufe.edu.cn/career/index
+    publisher: 上海财经大学就业指导中心
+    source_type: official_department
+    scope_unit: 毕业生
+    sections:
+      - name: 相关下载
+        list_url: https://career.sufe.edu.cn/career/news/search/xgxz
+        category: 实习就业
+        scene: 就业手续
+        time_policy: all_history
+      - name: 信息公示
+        list_url: https://career.sufe.edu.cn/career/news/search/xxgs
+        category: 实习就业
+        scene: 就业手续
+        time_policy: recent_2_school_years
+      - name: 通知公告
+        list_url: https://career.sufe.edu.cn/career/news/search/tzgg
+        category: 实习就业
+        scene: 就业手续
+        time_policy: recent_5_school_years
+        title_include: 就业手续|三方|协议|网签|推荐表|档案|户口|报到证|毕业去向|解约|违约|基层|征兵|选调|政策|指南|手续|登记
+      - name: 定向选调
+        list_url: https://career.sufe.edu.cn/career/news/search/dxxdnews
+        category: 实习就业
+        scene: 就业手续
+        time_policy: recent_5_school_years
+
+  - id: nic
+    adapter: wp3
+    homepage: https://nic.sufe.edu.cn/
+    publisher: 上海财经大学网络信息中心
+    source_type: official_department
+    scope_unit: 全体学生
+    sections:
+      - name: 学生服务
+        list_url: https://nic.sufe.edu.cn/19675/list.htm
+        category: 校园生活
+        scene: 信息化与校园卡
+        time_policy: all_history
+
+  - id: lib
+    adapter: wp3
+    homepage: https://lib.sufe.edu.cn/
+    publisher: 上海财经大学图书馆
+    source_type: official_department
+    scope_unit: 全体师生
+    sections:
+      - name: 服务时间
+        list_url: https://lib.sufe.edu.cn/8350/list.htm
+        category: 校园生活
+        scene: 图书馆
+        time_policy: all_history
+        inline_article: "true"
+      - name: 借阅规则
+        list_url: https://lib.sufe.edu.cn/8365/list.htm
+        category: 校园生活
+        scene: 图书馆
+        time_policy: all_history
+        inline_article: "true"
+      - name: 读者须知
+        list_url: https://lib.sufe.edu.cn/8366/list.htm
+        category: 校园生活
+        scene: 图书馆
+        time_policy: all_history
+        inline_article: "true"
+      - name: 违章处理
+        list_url: https://lib.sufe.edu.cn/8367/list.htm
+        category: 校园生活
+        scene: 图书馆
+        time_policy: all_history
+        inline_article: "true"
+      - name: 借阅服务
+        list_url: https://lib.sufe.edu.cn/8326/list.htm
+        category: 校园生活
+        scene: 图书馆
+        time_policy: all_history
+        inline_article: "true"
+      - name: 续借及预约
+        list_url: https://lib.sufe.edu.cn/8353/list.htm
+        category: 校园生活
+        scene: 图书馆
+        time_policy: all_history
+        inline_article: "true"
+      - name: 馆际互借
+        list_url: https://lib.sufe.edu.cn/8327/list.htm
+        category: 校园生活
+        scene: 图书馆
+        time_policy: all_history
+        inline_article: "true"
+      - name: 校外访问
+        list_url: https://lib.sufe.edu.cn/8324/list.htm
+        category: 校园生活
+        scene: 图书馆
+        time_policy: all_history
+        inline_article: "true"
+      - name: 联系我们
+        list_url: https://lib.sufe.edu.cn/8346/list.htm
+        category: 校园生活
+        scene: 图书馆
+        time_policy: all_history
+        inline_article: "true"
+
+  - id: hq
+    adapter: wp3
+    homepage: https://hq.sufe.edu.cn/
+    publisher: 上海财经大学后勤实业发展中心
+    source_type: official_department
+    scope_unit: 全体学生
+    sections:
+      - name: 学生服务资料
+        list_url: https://hq.sufe.edu.cn/20020/list.htm
+        category: 校园生活
+        scene: 宿舍后勤
+        time_policy: all_history
+      - name: 学生生活园区工作
+        list_url: https://hq.sufe.edu.cn/2722/list.htm
+        category: 校园生活
+        scene: 宿舍后勤
+        time_policy: all_history
+      - name: 报修服务
+        list_url: https://hq.sufe.edu.cn/20007/list.htm
+        category: 校园生活
+        scene: 宿舍后勤
+        time_policy: all_history
+      - name: 快递邮寄
+        list_url: https://hq.sufe.edu.cn/20012/list.htm
+        category: 校园生活
+        scene: 宿舍后勤
+        time_policy: all_history
+
+  - id: gongkai
+    adapter: wp3
+    homepage: https://gongkai.sufe.edu.cn/
+    publisher: 上海财经大学信息公开网
+    source_type: official_department
+    scope_unit: 全体学生
+    allowed_hosts:
+      - hq.sufe.edu.cn
+    sections:
+      - name: 住宿管理制度及服务信息
+        list_url: https://gongkai.sufe.edu.cn/xszsglzdjfwxx/list.htm
+        category: 校园生活
+        scene: 宿舍后勤
+        time_policy: all_history
+      - name: 大学生医保制度
+        list_url: https://gongkai.sufe.edu.cn/13787/list.htm
+        category: 校园生活
+        scene: 医疗医保
+        time_policy: all_history
+
+  - id: yljk
+    adapter: wp3
+    homepage: https://yljk.sufe.edu.cn/
+    publisher: 上海财经大学医疗健康服务中心
+    source_type: official_department
+    scope_unit: 全体学生
+    sections:
+      - name: 大学生医保
+        list_url: https://yljk.sufe.edu.cn/12542/list.htm
+        category: 校园生活
+        scene: 医疗医保
+        time_policy: all_history
+      - name: 规章制度
+        list_url: https://yljk.sufe.edu.cn/1400/list.htm
+        category: 校园生活
+        scene: 医疗医保
+        time_policy: all_history
+      - name: 报销通知
+        list_url: https://yljk.sufe.edu.cn/1401/list.htm
+        category: 校园生活
+        scene: 医疗医保
+        time_policy: recent_5_school_years
+      - name: 学生体检
+        list_url: https://yljk.sufe.edu.cn/12544/list.htm
+        category: 校园生活
+        scene: 医疗医保
+        time_policy: recent_5_school_years
+
+  - id: cwc
+    adapter: wp3
+    homepage: https://cwc.sufe.edu.cn/
+    publisher: 上海财经大学财务处
+    source_type: official_department
+    scope_unit: 全体学生
+    sections:
+      - name: 通知公告
+        list_url: https://cwc.sufe.edu.cn/xxgg_2982/list.htm
+        category: 学工事务
+        scene: 缴费财务
+        time_policy: recent_5_school_years
+        title_include: 缴费|学费|住宿费|收费|票据|银行卡|缓缴
+
+  - id: ieco
+    adapter: wp3
+    homepage: https://ieco.sufe.edu.cn/
+    publisher: 上海财经大学国际交流与合作处
+    source_type: official_department
+    scope_unit: 全体学生
+    sections:
+      - name: 报名通知
+        list_url: https://ieco.sufe.edu.cn/17864/list.htm
+        category: 学工事务
+        scene: 国际交流
+        time_policy: recent_5_school_years
+      - name: 学生项目列表
+        list_url: https://ieco.sufe.edu.cn/xsxmNew/list.htm
+        category: 学工事务
+        scene: 国际交流
+        time_policy: all_history
+      - name: 学习项目简介
+        list_url: https://ieco.sufe.edu.cn/xxxmjj/list.htm
+        category: 学工事务
+        scene: 国际交流
+        time_policy: all_history

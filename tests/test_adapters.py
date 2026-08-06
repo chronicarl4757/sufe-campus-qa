@@ -263,7 +263,7 @@ def test_career_adapter_parses_json_listing_and_skips_external_links():
         "post+https://career.sufe.edu.cn/career/news/data/tzgg/103",
     ]
     assert result.total_pages == 2
-    assert result.next_page and result.next_page.url.endswith("/search/tzgg/2/20")
+    assert result.next_page and result.next_page.url.endswith("/search/tzgg/2/10")
 
 
 def test_career_adapter_parses_json_article_with_api_attachments():
@@ -287,6 +287,6 @@ def test_career_adapter_parses_json_article_with_api_attachments():
     assert article.publish_date == "2026-05-01"
     assert "毕业去向登记" in article.body_text
     assert [a.requested_url for a in article.attachments] == [
-        "https://career.sufe.edu.cn/download/fileDownload/103"
+        "https://career.sufe.edu.cn/career/download/fileDownload/103"
     ]
     assert article.attachments[0].anchor_text == "毕业去向登记表.docx"
