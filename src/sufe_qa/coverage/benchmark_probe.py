@@ -135,6 +135,22 @@ def _domain_of(hit: Hit) -> str:
     return urlparse(hit.source_url).netloc.lower()
 
 
+def load_doc_parent_domains(manifest_path: Path) -> dict[str, str]:
+    """doc_id → 父页面域名。附件的权威性来自其父通知页：
+
+    gs 的附件托管在 ssd 平台，命中 ssd 下载地址时应视为命中 gs.sufe.edu.cn。
+    """
+    from sufe_qa.schema import load_manifest
+
+    docs = load_manifest(manifest_path)
+    out: dict[str, str] = {}
+    for doc_id, meta in docs.items():
+        parent = docs.get(meta.parent_doc_id or "")
+        if parent is not None:
+            out[doc_id] = urlparse(parent.source_url).netloc.lower()
+    return out
+
+
 def _evidence(hits: list[Hit]) -> tuple[HitEvidence, ...]:
     seen: set[str] = set()
     out: list[HitEvidence] = []
@@ -161,7 +177,12 @@ def _evidence(hits: list[Hit]) -> tuple[HitEvidence, ...]:
     return tuple(out)
 
 
-def evaluate_item(item: BenchmarkItem, hits: list[Hit], min_similarity: float) -> BenchmarkResult:
+def evaluate_item(
+    item: BenchmarkItem,
+    hits: list[Hit],
+    min_similarity: float,
+    parent_domains: dict[str, str] | None = None,
+) -> BenchmarkResult:
     confident = is_confident(hits, min_similarity)
     base = dict(
         id=item.id,
@@ -186,6 +207,11 @@ def evaluate_item(item: BenchmarkItem, hits: list[Hit], min_similarity: float) -
 
     expected_domains = {d.lower() for d in item.expected_domains}
     hit_domains = {_domain_of(h) for h in hits[:TOP_EVIDENCE_N] if h.source_url}
+    if parent_domains:
+        # 附件命中同时计入其父通知页域名（ssd 托管的 gs 附件 → gs.sufe.edu.cn）
+        hit_domains |= {
+            parent_domains[h.doc_id] for h in hits[:TOP_EVIDENCE_N] if h.doc_id in parent_domains
+        }
     matched = tuple(sorted(expected_domains & hit_domains))
     corpus_text = re.sub(r"\s+", "", "\n".join(h.text for h in hits[:TOP_EVIDENCE_N])).lower()
     supported = tuple(p for p in item.expected_answer_points if _point_supported(corpus_text, p))
@@ -229,10 +255,13 @@ def run_benchmark(
     import hashlib
 
     items = load_benchmark(bank_path)
+    parent_domains = (
+        load_doc_parent_domains(settings.manifest_path) if settings.manifest_path.is_file() else {}
+    )
     results: list[BenchmarkResult] = []
     for item in items:
         hits = retriever.search_routed(item.question)
-        results.append(evaluate_item(item, hits, settings.vector_min_similarity))
+        results.append(evaluate_item(item, hits, settings.vector_min_similarity, parent_domains))
 
     normal = [
         r

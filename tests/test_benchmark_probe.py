@@ -164,3 +164,36 @@ def test_run_benchmark_aggregates(tmp_path):
     assert report.refusal_gate_refused == 1
     assert report.by_scene["A"]["answerable"] == 1
     assert report.by_scene["B"]["gate_refused"] == 1
+
+
+def test_evaluate_matches_parent_domain_for_hosted_attachment():
+    """gs 附件托管在 ssd：命中 ssd 下载地址应按父页面归属 gs.sufe.edu.cn。"""
+    item = BenchmarkItem(
+        id="q5",
+        question="q",
+        scene="s",
+        expected_domains=("gs.sufe.edu.cn",),
+        expected_answer_points=("申请条件",),
+    )
+    hits = [
+        Hit(
+            chunk_id="att:0",
+            doc_id="att1",
+            title="办法.pdf",
+            category="c",
+            source_url="https://ssd.sufe.edu.cn/index.php?mod=io&op=getStream",
+            publisher="研究生院",
+            heading_path="",
+            text="申请条件：应届本科毕业生",
+            rrf_score=0.01,
+            vector_similarity=0.9,
+            parent_doc_id="art1",
+            parent_title="关于印发办法的通知",
+        )
+    ]
+    # 无父级归属信息时：域名偏离
+    assert evaluate_item(item, hits, 0.5).status == "answerable_offdomain"
+    # 有父级归属时：按 gs 计入
+    r = evaluate_item(item, hits, 0.5, {"att1": "gs.sufe.edu.cn"})
+    assert r.status == "answerable"
+    assert r.matched_domains == ("gs.sufe.edu.cn",)
