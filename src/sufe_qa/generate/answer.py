@@ -65,17 +65,19 @@ class Answer:
 
         LLM 按命中位次引用 [n]，同文档多 chunk 合并后卡片序号不连续；
         前端据映射表把 [n] 重编号并锚到正确卡片。
+        附件命中展示父级标题，避免「硕士生招生.pdf」这类无上下文文件名误导用户。
         """
         cards: list[SourceCard] = []
         doc_to_card: dict[str, int] = {}
         mapping: dict[int, int] = {}
         for pos, h in enumerate(self.hits, start=1):
             if h.doc_id not in doc_to_card:
+                title = f"{h.parent_title}（附件：{h.title}）" if h.parent_title else h.title
                 doc_to_card[h.doc_id] = len(cards) + 1
                 cards.append(
                     SourceCard(
                         index=doc_to_card[h.doc_id],
-                        title=h.title,
+                        title=title,
                         publisher=h.publisher,
                         source_url=h.source_url,
                         publish_date=h.publish_date,

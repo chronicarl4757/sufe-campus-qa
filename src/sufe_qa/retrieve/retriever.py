@@ -72,6 +72,8 @@ class Hit:
     source_type: str = "unknown"
     validity_status: str = "unknown_validity"
     index_collection: str = ""
+    parent_doc_id: str = ""  # 附件命中的所属文章；无父级时为空
+    parent_title: str = ""
 
 
 def is_confident(hits: list[Hit], min_similarity: float) -> bool:
@@ -97,6 +99,7 @@ class _CollectionView:
     name: str
     col: object
     store: dict[str, tuple[str, dict]] = field(default_factory=dict)
+    doc_titles: dict[str, str] = field(default_factory=dict)
     bm25: object | None = None
     bm25_ids: list[str] = field(default_factory=list)
 
@@ -144,6 +147,11 @@ class HybridRetriever:
         docs = data.get("documents") or []
         metas = data.get("metadatas") or []
         view.store = {cid: (d, m or {}) for cid, d, m in zip(ids, docs, metas, strict=True)}
+        view.doc_titles = {}
+        for _, meta in view.store.values():
+            doc_id = str(meta.get("doc_id", ""))
+            if doc_id and doc_id not in view.doc_titles:
+                view.doc_titles[doc_id] = str(meta.get("title", ""))
         view.bm25_ids = ids
         view.bm25 = BM25Okapi([tokenize(d) for d in docs]) if docs else None
 
@@ -214,6 +222,7 @@ class HybridRetriever:
         hits: list[Hit] = []
         for cid in top_ids:
             text, meta = view.store.get(cid, ("", {}))
+            parent_doc_id = str(meta.get("parent_doc_id", "") or "")
             hits.append(
                 Hit(
                     chunk_id=cid,
@@ -231,6 +240,8 @@ class HybridRetriever:
                     source_type=str(meta.get("source_type", "unknown")),
                     validity_status=str(meta.get("validity_status", "unknown_validity")),
                     index_collection=str(meta.get("index_collection", view.name)),
+                    parent_doc_id=parent_doc_id,
+                    parent_title=view.doc_titles.get(parent_doc_id, "") if parent_doc_id else "",
                 )
             )
         return hits

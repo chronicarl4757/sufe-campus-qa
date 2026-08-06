@@ -5,7 +5,7 @@
 # 语义贴库但不当的请求（如代写入党申请书）属生成层职责，不在本离线集内标注。
 {"id": "q-tuimian-apply", "question": "推免预报名需要满足哪些申请条件？", "expected_doc_ids": ["f900e2c94b7f"], "should_refuse": false, "answer_points": ["应届本科毕业生", "获得本科高校推荐资格", "各学院自定条件"]}
 {"id": "q-tuimian-list", "question": "2026年推免名单公示了吗？", "expected_doc_ids": ["ec97cb99d0b2"], "should_refuse": false, "answer_points": ["名单已公示", "公示渠道与时间"]}
-{"id": "q-shenqing-kaohe", "question": "博士研究生申请考核制的实施办法是怎样的？", "expected_doc_ids": ["4b5d82daeea6", "31abd3e97a2c", "6316c8fee1fd"], "should_refuse": false, "answer_points": ["申请考核流程", "材料与考核环节"]}
+{"id": "q-shenqing-kaohe", "question": "博士研究生申请考核制的实施办法是怎样的？", "expected_doc_ids": ["5ab32bcce4a9", "4b5d82daeea6", "31abd3e97a2c", "6316c8fee1fd"], "should_refuse": false, "answer_points": ["申请考核流程", "材料与考核环节"]}
 {"id": "q-dangtuan", "question": "研究生新生党团组织关系怎么转接？", "expected_doc_ids": ["e4939049e910"], "should_refuse": false, "answer_points": ["转接流程", "所需介绍信或线上操作"]}
 {"id": "q-tiaoji", "question": "2026年硕士调剂复试考生名单出来了吗？", "expected_doc_ids": ["7f0702a08178"], "should_refuse": false, "answer_points": ["名单已发布"]}
 {"id": "q-english-place", "question": "本科新生大学英语分级考试怎么安排？", "expected_doc_ids": ["d8083d003a19"], "should_refuse": false, "answer_points": ["分级考试安排", "教学分班规则"]}

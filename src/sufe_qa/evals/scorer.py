@@ -102,7 +102,13 @@ def score_retrieval(
         if item.should_refuse:
             rows.append(EvalRow(item.id, item.question, hit=None, refused=refused, correct=refused))
         else:
-            hit = any(h.doc_id in item.expected_doc_ids for h in hits)
+            # 期望文档命中其附件子文档（或反向）视同命中同一家族：
+            # 高校通知常为标题页+附件正文，家族内任一命中都指向同一份材料。
+            hit = any(
+                h.doc_id in item.expected_doc_ids
+                or (h.parent_doc_id and h.parent_doc_id in item.expected_doc_ids)
+                for h in hits
+            )
             # 应答题被低置信门控拦下视同作答失败：检索命中但被拒答不计正确
             rows.append(
                 EvalRow(
