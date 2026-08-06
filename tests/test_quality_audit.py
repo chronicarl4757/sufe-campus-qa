@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import hashlib
+from dataclasses import replace
 from datetime import date
 
 from sufe_qa.quality.audit import audit_corpus, write_quality_audit
@@ -10,6 +11,7 @@ from sufe_qa.schema import (
     append_manifest,
     append_relations,
     doc_id_from,
+    load_manifest,
     sha256_text,
 )
 
@@ -211,3 +213,107 @@ def test_shared_attachment_is_retained_when_any_parent_is_active(tmp_path):
     assert decision.retention_status == "active"
     assert decision.retention_reason == "retained_by_parent_relation"
     assert decision.canonical_doc_id == active_parent
+
+
+def test_unparsed_attachment_with_no_corpus_text_stays_archived(tmp_path):
+    data = tmp_path / "data"
+    corpus = data / "corpus"
+    append_manifest(
+        corpus / "manifest.jsonl",
+        [
+            DocMeta(
+                doc_id="unparsed",
+                title="73a8d60e-9908-4f5c-88cd-db18e67f6484.xls",
+                source_url="https://jwc.sufe.edu.cn/_upload/unparsed.xls",
+                publisher="上海财经大学教务处",
+                publish_date="unknown",
+                category="学工事务",
+                fetched_at="2026-08-01T00:00:00+00:00",
+                content_hash="",
+                file_path="",
+                document_type="attachment",
+                parse_status="unsupported_format",
+                quality_status="unsupported_format",
+                source_type="attachment",
+                source_section="办事流程",
+                scope_unit="本科生",
+            )
+        ],
+    )
+    report = audit_corpus(
+        corpus / "manifest.jsonl",
+        corpus,
+        data / "raw",
+        evaluated_at=date(2026, 8, 6),
+        time_policies={
+            ("上海财经大学教务处", "办事流程"): "all_history"
+        },
+    )
+    decision = report.decisions[0]
+    assert decision.document_kind == "incomplete"
+    assert decision.retention_status == "archived"
+    assert decision.index_collection == "none"
+
+
+def test_explicit_superseded_policy_routes_to_historical(tmp_path):
+    data = tmp_path / "data"
+    corpus = data / "corpus"
+    doc_id = _add(
+        corpus,
+        url="https://gs.sufe.edu.cn/Home/Detail/old-policy",
+        title="上海财经大学研究生学籍管理规定",
+        body="第一条 为规范研究生学籍管理制定本规定。第二条 本规定适用于在校研究生。",
+        publish_date="2013-01-10",
+        kind="policy",
+        section="学籍管理规定",
+    )
+    current = next(iter(load_manifest(corpus / "manifest.jsonl").values()))
+    append_manifest(
+        corpus / "manifest.jsonl",
+        [
+            replace(
+                current,
+                validity_status="superseded",
+                validity_confidence=1.0,
+                validity_evidence="同时废止原规定",
+            )
+        ],
+    )
+    report = audit_corpus(
+        corpus / "manifest.jsonl",
+        corpus,
+        data / "raw",
+        evaluated_at=date(2026, 8, 6),
+        time_policies={
+            ("上海财经大学研究生院", "学籍管理规定"): "all_history"
+        },
+    )
+    decision = next(item for item in report.decisions if item.doc_id == doc_id)
+    assert decision.retention_status == "historical"
+    assert decision.retention_reason == "explicit_superseded_validity"
+    assert decision.index_collection == "historical"
+
+
+def test_article_requiring_missing_attachment_is_archived_as_incomplete(tmp_path):
+    data = tmp_path / "data"
+    corpus = data / "corpus"
+    doc_id = _add(
+        corpus,
+        url="https://gs.sufe.edu.cn/Home/Detail/missing-attachment",
+        title="上海财经大学2025年研究生资助申请通知",
+        body="本年度申请条件、办理流程和截止时间如下，申请表及完整材料清单详见附件。",
+        publish_date="2025-09-01",
+    )
+    report = audit_corpus(
+        corpus / "manifest.jsonl",
+        corpus,
+        data / "raw",
+        evaluated_at=date(2026, 8, 6),
+        time_policies={
+            ("上海财经大学研究生院", "招生通知"): "recent_5_school_years"
+        },
+    )
+    decision = next(item for item in report.decisions if item.doc_id == doc_id)
+    assert decision.document_kind == "incomplete"
+    assert decision.retention_status == "archived"
+    assert "missing_required_attachment" in decision.reasons

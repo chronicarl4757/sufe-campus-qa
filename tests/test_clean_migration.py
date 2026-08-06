@@ -97,3 +97,16 @@ def test_clean_rebuild_atomically_swaps_and_keeps_archived_audit_row(tmp_path):
     assert manifest["old"].file_path == ""
     assert manifest["old"].content_hash == ""
     assert _tree_hash(raw) == before_raw
+
+    after = audit_corpus(
+        corpus / "manifest.jsonl",
+        corpus,
+        raw,
+        evaluated_at=date(2026, 8, 6),
+        time_policies={
+            ("上海财经大学研究生院", "招生通知"): "recent_5_school_years"
+        },
+    )
+    after_old = next(item for item in after.decisions if item.doc_id == "old")
+    assert after_old.document_kind == "annual_notice"
+    assert after_old.retention_status == "archived"

@@ -61,6 +61,7 @@ from sufe_qa.quality.audit import (
     write_quality_audit,
 )
 from sufe_qa.quality.migrate import rebuild_clean_corpus
+from sufe_qa.quality.gates import verify_clean_pipeline, write_gate_report
 from sufe_qa.retrieve.retriever import HybridRetriever
 from sufe_qa.schema import default_relations_path
 
@@ -497,6 +498,59 @@ def _cmd_rebuild_clean_corpus(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_quality_gates(args: argparse.Namespace) -> int:
+    settings = load_settings()
+    coverage_path = Path(args.coverage) if args.coverage else None
+    report = verify_clean_pipeline(settings, coverage_path=coverage_path)
+    write_gate_report(report, Path(args.output))
+    if args.missing_sources and coverage_path and coverage_path.is_file():
+        coverage = json.loads(coverage_path.read_text(encoding="utf-8"))
+        probes = {}
+        if args.question_bank:
+            for line in Path(args.question_bank).read_text(encoding="utf-8").splitlines():
+                if line.strip():
+                    item = json.loads(line)
+                    probes[str(item["id"])] = item
+        missing = []
+        for result in coverage.get("question_results") or []:
+            if result.get("status") == "answerable":
+                continue
+            probe = probes.get(str(result.get("id")), {})
+            missing.append(
+                {
+                    "id": result.get("id"),
+                    "question": result.get("question"),
+                    "scene": result.get("scene"),
+                    "status": result.get("status"),
+                    "expected_domains": probe.get("expected_domains", []),
+                    "missing_reasons": result.get("missing_reasons", []),
+                }
+            )
+        missing_path = Path(args.missing_sources)
+        missing_path.parent.mkdir(parents=True, exist_ok=True)
+        missing_path.write_text(
+            json.dumps(
+                {
+                    "question_bank_version": coverage.get("question_bank_version"),
+                    "question_bank_hash": coverage.get("question_bank_hash"),
+                    "missing_count": len(missing),
+                    "items": missing,
+                },
+                ensure_ascii=False,
+                indent=2,
+            )
+            + "\n",
+            encoding="utf-8",
+        )
+    print(f"质量门报告: {args.output}")
+    failed = [name for name, passed in report["gates"].items() if not passed]
+    if failed:
+        print(f"未通过质量门: {', '.join(failed)}", file=sys.stderr)
+        return 1
+    print("全部质量门通过")
+    return 0
+
+
 def _cmd_serve(args: argparse.Namespace) -> int:
     settings = load_settings()
     import uvicorn
@@ -642,6 +696,21 @@ def build_parser() -> argparse.ArgumentParser:
     rc.add_argument("--corpus", default="")
     rc.add_argument("--apply", action="store_true", help="确认执行原子切换；默认仅预览")
     rc.set_defaults(func=_cmd_rebuild_clean_corpus)
+
+    qg = sub.add_parser("quality-gates", help="验证 corpus、collection、附件和固定题库质量门")
+    qg.add_argument("--coverage", default="")
+    qg.add_argument("--question-bank", default="")
+    qg.add_argument(
+        "--output",
+        default=str(PROJECT_ROOT / "data" / "crawl_reports" / "sufe_full_report.json"),
+    )
+    qg.add_argument(
+        "--missing-sources",
+        default=str(
+            PROJECT_ROOT / "data" / "crawl_reports" / "sufe_missing_sources.json"
+        ),
+    )
+    qg.set_defaults(func=_cmd_quality_gates)
 
     s = sub.add_parser("serve", help="启动 Web 问答界面")
     s.add_argument("--host", default="127.0.0.1")

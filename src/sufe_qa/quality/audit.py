@@ -20,6 +20,7 @@ _DATE_LABEL_RE = re.compile(
     r"(20\d{2})\s*[-/.年]\s*(\d{1,2})\s*[-/.月]\s*(\d{1,2})"
 )
 _YEAR_RE = re.compile(r"(?:19|20)\d{2}")
+_ATTACHMENT_REFERENCES = ("详见附件", "见附件", "点击下载", "申请表见附件", "办法见附件")
 
 
 @dataclass(frozen=True)
@@ -52,10 +53,15 @@ class DataQualityAudit:
     manifest_fingerprint: str
     total_documents: int
     accepted_documents: int
+    materialized_documents: int
+    active_documents: int
+    historical_documents: int
+    archived_documents: int
     year_title_count: int
     year_title_ratio: float
     annual_series_count: int
     duplicate_annual_series_count: int
+    duplicate_active_annual_series_count: int
     date_correction_count: int
     date_conflict_count: int
     old_annual_count: int
@@ -63,6 +69,9 @@ class DataQualityAudit:
     collection_contamination_count: int
     unknown_type_count: int
     archived_without_raw_count: int
+    main_qa_documents: int
+    public_list_documents: int
+    historical_collection_documents: int
     decisions: tuple[QualityDecision, ...]
 
     def to_dict(self) -> dict:
@@ -159,6 +168,30 @@ def audit_corpus(
     time_policies = time_policies or {}
     manifest = load_manifest(manifest_path)
     bodies = {doc_id: _body_for(meta, corpus_dir) for doc_id, meta in manifest.items()}
+    relations_path = relations_path or manifest_path.with_name("relations.jsonl")
+    relations = load_relations(relations_path)
+    children_by_parent: dict[str, set[str]] = {}
+    for relation in relations:
+        if relation.relation == "attachment_of":
+            children_by_parent.setdefault(relation.parent_doc_id, set()).add(
+                relation.child_doc_id
+            )
+    valid_attachment_ids = {
+        doc_id
+        for doc_id, meta in manifest.items()
+        if meta.document_type == "attachment"
+        and meta.quality_status == "accepted"
+        and bool(meta.file_path and bodies[doc_id])
+    }
+    missing_required_attachment = {
+        doc_id
+        for doc_id, meta in manifest.items()
+        if meta.document_type == "article"
+        and any(marker in bodies[doc_id] for marker in _ATTACHMENT_REFERENCES)
+        and not (
+            children_by_parent.get(doc_id, set()) & valid_attachment_ids
+        )
+    }
     dates: dict[str, tuple[str, str, float, bool]] = {}
     kinds: dict[str, str] = {}
     policies: dict[str, str] = {}
@@ -166,12 +199,24 @@ def audit_corpus(
 
     for doc_id, meta in manifest.items():
         dates[doc_id] = _labeled_date(meta, raw_root)
-        kind = classify_document_kind(
-            meta.title,
-            bodies[doc_id],
-            quality_status=meta.quality_status,
-            has_valid_attachment=meta.document_type == "attachment",
-        )
+        if doc_id in missing_required_attachment or meta.quality_status != "accepted":
+            kind = "incomplete"
+        elif not meta.file_path or not bodies[doc_id]:
+            if (
+                meta.retention_status == "archived"
+                and meta.retention_reason != "legacy_unreviewed"
+                and meta.document_kind
+            ):
+                kind = meta.document_kind
+            else:
+                kind = "incomplete"
+        else:
+            kind = classify_document_kind(
+                meta.title,
+                bodies[doc_id],
+                quality_status=meta.quality_status,
+                has_valid_attachment=meta.document_type == "attachment",
+            )
         kinds[doc_id] = kind
         policy = time_policies.get(
             (meta.publisher, meta.source_section), _default_time_policy(kind)
@@ -194,14 +239,26 @@ def audit_corpus(
             resolve_lifecycle(candidates, time_policy=policy, evaluated_at=evaluated_at)
         )
 
-    relations_path = relations_path or manifest_path.with_name("relations.jsonl")
+    for doc_id, meta in manifest.items():
+        if meta.validity_status not in {"historical", "superseded"}:
+            continue
+        decision = lifecycle[doc_id]
+        if decision.retention_status == "active":
+            lifecycle[doc_id] = replace(
+                decision,
+                retention_status="historical",
+                retention_reason="explicit_superseded_validity",
+            )
+
     parent_ids_by_child: dict[str, set[str]] = {}
-    for relation in load_relations(relations_path):
+    for relation in relations:
         parent_ids_by_child.setdefault(relation.child_doc_id, set()).add(
             relation.parent_doc_id
         )
     for doc_id, meta in manifest.items():
         if meta.document_type != "attachment":
+            continue
+        if kinds[doc_id] == "incomplete" or meta.quality_status != "accepted":
             continue
         parent_ids = parent_ids_by_child.get(doc_id, set())
         parent_candidates = [
@@ -246,6 +303,8 @@ def audit_corpus(
             reasons.append("publish_date_corrected_from_raw_label")
         if kind != meta.document_kind:
             reasons.append("document_kind_reclassified")
+        if doc_id in missing_required_attachment:
+            reasons.append("missing_required_attachment")
         retained_parent = any(
             lifecycle[parent_id].retention_status in {"active", "historical"}
             for parent_id in parent_ids_by_child.get(doc_id, set())
@@ -282,9 +341,14 @@ def audit_corpus(
         )
 
     annual_groups: dict[str, int] = {}
+    active_annual_groups: dict[str, int] = {}
     for item in decisions:
         if item.temporal_class == "annual":
             annual_groups[item.series_key] = annual_groups.get(item.series_key, 0) + 1
+            if item.retention_status == "active":
+                active_annual_groups[item.series_key] = (
+                    active_annual_groups.get(item.series_key, 0) + 1
+                )
     accepted = sum(meta.quality_status == "accepted" for meta in manifest.values())
     year_titles = sum(bool(_YEAR_RE.search(meta.title)) for meta in manifest.values())
     contamination = sum(
@@ -299,10 +363,22 @@ def audit_corpus(
         manifest_fingerprint=_manifest_fingerprint(manifest_path),
         total_documents=len(manifest),
         accepted_documents=accepted,
+        materialized_documents=sum(
+            bool(meta.file_path and (corpus_dir / meta.file_path).is_file())
+            for meta in manifest.values()
+        ),
+        active_documents=sum(item.retention_status == "active" for item in decisions),
+        historical_documents=sum(
+            item.retention_status == "historical" for item in decisions
+        ),
+        archived_documents=sum(item.retention_status == "archived" for item in decisions),
         year_title_count=year_titles,
         year_title_ratio=(year_titles / len(manifest) if manifest else 0.0),
         annual_series_count=len(annual_groups),
         duplicate_annual_series_count=sum(count > 1 for count in annual_groups.values()),
+        duplicate_active_annual_series_count=sum(
+            count > 1 for count in active_annual_groups.values()
+        ),
         date_correction_count=sum(
             item.before_publish_date != item.after_publish_date for item in decisions
         ),
@@ -318,6 +394,13 @@ def audit_corpus(
         collection_contamination_count=contamination,
         unknown_type_count=sum(item.document_kind == "incomplete" for item in decisions),
         archived_without_raw_count=sum("archived_without_raw" in item.reasons for item in decisions),
+        main_qa_documents=sum(item.index_collection == "main_qa" for item in decisions),
+        public_list_documents=sum(
+            item.index_collection == "public_list" for item in decisions
+        ),
+        historical_collection_documents=sum(
+            item.index_collection == "historical" for item in decisions
+        ),
         decisions=tuple(decisions),
     )
 
@@ -328,12 +411,16 @@ def render_quality_markdown(report: DataQualityAudit) -> str:
         "",
         f"- 审计时间：{report.evaluated_at}",
         f"- 文档总数：{report.total_documents}",
+        f"- 有正文文件：{report.materialized_documents}",
+        f"- 生命周期：active {report.active_documents} / historical {report.historical_documents} / archived {report.archived_documents}",
         f"- 标题含年份：{report.year_title_count}（{report.year_title_ratio:.1%}）",
         f"- 年度系列：{report.annual_series_count}，其中重复系列 {report.duplicate_annual_series_count}",
+        f"- active 年度系列重复：{report.duplicate_active_annual_series_count}",
         f"- 日期修正：{report.date_correction_count}，日期冲突：{report.date_conflict_count}",
         f"- 旧年度通知归档：{report.old_annual_count}，旧公示归档：{report.old_public_count}",
         f"- 无法分类：{report.unknown_type_count}",
         f"- 归档但缺少 raw：{report.archived_without_raw_count}",
+        f"- collection：main_qa {report.main_qa_documents} / public_list {report.public_list_documents} / historical {report.historical_collection_documents}",
         "",
         "## 年度系列与逐文档决策",
         "",

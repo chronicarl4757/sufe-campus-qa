@@ -1,0 +1,273 @@
+"""清理后语料、collection 与固定题库的可重复质量门。"""
+
+from __future__ import annotations
+
+import json
+from collections import Counter, defaultdict
+from datetime import datetime, timezone
+from pathlib import Path
+
+import chromadb
+
+from sufe_qa.config import Settings
+from sufe_qa.indexing.collections import (
+    HISTORICAL_COLLECTION,
+    HISTORICAL_KINDS,
+    MAIN_QA_COLLECTION,
+    MAIN_QA_KINDS,
+    PUBLIC_LIST_COLLECTION,
+    PUBLIC_LIST_KINDS,
+    collection_name_for,
+)
+from sufe_qa.schema import load_manifest, load_relations, sha256_text
+
+_ATTACHMENT_REFERENCES = ("详见附件", "见附件", "点击下载", "申请表见附件", "办法见附件")
+
+
+def _collection_stats(settings: Settings) -> dict[str, dict]:
+    client = chromadb.PersistentClient(path=str(settings.chroma_dir))
+    rules = {
+        MAIN_QA_COLLECTION: (MAIN_QA_KINDS, "active"),
+        PUBLIC_LIST_COLLECTION: (PUBLIC_LIST_KINDS, "active"),
+        HISTORICAL_COLLECTION: (HISTORICAL_KINDS, "historical"),
+    }
+    output: dict[str, dict] = {}
+    for key, (allowed_kinds, required_retention) in rules.items():
+        name = collection_name_for(settings, key)
+        try:
+            collection = client.get_collection(name)
+        except ValueError:
+            output[key] = {
+                "name": name,
+                "chunk_count": 0,
+                "document_count": 0,
+                "invalid_documents": ["missing_collection"],
+            }
+            continue
+        metadatas = collection.get(include=["metadatas"]).get("metadatas") or []
+        doc_ids = {str(meta.get("doc_id", "")) for meta in metadatas if meta}
+        invalid = sorted(
+            {
+                str(meta.get("doc_id", ""))
+                for meta in metadatas
+                if meta
+                and (
+                    str(meta.get("document_kind", "")) not in allowed_kinds
+                    or str(meta.get("retention_status", "")) != required_retention
+                )
+            }
+        )
+        output[key] = {
+            "name": name,
+            "chunk_count": collection.count(),
+            "document_count": len(doc_ids),
+            "invalid_documents": invalid,
+        }
+    return output
+
+
+def _coverage_stats(path: Path | None) -> dict:
+    if path is None or not path.is_file():
+        return {
+            "question_bank_version": "missing",
+            "question_bank_hash": "missing",
+            "total": 0,
+            "answerable": 0,
+            "partially_answerable": 0,
+            "not_answerable": 0,
+            "authoritative_hits": 0,
+            "wrong_department_hits": 0,
+        }
+    data = json.loads(path.read_text(encoding="utf-8"))
+    results = data.get("question_results") or []
+    counts = Counter(str(row.get("status", "not_answerable")) for row in results)
+    wrong_department = sum(
+        bool(row.get("retrieved_doc_ids")) and not bool(row.get("matched_domains"))
+        for row in results
+    )
+    return {
+        "question_bank_version": data.get("question_bank_version", "unknown"),
+        "question_bank_hash": data.get("question_bank_hash", "unknown"),
+        "total": len(results),
+        "answerable": counts["answerable"],
+        "partially_answerable": counts["partially_answerable"],
+        "not_answerable": counts["not_answerable"],
+        "authoritative_hits": counts["answerable"] + counts["partially_answerable"],
+        "wrong_department_hits": wrong_department,
+    }
+
+
+def _crawl_report_stats(settings: Settings) -> dict[str, dict]:
+    reports_dir = settings.data_dir / "crawl_reports"
+    latest: dict[str, tuple[str, dict]] = {}
+    if not reports_dir.is_dir():
+        return {}
+    for path in reports_dir.glob("*.json"):
+        if path.name in {"sufe_full_report.json", "sufe_missing_sources.json"}:
+            continue
+        try:
+            data = json.loads(path.read_text(encoding="utf-8"))
+        except (json.JSONDecodeError, OSError):
+            continue
+        host = str(data.get("host", ""))
+        if not host:
+            continue
+        previous = latest.get(host)
+        if previous is None or path.name > previous[0]:
+            latest[host] = (path.name, data)
+    fields = (
+        "categories_found",
+        "list_pages_fetched",
+        "articles_found",
+        "articles_downloaded",
+        "attachments_found",
+        "attachments_downloaded",
+        "attachments_parsed",
+        "incomplete_documents",
+        "low_quality_documents",
+        "final_indexed",
+    )
+    return {
+        host: {
+            "report_file": filename,
+            **{field: int(data.get(field, 0) or 0) for field in fields},
+        }
+        for host, (filename, data) in sorted(latest.items())
+    }
+
+
+def verify_clean_pipeline(
+    settings: Settings,
+    *,
+    coverage_path: Path | None = None,
+) -> dict:
+    manifest = load_manifest(settings.manifest_path)
+    relations = load_relations(settings.manifest_path.with_name("relations.jsonl"))
+    file_hash_errors: list[str] = []
+    missing_files: list[str] = []
+    materialized = []
+    hashes: dict[str, list[str]] = defaultdict(list)
+    for meta in manifest.values():
+        if not meta.file_path:
+            continue
+        path = settings.corpus_dir / meta.file_path
+        if not path.is_file():
+            missing_files.append(meta.doc_id)
+            continue
+        text = path.read_text(encoding="utf-8", errors="replace")
+        if sha256_text(text) != meta.content_hash:
+            file_hash_errors.append(meta.doc_id)
+        materialized.append(meta)
+        hashes[meta.text_hash or meta.content_hash].append(meta.doc_id)
+
+    retained = [
+        meta
+        for meta in manifest.values()
+        if meta.retention_status in {"active", "historical"}
+        and meta.quality_status == "accepted"
+    ]
+    materialized_ids = {meta.doc_id for meta in materialized}
+    isolated_materialized = sorted(
+        meta.doc_id
+        for meta in materialized
+        if meta.document_kind in {"news", "event", "promotion", "incomplete"}
+        or meta.retention_status == "archived"
+    )
+    active_annual: dict[str, list[str]] = defaultdict(list)
+    for meta in manifest.values():
+        if (
+            meta.document_kind == "annual_notice"
+            and meta.retention_status == "active"
+            and meta.series_key
+        ):
+            active_annual[meta.series_key].append(meta.doc_id)
+    duplicate_active_series = {
+        key: ids for key, ids in active_annual.items() if len(ids) > 1
+    }
+
+    children_by_parent: dict[str, set[str]] = defaultdict(set)
+    for relation in relations:
+        if relation.relation == "attachment_of":
+            children_by_parent[relation.parent_doc_id].add(relation.child_doc_id)
+    attachment_reference_violations: list[str] = []
+    for meta in materialized:
+        if meta.document_type != "article":
+            continue
+        text = (settings.corpus_dir / meta.file_path).read_text(
+            encoding="utf-8", errors="replace"
+        )
+        if not any(marker in text for marker in _ATTACHMENT_REFERENCES):
+            continue
+        if not any(child in materialized_ids for child in children_by_parent.get(meta.doc_id, set())):
+            attachment_reference_violations.append(meta.doc_id)
+
+    attachments = [meta for meta in manifest.values() if meta.document_type == "attachment"]
+    parsed_attachments = [
+        meta
+        for meta in attachments
+        if meta.parse_status == "ok" and meta.quality_status == "accepted" and meta.file_path
+    ]
+    duplicate_groups = [ids for ids in hashes.values() if len(ids) > 1]
+    collections = _collection_stats(settings)
+    coverage = _coverage_stats(coverage_path)
+    corpus = {
+        "manifest_documents": len(manifest),
+        "materialized_documents": len(materialized),
+        "retained_documents": len(retained),
+        "valid_body_ratio": (len(materialized) / len(retained) if retained else 1.0),
+        "missing_files": missing_files,
+        "file_hash_errors": file_hash_errors,
+        "isolated_materialized": isolated_materialized,
+        "duplicate_text_groups": duplicate_groups,
+        "duplicate_document_rate": (
+            sum(len(group) - 1 for group in duplicate_groups) / len(materialized)
+            if materialized
+            else 0.0
+        ),
+        "active_annual_series_duplicates": duplicate_active_series,
+        "unknown_validity_main_documents": sum(
+            meta.index_collection == "main_qa"
+            and meta.validity_status == "unknown_validity"
+            for meta in manifest.values()
+        ),
+    }
+    attachment_stats = {
+        "total": len(attachments),
+        "parsed_and_materialized": len(parsed_attachments),
+        "parse_success_rate": (
+            len(parsed_attachments) / len(attachments) if attachments else 1.0
+        ),
+        "article_reference_violations": attachment_reference_violations,
+        "relation_count": sum(
+            relation.relation == "attachment_of" for relation in relations
+        ),
+    }
+    gates = {
+        "corpus_integrity": not missing_files and not file_hash_errors,
+        "valid_body_ratio": corpus["valid_body_ratio"] >= 0.98,
+        "isolated_content_removed": not isolated_materialized,
+        "annual_series_canonical": not duplicate_active_series,
+        "collection_isolation": all(
+            not item["invalid_documents"] for item in collections.values()
+        ),
+        "attachment_completeness": not attachment_reference_violations,
+        "question_authoritative_hits": coverage["authoritative_hits"] >= 120,
+        "question_answerability": coverage["answerable"] >= 120,
+        "wrong_department_hits": coverage["wrong_department_hits"] == 0,
+    }
+    return {
+        "schema_version": "1",
+        "evaluated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "corpus": corpus,
+        "attachments": attachment_stats,
+        "collections": collections,
+        "crawl_sites": _crawl_report_stats(settings),
+        "coverage": coverage,
+        "gates": gates,
+        "passed": all(gates.values()),
+    }
+
+
+def write_gate_report(report: dict, path: Path) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
