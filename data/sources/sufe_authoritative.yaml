@@ -58,6 +58,12 @@ sources:
         category: 奖助学金
         scene: 奖助学金
         time_policy: all_history
+      # 学生资助枢纽：国奖/励志/社会奖助学金/困难认定/学费减免/生源地贷款年度通知
+      - name: 学生资助
+        list_url: https://xsc.sufe.edu.cn/xszz_19081/list.htm
+        category: 奖助学金
+        scene: 奖助学金
+        time_policy: recent_5_school_years
       - name: 通知公告
         list_url: https://xsc.sufe.edu.cn/5450/list.htm
         category: 学工事务
