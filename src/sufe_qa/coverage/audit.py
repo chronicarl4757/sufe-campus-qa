@@ -181,7 +181,11 @@ def _document_kind(meta: DocMeta, text: str) -> str:
         if re.search(r"20\d{2}年|年度", meta.title):
             return "annual_notice"
         return "procedure"
-    return "news" if any(k in f"{meta.title}{text}" for k in ("新闻", "动态", "召开")) else "incomplete"
+    return (
+        "news"
+        if any(k in f"{meta.title}{text}" for k in ("新闻", "动态", "召开"))
+        else "incomplete"
+    )
 
 
 def _load_docs(manifest_path: Path, corpus_dir: Path) -> list[_CorpusDoc]:
@@ -218,6 +222,52 @@ def _question_terms(question: str) -> set[str]:
     return terms
 
 
+# 回答要点的确定性语义匹配：政策正文很少逐字出现"联系方式"这类标签，
+# 实际写法是"联系电话：……""教务管理科（105 室）"。按要点尾缀归类。
+_POINT_RULES: tuple[tuple[tuple[str, ...], str], ...] = (
+    (("材料", "证明", "清单", "凭证"), r"材料|证明|清单|表格|附件|凭证"),
+    (("流程", "步骤", "程序", "手续"), r"流程|步骤|程序|手续|办理"),
+    (("条件", "资格", "要求", "规则", "范围", "标准"), r"条件|资格|要求|规则|范围|标准"),
+    (
+        ("时间", "截止", "期限", "有效期", "时段", "安排"),
+        r"时间|截止|日期|期限|有效|时段|\d{1,2}\s*月",
+    ),
+    (
+        ("部门", "科室", "单位", "办公室", "审核", "审批", "受理", "经办", "指导"),
+        r"教务处|学生处|研究生院|学院|部门|科室|办公室|中心|处|所",
+    ),
+    (
+        ("联系", "咨询", "电话", "地址", "地点", "渠道", "反馈", "报告"),
+        r"联系|咨询|电话|邮箱|地址|地点|渠道|反馈",
+    ),
+    (("对象",), r"对象|适用于|面向"),
+    (
+        ("入口", "系统", "方式", "下载", "平台", "绑定", "激活", "认证"),
+        r"入口|系统|平台|网站|下载|登录|办理|激活|认证",
+    ),
+    (("费用", "收费", "资助标准"), r"费用|收费|金额|免费|元"),
+)
+_POINT_PATTERN_CACHE: dict[str, re.Pattern[str]] = {}
+
+
+def _point_pattern(point: str) -> re.Pattern[str]:
+    pattern = _POINT_PATTERN_CACHE.get(point)
+    if pattern is None:
+        for suffixes, alternation in _POINT_RULES:
+            if any(suffix in point for suffix in suffixes):
+                pattern = re.compile(alternation)
+                break
+        else:
+            pattern = re.compile(re.escape(point))
+        _POINT_PATTERN_CACHE[point] = pattern
+    return pattern
+
+
+def _point_supported(text: str, point: str) -> bool:
+    """要点证据：语义类别匹配，或要点原文逐字出现。"""
+    return point in text or bool(_point_pattern(point).search(text))
+
+
 def _excerpt(body: str, point: str) -> str:
     compact = re.sub(r"\s+", " ", body).strip()
     index = compact.find(point)
@@ -236,14 +286,18 @@ def _evaluate_question(probe: QuestionProbe, docs: list[_CorpusDoc]) -> Question
         text = _normalize(f"{doc.meta.title}\n{doc.body}")
         domain_score = 2 if doc.domain in expected_domains else 0
         term_score = sum(1 for term in terms if _normalize(term) in text)
-        point_score = sum(1 for point in probe.required_answer_points if _normalize(point) in text)
+        point_score = sum(
+            1 for point in probe.required_answer_points if _point_supported(text, point)
+        )
         if domain_score and term_score + point_score >= 2:
             candidates.append((domain_score + term_score + point_score, doc))
     candidates.sort(key=lambda item: (item[0], item[1].meta.publish_date), reverse=True)
     selected = [doc for _, doc in candidates[:5]]
     evidence: list[PointEvidence] = []
     for point in probe.required_answer_points:
-        match = next((doc for doc in selected if _normalize(point) in _normalize(doc.body)), None)
+        match = next(
+            (doc for doc in selected if _point_supported(_normalize(doc.body), point)), None
+        )
         if match:
             evidence.append(
                 PointEvidence(
