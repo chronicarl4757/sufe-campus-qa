@@ -397,3 +397,42 @@ sources:
         category: 学工事务
         scene: 国际交流
         time_policy: all_history
+
+  - id: baoweichu
+    adapter: wp3
+    homepage: https://baoweichu.sufe.edu.cn/
+    publisher: 上海财经大学保卫处
+    source_type: official_department
+    scope_unit: 全体学生
+    sections:
+      # 户政/征兵/办事指南；工作动态、安全宣传、失物招领不进问答索引
+      - name: 户政管理
+        list_url: https://baoweichu.sufe.edu.cn/878/list.htm
+        category: 学工事务
+        scene: 新生与安全
+        time_policy: recent_5_school_years
+      - name: 服务规范
+        list_url: https://baoweichu.sufe.edu.cn/881/list.htm
+        category: 学工事务
+        scene: 新生与安全
+        time_policy: all_history
+      - name: 常见问题
+        list_url: https://baoweichu.sufe.edu.cn/885/list.htm
+        category: 学工事务
+        scene: 新生与安全
+        time_policy: all_history
+      - name: 征兵工作
+        list_url: https://baoweichu.sufe.edu.cn/2327/list.htm
+        category: 学工事务
+        scene: 新生与安全
+        time_policy: recent_5_school_years
+      - name: 兵役登记
+        list_url: https://baoweichu.sufe.edu.cn/2328/list.htm
+        category: 学工事务
+        scene: 新生与安全
+        time_policy: recent_5_school_years
+      - name: 常用下载
+        list_url: https://baoweichu.sufe.edu.cn/884/list.htm
+        category: 学工事务
+        scene: 新生与安全
+        time_policy: all_history
