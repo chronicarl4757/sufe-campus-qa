@@ -487,6 +487,21 @@ def _cmd_benchmark_probe(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_ground_benchmark(args: argparse.Namespace) -> int:
+    from sufe_qa.coverage.ground_bank import ground_bank
+
+    n_grounded, n_needs = ground_bank(
+        Path(args.bank),
+        Path(args.probe_report),
+        grounded_out=Path(args.grounded_out),
+        needs_docs_out=Path(args.needs_docs_out),
+        current_year=args.current_year,
+    )
+    print(f"有文可依 {n_grounded} 条 → {args.grounded_out}")
+    print(f"待补文档 {n_needs} 条 → {args.needs_docs_out}")
+    return 0
+
+
 def _cmd_quality_audit(args: argparse.Namespace) -> int:
     settings = load_settings()
     manifest_path = Path(args.manifest) if args.manifest else settings.manifest_path
@@ -722,6 +737,25 @@ def build_parser() -> argparse.ArgumentParser:
     )
     bp.add_argument("--fake-embed", action="store_true", help=argparse.SUPPRESS)
     bp.set_defaults(func=_cmd_benchmark_probe)
+
+    gb = sub.add_parser("ground-benchmark", help="按探针结果固化有文可依题库与待补文档清单")
+    gb.add_argument(
+        "--bank", default=str(PROJECT_ROOT / "data" / "eval" / "sufe_benchmark_v2.jsonl")
+    )
+    gb.add_argument(
+        "--probe-report",
+        default=str(PROJECT_ROOT / "data" / "coverage" / "sufe_benchmark_v2_report.json"),
+    )
+    gb.add_argument(
+        "--grounded-out",
+        default=str(PROJECT_ROOT / "data" / "eval" / "sufe_benchmark_v2_grounded.jsonl"),
+    )
+    gb.add_argument(
+        "--needs-docs-out",
+        default=str(PROJECT_ROOT / "data" / "coverage" / "sufe_needs_docs.jsonl"),
+    )
+    gb.add_argument("--current-year", type=int, default=2026)
+    gb.set_defaults(func=_cmd_ground_benchmark)
 
     qa = sub.add_parser("quality-audit", help="只读审计日期、类型、年度系列和生命周期")
     qa.add_argument("--sources", default=str(DEFAULT_AUTHORITY_SOURCES))
