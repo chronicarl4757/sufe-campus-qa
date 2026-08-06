@@ -82,7 +82,7 @@ class _CollectionView:
 
 
 class HybridRetriever:
-    """默认检索主问答 collection；公示名单必须显式路由。"""
+    """默认检索主问答；公示名单和历史版本必须显式路由。"""
 
     def __init__(
         self,

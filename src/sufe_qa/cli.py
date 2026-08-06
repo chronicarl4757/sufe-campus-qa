@@ -24,6 +24,12 @@ from urllib.parse import urlparse
 from sufe_qa.config import PROJECT_ROOT, Settings, load_settings
 from sufe_qa.coverage.audit import audit_manifest
 from sufe_qa.coverage.reports import write_coverage_report
+from sufe_qa.crawler.authority import load_authority_sources
+from sufe_qa.crawler.authority_runner import (
+    AuthorityRunOptions,
+    crawl_authority_sources,
+    retry_attachments_from_raw,
+)
 from sufe_qa.crawler.crawl import load_seeds
 from sufe_qa.crawler.discover import discover_site
 from sufe_qa.crawler.engine import CrawlOptions, CrawlReport, crawl_category
@@ -40,10 +46,15 @@ from sufe_qa.indexing.indexer import (
     migrate_legacy_collection,
     update_index,
 )
-from sufe_qa.indexing.collections import MAIN_QA_COLLECTION, PUBLIC_LIST_COLLECTION
+from sufe_qa.indexing.collections import (
+    HISTORICAL_COLLECTION,
+    MAIN_QA_COLLECTION,
+    PUBLIC_LIST_COLLECTION,
+)
 from sufe_qa.ingest.attachment_parsers import parse_attachment
 from sufe_qa.ingest.inbox import ingest_inbox
 from sufe_qa.ingest.pipeline import ingest_crawled_articles
+from sufe_qa.ingest.version_reconcile import reconcile_versions
 from sufe_qa.retrieve.retriever import HybridRetriever
 from sufe_qa.schema import default_relations_path
 
@@ -51,6 +62,7 @@ logger = logging.getLogger(__name__)
 
 DEFAULT_SEEDS = PROJECT_ROOT / "seeds.yaml"
 DEFAULT_EVALSET = PROJECT_ROOT / "data" / "eval" / "evalset.v1.jsonl"
+DEFAULT_AUTHORITY_SOURCES = PROJECT_ROOT / "data" / "sources" / "sufe_authoritative.yaml"
 
 
 def _make_embedder(settings: Settings, fake: bool) -> Embedder:
@@ -237,6 +249,82 @@ def _cmd_crawl_site(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_crawl_authoritative(args: argparse.Namespace) -> int:
+    settings = load_settings()
+    sources = load_authority_sources(Path(args.sources))
+    if args.source:
+        sources = [source for source in sources if source.source_id in set(args.source)]
+    if not sources:
+        print("权威来源清单为空或未匹配 --source", file=sys.stderr)
+        return 2
+    reports = crawl_authority_sources(
+        settings,
+        sources,
+        options=AuthorityRunOptions(
+            delay=args.delay,
+            max_list_pages=args.max_list_pages or 1000,
+            max_articles=args.max_articles or None,
+            max_attachment_bytes=args.max_attachment_bytes,
+            max_attachments_per_article=args.max_attachments_per_article,
+            since=args.since,
+            download_attachments=not args.no_attachments,
+            dry_run=args.dry_run,
+            report_dir=settings.data_dir / "crawl_reports" if args.report_json else None,
+            refresh_articles=args.refresh,
+        ),
+    )
+    for report in reports:
+        print(report.summary())
+    if not args.dry_run:
+        version_report = reconcile_versions(
+            settings.manifest_path,
+            settings.corpus_dir,
+            default_relations_path(settings.manifest_path),
+        )
+        print(
+            f"版本关系：候选主题组 {version_report.candidate_groups}，"
+            f"明确关系 {version_report.relation_count}，"
+            f"unknown_validity {version_report.unknown_validity_count}"
+        )
+    return 0
+
+
+def _cmd_reconcile_versions(_args: argparse.Namespace) -> int:
+    settings = load_settings()
+    report = reconcile_versions(
+        settings.manifest_path,
+        settings.corpus_dir,
+        default_relations_path(settings.manifest_path),
+    )
+    print(
+        f"版本关系：候选主题组 {report.candidate_groups}，明确关系 {report.relation_count}，"
+        f"unknown_validity {report.unknown_validity_count}，更新文档 {report.updated_document_count}"
+    )
+    return 0
+
+
+def _cmd_retry_attachments(args: argparse.Namespace) -> int:
+    settings = load_settings()
+    sources = load_authority_sources(Path(args.sources))
+    source = next((item for item in sources if item.source_id == args.source), None)
+    if source is None:
+        print(f"未找到 source id: {args.source}", file=sys.stderr)
+        return 2
+    reports = retry_attachments_from_raw(
+        settings,
+        source,
+        options=AuthorityRunOptions(
+            delay=args.delay,
+            max_attachment_bytes=args.max_attachment_bytes,
+            max_attachments_per_article=args.max_attachments_per_article,
+            report_dir=settings.data_dir / "crawl_reports" if args.report_json else None,
+        ),
+    )
+    for report in reports:
+        print(report.summary())
+    return 0
+
+
 def _cmd_crawl_report(args: argparse.Namespace) -> int:
     settings = load_settings()
     reports_dir = settings.data_dir / "crawl_reports"
@@ -283,7 +371,8 @@ def _cmd_index(args: argparse.Namespace) -> int:
         f"新增 {report.added_docs} 篇，更新 {report.updated_docs} 篇，"
         f"删除 {report.deleted_docs} 篇，共 {report.total_chunks} chunks，"
         f"主问答 {report.collection_counts.get(MAIN_QA_COLLECTION, 0)} chunks，"
-        f"公示 {report.collection_counts.get(PUBLIC_LIST_COLLECTION, 0)} chunks"
+        f"公示 {report.collection_counts.get(PUBLIC_LIST_COLLECTION, 0)} chunks，"
+        f"历史 {report.collection_counts.get(HISTORICAL_COLLECTION, 0)} chunks"
     )
     if report.backup_path:
         print(f"旧索引备份: {report.backup_path}")
@@ -406,6 +495,33 @@ def build_parser() -> argparse.ArgumentParser:
     cs.add_argument("--report-json", action="store_true")
     cs.set_defaults(func=_cmd_crawl_site)
 
+    ac = sub.add_parser("crawl-authoritative", help="按上财职能部门 adapter 清单抓取垂直切片")
+    ac.add_argument("--sources", default=str(DEFAULT_AUTHORITY_SOURCES))
+    ac.add_argument("--source", action="append", help="只抓指定 source id，可重复")
+    ac.add_argument("--delay", type=float, default=1.0)
+    ac.add_argument("--max-list-pages", type=int, default=0)
+    ac.add_argument("--max-articles", type=int, default=0)
+    ac.add_argument("--max-attachment-bytes", type=int, default=30_000_000)
+    ac.add_argument("--max-attachments-per-article", type=int, default=20)
+    ac.add_argument("--since", default=None)
+    ac.add_argument("--dry-run", action="store_true")
+    ac.add_argument("--no-attachments", action="store_true")
+    ac.add_argument("--refresh", action="store_true", help="忽略文章条件请求，重抓正文与附件")
+    ac.add_argument("--report-json", action="store_true")
+    ac.set_defaults(func=_cmd_crawl_authoritative)
+
+    vr = sub.add_parser("reconcile-versions", help="根据正文证据回溯制度版本关系")
+    vr.set_defaults(func=_cmd_reconcile_versions)
+
+    ra = sub.add_parser("retry-attachments", help="从原始文章缓存定向重放附件")
+    ra.add_argument("--sources", default=str(DEFAULT_AUTHORITY_SOURCES))
+    ra.add_argument("--source", required=True)
+    ra.add_argument("--delay", type=float, default=1.0)
+    ra.add_argument("--max-attachment-bytes", type=int, default=30_000_000)
+    ra.add_argument("--max-attachments-per-article", type=int, default=20)
+    ra.add_argument("--report-json", action="store_true")
+    ra.set_defaults(func=_cmd_retry_attachments)
+
     cr = sub.add_parser("crawl-report", help="查看最近一次抓取报告")
     cr.add_argument("host", nargs="?", default=None)
     cr.set_defaults(func=_cmd_crawl_report)
@@ -425,9 +541,9 @@ def build_parser() -> argparse.ArgumentParser:
     a.add_argument("question")
     a.add_argument(
         "--collection",
-        choices=[MAIN_QA_COLLECTION, PUBLIC_LIST_COLLECTION],
+        choices=[MAIN_QA_COLLECTION, PUBLIC_LIST_COLLECTION, HISTORICAL_COLLECTION],
         default=MAIN_QA_COLLECTION,
-        help="检索 collection；公示名单必须显式选择 public_list",
+        help="检索 collection；公示名单和历史版本必须显式选择对应 collection",
     )
     a.add_argument("--fake-embed", action="store_true", help=argparse.SUPPRESS)
     a.set_defaults(func=_cmd_ask)

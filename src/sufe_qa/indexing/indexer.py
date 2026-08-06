@@ -19,6 +19,7 @@ import chromadb
 
 from sufe_qa.config import Settings
 from sufe_qa.indexing.collections import (
+    HISTORICAL_COLLECTION,
     MAIN_QA_COLLECTION,
     PUBLIC_LIST_COLLECTION,
     collection_for_kind,
@@ -100,7 +101,7 @@ def _document_kind(meta: DocMeta, text: str) -> str:
         quality_status=str(meta.quality_status or "accepted"),
         has_valid_attachment=meta.document_type == "attachment",
     )
-    return "manual" if inferred == "incomplete" else inferred
+    return inferred
 
 
 def _load_indexable(settings: Settings) -> tuple[dict[str, _Indexable], int]:
@@ -116,11 +117,66 @@ def _load_indexable(settings: Settings) -> tuple[dict[str, _Indexable], int]:
             continue
         text = path.read_text(encoding="utf-8")
         kind = _document_kind(meta, text)
-        collection_key = collection_for_kind(kind)
+        retention_status = meta.retention_status
+        if meta.validity_status in {"historical", "superseded"}:
+            retention_status = "historical"
+        collection_key = collection_for_kind(kind, retention_status)
         if collection_key is None:
             skipped += 1
             continue
-        out[doc_id] = _Indexable(meta, text, kind, collection_key)
+        effective_meta = (
+            meta
+            if retention_status == meta.retention_status
+            else replace(meta, retention_status=retention_status)
+        )
+        out[doc_id] = _Indexable(effective_meta, text, kind, collection_key)
+
+    # 防御性折叠：重试分批或旧迁移可能留下同一年度系列的多个 active 文档。
+    # 只改变索引视图，不据此改变 validity_status。
+    active_series: dict[str, list[_Indexable]] = {}
+    for item in out.values():
+        if (
+            item.document_kind == "annual_notice"
+            and item.meta.retention_status == "active"
+            and item.meta.series_key
+        ):
+            active_series.setdefault(item.meta.series_key, []).append(item)
+    for group in active_series.values():
+        if len(group) < 2:
+            continue
+        group_ids = {item.meta.doc_id for item in group}
+        declared = {
+            item.meta.canonical_doc_id
+            for item in group
+            if item.meta.canonical_doc_id in group_ids
+        }
+        canonical_id = (
+            next(iter(declared))
+            if len(declared) == 1
+            else max(group, key=lambda item: (item.meta.publish_date, item.meta.doc_id)).meta.doc_id
+        )
+        for item in group:
+            if item.meta.doc_id == canonical_id:
+                out[item.meta.doc_id] = replace(
+                    item,
+                    meta=replace(item.meta, canonical_doc_id=canonical_id),
+                )
+                continue
+            historical_key = collection_for_kind(item.document_kind, "historical")
+            if historical_key is None:
+                del out[item.meta.doc_id]
+                skipped += 1
+                continue
+            out[item.meta.doc_id] = replace(
+                item,
+                meta=replace(
+                    item.meta,
+                    retention_status="historical",
+                    retention_reason="index_canonical_fold",
+                    canonical_doc_id=canonical_id,
+                ),
+                collection_key=historical_key,
+            )
     return out, skipped
 
 
@@ -148,6 +204,11 @@ def _chunk_metadata(item: _Indexable, collection_name: str) -> dict[str, str | i
         "revision_year": int(meta.revision_year or 0),
         "parent_doc_id": meta.parent_doc_id or "",
         "index_collection": collection_name,
+        "temporal_class": meta.temporal_class or "undated",
+        "series_key": meta.series_key or "",
+        "retention_status": meta.retention_status or "archived",
+        "retention_reason": meta.retention_reason or "",
+        "canonical_doc_id": meta.canonical_doc_id or "",
         # 只影响门控后的排序，不参与 vector_min_similarity 判定。
         "boost": default_boost(item.document_kind),
     }
@@ -170,7 +231,7 @@ def _upsert_item(col, item: _Indexable, embedder: Embedder, collection_name: str
 
 def _existing_by_collection(client, settings: Settings) -> dict[str, dict[str, str]]:
     existing: dict[str, dict[str, str]] = {}
-    for key in (MAIN_QA_COLLECTION, PUBLIC_LIST_COLLECTION):
+    for key in (MAIN_QA_COLLECTION, PUBLIC_LIST_COLLECTION, HISTORICAL_COLLECTION):
         col = client.get_or_create_collection(
             collection_name_for(settings, key), metadata={"hnsw:space": "cosine"}
         )
@@ -200,6 +261,12 @@ def _write_index_metadata(settings: Settings, index_dir: Path) -> None:
                 "name": settings.public_list_collection_name,
                 "document_kinds": ["public_list"],
             },
+            HISTORICAL_COLLECTION: {
+                "name": settings.historical_collection_name,
+                "document_kinds": sorted(
+                    {"policy", "procedure", "annual_notice", "form", "manual", "service_guide"}
+                ),
+            },
         },
     }
     (index_dir / "index_metadata.json").write_text(
@@ -213,7 +280,7 @@ def _build_incremental(settings: Settings, embedder: Embedder, index_dir: Path) 
         key: client.get_or_create_collection(
             collection_name_for(settings, key), metadata={"hnsw:space": "cosine"}
         )
-        for key in (MAIN_QA_COLLECTION, PUBLIC_LIST_COLLECTION)
+        for key in (MAIN_QA_COLLECTION, PUBLIC_LIST_COLLECTION, HISTORICAL_COLLECTION)
     }
     manifest, skipped = _load_indexable(settings)
     desired = {
@@ -271,7 +338,7 @@ def _build_full(settings: Settings, embedder: Embedder, index_dir: Path) -> Inde
         key: client.get_or_create_collection(
             collection_name_for(settings, key), metadata={"hnsw:space": "cosine"}
         )
-        for key in (MAIN_QA_COLLECTION, PUBLIC_LIST_COLLECTION)
+        for key in (MAIN_QA_COLLECTION, PUBLIC_LIST_COLLECTION, HISTORICAL_COLLECTION)
     }
     manifest, skipped = _load_indexable(settings)
     chunks = 0
@@ -343,6 +410,7 @@ def migrate_legacy_collection(settings: Settings) -> LegacyMigrationReport:
     target_rows: dict[str, list[tuple[str, list[float], str, dict]]] = {
         MAIN_QA_COLLECTION: [],
         PUBLIC_LIST_COLLECTION: [],
+        HISTORICAL_COLLECTION: [],
     }
     skipped = 0
     for chunk_id, text, metadata, embedding in zip(

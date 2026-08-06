@@ -31,6 +31,8 @@ def _write_doc(s, doc_id, category, fname, text, title, content_hash):
                 fetched_at="t",
                 content_hash=content_hash,
                 file_path=f"{category}/{fname}",
+                retention_status="active",
+                retention_reason="test_fixture",
             )
         ],
     )
@@ -74,6 +76,8 @@ def test_update_and_delete(tmp_path):
                 fetched_at="t2",
                 content_hash="sha256:cccc",
                 file_path="奖助学金/a.md",
+                retention_status="active",
+                retention_reason="test_fixture",
             )
         ],
     )

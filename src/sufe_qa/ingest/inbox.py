@@ -7,7 +7,12 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from sufe_qa.config import CATEGORIES
-from sufe_qa.ingest.classification import classify_document_kind, normalize_policy_name
+from sufe_qa.ingest.classification import (
+    classify_document_kind,
+    normalize_policy_name,
+    standardize_topic_key,
+)
+from sufe_qa.ingest.lifecycle import series_key_for, temporal_class_for
 from sufe_qa.ingest.parsers import ParseError, parse_file
 from sufe_qa.schema import DocMeta, append_manifest, doc_id_from, load_manifest, sha256_text
 
@@ -92,6 +97,8 @@ def ingest_inbox(
         out_path.parent.mkdir(parents=True, exist_ok=True)
         out_path.write_text(final, encoding="utf-8")
         document_kind = classify_document_kind(doc.title, doc.text)
+        if document_kind == "incomplete":
+            document_kind = "manual"
         new_metas.append(
             DocMeta(
                 doc_id=doc_id,
@@ -103,9 +110,14 @@ def ingest_inbox(
                 fetched_at=datetime.now(timezone.utc).isoformat(timespec="seconds"),
                 content_hash=content_hash,
                 file_path=rel_path.as_posix(),
-                document_kind="manual" if document_kind == "incomplete" else document_kind,
+                document_kind=document_kind,
                 policy_name=normalize_policy_name(doc.title),
+                topic_key=standardize_topic_key(doc.title, normalize_policy_name(doc.title)),
                 source_type="manual_upload",
+                temporal_class=temporal_class_for(document_kind, doc.title),
+                series_key=series_key_for(doc.title, publisher=publisher),
+                retention_status="active",
+                retention_reason="manual_upload",
             )
         )
         existing_hashes.add(content_hash)

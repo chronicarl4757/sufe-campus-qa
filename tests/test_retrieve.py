@@ -121,6 +121,8 @@ def test_search_recency_reranks_identical_relevance(settings):
             fetched_at="2026-07-31T00:00:00+00:00",
             content_hash=f"sha256:{fname}",
             file_path=fname,
+            retention_status="active",
+            retention_reason="test_fixture",
         )
         for fname, date in (("old.md", "2015-01-01"), ("new.md", "2026-01-01"))
     ]
@@ -155,8 +157,10 @@ def test_search_doc_type_boost(settings):
                 publish_date="2026-01-01",
                 category="学工事务",
                 fetched_at="2026-07-31T00:00:00+00:00",
-                content_hash=f"sha256:{fname}",
-                file_path=fname,
+                    content_hash=f"sha256:{fname}",
+                    file_path=fname,
+                    retention_status="active",
+                    retention_reason="test_fixture",
             )
             for fname, title, _ in docs
         ],

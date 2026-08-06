@@ -22,6 +22,7 @@ class Settings:
     # collection_name 保留为主问答 collection 的兼容字段；旧名称只用于迁移输入。
     collection_name: str = "sufe_qa_main_v2"
     public_list_collection_name: str = "sufe_qa_public_list_v2"
+    historical_collection_name: str = "sufe_qa_historical_v2"
     legacy_collection_name: str = "sufe_campus_qa"
     collection_schema_version: str = "2"
     llm_model: str = "deepseek-v4-flash"
