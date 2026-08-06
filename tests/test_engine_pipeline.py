@@ -168,6 +168,19 @@ def test_attachment_filename_fallback():
     assert attachment_filename("", f"{BASE}/download.jsp", f"{BASE}/x", 4) == "attachment-4"
 
 
+def test_attachment_filename_prefers_anchor_over_opaque_uuid():
+    """jwc 附件服务器的 UUID 文件名没有语义，应回退到锚文本。"""
+    uuid_url = f"{BASE}/_upload/article/files/ab/cd/e470cdc5-5780-4d49-ad18-f265ea4c5887.pdf"
+    assert (
+        attachment_filename("", uuid_url, uuid_url, 1, anchor_text="本科生缓考申请表")
+        == "本科生缓考申请表.pdf"
+    )
+    # 无语义锚文本时才保留 UUID 段（可辨识的唯一名）
+    assert attachment_filename("", uuid_url, uuid_url, 2) == (
+        "e470cdc5-5780-4d49-ad18-f265ea4c5887.pdf"
+    )
+
+
 def test_iframe_pdfjs_viewer_resolved(tmp_path):
     """gs 站真实链路：iframe mod=pdf 查看器 → _fileurl → getStream 真 PDF。"""
     viewer_url = "https://ssd.sufe.edu.cn/index.php?mod=pdf&path=TOK"

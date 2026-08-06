@@ -184,6 +184,14 @@ def filename_from_disposition(cd: str) -> str | None:
     return raw
 
 
+# 无语义内容的哈希/UUID 文件名（如 jwc 附件服务器命名）：锚文本比它更有价值
+_OPAQUE_STEM_RE = re.compile(r"^[0-9a-fA-F]{6,}(?:-[0-9a-fA-F]{4,}){2,}$|^[0-9a-fA-F]{24,}$")
+
+
+def _is_opaque_name(segment: str) -> bool:
+    return bool(_OPAQUE_STEM_RE.fullmatch(Path(segment).stem))
+
+
 def attachment_filename(
     content_disposition: str,
     final_url: str,
@@ -193,14 +201,19 @@ def attachment_filename(
     parent_title: str = "",
     mime_type: str = "",
 ) -> str:
-    """文件名回退链：Content-Disposition → 带附件扩展名的 URL 段 → 锚文本 → 父标题 → 序号。"""
+    """文件名回退链：Content-Disposition → 有意义的 URL 段 → 锚文本 → 父标题 → 序号。"""
     if name := filename_from_disposition(content_disposition):
         return name
+    skipped_ext = ""
+    opaque_seg = ""
     for url in (final_url, requested_url):
         seg = unquote(urlparse(url).path.rstrip("/").rsplit("/", 1)[-1]).strip()
         if any(seg.lower().endswith(ext) for ext in ATTACH_EXTS):
-            return seg
-    ext = _MIME_EXT.get(mime_type, "")
+            if not _is_opaque_name(seg):
+                return seg
+            skipped_ext = skipped_ext or Path(seg).suffix
+            opaque_seg = opaque_seg or seg
+    ext = _MIME_EXT.get(mime_type, "") or skipped_ext
     if anchor_text:
         name = re.sub(r"[\\/:*?\"<>|\s]+", "_", anchor_text).strip("_")[:80]
         if name:
@@ -208,6 +221,8 @@ def attachment_filename(
     if parent_title:
         name = re.sub(r"[\\/:*?\"<>|\s]+", "_", parent_title).strip("_")[:80]
         return name + ext
+    if opaque_seg:
+        return opaque_seg
     return f"attachment-{index}{ext}"
 
 
