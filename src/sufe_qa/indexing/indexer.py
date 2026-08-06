@@ -38,6 +38,10 @@ class Embedder(Protocol):
 class FakeEmbedder:
     """确定性假向量：字符 3-gram 哈希到 64 维，仅用于测试。"""
 
+    model_name = "fake-hash-3gram-v1"
+    backend = "fake"
+    test_only = True
+
     def __init__(self, dim: int = 64):
         self.dim = dim
 
@@ -57,6 +61,9 @@ class BgeEmbedder:
     def __init__(self, model_name: str = "BAAI/bge-m3"):
         from sentence_transformers import SentenceTransformer  # 仅此处置允许 import
 
+        self.model_name = model_name
+        self.backend = "sentence-transformers"
+        self.test_only = False
         self._m = SentenceTransformer(model_name)
 
     def encode(self, texts: list[str]) -> list[list[float]]:
@@ -244,11 +251,35 @@ def _existing_by_collection(client, settings: Settings) -> dict[str, dict[str, s
     return existing
 
 
-def _write_index_metadata(settings: Settings, index_dir: Path) -> None:
+def _write_index_metadata(
+    settings: Settings,
+    index_dir: Path,
+    embedder: Embedder | None,
+) -> None:
     index_dir.mkdir(parents=True, exist_ok=True)
+    embedding_model = str(getattr(embedder, "model_name", "legacy-unknown"))
+    embedding_backend = str(getattr(embedder, "backend", "legacy-unknown"))
+    test_only = bool(getattr(embedder, "test_only", False))
+    manifest_fingerprint = "sha256:" + hashlib.sha256(
+        settings.manifest_path.read_bytes() if settings.manifest_path.is_file() else b""
+    ).hexdigest()
+    fingerprint_payload = json.dumps(
+        {
+            "collection_schema_version": settings.collection_schema_version,
+            "embedding_model": embedding_model,
+            "manifest_fingerprint": manifest_fingerprint,
+        },
+        ensure_ascii=False,
+        sort_keys=True,
+    ).encode("utf-8")
     data = {
         "schema_version": settings.collection_schema_version,
         "created_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "embedding_model": embedding_model,
+        "embedding_backend": embedding_backend,
+        "test_only": test_only,
+        "manifest_fingerprint": manifest_fingerprint,
+        "index_fingerprint": "sha256:" + hashlib.sha256(fingerprint_payload).hexdigest(),
         "legacy_collection": settings.legacy_collection_name,
         "collections": {
             MAIN_QA_COLLECTION: {
@@ -321,7 +352,7 @@ def _build_incremental(settings: Settings, embedder: Embedder, index_dir: Path) 
 
     # doc_id 从主库迁移到公示库（或反向）时，旧 collection 已删除，新增也计为更新。
     deleted_global -= desired_global
-    _write_index_metadata(settings, index_dir)
+    _write_index_metadata(settings, index_dir, embedder)
     return IndexReport(
         added_docs=len(added_global),
         updated_docs=len(updated_global),
@@ -348,7 +379,7 @@ def _build_full(settings: Settings, embedder: Embedder, index_dir: Path) -> Inde
         for item in items:
             chunks += _upsert_item(col, item, embedder, collection_name_for(settings, key))
         counts[key] = col.count()
-    _write_index_metadata(settings, index_dir)
+    _write_index_metadata(settings, index_dir, embedder)
     return IndexReport(
         added_docs=len(manifest),
         updated_docs=0,
@@ -448,5 +479,5 @@ def migrate_legacy_collection(settings: Settings) -> LegacyMigrationReport:
         )
         migrated += len(rows)
         counts[key] = col.count()
-    _write_index_metadata(settings, settings.chroma_dir)
+    _write_index_metadata(settings, settings.chroma_dir, None)
     return LegacyMigrationReport(settings.legacy_collection_name, migrated, skipped, counts)

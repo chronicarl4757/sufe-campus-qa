@@ -1,3 +1,5 @@
+import json
+
 from sufe_qa.config import Settings
 from sufe_qa.indexing.indexer import FakeEmbedder, update_index
 from sufe_qa.schema import DocMeta, append_manifest
@@ -45,6 +47,28 @@ def test_first_build_indexes_all(tmp_path):
     r = update_index(s, FakeEmbedder())
     assert (r.added_docs, r.updated_docs, r.deleted_docs) == (2, 0, 0)
     assert r.total_chunks >= 2
+
+
+def test_index_metadata_records_actual_embedder_and_manifest_fingerprint(tmp_path):
+    s = _settings(tmp_path)
+    _write_doc(
+        s,
+        "docA",
+        "奖助学金",
+        "a.md",
+        "第一条 奖学金标准。",
+        "奖学金办法",
+        "sha256:aaaa",
+    )
+
+    update_index(s, FakeEmbedder(), full=True)
+
+    metadata = json.loads((s.chroma_dir / "index_metadata.json").read_text(encoding="utf-8"))
+    assert metadata["embedding_model"] == "fake-hash-3gram-v1"
+    assert metadata["embedding_backend"] == "fake"
+    assert metadata["test_only"] is True
+    assert metadata["manifest_fingerprint"].startswith("sha256:")
+    assert metadata["index_fingerprint"].startswith("sha256:")
 
 
 def test_second_run_noop(tmp_path):
