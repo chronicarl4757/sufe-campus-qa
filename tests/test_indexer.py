@@ -1,7 +1,9 @@
 import json
+import sys
+from types import SimpleNamespace
 
 from sufe_qa.config import Settings
-from sufe_qa.indexing.indexer import FakeEmbedder, update_index
+from sufe_qa.indexing.indexer import BgeEmbedder, FakeEmbedder, update_index
 from sufe_qa.schema import DocMeta, append_manifest
 
 
@@ -69,6 +71,44 @@ def test_index_metadata_records_actual_embedder_and_manifest_fingerprint(tmp_pat
     assert metadata["test_only"] is True
     assert metadata["manifest_fingerprint"].startswith("sha256:")
     assert metadata["index_fingerprint"].startswith("sha256:")
+
+
+def test_bge_embedder_uses_fp16_and_small_batches_on_low_vram(monkeypatch):
+    calls = {}
+
+    class StubModel:
+        def __init__(self, model_name, **kwargs):
+            calls["init"] = (model_name, kwargs)
+
+        def encode(self, texts, **kwargs):
+            calls["encode"] = (texts, kwargs)
+            return [[1.0, 0.0] for _ in texts]
+
+    stub_torch = SimpleNamespace(
+        float16="float16",
+        cuda=SimpleNamespace(
+            is_available=lambda: True,
+            get_device_properties=lambda _index: SimpleNamespace(total_memory=2 * 1024**3),
+        ),
+    )
+    monkeypatch.setitem(sys.modules, "torch", stub_torch)
+    monkeypatch.setitem(
+        sys.modules,
+        "sentence_transformers",
+        SimpleNamespace(SentenceTransformer=StubModel),
+    )
+
+    embedder = BgeEmbedder("BAAI/bge-m3")
+    vectors = embedder.encode(["第一条 测试文本"])
+
+    assert calls["init"] == (
+        "BAAI/bge-m3",
+        {"device": "cuda", "model_kwargs": {"torch_dtype": "float16"}},
+    )
+    assert calls["encode"][1]["batch_size"] == 2
+    assert embedder.device == "cuda"
+    assert embedder.precision == "float16"
+    assert vectors == [[1.0, 0.0]]
 
 
 def test_second_run_noop(tmp_path):

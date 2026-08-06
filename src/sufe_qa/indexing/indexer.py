@@ -41,6 +41,8 @@ class FakeEmbedder:
     model_name = "fake-hash-3gram-v1"
     backend = "fake"
     test_only = True
+    device = "cpu"
+    precision = "float32"
 
     def __init__(self, dim: int = 64):
         self.dim = dim
@@ -59,15 +61,34 @@ class FakeEmbedder:
 
 class BgeEmbedder:
     def __init__(self, model_name: str = "BAAI/bge-m3"):
+        import torch
         from sentence_transformers import SentenceTransformer  # 仅此处置允许 import
 
         self.model_name = model_name
         self.backend = "sentence-transformers"
         self.test_only = False
-        self._m = SentenceTransformer(model_name)
+        self.device = "cuda" if torch.cuda.is_available() else "cpu"
+        self.precision = "float16" if self.device == "cuda" else "float32"
+        self.batch_size = 32
+        model_kwargs = None
+        if self.device == "cuda":
+            model_kwargs = {"torch_dtype": torch.float16}
+            total_vram = torch.cuda.get_device_properties(0).total_memory
+            if total_vram <= 4 * 1024**3:
+                self.batch_size = 2
+        self._m = SentenceTransformer(
+            model_name,
+            device=self.device,
+            model_kwargs=model_kwargs,
+        )
 
     def encode(self, texts: list[str]) -> list[list[float]]:
-        return [[float(x) for x in v] for v in self._m.encode(texts, normalize_embeddings=True)]
+        vectors = self._m.encode(
+            texts,
+            batch_size=self.batch_size,
+            normalize_embeddings=True,
+        )
+        return [[float(x) for x in v] for v in vectors]
 
 
 @dataclass(frozen=True)
@@ -259,6 +280,8 @@ def _write_index_metadata(
     index_dir.mkdir(parents=True, exist_ok=True)
     embedding_model = str(getattr(embedder, "model_name", "legacy-unknown"))
     embedding_backend = str(getattr(embedder, "backend", "legacy-unknown"))
+    embedding_device = str(getattr(embedder, "device", "legacy-unknown"))
+    embedding_precision = str(getattr(embedder, "precision", "legacy-unknown"))
     test_only = bool(getattr(embedder, "test_only", False))
     manifest_fingerprint = "sha256:" + hashlib.sha256(
         settings.manifest_path.read_bytes() if settings.manifest_path.is_file() else b""
@@ -277,6 +300,8 @@ def _write_index_metadata(
         "created_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "embedding_model": embedding_model,
         "embedding_backend": embedding_backend,
+        "embedding_device": embedding_device,
+        "embedding_precision": embedding_precision,
         "test_only": test_only,
         "manifest_fingerprint": manifest_fingerprint,
         "index_fingerprint": "sha256:" + hashlib.sha256(fingerprint_payload).hexdigest(),
