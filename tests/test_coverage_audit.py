@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+from dataclasses import replace
 from pathlib import Path
 
 from sufe_qa.coverage.audit import audit_manifest, render_markdown
@@ -75,3 +76,33 @@ def test_audit_markdown_contains_scene_stats_and_question_rows(tmp_path):
     assert "本科生国家奖学金申请条件是什么？" in markdown
     data = json.loads(report.to_json())
     assert data["question_bank_hash"] == report.question_bank_hash
+
+
+def test_audit_excludes_manifest_only_archived_rows_from_corpus_counts(tmp_path):
+    manifest = tmp_path / "corpus" / "manifest.jsonl"
+    materialized = _write_doc(
+        tmp_path,
+        "本科生奖学金评选办法",
+        "https://xsc.sufe.edu.cn/policy/current",
+        "申请条件、评审流程、材料和申诉部门见正文。",
+        "上海财经大学学生工作处",
+    )
+    archived = replace(
+        materialized,
+        doc_id="archived-row",
+        title="2018年度奖学金评选通知",
+        source_url="https://xsc.sufe.edu.cn/notice/2018",
+        content_hash="",
+        file_path="",
+        retention_status="archived",
+    )
+    append_manifest(manifest, [materialized, archived])
+
+    report = audit_manifest(
+        manifest_path=manifest,
+        corpus_dir=tmp_path / "corpus",
+        question_bank_path=Path("data/eval/sufe_question_bank.jsonl"),
+    )
+
+    assert report.corpus_document_count == 1
+    assert report.scene_stats["奖助学金"].document_count == 1

@@ -187,11 +187,12 @@ def _document_kind(meta: DocMeta, text: str) -> str:
 def _load_docs(manifest_path: Path, corpus_dir: Path) -> list[_CorpusDoc]:
     docs: list[_CorpusDoc] = []
     for meta in load_manifest(manifest_path).values():
-        body = ""
-        if meta.file_path:
-            path = corpus_dir / meta.file_path
-            if path.is_file():
-                body = path.read_text(encoding="utf-8", errors="replace")
+        if not meta.file_path:
+            continue
+        path = corpus_dir / meta.file_path
+        if not path.is_file():
+            continue
+        body = path.read_text(encoding="utf-8", errors="replace")
         scene = _scene_for(meta, body)
         if scene is None:
             continue
