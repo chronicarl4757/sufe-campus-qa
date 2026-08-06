@@ -145,6 +145,34 @@ def test_filename_from_disposition_gbk():
     assert filename_from_disposition(cd) == "推免名单.xlsx"
 
 
+def test_filename_from_disposition_percent_encoded_plain():
+    """career 站点把中文名整段百分号编码后写进普通 filename 参数。"""
+    cd = "attachment; filename=%E6%8E%A8%E5%85%8D%E5%8A%9E%E6%B3%95.pdf"
+    assert filename_from_disposition(cd) == "推免办法.pdf"
+
+
+def test_save_raw_attachment_truncates_long_percent_encoded_name(tmp_path):
+    """超长百分号编码文件名不得触发 OSError: File name too long。"""
+    from sufe_qa.crawler.engine import DownloadedAttachment
+    from sufe_qa.ingest.pipeline import _save_raw_attachment
+
+    long_name = "%E4%B8%8A%E6%B5%B7" * 60 + ".xlsx"  # 解码后仍远超 255 字节
+    att = DownloadedAttachment(
+        requested_url="https://example.cn/dl",
+        final_url="https://example.cn/dl",
+        filename=long_name,
+        mime_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        content=b"fake-xlsx",
+        binary_hash="ab" * 32,
+        status="ok",
+    )
+    path = _save_raw_attachment(tmp_path, att)
+    assert path.is_file()
+    assert len(path.name.encode("utf-8")) <= 200
+    assert path.read_bytes() == b"fake-xlsx"
+    assert not path.name.startswith("%")
+
+
 def test_attachment_filename_fallback():
     assert attachment_filename("", f"{BASE}/_upload/a.pdf", f"{BASE}/x", 1) == "a.pdf"
     # 无附件扩展名的下载脚本：依次回退到锚文本、父标题（按 mime 补扩展名）、序号

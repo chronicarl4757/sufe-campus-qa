@@ -158,6 +158,13 @@ _MIME_EXT = {
 }
 
 
+def _maybe_unquote(name: str) -> str:
+    """部分服务器把中文名整段百分号编码后直接写进普通 filename 参数。"""
+    if name.isascii() and re.search(r"%[0-9A-Fa-f]{2}", name):
+        return unquote(name, errors="replace")
+    return name
+
+
 def filename_from_disposition(cd: str) -> str | None:
     """从 Content-Disposition 提取文件名；支持 RFC5987 与 GBK 伪装 latin-1 的中文名。"""
     if not cd:
@@ -171,7 +178,7 @@ def filename_from_disposition(cd: str) -> str | None:
     m = _FILENAME_RE.search(cd)
     if not m:
         return None
-    raw = m.group(1).strip()
+    raw = _maybe_unquote(m.group(1).strip())
     try:  # httpx 头按 latin-1 解码，中文名需还原字节再猜编码
         raw.encode("latin-1")
     except UnicodeEncodeError:

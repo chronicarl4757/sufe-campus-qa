@@ -488,10 +488,32 @@ def _save_raw_article(raw_dir: Path, doc_id: str, art: CrawledArticle) -> None:
     (d / f"{doc_id}.html").write_text(art.html, encoding="utf-8")
 
 
+def _safe_raw_filename(att: DownloadedAttachment) -> str:
+    """原始附件落盘文件名：安全名原样保留；百分号编码/超长的先解码再按字节截断。
+
+    高校下载接口常把中文文件名整段百分号编码后塞进 URL 或
+    Content-Disposition，直接当文件名会超过 255 字节上限
+    （OSError: File name too long）。截断名追加哈希尾防撞。
+    """
+    from urllib.parse import unquote
+
+    name = att.filename or ""
+    if name and "/" not in name and len(name.encode("utf-8", errors="ignore")) <= 120:
+        if not (name.isascii() and re.search(r"%[0-9A-Fa-f]{2}", name)):
+            return name
+    name = unquote(name, errors="replace").replace("/", "_").strip()
+    if not name:
+        return att.binary_hash[:16]
+    suffix = Path(name).suffix[:16]
+    stem_bytes = Path(name).stem.encode("utf-8")[:120]
+    stem = stem_bytes.decode("utf-8", errors="ignore")
+    return f"{stem}-{att.binary_hash[:8]}{suffix}"
+
+
 def _save_raw_attachment(raw_dir: Path, att: DownloadedAttachment) -> Path:
     d = raw_dir / "attachments" / att.binary_hash[:2]
     d.mkdir(parents=True, exist_ok=True)
-    path = d / (att.filename or att.binary_hash[:16])
+    path = d / _safe_raw_filename(att)
     if not path.exists() or path.stat().st_size != len(att.content):
         path.write_bytes(att.content)
     return path
