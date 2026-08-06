@@ -1,0 +1,164 @@
+# 问题覆盖驱动的首个垂直切片：教务处 + 学生处 + 研究生院。
+# category 是现有 corpus 目录兼容分类；scene 保存在 source_section/metadata，
+# 覆盖审计以固定题库场景为分母，不把 corpus category 当作业务场景。
+sources:
+  - id: jwc
+    adapter: jwc
+    homepage: https://jwc.sufe.edu.cn/
+    publisher: 上海财经大学教务处
+    source_type: official_department
+    scope_unit: 本科生
+    sections:
+      - name: 办事流程
+        list_url: https://jwc.sufe.edu.cn/5124/list.htm
+        category: 学工事务
+        scene: 本科教务
+        time_policy: all_history
+      - name: 规章制度
+        list_url: https://jwc.sufe.edu.cn/5123/list.htm
+        category: 学工事务
+        scene: 本科教务
+        time_policy: all_history
+      - name: 教学建设
+        list_url: https://jwc.sufe.edu.cn/5125/list.htm
+        category: 学工事务
+        scene: 本科教务
+        time_policy: all_history
+      - name: 常用下载
+        list_url: https://jwc.sufe.edu.cn/5126/list.htm
+        category: 学工事务
+        scene: 本科教务
+        time_policy: all_history
+
+  - id: xsc
+    adapter: wp3
+    homepage: https://xsc.sufe.edu.cn/
+    publisher: 上海财经大学学生处
+    source_type: official_department
+    scope_unit: 本科生
+    sections:
+      - name: 行政规章
+        list_url: https://xsc.sufe.edu.cn/5436/list.htm
+        category: 奖助学金
+        scene: 奖助学金
+        time_policy: all_history
+      - name: 部门制度
+        list_url: https://xsc.sufe.edu.cn/5437/list.htm
+        category: 奖助学金
+        scene: 奖助学金
+        time_policy: all_history
+      - name: 通知公告
+        list_url: https://xsc.sufe.edu.cn/5450/list.htm
+        category: 学工事务
+        scene: 新生与安全
+        time_policy: recent_5_school_years
+
+  - id: gs
+    adapter: graduate_school
+    homepage: https://gs.sufe.edu.cn/
+    publisher: 上海财经大学研究生院
+    source_type: official_department
+    scope_unit: 研究生
+    allowed_hosts:
+      - ssd.sufe.edu.cn
+    sections:
+      - name: 招生通知
+        list_url: https://gs.sufe.edu.cn/Home/List/31
+        category: 推免升学
+        scene: 推免与招生
+        time_policy: recent_5_school_years
+      - name: 招生简章
+        list_url: https://gs.sufe.edu.cn/Home/List/32
+        category: 推免升学
+        scene: 推免与招生
+        time_policy: recent_5_school_years
+      - name: 招生管理规定
+        list_url: https://gs.sufe.edu.cn/Home/List/35
+        category: 推免升学
+        scene: 推免与招生
+        time_policy: all_history
+      - name: 招生公示
+        list_url: https://gs.sufe.edu.cn/Home/List/43
+        category: 推免升学
+        scene: 推免与招生
+        time_policy: recent_2_school_years
+      - name: 培养工作通知
+        list_url: https://gs.sufe.edu.cn/Home/List/49
+        category: 学工事务
+        scene: 研究生培养与学位
+        time_policy: recent_5_school_years
+      - name: 教学管理
+        list_url: https://gs.sufe.edu.cn/Home/List/46
+        category: 学工事务
+        scene: 研究生培养与学位
+        time_policy: all_history
+      - name: 培养管理制度
+        list_url: https://gs.sufe.edu.cn/Home/List/48
+        category: 学工事务
+        scene: 研究生培养与学位
+        time_policy: all_history
+      - name: 学位工作通知
+        list_url: https://gs.sufe.edu.cn/Home/List/50
+        category: 学工事务
+        scene: 研究生培养与学位
+        time_policy: recent_5_school_years
+      - name: 学位管理规定
+        list_url: https://gs.sufe.edu.cn/Home/List/54
+        category: 学工事务
+        scene: 研究生培养与学位
+        time_policy: all_history
+      - name: 学位授予名单
+        list_url: https://gs.sufe.edu.cn/Home/List/51
+        category: 学工事务
+        scene: 研究生培养与学位
+        time_policy: recent_2_school_years
+      - name: 答辩公告
+        list_url: https://gs.sufe.edu.cn/Home/List/55
+        category: 学工事务
+        scene: 研究生培养与学位
+        time_policy: current_school_year
+      - name: 学籍管理通知
+        list_url: https://gs.sufe.edu.cn/Home/List/56
+        category: 学工事务
+        scene: 研究生培养与学位
+        time_policy: recent_5_school_years
+      - name: 学籍管理规定
+        list_url: https://gs.sufe.edu.cn/Home/List/57
+        category: 学工事务
+        scene: 研究生培养与学位
+        time_policy: all_history
+      - name: 办事程序
+        list_url: https://gs.sufe.edu.cn/Home/List/58
+        category: 学工事务
+        scene: 研究生培养与学位
+        time_policy: all_history
+      - name: 毕业管理
+        list_url: https://gs.sufe.edu.cn/Home/List/59
+        category: 学工事务
+        scene: 研究生培养与学位
+        time_policy: all_history
+      - name: 国际交流通知
+        list_url: https://gs.sufe.edu.cn/Home/List/65
+        category: 学工事务
+        scene: 国际交流
+        time_policy: recent_5_school_years
+      - name: 公派留学
+        list_url: https://gs.sufe.edu.cn/Home/List/66
+        category: 学工事务
+        scene: 国际交流
+        time_policy: all_history
+      - name: 短期交流
+        list_url: https://gs.sufe.edu.cn/Home/List/67
+        category: 学工事务
+        scene: 国际交流
+        time_policy: all_history
+      - name: 出国管理
+        list_url: https://gs.sufe.edu.cn/Home/List/68
+        category: 学工事务
+        scene: 国际交流
+        time_policy: all_history
+      - name: 国际交流政策文件
+        list_url: https://gs.sufe.edu.cn/Home/List/69
+        category: 学工事务
+        scene: 国际交流
+        time_policy: all_history

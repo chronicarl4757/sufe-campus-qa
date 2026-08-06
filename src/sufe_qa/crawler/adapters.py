@@ -32,7 +32,7 @@ class SectionSpec:
     publisher: str
     source_type: str
     scope_unit: str = ""
-    time_policy: str = "all"
+    time_policy: str = "all_history"
     max_pages: int | None = None
     known_page_urls: tuple[str, ...] = ()
     metadata: dict[str, str] = field(default_factory=dict)

@@ -88,6 +88,7 @@ def crawl_authority_sources(
                     source_type=section.source_type,
                     source_section=section.name,
                     scope_unit=section.scope_unit,
+                    time_policy=section.time_policy,
                 )
         report.not_seen_documents += len(state.finalize())
         if not options.dry_run:
@@ -219,6 +220,11 @@ def retry_attachments_from_raw(
                     source_type=source.source_type,
                     source_section=source_section,
                     scope_unit=scope_unit or source.scope_unit,
+                    time_policy=(
+                        configured[source_section].time_policy
+                        if source_section in configured
+                        else "all_history"
+                    ),
                 )
     if options.report_dir is not None:
         report.save(options.report_dir)

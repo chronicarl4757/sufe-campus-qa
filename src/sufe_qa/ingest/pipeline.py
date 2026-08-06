@@ -10,8 +10,8 @@
 from __future__ import annotations
 
 import re
-from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from dataclasses import dataclass, field, replace
+from datetime import date, datetime, timezone
 from pathlib import Path
 from urllib.parse import urldefrag, urlparse, urlunparse
 
@@ -22,6 +22,11 @@ from sufe_qa.ingest.classification import (
     classify_document_kind,
     normalize_policy_name,
     standardize_topic_key,
+)
+from sufe_qa.ingest.lifecycle import (
+    LifecycleCandidate,
+    LifecycleDecision,
+    resolve_lifecycle,
 )
 from sufe_qa.ingest.quality import assess_document
 from sufe_qa.schema import (
@@ -106,6 +111,55 @@ def _now() -> str:
     return datetime.now(timezone.utc).isoformat(timespec="seconds")
 
 
+def _article_meta(
+    *,
+    doc_id: str,
+    art: CrawledArticle,
+    category: str,
+    src: str,
+    content_hash: str,
+    file_path: str,
+    document_kind: str,
+    lifecycle: LifecycleDecision,
+    source_type: str,
+    source_section: str,
+    scope_unit: str,
+) -> DocMeta:
+    return DocMeta(
+        doc_id=doc_id,
+        title=art.title,
+        source_url=src,
+        publisher=art.publisher,
+        publish_date=art.publish_date,
+        category=category,
+        fetched_at=_now(),
+        content_hash=content_hash,
+        file_path=file_path,
+        document_type="article",
+        source_page_url=src,
+        parse_status="ok",
+        quality_status="accepted",
+        text_hash=sha256_text(_squash(art.body_text)),
+        document_kind=document_kind,
+        policy_name=normalize_policy_name(art.title),
+        topic_key=standardize_topic_key(
+            art.title, normalize_policy_name(art.title), scope_unit
+        ),
+        source_type=source_type,
+        source_section=source_section,
+        scope_unit=scope_unit,
+        validity_status="unknown_validity",
+        publish_date_evidence=art.publish_date_evidence,
+        publish_date_confidence=art.publish_date_confidence,
+        date_conflict=art.date_conflict,
+        temporal_class=lifecycle.temporal_class,
+        series_key=lifecycle.series_key,
+        retention_status=lifecycle.retention_status,
+        retention_reason=lifecycle.retention_reason,
+        canonical_doc_id=lifecycle.canonical_doc_id,
+    )
+
+
 def ingest_crawled_articles(
     articles: list[CrawledArticle],
     *,
@@ -120,6 +174,8 @@ def ingest_crawled_articles(
     source_type: str = "unknown",
     source_section: str = "",
     scope_unit: str = "",
+    time_policy: str = "all_history",
+    evaluated_at: date | None = None,
 ) -> IngestStats:
     """把一批抓取结果落库。dry_run=True 时只评估与计数，不写任何文件。"""
     stats = IngestStats()
@@ -128,6 +184,61 @@ def ingest_crawled_articles(
     relations: list[DocRelation] = []
     binary_seen: dict[str, str] = {}  # binary_hash -> 首个附件 doc_id（本轮）
     processed_atts: set[str] = set()
+    lifecycle_date = evaluated_at or datetime.now(timezone.utc).date()
+
+    article_kinds: dict[str, str] = {}
+    article_candidates: dict[str, LifecycleCandidate] = {}
+    attachment_kinds: dict[str, str] = {}
+    attachment_candidates: dict[str, LifecycleCandidate] = {}
+    for art in articles:
+        if art.status != "ok":
+            continue
+        src = _normalize_doc_url(art.final_url or art.requested_url)
+        doc_id = doc_id_from(src)
+        document_kind = classify_document_kind(art.title, art.body_text)
+        article_kinds[doc_id] = document_kind
+        article_candidates[doc_id] = LifecycleCandidate(
+            doc_id=doc_id,
+            title=art.title,
+            publisher=art.publisher,
+            scope_unit=scope_unit,
+            document_kind=document_kind,
+            publish_date=art.publish_date,
+        )
+        for att in art.downloaded:
+            if att.status != "ok" or att.parse is None:
+                continue
+            text = getattr(att.parse, "text", "") or ""
+            if getattr(att.parse, "parse_status", "") != "ok" or not text:
+                continue
+            att_src = _normalize_doc_url(att.final_url or att.requested_url)
+            att_doc_id = doc_id_from(att_src)
+            att_kind = classify_document_kind(
+                att.filename, text, has_valid_attachment=True
+            )
+            attachment_kinds[att_doc_id] = att_kind
+            candidate = LifecycleCandidate(
+                doc_id=att_doc_id,
+                title=att.filename,
+                publisher=art.publisher,
+                scope_unit=scope_unit,
+                document_kind=att_kind,
+                publish_date=art.publish_date,
+            )
+            previous = attachment_candidates.get(att_doc_id)
+            if previous is None or candidate.publish_date > previous.publish_date:
+                attachment_candidates[att_doc_id] = candidate
+
+    article_lifecycle = resolve_lifecycle(
+        list(article_candidates.values()),
+        time_policy=time_policy,
+        evaluated_at=lifecycle_date,
+    )
+    attachment_lifecycle = resolve_lifecycle(
+        list(attachment_candidates.values()),
+        time_policy=time_policy,
+        evaluated_at=lifecycle_date,
+    )
 
     for art in articles:
         if art.status == "not_modified":
@@ -139,6 +250,10 @@ def ingest_crawled_articles(
 
         src = _normalize_doc_url(art.final_url or art.requested_url)
         doc_id = doc_id_from(src)
+        document_kind = article_kinds[doc_id]
+        lifecycle = article_lifecycle[doc_id]
+        if raw_dir is not None and not dry_run:
+            _save_raw_article(raw_dir, doc_id, art)
         has_valid_att = any(
             a.status in ("ok", "duplicate")
             and a.parse is not None
@@ -203,14 +318,65 @@ def ingest_crawled_articles(
                 _drop_old_file(corpus_dir, old)
             continue
 
-        # 文章入库
+        # 时间窗外文档保留 raw 与 manifest 审计，但不物化到 corpus。
+        if lifecycle.retention_status == "archived":
+            stats.add(doc_id, "archived", lifecycle.retention_reason, art.title)
+            if not dry_run:
+                metas.append(
+                    _article_meta(
+                        doc_id=doc_id,
+                        art=art,
+                        category=category,
+                        src=src,
+                        content_hash="",
+                        file_path="",
+                        document_kind=document_kind,
+                        lifecycle=lifecycle,
+                        source_type=source_type,
+                        source_section=source_section,
+                        scope_unit=scope_unit,
+                    )
+                )
+
+        # active/historical 文档物化正文；历史年度版本随后进入 historical collection。
         final = f"# {art.title}\n\n{art.body_text}\n"
         ch = sha256_text(final)
         old = existing.get(doc_id)
-        if old and old.content_hash == ch and (corpus_dir / old.file_path).exists():
+        if lifecycle.retention_status == "archived":
+            pass
+        elif (
+            old
+            and old.content_hash == ch
+            and old.file_path
+            and (corpus_dir / old.file_path).exists()
+        ):
             stats.add(doc_id, "unchanged", "", art.title)
             if report:
                 report.unchanged_documents += 1
+            metadata_updates = {
+                "publisher": art.publisher,
+                "publish_date": art.publish_date,
+                "document_kind": document_kind,
+                "policy_name": normalize_policy_name(art.title),
+                "topic_key": standardize_topic_key(
+                    art.title, normalize_policy_name(art.title), scope_unit
+                ),
+                "source_type": source_type,
+                "source_section": source_section,
+                "scope_unit": scope_unit,
+                "publish_date_evidence": art.publish_date_evidence,
+                "publish_date_confidence": art.publish_date_confidence,
+                "date_conflict": art.date_conflict,
+                "temporal_class": lifecycle.temporal_class,
+                "series_key": lifecycle.series_key,
+                "retention_status": lifecycle.retention_status,
+                "retention_reason": lifecycle.retention_reason,
+                "canonical_doc_id": lifecycle.canonical_doc_id,
+            }
+            if not dry_run and any(
+                getattr(old, key) != value for key, value in metadata_updates.items()
+            ):
+                metas.append(replace(old, fetched_at=_now(), **metadata_updates))
         else:
             rel = _doc_relpath(corpus_dir, old, category, art.title, ch)
             if not dry_run:
@@ -218,31 +384,18 @@ def ingest_crawled_articles(
                 out.parent.mkdir(parents=True, exist_ok=True)
                 out.write_text(final, encoding="utf-8")
                 metas.append(
-                    DocMeta(
+                    _article_meta(
                         doc_id=doc_id,
-                        title=art.title,
-                        source_url=src,
-                        publisher=art.publisher,
-                        publish_date=art.publish_date,
+                        art=art,
                         category=category,
-                        fetched_at=_now(),
+                        src=src,
                         content_hash=ch,
                         file_path=rel.as_posix(),
-                        document_type="article",
-                        source_page_url=src,
-                        parse_status="ok",
-                        quality_status="accepted",
-                        text_hash=sha256_text(_squash(art.body_text)),
-                        document_kind=classify_document_kind(art.title, art.body_text),
-                        policy_name=normalize_policy_name(art.title),
-                        topic_key=standardize_topic_key(art.title, normalize_policy_name(art.title), scope_unit),
+                        document_kind=document_kind,
+                        lifecycle=lifecycle,
                         source_type=source_type,
                         source_section=source_section,
                         scope_unit=scope_unit,
-                        validity_status="unknown_validity",
-                        publish_date_evidence=art.publish_date_evidence,
-                        publish_date_confidence=art.publish_date_confidence,
-                        date_conflict=art.date_conflict,
                     )
                 )
             action = "updated" if old else "new"
@@ -254,8 +407,6 @@ def ingest_crawled_articles(
                     report.new_documents += 1
 
         # 附件入库（与父文章是否被拒解耦：附件本身可能仍有独立价值）
-        if raw_dir is not None and not dry_run:
-            _save_raw_article(raw_dir, doc_id, art)
         for att in art.downloaded:
             _ingest_attachment(
                 att,
@@ -273,9 +424,10 @@ def ingest_crawled_articles(
                 state=state,
                 raw_dir=raw_dir,
                 dry_run=dry_run,
-                source_type=source_type,
                 source_section=source_section,
                 scope_unit=scope_unit,
+                document_kinds=attachment_kinds,
+                lifecycle_by_doc=attachment_lifecycle,
             )
 
     if not dry_run:
@@ -349,6 +501,64 @@ def _save_raw_attachment(raw_dir: Path, att: DownloadedAttachment) -> Path:
     return path
 
 
+def _attachment_meta(
+    *,
+    att_doc_id: str,
+    att: DownloadedAttachment,
+    parent: CrawledArticle,
+    parent_doc_id: str,
+    category: str,
+    src: str,
+    content_hash: str,
+    file_path: str,
+    text_hash: str,
+    document_kind: str,
+    lifecycle: LifecycleDecision,
+    source_section: str,
+    scope_unit: str,
+) -> DocMeta:
+    return DocMeta(
+        doc_id=att_doc_id,
+        title=att.filename,
+        source_url=src,
+        publisher=parent.publisher,
+        publish_date=parent.publish_date,
+        category=category,
+        fetched_at=_now(),
+        content_hash=content_hash,
+        file_path=file_path,
+        document_type="attachment",
+        parent_doc_id=parent_doc_id,
+        source_page_url=_normalize_doc_url(parent.final_url or parent.requested_url),
+        download_url=src,
+        attachment_name=att.filename,
+        mime_type=att.mime_type,
+        parse_status="ok",
+        quality_status="accepted",
+        binary_hash=att.binary_hash,
+        text_hash=text_hash,
+        document_kind=document_kind,
+        policy_name=normalize_policy_name(att.filename or parent.title),
+        topic_key=standardize_topic_key(
+            att.filename or parent.title,
+            normalize_policy_name(att.filename or parent.title),
+            scope_unit,
+        ),
+        source_type="attachment",
+        source_section=source_section,
+        scope_unit=scope_unit,
+        validity_status="unknown_validity",
+        publish_date_evidence=parent.publish_date_evidence,
+        publish_date_confidence=parent.publish_date_confidence,
+        date_conflict=parent.date_conflict,
+        temporal_class=lifecycle.temporal_class,
+        series_key=lifecycle.series_key,
+        retention_status=lifecycle.retention_status,
+        retention_reason=lifecycle.retention_reason,
+        canonical_doc_id=lifecycle.canonical_doc_id,
+    )
+
+
 def _ingest_attachment(
     att: DownloadedAttachment,
     parent: CrawledArticle,
@@ -366,9 +576,10 @@ def _ingest_attachment(
     state: CrawlState | None,
     raw_dir: Path | None,
     dry_run: bool,
-    source_type: str,
     source_section: str,
     scope_unit: str,
+    document_kinds: dict[str, str],
+    lifecycle_by_doc: dict[str, LifecycleDecision],
 ) -> None:
     if att.status == "duplicate":
         # 本轮内同 binary 的另一 URL：关系挂到首个 canonical 文档，不重复嵌入
@@ -485,6 +696,31 @@ def _ingest_attachment(
             )
         return
 
+    document_kind = document_kinds[att_doc_id]
+    lifecycle = lifecycle_by_doc[att_doc_id]
+    if lifecycle.retention_status == "archived":
+        stats.add(att_doc_id, "archived", lifecycle.retention_reason, att.filename)
+        if not dry_run:
+            metas.append(
+                _attachment_meta(
+                    att_doc_id=att_doc_id,
+                    att=att,
+                    parent=parent,
+                    parent_doc_id=parent_doc_id,
+                    category=category,
+                    src=src,
+                    content_hash="",
+                    file_path="",
+                    text_hash=text_hash,
+                    document_kind=document_kind,
+                    lifecycle=lifecycle,
+                    source_section=source_section,
+                    scope_unit=scope_unit,
+                )
+            )
+        relations.append(DocRelation(parent_doc_id=parent_doc_id, child_doc_id=att_doc_id))
+        return
+
     md = _attachment_md(att, parent, text)
     ch = sha256_text(md)
     if (
@@ -509,7 +745,17 @@ def _ingest_attachment(
         if report:
             report.unchanged_documents += 1
         if not dry_run:
-            metas.append(_refresh_att_meta(old, att, src, parent_doc_id, parent))
+            metas.append(
+                _refresh_att_meta(
+                    old,
+                    att,
+                    src,
+                    parent_doc_id,
+                    parent,
+                    document_kind=document_kind,
+                    lifecycle=lifecycle,
+                )
+            )
     else:
         rel = _doc_relpath(corpus_dir, old, category, att.filename, ch)
         if not dry_run:
@@ -517,41 +763,20 @@ def _ingest_attachment(
             out.parent.mkdir(parents=True, exist_ok=True)
             out.write_text(md, encoding="utf-8")
             metas.append(
-                DocMeta(
-                    doc_id=att_doc_id,
-                    title=att.filename,
-                    source_url=src,
-                    publisher=parent.publisher,
-                    publish_date=parent.publish_date,
+                _attachment_meta(
+                    att_doc_id=att_doc_id,
+                    att=att,
+                    parent=parent,
+                    parent_doc_id=parent_doc_id,
                     category=category,
-                    fetched_at=_now(),
+                    src=src,
                     content_hash=ch,
                     file_path=rel.as_posix(),
-                    document_type="attachment",
-                    parent_doc_id=parent_doc_id,
-                    source_page_url=_normalize_doc_url(parent.final_url or parent.requested_url),
-                    download_url=src,
-                    attachment_name=att.filename,
-                    mime_type=att.mime_type,
-                    parse_status="ok",
-                    quality_status="accepted",
-                    binary_hash=att.binary_hash,
                     text_hash=text_hash,
-                    document_kind=(
-                        classify_document_kind(parent.title, text, has_valid_attachment=True)
-                        or "manual"
-                    ),
-                    policy_name=normalize_policy_name(parent.title),
-                    topic_key=standardize_topic_key(
-                        parent.title, normalize_policy_name(parent.title), scope_unit
-                    ),
-                    source_type="attachment",
+                    document_kind=document_kind,
+                    lifecycle=lifecycle,
                     source_section=source_section,
                     scope_unit=scope_unit,
-                    validity_status="unknown_validity",
-                    publish_date_evidence=parent.publish_date_evidence,
-                    publish_date_confidence=parent.publish_date_confidence,
-                    date_conflict=parent.date_conflict,
                 )
             )
         action = "updated" if old else "new"
@@ -565,7 +790,14 @@ def _ingest_attachment(
 
 
 def _refresh_att_meta(
-    old: DocMeta, att: DownloadedAttachment, src: str, parent_doc_id: str, parent: CrawledArticle
+    old: DocMeta,
+    att: DownloadedAttachment,
+    src: str,
+    parent_doc_id: str,
+    parent: CrawledArticle,
+    *,
+    document_kind: str,
+    lifecycle: LifecycleDecision,
 ) -> DocMeta:
     """binary 变 text 不变的元数据刷新：content_hash 保持旧值，indexer 不会重嵌入。"""
     return DocMeta(
@@ -589,7 +821,7 @@ def _refresh_att_meta(
         quality_status="accepted",
         binary_hash=att.binary_hash,
         text_hash=old.text_hash,
-        document_kind=old.document_kind,
+        document_kind=document_kind,
         policy_name=old.policy_name,
         document_number=old.document_number,
         effective_date=old.effective_date,
@@ -614,4 +846,9 @@ def _refresh_att_meta(
             old.publish_date_confidence, parent.publish_date_confidence
         ),
         date_conflict=old.date_conflict or parent.date_conflict,
+        temporal_class=lifecycle.temporal_class,
+        series_key=lifecycle.series_key,
+        retention_status=lifecycle.retention_status,
+        retention_reason=lifecycle.retention_reason,
+        canonical_doc_id=lifecycle.canonical_doc_id,
     )

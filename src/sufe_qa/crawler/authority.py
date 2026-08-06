@@ -59,7 +59,7 @@ def _section_from(source: dict[str, Any], raw: dict[str, Any]) -> SectionSpec:
         publisher=str(source.get("publisher") or ""),
         source_type=str(source.get("source_type") or "official_department"),
         scope_unit=str(raw.get("scope_unit") or source.get("scope_unit") or ""),
-        time_policy=str(raw.get("time_policy") or "all"),
+        time_policy=str(raw.get("time_policy") or "all_history"),
         max_pages=int(raw["max_pages"]) if raw.get("max_pages") is not None else None,
         known_page_urls=tuple(str(url) for url in raw.get("known_page_urls") or ()),
         metadata=metadata,
