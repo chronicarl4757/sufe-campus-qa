@@ -40,6 +40,11 @@ ATTACH_PATH_RE = re.compile(
 )
 ATTACH_SCORE_THRESHOLD = 0.5
 
+# 文章/栏目页扩展名：永远不是附件（hq 曾把「管理办法」锚文本的 page.htm 误当附件）
+_PAGE_EXTS = (".htm", ".html", ".shtml")
+# 客户端与压缩软件包：不是问答语料（nic 的 VPN 客户端 .rar 超 30MB 且无法解析）
+_BINARY_PACKAGE_EXTS = (".rar", ".7z", ".exe", ".msi", ".dmg", ".apk", ".ipa")
+
 _DATE_RE = re.compile(r"(20\d{2})\s*[-/.年]\s*(\d{1,2})\s*[-/.月]\s*(\d{1,2})")
 # 阅读计数行每次访问都变，剥掉避免 content_hash 抖动导致伪更新
 _VIEW_COUNT_RE = re.compile(
@@ -316,6 +321,11 @@ def discover_attachments(soup: BeautifulSoup, page_url: str) -> list[AttachmentC
             return  # 畸形 URL（非法 netloc 等）：单个坏属性不应拖垮整页解析
         if not full.startswith(("http://", "https://")):
             return
+        path_lower = urlparse(full).path.lower()
+        if path_lower.endswith(_PAGE_EXTS):
+            return  # 文章/栏目页：锚文本含「办法/通知」也只是站内链接
+        if path_lower.endswith(_BINARY_PACKAGE_EXTS):
+            return  # 软件包不是问答语料
         score, reasons = _score_candidate(full, anchor, embedded, has_download_attr)
         if score < ATTACH_SCORE_THRESHOLD:
             return

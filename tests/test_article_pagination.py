@@ -216,6 +216,34 @@ def test_javascript_and_mailto_ignored():
     assert discover_attachments(_soup(html), f"{BASE}info/1005.htm") == []
 
 
+def test_sibling_htm_pages_never_attachment_candidates():
+    """hq 曾把锚文本含「办法/材料」的文章页链接误当附件（返回 text/html 失败）。"""
+    html = f"""
+    <html><body>
+    <a href="{BASE}f8/cf/c20020a260303/page.htm" download>学生宿舍管理办法</a>
+    <a href="{BASE}19990/list.htm" download>办事材料</a>
+    <a href="{BASE}_upload/files/abc.pdf">附件：申请表</a>
+    </body></html>
+    """
+    cands = discover_attachments(_soup(html), f"{BASE}info/1006.htm")
+    urls = {c.requested_url for c in cands}
+    assert urls == {f"{BASE}_upload/files/abc.pdf"}
+
+
+def test_binary_packages_skipped():
+    """VPN 客户端等软件包不属于问答语料，发现阶段直接跳过。"""
+    html = f"""
+    <html><body>
+    <a href="{BASE}_upload/files/client.rar">VPN 客户端下载</a>
+    <a href="{BASE}_upload/files/setup.exe">安装包</a>
+    <a href="{BASE}_upload/files/guide.pdf">使用指南</a>
+    </body></html>
+    """
+    cands = discover_attachments(_soup(html), f"{BASE}info/1007.htm")
+    urls = {c.requested_url for c in cands}
+    assert urls == {f"{BASE}_upload/files/guide.pdf"}
+
+
 # ---------------- 正文与面包屑 ----------------
 
 
