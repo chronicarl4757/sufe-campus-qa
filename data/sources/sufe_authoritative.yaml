@@ -19,6 +19,17 @@ sources:
         category: 学工事务
         scene: 本科教务
         time_policy: all_history
+      # 5123 仅是导航页；学生类/管理类制度才是真正的校级政策列表（直链 PDF）
+      - name: 学生类制度
+        list_url: https://jwc.sufe.edu.cn/5145/list.htm
+        category: 学工事务
+        scene: 本科教务
+        time_policy: all_history
+      - name: 管理类制度
+        list_url: https://jwc.sufe.edu.cn/5144/list.htm
+        category: 学工事务
+        scene: 本科教务
+        time_policy: all_history
       - name: 教学建设
         list_url: https://jwc.sufe.edu.cn/5125/list.htm
         category: 学工事务
