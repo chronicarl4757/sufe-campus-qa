@@ -454,6 +454,38 @@ def _cmd_coverage_audit(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_benchmark_probe(args: argparse.Namespace) -> int:
+    import json as _json
+
+    from sufe_qa.coverage.benchmark_probe import run_benchmark
+
+    bank = Path(args.bank)
+    if not bank.is_file():
+        print(f"benchmark 题库不存在: {bank}", file=sys.stderr)
+        return 2
+    settings = load_settings()
+    retriever = HybridRetriever(settings, _make_embedder(settings, args.fake_embed))
+    report = run_benchmark(settings, retriever, bank)
+    out_json = Path(args.output_json)
+    out_json.parent.mkdir(parents=True, exist_ok=True)
+    out_json.write_text(
+        _json.dumps(report.to_dict(), ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
+    rate = report.answerable / report.scored if report.scored else 0.0
+    partial = report.partially_answerable / report.scored if report.scored else 0.0
+    print(f"题目 {report.total} 条（计入可答率 {report.scored} 条）")
+    print(
+        f"可答 {report.answerable}（{rate:.1%}）| 部分可答 {report.partially_answerable}（{partial:.1%}）"
+        f" | 不可答 {report.not_answerable}"
+    )
+    print(
+        f"拒答题：门控拦下 {report.refusal_gate_refused}，需生成层确认 {report.refusal_generation_required}"
+        f"；追问题 {report.clarification_required} 条待生成层确认"
+    )
+    print(f"报告 JSON: {out_json}")
+    return 0
+
+
 def _cmd_quality_audit(args: argparse.Namespace) -> int:
     settings = load_settings()
     manifest_path = Path(args.manifest) if args.manifest else settings.manifest_path
@@ -678,6 +710,17 @@ def build_parser() -> argparse.ArgumentParser:
     )
     ca.add_argument("--index-fingerprint", default="not_indexed")
     ca.set_defaults(func=_cmd_coverage_audit)
+
+    bp = sub.add_parser("benchmark-probe", help="用户真实问题 benchmark 的检索级探针")
+    bp.add_argument(
+        "--bank", default=str(PROJECT_ROOT / "data" / "eval" / "sufe_benchmark_v2.jsonl")
+    )
+    bp.add_argument(
+        "--output-json",
+        default=str(PROJECT_ROOT / "data" / "coverage" / "sufe_benchmark_v2_report.json"),
+    )
+    bp.add_argument("--fake-embed", action="store_true", help=argparse.SUPPRESS)
+    bp.set_defaults(func=_cmd_benchmark_probe)
 
     qa = sub.add_parser("quality-audit", help="只读审计日期、类型、年度系列和生命周期")
     qa.add_argument("--sources", default=str(DEFAULT_AUTHORITY_SOURCES))
