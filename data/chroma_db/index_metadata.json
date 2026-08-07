@@ -1,13 +1,13 @@
 {
   "schema_version": "2",
-  "created_at": "2026-08-06T09:49:53+00:00",
+  "created_at": "2026-08-06T17:47:50+00:00",
   "embedding_model": "BAAI/bge-m3",
   "embedding_backend": "sentence-transformers",
   "embedding_device": "cuda",
   "embedding_precision": "float16",
   "test_only": false,
-  "manifest_fingerprint": "sha256:750555f35381974c385eb5133683cd19016a96253471a6fbb4ece231176fb235",
-  "index_fingerprint": "sha256:9f026b6e4cebb066e28003f8d8fe57fc75dd977949c567cb6a2c441c63f888a5",
+  "manifest_fingerprint": "sha256:2569bf7abf69dc4299f708714e9d585f7313ec46b7b3c23714a1a4846bc9ca10",
+  "index_fingerprint": "sha256:a7cf1822f5da094d89b41806863619be1bdfdc2f0339040814e351d15dbfcc42",
   "legacy_collection": "sufe_campus_qa",
   "collections": {
     "main_qa": {
