@@ -1,0 +1,44 @@
+{
+ "host": "nic.sufe.edu.cn",
+ "started_at": "2026-08-06T16:14:00+00:00",
+ "categories_found": 1,
+ "list_pages_fetched": 2,
+ "categories_requires_adapter": 0,
+ "articles_found": 14,
+ "articles_downloaded": 14,
+ "attachments_found": 9,
+ "attachments_downloaded": 4,
+ "attachments_parsed": 1,
+ "scanned_pdfs": 0,
+ "legacy_docs_unparsed": 0,
+ "incomplete_documents": 0,
+ "low_quality_documents": 0,
+ "sensitive_quarantined": 0,
+ "duplicate_attachments": 2,
+ "new_documents": 8,
+ "updated_documents": 0,
+ "unchanged_documents": 0,
+ "not_seen_documents": 0,
+ "final_indexed": 8,
+ "failures": [
+  {
+   "url": "https://nic.sufe.edu.cn/_upload/article/files/fe/88/66032c4341f780e0b0c388e0cdf5/7940969e-96fd-4ece-a2d5-2170493118a6.rar",
+   "stage": "attachment",
+   "status": "oversized",
+   "reason": "超过 30000000 字节上限"
+  },
+  {
+   "url": "https://nic.sufe.edu.cn/_upload/article/files/fe/88/66032c4341f780e0b0c388e0cdf5/4ee23538-29d6-4984-81d9-8f6d0d2a8be3.rar",
+   "stage": "attachment",
+   "status": "http_error",
+   "reason": "HTTP 404"
+  },
+  {
+   "url": "https://nic.sufe.edu.cn/_upload/article/files/fe/88/66032c4341f780e0b0c388e0cdf5/fa679bdc-7648-41f9-ab7a-5dc736e12298.rar",
+   "stage": "attachment",
+   "status": "oversized",
+   "reason": "超过 30000000 字节上限"
+  }
+ ],
+ "notes": []
+}

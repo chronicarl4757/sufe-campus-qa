@@ -1,0 +1,44 @@
+{
+ "host": "yljk.sufe.edu.cn",
+ "started_at": "2026-08-06T16:15:26+00:00",
+ "categories_found": 4,
+ "list_pages_fetched": 18,
+ "categories_requires_adapter": 0,
+ "articles_found": 196,
+ "articles_downloaded": 191,
+ "attachments_found": 41,
+ "attachments_downloaded": 39,
+ "attachments_parsed": 35,
+ "scanned_pdfs": 1,
+ "legacy_docs_unparsed": 0,
+ "incomplete_documents": 3,
+ "low_quality_documents": 43,
+ "sensitive_quarantined": 13,
+ "duplicate_attachments": 4,
+ "new_documents": 77,
+ "updated_documents": 0,
+ "unchanged_documents": 0,
+ "not_seen_documents": 0,
+ "final_indexed": 77,
+ "failures": [
+  {
+   "url": "https://yljk.sufe.edu.cn/cb/0d/c12542a248589/page.htm",
+   "stage": "attachment",
+   "status": "unsupported_mime",
+   "reason": "附件请求返回 text/html（疑似错误页或查看器）"
+  },
+  {
+   "url": "https://yljk.sufe.edu.cn/61/f5/c12542a221685/page.htm",
+   "stage": "attachment",
+   "status": "unsupported_mime",
+   "reason": "附件请求返回 text/html（疑似错误页或查看器）"
+  },
+  {
+   "url": "https://yljk.sufe.edu.cn/61/f5/c1401a221685/page.htm",
+   "stage": "attachment",
+   "status": "unsupported_mime",
+   "reason": "附件请求返回 text/html（疑似错误页或查看器）"
+  }
+ ],
+ "notes": []
+}
