@@ -96,8 +96,14 @@ def classify_document_kind(
     if quality_status in {"incomplete_document", "low_quality", "quarantined", "rejected"}:
         return "incomplete"
     text = f"{title}\n{body_text}"
+    # 书名号中的正式制度名优先于“活动/管理动态”等通用隔离词。
+    if _FORMAL_POLICY_WRAPPER_RE.search(title):
+        return "policy"
     if any(keyword in title for keyword in _PUBLIC_LIST_KWS):
         return "public_list"
+    # 标题明确自称“新闻/动态”时按新闻隔离；其余宣讲会、活动回顾再归 promotion。
+    if "新闻" in title or "动态" in title:
+        return "news"
     if any(keyword in title for keyword in _PROMOTION_KWS):
         return "promotion"
     if any(keyword in title for keyword in _EVENT_KWS):
@@ -107,8 +113,6 @@ def classify_document_kind(
     # 文号/发布日期前缀不应把“关于印发《正式制度》”误判为年度业务通知。
     # 该规则只接受书名号内带制度词的明确包装标题，不影响“2025 年复试录取办法”
     # 等每年重新制定的招生安排。
-    if _FORMAL_POLICY_WRAPPER_RE.search(title):
-        return "policy"
     if _TEMPORAL_TITLE_RE.search(title) and any(
         keyword in title for keyword in _ANNUAL_BUSINESS_KWS
     ):

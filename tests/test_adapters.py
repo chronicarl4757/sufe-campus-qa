@@ -260,6 +260,31 @@ def test_nic_service_adapter_combines_all_embedded_service_tabs():
     assert article.document_kind_hint == "service_guide"
 
 
+def test_nic_service_adapter_does_not_hint_news_as_service_guide():
+    spec = PageSpec(
+        url="https://nic.sufe.edu.cn/aa/bb/c19675a999999/page.htm",
+        section_id="nic-student-services",
+        page_kind="article",
+        title_hint="网络安全宣传活动回顾",
+        publisher_hint="网络信息中心",
+        category="校园生活",
+        source_type="official_department",
+        scope_unit="学生",
+    )
+    html = """
+    <html><head><title>网络安全宣传活动回顾</title></head><body>
+      <h1>网络安全宣传活动回顾</h1>
+      <div class="nrkk-7 nrr1"><div class="wp_articlecontent">
+        <p>网络信息中心组织师生参加宣传活动，现场开展交流并回顾活动成果。</p>
+      </div></div>
+    </body></html>
+    """
+
+    article = NicServiceAdapter().parse_article(_page(spec.url, html), spec)
+
+    assert article.document_kind_hint == ""
+
+
 def test_business_school_adapter_reuses_wp3_contract():
     adapter = BusinessSchoolAdapter(publisher="会计学院", scope_unit="会计学院")
     assert isinstance(adapter, Wp3Adapter)

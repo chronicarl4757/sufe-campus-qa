@@ -41,6 +41,16 @@ def test_dated_printing_notice_for_quoted_policy_remains_policy():
     )
 
 
+def test_formal_policy_wrapper_outranks_activity_word_inside_policy_name():
+    assert (
+        classify_document_kind(
+            "关于印发《上海财经大学学生社团活动管理办法》的通知",
+            "第一条 为规范学生社团活动，制定本办法。第二条 本办法适用于学生社团。",
+        )
+        == "policy"
+    )
+
+
 def test_public_list_and_promotion_precede_generic_notice_rules():
     assert (
         classify_document_kind(

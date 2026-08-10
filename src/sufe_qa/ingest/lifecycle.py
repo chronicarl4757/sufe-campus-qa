@@ -159,7 +159,14 @@ def canonicalize_active_annual(
         if decision.temporal_class == "annual" and decision.retention_status == "active":
             annual_groups.setdefault(decision.series_key, []).append(candidate)
     for group in annual_groups.values():
-        canonical = max(group, key=lambda candidate: (candidate.publish_date, candidate.doc_id))
+        canonical = max(
+            group,
+            key=lambda candidate: (
+                _parse_date(candidate.publish_date) is not None,
+                _parse_date(candidate.publish_date) or date.min,
+                candidate.doc_id,
+            ),
+        )
         for candidate in group:
             decision = output[candidate.doc_id]
             output[candidate.doc_id] = replace(

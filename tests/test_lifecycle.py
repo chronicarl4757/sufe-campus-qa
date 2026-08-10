@@ -137,6 +137,26 @@ def test_global_canonicalization_folds_series_resolved_under_different_policies(
     assert folded["older"].canonical_doc_id == "latest"
 
 
+def test_unknown_publish_date_never_replaces_dated_annual_canonical():
+    dated = _candidate(
+        "dated", "研究生奖学金评选通知", "annual_notice", "2025-09-01"
+    )
+    undated = _candidate(
+        "undated", "研究生奖学金评选通知", "annual_notice", "unknown"
+    )
+
+    decisions = resolve_lifecycle(
+        [dated, undated],
+        time_policy="all_history",
+        evaluated_at=date(2026, 8, 10),
+    )
+
+    assert decisions["dated"].retention_status == "active"
+    assert decisions["dated"].canonical_doc_id == "dated"
+    assert decisions["undated"].retention_status == "historical"
+    assert decisions["undated"].canonical_doc_id == "dated"
+
+
 def test_public_and_operational_windows_are_distinct():
     public = resolve_lifecycle(
         [

@@ -379,7 +379,8 @@ def _cmd_ingest_authority_files(args: argparse.Namespace) -> int:
     print(
         f"共 {report.total_files}，可导入 {report.accepted}，实际写入 {report.persisted}，"
         f"重复 {report.duplicates}，排除 {report.excluded}，"
-        f"不完整 {report.incomplete}，隔离 {report.quarantined}"
+        f"不完整 {report.incomplete}，隔离 {report.quarantined}，"
+        f"撤销 {report.revoked}，缺失 {report.missing}"
     )
     if not args.apply and report.accepted:
         print("当前为 dry-run；确认报告后添加 --apply 才会写入 corpus/manifest")
