@@ -164,14 +164,15 @@ def _is_curated_manual(meta: DocMeta) -> bool:
     )
 
 
-def _is_authority_typed_service_guide(meta: DocMeta) -> bool:
-    """保留 adapter 对权威服务目录给出的显式类型，避免通用关键词审计降级。"""
-    return meta.document_kind == "service_guide" and meta.source_type in {
-        "official_department",
-        "official_college",
-        "information_disclosure",
-        "service_platform",
-    }
+def _is_nic_service_guide(meta: DocMeta) -> bool:
+    """只信任 NIC adapter 对学生服务目录给出的类型，不接受任意来源的同名字段。"""
+    return (
+        meta.document_kind == "service_guide"
+        and meta.source_type == "official_department"
+        and meta.source_section == "学生服务"
+        and "网络信息中心" in meta.publisher
+        and urlparse(meta.source_url).netloc.lower() == "nic.sufe.edu.cn"
+    )
 
 
 def audit_corpus(
@@ -226,7 +227,7 @@ def audit_corpus(
                 kind = meta.document_kind
             else:
                 kind = "incomplete"
-        elif _is_curated_manual(meta) or _is_authority_typed_service_guide(meta):
+        elif _is_curated_manual(meta) or _is_nic_service_guide(meta):
             kind = meta.document_kind
         else:
             kind = classify_document_kind(
