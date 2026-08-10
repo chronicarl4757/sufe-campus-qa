@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import pytest
+import yaml
+from docx import Document
 
 from sufe_qa import cli
 from sufe_qa.config import load_settings
@@ -30,6 +32,74 @@ def test_help_exits_zero(capsys):
     with pytest.raises(SystemExit) as e:
         cli.main(["--help"])
     assert e.value.code == 0
+
+
+def test_ingest_authority_files_cli_defaults_to_dry_run(settings, tmp_path, capsys):
+    source = tmp_path / "规章制度"
+    relative = "本科教学/20250801课程考核管理办法.docx"
+    path = source / relative
+    path.parent.mkdir(parents=True)
+    document = Document()
+    document.add_heading("课程考核管理办法", level=1)
+    document.add_paragraph("第一条 本办法适用于本科学生课程考核和成绩管理。" * 8)
+    document.save(path)
+    rules = tmp_path / "rules.yaml"
+    rules.write_text(
+        yaml.safe_dump(
+            {
+                "schema_version": "1",
+                "namespace": "sufe-regulations",
+                "entries": [
+                    {
+                        "path": relative,
+                        "category": "学工事务",
+                        "publisher": "上海财经大学教务处",
+                        "scope_unit": "上海财经大学",
+                        "source_section": "本科教学",
+                        "document_kind": "policy",
+                        "retention_status": "active",
+                    }
+                ],
+            },
+            allow_unicode=True,
+        ),
+        encoding="utf-8",
+    )
+    report = tmp_path / "report.json"
+
+    assert (
+        cli.main(
+            [
+                "ingest-authority-files",
+                "--source",
+                str(source),
+                "--rules",
+                str(rules),
+                "--report",
+                str(report),
+            ]
+        )
+        == 0
+    )
+    assert load_manifest(settings.manifest_path) == {}
+    assert "可导入 1，实际写入 0" in capsys.readouterr().out
+
+    assert (
+        cli.main(
+            [
+                "ingest-authority-files",
+                "--source",
+                str(source),
+                "--rules",
+                str(rules),
+                "--report",
+                str(report),
+                "--apply",
+            ]
+        )
+        == 0
+    )
+    assert len(load_manifest(settings.manifest_path)) == 1
 
 
 def test_coverage_audit_writes_json_and_markdown(settings, tmp_path):

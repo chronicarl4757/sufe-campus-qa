@@ -53,6 +53,7 @@ from sufe_qa.indexing.collections import (
 )
 from sufe_qa.ingest.attachment_parsers import parse_attachment
 from sufe_qa.ingest.inbox import ingest_inbox
+from sufe_qa.ingest.manual_authority import import_manual_authority_files
 from sufe_qa.ingest.pipeline import ingest_crawled_articles
 from sufe_qa.ingest.version_reconcile import reconcile_versions
 from sufe_qa.quality.audit import (
@@ -362,6 +363,26 @@ def _cmd_ingest(args: argparse.Namespace) -> int:
     )
     for name in report.quarantined:
         print(f"  隔离（疑似敏感信息）: {name}", file=sys.stderr)
+    return 0
+
+
+def _cmd_ingest_authority_files(args: argparse.Namespace) -> int:
+    settings = load_settings()
+    report = import_manual_authority_files(
+        Path(args.source),
+        Path(args.rules),
+        settings.corpus_dir,
+        settings.manifest_path,
+        report_path=Path(args.report),
+        apply=args.apply,
+    )
+    print(
+        f"共 {report.total_files}，可导入 {report.accepted}，实际写入 {report.persisted}，"
+        f"重复 {report.duplicates}，排除 {report.excluded}，"
+        f"不完整 {report.incomplete}，隔离 {report.quarantined}"
+    )
+    if not args.apply and report.accepted:
+        print("当前为 dry-run；确认报告后添加 --apply 才会写入 corpus/manifest")
     return 0
 
 
@@ -696,6 +717,15 @@ def build_parser() -> argparse.ArgumentParser:
     i.add_argument("--category", required=True)
     i.add_argument("--publisher", default="手动投放")
     i.set_defaults(func=_cmd_ingest)
+
+    ia = sub.add_parser(
+        "ingest-authority-files", help="按显式 allowlist 审计并导入本地权威资料"
+    )
+    ia.add_argument("--source", required=True, help="待审计资料根目录")
+    ia.add_argument("--rules", required=True, help="精确文件 allowlist YAML")
+    ia.add_argument("--report", required=True, help="逐文件 JSON 审计报告")
+    ia.add_argument("--apply", action="store_true", help="确认后写入 corpus/manifest")
+    ia.set_defaults(func=_cmd_ingest_authority_files)
 
     x = sub.add_parser("index", help="增量索引")
     x.add_argument("--full", action="store_true", help="全量重建")
