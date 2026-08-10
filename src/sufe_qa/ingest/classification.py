@@ -38,6 +38,9 @@ _ANNUAL_BUSINESS_KWS = (
 _TEMPORAL_TITLE_RE = re.compile(
     r"(?:19|20)\d{2}(?:\s*[-—至/]\s*(?:19|20)\d{2})?\s*(?:年|年度|学年)?"
 )
+_FORMAL_POLICY_WRAPPER_RE = re.compile(
+    r"关于印发《[^》]*(?:办法|规定|细则|条例|章程)[^》]*》(?:的)?通知"
+)
 
 _TOPIC_RULES = (
     (("本科生", "奖学金"), "undergraduate.scholarship.merit"),
@@ -101,6 +104,11 @@ def classify_document_kind(
         return "event"
     if any(keyword in title for keyword in _NEWS_KWS):
         return "news"
+    # 文号/发布日期前缀不应把“关于印发《正式制度》”误判为年度业务通知。
+    # 该规则只接受书名号内带制度词的明确包装标题，不影响“2025 年复试录取办法”
+    # 等每年重新制定的招生安排。
+    if _FORMAL_POLICY_WRAPPER_RE.search(title):
+        return "policy"
     if _TEMPORAL_TITLE_RE.search(title) and any(
         keyword in title for keyword in _ANNUAL_BUSINESS_KWS
     ):

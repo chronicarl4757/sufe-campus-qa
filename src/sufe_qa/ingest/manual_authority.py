@@ -6,7 +6,7 @@ import hashlib
 import json
 import mimetypes
 import re
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, replace
 from datetime import date, datetime, timezone
 from pathlib import Path, PurePosixPath
 from urllib.parse import quote
@@ -176,6 +176,22 @@ def _write_report(path: Path, report: ManualImportReport) -> None:
     tmp.replace(path)
 
 
+def _metadata_matches_entry(
+    meta: DocMeta,
+    entry: ManualAuthorityEntry,
+    index_collection: str,
+) -> bool:
+    return (
+        meta.category == entry.category
+        and meta.publisher == entry.publisher
+        and meta.scope_unit == entry.scope_unit
+        and meta.source_section == entry.source_section
+        and meta.document_kind == entry.document_kind
+        and meta.retention_status == entry.retention_status
+        and meta.index_collection == index_collection
+    )
+
+
 def import_manual_authority_files(
     source_root: Path,
     rules_path: Path,
@@ -244,11 +260,22 @@ def import_manual_authority_files(
         final = f"# {title}\n\n{text}\n"
         content_hash = sha256_text(final)
         text_hash = sha256_text(text)
-        duplicate_doc_id = existing_by_content.get(content_hash) or existing_by_text.get(text_hash)
         source_url = f"manual://{namespace}/{quote(relative_path, safe='/')}"
         doc_id = doc_id_from(source_url)
         old = existing.get(doc_id)
-        if duplicate_doc_id or (old and old.content_hash == content_hash):
+        same_source_content = bool(
+            old and (old.content_hash == content_hash or old.text_hash == text_hash)
+        )
+        duplicate_doc_id = (
+            doc_id
+            if same_source_content
+            else existing_by_content.get(content_hash) or existing_by_text.get(text_hash)
+        )
+        collection = collection_for_kind(entry.document_kind, entry.retention_status) or "none"
+        if duplicate_doc_id and (
+            duplicate_doc_id != doc_id
+            or (old is not None and _metadata_matches_entry(old, entry, collection))
+        ):
             decisions.append(
                 ManualImportDecision(
                     relative_path,
@@ -265,7 +292,6 @@ def import_manual_authority_files(
             continue
 
         publish_date, date_evidence, date_confidence = _publish_date_from_filename(title)
-        collection = collection_for_kind(entry.document_kind, entry.retention_status) or "none"
         rel_path = (
             Path(old.file_path)
             if old and old.file_path
@@ -307,12 +333,28 @@ def import_manual_authority_files(
             retention_reason="manual_allowlist",
             canonical_doc_id=doc_id if entry.retention_status == "active" else "",
         )
+        if old is not None and same_source_content:
+            meta = replace(
+                meta,
+                document_number=old.document_number,
+                effective_date=old.effective_date,
+                valid_until=old.valid_until,
+                supersedes=old.supersedes,
+                superseded_by=old.superseded_by,
+                applicable_student_type=old.applicable_student_type,
+                applicable_school_year=old.applicable_school_year,
+                validity_status=old.validity_status,
+                validity_confidence=old.validity_confidence,
+                validity_evidence=old.validity_evidence,
+                relation_confidence=old.relation_confidence,
+                relation_evidence=old.relation_evidence,
+            )
         candidates.append(ManualImportCandidate(meta=meta, content=final))
         decisions.append(
             ManualImportDecision(
                 relative_path,
                 "accepted",
-                "allowlisted_student_material",
+                "metadata_refresh" if same_source_content else "allowlisted_student_material",
                 doc_id=doc_id,
                 parse_status=parsed.parse_status,
                 char_count=len(text),

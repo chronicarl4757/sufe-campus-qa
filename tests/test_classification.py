@@ -29,6 +29,18 @@ def test_formal_timeless_regulation_remains_policy():
     )
 
 
+def test_dated_printing_notice_for_quoted_policy_remains_policy():
+    assert (
+        classify_document_kind(
+            "20250703关于印发《上海财经大学本科学生课程考核管理办法"
+            "（2025年5月修订）》的通知",
+            "《上海财经大学本科学生课程考核管理办法》已经审议通过，现印发给你们。"
+            "第一条 为规范本科学生课程考核，制定本办法。",
+        )
+        == "policy"
+    )
+
+
 def test_public_list_and_promotion_precede_generic_notice_rules():
     assert (
         classify_document_kind(

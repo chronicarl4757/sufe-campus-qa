@@ -211,6 +211,71 @@ def test_shared_attachment_is_retained_when_any_parent_is_active(tmp_path):
     assert decision.canonical_doc_id == active_parent
 
 
+def test_isolated_event_attachment_is_not_revived_by_active_parent(tmp_path):
+    data = tmp_path / "data"
+    corpus = data / "corpus"
+    parent_id = _add(
+        corpus,
+        url="https://gs.sufe.edu.cn/Home/Detail/policy-parent",
+        title="上海财经大学研究生综合评价管理办法",
+        body="第一条 为规范研究生综合评价制定本办法。第二条 本办法适用于在校研究生。",
+        publish_date="2025-01-01",
+        kind="policy",
+        section="培养管理制度",
+    )
+    attachment_url = "https://gs.sufe.edu.cn/_upload/sports-event.pdf"
+    attachment_id = doc_id_from(attachment_url)
+    title = "体育特长生比赛加分.pdf"
+    body = "本年度体育比赛活动安排和参赛名单。"
+    text = f"# {title}\n\n{body}\n"
+    rel = f"学工事务/{attachment_id}.md"
+    path = corpus / rel
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(text, encoding="utf-8")
+    append_manifest(
+        corpus / "manifest.jsonl",
+        [
+            DocMeta(
+                doc_id=attachment_id,
+                title=title,
+                source_url=attachment_url,
+                publisher="上海财经大学研究生院",
+                publish_date="2025-01-01",
+                category="学工事务",
+                fetched_at="2026-08-01T00:00:00+00:00",
+                content_hash=sha256_text(text),
+                file_path=rel,
+                document_type="attachment",
+                parent_doc_id=parent_id,
+                source_page_url="https://gs.sufe.edu.cn/Home/Detail/policy-parent",
+                document_kind="event",
+                source_type="attachment",
+                source_section="培养管理制度",
+                scope_unit="研究生",
+            )
+        ],
+    )
+    append_relations(
+        corpus / "relations.jsonl",
+        [DocRelation(parent_doc_id=parent_id, child_doc_id=attachment_id)],
+    )
+
+    report = audit_corpus(
+        corpus / "manifest.jsonl",
+        corpus,
+        data / "raw",
+        evaluated_at=date(2026, 8, 6),
+        time_policies={
+            ("上海财经大学研究生院", "培养管理制度"): "all_history"
+        },
+    )
+
+    decision = next(item for item in report.decisions if item.doc_id == attachment_id)
+    assert decision.document_kind == "event"
+    assert decision.retention_status == "archived"
+    assert decision.index_collection == "none"
+
+
 def test_unparsed_attachment_with_no_corpus_text_stays_archived(tmp_path):
     data = tmp_path / "data"
     corpus = data / "corpus"
@@ -284,6 +349,89 @@ def test_explicit_superseded_policy_routes_to_historical(tmp_path):
     assert decision.retention_status == "historical"
     assert decision.retention_reason == "explicit_superseded_validity"
     assert decision.index_collection == "historical"
+
+
+def test_manual_allowlist_historical_policy_stays_historical(tmp_path):
+    data = tmp_path / "data"
+    corpus = data / "corpus"
+    doc_id = _add(
+        corpus,
+        url="manual://sufe-regulations/研究生教学/旧版出国管理办法.pdf",
+        title="上海财经大学研究生申请出国管理办法(试行)(2005年8月制定)",
+        body="第一条 为规范研究生学位管理制定本规定。第二条 本规定适用于在校研究生。",
+        publish_date="2013-01-10",
+        kind="policy",
+        section="研究生学位",
+    )
+    current = load_manifest(corpus / "manifest.jsonl")[doc_id]
+    append_manifest(
+        corpus / "manifest.jsonl",
+        [
+            replace(
+                current,
+                source_type="manual_upload",
+                retention_status="historical",
+                retention_reason="manual_allowlist",
+                index_collection="historical",
+            )
+        ],
+    )
+
+    report = audit_corpus(
+        corpus / "manifest.jsonl",
+        corpus,
+        data / "raw",
+        evaluated_at=date(2026, 8, 6),
+        time_policies={
+            ("上海财经大学研究生院", "研究生学位"): "all_history"
+        },
+    )
+
+    decision = next(item for item in report.decisions if item.doc_id == doc_id)
+    assert decision.document_kind == "policy"
+    assert decision.retention_status == "historical"
+    assert decision.retention_reason == "manual_allowlist_historical"
+    assert decision.index_collection == "historical"
+
+
+def test_manual_allowlist_active_annual_without_exact_date_stays_active(tmp_path):
+    data = tmp_path / "data"
+    corpus = data / "corpus"
+    doc_id = _add(
+        corpus,
+        url="manual://sufe-regulations/本科教学/2026年学院推免细则.pdf",
+        title="2026年计算机与人工智能学院推免选拔工作细则",
+        body="本年度推免申请条件、材料、选拔流程、审核部门和公示要求。" * 3,
+        publish_date="unknown",
+        kind="annual_notice",
+        section="本科教学",
+    )
+    current = load_manifest(corpus / "manifest.jsonl")[doc_id]
+    append_manifest(
+        corpus / "manifest.jsonl",
+        [
+            replace(
+                current,
+                source_type="manual_upload",
+                retention_status="active",
+                retention_reason="manual_allowlist",
+                index_collection="main_qa",
+            )
+        ],
+    )
+
+    report = audit_corpus(
+        corpus / "manifest.jsonl",
+        corpus,
+        data / "raw",
+        evaluated_at=date(2026, 8, 6),
+    )
+
+    decision = next(item for item in report.decisions if item.doc_id == doc_id)
+    assert decision.document_kind == "annual_notice"
+    assert decision.retention_status == "active"
+    assert decision.retention_reason == "manual_allowlist_active"
+    assert decision.index_collection == "main_qa"
 
 
 def test_article_requiring_missing_attachment_is_archived_as_incomplete(tmp_path):

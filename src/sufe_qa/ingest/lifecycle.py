@@ -144,16 +144,25 @@ def resolve_lifecycle(
         )
         for candidate in candidates
     }
+    return canonicalize_active_annual(candidates, decisions)
+
+
+def canonicalize_active_annual(
+    candidates: list[LifecycleCandidate],
+    decisions: dict[str, LifecycleDecision],
+) -> dict[str, LifecycleDecision]:
+    """跨栏目时间策略为所有仍 active 的年度系列选出唯一 canonical。"""
+    output = dict(decisions)
     annual_groups: dict[str, list[LifecycleCandidate]] = {}
     for candidate in candidates:
-        decision = decisions[candidate.doc_id]
+        decision = output[candidate.doc_id]
         if decision.temporal_class == "annual" and decision.retention_status == "active":
             annual_groups.setdefault(decision.series_key, []).append(candidate)
     for group in annual_groups.values():
         canonical = max(group, key=lambda candidate: (candidate.publish_date, candidate.doc_id))
         for candidate in group:
-            decision = decisions[candidate.doc_id]
-            decisions[candidate.doc_id] = replace(
+            decision = output[candidate.doc_id]
+            output[candidate.doc_id] = replace(
                 decision,
                 retention_status=(
                     "active" if candidate.doc_id == canonical.doc_id else "historical"
@@ -165,4 +174,4 @@ def resolve_lifecycle(
                 ),
                 canonical_doc_id=canonical.doc_id,
             )
-    return decisions
+    return output

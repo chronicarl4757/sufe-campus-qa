@@ -12,7 +12,11 @@ from urllib.parse import urlparse
 
 from sufe_qa.indexing.collections import collection_for_kind
 from sufe_qa.ingest.classification import classify_document_kind
-from sufe_qa.ingest.lifecycle import LifecycleCandidate, resolve_lifecycle
+from sufe_qa.ingest.lifecycle import (
+    LifecycleCandidate,
+    canonicalize_active_annual,
+    resolve_lifecycle,
+)
 from sufe_qa.schema import DocMeta, load_manifest, load_relations
 
 _DATE_LABEL_RE = re.compile(
@@ -154,6 +158,12 @@ def _default_time_policy(kind: str) -> str:
     return "archive_only"
 
 
+def _is_curated_manual(meta: DocMeta) -> bool:
+    return meta.source_type == "manual_upload" and meta.source_url.startswith(
+        "manual://sufe-regulations/"
+    )
+
+
 def audit_corpus(
     manifest_path: Path,
     corpus_dir: Path,
@@ -206,6 +216,8 @@ def audit_corpus(
                 kind = meta.document_kind
             else:
                 kind = "incomplete"
+        elif _is_curated_manual(meta):
+            kind = meta.document_kind
         else:
             kind = classify_document_kind(
                 meta.title,
@@ -236,6 +248,25 @@ def audit_corpus(
         )
 
     for doc_id, meta in manifest.items():
+        if not (
+            _is_curated_manual(meta)
+            and meta.retention_status in {"active", "historical"}
+            and kinds[doc_id] not in {"news", "event", "promotion", "incomplete"}
+        ):
+            continue
+        lifecycle[doc_id] = replace(
+            lifecycle[doc_id],
+            retention_status=meta.retention_status,
+            retention_reason=f"manual_allowlist_{meta.retention_status}",
+            canonical_doc_id=(
+                doc_id
+                if meta.retention_status == "active"
+                and lifecycle[doc_id].temporal_class == "annual"
+                else ""
+            ),
+        )
+
+    for doc_id, meta in manifest.items():
         if meta.validity_status not in {"historical", "superseded"}:
             continue
         decision = lifecycle[doc_id]
@@ -245,6 +276,10 @@ def audit_corpus(
                 retention_status="historical",
                 retention_reason="explicit_superseded_validity",
             )
+    lifecycle = canonicalize_active_annual(
+        [candidate for candidates in candidates_by_policy.values() for candidate in candidates],
+        lifecycle,
+    )
 
     parent_ids_by_child: dict[str, set[str]] = {}
     for relation in relations:
@@ -274,7 +309,9 @@ def audit_corpus(
         if own.retention_status == "archived" and parent_lifecycle.retention_status in {
             "active",
             "historical",
-        }:
+        } and collection_for_kind(
+            kinds[doc_id], parent_lifecycle.retention_status
+        ) is not None:
             lifecycle[doc_id] = replace(
                 own,
                 series_key=parent_lifecycle.series_key,

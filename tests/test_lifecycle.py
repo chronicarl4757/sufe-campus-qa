@@ -4,6 +4,7 @@ from datetime import date
 
 from sufe_qa.ingest.lifecycle import (
     LifecycleCandidate,
+    canonicalize_active_annual,
     resolve_lifecycle,
     series_key_for,
     temporal_class_for,
@@ -108,6 +109,32 @@ def test_annual_window_archives_old_and_selects_one_active_series_version():
     assert decisions["latest"].retention_status == "active"
     assert decisions["latest"].canonical_doc_id == "latest"
     assert decisions["prior"].canonical_doc_id == "latest"
+
+
+def test_global_canonicalization_folds_series_resolved_under_different_policies():
+    older = _candidate(
+        "older", "2024年研究生奖学金评选通知", "annual_notice", "2024-09-01"
+    )
+    latest = _candidate(
+        "latest", "2025年研究生奖学金评选通知", "annual_notice", "2025-09-01"
+    )
+    candidates = [older, latest]
+    decisions = {
+        **resolve_lifecycle(
+            [older], time_policy="all_history", evaluated_at=date(2026, 8, 6)
+        ),
+        **resolve_lifecycle(
+            [latest], time_policy="recent_5_school_years", evaluated_at=date(2026, 8, 6)
+        ),
+    }
+
+    folded = canonicalize_active_annual(candidates, decisions)
+
+    assert folded["latest"].retention_status == "active"
+    assert folded["latest"].canonical_doc_id == "latest"
+    assert folded["older"].retention_status == "historical"
+    assert folded["older"].retention_reason == "prior_annual_series_version"
+    assert folded["older"].canonical_doc_id == "latest"
 
 
 def test_public_and_operational_windows_are_distinct():

@@ -153,6 +153,30 @@ def test_rule_validation_rejects_duplicate_and_traversal_paths(tmp_path: Path) -
         )
 
 
+def test_apply_refreshes_explicit_metadata_for_same_source_and_content(tmp_path: Path) -> None:
+    source = tmp_path / "规章制度"
+    relative = "研究生教学/旧版学位管理办法.docx"
+    _write_docx(
+        source / relative,
+        "旧版学位管理办法",
+        "第一条 本办法规定研究生申请学位的条件、材料和审核程序。" * 6,
+    )
+    rules = tmp_path / "rules.yaml"
+    corpus = tmp_path / "corpus"
+    manifest = corpus / "manifest.jsonl"
+    _write_rules(rules, [_entry(relative, retention_status="active")])
+    import_manual_authority_files(source, rules, corpus, manifest, apply=True)
+    _write_rules(rules, [_entry(relative, retention_status="historical")])
+
+    report = import_manual_authority_files(source, rules, corpus, manifest, apply=True)
+
+    assert report.accepted == report.persisted == 1
+    assert report.duplicates == 0
+    meta = next(iter(load_manifest(manifest).values()))
+    assert meta.retention_status == "historical"
+    assert meta.index_collection == "historical"
+
+
 def test_report_serializes_all_decisions(tmp_path: Path) -> None:
     source = tmp_path / "规章制度"
     _write_docx(source / "未收录.docx", "未收录", "第一条 普通正文。" * 10)
