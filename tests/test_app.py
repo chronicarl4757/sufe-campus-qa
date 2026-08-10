@@ -163,6 +163,12 @@ def test_coverage_static_assets_define_audit_behaviors(client):
         "applyFilters",
         "point_evidence",
         "retrieved_doc_ids",
+        "renderRealAnswer",
+        "renderAnswerHits",
+        "real_answer",
+        "answer_text",
+        "answer-status-filter",
+        "probe-status-filter",
     ):
         assert token in script.text
     for selector in (
@@ -170,6 +176,9 @@ def test_coverage_static_assets_define_audit_behaviors(client):
         ".matrix-cell",
         ".scene-bar",
         ".question-drawer",
+        ".real-answer",
+        ".answer-citation",
+        ".answer-hit",
         "@media (max-width: 720px)",
         "@media (prefers-reduced-motion: reduce)",
     ):
@@ -181,6 +190,15 @@ def test_coverage_visual_contract_avoids_template_effects(client):
     app_styles = client.get("/static/styles.css").text
     assert "linear-gradient" not in coverage_styles
     assert ".audit-link" in app_styles
+
+
+def test_coverage_page_labels_real_answers_and_rule_probe_separately(client):
+    page = client.get("/coverage").text
+    assert 'id="real-answer"' in page
+    assert 'id="answer-hit-rows"' in page
+    assert 'id="answer-status-filter"' in page
+    assert 'id="probe-status-filter"' in page
+    assert "规则探针证据（非人工判分）" in page
 
 
 def test_meta(client):

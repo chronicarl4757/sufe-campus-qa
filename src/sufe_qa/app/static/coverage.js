@@ -1,10 +1,18 @@
 /* 上财 150 问覆盖质检：只读展示固定评测报告，不在浏览器重算评测结论。 */
 "use strict";
 
-const STATUS = {
-  answerable: { label: "完整可回答", short: "完整", symbol: "●", className: "is-answerable" },
-  partially_answerable: { label: "部分可回答", short: "部分", symbol: "◐", className: "is-partial" },
-  not_answerable: { label: "不可回答", short: "缺失", symbol: "×", className: "is-failed" },
+const PROBE_STATUS = {
+  answerable: { label: "规则探针完整", short: "规整", symbol: "●", className: "is-answerable" },
+  partially_answerable: { label: "规则探针部分", short: "规部", symbol: "◐", className: "is-partial" },
+  not_answerable: { label: "规则探针未命中", short: "规缺", symbol: "×", className: "is-failed" },
+};
+
+const ANSWER_STATUS = {
+  answered: { label: "已回答 · 引用通过", short: "已答", symbol: "✓", className: "is-real-answered" },
+  answered_with_citation_issue: { label: "已回答 · 引用异常", short: "引异", symbol: "!", className: "is-real-citation" },
+  refused: { label: "真实拒答", short: "拒答", symbol: "—", className: "is-real-refused" },
+  error: { label: "生成错误", short: "错误", symbol: "×", className: "is-real-error" },
+  not_run: { label: "尚未运行", short: "未跑", symbol: "·", className: "is-real-pending" },
 };
 
 const state = {
@@ -67,6 +75,13 @@ function renderReportMeta(report) {
   setMeta("meta-bank-hash", shortHash(report.question_bank_hash), report.question_bank_hash);
   setMeta("meta-index-hash", shortHash(report.index_fingerprint), report.index_fingerprint);
   setMeta("meta-retriever", retrieverLabel(report.retriever_config));
+  const run = report.answer_run || {};
+  const generated = Object.values(run.status_counts || {}).reduce((sum, value) => sum + Number(value || 0), 0);
+  setMeta(
+    "meta-answer-run",
+    run.available ? `${run.llm_model || "模型未知"} · ${generated}/${run.total || state.questions.length}` : "尚未运行",
+    run.prompt_hash,
+  );
   byId("stamp-count").textContent = String(state.questions.length);
   document.querySelector(".audit-stamp").setAttribute(
     "aria-label",
@@ -86,20 +101,22 @@ function metric(label, value, note, tone) {
 
 function renderSummary() {
   const total = state.questions.length;
-  const complete = state.questions.filter((q) => q.status === "answerable").length;
-  const partial = state.questions.filter((q) => q.status === "partially_answerable").length;
-  const failed = state.questions.filter((q) => q.status === "not_answerable").length;
-  const authoritative = state.questions.filter((q) => array(q.matched_domains).length > 0).length;
-  const attachments = state.questions.filter((q) => q.has_attachment === true).length;
-  const rate = total ? `${((complete / total) * 100).toFixed(1)}%` : "0.0%";
+  const count = (status) => state.questions.filter((q) => answerStatusOf(q) === status).length;
+  const answered = count("answered");
+  const citation = count("answered_with_citation_issue");
+  const refused = count("refused");
+  const errors = count("error");
+  const pending = count("not_run");
+  const probeComplete = state.questions.filter((q) => q.status === "answerable").length;
 
   byId("summary-metrics").replaceChildren(
     metric("固定问题", total, "题库分母", "total"),
-    metric("完整可回答", complete, `完整通过率 ${rate}`, "pass"),
-    metric("部分可回答", partial, "仍有回答要点缺口", "partial"),
-    metric("不可回答", failed, "无足够官方依据", "failed"),
-    metric("权威域名命中", authoritative, `占全部问题 ${total ? Math.round((authoritative / total) * 100) : 0}%`),
-    metric("含附件依据", attachments, "命中文档包含附件"),
+    metric("真实回答", answered, "引用编号校验通过", "pass"),
+    metric("引用异常", citation, "无引用或引用越界", "partial"),
+    metric("真实拒答", refused, "未过检索置信门", "failed"),
+    metric("生成错误", errors, "模型或网络错误", "failed"),
+    metric("尚未运行", pending, "未产生真实快照"),
+    metric("规则探针完整", probeComplete, "仅为关键词规则结果", "probe"),
   );
 }
 
@@ -119,22 +136,23 @@ function renderScenes() {
   for (const scene of sceneOrder()) {
     const rows = state.questions.filter((q) => q.scene === scene);
     const total = rows.length || 1;
-    const complete = rows.filter((q) => q.status === "answerable").length;
-    const partial = rows.filter((q) => q.status === "partially_answerable").length;
-    const failed = rows.filter((q) => q.status === "not_answerable").length;
+    const answered = rows.filter((q) => answerStatusOf(q) === "answered").length;
+    const citation = rows.filter((q) => answerStatusOf(q) === "answered_with_citation_issue").length;
+    const refused = rows.filter((q) => answerStatusOf(q) === "refused").length;
+    const errors = rows.filter((q) => ["error", "not_run"].includes(answerStatusOf(q))).length;
     const button = element("button", `scene-bar${selected === scene ? " is-selected" : ""}`);
     button.type = "button";
     button.dataset.scene = scene;
     button.setAttribute("aria-pressed", String(selected === scene));
-    button.setAttribute("aria-label", `${scene}：完整 ${complete}，部分 ${partial}，不可回答 ${failed}`);
+    button.setAttribute("aria-label", `${scene}：已回答 ${answered}，引用异常 ${citation}，拒答 ${refused}，错误或未运行 ${errors}`);
 
     const head = element("span", "scene-bar__head");
     head.append(
       element("strong", "scene-bar__name", scene),
-      element("span", "scene-bar__count", `${complete} / ${rows.length} 完整`),
+      element("span", "scene-bar__count", `${answered} / ${rows.length} 引用通过`),
     );
     const track = element("span", "scene-bar__track");
-    for (const [name, value] of [["answerable", complete], ["partial", partial], ["failed", failed]]) {
+    for (const [name, value] of [["answered", answered], ["citation", citation], ["refused", refused], ["error", errors]]) {
       const segment = element("i", `scene-bar__segment is-${name}`);
       segment.style.width = `${(value / total) * 100}%`;
       track.appendChild(segment);
@@ -150,6 +168,8 @@ function renderScenes() {
 }
 
 function searchableText(question) {
+  const answer = question.real_answer || {};
+  const hits = array(answer.hits);
   return [
     question.id,
     question.question,
@@ -158,19 +178,23 @@ function searchableText(question) {
     ...array(question.publishers),
     ...array(question.matched_domains),
     ...array(question.retrieved_doc_ids),
+    answer.answer_text || "",
+    ...hits.flatMap((hit) => [hit.doc_id, hit.chunk_id, hit.title, hit.publisher, hit.text]),
   ].join(" ").toLocaleLowerCase("zh-CN");
 }
 
 function applyFilters() {
   const query = byId("search-filter").value.trim().toLocaleLowerCase("zh-CN");
   const scene = byId("scene-filter").value;
-  const status = byId("status-filter").value;
+  const answerStatus = byId("answer-status-filter").value;
+  const probeStatus = byId("probe-status-filter").value;
   const attachment = byId("attachment-filter").value;
 
   state.filtered = state.questions.filter((question) => {
     if (query && !searchableText(question).includes(query)) return false;
     if (scene && question.scene !== scene) return false;
-    if (status && question.status !== status) return false;
+    if (answerStatus && answerStatusOf(question) !== answerStatus) return false;
+    if (probeStatus && question.status !== probeStatus) return false;
     if (attachment === "yes" && question.has_attachment !== true) return false;
     if (attachment === "no" && question.has_attachment === true) return false;
     return true;
@@ -183,15 +207,23 @@ function applyFilters() {
   renderQuestionList();
 }
 
-function statusMeta(status) {
-  return STATUS[status] || STATUS.not_answerable;
+function probeStatusMeta(status) {
+  return PROBE_STATUS[status] || PROBE_STATUS.not_answerable;
+}
+
+function answerStatusOf(question) {
+  return question.real_answer ? question.real_answer.status : "not_run";
+}
+
+function answerStatusMeta(question) {
+  return ANSWER_STATUS[answerStatusOf(question)] || ANSWER_STATUS.error;
 }
 
 function renderMatrix() {
   const container = byId("evidence-matrix");
   const fragment = document.createDocumentFragment();
   for (const question of state.filtered) {
-    const meta = statusMeta(question.status);
+    const meta = answerStatusMeta(question);
     const button = element("button", `matrix-cell ${meta.className}`);
     button.type = "button";
     button.dataset.questionId = question.id;
@@ -202,6 +234,8 @@ function renderMatrix() {
       element("span", "matrix-cell__symbol", meta.symbol),
     );
     const flags = element("span", "matrix-cell__flags");
+    const probe = probeStatusMeta(question.status);
+    flags.appendChild(element("i", `flag flag--probe ${probe.className}`, probe.symbol));
     if (question.has_attachment === true) flags.appendChild(element("i", "flag flag--attachment", "附"));
     if (array(question.validity_statuses).includes("unknown_validity")) {
       flags.appendChild(element("i", "flag flag--unknown", "?"));
@@ -221,7 +255,8 @@ function renderQuestionList() {
   const container = byId("question-list");
   const fragment = document.createDocumentFragment();
   for (const question of state.filtered) {
-    const meta = statusMeta(question.status);
+    const meta = answerStatusMeta(question);
+    const probe = probeStatusMeta(question.status);
     const row = element("button", "question-row");
     row.type = "button";
     row.dataset.questionId = question.id;
@@ -240,7 +275,8 @@ function renderQuestionList() {
     const tail = element("span", "question-row__tail");
     tail.append(
       element("span", `status-pill ${meta.className}`, `${meta.symbol} ${meta.label}`),
-      element("span", `gap-count${gaps.length ? " has-gaps" : ""}`, gaps.length ? `${gaps.length} 项缺口` : "要点完整"),
+      element("span", `probe-pill ${probe.className}`, `${probe.symbol} ${probe.label}`),
+      element("span", `gap-count${gaps.length ? " has-gaps" : ""}`, gaps.length ? `${gaps.length} 项规则缺口` : "规则要点齐"),
     );
     row.append(number, main, tail);
     row.addEventListener("click", () => openQuestion(question.id, row));
@@ -298,6 +334,140 @@ function renderDocuments(question) {
   body.replaceChildren(fragment);
 }
 
+function renderAnswerText(answerText, hits) {
+  const container = element("div", "real-answer__content");
+  const hitIndexes = new Set(hits.map((hit) => Number(hit.prompt_index)));
+  const pattern = /\[(\d{1,2})\]/g;
+  let cursor = 0;
+  let match;
+  while ((match = pattern.exec(answerText)) !== null) {
+    container.appendChild(document.createTextNode(answerText.slice(cursor, match.index)));
+    const index = Number(match[1]);
+    const cite = element("button", "answer-citation", `[${index}]`);
+    cite.type = "button";
+    cite.disabled = !hitIndexes.has(index);
+    cite.setAttribute("aria-label", hitIndexes.has(index) ? `定位到资料 ${index}` : `无效引用 ${index}`);
+    if (hitIndexes.has(index)) {
+      cite.addEventListener("click", () => {
+        const target = byId(`answer-hit-${index}`);
+        if (!target) return;
+        target.scrollIntoView({ behavior: "smooth", block: "center" });
+        target.classList.remove("flash");
+        void target.offsetWidth;
+        target.classList.add("flash");
+      });
+    }
+    container.appendChild(cite);
+    cursor = pattern.lastIndex;
+  }
+  container.appendChild(document.createTextNode(answerText.slice(cursor)));
+  return container;
+}
+
+function renderRealAnswer(question) {
+  const box = byId("real-answer");
+  const metaBox = byId("real-answer-meta");
+  const textBox = byId("real-answer-text");
+  const answer = question.real_answer;
+  const meta = answerStatusMeta(question);
+  box.className = `real-answer ${meta.className}`;
+  metaBox.replaceChildren();
+  textBox.replaceChildren();
+
+  const run = state.report.answer_run || {};
+  const tags = [
+    `${meta.symbol} ${meta.label}`,
+    answer ? `模型 ${run.llm_model || "报告未提供"}` : "无真实答案快照",
+  ];
+  if (answer) {
+    tags.push(`生成 ${formatEvaluatedAt(answer.generated_at)}`);
+    tags.push(`耗时 ${Math.round(Number(answer.latency_ms || 0))} ms`);
+    tags.push(answer.domain_match ? "命中预期域名" : "未命中预期域名");
+    tags.push("人工审核：未完成");
+  }
+  for (const tag of tags) metaBox.appendChild(element("span", "real-answer__tag", tag));
+
+  if (!answer) {
+    textBox.appendChild(element("p", "real-answer__notice", "尚未运行真实问答。本题只有规则探针结果，不能视为答案。"));
+    return;
+  }
+  if (answer.status === "error") {
+    textBox.appendChild(element("p", "real-answer__notice is-error", `生成失败：${answer.error || "报告未提供错误原因"}`));
+    return;
+  }
+  textBox.appendChild(renderAnswerText(answer.answer_text || "报告未提供答案正文", array(answer.hits)));
+  const check = answer.citation_check;
+  if (answer.status === "refused") {
+    textBox.appendChild(element("p", "citation-audit is-refused", "本题未通过真实检索置信门，因此没有调用模型补写答案。"));
+  } else if (check && check.ok) {
+    textBox.appendChild(element("p", "citation-audit is-valid", "✓ 引用编号存在，且均指向本次 prompt 中的真实 chunk。"));
+  } else {
+    const invalid = check && array(check.invalid_refs).length
+      ? `越界编号：${check.invalid_refs.join("、")}`
+      : "回答缺少可校验引用";
+    textBox.appendChild(element("p", "citation-audit is-invalid", `! 引用校验未通过：${invalid}`));
+  }
+}
+
+function renderAnswerHits(question) {
+  const body = byId("answer-hit-rows");
+  const hits = array(question.real_answer && question.real_answer.hits);
+  if (!hits.length) {
+    const row = element("tr", "answer-hit");
+    const cell = element("td", "document-empty", "本题没有用于真实回答的 chunk。" );
+    cell.colSpan = 5;
+    row.appendChild(cell);
+    body.replaceChildren(row);
+    return;
+  }
+  const fragment = document.createDocumentFragment();
+  for (const hit of hits) {
+    const index = Number(hit.prompt_index);
+    const row = element("tr", "answer-hit");
+    row.id = `answer-hit-${index}`;
+    const indexCell = element("td", "answer-hit__index", `[${index}]`);
+    const idCell = document.createElement("td");
+    idCell.append(
+      element("strong", "document-id", hit.doc_id || "报告未提供"),
+      element("small", "answer-hit__chunk-id", hit.chunk_id || "报告未提供"),
+    );
+    const titleCell = document.createElement("td");
+    const title = hit.parent_title || hit.title || "报告未提供";
+    if (/^https?:\/\//.test(hit.source_url || "")) {
+      const link = element("a", "document-title", title);
+      link.href = hit.source_url;
+      link.target = "_blank";
+      link.rel = "noopener";
+      titleCell.appendChild(link);
+    } else {
+      titleCell.appendChild(element("strong", "document-title", title));
+    }
+    titleCell.appendChild(element("small", "document-publisher", hit.publisher || "报告未提供"));
+    const similarity = typeof hit.vector_similarity === "number"
+      ? hit.vector_similarity.toFixed(3)
+      : "—";
+    row.append(
+      indexCell,
+      idCell,
+      titleCell,
+      element("td", "answer-hit__similarity", similarity),
+      element("td", `document-validity is-${hit.validity_status || "unknown_validity"}`, hit.validity_status || "报告未提供"),
+    );
+    const chunkRow = element("tr", "answer-hit__chunk");
+    const chunkCell = document.createElement("td");
+    chunkCell.colSpan = 5;
+    const details = document.createElement("details");
+    details.append(
+      element("summary", "", `查看 [${index}] 实际 chunk · ${hit.heading_path || "无小节标题"}`),
+      element("pre", "", hit.text || "报告未提供 chunk 正文"),
+    );
+    chunkCell.appendChild(details);
+    chunkRow.appendChild(chunkCell);
+    fragment.append(row, chunkRow);
+  }
+  body.replaceChildren(fragment);
+}
+
 function renderPointEvidence(question) {
   const container = byId("point-evidence");
   const records = array(question.point_evidence);
@@ -340,7 +510,9 @@ function renderMissingReasons(question) {
 }
 
 function renderVerdict(question) {
-  const meta = statusMeta(question.status);
+  const meta = answerStatusMeta(question);
+  const probe = probeStatusMeta(question.status);
+  const answer = question.real_answer;
   const box = byId("drawer-verdict");
   const heading = element("div", "drawer-verdict__heading");
   heading.append(
@@ -351,9 +523,10 @@ function renderVerdict(question) {
   const facts = element("dl", "drawer-facts");
   const factData = [
     ["问题 ID", question.id],
-    ["命中文档", `${array(question.retrieved_doc_ids).length} 份`],
-    ["权威域名", array(question.matched_domains).join("、") || "报告未提供"],
-    ["附件", question.has_attachment === true ? "是" : "否"],
+    ["真实回答 chunks", `${array(answer && answer.hits).length} 个`],
+    ["真实命中域名", array(answer && answer.matched_domains).join("、") || "报告未提供"],
+    ["规则探针", probe.label],
+    ["人工审核", "未完成"],
   ];
   for (const [label, value] of factData) {
     const group = document.createElement("div");
@@ -378,6 +551,8 @@ function openQuestion(questionId, trigger) {
   byId("drawer-sequence").textContent = `问题 ${String(question._ordinal).padStart(3, "0")} / ${state.questions.length}`;
   byId("drawer-title").textContent = question.question;
   renderVerdict(question);
+  renderRealAnswer(question);
+  renderAnswerHits(question);
   renderDocuments(question);
   renderPointEvidence(question);
   renderMissingReasons(question);
@@ -413,7 +588,13 @@ function populateSceneFilter() {
 }
 
 function bindControls() {
-  for (const id of ["search-filter", "scene-filter", "status-filter", "attachment-filter"]) {
+  for (const id of [
+    "search-filter",
+    "scene-filter",
+    "answer-status-filter",
+    "probe-status-filter",
+    "attachment-filter",
+  ]) {
     byId(id).addEventListener(id === "search-filter" ? "input" : "change", applyFilters);
   }
   byId("filter-bar").addEventListener("reset", () => window.setTimeout(applyFilters, 0));

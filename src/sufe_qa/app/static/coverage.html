@@ -16,7 +16,7 @@
       <div>
         <p class="folio">固定题库 / 检索质量卷宗</p>
         <h1>150 问覆盖质检</h1>
-        <p class="audit-lede">逐题核验命中部门、依据文档、回答要点与缺失证据。</p>
+        <p class="audit-lede">逐题查看真实模型回答、引用 chunks，并与规则探针分开核验。</p>
       </div>
       <div class="audit-stamp" aria-label="评测状态：读取中">
         <span id="stamp-count">—</span>
@@ -29,6 +29,7 @@
       <div><dt>题库哈希</dt><dd id="meta-bank-hash">—</dd></div>
       <div><dt>索引指纹</dt><dd id="meta-index-hash">—</dd></div>
       <div><dt>检索配置</dt><dd id="meta-retriever">—</dd></div>
+      <div><dt>真实生成</dt><dd id="meta-answer-run">读取中</dd></div>
     </dl>
   </header>
 
@@ -44,19 +45,20 @@
     <div id="dashboard" hidden>
       <section class="summary-section" aria-labelledby="summary-title">
         <div class="section-heading">
-          <div><p class="section-kicker">卷一 · 总体判定</p><h2 id="summary-title">当前覆盖结果</h2></div>
-          <p class="summary-note">部分可回答不计入完整通过率</p>
+          <div><p class="section-kicker">卷一 · 真实运行</p><h2 id="summary-title">150 问实际作答结果</h2></div>
+          <p class="summary-note">“已回答”表示真实生成并通过引用编号校验，不代表人工审核</p>
         </div>
         <div class="summary-metrics" id="summary-metrics"></div>
       </section>
 
       <section class="scene-section" aria-labelledby="scene-title">
         <div class="section-heading">
-          <div><p class="section-kicker">卷二 · 场景分布</p><h2 id="scene-title">11 个学生事务场景</h2></div>
+          <div><p class="section-kicker">卷二 · 场景分布</p><h2 id="scene-title">11 个场景的真实回答状态</h2></div>
           <div class="legend" aria-label="状态图例">
-            <span><i class="legend-mark is-answerable"></i>完整</span>
-            <span><i class="legend-mark is-partial"></i>部分</span>
-            <span><i class="legend-mark is-failed"></i>不可回答</span>
+            <span><i class="legend-mark is-answered"></i>已回答</span>
+            <span><i class="legend-mark is-citation"></i>引用异常</span>
+            <span><i class="legend-mark is-refused"></i>拒答</span>
+            <span><i class="legend-mark is-error"></i>错误/未运行</span>
           </div>
         </div>
         <div class="scene-bars" id="scene-bars"></div>
@@ -75,7 +77,8 @@
                    placeholder="问题、ID、标题、部门、doc_id">
           </label>
           <label><span>场景</span><select id="scene-filter" name="scene"><option value="">全部场景</option></select></label>
-          <label><span>状态</span><select id="status-filter" name="status"><option value="">全部状态</option><option value="answerable">完整可回答</option><option value="partially_answerable">部分可回答</option><option value="not_answerable">不可回答</option></select></label>
+          <label><span>真实回答状态</span><select id="answer-status-filter" name="answer_status"><option value="">全部状态</option><option value="answered">已回答且引用通过</option><option value="answered_with_citation_issue">引用异常</option><option value="refused">真实拒答</option><option value="error">生成错误</option><option value="not_run">尚未运行</option></select></label>
+          <label><span>规则探针状态</span><select id="probe-status-filter" name="probe_status"><option value="">全部探针</option><option value="answerable">规则探针完整</option><option value="partially_answerable">规则探针部分</option><option value="not_answerable">规则探针未命中</option></select></label>
           <label><span>附件</span><select id="attachment-filter" name="attachment"><option value="">不限</option><option value="yes">含附件</option><option value="no">无附件</option></select></label>
           <button id="reset-filters" type="reset">清除筛选</button>
         </form>
@@ -96,9 +99,15 @@
     </header>
     <div class="drawer-body">
       <section class="drawer-verdict" id="drawer-verdict"></section>
-      <section aria-labelledby="documents-title"><h3 id="documents-title">命中文档</h3><div class="document-table-wrap"><table class="document-table"><thead><tr><th>doc_id</th><th>标题 / 发布部门</th><th>日期</th><th>类型</th><th>有效性</th></tr></thead><tbody id="document-rows"></tbody></table></div></section>
-      <section aria-labelledby="evidence-title"><h3 id="evidence-title">回答要点证据</h3><div class="point-evidence" id="point-evidence"></div></section>
-      <section aria-labelledby="missing-title"><h3 id="missing-title">缺失原因</h3><div class="missing-reasons" id="missing-reasons"></div></section>
+      <section class="real-answer" id="real-answer" aria-labelledby="real-answer-title">
+        <h3 id="real-answer-title">真实模型回答</h3>
+        <div class="real-answer__meta" id="real-answer-meta"></div>
+        <div class="real-answer__text" id="real-answer-text"></div>
+      </section>
+      <section aria-labelledby="answer-hits-title"><h3 id="answer-hits-title">本次回答实际使用的 chunks</h3><div class="document-table-wrap"><table class="document-table answer-hit-table"><thead><tr><th>引用</th><th>doc_id / chunk_id</th><th>标题 / 发布部门</th><th>相似度</th><th>有效性</th></tr></thead><tbody id="answer-hit-rows"></tbody></table></div></section>
+      <section aria-labelledby="documents-title"><h3 id="documents-title">规则探针候选文档</h3><div class="document-table-wrap"><table class="document-table"><thead><tr><th>doc_id</th><th>标题 / 发布部门</th><th>日期</th><th>类型</th><th>有效性</th></tr></thead><tbody id="document-rows"></tbody></table></div></section>
+      <section aria-labelledby="evidence-title"><h3 id="evidence-title">规则探针证据（非人工判分）</h3><div class="point-evidence" id="point-evidence"></div></section>
+      <section aria-labelledby="missing-title"><h3 id="missing-title">规则探针缺失原因</h3><div class="missing-reasons" id="missing-reasons"></div></section>
     </div>
   </aside>
 
