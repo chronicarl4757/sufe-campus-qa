@@ -21,6 +21,40 @@ DOC = (
 ) * 2
 QUESTION = DOC[12:112]  # 正文子串提问，FakeEmbedder 下保证过置信门控
 
+COVERAGE_REPORT = {
+    "question_bank_version": "sufe-question-bank.v1",
+    "question_bank_hash": "sha256:bank",
+    "index_fingerprint": "sha256:index",
+    "evaluated_at": "2026-08-10T13:10:28+00:00",
+    "retriever_config": {"similarity_threshold": 0.5},
+    "scene_stats": {
+        "本科教务": {
+            "question_count": 1,
+            "answerable_question_count": 1,
+            "partially_answerable_question_count": 0,
+            "unanswerable_question_count": 0,
+        }
+    },
+    "question_results": [
+        {
+            "id": "jwc-leave-001",
+            "question": "本科生如何申请缓考？",
+            "scene": "本科教务",
+            "status": "answerable",
+            "retrieved_doc_ids": ["doc-1"],
+            "titles": ["缓考办理办法"],
+            "publishers": ["上海财经大学教务处"],
+            "publish_dates": ["2026-01-01"],
+            "document_kinds": ["procedure"],
+            "validity_statuses": ["current"],
+            "has_attachment": True,
+            "matched_domains": ["jwc.sufe.edu.cn"],
+            "point_evidence": [],
+            "missing_reasons": [],
+        }
+    ],
+}
+
 
 @pytest.fixture
 def client(tmp_path, monkeypatch):
@@ -51,6 +85,52 @@ def test_meta(client):
     assert m["categories"] == ["学工事务"]
     assert m["updated_at"]
     assert len(m["examples"]) >= 4
+
+
+def _write_coverage_report(tmp_path, report=COVERAGE_REPORT):
+    path = tmp_path / "coverage" / "sufe_coverage_after.json"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(report, ensure_ascii=False), encoding="utf-8")
+
+
+def test_coverage_api_returns_current_report(client, tmp_path):
+    _write_coverage_report(tmp_path)
+    response = client.get("/api/coverage")
+    assert response.status_code == 200
+    assert response.json()["question_results"][0]["id"] == "jwc-leave-001"
+    assert response.headers["cache-control"] == "no-store"
+
+
+def test_coverage_api_reports_missing_file(client):
+    response = client.get("/api/coverage")
+    assert response.status_code == 404
+    assert response.json()["detail"] == "覆盖评测报告不存在"
+
+
+def test_coverage_api_rejects_malformed_json(client, tmp_path):
+    path = tmp_path / "coverage" / "sufe_coverage_after.json"
+    path.parent.mkdir(parents=True)
+    path.write_text("{broken", encoding="utf-8")
+    response = client.get("/api/coverage")
+    assert response.status_code == 500
+    assert response.json()["detail"] == "覆盖评测报告无法解析"
+
+
+@pytest.mark.parametrize(
+    "mutation",
+    [
+        lambda report: report.pop("scene_stats"),
+        lambda report: report["question_results"][0].pop("question"),
+        lambda report: report["question_results"][0].update(status="invented"),
+    ],
+)
+def test_coverage_api_rejects_invalid_schema(client, tmp_path, mutation):
+    report = json.loads(json.dumps(COVERAGE_REPORT))
+    mutation(report)
+    _write_coverage_report(tmp_path, report)
+    response = client.get("/api/coverage")
+    assert response.status_code == 500
+    assert response.json()["detail"] == "覆盖评测报告结构无效"
 
 
 def _events(text: str) -> dict[str, list[dict]]:

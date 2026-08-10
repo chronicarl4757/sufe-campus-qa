@@ -21,8 +21,8 @@ from collections.abc import Iterator
 from datetime import datetime, timezone
 from pathlib import Path
 
-from fastapi import FastAPI, Request
-from fastapi.responses import FileResponse, StreamingResponse
+from fastapi import FastAPI, HTTPException, Request
+from fastapi.responses import FileResponse, JSONResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
@@ -35,6 +35,7 @@ from sufe_qa.schema import load_manifest
 logger = logging.getLogger(__name__)
 
 STATIC_DIR = Path(__file__).parent / "static"
+_COVERAGE_STATUSES = {"answerable", "partially_answerable", "not_answerable"}
 
 EXAMPLE_QUESTIONS = [
     "推免预报名的申请条件是什么？",
@@ -54,6 +55,30 @@ class FeedbackReq(BaseModel):
     question: str = Field(max_length=2000)
     answer: str = Field(max_length=8000)
     rating: str  # "up" | "down"
+
+
+def _load_coverage_report(path: Path) -> dict:
+    if not path.is_file():
+        raise HTTPException(status_code=404, detail="覆盖评测报告不存在")
+    try:
+        report = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, json.JSONDecodeError) as exc:
+        raise HTTPException(status_code=500, detail="覆盖评测报告无法解析") from exc
+    if not isinstance(report, dict):
+        raise HTTPException(status_code=500, detail="覆盖评测报告结构无效")
+    questions = report.get("question_results")
+    scenes = report.get("scene_stats")
+    if not isinstance(questions, list) or not isinstance(scenes, dict):
+        raise HTTPException(status_code=500, detail="覆盖评测报告结构无效")
+    for question in questions:
+        required = ("id", "question", "scene", "status")
+        if not isinstance(question, dict) or any(
+            not isinstance(question.get(key), str) or not question[key] for key in required
+        ):
+            raise HTTPException(status_code=500, detail="覆盖评测报告结构无效")
+        if question["status"] not in _COVERAGE_STATUSES:
+            raise HTTPException(status_code=500, detail="覆盖评测报告结构无效")
+    return report
 
 
 def _sse(event: str, data: dict) -> str:
@@ -131,6 +156,13 @@ def create_app(
             "categories": sorted({m.category for m in manifest.values()}),
             "examples": EXAMPLE_QUESTIONS,
         }
+
+    @app.get("/api/coverage")
+    def coverage_report() -> JSONResponse:
+        report = _load_coverage_report(
+            settings.data_dir / "coverage" / "sufe_coverage_after.json"
+        )
+        return JSONResponse(report, headers={"Cache-Control": "no-store"})
 
     @app.post("/api/ask")
     def ask(req: AskReq, request: Request) -> StreamingResponse:
