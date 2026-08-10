@@ -4,49 +4,49 @@
 - question_bank_hash: `sha256:8a5ab6a1110531cd443d9e652a1032f4e97d25d0f083bf9728429a0c28c352f9`
 - embedding_model: `BAAI/bge-m3`
 - similarity_threshold: `0.5`
-- index_fingerprint: `not_indexed`
-- evaluated_at: `2026-08-07T09:16:04+00:00`
+- index_fingerprint: `sha256:43554cb21eeb45f5cd669a742735b9a0aab5d5b5dfed27bea35d7bf3844ba7d4`
+- evaluated_at: `2026-08-10T13:03:35+00:00`
 
 ## 场景统计
 
 | 场景 | 文档数 | 有效 policy | 有效 procedure | 标题/不完整 | 新闻/宣传 | 最新有效版本 | 可回答 | 部分 | 不可回答 | 缺失权威来源 |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
-| 本科教务 | 52 | 15 | 16 | 0 | 0 | 22 | 17 | 3 | 0 | — |
-| 研究生培养与学位 | 17 | 5 | 2 | 0 | 0 | 9 | 11 | 9 | 0 | — |
-| 奖助学金 | 183 | 29 | 2 | 0 | 0 | 59 | 8 | 7 | 0 | — |
+| 本科教务 | 52 | 14 | 19 | 0 | 0 | 22 | 17 | 3 | 0 | — |
+| 研究生培养与学位 | 17 | 6 | 2 | 0 | 0 | 9 | 11 | 9 | 0 | — |
+| 奖助学金 | 147 | 24 | 5 | 0 | 0 | 44 | 8 | 7 | 0 | — |
 | 推免与招生 | 242 | 14 | 9 | 0 | 0 | 130 | 6 | 9 | 0 | — |
 | 就业手续 | 76 | 0 | 7 | 1 | 0 | 37 | 7 | 8 | 0 | — |
 | 宿舍后勤 | 10 | 0 | 3 | 1 | 0 | 3 | 5 | 5 | 0 | — |
-| 信息化与校园卡 | 8 | 0 | 6 | 0 | 0 | 5 | 4 | 11 | 0 | — |
+| 信息化与校园卡 | 14 | 0 | 2 | 0 | 0 | 2 | 3 | 12 | 0 | — |
 | 图书馆 | 9 | 0 | 4 | 0 | 0 | 4 | 6 | 4 | 0 | — |
 | 医疗医保 | 74 | 8 | 40 | 0 | 0 | 46 | 6 | 4 | 0 | — |
 | 国际交流 | 32 | 0 | 5 | 0 | 0 | 6 | 8 | 2 | 0 | — |
-| 新生与安全 | 27 | 2 | 12 | 0 | 0 | 15 | 8 | 2 | 0 | — |
+| 新生与安全 | 17 | 4 | 9 | 0 | 0 | 11 | 8 | 2 | 0 | — |
 
 ## 逐题结果
 
 | ID | 问题 | 场景 | 状态 | doc_id | 标题 | 缺口 |
 |---|---|---|---|---|---|---|
 | jwc-leave-001 | 本科生因病无法参加考试如何申请缓考？ | 本科教务 | answerable | 36481bbba58c, 282827505b9c, f8892252b39b, caef95227715, b34e7552a58f | 上海财经大学本科学生学籍管理实施细则（修订稿）.pdf | — |
-| jwc-leave-002 | 本科生如何办理休学和复学？ | 本科教务 | answerable | 36481bbba58c, 3805d2ce561e, 6cc64e90571a, f8892252b39b, caef95227715 | 上海财经大学本科学生学籍管理实施细则（修订稿）.pdf | — |
-| jwc-course-003 | 重修课程如何办理？ | 本科教务 | partially_answerable | f8892252b39b, 36481bbba58c, 6cc64e90571a, c5ae3d61e34e, 2e002b0c1101 | e470cdc5-5780-4d49-ad18-f265ea4c5887.pdf | 缺少回答要点：适用情形 |
+| jwc-leave-002 | 本科生如何办理休学和复学？ | 本科教务 | answerable | 36481bbba58c, 3805d2ce561e, 6cc64e90571a, caef95227715, f8892252b39b | 上海财经大学本科学生学籍管理实施细则（修订稿）.pdf | — |
+| jwc-course-003 | 重修课程如何办理？ | 本科教务 | partially_answerable | 36481bbba58c, f8892252b39b, 6cc64e90571a, c5ae3d61e34e, 2e002b0c1101 | 上海财经大学本科学生学籍管理实施细则（修订稿）.pdf | 缺少回答要点：适用情形 |
 | jwc-major-004 | 如何申请转专业？ | 本科教务 | answerable | 36481bbba58c, 4cc221b5efe0, 6cc64e90571a, c5ae3d61e34e, fb93dacd6384 | 上海财经大学本科学生学籍管理实施细则（修订稿）.pdf | — |
-| jwc-credit-005 | 本科生如何申请校外学习学分认定？ | 本科教务 | answerable | 6cc64e90571a, 36481bbba58c, b73dbd658c3b, caef95227715, c5ae3d61e34e | 2fb18367-7103-4ec4-bf14-e2605e87f0a9.pdf | — |
-| jwc-card-006 | 学生证丢失如何补办？ | 本科教务 | answerable | 661167fb7bae, b34e7552a58f, ce9f40abd3f5, caef95227715, a134102b3ff1 | 13d98ab8-a7b8-4dd6-8bfe-c7189cf77bf1.doc | — |
+| jwc-credit-005 | 本科生如何申请校外学习学分认定？ | 本科教务 | answerable | 36481bbba58c, 6cc64e90571a, b73dbd658c3b, caef95227715, c5ae3d61e34e | 上海财经大学本科学生学籍管理实施细则（修订稿）.pdf | — |
+| jwc-card-006 | 学生证丢失如何补办？ | 本科教务 | answerable | 661167fb7bae, 36481bbba58c, a134102b3ff1, b34e7552a58f, caef95227715 | 13d98ab8-a7b8-4dd6-8bfe-c7189cf77bf1.doc | — |
 | jwc-drop-007 | 退课和选课的办理入口是什么？ | 本科教务 | answerable | 36481bbba58c, 6cc64e90571a, f8892252b39b, caef95227715, fb93dacd6384 | 上海财经大学本科学生学籍管理实施细则（修订稿）.pdf | — |
-| jwc-double-008 | 本科生如何申请双专业学习？ | 本科教务 | answerable | 36481bbba58c, 6cc64e90571a, c5ae3d61e34e, b73dbd658c3b, caef95227715 | 上海财经大学本科学生学籍管理实施细则（修订稿）.pdf | — |
+| jwc-double-008 | 本科生如何申请双专业学习？ | 本科教务 | answerable | 36481bbba58c, 6cc64e90571a, c5ae3d61e34e, 75094c370868, b73dbd658c3b | 上海财经大学本科学生学籍管理实施细则（修订稿）.pdf | — |
 | jwc-withdraw-009 | 本科生办理退学需要哪些手续？ | 本科教务 | answerable | 36481bbba58c, 3805d2ce561e, ce9f40abd3f5, d801506ea32e, 6cc64e90571a | 上海财经大学本科学生学籍管理实施细则（修订稿）.pdf | — |
-| jwc-exam-010 | 本科生考试违纪会按照什么规定处理？ | 本科教务 | partially_answerable | 36481bbba58c, c5ae3d61e34e, a134102b3ff1, caef95227715, fb93dacd6384 | 上海财经大学本科学生学籍管理实施细则（修订稿）.pdf | 缺少回答要点：适用制度; 缺少回答要点：违纪类型 |
-| jwc-score-011 | 本科生对课程成绩有异议如何申请复核？ | 本科教务 | answerable | c5ae3d61e34e, 36481bbba58c, caef95227715, fb93dacd6384, 1e34012f4414 | 上海财经大学推荐优秀应届本科毕业生免试攻读研究生工作管理办法（试行）.pdf | — |
+| jwc-exam-010 | 本科生考试违纪会按照什么规定处理？ | 本科教务 | partially_answerable | 36481bbba58c, a134102b3ff1, c5ae3d61e34e, caef95227715, fb93dacd6384 | 上海财经大学本科学生学籍管理实施细则（修订稿）.pdf | 缺少回答要点：适用制度; 缺少回答要点：违纪类型 |
+| jwc-score-011 | 本科生对课程成绩有异议如何申请复核？ | 本科教务 | answerable | 36481bbba58c, c5ae3d61e34e, caef95227715, fb93dacd6384, 1e34012f4414 | 上海财经大学本科学生学籍管理实施细则（修订稿）.pdf | — |
 | jwc-makeup-012 | 本科生补考和重修的区别是什么？ | 本科教务 | answerable | 36481bbba58c, f8892252b39b, 3805d2ce561e, 4cc221b5efe0, 6cc64e90571a | 上海财经大学本科学生学籍管理实施细则（修订稿）.pdf | — |
-| jwc-exempt-013 | 本科生课程免修或免考如何申请？ | 本科教务 | answerable | 6cc64e90571a, 36481bbba58c, f8892252b39b, c5ae3d61e34e, caef95227715 | 2fb18367-7103-4ec4-bf14-e2605e87f0a9.pdf | — |
-| jwc-plan-014 | 在哪里可以查询本科生培养方案和学分要求？ | 本科教务 | partially_answerable | 36481bbba58c, 6cc64e90571a, caef95227715, 59f10253846c, f8892252b39b | 上海财经大学本科学生学籍管理实施细则（修订稿）.pdf | 缺少回答要点：课程类别; 缺少回答要点：适用年级 |
+| jwc-exempt-013 | 本科生课程免修或免考如何申请？ | 本科教务 | answerable | 36481bbba58c, 6cc64e90571a, c5ae3d61e34e, f8892252b39b, caef95227715 | 上海财经大学本科学生学籍管理实施细则（修订稿）.pdf | — |
+| jwc-plan-014 | 在哪里可以查询本科生培养方案和学分要求？ | 本科教务 | partially_answerable | 36481bbba58c, 6cc64e90571a, caef95227715, 59f10253846c, 75094c370868 | 上海财经大学本科学生学籍管理实施细则（修订稿）.pdf | 缺少回答要点：课程类别; 缺少回答要点：适用年级 |
 | jwc-thesis-015 | 本科毕业论文如何选题、开题和提交？ | 本科教务 | answerable | 75094c370868, 59f10253846c, 36481bbba58c, 1e34012f4414, 62024ec24ad1 | 上海财经大学本科学生毕业论文（设计）工作的规定.pdf | — |
 | jwc-graduation-016 | 本科生申请毕业需要满足哪些学分和学籍条件？ | 本科教务 | answerable | 36481bbba58c, caef95227715, c5ae3d61e34e, 6cc64e90571a, f8892252b39b | 上海财经大学本科学生学籍管理实施细则（修订稿）.pdf | — |
-| jwc-gpa-017 | 本科成绩单中的绩点如何计算？ | 本科教务 | answerable | 36481bbba58c, 6cc64e90571a, caef95227715, a134102b3ff1, c5ae3d61e34e | 上海财经大学本科学生学籍管理实施细则（修订稿）.pdf | — |
-| jwc-sports-018 | 体育特长生比赛加分如何申请？ | 本科教务 | answerable | b73dbd658c3b, b34e7552a58f, caef95227715, 36481bbba58c, 3805d2ce561e | 办事流程 | — |
-| jwc-certificate-019 | 本科生如何办理在读或学籍证明？ | 本科教务 | answerable | 36481bbba58c, caef95227715, 3805d2ce561e, 6cc64e90571a, ce9f40abd3f5 | 上海财经大学本科学生学籍管理实施细则（修订稿）.pdf | — |
-| jwc-contact-020 | 教务系统或选课出现问题应联系哪个部门？ | 本科教务 | answerable | c5ae3d61e34e, 75094c370868, 36481bbba58c, 59f10253846c, 6cc64e90571a | 上海财经大学推荐优秀应届本科毕业生免试攻读研究生工作管理办法（试行）.pdf | — |
+| jwc-gpa-017 | 本科成绩单中的绩点如何计算？ | 本科教务 | answerable | 36481bbba58c, 6cc64e90571a, a134102b3ff1, caef95227715, 75094c370868 | 上海财经大学本科学生学籍管理实施细则（修订稿）.pdf | — |
+| jwc-sports-018 | 体育特长生比赛加分如何申请？ | 本科教务 | answerable | b73dbd658c3b, 36481bbba58c, b34e7552a58f, caef95227715, 3805d2ce561e | 办事流程 | — |
+| jwc-certificate-019 | 本科生如何办理在读或学籍证明？ | 本科教务 | answerable | 36481bbba58c, caef95227715, 3805d2ce561e, 6cc64e90571a, c5ae3d61e34e | 上海财经大学本科学生学籍管理实施细则（修订稿）.pdf | — |
+| jwc-contact-020 | 教务系统或选课出现问题应联系哪个部门？ | 本科教务 | answerable | 36481bbba58c, 75094c370868, c5ae3d61e34e, 59f10253846c, 6cc64e90571a | 上海财经大学本科学生学籍管理实施细则（修订稿）.pdf | — |
 | gs-course-001 | 研究生如何选课？ | 研究生培养与学位 | answerable | 12d8bae93ae8, 1fb82cab054b, 31211fd84e31, 844338d7d8e8, 5150e284b7e6 | 上海财经大学2026年招收攻读硕士学位研究生初试成绩公布后相关问题汇总 | — |
 | gs-grade-002 | 研究生是否有绩点要求？ | 研究生培养与学位 | partially_answerable | 739c8bdca878, bfe1c345a8e2, 1f9cd474ac62, 12d8bae93ae8, 1fb82cab054b | 2026年全国硕士研究生招生考试上海财经大学考点（代码：3109）考前提醒（二） | 缺少回答要点：适用培养层次; 缺少回答要点：适用环节; 缺少回答要点：制度来源 |
 | gs-transcript-003 | 研究生成绩单在哪里打印？ | 研究生培养与学位 | answerable | 94bcb693271a, e364a11babc8, 5d4628bc8faa, b50750ea2d92, 20233e75a8e3 | 上海财经大学2025年硕士研究生招生考试报名公告 | — |
@@ -67,21 +67,21 @@
 | gs-extension-018 | 研究生延期毕业如何申请？ | 研究生培养与学位 | answerable | c8ae11c35f97, f900e2c94b7f, 12d8bae93ae8, c0c2a73030c1, 1c38828bd054 | 上海财经大学博士研究生学位论文工作的基本要求（2002年9月修订） | — |
 | gs-advisor-019 | 研究生如何申请导师变更？ | 研究生培养与学位 | partially_answerable | 12d8bae93ae8, 844338d7d8e8, 2675703133ac, f511bc1fc4a2, f8015ab6e16f | 上海财经大学2026年招收攻读硕士学位研究生初试成绩公布后相关问题汇总 | 缺少回答要点：适用情形 |
 | gs-review-020 | 研究生学位论文外审和预答辩如何安排？ | 研究生培养与学位 | answerable | 83b8da8365ee, c8ae11c35f97, c55834842682, fdc14f69b3bb, f69ff958852a | 政策文件 | — |
-| aid-national-001 | 本科生国家奖学金申请条件是什么？ | 奖助学金 | answerable | 3e2ec161e017, 861408385e90, 87cb45995557, 57d4620aea1b, 2e8a9386b4f8 | 关于开展2024-2025学年国家励志奖学金评选工作的通知 | — |
+| aid-national-001 | 本科生国家奖学金申请条件是什么？ | 奖助学金 | answerable | 3e2ec161e017, 861408385e90, 87cb45995557, 2e8a9386b4f8, 57d4620aea1b | 关于开展2024-2025学年国家励志奖学金评选工作的通知 | — |
 | aid-fail-002 | 有挂科记录还能申请奖学金吗？ | 奖助学金 | partially_answerable | 52a785d3df9c, e8b2b9918594, 231d0aa11418, 77ec547b2f2e, 87cb45995557 | bb74c415-f49b-4bb8-9f0b-3830b36fb8cc.pdf | 缺少回答要点：适用奖项; 缺少回答要点：依据办法 |
 | aid-hardship-003 | 家庭经济困难学生如何认定？ | 奖助学金 | answerable | 52a785d3df9c, b815e0eefe9a, 3e2ec161e017, 861408385e90, 77d10806304e | bb74c415-f49b-4bb8-9f0b-3830b36fb8cc.pdf | — |
 | aid-temporary-004 | 临时困难补助如何申请？ | 奖助学金 | answerable | 04bec8770ea1, 58c34224a8c8, 5220cf43e76b, 1f5aa08edc4d, 52a785d3df9c | 关于印发《上海财经大学学生临时困难补助管理办法》的通知 | — |
 | aid-workstudy-005 | 勤工助学有哪些要求？ | 奖助学金 | partially_answerable | 1f5aa08edc4d, 5220cf43e76b, 52a785d3df9c, d9ef5485306b, 3e2ec161e017 | 关于印发《上海财经大学学生违纪处分规定（2023年10月修订）》的通知.pdf | 缺少回答要点：岗位申请 |
-| aid-combine-006 | 国家励志奖学金和国家奖学金是否可以兼得？ | 奖助学金 | partially_answerable | e8b2b9918594, 87cb45995557, ba83658755d9, b9076de50dc7, 52a785d3df9c | 关于印发《上海财经大学本科生奖学金评选管理办法》的通知（上财行规[2025]22号）.pdf | 缺少回答要点：制度依据 |
+| aid-combine-006 | 国家励志奖学金和国家奖学金是否可以兼得？ | 奖助学金 | partially_answerable | e8b2b9918594, 87cb45995557, 52a785d3df9c, 3e2ec161e017, 861408385e90 | 关于印发《上海财经大学本科生奖学金评选管理办法》的通知（上财行规[2025]22号）.pdf | 缺少回答要点：制度依据 |
 | aid-assessment-007 | 综合测评如何计算？ | 奖助学金 | partially_answerable | 3e2ec161e017, 861408385e90, a7ba514b5aec, b880d66272a2, 1067b1ad3777 | 关于开展2024-2025学年国家励志奖学金评选工作的通知 | 缺少回答要点：评价项目 |
-| aid-appeal-008 | 奖学金评选结果如何申诉？ | 奖助学金 | answerable | 1ab2328b6329, 4a24a8bbdf92, ba83658755d9, b9076de50dc7, 3e2ec161e017 | 关于开展2024年研究生国家奖学金评选工作的通知.pdf | — |
+| aid-appeal-008 | 奖学金评选结果如何申诉？ | 奖助学金 | answerable | 1ab2328b6329, 4a24a8bbdf92, 3e2ec161e017, 861408385e90, 2e8a9386b4f8 | 关于开展2024年研究生国家奖学金评选工作的通知.pdf | — |
 | aid-grant-009 | 本科生国家助学金如何申请？ | 奖助学金 | answerable | 145349451521, 4cb5fd791a1a, 87cb45995557, 3e2ec161e017, 861408385e90 | 关于开展2024-2025学年本科生国家助学金及社会助学金评选工作的通知.doc | — |
-| aid-tuition-010 | 学费减免如何申请？ | 奖助学金 | answerable | 4cb5fd791a1a, b815e0eefe9a, c738554bdeee, 8f245c042322, 52a785d3df9c | 48f8b69e-45bb-4d19-91e9-6df752543a42.pdf | — |
-| aid-campus-loan-011 | 校园地国家助学贷款如何办理？ | 奖助学金 | answerable | 4ff558a986d5, ee98c67e0dbc, 1f5aa08edc4d, 4256e93f19b3, 049a7db37997 | 关于印发《上海财经大学校园地国家助学贷款管理办法（2025年5月修订）》的通知 | — |
-| aid-origin-loan-012 | 生源地助学贷款如何办理学校确认？ | 奖助学金 | partially_answerable | ee98c67e0dbc, 52a785d3df9c, 1693b45a1775, 611df4dc53c6, 5836ee860bf9 | 关于申请2022年中西部基层单位就业学费补偿国家助学贷款代偿的通知 | 缺少回答要点：学校确认环节 |
-| aid-military-aid-013 | 服兵役学生国家教育资助如何申请？ | 奖助学金 | answerable | bb5bbb0e9e8c, 52a785d3df9c, 77ec547b2f2e, 4f21705d51ca, 145349451521 | 关于印发《上海财经大学服兵役学生国家教育资助实施办法（2025年5月修订）》的通知 | — |
+| aid-tuition-010 | 学费减免如何申请？ | 奖助学金 | answerable | 4cb5fd791a1a, b815e0eefe9a, 8f245c042322, c738554bdeee, 52a785d3df9c | 48f8b69e-45bb-4d19-91e9-6df752543a42.pdf | — |
+| aid-campus-loan-011 | 校园地国家助学贷款如何办理？ | 奖助学金 | answerable | ee98c67e0dbc, 1f5aa08edc4d, 049a7db37997, 4256e93f19b3, 280b436e0a52 | 关于申请2022年中西部基层单位就业学费补偿国家助学贷款代偿的通知 | — |
+| aid-origin-loan-012 | 生源地助学贷款如何办理学校确认？ | 奖助学金 | partially_answerable | ee98c67e0dbc, 52a785d3df9c, 045ddc88af3e, 5836ee860bf9, 204cdd70a17d | 关于申请2022年中西部基层单位就业学费补偿国家助学贷款代偿的通知 | 缺少回答要点：学校确认环节 |
+| aid-military-aid-013 | 服兵役学生国家教育资助如何申请？ | 奖助学金 | answerable | 52a785d3df9c, 77ec547b2f2e, 145349451521, 1ab2328b6329, 0922e508be1d | bb74c415-f49b-4bb8-9f0b-3830b36fb8cc.pdf | — |
 | aid-graduate-aid-014 | 研究生国家助学金的对象和发放规则是什么？ | 奖助学金 | partially_answerable | 0922e508be1d, 77ec547b2f2e, ad82461a66c4, 1ab2328b6329, 145349451521 | d993c56d-f948-45aa-8685-9bf99190224c.pdf | 缺少回答要点：制度依据 |
-| aid-social-015 | 社会奖学金的评选条件和申请流程是什么？ | 奖助学金 | partially_answerable | ba83658755d9, b9076de50dc7, 145349451521, 3cd9009d3563, 3e2ec161e017 | 关于开展2024-2025学年本科生社会奖学金评选工作的通知 | 缺少回答要点：年度通知 |
+| aid-social-015 | 社会奖学金的评选条件和申请流程是什么？ | 奖助学金 | partially_answerable | 145349451521, 3cd9009d3563, 3e2ec161e017, 861408385e90, 2e8a9386b4f8 | 关于开展2024-2025学年本科生国家助学金及社会助学金评选工作的通知.doc | 缺少回答要点：年度通知 |
 | admit-basic-001 | 推免基本条件是什么？ | 推免与招生 | partially_answerable | c5ae3d61e34e, caef95227715, 83b8da8365ee, 36481bbba58c, 739c8bdca878 | 上海财经大学推荐优秀应届本科毕业生免试攻读研究生工作管理办法（试行）.pdf | 缺少回答要点：制度依据 |
 | admit-college-002 | 学院推免自定条件是什么？ | 推免与招生 | partially_answerable | f900e2c94b7f, 397ea76bef2e, 377bbc3c92b9, abd84963c34a, 75c5c197f4f5 | 关于上海财经大学2027年接收优秀应届本科毕业生免试攻读研究生（含直博生）预报名的通知 | 缺少回答要点：学院实施细则 |
 | admit-fail-003 | 推免申请是否要求没有挂科记录？ | 推免与招生 | partially_answerable | c5ae3d61e34e, 2675703133ac, 36481bbba58c, 1fb82cab054b, 1c38828bd054 | 上海财经大学推荐优秀应届本科毕业生免试攻读研究生工作管理办法（试行）.pdf | 缺少回答要点：适用年级; 缺少回答要点：制度依据 |
@@ -122,21 +122,21 @@
 | housing-temporary-008 | 临时住宿如何申请？ | 宿舍后勤 | partially_answerable | a52286f6863a, fc4db938e9a8, cd2f0a2c4d74, 4142746d68d4, eed57bcd7dd7 | 上海财经大学“爱心小屋”临时住宿协议.doc | 缺少回答要点：适用对象 |
 | housing-catering-009 | 学校餐饮服务和就餐问题应联系哪里？ | 宿舍后勤 | answerable | fc4db938e9a8, a52286f6863a, 9525c214a5a9, cd2f0a2c4d74, 480760984ceb | 大学生医保问答及相关管理办法 | — |
 | housing-express-010 | 校园快递服务在哪里查询或反馈？ | 宿舍后勤 | answerable | fc4db938e9a8, 480760984ceb, 9525c214a5a9, a52286f6863a, cd2f0a2c4d74 | 大学生医保问答及相关管理办法 | — |
-| nic-activate-001 | 统一认证账号如何激活？ | 信息化与校园卡 | partially_answerable | fd893261ff29, f4504c68982d, 077ec1d6692d, 7dcfaeceef5f, a648ee0a55f3 | 一、校园一卡通简介 | 缺少回答要点：技术支持 |
-| nic-password-002 | 统一认证密码忘了怎么办？ | 信息化与校园卡 | answerable | fd893261ff29, f4504c68982d, 077ec1d6692d, 7dcfaeceef5f, a648ee0a55f3 | 一、校园一卡通简介 | — |
-| nic-freeze-003 | 统一认证账号为什么被冻结？ | 信息化与校园卡 | partially_answerable | fd893261ff29, f4504c68982d, 077ec1d6692d, 7dcfaeceef5f, a648ee0a55f3 | 一、校园一卡通简介 | 缺少回答要点：冻结原因 |
-| nic-arrears-004 | 欠费后账号如何解冻？ | 信息化与校园卡 | answerable | fd893261ff29, 7dcfaeceef5f, a648ee0a55f3, f4504c68982d, 3a12c66406ab | 一、校园一卡通简介 | — |
-| nic-card-005 | 校园卡如何充值和挂失？ | 信息化与校园卡 | answerable | fd893261ff29, 077ec1d6692d, 7dcfaeceef5f, a648ee0a55f3, f4504c68982d | 一、校园一卡通简介 | — |
-| nic-ecard-006 | 电子校园卡如何领取？ | 信息化与校园卡 | partially_answerable | fd893261ff29, 077ec1d6692d, f4504c68982d, 7dcfaeceef5f, a648ee0a55f3 | 一、校园一卡通简介 | 缺少回答要点：故障处理 |
-| nic-wifi-007 | 如何连接校园无线网？ | 信息化与校园卡 | partially_answerable | 7dcfaeceef5f, a648ee0a55f3, 3a12c66406ab, 077ec1d6692d, fd893261ff29 | 无线联网 | 缺少回答要点：网络名称; 缺少回答要点：适用终端; 缺少回答要点：故障排查 |
+| nic-activate-001 | 统一认证账号如何激活？ | 信息化与校园卡 | partially_answerable | 9e36c2f95bfe, fd893261ff29, f4504c68982d, 077ec1d6692d, 40484c99851e | 统一认证 | 缺少回答要点：身份验证; 缺少回答要点：技术支持 |
+| nic-password-002 | 统一认证密码忘了怎么办？ | 信息化与校园卡 | answerable | fd893261ff29, 9e36c2f95bfe, f4504c68982d, 077ec1d6692d, 5047ad905af6 | 一、校园一卡通简介 | — |
+| nic-freeze-003 | 统一认证账号为什么被冻结？ | 信息化与校园卡 | partially_answerable | 9e36c2f95bfe, fd893261ff29, 5047ad905af6, f4504c68982d, 077ec1d6692d | 统一认证 | 缺少回答要点：冻结原因 |
+| nic-arrears-004 | 欠费后账号如何解冻？ | 信息化与校园卡 | answerable | 9e36c2f95bfe, fd893261ff29, 5047ad905af6, 7dcfaeceef5f, a648ee0a55f3 | 统一认证 | — |
+| nic-card-005 | 校园卡如何充值和挂失？ | 信息化与校园卡 | answerable | fd893261ff29, 9e36c2f95bfe, 077ec1d6692d, 7dcfaeceef5f, a648ee0a55f3 | 一、校园一卡通简介 | — |
+| nic-ecard-006 | 电子校园卡如何领取？ | 信息化与校园卡 | partially_answerable | fd893261ff29, 077ec1d6692d, 9e36c2f95bfe, f4504c68982d, 40484c99851e | 一、校园一卡通简介 | 缺少回答要点：故障处理 |
+| nic-wifi-007 | 如何连接校园无线网？ | 信息化与校园卡 | partially_answerable | 7dcfaeceef5f, a648ee0a55f3, 5047ad905af6, 3a12c66406ab, 077ec1d6692d | 无线联网 | 缺少回答要点：网络名称; 缺少回答要点：适用终端; 缺少回答要点：故障排查 |
 | nic-wired-008 | 校园有线网络如何开通？ | 信息化与校园卡 | partially_answerable | 7dcfaeceef5f, a648ee0a55f3, 3a12c66406ab, fd893261ff29, 077ec1d6692d | 无线联网 | 缺少回答要点：技术支持 |
-| nic-eduroam-009 | 如何使用 Eduroam？ | 信息化与校园卡 | answerable | fd893261ff29, f4504c68982d, 019689e79ce5, 34d558436042, 3a12c66406ab | 一、校园一卡通简介 | — |
-| nic-email-010 | 毕业后学校邮箱和统一认证还能使用多久？ | 信息化与校园卡 | partially_answerable | fd893261ff29, 077ec1d6692d, f4504c68982d, 34d558436042, 019689e79ce5 | 一、校园一卡通简介 | 缺少回答要点：账号状态 |
-| nic-vpn-011 | VPN 如何使用？ | 信息化与校园卡 | partially_answerable | 019689e79ce5, 077ec1d6692d, 34d558436042, 7dcfaeceef5f, a648ee0a55f3 | MacOS系统VPN客户端MotionPro_Plus设置说明.pdf | 缺少回答要点：适用资源 |
-| nic-wechat-012 | 企业微信如何绑定学校身份？ | 信息化与校园卡 | partially_answerable | fd893261ff29, f4504c68982d, 34d558436042, 7dcfaeceef5f, a648ee0a55f3 | 一、校园一卡通简介 | 缺少回答要点：技术支持 |
-| nic-one-stop-013 | 一网通办如何进入学生服务？ | 信息化与校园卡 | partially_answerable | 34d558436042, fd893261ff29, 077ec1d6692d, f4504c68982d, 3a12c66406ab | 一网通办 | 缺少回答要点：服务查找 |
-| nic-teaching-014 | 上财教学网的登录和访问方式是什么？ | 信息化与校园卡 | partially_answerable | 077ec1d6692d, 019689e79ce5, f4504c68982d, 34d558436042, fd893261ff29 | 上财教学网 | 缺少回答要点：技术支持 |
-| nic-supercomputer-015 | 学生如何申请使用超算平台？ | 信息化与校园卡 | partially_answerable | fd893261ff29, 077ec1d6692d, f4504c68982d, 34d558436042, 7dcfaeceef5f | 一、校园一卡通简介 | 缺少回答要点：账号申请 |
+| nic-eduroam-009 | 如何使用 Eduroam？ | 信息化与校园卡 | partially_answerable | 5047ad905af6, 434f98ee0dd5, 9e36c2f95bfe, fd893261ff29, f4504c68982d | Eduroam | 缺少回答要点：适用对象 |
+| nic-email-010 | 毕业后学校邮箱和统一认证还能使用多久？ | 信息化与校园卡 | partially_answerable | 51addf1ea6fd, 9e36c2f95bfe, fd893261ff29, 077ec1d6692d, 434f98ee0dd5 | 电子邮箱 | 缺少回答要点：适用对象; 缺少回答要点：账号状态 |
+| nic-vpn-011 | VPN 如何使用？ | 信息化与校园卡 | partially_answerable | 019689e79ce5, 077ec1d6692d, 34d558436042, 40484c99851e, 434f98ee0dd5 | MacOS系统VPN客户端MotionPro_Plus设置说明.pdf | 缺少回答要点：适用资源 |
+| nic-wechat-012 | 企业微信如何绑定学校身份？ | 信息化与校园卡 | partially_answerable | fd893261ff29, 5047ad905af6, 49fb73e02893, f4504c68982d, 34d558436042 | 一、校园一卡通简介 | 缺少回答要点：技术支持 |
+| nic-one-stop-013 | 一网通办如何进入学生服务？ | 信息化与校园卡 | partially_answerable | 34d558436042, fd893261ff29, 077ec1d6692d, 9e36c2f95bfe, f4504c68982d | 一网通办 | 缺少回答要点：服务查找 |
+| nic-teaching-014 | 上财教学网的登录和访问方式是什么？ | 信息化与校园卡 | partially_answerable | 077ec1d6692d, 019689e79ce5, 9e36c2f95bfe, 40484c99851e, 5047ad905af6 | 上财教学网 | 缺少回答要点：适用对象; 缺少回答要点：技术支持 |
+| nic-supercomputer-015 | 学生如何申请使用超算平台？ | 信息化与校园卡 | partially_answerable | fd893261ff29, 434f98ee0dd5, 077ec1d6692d, f4504c68982d, 34d558436042 | 一、校园一卡通简介 | 缺少回答要点：账号申请 |
 | library-hours-001 | 图书馆开放时间是什么？ | 图书馆 | partially_answerable | eb36ca9f5d3f, 59b3b5517051, fb45c29d5189, ffb9750af1bf, f77bfc37b926 | 续借及预约 | 缺少回答要点：开放校区 |
 | library-permission-002 | 本科生是否自动开通借阅权限？ | 图书馆 | answerable | eb36ca9f5d3f, 59b3b5517051, f77bfc37b926, fb45c29d5189, c172696f9d84 | 续借及预约 | — |
 | library-loan-003 | 图书可以借多久？ | 图书馆 | partially_answerable | 59b3b5517051, eb36ca9f5d3f, f77bfc37b926, 10cc83bd33cd, fb45c29d5189 | 馆际互借 | 缺少回答要点：逾期处理 |
@@ -168,12 +168,12 @@
 | exchange-public-009 | 公派留学项目如何报名？ | 国际交流 | partially_answerable | a50221cc7070, f511bc1fc4a2, 94b61196bf6e, 440e560398ab, 93d28201f44b | 上海财经大学关于2022年国家建设高水平大学公派研究生项目选拔及申请受理工作的安排 | 缺少回答要点：资助政策 |
 | exchange-contact-010 | 国际交流项目的咨询联系方式是什么？ | 国际交流 | answerable | c688036c17e7, 440e560398ab, f8015ab6e16f, 220adadfc5cc, 0ee8ebbdf902 | Q&A | 2026-2027学年海外交流学习常见问题答疑 | — |
 | new-report-001 | 新生入学报到需要办理哪些手续？ | 新生与安全 | answerable | 52a785d3df9c, 5220cf43e76b, 2fe0ae1e3ab7, 4cb5fd791a1a, b815e0eefe9a | bb74c415-f49b-4bb8-9f0b-3830b36fb8cc.pdf | — |
-| new-orientation-002 | 新生如何领取校园卡并开通相关服务？ | 新生与安全 | answerable | 5220cf43e76b, 52a785d3df9c, 59c52c36ac90, 4ae6290eaaab, 418fee24b2e9 | 9903a61e-8740-4c78-809d-fe160d8ddad5.pdf | — |
+| new-orientation-002 | 新生如何领取校园卡并开通相关服务？ | 新生与安全 | answerable | 5220cf43e76b, 52a785d3df9c, 418fee24b2e9, 480760984ceb, a6a7b44dd541 | 9903a61e-8740-4c78-809d-fe160d8ddad5.pdf | — |
 | new-household-003 | 户籍和学籍证明如何办理？ | 新生与安全 | answerable | 52a785d3df9c, 1f5aa08edc4d, 2fe0ae1e3ab7, 5220cf43e76b, eed57bcd7dd7 | bb74c415-f49b-4bb8-9f0b-3830b36fb8cc.pdf | — |
 | new-military-registration-004 | 大学生兵役登记如何办理？ | 新生与安全 | answerable | 2fe0ae1e3ab7, 52a785d3df9c, 5c8241801dd8, 7f8293cb80ec, 0922e508be1d | 上海财经大学2016年征兵工作通知 | — |
-| new-enlistment-005 | 在校生参军入伍流程是什么？ | 新生与安全 | answerable | 2fe0ae1e3ab7, 52a785d3df9c, 57d4620aea1b, 2e8a9386b4f8, c738554bdeee | 上海财经大学2016年征兵工作通知 | — |
-| new-traffic-006 | 校园交通和车辆管理有哪些规定？ | 新生与安全 | answerable | 52a785d3df9c, 4ae6290eaaab, 2fe0ae1e3ab7, 9525c214a5a9, 4cb5fd791a1a | bb74c415-f49b-4bb8-9f0b-3830b36fb8cc.pdf | — |
+| new-enlistment-005 | 在校生参军入伍流程是什么？ | 新生与安全 | answerable | 2fe0ae1e3ab7, 52a785d3df9c, 2e8a9386b4f8, 57d4620aea1b, 8f245c042322 | 上海财经大学2016年征兵工作通知 | — |
+| new-traffic-006 | 校园交通和车辆管理有哪些规定？ | 新生与安全 | answerable | 52a785d3df9c, 2fe0ae1e3ab7, 9525c214a5a9, 4cb5fd791a1a, 5220cf43e76b | bb74c415-f49b-4bb8-9f0b-3830b36fb8cc.pdf | — |
 | new-lost-007 | 校园失物招领如何办理？ | 新生与安全 | answerable | 5220cf43e76b, 52a785d3df9c, 1f5aa08edc4d, 2fe0ae1e3ab7, ee98c67e0dbc | 9903a61e-8740-4c78-809d-fe160d8ddad5.pdf | — |
-| new-safety-008 | 校园安全事件应如何报告和求助？ | 新生与安全 | answerable | 1f5aa08edc4d, 4f21705d51ca, 418fee24b2e9, 5220cf43e76b, 52a785d3df9c | 关于印发《上海财经大学学生违纪处分规定（2023年10月修订）》的通知.pdf | — |
+| new-safety-008 | 校园安全事件应如何报告和求助？ | 新生与安全 | answerable | 1f5aa08edc4d, 418fee24b2e9, 5220cf43e76b, 52a785d3df9c, 2fe0ae1e3ab7 | 关于印发《上海财经大学学生违纪处分规定（2023年10月修订）》的通知.pdf | — |
 | new-fraud-009 | 校园电信网络诈骗如何举报和求助？ | 新生与安全 | partially_answerable | 1f5aa08edc4d, 418fee24b2e9, 5220cf43e76b, 52a785d3df9c, 13fe448b5b0b | 关于印发《上海财经大学学生违纪处分规定（2023年10月修订）》的通知.pdf | 缺少回答要点：识别提示; 缺少回答要点：紧急措施 |
 | new-download-010 | 保卫处常用证明和表格在哪里下载？ | 新生与安全 | partially_answerable | 1be2da8f5d92, b5e1c6ef7ecd, 16392d954e77, eed57bcd7dd7, 1f5aa08edc4d | 集体宿舍证明.docx | 缺少回答要点：适用事项 |

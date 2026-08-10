@@ -1,347 +1,58 @@
 {
   "question_bank_version": "sufe-question-bank.v1",
   "question_bank_hash": "sha256:8a5ab6a1110531cd443d9e652a1032f4e97d25d0f083bf9728429a0c28c352f9",
-  "missing_count": 150,
+  "missing_count": 65,
   "items": [
-    {
-      "id": "jwc-leave-001",
-      "question": "本科生因病无法参加考试如何申请缓考？",
-      "scene": "本科教务",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "jwc.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：申请条件",
-        "缺少回答要点：审批部门"
-      ]
-    },
-    {
-      "id": "jwc-leave-002",
-      "question": "本科生如何办理休学和复学？",
-      "scene": "本科教务",
-      "status": "not_answerable",
-      "expected_domains": [
-        "jwc.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：休学条件",
-        "缺少回答要点：复学条件",
-        "缺少回答要点：申请材料",
-        "缺少回答要点：办理部门"
-      ]
-    },
     {
       "id": "jwc-course-003",
       "question": "重修课程如何办理？",
       "scene": "本科教务",
-      "status": "not_answerable",
-      "expected_domains": [
-        "jwc.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：适用情形",
-        "缺少回答要点：选课入口",
-        "缺少回答要点：办理时间",
-        "缺少回答要点：费用或成绩规则"
-      ]
-    },
-    {
-      "id": "jwc-major-004",
-      "question": "如何申请转专业？",
-      "scene": "本科教务",
       "status": "partially_answerable",
       "expected_domains": [
         "jwc.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "缺少回答要点：申请条件",
-        "缺少回答要点：申请时间",
-        "缺少回答要点：审批流程"
-      ]
-    },
-    {
-      "id": "jwc-credit-005",
-      "question": "本科生如何申请校外学习学分认定？",
-      "scene": "本科教务",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "jwc.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：申请材料",
-        "缺少回答要点：成绩转换规则"
-      ]
-    },
-    {
-      "id": "jwc-card-006",
-      "question": "学生证丢失如何补办？",
-      "scene": "本科教务",
-      "status": "not_answerable",
-      "expected_domains": [
-        "jwc.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：申请入口",
-        "缺少回答要点：申请材料",
-        "缺少回答要点：办理地点",
-        "缺少回答要点：办理时间"
-      ]
-    },
-    {
-      "id": "jwc-drop-007",
-      "question": "退课和选课的办理入口是什么？",
-      "scene": "本科教务",
-      "status": "not_answerable",
-      "expected_domains": [
-        "jwc.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：选课入口",
-        "缺少回答要点：退课规则",
-        "缺少回答要点：办理时间",
-        "缺少回答要点：咨询部门"
-      ]
-    },
-    {
-      "id": "jwc-double-008",
-      "question": "本科生如何申请双专业学习？",
-      "scene": "本科教务",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "jwc.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：申请条件",
-        "缺少回答要点：报名时间",
-        "缺少回答要点：学分要求"
-      ]
-    },
-    {
-      "id": "jwc-withdraw-009",
-      "question": "本科生办理退学需要哪些手续？",
-      "scene": "本科教务",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "jwc.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：审批材料",
-        "缺少回答要点：离校手续",
-        "缺少回答要点：审批部门"
+        "缺少回答要点：适用情形"
       ]
     },
     {
       "id": "jwc-exam-010",
       "question": "本科生考试违纪会按照什么规定处理？",
       "scene": "本科教务",
-      "status": "not_answerable",
+      "status": "partially_answerable",
       "expected_domains": [
         "jwc.sufe.edu.cn"
       ],
       "missing_reasons": [
         "缺少回答要点：适用制度",
-        "缺少回答要点：违纪类型",
-        "缺少回答要点：处理程序",
-        "缺少回答要点：申诉渠道"
-      ]
-    },
-    {
-      "id": "jwc-score-011",
-      "question": "本科生对课程成绩有异议如何申请复核？",
-      "scene": "本科教务",
-      "status": "not_answerable",
-      "expected_domains": [
-        "jwc.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：申请条件",
-        "缺少回答要点：申请时间",
-        "缺少回答要点：办理材料",
-        "缺少回答要点：受理部门"
-      ]
-    },
-    {
-      "id": "jwc-makeup-012",
-      "question": "本科生补考和重修的区别是什么？",
-      "scene": "本科教务",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "jwc.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：办理入口",
-        "缺少回答要点：时间安排"
-      ]
-    },
-    {
-      "id": "jwc-exempt-013",
-      "question": "本科生课程免修或免考如何申请？",
-      "scene": "本科教务",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "jwc.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：申请条件",
-        "缺少回答要点：证明材料",
-        "缺少回答要点：审批流程"
+        "缺少回答要点：违纪类型"
       ]
     },
     {
       "id": "jwc-plan-014",
       "question": "在哪里可以查询本科生培养方案和学分要求？",
       "scene": "本科教务",
-      "status": "not_answerable",
+      "status": "partially_answerable",
       "expected_domains": [
         "jwc.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "缺少回答要点：培养方案入口",
         "缺少回答要点：课程类别",
-        "缺少回答要点：学分要求",
         "缺少回答要点：适用年级"
-      ]
-    },
-    {
-      "id": "jwc-thesis-015",
-      "question": "本科毕业论文如何选题、开题和提交？",
-      "scene": "本科教务",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "jwc.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：时间节点",
-        "缺少回答要点：指导部门"
-      ]
-    },
-    {
-      "id": "jwc-graduation-016",
-      "question": "本科生申请毕业需要满足哪些学分和学籍条件？",
-      "scene": "本科教务",
-      "status": "not_answerable",
-      "expected_domains": [
-        "jwc.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：毕业条件",
-        "缺少回答要点：学分要求",
-        "缺少回答要点：学籍要求",
-        "缺少回答要点：审核部门"
-      ]
-    },
-    {
-      "id": "jwc-gpa-017",
-      "question": "本科成绩单中的绩点如何计算？",
-      "scene": "本科教务",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "jwc.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：计算规则",
-        "缺少回答要点：成绩范围",
-        "缺少回答要点：查询入口"
-      ]
-    },
-    {
-      "id": "jwc-sports-018",
-      "question": "体育特长生比赛加分如何申请？",
-      "scene": "本科教务",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "jwc.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：审核部门"
-      ]
-    },
-    {
-      "id": "jwc-certificate-019",
-      "question": "本科生如何办理在读或学籍证明？",
-      "scene": "本科教务",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "jwc.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：申请入口",
-        "缺少回答要点：办理地点",
-        "缺少回答要点：领取方式"
-      ]
-    },
-    {
-      "id": "jwc-contact-020",
-      "question": "教务系统或选课出现问题应联系哪个部门？",
-      "scene": "本科教务",
-      "status": "not_answerable",
-      "expected_domains": [
-        "jwc.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：服务入口",
-        "缺少回答要点：联系方式",
-        "缺少回答要点：受理范围",
-        "缺少回答要点：办理时间"
-      ]
-    },
-    {
-      "id": "gs-course-001",
-      "question": "研究生如何选课？",
-      "scene": "研究生培养与学位",
-      "status": "not_answerable",
-      "expected_domains": [
-        "gs.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：选课系统",
-        "缺少回答要点：选课时间",
-        "缺少回答要点：选课规则",
-        "缺少回答要点：咨询部门"
       ]
     },
     {
       "id": "gs-grade-002",
       "question": "研究生是否有绩点要求？",
       "scene": "研究生培养与学位",
-      "status": "not_answerable",
+      "status": "partially_answerable",
       "expected_domains": [
         "gs.sufe.edu.cn"
       ],
       "missing_reasons": [
         "缺少回答要点：适用培养层次",
-        "缺少回答要点：绩点或成绩要求",
         "缺少回答要点：适用环节",
         "缺少回答要点：制度来源"
-      ]
-    },
-    {
-      "id": "gs-transcript-003",
-      "question": "研究生成绩单在哪里打印？",
-      "scene": "研究生培养与学位",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "gs.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：办理入口",
-        "缺少回答要点：电子或纸质方式",
-        "缺少回答要点：联系方式"
-      ]
-    },
-    {
-      "id": "gs-credit-004",
-      "question": "研究生学分如何认定？",
-      "scene": "研究生培养与学位",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "gs.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：认定范围",
-        "缺少回答要点：办理流程",
-        "缺少回答要点：审批部门"
       ]
     },
     {
@@ -353,7 +64,6 @@
         "gs.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "缺少回答要点：申请条件",
         "缺少回答要点：学籍影响"
       ]
     },
@@ -366,22 +76,7 @@
         "gs.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "缺少回答要点：报名条件",
-        "缺少回答要点：考核环节",
-        "缺少回答要点：时间节点"
-      ]
-    },
-    {
-      "id": "gs-joint-007",
-      "question": "硕博连读需要满足什么条件？",
-      "scene": "研究生培养与学位",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "gs.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：学业要求",
-        "缺少回答要点：选拔流程"
+        "缺少回答要点：考核环节"
       ]
     },
     {
@@ -393,7 +88,6 @@
         "gs.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "缺少回答要点：答辩流程",
         "缺少回答要点：学位授予环节"
       ]
     },
@@ -407,7 +101,6 @@
       ],
       "missing_reasons": [
         "缺少回答要点：项目对象",
-        "缺少回答要点：选拔流程",
         "缺少回答要点：资助或学分"
       ]
     },
@@ -415,14 +108,12 @@
       "id": "gs-scholarship-010",
       "question": "研究生国家奖学金依据哪份办法评定？",
       "scene": "研究生培养与学位",
-      "status": "not_answerable",
+      "status": "partially_answerable",
       "expected_domains": [
         "gs.sufe.edu.cn"
       ],
       "missing_reasons": [
         "缺少回答要点：适用办法",
-        "缺少回答要点：评定对象",
-        "缺少回答要点：评审条件",
         "缺少回答要点：年度通知"
       ]
     },
@@ -435,21 +126,7 @@
         "gs.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "缺少回答要点：课程要求",
-        "缺少回答要点：学分要求",
         "缺少回答要点：适用年级"
-      ]
-    },
-    {
-      "id": "gs-opening-012",
-      "question": "研究生学位论文开题报告如何办理？",
-      "scene": "研究生培养与学位",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "gs.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：时间节点"
       ]
     },
     {
@@ -461,75 +138,8 @@
         "gs.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "缺少回答要点：考核对象",
         "缺少回答要点：考核内容",
         "缺少回答要点：结果处理"
-      ]
-    },
-    {
-      "id": "gs-degree-014",
-      "question": "研究生申请学位需要提交哪些材料？",
-      "scene": "研究生培养与学位",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "gs.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：材料清单",
-        "缺少回答要点：办理流程",
-        "缺少回答要点：受理部门"
-      ]
-    },
-    {
-      "id": "gs-status-015",
-      "question": "研究生在线学籍证明如何办理？",
-      "scene": "研究生培养与学位",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "gs.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：申请入口"
-      ]
-    },
-    {
-      "id": "gs-exemption-016",
-      "question": "研究生免修免考如何申请？",
-      "scene": "研究生培养与学位",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "gs.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：适用对象",
-        "缺少回答要点：审批流程"
-      ]
-    },
-    {
-      "id": "gs-graduation-017",
-      "question": "研究生毕业管理和离校手续有哪些？",
-      "scene": "研究生培养与学位",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "gs.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：毕业条件",
-        "缺少回答要点：办理流程",
-        "缺少回答要点：办理部门"
-      ]
-    },
-    {
-      "id": "gs-extension-018",
-      "question": "研究生延期毕业如何申请？",
-      "scene": "研究生培养与学位",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "gs.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：申请时间",
-        "缺少回答要点：审批部门"
       ]
     },
     {
@@ -541,34 +151,7 @@
         "gs.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "缺少回答要点：适用情形",
-        "缺少回答要点：审批流程",
-        "缺少回答要点：受理部门"
-      ]
-    },
-    {
-      "id": "gs-review-020",
-      "question": "研究生学位论文外审和预答辩如何安排？",
-      "scene": "研究生培养与学位",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "gs.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：适用对象"
-      ]
-    },
-    {
-      "id": "aid-national-001",
-      "question": "本科生国家奖学金申请条件是什么？",
-      "scene": "奖助学金",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "xsc.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：评选对象",
-        "缺少回答要点：成绩或综合表现要求"
+        "缺少回答要点：适用情形"
       ]
     },
     {
@@ -580,36 +163,8 @@
         "xsc.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "缺少回答要点：不及格课程规则",
         "缺少回答要点：适用奖项",
         "缺少回答要点：依据办法"
-      ]
-    },
-    {
-      "id": "aid-hardship-003",
-      "question": "家庭经济困难学生如何认定？",
-      "scene": "奖助学金",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "xsc.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：认定对象",
-        "缺少回答要点：认定流程",
-        "缺少回答要点：时间节点"
-      ]
-    },
-    {
-      "id": "aid-temporary-004",
-      "question": "临时困难补助如何申请？",
-      "scene": "奖助学金",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "xsc.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：办理流程",
-        "缺少回答要点：受理部门"
       ]
     },
     {
@@ -621,92 +176,31 @@
         "xsc.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "缺少回答要点：申请对象",
-        "缺少回答要点：岗位申请",
-        "缺少回答要点：资助标准或管理部门"
+        "缺少回答要点：岗位申请"
       ]
     },
     {
       "id": "aid-combine-006",
       "question": "国家励志奖学金和国家奖学金是否可以兼得？",
       "scene": "奖助学金",
-      "status": "not_answerable",
+      "status": "partially_answerable",
       "expected_domains": [
         "xsc.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "缺少回答要点：兼得规则",
-        "缺少回答要点：适用对象",
-        "缺少回答要点：制度依据",
-        "缺少回答要点：申请要求"
+        "缺少回答要点：制度依据"
       ]
     },
     {
       "id": "aid-assessment-007",
       "question": "综合测评如何计算？",
       "scene": "奖助学金",
-      "status": "not_answerable",
-      "expected_domains": [
-        "xsc.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：评价项目",
-        "缺少回答要点：计算规则",
-        "缺少回答要点：适用对象",
-        "缺少回答要点：成绩或材料来源"
-      ]
-    },
-    {
-      "id": "aid-appeal-008",
-      "question": "奖学金评选结果如何申诉？",
-      "scene": "奖助学金",
       "status": "partially_answerable",
       "expected_domains": [
         "xsc.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "缺少回答要点：申诉条件",
-        "缺少回答要点：受理部门"
-      ]
-    },
-    {
-      "id": "aid-grant-009",
-      "question": "本科生国家助学金如何申请？",
-      "scene": "奖助学金",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "xsc.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：申请对象",
-        "缺少回答要点：发放规则"
-      ]
-    },
-    {
-      "id": "aid-tuition-010",
-      "question": "学费减免如何申请？",
-      "scene": "奖助学金",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "xsc.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：适用对象",
-        "缺少回答要点：办理流程",
-        "缺少回答要点：审批部门"
-      ]
-    },
-    {
-      "id": "aid-campus-loan-011",
-      "question": "校园地国家助学贷款如何办理？",
-      "scene": "奖助学金",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "xsc.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：办理流程",
-        "缺少回答要点：经办部门"
+        "缺少回答要点：评价项目"
       ]
     },
     {
@@ -718,22 +212,7 @@
         "xsc.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "缺少回答要点：申请流程",
-        "缺少回答要点：学校确认环节",
-        "缺少回答要点：咨询部门"
-      ]
-    },
-    {
-      "id": "aid-military-aid-013",
-      "question": "服兵役学生国家教育资助如何申请？",
-      "scene": "奖助学金",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "xsc.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：适用对象",
-        "缺少回答要点：办理流程"
+        "缺少回答要点：学校确认环节"
       ]
     },
     {
@@ -745,8 +224,6 @@
         "xsc.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "缺少回答要点：适用对象",
-        "缺少回答要点：发放规则",
         "缺少回答要点：制度依据"
       ]
     },
@@ -759,8 +236,6 @@
         "xsc.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "缺少回答要点：评选对象",
-        "缺少回答要点：评选流程",
         "缺少回答要点：年度通知"
       ]
     },
@@ -768,15 +243,12 @@
       "id": "admit-basic-001",
       "question": "推免基本条件是什么？",
       "scene": "推免与招生",
-      "status": "not_answerable",
+      "status": "partially_answerable",
       "expected_domains": [
         "gs.sufe.edu.cn",
         "jwc.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "缺少回答要点：申请对象",
-        "缺少回答要点：学业条件",
-        "缺少回答要点：思想品德要求",
         "缺少回答要点：制度依据"
       ]
     },
@@ -790,23 +262,19 @@
         "jwc.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "缺少回答要点：学校统一条件",
-        "缺少回答要点：学院实施细则",
-        "缺少回答要点：适用范围"
+        "缺少回答要点：学院实施细则"
       ]
     },
     {
       "id": "admit-fail-003",
       "question": "推免申请是否要求没有挂科记录？",
       "scene": "推免与招生",
-      "status": "not_answerable",
+      "status": "partially_answerable",
       "expected_domains": [
         "gs.sufe.edu.cn",
         "jwc.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "缺少回答要点：课程成绩条件",
-        "缺少回答要点：不及格规则",
         "缺少回答要点：适用年级",
         "缺少回答要点：制度依据"
       ]
@@ -815,31 +283,13 @@
       "id": "admit-ranking-004",
       "question": "推免综合成绩排名如何确定？",
       "scene": "推免与招生",
-      "status": "not_answerable",
-      "expected_domains": [
-        "gs.sufe.edu.cn",
-        "jwc.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：排名规则",
-        "缺少回答要点：成绩组成",
-        "缺少回答要点：适用对象",
-        "缺少回答要点：公示方式"
-      ]
-    },
-    {
-      "id": "admit-materials-005",
-      "question": "推免申请需要提交哪些材料？",
-      "scene": "推免与招生",
       "status": "partially_answerable",
       "expected_domains": [
         "gs.sufe.edu.cn",
         "jwc.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "缺少回答要点：材料清单",
-        "缺少回答要点：提交方式",
-        "缺少回答要点：受理部门"
+        "缺少回答要点：成绩组成"
       ]
     },
     {
@@ -857,35 +307,6 @@
       ]
     },
     {
-      "id": "admit-backup-007",
-      "question": "推免候补资格如何确定？",
-      "scene": "推免与招生",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "gs.sufe.edu.cn",
-        "jwc.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：候补对象",
-        "缺少回答要点：确定程序",
-        "缺少回答要点：公示方式"
-      ]
-    },
-    {
-      "id": "admit-direct-phd-008",
-      "question": "本科直博生如何申请？",
-      "scene": "推免与招生",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "gs.sufe.edu.cn",
-        "jwc.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：申请对象",
-        "缺少回答要点：选拔流程"
-      ]
-    },
-    {
       "id": "admit-preapply-009",
       "question": "本科生申请免试攻读研究生预报名如何办理？",
       "scene": "推免与招生",
@@ -895,59 +316,14 @@
         "jwc.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "缺少回答要点：报名入口",
         "缺少回答要点：适用对象"
-      ]
-    },
-    {
-      "id": "admit-phd-assess-010",
-      "question": "博士申请考核制招生如何报名？",
-      "scene": "推免与招生",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "gs.sufe.edu.cn",
-        "jwc.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：报名条件",
-        "缺少回答要点：考核方式",
-        "缺少回答要点：时间节点"
-      ]
-    },
-    {
-      "id": "admit-master-book-011",
-      "question": "硕士研究生招生简章在哪里查询？",
-      "scene": "推免与招生",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "gs.sufe.edu.cn",
-        "jwc.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：报名时间",
-        "缺少回答要点：考试安排",
-        "缺少回答要点：官方入口"
-      ]
-    },
-    {
-      "id": "admit-doctor-book-012",
-      "question": "博士研究生招生简章和招生规定在哪里查询？",
-      "scene": "推免与招生",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "gs.sufe.edu.cn",
-        "jwc.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：报名材料",
-        "缺少回答要点：官方入口"
       ]
     },
     {
       "id": "admit-subject-013",
       "question": "研究生招生考试科目调整公告如何查询？",
       "scene": "推免与招生",
-      "status": "not_answerable",
+      "status": "partially_answerable",
       "expected_domains": [
         "gs.sufe.edu.cn",
         "jwc.sufe.edu.cn"
@@ -955,8 +331,7 @@
       "missing_reasons": [
         "缺少回答要点：适用专业",
         "缺少回答要点：调整内容",
-        "缺少回答要点：生效年度",
-        "缺少回答要点：发布部门"
+        "缺少回答要点：生效年度"
       ]
     },
     {
@@ -970,71 +345,31 @@
       ],
       "missing_reasons": [
         "缺少回答要点：公示栏目",
-        "缺少回答要点：名单类型",
-        "缺少回答要点：查询入口"
+        "缺少回答要点：名单类型"
       ]
     },
     {
       "id": "admit-adjust-015",
       "question": "硕士研究生调剂和复试办法如何查询？",
       "scene": "推免与招生",
-      "status": "not_answerable",
+      "status": "partially_answerable",
       "expected_domains": [
         "gs.sufe.edu.cn",
         "jwc.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "缺少回答要点：适用对象",
-        "缺少回答要点：申请条件",
-        "缺少回答要点：复试流程",
-        "缺少回答要点：时间节点"
-      ]
-    },
-    {
-      "id": "career-recommend-001",
-      "question": "就业推荐表如何制作？",
-      "scene": "就业手续",
-      "status": "not_answerable",
-      "expected_domains": [
-        "career.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "未命中权威来源：career.sufe.edu.cn",
-        "缺少回答要点：办理入口",
-        "缺少回答要点：填写要求",
-        "缺少回答要点：审核流程",
-        "缺少回答要点：材料"
-      ]
-    },
-    {
-      "id": "career-paper-tripartite-002",
-      "question": "纸质三方协议如何办理？",
-      "scene": "就业手续",
-      "status": "not_answerable",
-      "expected_domains": [
-        "career.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "未命中权威来源：career.sufe.edu.cn",
-        "缺少回答要点：领取方式",
-        "缺少回答要点：填写要求",
-        "缺少回答要点：盖章流程",
-        "缺少回答要点：提交部门"
+        "缺少回答要点：适用对象"
       ]
     },
     {
       "id": "career-online-sign-003",
       "question": "网签流程是什么？",
       "scene": "就业手续",
-      "status": "not_answerable",
+      "status": "partially_answerable",
       "expected_domains": [
         "career.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "未命中权威来源：career.sufe.edu.cn",
-        "缺少回答要点：系统入口",
-        "缺少回答要点：签约步骤",
-        "缺少回答要点：材料",
         "缺少回答要点：生效确认"
       ]
     },
@@ -1042,191 +377,84 @@
       "id": "career-terminate-004",
       "question": "三方协议填错或解约怎么办？",
       "scene": "就业手续",
-      "status": "not_answerable",
+      "status": "partially_answerable",
       "expected_domains": [
         "career.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "未命中权威来源：career.sufe.edu.cn",
-        "缺少回答要点：适用情形",
-        "缺少回答要点：办理流程",
-        "缺少回答要点：材料",
-        "缺少回答要点：违约或解约要求"
+        "缺少回答要点：适用情形"
       ]
     },
     {
       "id": "career-destination-005",
       "question": "毕业去向如何登记？",
       "scene": "就业手续",
-      "status": "not_answerable",
+      "status": "partially_answerable",
       "expected_domains": [
         "career.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "未命中权威来源：career.sufe.edu.cn",
-        "缺少回答要点：登记入口",
-        "缺少回答要点：去向类型",
-        "缺少回答要点：截止时间",
-        "缺少回答要点：审核部门"
+        "缺少回答要点：去向类型"
       ]
     },
     {
       "id": "career-archive-006",
       "question": "毕业档案如何查询？",
       "scene": "就业手续",
-      "status": "not_answerable",
+      "status": "partially_answerable",
       "expected_domains": [
         "career.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "未命中权威来源：career.sufe.edu.cn",
-        "缺少回答要点：档案去向",
-        "缺少回答要点：查询入口",
-        "缺少回答要点：办理材料",
-        "缺少回答要点：联系方式"
-      ]
-    },
-    {
-      "id": "career-shanghai-007",
-      "question": "非上海生源申请上海户籍需要哪些材料？",
-      "scene": "就业手续",
-      "status": "not_answerable",
-      "expected_domains": [
-        "career.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "未命中权威来源：career.sufe.edu.cn",
-        "缺少回答要点：适用对象",
-        "缺少回答要点：材料清单",
-        "缺少回答要点：办理流程",
-        "缺少回答要点：时间节点"
+        "缺少回答要点：档案去向"
       ]
     },
     {
       "id": "career-graduate-008",
       "question": "考上研究生后已签三方怎么办？",
       "scene": "就业手续",
-      "status": "not_answerable",
+      "status": "partially_answerable",
       "expected_domains": [
         "career.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "未命中权威来源：career.sufe.edu.cn",
         "缺少回答要点：适用情形",
-        "缺少回答要点：解约流程",
-        "缺少回答要点：材料",
         "缺少回答要点：去向变更"
-      ]
-    },
-    {
-      "id": "career-unemployed-009",
-      "question": "不就业登记如何办理？",
-      "scene": "就业手续",
-      "status": "not_answerable",
-      "expected_domains": [
-        "career.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "未命中权威来源：career.sufe.edu.cn",
-        "缺少回答要点：适用对象",
-        "缺少回答要点：登记入口",
-        "缺少回答要点：材料",
-        "缺少回答要点：截止时间"
-      ]
-    },
-    {
-      "id": "career-flexible-010",
-      "question": "灵活就业如何登记？",
-      "scene": "就业手续",
-      "status": "not_answerable",
-      "expected_domains": [
-        "career.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "未命中权威来源：career.sufe.edu.cn",
-        "缺少回答要点：适用对象",
-        "缺少回答要点：登记流程",
-        "缺少回答要点：材料",
-        "缺少回答要点：审核部门"
       ]
     },
     {
       "id": "career-grassroots-011",
       "question": "基层就业项目需要办理哪些就业手续？",
       "scene": "就业手续",
-      "status": "not_answerable",
+      "status": "partially_answerable",
       "expected_domains": [
         "career.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "未命中权威来源：career.sufe.edu.cn",
-        "缺少回答要点：项目范围",
-        "缺少回答要点：登记流程",
-        "缺少回答要点：材料",
         "缺少回答要点：政策依据"
-      ]
-    },
-    {
-      "id": "career-military-012",
-      "question": "征兵就业政策和就业去向如何登记？",
-      "scene": "就业手续",
-      "status": "not_answerable",
-      "expected_domains": [
-        "career.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "未命中权威来源：career.sufe.edu.cn",
-        "缺少回答要点：适用对象",
-        "缺少回答要点：办理流程",
-        "缺少回答要点：材料",
-        "缺少回答要点：负责部门"
-      ]
-    },
-    {
-      "id": "career-change-013",
-      "question": "毕业生就业去向登记后如何变更？",
-      "scene": "就业手续",
-      "status": "not_answerable",
-      "expected_domains": [
-        "career.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "未命中权威来源：career.sufe.edu.cn",
-        "缺少回答要点：变更条件",
-        "缺少回答要点：材料",
-        "缺少回答要点：办理入口",
-        "缺少回答要点：受理部门"
       ]
     },
     {
       "id": "career-agency-014",
       "question": "签约单位变更时就业手续如何办理？",
       "scene": "就业手续",
-      "status": "not_answerable",
+      "status": "partially_answerable",
       "expected_domains": [
         "career.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "未命中权威来源：career.sufe.edu.cn",
-        "缺少回答要点：适用情形",
-        "缺少回答要点：解约材料",
-        "缺少回答要点：重新签约流程",
-        "缺少回答要点：时间要求"
+        "缺少回答要点：适用情形"
       ]
     },
     {
       "id": "career-manual-015",
       "question": "就业系统学生操作手册在哪里下载？",
       "scene": "就业手续",
-      "status": "not_answerable",
+      "status": "partially_answerable",
       "expected_domains": [
         "career.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "未命中权威来源：career.sufe.edu.cn",
-        "缺少回答要点：下载入口",
-        "缺少回答要点：适用系统",
-        "缺少回答要点：操作步骤",
         "缺少回答要点：技术支持"
       ]
     },
@@ -1234,118 +462,53 @@
       "id": "housing-holiday-001",
       "question": "寒暑假如何申请留校住宿？",
       "scene": "宿舍后勤",
-      "status": "not_answerable",
+      "status": "partially_answerable",
       "expected_domains": [
         "hq.sufe.edu.cn",
         "gongkai.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "未命中权威来源：hq.sufe.edu.cn, gongkai.sufe.edu.cn",
-        "缺少回答要点：申请对象",
-        "缺少回答要点：申请时间",
-        "缺少回答要点：材料",
-        "缺少回答要点：审批流程"
-      ]
-    },
-    {
-      "id": "housing-checkout-002",
-      "question": "如何办理退宿？",
-      "scene": "宿舍后勤",
-      "status": "not_answerable",
-      "expected_domains": [
-        "hq.sufe.edu.cn",
-        "gongkai.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "未命中权威来源：hq.sufe.edu.cn, gongkai.sufe.edu.cn",
-        "缺少回答要点：办理条件",
-        "缺少回答要点：流程",
-        "缺少回答要点：材料",
-        "缺少回答要点：办理地点"
+        "缺少回答要点：申请对象"
       ]
     },
     {
       "id": "housing-deferred-003",
       "question": "延期毕业还能住宿吗？",
       "scene": "宿舍后勤",
-      "status": "not_answerable",
+      "status": "partially_answerable",
       "expected_domains": [
         "hq.sufe.edu.cn",
         "gongkai.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "未命中权威来源：hq.sufe.edu.cn, gongkai.sufe.edu.cn",
-        "缺少回答要点：适用对象",
-        "缺少回答要点：住宿条件",
-        "缺少回答要点：申请流程",
-        "缺少回答要点：时间节点"
-      ]
-    },
-    {
-      "id": "housing-adjust-004",
-      "question": "宿舍调整需要什么流程？",
-      "scene": "宿舍后勤",
-      "status": "not_answerable",
-      "expected_domains": [
-        "hq.sufe.edu.cn",
-        "gongkai.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "未命中权威来源：hq.sufe.edu.cn, gongkai.sufe.edu.cn",
-        "缺少回答要点：申请条件",
-        "缺少回答要点：材料",
-        "缺少回答要点：审批部门",
-        "缺少回答要点：办理时间"
+        "缺少回答要点：适用对象"
       ]
     },
     {
       "id": "housing-apply-005",
       "question": "新生或在校生住宿申请在哪里办理？",
       "scene": "宿舍后勤",
-      "status": "not_answerable",
+      "status": "partially_answerable",
       "expected_domains": [
         "hq.sufe.edu.cn",
         "gongkai.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "未命中权威来源：hq.sufe.edu.cn, gongkai.sufe.edu.cn",
-        "缺少回答要点：申请入口",
-        "缺少回答要点：对象",
-        "缺少回答要点：材料",
-        "缺少回答要点：分配流程"
-      ]
-    },
-    {
-      "id": "housing-repair-006",
-      "question": "宿舍如何报修？",
-      "scene": "宿舍后勤",
-      "status": "not_answerable",
-      "expected_domains": [
-        "hq.sufe.edu.cn",
-        "gongkai.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "未命中权威来源：hq.sufe.edu.cn, gongkai.sufe.edu.cn",
-        "缺少回答要点：报修入口",
-        "缺少回答要点：受理范围",
-        "缺少回答要点：处理时间",
-        "缺少回答要点：联系方式"
+        "缺少回答要点：对象"
       ]
     },
     {
       "id": "housing-electric-007",
       "question": "宿舍内可以使用哪些电器？",
       "scene": "宿舍后勤",
-      "status": "not_answerable",
+      "status": "partially_answerable",
       "expected_domains": [
         "hq.sufe.edu.cn",
         "gongkai.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "未命中权威来源：hq.sufe.edu.cn, gongkai.sufe.edu.cn",
         "缺少回答要点：允许电器",
         "缺少回答要点：禁用电器",
-        "缺少回答要点：安全要求",
         "缺少回答要点：管理依据"
       ]
     },
@@ -1353,146 +516,49 @@
       "id": "housing-temporary-008",
       "question": "临时住宿如何申请？",
       "scene": "宿舍后勤",
-      "status": "not_answerable",
+      "status": "partially_answerable",
       "expected_domains": [
         "hq.sufe.edu.cn",
         "gongkai.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "未命中权威来源：hq.sufe.edu.cn, gongkai.sufe.edu.cn",
-        "缺少回答要点：适用对象",
-        "缺少回答要点：材料",
-        "缺少回答要点：办理流程",
-        "缺少回答要点：审批部门"
-      ]
-    },
-    {
-      "id": "housing-catering-009",
-      "question": "学校餐饮服务和就餐问题应联系哪里？",
-      "scene": "宿舍后勤",
-      "status": "not_answerable",
-      "expected_domains": [
-        "hq.sufe.edu.cn",
-        "gongkai.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "未命中权威来源：hq.sufe.edu.cn, gongkai.sufe.edu.cn",
-        "缺少回答要点：服务地点",
-        "缺少回答要点：服务时间",
-        "缺少回答要点：反馈入口",
-        "缺少回答要点：联系方式"
-      ]
-    },
-    {
-      "id": "housing-express-010",
-      "question": "校园快递服务在哪里查询或反馈？",
-      "scene": "宿舍后勤",
-      "status": "not_answerable",
-      "expected_domains": [
-        "hq.sufe.edu.cn",
-        "gongkai.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "未命中权威来源：hq.sufe.edu.cn, gongkai.sufe.edu.cn",
-        "缺少回答要点：服务地点",
-        "缺少回答要点：取件规则",
-        "缺少回答要点：反馈入口",
-        "缺少回答要点：联系方式"
+        "缺少回答要点：适用对象"
       ]
     },
     {
       "id": "nic-activate-001",
       "question": "统一认证账号如何激活？",
       "scene": "信息化与校园卡",
-      "status": "not_answerable",
+      "status": "partially_answerable",
       "expected_domains": [
         "nic.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "未命中权威来源：nic.sufe.edu.cn",
-        "缺少回答要点：激活入口",
         "缺少回答要点：身份验证",
-        "缺少回答要点：操作步骤",
         "缺少回答要点：技术支持"
-      ]
-    },
-    {
-      "id": "nic-password-002",
-      "question": "统一认证密码忘了怎么办？",
-      "scene": "信息化与校园卡",
-      "status": "not_answerable",
-      "expected_domains": [
-        "nic.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "未命中权威来源：nic.sufe.edu.cn",
-        "缺少回答要点：找回入口",
-        "缺少回答要点：身份验证",
-        "缺少回答要点：重置步骤",
-        "缺少回答要点：联系方式"
       ]
     },
     {
       "id": "nic-freeze-003",
       "question": "统一认证账号为什么被冻结？",
       "scene": "信息化与校园卡",
-      "status": "not_answerable",
+      "status": "partially_answerable",
       "expected_domains": [
         "nic.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "未命中权威来源：nic.sufe.edu.cn",
-        "缺少回答要点：冻结原因",
-        "缺少回答要点：解冻条件",
-        "缺少回答要点：办理流程",
-        "缺少回答要点：受理部门"
-      ]
-    },
-    {
-      "id": "nic-arrears-004",
-      "question": "欠费后账号如何解冻？",
-      "scene": "信息化与校园卡",
-      "status": "not_answerable",
-      "expected_domains": [
-        "nic.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "未命中权威来源：nic.sufe.edu.cn",
-        "缺少回答要点：欠费规则",
-        "缺少回答要点：缴费入口",
-        "缺少回答要点：解冻流程",
-        "缺少回答要点：生效时间"
-      ]
-    },
-    {
-      "id": "nic-card-005",
-      "question": "校园卡如何充值和挂失？",
-      "scene": "信息化与校园卡",
-      "status": "not_answerable",
-      "expected_domains": [
-        "nic.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "未命中权威来源：nic.sufe.edu.cn",
-        "缺少回答要点：充值入口",
-        "缺少回答要点：挂失方式",
-        "缺少回答要点：补办流程",
-        "缺少回答要点：联系方式"
+        "缺少回答要点：冻结原因"
       ]
     },
     {
       "id": "nic-ecard-006",
       "question": "电子校园卡如何领取？",
       "scene": "信息化与校园卡",
-      "status": "not_answerable",
+      "status": "partially_answerable",
       "expected_domains": [
         "nic.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "未命中权威来源：nic.sufe.edu.cn",
-        "缺少回答要点：领取入口",
-        "缺少回答要点：身份绑定",
-        "缺少回答要点：使用场景",
         "缺少回答要点：故障处理"
       ]
     },
@@ -1500,14 +566,12 @@
       "id": "nic-wifi-007",
       "question": "如何连接校园无线网？",
       "scene": "信息化与校园卡",
-      "status": "not_answerable",
+      "status": "partially_answerable",
       "expected_domains": [
         "nic.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "未命中权威来源：nic.sufe.edu.cn",
         "缺少回答要点：网络名称",
-        "缺少回答要点：认证步骤",
         "缺少回答要点：适用终端",
         "缺少回答要点：故障排查"
       ]
@@ -1516,15 +580,11 @@
       "id": "nic-wired-008",
       "question": "校园有线网络如何开通？",
       "scene": "信息化与校园卡",
-      "status": "not_answerable",
+      "status": "partially_answerable",
       "expected_domains": [
         "nic.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "未命中权威来源：nic.sufe.edu.cn",
-        "缺少回答要点：申请入口",
-        "缺少回答要点：配置步骤",
-        "缺少回答要点：适用地点",
         "缺少回答要点：技术支持"
       ]
     },
@@ -1532,47 +592,36 @@
       "id": "nic-eduroam-009",
       "question": "如何使用 Eduroam？",
       "scene": "信息化与校园卡",
-      "status": "not_answerable",
+      "status": "partially_answerable",
       "expected_domains": [
         "nic.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "未命中权威来源：nic.sufe.edu.cn",
-        "缺少回答要点：适用对象",
-        "缺少回答要点：账号要求",
-        "缺少回答要点：连接步骤",
-        "缺少回答要点：使用范围"
+        "缺少回答要点：适用对象"
       ]
     },
     {
       "id": "nic-email-010",
       "question": "毕业后学校邮箱和统一认证还能使用多久？",
       "scene": "信息化与校园卡",
-      "status": "not_answerable",
+      "status": "partially_answerable",
       "expected_domains": [
         "nic.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "未命中权威来源：nic.sufe.edu.cn",
         "缺少回答要点：适用对象",
-        "缺少回答要点：服务期限",
-        "缺少回答要点：账号状态",
-        "缺少回答要点：咨询部门"
+        "缺少回答要点：账号状态"
       ]
     },
     {
       "id": "nic-vpn-011",
       "question": "VPN 如何使用？",
       "scene": "信息化与校园卡",
-      "status": "not_answerable",
+      "status": "partially_answerable",
       "expected_domains": [
         "nic.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "未命中权威来源：nic.sufe.edu.cn",
-        "缺少回答要点：客户端下载",
-        "缺少回答要点：登录方式",
-        "缺少回答要点：配置步骤",
         "缺少回答要点：适用资源"
       ]
     },
@@ -1580,15 +629,11 @@
       "id": "nic-wechat-012",
       "question": "企业微信如何绑定学校身份？",
       "scene": "信息化与校园卡",
-      "status": "not_answerable",
+      "status": "partially_answerable",
       "expected_domains": [
         "nic.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "未命中权威来源：nic.sufe.edu.cn",
-        "缺少回答要点：绑定入口",
-        "缺少回答要点：身份验证",
-        "缺少回答要点：操作步骤",
         "缺少回答要点：技术支持"
       ]
     },
@@ -1596,30 +641,23 @@
       "id": "nic-one-stop-013",
       "question": "一网通办如何进入学生服务？",
       "scene": "信息化与校园卡",
-      "status": "not_answerable",
+      "status": "partially_answerable",
       "expected_domains": [
         "nic.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "未命中权威来源：nic.sufe.edu.cn",
-        "缺少回答要点：入口",
-        "缺少回答要点：身份认证",
-        "缺少回答要点：服务查找",
-        "缺少回答要点：故障反馈"
+        "缺少回答要点：服务查找"
       ]
     },
     {
       "id": "nic-teaching-014",
       "question": "上财教学网的登录和访问方式是什么？",
       "scene": "信息化与校园卡",
-      "status": "not_answerable",
+      "status": "partially_answerable",
       "expected_domains": [
         "nic.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "未命中权威来源：nic.sufe.edu.cn",
-        "缺少回答要点：访问入口",
-        "缺少回答要点：认证方式",
         "缺少回答要点：适用对象",
         "缺少回答要点：技术支持"
       ]
@@ -1628,111 +666,47 @@
       "id": "nic-supercomputer-015",
       "question": "学生如何申请使用超算平台？",
       "scene": "信息化与校园卡",
-      "status": "not_answerable",
+      "status": "partially_answerable",
       "expected_domains": [
         "nic.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "未命中权威来源：nic.sufe.edu.cn",
-        "缺少回答要点：申请对象",
-        "缺少回答要点：账号申请",
-        "缺少回答要点：使用流程",
-        "缺少回答要点：联系方式"
+        "缺少回答要点：账号申请"
       ]
     },
     {
       "id": "library-hours-001",
       "question": "图书馆开放时间是什么？",
       "scene": "图书馆",
-      "status": "not_answerable",
+      "status": "partially_answerable",
       "expected_domains": [
         "lib.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "未命中权威来源：lib.sufe.edu.cn",
-        "缺少回答要点：开放校区",
-        "缺少回答要点：开放时段",
-        "缺少回答要点：节假日规则",
-        "缺少回答要点：联系方式"
-      ]
-    },
-    {
-      "id": "library-permission-002",
-      "question": "本科生是否自动开通借阅权限？",
-      "scene": "图书馆",
-      "status": "not_answerable",
-      "expected_domains": [
-        "lib.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "未命中权威来源：lib.sufe.edu.cn",
-        "缺少回答要点：开通条件",
-        "缺少回答要点：证件要求",
-        "缺少回答要点：借阅入口",
-        "缺少回答要点：咨询部门"
+        "缺少回答要点：开放校区"
       ]
     },
     {
       "id": "library-loan-003",
       "question": "图书可以借多久？",
       "scene": "图书馆",
-      "status": "not_answerable",
+      "status": "partially_answerable",
       "expected_domains": [
         "lib.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "未命中权威来源：lib.sufe.edu.cn",
-        "缺少回答要点：借阅期限",
-        "缺少回答要点：续借规则",
-        "缺少回答要点：适用对象",
         "缺少回答要点：逾期处理"
-      ]
-    },
-    {
-      "id": "library-renew-004",
-      "question": "如何续借或预约图书？",
-      "scene": "图书馆",
-      "status": "not_answerable",
-      "expected_domains": [
-        "lib.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "未命中权威来源：lib.sufe.edu.cn",
-        "缺少回答要点：操作入口",
-        "缺少回答要点：续借条件",
-        "缺少回答要点：预约规则",
-        "缺少回答要点：提醒方式"
-      ]
-    },
-    {
-      "id": "library-overdue-005",
-      "question": "图书逾期如何处理？",
-      "scene": "图书馆",
-      "status": "not_answerable",
-      "expected_domains": [
-        "lib.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "未命中权威来源：lib.sufe.edu.cn",
-        "缺少回答要点：逾期规则",
-        "缺少回答要点：费用或限制",
-        "缺少回答要点：处理方式",
-        "缺少回答要点：联系方式"
       ]
     },
     {
       "id": "library-offcampus-006",
       "question": "校外如何访问图书馆数据库？",
       "scene": "图书馆",
-      "status": "not_answerable",
+      "status": "partially_answerable",
       "expected_domains": [
         "lib.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "未命中权威来源：lib.sufe.edu.cn",
-        "缺少回答要点：访问入口",
-        "缺少回答要点：身份认证",
-        "缺少回答要点：适用数据库",
         "缺少回答要点：技术支持"
       ]
     },
@@ -1740,269 +714,60 @@
       "id": "library-seat-007",
       "question": "如何预约图书馆座位？",
       "scene": "图书馆",
-      "status": "not_answerable",
+      "status": "partially_answerable",
       "expected_domains": [
         "lib.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "未命中权威来源：lib.sufe.edu.cn",
-        "缺少回答要点：预约入口",
-        "缺少回答要点：预约规则",
-        "缺少回答要点：签到要求",
         "缺少回答要点：违约处理"
-      ]
-    },
-    {
-      "id": "library-room-008",
-      "question": "如何预约图书馆研讨室？",
-      "scene": "图书馆",
-      "status": "not_answerable",
-      "expected_domains": [
-        "lib.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "未命中权威来源：lib.sufe.edu.cn",
-        "缺少回答要点：预约对象",
-        "缺少回答要点：入口",
-        "缺少回答要点：使用规则",
-        "缺少回答要点：联系方式"
-      ]
-    },
-    {
-      "id": "library-ill-009",
-      "question": "如何申请馆际互借或文献传递？",
-      "scene": "图书馆",
-      "status": "not_answerable",
-      "expected_domains": [
-        "lib.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "未命中权威来源：lib.sufe.edu.cn",
-        "缺少回答要点：申请入口",
-        "缺少回答要点：服务对象",
-        "缺少回答要点：材料或信息",
-        "缺少回答要点：办理流程"
-      ]
-    },
-    {
-      "id": "library-print-010",
-      "question": "图书馆自助打印在哪里办理？",
-      "scene": "图书馆",
-      "status": "not_answerable",
-      "expected_domains": [
-        "lib.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "未命中权威来源：lib.sufe.edu.cn",
-        "缺少回答要点：服务地点",
-        "缺少回答要点：操作方式",
-        "缺少回答要点：收费规则",
-        "缺少回答要点：故障反馈"
-      ]
-    },
-    {
-      "id": "medical-insurance-001",
-      "question": "大学生医保如何使用？",
-      "scene": "医疗医保",
-      "status": "not_answerable",
-      "expected_domains": [
-        "yljk.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "未命中权威来源：yljk.sufe.edu.cn",
-        "缺少回答要点：参保对象",
-        "缺少回答要点：就医流程",
-        "缺少回答要点：凭证",
-        "缺少回答要点：咨询部门"
-      ]
-    },
-    {
-      "id": "medical-outpatient-002",
-      "question": "大学生医保门诊如何报销？",
-      "scene": "医疗医保",
-      "status": "not_answerable",
-      "expected_domains": [
-        "yljk.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "未命中权威来源：yljk.sufe.edu.cn",
-        "缺少回答要点：报销范围",
-        "缺少回答要点：材料",
-        "缺少回答要点：办理流程",
-        "缺少回答要点：时间要求"
       ]
     },
     {
       "id": "medical-referral-003",
       "question": "校外就医是否需要转诊？",
       "scene": "医疗医保",
-      "status": "not_answerable",
+      "status": "partially_answerable",
       "expected_domains": [
         "yljk.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "未命中权威来源：yljk.sufe.edu.cn",
-        "缺少回答要点：转诊条件",
-        "缺少回答要点：申请流程",
-        "缺少回答要点：材料",
         "缺少回答要点：适用医院"
-      ]
-    },
-    {
-      "id": "medical-hospital-004",
-      "question": "住院如何办理结算？",
-      "scene": "医疗医保",
-      "status": "not_answerable",
-      "expected_domains": [
-        "yljk.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "未命中权威来源：yljk.sufe.edu.cn",
-        "缺少回答要点：入院手续",
-        "缺少回答要点：结算材料",
-        "缺少回答要点：办理流程",
-        "缺少回答要点：联系部门"
       ]
     },
     {
       "id": "medical-excluded-005",
       "question": "哪些医疗费用不能报销？",
       "scene": "医疗医保",
-      "status": "not_answerable",
+      "status": "partially_answerable",
       "expected_domains": [
         "yljk.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "未命中权威来源：yljk.sufe.edu.cn",
-        "缺少回答要点：不予报销范围",
-        "缺少回答要点：适用政策",
-        "缺少回答要点：材料要求",
-        "缺少回答要点：咨询方式"
-      ]
-    },
-    {
-      "id": "medical-location-006",
-      "question": "校医院在哪里，如何联系？",
-      "scene": "医疗医保",
-      "status": "not_answerable",
-      "expected_domains": [
-        "yljk.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "未命中权威来源：yljk.sufe.edu.cn",
-        "缺少回答要点：地址",
-        "缺少回答要点：门诊时间",
-        "缺少回答要点：联系方式",
-        "缺少回答要点：服务范围"
+        "缺少回答要点：适用政策"
       ]
     },
     {
       "id": "medical-offsite-007",
       "question": "异地就医如何办理备案或报销？",
       "scene": "医疗医保",
-      "status": "not_answerable",
+      "status": "partially_answerable",
       "expected_domains": [
         "yljk.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "未命中权威来源：yljk.sufe.edu.cn",
-        "缺少回答要点：适用对象",
-        "缺少回答要点：备案流程",
-        "缺少回答要点：材料",
-        "缺少回答要点：结算方式"
-      ]
-    },
-    {
-      "id": "medical-physical-008",
-      "question": "学生体检在哪里预约或办理？",
-      "scene": "医疗医保",
-      "status": "not_answerable",
-      "expected_domains": [
-        "yljk.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "未命中权威来源：yljk.sufe.edu.cn",
-        "缺少回答要点：对象",
-        "缺少回答要点：预约入口",
-        "缺少回答要点：时间",
-        "缺少回答要点：地点"
-      ]
-    },
-    {
-      "id": "medical-infectious-009",
-      "question": "学校传染病管理和报告流程是什么？",
-      "scene": "医疗医保",
-      "status": "not_answerable",
-      "expected_domains": [
-        "yljk.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "未命中权威来源：yljk.sufe.edu.cn",
-        "缺少回答要点：报告对象",
-        "缺少回答要点：流程",
-        "缺少回答要点：隔离或就医要求",
-        "缺少回答要点：负责部门"
+        "缺少回答要点：适用对象"
       ]
     },
     {
       "id": "medical-download-010",
       "question": "医疗医保常用表格在哪里下载？",
       "scene": "医疗医保",
-      "status": "not_answerable",
+      "status": "partially_answerable",
       "expected_domains": [
         "yljk.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "未命中权威来源：yljk.sufe.edu.cn",
-        "缺少回答要点：下载入口",
-        "缺少回答要点：适用事项",
-        "缺少回答要点：提交方式",
-        "缺少回答要点：联系方式"
-      ]
-    },
-    {
-      "id": "exchange-program-001",
-      "question": "学生交换项目在哪里查询？",
-      "scene": "国际交流",
-      "status": "not_answerable",
-      "expected_domains": [
-        "ieco.sufe.edu.cn",
-        "gs.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：项目入口",
-        "缺少回答要点：项目对象",
-        "缺少回答要点：申请时间",
-        "缺少回答要点：发布部门"
-      ]
-    },
-    {
-      "id": "exchange-condition-002",
-      "question": "交换项目申请条件是什么？",
-      "scene": "国际交流",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "ieco.sufe.edu.cn",
-        "gs.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：年级要求",
-        "缺少回答要点：成绩要求"
-      ]
-    },
-    {
-      "id": "exchange-materials-003",
-      "question": "交换项目报名需要哪些材料？",
-      "scene": "国际交流",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "ieco.sufe.edu.cn",
-        "gs.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：材料清单",
-        "缺少回答要点：提交方式",
-        "缺少回答要点：格式要求"
+        "缺少回答要点：适用事项"
       ]
     },
     {
@@ -2020,234 +785,23 @@
       ]
     },
     {
-      "id": "exchange-funding-005",
-      "question": "学生交流项目有哪些资助？",
-      "scene": "国际交流",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "ieco.sufe.edu.cn",
-        "gs.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：资助对象",
-        "缺少回答要点：资助范围",
-        "缺少回答要点：发放方式"
-      ]
-    },
-    {
-      "id": "exchange-predeparture-006",
-      "question": "出国交流行前手续如何办理？",
-      "scene": "国际交流",
-      "status": "not_answerable",
-      "expected_domains": [
-        "ieco.sufe.edu.cn",
-        "gs.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：手续清单",
-        "缺少回答要点：办理时间",
-        "缺少回答要点：审批部门",
-        "缺少回答要点：安全要求"
-      ]
-    },
-    {
-      "id": "exchange-credit-007",
-      "question": "海外交流成绩和学分如何认定？",
-      "scene": "国际交流",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "ieco.sufe.edu.cn",
-        "gs.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：认定范围",
-        "缺少回答要点：转换规则"
-      ]
-    },
-    {
-      "id": "exchange-short-008",
-      "question": "短期国际交流如何申请？",
-      "scene": "国际交流",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "ieco.sufe.edu.cn",
-        "gs.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：项目对象",
-        "缺少回答要点：时间节点"
-      ]
-    },
-    {
       "id": "exchange-public-009",
       "question": "公派留学项目如何报名？",
       "scene": "国际交流",
-      "status": "not_answerable",
+      "status": "partially_answerable",
       "expected_domains": [
         "ieco.sufe.edu.cn",
         "gs.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "缺少回答要点：项目条件",
-        "缺少回答要点：报名材料",
-        "缺少回答要点：选拔流程",
         "缺少回答要点：资助政策"
-      ]
-    },
-    {
-      "id": "exchange-contact-010",
-      "question": "国际交流项目的咨询联系方式是什么？",
-      "scene": "国际交流",
-      "status": "not_answerable",
-      "expected_domains": [
-        "ieco.sufe.edu.cn",
-        "gs.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：联系方式",
-        "缺少回答要点：负责部门",
-        "缺少回答要点：服务范围",
-        "缺少回答要点：办公时间"
-      ]
-    },
-    {
-      "id": "new-report-001",
-      "question": "新生入学报到需要办理哪些手续？",
-      "scene": "新生与安全",
-      "status": "not_answerable",
-      "expected_domains": [
-        "baoweichu.sufe.edu.cn",
-        "xsc.sufe.edu.cn",
-        "hq.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：报到材料",
-        "缺少回答要点：办理流程",
-        "缺少回答要点：时间地点",
-        "缺少回答要点：负责部门"
-      ]
-    },
-    {
-      "id": "new-orientation-002",
-      "question": "新生如何领取校园卡并开通相关服务？",
-      "scene": "新生与安全",
-      "status": "not_answerable",
-      "expected_domains": [
-        "baoweichu.sufe.edu.cn",
-        "xsc.sufe.edu.cn",
-        "hq.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：领取方式",
-        "缺少回答要点：身份激活",
-        "缺少回答要点：办理地点",
-        "缺少回答要点：联系方式"
-      ]
-    },
-    {
-      "id": "new-household-003",
-      "question": "户籍和学籍证明如何办理？",
-      "scene": "新生与安全",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "baoweichu.sufe.edu.cn",
-        "xsc.sufe.edu.cn",
-        "hq.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：申请对象",
-        "缺少回答要点：办理入口",
-        "缺少回答要点：受理部门"
-      ]
-    },
-    {
-      "id": "new-military-registration-004",
-      "question": "大学生兵役登记如何办理？",
-      "scene": "新生与安全",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "baoweichu.sufe.edu.cn",
-        "xsc.sufe.edu.cn",
-        "hq.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：登记对象",
-        "缺少回答要点：登记入口",
-        "缺少回答要点：时间节点"
-      ]
-    },
-    {
-      "id": "new-enlistment-005",
-      "question": "在校生参军入伍流程是什么？",
-      "scene": "新生与安全",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "baoweichu.sufe.edu.cn",
-        "xsc.sufe.edu.cn",
-        "hq.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：报名条件",
-        "缺少回答要点：报名流程",
-        "缺少回答要点：负责部门"
-      ]
-    },
-    {
-      "id": "new-traffic-006",
-      "question": "校园交通和车辆管理有哪些规定？",
-      "scene": "新生与安全",
-      "status": "not_answerable",
-      "expected_domains": [
-        "baoweichu.sufe.edu.cn",
-        "xsc.sufe.edu.cn",
-        "hq.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：适用范围",
-        "缺少回答要点：办理入口",
-        "缺少回答要点：通行要求",
-        "缺少回答要点：联系方式"
-      ]
-    },
-    {
-      "id": "new-lost-007",
-      "question": "校园失物招领如何办理？",
-      "scene": "新生与安全",
-      "status": "not_answerable",
-      "expected_domains": [
-        "baoweichu.sufe.edu.cn",
-        "xsc.sufe.edu.cn",
-        "hq.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：提交方式",
-        "缺少回答要点：认领流程",
-        "缺少回答要点：办理地点",
-        "缺少回答要点：联系方式"
-      ]
-    },
-    {
-      "id": "new-safety-008",
-      "question": "校园安全事件应如何报告和求助？",
-      "scene": "新生与安全",
-      "status": "not_answerable",
-      "expected_domains": [
-        "baoweichu.sufe.edu.cn",
-        "xsc.sufe.edu.cn",
-        "hq.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：报告渠道",
-        "缺少回答要点：紧急联系方式",
-        "缺少回答要点：处理流程",
-        "缺少回答要点：负责部门"
       ]
     },
     {
       "id": "new-fraud-009",
       "question": "校园电信网络诈骗如何举报和求助？",
       "scene": "新生与安全",
-      "status": "not_answerable",
+      "status": "partially_answerable",
       "expected_domains": [
         "baoweichu.sufe.edu.cn",
         "xsc.sufe.edu.cn",
@@ -2255,26 +809,21 @@
       ],
       "missing_reasons": [
         "缺少回答要点：识别提示",
-        "缺少回答要点：报告渠道",
-        "缺少回答要点：紧急措施",
-        "缺少回答要点：负责部门"
+        "缺少回答要点：紧急措施"
       ]
     },
     {
       "id": "new-download-010",
       "question": "保卫处常用证明和表格在哪里下载？",
       "scene": "新生与安全",
-      "status": "not_answerable",
+      "status": "partially_answerable",
       "expected_domains": [
         "baoweichu.sufe.edu.cn",
         "xsc.sufe.edu.cn",
         "hq.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "缺少回答要点：下载入口",
-        "缺少回答要点：适用事项",
-        "缺少回答要点：提交方式",
-        "缺少回答要点：联系方式"
+        "缺少回答要点：适用事项"
       ]
     }
   ]
