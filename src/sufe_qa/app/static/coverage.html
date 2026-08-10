@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>150 问覆盖质检 · 上财校务问答</title>
+  <link rel="stylesheet" href="/static/coverage.css">
+</head>
+<body>
+  <header class="audit-masthead">
+    <div class="audit-masthead__topline">
+      <p class="eyebrow">SUFE KNOWLEDGE COVERAGE · EVIDENCE AUDIT</p>
+      <a class="back-link" href="/">返回校务问答</a>
+    </div>
+    <div class="audit-title-row">
+      <div>
+        <p class="folio">固定题库 / 检索质量卷宗</p>
+        <h1>150 问覆盖质检</h1>
+        <p class="audit-lede">逐题核验命中部门、依据文档、回答要点与缺失证据。</p>
+      </div>
+      <div class="audit-stamp" aria-label="评测状态：读取中">
+        <span id="stamp-count">—</span>
+        <small>QUESTIONS</small>
+      </div>
+    </div>
+    <dl class="report-meta" id="report-meta" aria-label="评测版本信息">
+      <div><dt>题库版本</dt><dd id="meta-version">读取中</dd></div>
+      <div><dt>评测时间</dt><dd id="meta-time">—</dd></div>
+      <div><dt>题库哈希</dt><dd id="meta-bank-hash">—</dd></div>
+      <div><dt>索引指纹</dt><dd id="meta-index-hash">—</dd></div>
+      <div><dt>检索配置</dt><dd id="meta-retriever">—</dd></div>
+    </dl>
+  </header>
+
+  <main class="audit-main">
+    <div class="loading-state" id="loading-state" role="status">正在清点 150 问证据……</div>
+    <section class="error-state" id="error-state" role="alert" hidden>
+      <p class="section-kicker">报告未能打开</p>
+      <h2 id="error-message">覆盖评测报告加载失败</h2>
+      <p>请确认已生成 <code>data/coverage/sufe_coverage_after.json</code>，然后刷新页面。</p>
+      <button id="retry-button" type="button">重新读取</button>
+    </section>
+
+    <div id="dashboard" hidden>
+      <section class="summary-section" aria-labelledby="summary-title">
+        <div class="section-heading">
+          <div><p class="section-kicker">卷一 · 总体判定</p><h2 id="summary-title">当前覆盖结果</h2></div>
+          <p class="summary-note">部分可回答不计入完整通过率</p>
+        </div>
+        <div class="summary-metrics" id="summary-metrics"></div>
+      </section>
+
+      <section class="scene-section" aria-labelledby="scene-title">
+        <div class="section-heading">
+          <div><p class="section-kicker">卷二 · 场景分布</p><h2 id="scene-title">11 个学生事务场景</h2></div>
+          <div class="legend" aria-label="状态图例">
+            <span><i class="legend-mark is-answerable"></i>完整</span>
+            <span><i class="legend-mark is-partial"></i>部分</span>
+            <span><i class="legend-mark is-failed"></i>不可回答</span>
+          </div>
+        </div>
+        <div class="scene-bars" id="scene-bars"></div>
+      </section>
+
+      <section class="questions-section" aria-labelledby="questions-title">
+        <div class="section-heading section-heading--questions">
+          <div><p class="section-kicker">卷三 · 逐题核验</p><h2 id="questions-title">150 格证据矩阵</h2></div>
+          <p class="result-count" id="result-count" aria-live="polite">当前 — / —</p>
+        </div>
+
+        <form class="filter-bar" id="filter-bar" role="search">
+          <label class="search-field">
+            <span>检索问题或依据</span>
+            <input id="search-filter" name="search" type="search" autocomplete="off"
+                   placeholder="问题、ID、标题、部门、doc_id">
+          </label>
+          <label><span>场景</span><select id="scene-filter" name="scene"><option value="">全部场景</option></select></label>
+          <label><span>状态</span><select id="status-filter" name="status"><option value="">全部状态</option><option value="answerable">完整可回答</option><option value="partially_answerable">部分可回答</option><option value="not_answerable">不可回答</option></select></label>
+          <label><span>附件</span><select id="attachment-filter" name="attachment"><option value="">不限</option><option value="yes">含附件</option><option value="no">无附件</option></select></label>
+          <button id="reset-filters" type="reset">清除筛选</button>
+        </form>
+
+        <div class="matrix-key" aria-hidden="true"><span>001</span><i></i><span>固定题库顺序</span><i></i><span>150</span></div>
+        <div class="evidence-matrix" id="evidence-matrix" aria-label="150 问状态矩阵"></div>
+        <div class="question-list" id="question-list"></div>
+        <p class="empty-results" id="empty-results" hidden>没有符合当前条件的问题。清除筛选后可查看全部 150 问。</p>
+      </section>
+    </div>
+  </main>
+
+  <div class="drawer-backdrop" id="drawer-backdrop" hidden></div>
+  <aside class="question-drawer" id="question-drawer" aria-labelledby="drawer-title" aria-modal="true" role="dialog" hidden>
+    <header class="drawer-head">
+      <div><p class="drawer-sequence" id="drawer-sequence">问题 —</p><h2 id="drawer-title" tabindex="-1">逐题证据</h2></div>
+      <button class="drawer-close" id="drawer-close" type="button" aria-label="关闭问题详情">关闭</button>
+    </header>
+    <div class="drawer-body">
+      <section class="drawer-verdict" id="drawer-verdict"></section>
+      <section aria-labelledby="documents-title"><h3 id="documents-title">命中文档</h3><div class="document-table-wrap"><table class="document-table"><thead><tr><th>doc_id</th><th>标题 / 发布部门</th><th>日期</th><th>类型</th><th>有效性</th></tr></thead><tbody id="document-rows"></tbody></table></div></section>
+      <section aria-labelledby="evidence-title"><h3 id="evidence-title">回答要点证据</h3><div class="point-evidence" id="point-evidence"></div></section>
+      <section aria-labelledby="missing-title"><h3 id="missing-title">缺失原因</h3><div class="missing-reasons" id="missing-reasons"></div></section>
+    </div>
+  </aside>
+
+  <script src="/static/coverage.js"></script>
+</body>
+</html>

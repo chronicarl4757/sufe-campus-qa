@@ -79,6 +79,21 @@ def test_index_page_served(client):
     assert "上财校务问答" in r.text
 
 
+def test_coverage_page_served(client):
+    response = client.get("/coverage")
+    assert response.status_code == 200
+    assert "150 问覆盖质检" in response.text
+    assert 'id="evidence-matrix"' in response.text
+    assert 'id="question-drawer"' in response.text
+    assert 'src="/static/coverage.js"' in response.text
+
+
+def test_index_links_to_coverage_dashboard(client):
+    response = client.get("/")
+    assert 'href="/coverage"' in response.text
+    assert "覆盖质检" in response.text
+
+
 def test_meta(client):
     m = client.get("/api/meta").json()
     assert m["doc_count"] == 1

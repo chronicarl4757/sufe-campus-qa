@@ -146,6 +146,10 @@ def create_app(
     def index() -> FileResponse:
         return FileResponse(STATIC_DIR / "index.html")
 
+    @app.get("/coverage")
+    def coverage_page() -> FileResponse:
+        return FileResponse(STATIC_DIR / "coverage.html")
+
     @app.get("/api/meta")
     def meta() -> dict:
         manifest = load_manifest(settings.manifest_path)
