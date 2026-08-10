@@ -491,3 +491,4 @@
 {"parent_doc_id": "ffe1af39675e", "child_doc_id": "1be2da8f5d92", "relation": "attachment_of", "evidence": "", "confidence": 1.0, "created_at": ""}
 {"parent_doc_id": "6af7772be66c", "child_doc_id": "16392d954e77", "relation": "attachment_of", "evidence": "", "confidence": 1.0, "created_at": ""}
 {"parent_doc_id": "230e056e5422", "child_doc_id": "4e71a33624b2", "relation": "supersedes", "evidence": "标题版本标记：（2023年10月修订）", "confidence": 0.95, "created_at": ""}
+{"parent_doc_id": "74200e7e1e2b", "child_doc_id": "2a2da70ecca6", "relation": "supersedes", "evidence": "自2025 年1 月1 日起施行；修订上海财经大学学位工作细则", "confidence": 0.95, "created_at": ""}

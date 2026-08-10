@@ -1,0 +1,323 @@
+schema_version: "1"
+namespace: sufe-regulations
+
+# 精确 allowlist：未列出的本地文件仅进入审计报告，不写入 corpus 或索引。
+entries:
+  - path: 学工/【博士】计算机与人工智能学院博士研究生素质综合评价实施细则2025 1211.pdf
+    category: 评奖评优
+    publisher: 上海财经大学计算机与人工智能学院
+    scope_unit: 计算机与人工智能学院
+    source_section: 学生工作
+    document_kind: policy
+    retention_status: active
+  - path: 学工/【本科】计算机与人工智能学院本科生素质综合评价实施细则2025 0116.pdf
+    category: 评奖评优
+    publisher: 上海财经大学计算机与人工智能学院
+    scope_unit: 计算机与人工智能学院
+    source_section: 学生工作
+    document_kind: policy
+    retention_status: active
+  - path: 学工/【硕士】计算机与人工智能学院硕士研究生素质综合评价实施细则2025 1211.pdf
+    category: 评奖评优
+    publisher: 上海财经大学计算机与人工智能学院
+    scope_unit: 计算机与人工智能学院
+    source_section: 学生工作
+    document_kind: policy
+    retention_status: active
+  - path: 学工/上海财经大学计算机与人工智能学院优秀毕业生评选实施细则.pdf
+    category: 评奖评优
+    publisher: 上海财经大学计算机与人工智能学院
+    scope_unit: 计算机与人工智能学院
+    source_section: 学生工作
+    document_kind: policy
+    retention_status: active
+  - path: 学工/计算机与人工智能学院博士研究生助研津贴管理规定 终版.docx
+    category: 奖助学金
+    publisher: 上海财经大学计算机与人工智能学院
+    scope_unit: 计算机与人工智能学院
+    source_section: 学生工作
+    document_kind: policy
+    retention_status: active
+  - path: 学工/计算机与人工智能学院本科生奖学金评选实施细则12.8.docx
+    category: 奖助学金
+    publisher: 上海财经大学计算机与人工智能学院
+    scope_unit: 计算机与人工智能学院
+    source_section: 学生工作
+    document_kind: policy
+    retention_status: active
+  - path: 学工/计算机与人工智能学院研究生奖学金评选实施细则12.8.docx
+    category: 奖助学金
+    publisher: 上海财经大学计算机与人工智能学院
+    scope_unit: 计算机与人工智能学院
+    source_section: 学生工作
+    document_kind: policy
+    retention_status: active
+
+  - path: 本科教学/20250703关于印发《上海财经大学本科学生课程考核管理办法（2025年5月修订）》的通知.pdf
+    category: 学工事务
+    publisher: 上海财经大学
+    scope_unit: 上海财经大学
+    source_section: 本科教学
+    document_kind: policy
+    retention_status: active
+  - path: 本科教学/2026年计算机与人工智能学院本科生转专业工作实施细则.pdf
+    category: 学工事务
+    publisher: 上海财经大学计算机与人工智能学院
+    scope_unit: 计算机与人工智能学院
+    source_section: 本科教学
+    document_kind: annual_notice
+    retention_status: active
+  - path: 本科教学/8aaa85189d2e812b019e15c901c23d70关于印发《上海财经大学本科学生学籍管理实施细则（2026年4月修订）》的通知.pdf
+    category: 学工事务
+    publisher: 上海财经大学
+    scope_unit: 上海财经大学
+    source_section: 本科教学
+    document_kind: policy
+    retention_status: active
+  - path: 本科教学/上海财经大学计算机与人工智能学院2026年推荐优秀应届本科毕业生免试攻读研究生选拔工作细则.pdf
+    category: 推免升学
+    publisher: 上海财经大学计算机与人工智能学院
+    scope_unit: 计算机与人工智能学院
+    source_section: 本科教学
+    document_kind: annual_notice
+    retention_status: active
+  - path: 本科教学/上海财经大学计算机与人工智能学院本科学生毕业论文（设计）工作规定 （2025年11月修订）.pdf
+    category: 学工事务
+    publisher: 上海财经大学计算机与人工智能学院
+    scope_unit: 计算机与人工智能学院
+    source_section: 本科教学
+    document_kind: policy
+    retention_status: active
+  - path: 本科教学/上海财经大学计算机与人工智能学院毕业实习教学文件.pdf
+    category: 实习就业
+    publisher: 上海财经大学计算机与人工智能学院
+    scope_unit: 计算机与人工智能学院
+    source_section: 本科教学
+    document_kind: procedure
+    retention_status: active
+  - path: 本科教学/关于印发《上海财经大学本科生校外学习学分认定与成绩转换管理办法（2026年5月修订）》的通知.pdf
+    category: 学工事务
+    publisher: 上海财经大学
+    scope_unit: 上海财经大学
+    source_section: 本科教学
+    document_kind: policy
+    retention_status: active
+  - path: 本科教学/关于印发《上海财经大学本科生毕业论文（设计）重复率检测办法（2025年5月修订）》的通知.pdf
+    category: 学工事务
+    publisher: 上海财经大学
+    scope_unit: 上海财经大学
+    source_section: 本科教学
+    document_kind: policy
+    retention_status: active
+
+  - path: 研究生教学/20241231关于印发《上海财经大学学位工作细则（2024年10月修订）》的通知.pdf
+    category: 学工事务
+    publisher: 上海财经大学
+    scope_unit: 上海财经大学
+    source_section: 研究生教学
+    document_kind: policy
+    retention_status: active
+  - path: 研究生教学/20250905关于印发《上海财经大学学术行为规范及管理办法（2025年修订）》的通知.pdf
+    category: 学工事务
+    publisher: 上海财经大学
+    scope_unit: 上海财经大学
+    source_section: 研究生教学
+    document_kind: policy
+    retention_status: active
+  - path: 研究生教学/上海财经大学研究生申请出国(境)管理办法(试行)(2005年8月制定).pdf
+    category: 学工事务
+    publisher: 上海财经大学
+    scope_unit: 上海财经大学
+    source_section: 研究生国际交流
+    document_kind: policy
+    retention_status: historical
+  - path: 研究生教学/上海财经大学高水平学术会议资助文件/上海财经大学研究生参加高水平学术会议申请资助实施细则.pdf
+    category: 奖助学金
+    publisher: 上海财经大学计算机与人工智能学院
+    scope_unit: 计算机与人工智能学院
+    source_section: 研究生培养
+    document_kind: policy
+    retention_status: active
+  - path: 研究生教学/上海财经大学高水平学术会议资助文件/上海财经大学研究生参加高水平学术会议资助的申请办法（2024年6月修订）.pdf
+    category: 奖助学金
+    publisher: 上海财经大学
+    scope_unit: 上海财经大学
+    source_section: 研究生培养
+    document_kind: policy
+    retention_status: active
+  - path: 研究生教学/上海财经大学高水平学术会议资助文件/研究生申请高水平学术会议资助操作指南（含申请人、审批人操作）.pdf
+    category: 奖助学金
+    publisher: 上海财经大学
+    scope_unit: 上海财经大学
+    source_section: 研究生培养
+    document_kind: manual
+    retention_status: active
+  - path: 研究生教学/学位论文相关规定/20241023关于印发《上海财经大学博士、硕士学位论文抽检结果处理办法》的通知.pdf
+    category: 学工事务
+    publisher: 上海财经大学
+    scope_unit: 上海财经大学
+    source_section: 研究生学位
+    document_kind: policy
+    retention_status: active
+  - path: 研究生教学/学位论文相关规定/20241023关于印发《上海财经大学研究生学位论文双盲评审办法》的通知.pdf
+    category: 学工事务
+    publisher: 上海财经大学
+    scope_unit: 上海财经大学
+    source_section: 研究生学位
+    document_kind: policy
+    retention_status: active
+  - path: 研究生教学/学位论文相关规定/20241023关于印发《上海财经大学研究生学位论文重复率检测办法》的通知.pdf
+    category: 学工事务
+    publisher: 上海财经大学
+    scope_unit: 上海财经大学
+    source_section: 研究生学位
+    document_kind: policy
+    retention_status: active
+  - path: 研究生教学/学位论文相关规定/学术复核工作指引.pdf
+    category: 学工事务
+    publisher: 上海财经大学
+    scope_unit: 上海财经大学
+    source_section: 研究生学位
+    document_kind: procedure
+    retention_status: active
+  - path: 研究生教学/学位论文相关规定/研究生学位论文质量评估专家组工作指引.pdf
+    category: 学工事务
+    publisher: 上海财经大学
+    scope_unit: 上海财经大学
+    source_section: 研究生学位
+    document_kind: procedure
+    retention_status: active
+  - path: 研究生教学/导师管理细则/《上海财经大学计算机与人工智能学院研究生导师管理实施细则》（含指导人数）.docx
+    category: 学工事务
+    publisher: 上海财经大学计算机与人工智能学院
+    scope_unit: 计算机与人工智能学院
+    source_section: 研究生培养
+    document_kind: policy
+    retention_status: active
+  - path: 研究生教学/导师管理细则/上海财经大学管理科学与工程一级学科研究生导师管理实施细则（补充）-签字盖章版.pdf
+    category: 学工事务
+    publisher: 上海财经大学计算机与人工智能学院
+    scope_unit: 计算机与人工智能学院
+    source_section: 研究生培养
+    document_kind: policy
+    retention_status: active
+  - path: 研究生教学/导师管理细则/附件5：上海财经大学研究生导师管理办法.pdf
+    category: 学工事务
+    publisher: 上海财经大学
+    scope_unit: 上海财经大学
+    source_section: 研究生培养
+    document_kind: policy
+    retention_status: active
+  - path: 研究生教学/研究生毕业创新性成果要求/上海财经大学管科学与工程一级学科下授工学学位二级学科博士研究生科学研究工作和学术创新型成果要求签章版.pdf
+    category: 学工事务
+    publisher: 上海财经大学计算机与人工智能学院
+    scope_unit: 计算机与人工智能学院
+    source_section: 研究生学位
+    document_kind: policy
+    retention_status: active
+  - path: 研究生教学/研究生毕业创新性成果要求/新院标信管毕业要求1201-上海财经大学管理科学与工程一级学科博士研究生科学研究工作和学术创新性成果要求与认定细则终稿.docx
+    category: 学工事务
+    publisher: 上海财经大学计算机与人工智能学院
+    scope_unit: 计算机与人工智能学院
+    source_section: 研究生学位
+    document_kind: policy
+    retention_status: active
+  - path: 研究生教学/研究生毕业创新性成果要求/校标博士毕业要求-上海财经大学学位工作细则（上财研【2016】50号）.pdf
+    category: 学工事务
+    publisher: 上海财经大学
+    scope_unit: 上海财经大学
+    source_section: 研究生学位
+    document_kind: policy
+    retention_status: historical
+  - path: 研究生教学/研究生毕业创新性成果要求/老院标信管毕业要求-关于印发财经研究所等七家学院（所）《关于申请博士学位的科研成果要求的规定》的通知.doc
+    category: 学工事务
+    publisher: 上海财经大学
+    scope_unit: 上海财经大学
+    source_section: 研究生学位
+    document_kind: policy
+    retention_status: historical
+  - path: 研究生教学/附件1：关于印发《上海财经大学“上财国际课程”管理办法》的通知.pdf
+    category: 学工事务
+    publisher: 上海财经大学
+    scope_unit: 上海财经大学
+    source_section: 研究生教学
+    document_kind: policy
+    retention_status: active
+  - path: 研究生教学/附件2：关于印发《上海财经大学“上财国际课程”管理细则》的通知.pdf
+    category: 学工事务
+    publisher: 上海财经大学
+    scope_unit: 上海财经大学
+    source_section: 研究生教学
+    document_kind: policy
+    retention_status: active
+
+  - path: 科研/20221125关于印发《上海财经大学关于博士研究生科学研究工作和创新性成果评价与要求的指导意见》的通知.pdf
+    category: 学工事务
+    publisher: 上海财经大学
+    scope_unit: 上海财经大学
+    source_section: 研究生学位
+    document_kind: policy
+    retention_status: active
+  - path: 科研/20231130关于印发《上海财经大学研究生“学术之星”评选办法（2023年11月修订）》的通知.pdf
+    category: 评奖评优
+    publisher: 上海财经大学
+    scope_unit: 上海财经大学
+    source_section: 研究生培养
+    document_kind: policy
+    retention_status: active
+  - path: 科研/20240718关于印发《上海财经大学研究生创新基金管理办法（2024年6月修订）》的通知.pdf
+    category: 奖助学金
+    publisher: 上海财经大学
+    scope_unit: 上海财经大学
+    source_section: 研究生培养
+    document_kind: policy
+    retention_status: active
+  - path: 科研/20240718关于印发《上海财经大学研究生参加高水平学术会议资助的申请办法（2024年6月修订）》的通知.pdf
+    category: 奖助学金
+    publisher: 上海财经大学
+    scope_unit: 上海财经大学
+    source_section: 研究生培养
+    document_kind: policy
+    retention_status: active
+  - path: 科研/20240830关于印发《上海财经大学实验室安全分级分类管理办法》的通知.pdf
+    category: 校园生活
+    publisher: 上海财经大学
+    scope_unit: 上海财经大学
+    source_section: 实验室安全
+    document_kind: policy
+    retention_status: active
+  - path: 科研/20241023关于印发《上海财经大学学位论文作假行为处理办法（2024年9月修订）》的通知.pdf
+    category: 学工事务
+    publisher: 上海财经大学
+    scope_unit: 上海财经大学
+    source_section: 研究生学位
+    document_kind: policy
+    retention_status: active
+  - path: 科研/20250728关于印发《上海财经大学大学生创新创业训练计划管理办法（2025年7月修订）》的通知.pdf
+    category: 学工事务
+    publisher: 上海财经大学
+    scope_unit: 上海财经大学
+    source_section: 本科教学
+    document_kind: policy
+    retention_status: active
+  - path: 科研/20250905关于印发《上海财经大学学术行为规范及管理办法（2025年修订）》的通知.pdf
+    category: 学工事务
+    publisher: 上海财经大学
+    scope_unit: 上海财经大学
+    source_section: 研究生教学
+    document_kind: policy
+    retention_status: active
+  - path: 科研/上海财经大学学术成果认定办法（2024 年 1 月修订）.pdf
+    category: 学工事务
+    publisher: 上海财经大学
+    scope_unit: 上海财经大学
+    source_section: 研究生学位
+    document_kind: policy
+    retention_status: active
+  - path: 科研/上海财经大学研究生优秀科研成果奖励暂行办法（2013年5月修订）.pdf
+    category: 评奖评优
+    publisher: 上海财经大学
+    scope_unit: 上海财经大学
+    source_section: 研究生培养
+    document_kind: policy
+    retention_status: historical
