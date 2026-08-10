@@ -58,6 +58,16 @@ body {
   letter-spacing: 0.12em;
   color: var(--ink-soft);
 }
+.audit-link {
+  display: inline-block;
+  margin-top: 12px;
+  color: var(--vermilion-deep);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+}
+.audit-link:hover { color: var(--vermilion); }
 /* 文武线：粗下细，公文版头分隔线 */
 .wwx { margin: 18px auto 0; max-width: 1080px; }
 .wwx-thick { display: block; height: 3px; background: var(--vermilion); }

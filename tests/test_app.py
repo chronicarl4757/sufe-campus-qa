@@ -94,6 +94,40 @@ def test_index_links_to_coverage_dashboard(client):
     assert "覆盖质检" in response.text
 
 
+def test_coverage_static_assets_define_audit_behaviors(client):
+    script = client.get("/static/coverage.js")
+    styles = client.get("/static/coverage.css")
+    assert script.status_code == styles.status_code == 200
+    for token in (
+        "loadCoverage",
+        "renderSummary",
+        "renderScenes",
+        "renderMatrix",
+        "renderQuestionList",
+        "openQuestion",
+        "applyFilters",
+        "point_evidence",
+        "retrieved_doc_ids",
+    ):
+        assert token in script.text
+    for selector in (
+        ".evidence-matrix",
+        ".matrix-cell",
+        ".scene-bar",
+        ".question-drawer",
+        "@media (max-width: 720px)",
+        "@media (prefers-reduced-motion: reduce)",
+    ):
+        assert selector in styles.text
+
+
+def test_coverage_visual_contract_avoids_template_effects(client):
+    coverage_styles = client.get("/static/coverage.css").text
+    app_styles = client.get("/static/styles.css").text
+    assert "linear-gradient" not in coverage_styles
+    assert ".audit-link" in app_styles
+
+
 def test_meta(client):
     m = client.get("/api/meta").json()
     assert m["doc_count"] == 1
