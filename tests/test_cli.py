@@ -2,13 +2,17 @@
 
 from __future__ import annotations
 
+import json
+
 import pytest
 import yaml
 from docx import Document
 
 from sufe_qa import cli
 from sufe_qa.config import load_settings
+from sufe_qa.coverage.question_bank import QuestionBank, QuestionProbe
 from sufe_qa.generate.client import FakeLLM
+from sufe_qa.retrieve.retriever import Hit
 from sufe_qa.schema import doc_id_from, load_manifest
 
 DOC_TEXT = (
@@ -126,6 +130,78 @@ def test_coverage_audit_writes_json_and_markdown(settings, tmp_path):
     assert json_path.is_file()
     assert markdown_path.is_file()
     assert "本科教务" in markdown_path.read_text(encoding="utf-8")
+
+
+def test_answer_benchmark_cli_writes_real_answer_and_resumes(
+    settings, tmp_path, monkeypatch, capsys
+):
+    probe = QuestionProbe(
+        id="jwc-leave-001",
+        question="本科生如何申请缓考？",
+        scene="本科教务",
+        required_source_type="official_procedure",
+        expected_domains=("jwc.sufe.edu.cn",),
+        expected_doc_ids=(),
+        required_answer_points=("申请条件",),
+        needs_current_version=True,
+    )
+    bank = QuestionBank((probe,), content_hash="sha256:bank")
+    hit = Hit(
+        chunk_id="doc-1::0000",
+        doc_id="doc-1",
+        title="缓考办理办法",
+        category="本科教务",
+        source_url="https://jwc.sufe.edu.cn/page.htm",
+        publisher="上海财经大学教务处",
+        heading_path="缓考",
+        text="因病不能考试的学生应提交申请。",
+        rrf_score=0.03,
+        vector_similarity=0.9,
+    )
+
+    class StubRetriever:
+        calls = 0
+
+        def __init__(self, *args, **kwargs):
+            pass
+
+        def search_routed(self, question):
+            type(self).calls += 1
+            return [hit]
+
+    monkeypatch.setattr(cli, "load_question_bank", lambda path: bank)
+    monkeypatch.setattr(
+        cli,
+        "load_index_metadata",
+        lambda settings: {
+            "index_fingerprint": "sha256:index",
+            "embedding_model": "fake-for-test",
+            "embedding_backend": "fake",
+            "test_only": True,
+        },
+    )
+    monkeypatch.setattr(cli, "HybridRetriever", StubRetriever)
+    output = tmp_path / "real_answers.json"
+
+    argv = [
+        "answer-benchmark",
+        "--bank",
+        "ignored.jsonl",
+        "--output-json",
+        str(output),
+        "--workers",
+        "1",
+        "--fake-embed",
+    ]
+    assert cli.main(argv) == 0
+    payload = json.loads(output.read_text(encoding="utf-8"))
+    assert payload["results"][0]["status"] == "answered"
+    assert "离线演示回答" in payload["results"][0]["answer_text"]
+    assert "[1/1] answered" in capsys.readouterr().out
+
+    StubRetriever.calls = 0
+    assert cli.main([*argv, "--resume"]) == 0
+    assert StubRetriever.calls == 0
 
 
 def test_quality_audit_and_clean_rebuild_preview_do_not_mutate_corpus(settings, tmp_path):

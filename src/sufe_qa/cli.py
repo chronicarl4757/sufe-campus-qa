@@ -22,7 +22,12 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 from sufe_qa.config import PROJECT_ROOT, Settings, load_settings
+from sufe_qa.coverage.answer_benchmark import (
+    load_index_metadata,
+    run_answer_benchmark,
+)
 from sufe_qa.coverage.audit import audit_manifest
+from sufe_qa.coverage.question_bank import load_question_bank
 from sufe_qa.coverage.reports import write_coverage_report
 from sufe_qa.crawler.authority import load_authority_sources
 from sufe_qa.crawler.authority_runner import (
@@ -38,7 +43,7 @@ from sufe_qa.crawler.profile import ArticleProfile, SiteProfile, profile_from_ya
 from sufe_qa.crawler.state import CrawlState
 from sufe_qa.evals.scorer import load_evalset, score_retrieval
 from sufe_qa.generate.answer import answer_question
-from sufe_qa.generate.client import LLMClient
+from sufe_qa.generate.client import DeepSeekClient, LLMClient
 from sufe_qa.indexing.indexer import (
     BgeEmbedder,
     Embedder,
@@ -491,6 +496,44 @@ def _cmd_coverage_audit(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_answer_benchmark(args: argparse.Namespace) -> int:
+    settings = load_settings()
+    bank = load_question_bank(Path(args.bank))
+    index_metadata = load_index_metadata(settings)
+    if index_metadata.get("test_only") and not args.fake_embed:
+        print("拒绝使用 test-only embedding 索引生成正式答案", file=sys.stderr)
+        return 2
+    retriever = HybridRetriever(settings, _make_embedder(settings, args.fake_embed))
+
+    def llm_factory() -> LLMClient:
+        injected = _make_llm(settings)
+        return injected if injected is not None else DeepSeekClient(settings)
+
+    def progress(result, completed: int, total: int) -> None:
+        suffix = f" | {result.error}" if result.error else ""
+        print(f"[{completed}/{total}] {result.status} {result.id}{suffix}", flush=True)
+
+    report = run_answer_benchmark(
+        bank,
+        settings,
+        retriever,
+        llm_factory,
+        output_path=Path(args.output_json),
+        index_metadata=index_metadata,
+        workers=args.workers,
+        resume=args.resume,
+        max_items=args.max_items,
+        retry_errors=not args.no_retry_errors,
+        progress=progress,
+    )
+    print(f"真实答案报告: {args.output_json}")
+    print(
+        f"完成 {len(report.results)}/{report.total} | "
+        + " | ".join(f"{status} {count}" for status, count in report.status_counts.items())
+    )
+    return 1 if report.status_counts.get("error", 0) else 0
+
+
 def _cmd_benchmark_probe(args: argparse.Namespace) -> int:
     import json as _json
 
@@ -787,6 +830,21 @@ def build_parser() -> argparse.ArgumentParser:
     )
     ca.add_argument("--index-fingerprint", default="not_indexed")
     ca.set_defaults(func=_cmd_coverage_audit)
+
+    ab = sub.add_parser("answer-benchmark", help="固定 150 问真实检索与 LLM 回答快照")
+    ab.add_argument(
+        "--bank", default=str(PROJECT_ROOT / "data" / "eval" / "sufe_question_bank.jsonl")
+    )
+    ab.add_argument(
+        "--output-json",
+        default=str(PROJECT_ROOT / "data" / "coverage" / "sufe_real_answers.json"),
+    )
+    ab.add_argument("--workers", type=int, default=4, help="并发 LLM 生成数；检索仍串行")
+    ab.add_argument("--resume", action="store_true", help="复用兼容快照中的已完成结果")
+    ab.add_argument("--max-items", type=int, default=0, help="本次最多新增题数；0 为全部")
+    ab.add_argument("--no-retry-errors", action="store_true", help="续跑时保留已有 error")
+    ab.add_argument("--fake-embed", action="store_true", help=argparse.SUPPRESS)
+    ab.set_defaults(func=_cmd_answer_benchmark)
 
     bp = sub.add_parser("benchmark-probe", help="用户真实问题 benchmark 的检索级探针")
     bp.add_argument(
