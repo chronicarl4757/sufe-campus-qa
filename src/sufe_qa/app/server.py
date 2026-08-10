@@ -36,6 +36,12 @@ logger = logging.getLogger(__name__)
 
 STATIC_DIR = Path(__file__).parent / "static"
 _COVERAGE_STATUSES = {"answerable", "partially_answerable", "not_answerable"}
+_REAL_ANSWER_STATUSES = {
+    "answered",
+    "answered_with_citation_issue",
+    "refused",
+    "error",
+}
 
 EXAMPLE_QUESTIONS = [
     "推免预报名的申请条件是什么？",
@@ -79,6 +85,70 @@ def _load_coverage_report(path: Path) -> dict:
         if question["status"] not in _COVERAGE_STATUSES:
             raise HTTPException(status_code=500, detail="覆盖评测报告结构无效")
     return report
+
+
+def _load_real_answer_report(path: Path) -> dict | None:
+    if not path.is_file():
+        return None
+    try:
+        report = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, json.JSONDecodeError) as exc:
+        raise HTTPException(status_code=500, detail="真实答案报告无法解析") from exc
+    if not isinstance(report, dict) or report.get("schema_version") != "1":
+        raise HTTPException(status_code=500, detail="真实答案报告结构无效")
+    results = report.get("results")
+    if not isinstance(results, list) or not isinstance(report.get("total"), int):
+        raise HTTPException(status_code=500, detail="真实答案报告结构无效")
+    seen: set[str] = set()
+    for result in results:
+        required = ("id", "question", "scene", "status")
+        if not isinstance(result, dict) or any(
+            not isinstance(result.get(key), str) or not result[key] for key in required
+        ):
+            raise HTTPException(status_code=500, detail="真实答案报告结构无效")
+        if result["status"] not in _REAL_ANSWER_STATUSES or result["id"] in seen:
+            raise HTTPException(status_code=500, detail="真实答案报告结构无效")
+        if not isinstance(result.get("answer_text", ""), str) or not isinstance(
+            result.get("hits", []), list
+        ):
+            raise HTTPException(status_code=500, detail="真实答案报告结构无效")
+        seen.add(result["id"])
+    return report
+
+
+def _merge_real_answers(coverage: dict, answers: dict | None) -> dict:
+    questions = coverage["question_results"]
+    if answers is None:
+        coverage["answer_run"] = {"available": False}
+        for question in questions:
+            question["real_answer"] = None
+        return coverage
+    compatible = (
+        answers.get("question_bank_version") == coverage.get("question_bank_version")
+        and answers.get("question_bank_hash") == coverage.get("question_bank_hash")
+        and answers.get("index_fingerprint") == coverage.get("index_fingerprint")
+        and answers.get("total") == len(questions)
+    )
+    if not compatible:
+        raise HTTPException(status_code=409, detail="真实答案报告与覆盖题库或索引不兼容")
+    question_by_id = {question["id"]: question for question in questions}
+    answer_by_id: dict[str, dict] = {}
+    for answer in answers["results"]:
+        question = question_by_id.get(answer["id"])
+        if (
+            question is None
+            or question["question"] != answer["question"]
+            or question["scene"] != answer["scene"]
+        ):
+            raise HTTPException(status_code=409, detail="真实答案报告与覆盖题库或索引不兼容")
+        answer_by_id[answer["id"]] = answer
+    for question in questions:
+        question["real_answer"] = answer_by_id.get(question["id"])
+    coverage["answer_run"] = {
+        **{key: value for key, value in answers.items() if key != "results"},
+        "available": True,
+    }
+    return coverage
 
 
 def _sse(event: str, data: dict) -> str:
@@ -163,8 +233,10 @@ def create_app(
 
     @app.get("/api/coverage")
     def coverage_report() -> JSONResponse:
-        report = _load_coverage_report(
-            settings.data_dir / "coverage" / "sufe_coverage_after.json"
+        coverage_dir = settings.data_dir / "coverage"
+        report = _merge_real_answers(
+            _load_coverage_report(coverage_dir / "sufe_coverage_after.json"),
+            _load_real_answer_report(coverage_dir / "sufe_real_answers.json"),
         )
         return JSONResponse(report, headers={"Cache-Control": "no-store"})
 

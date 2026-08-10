@@ -55,6 +55,61 @@ COVERAGE_REPORT = {
     ],
 }
 
+REAL_ANSWER_REPORT = {
+    "schema_version": "1",
+    "run_id": "run-test",
+    "question_bank_version": "sufe-question-bank.v1",
+    "question_bank_hash": "sha256:bank",
+    "index_fingerprint": "sha256:index",
+    "embedding_model": "BAAI/bge-m3",
+    "embedding_backend": "sentence-transformers",
+    "embedding_test_only": False,
+    "llm_model": "deepseek-test",
+    "prompt_hash": "sha256:prompt",
+    "started_at": "2026-08-10T13:00:00+00:00",
+    "completed_at": "2026-08-10T13:01:00+00:00",
+    "total": 1,
+    "status_counts": {"answered": 1},
+    "results": [
+        {
+            "id": "jwc-leave-001",
+            "question": "本科生如何申请缓考？",
+            "scene": "本科教务",
+            "status": "answered",
+            "answer_text": "请在考试前提交申请和医院证明[1]。",
+            "refused": False,
+            "citation_check": {"ok": True, "has_citation": True, "invalid_refs": []},
+            "expected_domains": ["jwc.sufe.edu.cn"],
+            "required_answer_points": ["申请条件"],
+            "matched_domains": ["jwc.sufe.edu.cn"],
+            "domain_match": True,
+            "hits": [
+                {
+                    "prompt_index": 1,
+                    "chunk_id": "doc-1::0000",
+                    "doc_id": "doc-1",
+                    "title": "缓考办理办法",
+                    "parent_title": "",
+                    "publisher": "上海财经大学教务处",
+                    "source_url": "https://jwc.sufe.edu.cn/page.htm",
+                    "publish_date": "2026-04-01",
+                    "document_kind": "procedure",
+                    "source_type": "official_department",
+                    "validity_status": "current",
+                    "index_collection": "sufe_qa_main_v2",
+                    "heading_path": "缓考",
+                    "vector_similarity": 0.91,
+                    "rrf_score": 0.032,
+                    "text": "因病不能考试的学生应提交申请和医院证明。",
+                }
+            ],
+            "generated_at": "2026-08-10T13:00:30+00:00",
+            "latency_ms": 1234.5,
+            "error": "",
+        }
+    ],
+}
+
 
 @pytest.fixture
 def client(tmp_path, monkeypatch):
@@ -142,12 +197,60 @@ def _write_coverage_report(tmp_path, report=COVERAGE_REPORT):
     path.write_text(json.dumps(report, ensure_ascii=False), encoding="utf-8")
 
 
+def _write_real_answer_report(tmp_path, report=REAL_ANSWER_REPORT):
+    path = tmp_path / "coverage" / "sufe_real_answers.json"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(report, ensure_ascii=False), encoding="utf-8")
+
+
 def test_coverage_api_returns_current_report(client, tmp_path):
     _write_coverage_report(tmp_path)
     response = client.get("/api/coverage")
     assert response.status_code == 200
     assert response.json()["question_results"][0]["id"] == "jwc-leave-001"
+    assert response.json()["question_results"][0]["real_answer"] is None
+    assert response.json()["answer_run"] == {"available": False}
     assert response.headers["cache-control"] == "no-store"
+
+
+def test_coverage_api_merges_compatible_real_answers(client, tmp_path):
+    _write_coverage_report(tmp_path)
+    _write_real_answer_report(tmp_path)
+    payload = client.get("/api/coverage").json()
+    assert payload["answer_run"]["available"] is True
+    assert payload["answer_run"]["llm_model"] == "deepseek-test"
+    answer = payload["question_results"][0]["real_answer"]
+    assert answer["status"] == "answered"
+    assert "医院证明[1]" in answer["answer_text"]
+    assert answer["hits"][0]["chunk_id"] == "doc-1::0000"
+
+
+def test_coverage_api_rejects_malformed_real_answer_report(client, tmp_path):
+    _write_coverage_report(tmp_path)
+    path = tmp_path / "coverage" / "sufe_real_answers.json"
+    path.write_text("{broken", encoding="utf-8")
+    response = client.get("/api/coverage")
+    assert response.status_code == 500
+    assert response.json()["detail"] == "真实答案报告无法解析"
+
+
+def test_coverage_api_rejects_duplicate_real_answer_ids(client, tmp_path):
+    _write_coverage_report(tmp_path)
+    report = json.loads(json.dumps(REAL_ANSWER_REPORT))
+    report["results"].append(report["results"][0])
+    _write_real_answer_report(tmp_path, report)
+    response = client.get("/api/coverage")
+    assert response.status_code == 500
+    assert response.json()["detail"] == "真实答案报告结构无效"
+
+
+def test_coverage_api_rejects_answer_snapshot_from_other_index(client, tmp_path):
+    _write_coverage_report(tmp_path)
+    report = {**REAL_ANSWER_REPORT, "index_fingerprint": "sha256:other"}
+    _write_real_answer_report(tmp_path, report)
+    response = client.get("/api/coverage")
+    assert response.status_code == 409
+    assert response.json()["detail"] == "真实答案报告与覆盖题库或索引不兼容"
 
 
 def test_coverage_api_reports_missing_file(client):
