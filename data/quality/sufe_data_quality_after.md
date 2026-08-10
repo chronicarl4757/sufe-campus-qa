@@ -1,17 +1,17 @@
 # SUFE 语料质量与年度系列审计
 
 - 审计时间：2026-08-10
-- 文档总数：2087
-- 有正文文件：994
-- 生命周期：active 791 / historical 203 / archived 1093
-- 标题含年份：1421（68.1%）
+- 文档总数：2090
+- 有正文文件：997
+- 生命周期：active 794 / historical 203 / archived 1093
+- 标题含年份：1421（68.0%）
 - 年度系列：351，其中重复系列 117
 - active 年度系列重复：0
 - 日期修正：0，日期冲突：0
 - 旧年度通知归档：265，旧公示归档：170
 - 无法分类：595
 - 归档但缺少 raw：269
-- collection：main_qa 565 / public_list 226 / historical 203
+- collection：main_qa 568 / public_list 226 / historical 203
 
 ## 年度系列与逐文档决策
 
@@ -2104,3 +2104,6 @@
 | ffe1af39675e | 集体宿舍证明 | procedure | unknown | active | main_qa | all_history |
 | ffe4557d5883 | 长春市面向“双一流”高校（学科）招录专业选调生工作预通知 | incomplete | 2019-08-29 | archived | none | isolated_document_kind |
 | fffdd02df4c7 | 附件1：2026年“青选计划”选聘职位及计划.pdf | manual | 2025-11-14 | active | main_qa | all_history |
+| 2fa7bef4ec22 | 如何使用学生卡 | service_guide | 2026-08-01 | active | main_qa | all_history |
+| 5274843f4954 | 如何查看与充值寝室电费 | service_guide | 2026-08-01 | active | main_qa | all_history |
+| b864e52da130 | 如何连上校园网 | service_guide | 2026-08-01 | active | main_qa | all_history |

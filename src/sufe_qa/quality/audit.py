@@ -175,6 +175,15 @@ def _is_nic_service_guide(meta: DocMeta) -> bool:
     )
 
 
+def _is_curated_service_guide(meta: DocMeta) -> bool:
+    return (
+        meta.document_kind == "service_guide"
+        and meta.source_type == "manual_upload"
+        and meta.source_section == "人工精编指南"
+        and meta.source_url.startswith("curated/")
+    )
+
+
 def audit_corpus(
     manifest_path: Path,
     corpus_dir: Path,
@@ -227,7 +236,11 @@ def audit_corpus(
                 kind = meta.document_kind
             else:
                 kind = "incomplete"
-        elif _is_curated_manual(meta) or _is_nic_service_guide(meta):
+        elif (
+            _is_curated_manual(meta)
+            or _is_nic_service_guide(meta)
+            or _is_curated_service_guide(meta)
+        ):
             kind = meta.document_kind
         else:
             kind = classify_document_kind(

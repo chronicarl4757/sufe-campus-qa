@@ -9,7 +9,8 @@ DeepSeek 生成**带 [n] 来源引用**的回答；检索不到可靠来源时�
 
 ```
 离线索引：
-  crawler/(seeds.yaml 种子站 | discover-site 学院主页勘探→crawl-site) + data/inbox/(手动投放)
+  crawler/(seeds.yaml 种子站 | discover-site 学院主页勘探→crawl-site)
+  + data/inbox/(手动投放) + data/curated/(人工精编指南, front matter 元数据)
   → SafeFetcher(安全抓取: 协议/私网/robots逐跳重检/限速/大小上限)
   → 栏目分页(listN.htm/下一页/?page=N) → 文章元数据解析(标题回退链/日期规范化)
   → 附件发现(a/iframe/embed/object 打分) → 下载(pdf.js 查看器解析) 
@@ -52,6 +53,7 @@ sufe-qa discover-site https://scai.sufe.edu.cn/   # 勘探学院主页 → 生�
 sufe-qa crawl-site scai.sufe.edu.cn               # 按确定性 profile 整站抓取
 sufe-qa crawl-report gs.sufe.edu.cn               # 查看站点抓取报告
 sufe-qa ingest --category 学工事务  # 可选：data/inbox/ 手动文件入库
+sufe-qa ingest-curated           # 可选：data/curated/ 人工精编指南入库（解析 front matter）
 sufe-qa index                    # 建索引（首次自动下载 BGE-M3，约 2GB）
 sufe-qa ask "推免申请条件是什么？"  # CLI 问答
 sufe-qa serve                    # Web 界面：http://127.0.0.1:7860

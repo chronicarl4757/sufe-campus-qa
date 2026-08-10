@@ -1,10 +1,10 @@
 {
   "schema_version": "1",
-  "evaluated_at": "2026-08-10T13:03:37+00:00",
+  "evaluated_at": "2026-08-10T13:10:30+00:00",
   "corpus": {
-    "manifest_documents": 2087,
-    "materialized_documents": 994,
-    "retained_documents": 994,
+    "manifest_documents": 2090,
+    "materialized_documents": 997,
+    "retained_documents": 997,
     "valid_body_ratio": 1.0,
     "missing_files": [],
     "file_hash_errors": [],
@@ -164,7 +164,7 @@
         "d801506ea32e"
       ]
     ],
-    "duplicate_document_rate": 0.039235412474849095,
+    "duplicate_document_rate": 0.03911735205616851,
     "active_annual_series_duplicates": {},
     "unknown_validity_main_documents": 563
   },
@@ -178,8 +178,8 @@
   "collections": {
     "main_qa": {
       "name": "sufe_qa_main_v2",
-      "chunk_count": 5979,
-      "document_count": 565,
+      "chunk_count": 5982,
+      "document_count": 568,
       "invalid_documents": []
     },
     "public_list": {

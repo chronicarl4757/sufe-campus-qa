@@ -52,6 +52,7 @@ from sufe_qa.indexing.collections import (
     PUBLIC_LIST_COLLECTION,
 )
 from sufe_qa.ingest.attachment_parsers import parse_attachment
+from sufe_qa.ingest.curated import ingest_curated
 from sufe_qa.ingest.inbox import ingest_inbox
 from sufe_qa.ingest.manual_authority import import_manual_authority_files
 from sufe_qa.ingest.pipeline import ingest_crawled_articles
@@ -384,6 +385,20 @@ def _cmd_ingest_authority_files(args: argparse.Namespace) -> int:
     )
     if not args.apply and report.accepted:
         print("当前为 dry-run；确认报告后添加 --apply 才会写入 corpus/manifest")
+    return 0
+
+
+def _cmd_ingest_curated(args: argparse.Namespace) -> int:
+    settings = load_settings()
+    report = ingest_curated(
+        settings.data_dir / "curated", settings.corpus_dir, settings.manifest_path
+    )
+    print(
+        f"新增 {report.added}，更新 {report.updated}，未变 {report.unchanged}，"
+        f"跳过 {len(report.skipped)}"
+    )
+    for name in report.skipped:
+        print(f"  跳过（空文件或无正文）: {name}", file=sys.stderr)
     return 0
 
 
@@ -727,6 +742,11 @@ def build_parser() -> argparse.ArgumentParser:
     ia.add_argument("--report", required=True, help="逐文件 JSON 审计报告")
     ia.add_argument("--apply", action="store_true", help="确认后写入 corpus/manifest")
     ia.set_defaults(func=_cmd_ingest_authority_files)
+
+    ic = sub.add_parser(
+        "ingest-curated", help="data/curated/ 人工精编指南入库（解析 front matter）"
+    )
+    ic.set_defaults(func=_cmd_ingest_curated)
 
     x = sub.add_parser("index", help="增量索引")
     x.add_argument("--full", action="store_true", help="全量重建")
