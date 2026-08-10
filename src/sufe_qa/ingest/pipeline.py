@@ -43,6 +43,23 @@ from sufe_qa.schema import (
 #   accepted | incomplete_document | low_quality | quarantined | duplicate |
 #   scanned_pdf | legacy_doc_unparsed | unsupported_format | parse_failed | unparsed
 
+_DOCUMENT_KIND_HINTS = frozenset(
+    {
+        "policy",
+        "procedure",
+        "faq",
+        "annual_notice",
+        "form",
+        "manual",
+        "service_guide",
+        "public_list",
+        "news",
+        "event",
+        "promotion",
+        "incomplete",
+    }
+)
+
 
 @dataclass
 class IngestDecision:
@@ -193,7 +210,10 @@ def ingest_crawled_articles(
             continue
         src = _normalize_doc_url(art.final_url or art.requested_url)
         doc_id = doc_id_from(src)
-        document_kind = classify_document_kind(art.title, art.body_text)
+        hint = (art.document_kind_hint or "").strip().lower()
+        document_kind = (
+            hint if hint in _DOCUMENT_KIND_HINTS else classify_document_kind(art.title, art.body_text)
+        )
         article_kinds[doc_id] = document_kind
         article_candidates[doc_id] = LifecycleCandidate(
             doc_id=doc_id,

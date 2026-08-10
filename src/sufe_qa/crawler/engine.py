@@ -61,6 +61,7 @@ class CrawledArticle:
     publish_date_evidence: str = ""
     publish_date_confidence: float = 0.0
     date_conflict: bool = False
+    document_kind_hint: str = ""
 
 
 @dataclass

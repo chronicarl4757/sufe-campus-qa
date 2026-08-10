@@ -211,7 +211,7 @@ sources:
         time_policy: recent_5_school_years
 
   - id: nic
-    adapter: wp3
+    adapter: nic_service
     homepage: https://nic.sufe.edu.cn/
     publisher: 上海财经大学网络信息中心
     source_type: official_department

@@ -37,6 +37,7 @@ def test_authoritative_source_file_contains_vertical_slice_sites():
     assert sources["jwc"].adapter_name == "jwc"
     assert sources["xsc"].adapter_name == "wp3"
     assert sources["gs"].adapter_name == "graduate_school"
+    assert sources["nic"].adapter_name == "nic_service"
     assert any(section.name == "办事流程" for section in sources["jwc"].sections)
     assert any(section.name == "部门制度" for section in sources["xsc"].sections)
     assert any(section.name == "培养管理制度" for section in sources["gs"].sections)

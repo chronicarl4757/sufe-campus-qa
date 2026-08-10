@@ -455,3 +455,47 @@ def test_article_requiring_missing_attachment_is_archived_as_incomplete(tmp_path
     assert decision.document_kind == "incomplete"
     assert decision.retention_status == "archived"
     assert "missing_required_attachment" in decision.reasons
+
+
+def test_quality_audit_preserves_adapter_typed_official_service_guide(tmp_path):
+    data = tmp_path / "data"
+    corpus = data / "corpus"
+    doc_id = _add(
+        corpus,
+        url="https://nic.sufe.edu.cn/df/0d/c19675a253709/page.htm",
+        title="统一认证",
+        body=(
+            "上财认证供全校师生使用。账号激活后可以登录，忘记密码可以从登录页找回。"
+            "账号因未注册或欠费被冻结后，应完成注册或缴清欠费，系统随后自动解冻。"
+            "学生也可以携带有效证件前往服务台处理账户问题。"
+        ),
+        publish_date="2025-12-09",
+        kind="service_guide",
+        section="学生服务",
+    )
+    current = load_manifest(corpus / "manifest.jsonl")[doc_id]
+    append_manifest(
+        corpus / "manifest.jsonl",
+        [
+            replace(
+                current,
+                publisher="上海财经大学网络信息中心",
+                scope_unit="全体学生",
+                retention_status="active",
+                retention_reason="all_history",
+                index_collection="main_qa",
+            )
+        ],
+    )
+
+    report = audit_corpus(
+        corpus / "manifest.jsonl",
+        corpus,
+        data / "raw",
+        evaluated_at=date(2026, 8, 10),
+    )
+
+    decision = next(item for item in report.decisions if item.doc_id == doc_id)
+    assert decision.document_kind == "service_guide"
+    assert decision.retention_status == "active"
+    assert decision.index_collection == "main_qa"

@@ -94,3 +94,43 @@ def test_ingest_archives_old_annual_notice_without_materializing_corpus(tmp_path
     assert meta.file_path == ""
     assert list(corpus.glob("推免升学/*.md")) == []
     assert (raw / "articles" / f"{meta.doc_id}.html").is_file()
+
+
+def test_ingest_respects_adapter_document_kind_hint_for_official_service(tmp_path):
+    url = "https://nic.sufe.edu.cn/df/0d/c19675a253709/page.htm"
+    body = (
+        "上财认证供全校师生使用。账号激活后可登录，忘记密码可从登录页找回。"
+        "账号因未注册或欠费被冻结后，应完成注册或缴清欠费，系统随后自动解冻。"
+        "学生可以在校门口或宿舍门禁完成注册，也可以联系辅导员更新注册状态。"
+        "缴清欠费后系统会自动同步状态，具体生效时间以网络信息中心页面说明为准。"
+    )
+    article = CrawledArticle(
+        requested_url=url,
+        final_url=url,
+        title="统一认证",
+        publish_date="2025-12-09",
+        publisher="上海财经大学网络信息中心",
+        html=f"<html><body>{body}</body></html>",
+        body_text=body,
+        attachments=[],
+        status="ok",
+        errors=[],
+        document_kind_hint="service_guide",
+    )
+    corpus = tmp_path / "corpus"
+
+    ingest_crawled_articles(
+        [article],
+        category="校园生活",
+        corpus_dir=corpus,
+        manifest_path=corpus / "manifest.jsonl",
+        relations_path=corpus / "relations.jsonl",
+        source_type="official_department",
+        source_section="学生服务",
+        scope_unit="全体学生",
+    )
+
+    meta = next(iter(load_manifest(corpus / "manifest.jsonl").values()))
+    assert meta.document_kind == "service_guide"
+    assert meta.retention_status == "active"
+    assert (corpus / meta.file_path).is_file()

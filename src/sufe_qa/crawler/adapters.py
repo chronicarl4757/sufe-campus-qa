@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import json
 import re
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from hashlib import sha256
 from typing import Iterator, Protocol
 from urllib.parse import parse_qsl, urlencode, urljoin, urlparse, urlunparse
@@ -746,11 +746,17 @@ class NicServiceAdapter(Wp3Adapter):
     def _accept_article_url(self, url: str) -> bool:
         return "/service/" in url.lower() or "/services/" in url.lower()
 
+    def parse_article(self, page: PageContent, spec: PageSpec) -> ArticleSpec:
+        return replace(super().parse_article(page, spec), document_kind_hint="service_guide")
+
     def parse_listing(self, page: PageContent, section: SectionSpec) -> ListingResult:
         soup = BeautifulSoup(page.text(), "html.parser")
         pages: list[PageSpec] = []
         seen: set[str] = set()
-        selectors = ".service-card a, .service-item a, .service-list a, .tab-pane a[data-url]"
+        selectors = (
+            ".service-card a[href], .service-item a[href], .service-list a[href], "
+            ".tab-pane a[data-url], .news_list .news_title a[href]"
+        )
         for anchor in soup.select(selectors):
             spec = self._article_page_for_anchor(
                 anchor, section, page.final_url or page.requested_url
@@ -758,12 +764,12 @@ class NicServiceAdapter(Wp3Adapter):
             if spec and spec.url not in seen:
                 pages.append(spec)
                 seen.add(spec.url)
-        if pages:
-            return ListingResult(
-                article_pages=pages,
-                total_pages=1,
-                total_records=len(pages),
-                page_hash=sha256(re.sub(r"\s+", "", page.text()).encode("utf-8")).hexdigest(),
-                stop_reason="service_cards",
-            )
-        return super().parse_listing(page, section)
+        base = super().parse_listing(page, section)
+        if not pages:
+            return base
+        return replace(
+            base,
+            article_pages=pages,
+            total_records=base.total_records or len(pages),
+            stop_reason="service_cards",
+        )

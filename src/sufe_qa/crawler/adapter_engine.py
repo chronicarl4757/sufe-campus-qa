@@ -185,6 +185,7 @@ def _article_to_crawled(
         publish_date_evidence=article.publish_date_evidence,
         publish_date_confidence=article.publish_date_confidence,
         date_conflict=article.date_conflict,
+        document_kind_hint=article.document_kind_hint,
     )
 
 

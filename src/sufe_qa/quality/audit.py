@@ -164,6 +164,16 @@ def _is_curated_manual(meta: DocMeta) -> bool:
     )
 
 
+def _is_authority_typed_service_guide(meta: DocMeta) -> bool:
+    """保留 adapter 对权威服务目录给出的显式类型，避免通用关键词审计降级。"""
+    return meta.document_kind == "service_guide" and meta.source_type in {
+        "official_department",
+        "official_college",
+        "information_disclosure",
+        "service_platform",
+    }
+
+
 def audit_corpus(
     manifest_path: Path,
     corpus_dir: Path,
@@ -216,7 +226,7 @@ def audit_corpus(
                 kind = meta.document_kind
             else:
                 kind = "incomplete"
-        elif _is_curated_manual(meta):
+        elif _is_curated_manual(meta) or _is_authority_typed_service_guide(meta):
             kind = meta.document_kind
         else:
             kind = classify_document_kind(

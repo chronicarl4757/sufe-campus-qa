@@ -193,6 +193,73 @@ def test_nic_service_adapter_discovers_service_cards_tabs_and_faq():
     assert all(p.page_kind == "article" for p in result.article_pages)
 
 
+def test_nic_service_adapter_parses_real_wp3_service_list_without_sidebar_links():
+    section = SectionSpec(
+        section_id="nic-student-services",
+        name="学生服务",
+        list_url="https://nic.sufe.edu.cn/19675/list.htm",
+        category="校园生活",
+        publisher="网络信息中心",
+        source_type="official_department",
+        scope_unit="学生",
+    )
+    html = """
+    <html><body>
+      <ul class="col_listcolumn">
+        <li><a href="http://nic.sufe.edu.cn/e1/b2/c19676a254386/page.htm">教师服务</a></li>
+      </ul>
+      <ul class="news_list list2">
+        <li class="news"><div class="news_imgs"><a href="/df/0d/c19675a253709/page.htm"></a></div>
+          <div class="news_title"><a href="/df/0d/c19675a253709/page.htm" title="统一认证">统一认证</a></div></li>
+        <li class="news"><div class="news_imgs"><a href="/df/08/c19675a253704/page.htm"></a></div>
+          <div class="news_title"><a href="/df/08/c19675a253704/page.htm" title="VPN">VPN</a></div></li>
+      </ul>
+      <div id="wp_paging_w6"><span class="curr_page">1</span><span class="all_pages">2</span>
+        <span>总共 <em class="all_count">11</em> 记录</span>
+        <a class="next" href="/19675/list2.htm">下一页</a></div>
+    </body></html>
+    """
+
+    result = NicServiceAdapter().parse_listing(_page(section.list_url, html), section)
+
+    assert [(p.title_hint, p.url) for p in result.article_pages] == [
+        ("统一认证", "https://nic.sufe.edu.cn/df/0d/c19675a253709/page.htm"),
+        ("VPN", "https://nic.sufe.edu.cn/df/08/c19675a253704/page.htm"),
+    ]
+    assert result.total_pages == 2
+    assert result.total_records == 11
+    assert result.next_page is not None
+    assert result.next_page.url == "https://nic.sufe.edu.cn/19675/list2.htm"
+
+
+def test_nic_service_adapter_combines_all_embedded_service_tabs():
+    spec = PageSpec(
+        url="https://nic.sufe.edu.cn/df/0d/c19675a253709/page.htm",
+        section_id="nic-student-services",
+        page_kind="article",
+        title_hint="统一认证",
+        publisher_hint="网络信息中心",
+        category="校园生活",
+        source_type="official_department",
+        scope_unit="学生",
+    )
+    html = """
+    <html><head><title>统一认证</title></head><body>
+      <h1>统一认证</h1>
+      <div class="nrkk-7 nrr1"><div class="wp_articlecontent"><p>服务介绍：统一认证供全校学生使用。</p></div></div>
+      <div class="nrkk-7 nrr2"><div class="wp_articlecontent"><p>操作流程：先激活账号，再设置安全密码。</p></div></div>
+      <div class="nrkk-7 nrr4"><div class="wp_articlecontent"><p>常见问题：账号冻结后按注册或缴费状态解冻。</p></div></div>
+    </body></html>
+    """
+
+    article = NicServiceAdapter().parse_article(_page(spec.url, html), spec)
+
+    assert "服务介绍" in article.body_text
+    assert "操作流程" in article.body_text
+    assert "常见问题" in article.body_text
+    assert article.document_kind_hint == "service_guide"
+
+
 def test_business_school_adapter_reuses_wp3_contract():
     adapter = BusinessSchoolAdapter(publisher="会计学院", scope_unit="会计学院")
     assert isinstance(adapter, Wp3Adapter)
