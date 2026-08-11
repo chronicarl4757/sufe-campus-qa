@@ -1,10 +1,10 @@
 {
   "schema_version": "1",
-  "evaluated_at": "2026-08-10T13:10:30+00:00",
+  "evaluated_at": "2026-08-11T03:05:56+00:00",
   "corpus": {
-    "manifest_documents": 2090,
-    "materialized_documents": 997,
-    "retained_documents": 997,
+    "manifest_documents": 2151,
+    "materialized_documents": 1044,
+    "retained_documents": 1044,
     "valid_body_ratio": 1.0,
     "missing_files": [],
     "file_hash_errors": [],
@@ -41,6 +41,10 @@
       [
         "112bdfefa817",
         "df5b9bf3429f"
+      ],
+      [
+        "114ed38217e3",
+        "e4b8fcfcb7f3"
       ],
       [
         "12a95b2dc0d6",
@@ -107,6 +111,10 @@
         "9ea02f173cf6"
       ],
       [
+        "614f831349b2",
+        "e3375184c3ca"
+      ],
+      [
         "65b1c0021b0d",
         "66e45969c386"
       ],
@@ -164,22 +172,22 @@
         "d801506ea32e"
       ]
     ],
-    "duplicate_document_rate": 0.03911735205616851,
+    "duplicate_document_rate": 0.039272030651340994,
     "active_annual_series_duplicates": {},
-    "unknown_validity_main_documents": 563
+    "unknown_validity_main_documents": 606
   },
   "attachments": {
-    "total": 515,
-    "parsed_and_materialized": 401,
-    "parse_success_rate": 0.7786407766990291,
+    "total": 524,
+    "parsed_and_materialized": 411,
+    "parse_success_rate": 0.7843511450381679,
     "article_reference_violations": [],
-    "relation_count": 492
+    "relation_count": 501
   },
   "collections": {
     "main_qa": {
       "name": "sufe_qa_main_v2",
-      "chunk_count": 5982,
-      "document_count": 568,
+      "chunk_count": 6331,
+      "document_count": 611,
       "invalid_documents": []
     },
     "public_list": {
@@ -190,8 +198,8 @@
     },
     "historical": {
       "name": "sufe_qa_historical_v2",
-      "chunk_count": 1375,
-      "document_count": 203,
+      "chunk_count": 1392,
+      "document_count": 207,
       "invalid_documents": []
     }
   },
@@ -210,17 +218,17 @@
       "final_indexed": 22
     },
     "career.sufe.edu.cn": {
-      "report_file": "2026-08-06-1611-career.sufe.edu.cn.json",
-      "categories_found": 4,
-      "list_pages_fetched": 12,
-      "articles_found": 66,
-      "articles_downloaded": 66,
-      "attachments_found": 72,
-      "attachments_downloaded": 66,
-      "attachments_parsed": 55,
-      "incomplete_documents": 2,
-      "low_quality_documents": 11,
-      "final_indexed": 82
+      "report_file": "2026-08-11-0211-career.sufe.edu.cn.json",
+      "categories_found": 5,
+      "list_pages_fetched": 8,
+      "articles_found": 47,
+      "articles_downloaded": 47,
+      "attachments_found": 46,
+      "attachments_downloaded": 41,
+      "attachments_parsed": 37,
+      "incomplete_documents": 1,
+      "low_quality_documents": 6,
+      "final_indexed": 59
     },
     "cwc.sufe.edu.cn": {
       "report_file": "2026-08-06-1619-cwc.sufe.edu.cn.json",
@@ -249,30 +257,30 @@
       "final_indexed": 1
     },
     "gs.sufe.edu.cn": {
-      "report_file": "2026-08-01-1400-gs.sufe.edu.cn.json",
-      "categories_found": 8,
-      "list_pages_fetched": 0,
-      "articles_found": 137,
-      "articles_downloaded": 137,
-      "attachments_found": 284,
-      "attachments_downloaded": 246,
-      "attachments_parsed": 244,
-      "incomplete_documents": 0,
-      "low_quality_documents": 0,
-      "final_indexed": 377
+      "report_file": "2026-08-11-0209-gs.sufe.edu.cn.json",
+      "categories_found": 24,
+      "list_pages_fetched": 35,
+      "articles_found": 167,
+      "articles_downloaded": 157,
+      "attachments_found": 65,
+      "attachments_downloaded": 55,
+      "attachments_parsed": 54,
+      "incomplete_documents": 10,
+      "low_quality_documents": 50,
+      "final_indexed": 121
     },
     "hq.sufe.edu.cn": {
-      "report_file": "2026-08-06-1632-hq.sufe.edu.cn.json",
-      "categories_found": 4,
-      "list_pages_fetched": 4,
-      "articles_found": 11,
-      "articles_downloaded": 11,
+      "report_file": "2026-08-11-0255-hq.sufe.edu.cn.json",
+      "categories_found": 5,
+      "list_pages_fetched": 5,
+      "articles_found": 13,
+      "articles_downloaded": 13,
       "attachments_found": 10,
       "attachments_downloaded": 10,
       "attachments_parsed": 7,
       "incomplete_documents": 0,
       "low_quality_documents": 2,
-      "final_indexed": 9
+      "final_indexed": 11
     },
     "ieco.sufe.edu.cn": {
       "report_file": "2026-08-06-1619-ieco.sufe.edu.cn.json",
@@ -301,21 +309,21 @@
       "final_indexed": 47
     },
     "lib.sufe.edu.cn": {
-      "report_file": "2026-08-06-1614-lib.sufe.edu.cn.json",
-      "categories_found": 9,
-      "list_pages_fetched": 9,
-      "articles_found": 9,
-      "articles_downloaded": 9,
-      "attachments_found": 6,
-      "attachments_downloaded": 5,
-      "attachments_parsed": 5,
+      "report_file": "2026-08-11-0254-lib.sufe.edu.cn.json",
+      "categories_found": 13,
+      "list_pages_fetched": 13,
+      "articles_found": 13,
+      "articles_downloaded": 13,
+      "attachments_found": 9,
+      "attachments_downloaded": 8,
+      "attachments_parsed": 7,
       "incomplete_documents": 0,
-      "low_quality_documents": 2,
-      "final_indexed": 9
+      "low_quality_documents": 1,
+      "final_indexed": 18
     },
     "nic.sufe.edu.cn": {
-      "report_file": "2026-08-10-1216-nic.sufe.edu.cn.json",
-      "categories_found": 1,
+      "report_file": "2026-08-11-0213-nic.sufe.edu.cn.json",
+      "categories_found": 2,
       "list_pages_fetched": 2,
       "articles_found": 11,
       "articles_downloaded": 11,
@@ -327,41 +335,155 @@
       "final_indexed": 12
     },
     "xsc.sufe.edu.cn": {
-      "report_file": "2026-08-06-1730-xsc.sufe.edu.cn.json",
+      "report_file": "2026-08-11-0232-xsc.sufe.edu.cn.json",
       "categories_found": 4,
-      "list_pages_fetched": 16,
-      "articles_found": 207,
-      "articles_downloaded": 192,
-      "attachments_found": 62,
-      "attachments_downloaded": 71,
-      "attachments_parsed": 61,
-      "incomplete_documents": 4,
-      "low_quality_documents": 16,
-      "final_indexed": 201
+      "list_pages_fetched": 7,
+      "articles_found": 88,
+      "articles_downloaded": 73,
+      "attachments_found": 24,
+      "attachments_downloaded": 33,
+      "attachments_parsed": 28,
+      "incomplete_documents": 1,
+      "low_quality_documents": 5,
+      "final_indexed": 106
     },
     "yljk.sufe.edu.cn": {
-      "report_file": "2026-08-06-1615-yljk.sufe.edu.cn.json",
-      "categories_found": 4,
-      "list_pages_fetched": 18,
-      "articles_found": 196,
-      "articles_downloaded": 191,
-      "attachments_found": 41,
-      "attachments_downloaded": 39,
-      "attachments_parsed": 35,
-      "incomplete_documents": 3,
-      "low_quality_documents": 43,
-      "final_indexed": 77
+      "report_file": "2026-08-11-0300-yljk.sufe.edu.cn.json",
+      "categories_found": 5,
+      "list_pages_fetched": 9,
+      "articles_found": 84,
+      "articles_downloaded": 82,
+      "attachments_found": 12,
+      "attachments_downloaded": 12,
+      "attachments_parsed": 12,
+      "incomplete_documents": 0,
+      "low_quality_documents": 14,
+      "final_indexed": 57
     }
   },
   "coverage": {
     "question_bank_version": "sufe-question-bank.v1",
     "question_bank_hash": "sha256:8a5ab6a1110531cd443d9e652a1032f4e97d25d0f083bf9728429a0c28c352f9",
+    "index_fingerprint": "sha256:545329a1f706fc8d5541488f0606305c74dc1a82b7ccf9c105b5561818738c6d",
     "total": 150,
-    "answerable": 85,
-    "partially_answerable": 65,
+    "answerable": 86,
+    "partially_answerable": 64,
     "not_answerable": 0,
     "authoritative_hits": 150,
     "wrong_department_hits": 0
+  },
+  "real_answers": {
+    "available": true,
+    "question_bank_version": "sufe-question-bank.v1",
+    "question_bank_hash": "sha256:8a5ab6a1110531cd443d9e652a1032f4e97d25d0f083bf9728429a0c28c352f9",
+    "index_fingerprint": "sha256:545329a1f706fc8d5541488f0606305c74dc1a82b7ccf9c105b5561818738c6d",
+    "total": 150,
+    "unique": 150,
+    "answered": 139,
+    "refused": 11,
+    "citation_issues": 0,
+    "errors": 0,
+    "authoritative_answered": 132,
+    "wrong_department_answered": 7,
+    "wrong_department_ids": [
+      "exchange-contact-010",
+      "gs-exchange-009",
+      "gs-phd-006",
+      "gs-scholarship-010",
+      "jwc-score-011",
+      "jwc-sports-018",
+      "new-orientation-002"
+    ],
+    "scene_stats": {
+      "信息化与校园卡": {
+        "total": 15,
+        "answered": 14,
+        "refused": 1,
+        "citation_issues": 0,
+        "errors": 0,
+        "answer_rate": 0.9333333333333333
+      },
+      "医疗医保": {
+        "total": 10,
+        "answered": 10,
+        "refused": 0,
+        "citation_issues": 0,
+        "errors": 0,
+        "answer_rate": 1.0
+      },
+      "国际交流": {
+        "total": 10,
+        "answered": 10,
+        "refused": 0,
+        "citation_issues": 0,
+        "errors": 0,
+        "answer_rate": 1.0
+      },
+      "图书馆": {
+        "total": 10,
+        "answered": 9,
+        "refused": 1,
+        "citation_issues": 0,
+        "errors": 0,
+        "answer_rate": 0.9
+      },
+      "奖助学金": {
+        "total": 15,
+        "answered": 15,
+        "refused": 0,
+        "citation_issues": 0,
+        "errors": 0,
+        "answer_rate": 1.0
+      },
+      "宿舍后勤": {
+        "total": 10,
+        "answered": 9,
+        "refused": 1,
+        "citation_issues": 0,
+        "errors": 0,
+        "answer_rate": 0.9
+      },
+      "就业手续": {
+        "total": 15,
+        "answered": 14,
+        "refused": 1,
+        "citation_issues": 0,
+        "errors": 0,
+        "answer_rate": 0.9333333333333333
+      },
+      "推免与招生": {
+        "total": 15,
+        "answered": 14,
+        "refused": 1,
+        "citation_issues": 0,
+        "errors": 0,
+        "answer_rate": 0.9333333333333333
+      },
+      "新生与安全": {
+        "total": 10,
+        "answered": 7,
+        "refused": 3,
+        "citation_issues": 0,
+        "errors": 0,
+        "answer_rate": 0.7
+      },
+      "本科教务": {
+        "total": 20,
+        "answered": 19,
+        "refused": 1,
+        "citation_issues": 0,
+        "errors": 0,
+        "answer_rate": 0.95
+      },
+      "研究生培养与学位": {
+        "total": 20,
+        "answered": 18,
+        "refused": 2,
+        "citation_issues": 0,
+        "errors": 0,
+        "answer_rate": 0.9
+      }
+    }
   },
   "gates": {
     "corpus_integrity": true,
@@ -371,8 +493,10 @@
     "collection_isolation": true,
     "attachment_completeness": true,
     "question_authoritative_hits": true,
-    "question_answerability": false,
+    "question_answerability": true,
+    "real_answer_integrity": true,
+    "core_scene_answerability": true,
     "wrong_department_hits": true
   },
-  "passed": false
+  "passed": true
 }

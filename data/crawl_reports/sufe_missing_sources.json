@@ -1,829 +1,434 @@
 {
   "question_bank_version": "sufe-question-bank.v1",
   "question_bank_hash": "sha256:8a5ab6a1110531cd443d9e652a1032f4e97d25d0f083bf9728429a0c28c352f9",
-  "missing_count": 65,
+  "index_fingerprint": "sha256:545329a1f706fc8d5541488f0606305c74dc1a82b7ccf9c105b5561818738c6d",
+  "source": "real_answers",
+  "missing_count": 11,
   "items": [
-    {
-      "id": "jwc-course-003",
-      "question": "重修课程如何办理？",
-      "scene": "本科教务",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "jwc.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：适用情形"
-      ]
-    },
-    {
-      "id": "jwc-exam-010",
-      "question": "本科生考试违纪会按照什么规定处理？",
-      "scene": "本科教务",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "jwc.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：适用制度",
-        "缺少回答要点：违纪类型"
-      ]
-    },
     {
       "id": "jwc-plan-014",
       "question": "在哪里可以查询本科生培养方案和学分要求？",
       "scene": "本科教务",
-      "status": "partially_answerable",
+      "status": "refused",
       "expected_domains": [
         "jwc.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "缺少回答要点：课程类别",
-        "缺少回答要点：适用年级"
-      ]
-    },
-    {
-      "id": "gs-grade-002",
-      "question": "研究生是否有绩点要求？",
-      "scene": "研究生培养与学位",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "gs.sufe.edu.cn"
+        "根据已收录的资料，未提及本科生培养方案和学分要求的具体查询途径。资料中仅涉及校外学习学分认定流程 [1][2]、研究生选课与成绩单打印 [3]、研究生复试 [6] 及学位授予 [7] 等内容，均未包含本科生培养方案的查询方式。"
       ],
-      "missing_reasons": [
-        "缺少回答要点：适用培养层次",
-        "缺少回答要点：适用环节",
-        "缺少回答要点：制度来源"
-      ]
-    },
-    {
-      "id": "gs-leave-005",
-      "question": "研究生如何申请休学和复学？",
-      "scene": "研究生培养与学位",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "gs.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：学籍影响"
-      ]
-    },
-    {
-      "id": "gs-phd-006",
-      "question": "博士申请考核制流程是什么？",
-      "scene": "研究生培养与学位",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "gs.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：考核环节"
-      ]
-    },
-    {
-      "id": "gs-defense-008",
-      "question": "研究生学位论文答辩流程是什么？",
-      "scene": "研究生培养与学位",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "gs.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：学位授予环节"
-      ]
-    },
-    {
-      "id": "gs-exchange-009",
-      "question": "研究生短期国际交流如何申请？",
-      "scene": "研究生培养与学位",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "gs.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：项目对象",
-        "缺少回答要点：资助或学分"
-      ]
-    },
-    {
-      "id": "gs-scholarship-010",
-      "question": "研究生国家奖学金依据哪份办法评定？",
-      "scene": "研究生培养与学位",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "gs.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：适用办法",
-        "缺少回答要点：年度通知"
+      "top_hits": [
+        {
+          "doc_id": "6cc64e90571a",
+          "title": "2fb18367-7103-4ec4-bf14-e2605e87f0a9.pdf",
+          "publisher": "上海财经大学教务处",
+          "source_url": "https://jwc.sufe.edu.cn/_upload/article/files/e1/8d/e775793944139cb2dd3bff8cf37a/2fb18367-7103-4ec4-bf14-e2605e87f0a9.pdf",
+          "document_kind": "procedure",
+          "validity_status": "unknown_validity"
+        },
+        {
+          "doc_id": "d94e0fcbafa7",
+          "title": "关于印发《上海财经大学本科生校外学习学分认定与成绩转换管理办法（2026年5月修订）》的通知",
+          "publisher": "上海财经大学",
+          "source_url": "manual://sufe-regulations/%E6%9C%AC%E7%A7%91%E6%95%99%E5%AD%A6/%E5%85%B3%E4%BA%8E%E5%8D%B0%E5%8F%91%E3%80%8A%E4%B8%8A%E6%B5%B7%E8%B4%A2%E7%BB%8F%E5%A4%A7%E5%AD%A6%E6%9C%AC%E7%A7%91%E7%94%9F%E6%A0%A1%E5%A4%96%E5%AD%A6%E4%B9%A0%E5%AD%A6%E5%88%86%E8%AE%A4%E5%AE%9A%E4%B8%8E%E6%88%90%E7%BB%A9%E8%BD%AC%E6%8D%A2%E7%AE%A1%E7%90%86%E5%8A%9E%E6%B3%95%EF%BC%882026%E5%B9%B45%E6%9C%88%E4%BF%AE%E8%AE%A2%EF%BC%89%E3%80%8B%E7%9A%84%E9%80%9A%E7%9F%A5.pdf",
+          "document_kind": "policy",
+          "validity_status": "unknown_validity"
+        },
+        {
+          "doc_id": "e9d1828c895a",
+          "title": "常见问答",
+          "publisher": "上海财经大学研究生院",
+          "source_url": "https://gs.sufe.edu.cn/Home/Detail/5452",
+          "document_kind": "faq",
+          "validity_status": "unknown_validity"
+        }
       ]
     },
     {
       "id": "gs-plan-011",
       "question": "研究生培养方案和学分要求在哪里查询？",
       "scene": "研究生培养与学位",
-      "status": "partially_answerable",
+      "status": "refused",
       "expected_domains": [
         "gs.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "缺少回答要点：适用年级"
+        "根据已收录的资料，关于研究生培养方案和学分要求的查询途径，资料中未明确提及具体查询入口。资料[1]仅提到选课需“根据个人培养计划的课程与学分要求”进行，但未说明查询方式 [1]。"
+      ],
+      "top_hits": [
+        {
+          "doc_id": "e9d1828c895a",
+          "title": "常见问答",
+          "publisher": "上海财经大学研究生院",
+          "source_url": "https://gs.sufe.edu.cn/Home/Detail/5452",
+          "document_kind": "faq",
+          "validity_status": "unknown_validity"
+        },
+        {
+          "doc_id": "a9ea3b1e4817",
+          "title": "关于印发《上海财经大学研究生招生工作管理规定》的通知.pdf",
+          "publisher": "上海财经大学研究生院",
+          "source_url": "https://ssd.sufe.edu.cn/index.php?mod=io&op=getStream&path=a2YtcUltMGNqYnBPYndJR2FQTkxOVy10OW9LbGoxSHVsdHRlV29YNmN2Rk1TUURiM21seFNHOHEtaUQ4WElZeDhaUkhfSjNOZnVkR01R&filename=",
+          "document_kind": "policy",
+          "validity_status": "unknown_validity"
+        },
+        {
+          "doc_id": "490d348309a4",
+          "title": "附件1：关于印发《上海财经大学“上财国际课程”管理办法》的通知",
+          "publisher": "上海财经大学",
+          "source_url": "manual://sufe-regulations/%E7%A0%94%E7%A9%B6%E7%94%9F%E6%95%99%E5%AD%A6/%E9%99%84%E4%BB%B61%EF%BC%9A%E5%85%B3%E4%BA%8E%E5%8D%B0%E5%8F%91%E3%80%8A%E4%B8%8A%E6%B5%B7%E8%B4%A2%E7%BB%8F%E5%A4%A7%E5%AD%A6%E2%80%9C%E4%B8%8A%E8%B4%A2%E5%9B%BD%E9%99%85%E8%AF%BE%E7%A8%8B%E2%80%9D%E7%AE%A1%E7%90%86%E5%8A%9E%E6%B3%95%E3%80%8B%E7%9A%84%E9%80%9A%E7%9F%A5.pdf",
+          "document_kind": "policy",
+          "validity_status": "unknown_validity"
+        }
       ]
     },
     {
-      "id": "gs-midterm-013",
-      "question": "研究生中期考核有哪些要求？",
+      "id": "gs-exemption-016",
+      "question": "研究生免修免考如何申请？",
       "scene": "研究生培养与学位",
-      "status": "partially_answerable",
+      "status": "refused",
       "expected_domains": [
         "gs.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "缺少回答要点：考核内容",
-        "缺少回答要点：结果处理"
-      ]
-    },
-    {
-      "id": "gs-advisor-019",
-      "question": "研究生如何申请导师变更？",
-      "scene": "研究生培养与学位",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "gs.sufe.edu.cn"
+        "关于研究生免修免考申请，已收录的资料中未提及具体规定。现有资料主要涉及**本科学生**的课程免修办法，以及**接收外校推免生**的申请程序，均不适用于研究生免修免考申请。"
       ],
-      "missing_reasons": [
-        "缺少回答要点：适用情形"
+      "top_hits": [
+        {
+          "doc_id": "9bca5424fad0",
+          "title": "8aaa85189d2e812b019e15c901c23d70关于印发《上海财经大学本科学生学籍管理实施细则（2026年4月修订）》的通知",
+          "publisher": "上海财经大学",
+          "source_url": "manual://sufe-regulations/%E6%9C%AC%E7%A7%91%E6%95%99%E5%AD%A6/8aaa85189d2e812b019e15c901c23d70%E5%85%B3%E4%BA%8E%E5%8D%B0%E5%8F%91%E3%80%8A%E4%B8%8A%E6%B5%B7%E8%B4%A2%E7%BB%8F%E5%A4%A7%E5%AD%A6%E6%9C%AC%E7%A7%91%E5%AD%A6%E7%94%9F%E5%AD%A6%E7%B1%8D%E7%AE%A1%E7%90%86%E5%AE%9E%E6%96%BD%E7%BB%86%E5%88%99%EF%BC%882026%E5%B9%B44%E6%9C%88%E4%BF%AE%E8%AE%A2%EF%BC%89%E3%80%8B%E7%9A%84%E9%80%9A%E7%9F%A5.pdf",
+          "document_kind": "policy",
+          "validity_status": "unknown_validity"
+        },
+        {
+          "doc_id": "36481bbba58c",
+          "title": "上海财经大学本科学生学籍管理实施细则（修订稿）.pdf",
+          "publisher": "上海财经大学教务处",
+          "source_url": "https://jwc.sufe.edu.cn/_upload/article/files/50/12/742aadf843d88c3a4d139640541c/5383c055-740a-409d-91df-6558b48763da.pdf",
+          "document_kind": "policy",
+          "validity_status": "unknown_validity"
+        },
+        {
+          "doc_id": "c845c6bbfc32",
+          "title": "上海财经大学2018年接收外校优秀应届本科毕业生免试攻读硕士研究生办法",
+          "publisher": "上海财经大学研究生院",
+          "source_url": "https://gs.sufe.edu.cn/Home/Detail/5972",
+          "document_kind": "policy",
+          "validity_status": "unknown_validity"
+        }
       ]
     },
     {
-      "id": "aid-fail-002",
-      "question": "有挂科记录还能申请奖学金吗？",
-      "scene": "奖助学金",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "xsc.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：适用奖项",
-        "缺少回答要点：依据办法"
-      ]
-    },
-    {
-      "id": "aid-workstudy-005",
-      "question": "勤工助学有哪些要求？",
-      "scene": "奖助学金",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "xsc.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：岗位申请"
-      ]
-    },
-    {
-      "id": "aid-combine-006",
-      "question": "国家励志奖学金和国家奖学金是否可以兼得？",
-      "scene": "奖助学金",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "xsc.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：制度依据"
-      ]
-    },
-    {
-      "id": "aid-assessment-007",
-      "question": "综合测评如何计算？",
-      "scene": "奖助学金",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "xsc.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：评价项目"
-      ]
-    },
-    {
-      "id": "aid-origin-loan-012",
-      "question": "生源地助学贷款如何办理学校确认？",
-      "scene": "奖助学金",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "xsc.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：学校确认环节"
-      ]
-    },
-    {
-      "id": "aid-graduate-aid-014",
-      "question": "研究生国家助学金的对象和发放规则是什么？",
-      "scene": "奖助学金",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "xsc.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：制度依据"
-      ]
-    },
-    {
-      "id": "aid-social-015",
-      "question": "社会奖学金的评选条件和申请流程是什么？",
-      "scene": "奖助学金",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "xsc.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：年度通知"
-      ]
-    },
-    {
-      "id": "admit-basic-001",
-      "question": "推免基本条件是什么？",
+      "id": "admit-backup-007",
+      "question": "推免候补资格如何确定？",
       "scene": "推免与招生",
-      "status": "partially_answerable",
+      "status": "refused",
       "expected_domains": [
         "gs.sufe.edu.cn",
         "jwc.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "缺少回答要点：制度依据"
-      ]
-    },
-    {
-      "id": "admit-college-002",
-      "question": "学院推免自定条件是什么？",
-      "scene": "推免与招生",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "gs.sufe.edu.cn",
-        "jwc.sufe.edu.cn"
+        "根据已收录的资料，关于“推免候补资格”的确定方式，资料中未明确提及“候补”这一具体概念或流程。资料主要涉及推免资格的程序和取消情形，具体如下："
       ],
-      "missing_reasons": [
-        "缺少回答要点：学院实施细则"
+      "top_hits": [
+        {
+          "doc_id": "c5ae3d61e34e",
+          "title": "上海财经大学推荐优秀应届本科毕业生免试攻读研究生工作管理办法（试行）.pdf",
+          "publisher": "上海财经大学教务处",
+          "source_url": "https://jwc.sufe.edu.cn/_upload/article/files/60/69/01578a71457a819459316cd0abc3/f3cc04af-8418-426c-9ec6-3df4b82ebc17.pdf",
+          "document_kind": "policy",
+          "validity_status": "unknown_validity"
+        },
+        {
+          "doc_id": "c5ae3d61e34e",
+          "title": "上海财经大学推荐优秀应届本科毕业生免试攻读研究生工作管理办法（试行）.pdf",
+          "publisher": "上海财经大学教务处",
+          "source_url": "https://jwc.sufe.edu.cn/_upload/article/files/60/69/01578a71457a819459316cd0abc3/f3cc04af-8418-426c-9ec6-3df4b82ebc17.pdf",
+          "document_kind": "policy",
+          "validity_status": "unknown_validity"
+        },
+        {
+          "doc_id": "c5ae3d61e34e",
+          "title": "上海财经大学推荐优秀应届本科毕业生免试攻读研究生工作管理办法（试行）.pdf",
+          "publisher": "上海财经大学教务处",
+          "source_url": "https://jwc.sufe.edu.cn/_upload/article/files/60/69/01578a71457a819459316cd0abc3/f3cc04af-8418-426c-9ec6-3df4b82ebc17.pdf",
+          "document_kind": "policy",
+          "validity_status": "unknown_validity"
+        }
       ]
     },
     {
-      "id": "admit-fail-003",
-      "question": "推免申请是否要求没有挂科记录？",
-      "scene": "推免与招生",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "gs.sufe.edu.cn",
-        "jwc.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：适用年级",
-        "缺少回答要点：制度依据"
-      ]
-    },
-    {
-      "id": "admit-ranking-004",
-      "question": "推免综合成绩排名如何确定？",
-      "scene": "推免与招生",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "gs.sufe.edu.cn",
-        "jwc.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：成绩组成"
-      ]
-    },
-    {
-      "id": "admit-process-006",
-      "question": "学校推免生推荐流程是什么？",
-      "scene": "推免与招生",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "gs.sufe.edu.cn",
-        "jwc.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：学校遴选",
-        "缺少回答要点：公示环节"
-      ]
-    },
-    {
-      "id": "admit-preapply-009",
-      "question": "本科生申请免试攻读研究生预报名如何办理？",
-      "scene": "推免与招生",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "gs.sufe.edu.cn",
-        "jwc.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：适用对象"
-      ]
-    },
-    {
-      "id": "admit-subject-013",
-      "question": "研究生招生考试科目调整公告如何查询？",
-      "scene": "推免与招生",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "gs.sufe.edu.cn",
-        "jwc.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：适用专业",
-        "缺少回答要点：调整内容",
-        "缺少回答要点：生效年度"
-      ]
-    },
-    {
-      "id": "admit-public-014",
-      "question": "推免和研究生招生公示名单在哪里查询？",
-      "scene": "推免与招生",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "gs.sufe.edu.cn",
-        "jwc.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：公示栏目",
-        "缺少回答要点：名单类型"
-      ]
-    },
-    {
-      "id": "admit-adjust-015",
-      "question": "硕士研究生调剂和复试办法如何查询？",
-      "scene": "推免与招生",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "gs.sufe.edu.cn",
-        "jwc.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：适用对象"
-      ]
-    },
-    {
-      "id": "career-online-sign-003",
-      "question": "网签流程是什么？",
+      "id": "career-unemployed-009",
+      "question": "不就业登记如何办理？",
       "scene": "就业手续",
-      "status": "partially_answerable",
+      "status": "refused",
       "expected_domains": [
         "career.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "缺少回答要点：生效确认"
-      ]
-    },
-    {
-      "id": "career-terminate-004",
-      "question": "三方协议填错或解约怎么办？",
-      "scene": "就业手续",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "career.sufe.edu.cn"
+        "已收录的资料中未提及“不就业登记”的具体办理流程。资料主要涉及网签（就业协议书签订）和大学生医保政策，未包含不就业登记相关手续 [1][2][6]。"
       ],
-      "missing_reasons": [
-        "缺少回答要点：适用情形"
+      "top_hits": [
+        {
+          "doc_id": "a77e8b0aa307",
+          "title": "就业政策|就业手续办理第三步——签约（三）网签【更新版】",
+          "publisher": "上海财经大学就业指导中心",
+          "source_url": "post+https://career.sufe.edu.cn/career/news/data/jylc/2402281615018881",
+          "document_kind": "procedure",
+          "validity_status": "unknown_validity"
+        },
+        {
+          "doc_id": "a77e8b0aa307",
+          "title": "就业政策|就业手续办理第三步——签约（三）网签【更新版】",
+          "publisher": "上海财经大学就业指导中心",
+          "source_url": "post+https://career.sufe.edu.cn/career/news/data/jylc/2402281615018881",
+          "document_kind": "procedure",
+          "validity_status": "unknown_validity"
+        },
+        {
+          "doc_id": "bd003ceb1949",
+          "title": "大学生医保政策解读",
+          "publisher": "上海财经大学医疗健康服务中心",
+          "source_url": "https://yljk.sufe.edu.cn/5e/b1/c1400a220849/page.htm",
+          "document_kind": "procedure",
+          "validity_status": "unknown_validity"
+        }
       ]
     },
     {
-      "id": "career-destination-005",
-      "question": "毕业去向如何登记？",
-      "scene": "就业手续",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "career.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：去向类型"
-      ]
-    },
-    {
-      "id": "career-archive-006",
-      "question": "毕业档案如何查询？",
-      "scene": "就业手续",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "career.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：档案去向"
-      ]
-    },
-    {
-      "id": "career-graduate-008",
-      "question": "考上研究生后已签三方怎么办？",
-      "scene": "就业手续",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "career.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：适用情形",
-        "缺少回答要点：去向变更"
-      ]
-    },
-    {
-      "id": "career-grassroots-011",
-      "question": "基层就业项目需要办理哪些就业手续？",
-      "scene": "就业手续",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "career.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：政策依据"
-      ]
-    },
-    {
-      "id": "career-agency-014",
-      "question": "签约单位变更时就业手续如何办理？",
-      "scene": "就业手续",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "career.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：适用情形"
-      ]
-    },
-    {
-      "id": "career-manual-015",
-      "question": "就业系统学生操作手册在哪里下载？",
-      "scene": "就业手续",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "career.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：技术支持"
-      ]
-    },
-    {
-      "id": "housing-holiday-001",
-      "question": "寒暑假如何申请留校住宿？",
+      "id": "housing-repair-006",
+      "question": "宿舍如何报修？",
       "scene": "宿舍后勤",
-      "status": "partially_answerable",
+      "status": "refused",
       "expected_domains": [
         "hq.sufe.edu.cn",
         "gongkai.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "缺少回答要点：申请对象"
-      ]
-    },
-    {
-      "id": "housing-deferred-003",
-      "question": "延期毕业还能住宿吗？",
-      "scene": "宿舍后勤",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "hq.sufe.edu.cn",
-        "gongkai.sufe.edu.cn"
+        "根据已收录的资料，宿舍报修的具体流程未明确提及。资料中仅提到联网故障报修（不包括联网设备）可通过自助报修或电话报修（电话：65903201，工作日8:30-17:00）[7][8]，但这属于网络服务，并非宿舍设施维修。"
       ],
-      "missing_reasons": [
-        "缺少回答要点：适用对象"
-      ]
-    },
-    {
-      "id": "housing-apply-005",
-      "question": "新生或在校生住宿申请在哪里办理？",
-      "scene": "宿舍后勤",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "hq.sufe.edu.cn",
-        "gongkai.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：对象"
-      ]
-    },
-    {
-      "id": "housing-electric-007",
-      "question": "宿舍内可以使用哪些电器？",
-      "scene": "宿舍后勤",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "hq.sufe.edu.cn",
-        "gongkai.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：允许电器",
-        "缺少回答要点：禁用电器",
-        "缺少回答要点：管理依据"
-      ]
-    },
-    {
-      "id": "housing-temporary-008",
-      "question": "临时住宿如何申请？",
-      "scene": "宿舍后勤",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "hq.sufe.edu.cn",
-        "gongkai.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：适用对象"
-      ]
-    },
-    {
-      "id": "nic-activate-001",
-      "question": "统一认证账号如何激活？",
-      "scene": "信息化与校园卡",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "nic.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：身份验证",
-        "缺少回答要点：技术支持"
-      ]
-    },
-    {
-      "id": "nic-freeze-003",
-      "question": "统一认证账号为什么被冻结？",
-      "scene": "信息化与校园卡",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "nic.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：冻结原因"
+      "top_hits": [
+        {
+          "doc_id": "1f5aa08edc4d",
+          "title": "关于印发《上海财经大学学生违纪处分规定（2023年10月修订）》的通知.pdf",
+          "publisher": "上海财经大学学生处",
+          "source_url": "https://xsc.sufe.edu.cn/_upload/article/files/b4/ab/fdcf472d46e1996dc796d621accf/ccff4f96-0b92-4d3b-85ab-c388791db9ae.pdf",
+          "document_kind": "policy",
+          "validity_status": "current"
+        },
+        {
+          "doc_id": "cd2f0a2c4d74",
+          "title": "学生宿舍日常办事指南",
+          "publisher": "上海财经大学后勤实业发展中心",
+          "source_url": "https://hq.sufe.edu.cn/dc/73/c2722a187507/page.htm",
+          "document_kind": "procedure",
+          "validity_status": "unknown_validity"
+        },
+        {
+          "doc_id": "cd2f0a2c4d74",
+          "title": "学生宿舍日常办事指南",
+          "publisher": "上海财经大学后勤实业发展中心",
+          "source_url": "https://hq.sufe.edu.cn/dc/73/c2722a187507/page.htm",
+          "document_kind": "procedure",
+          "validity_status": "unknown_validity"
+        }
       ]
     },
     {
       "id": "nic-ecard-006",
       "question": "电子校园卡如何领取？",
       "scene": "信息化与校园卡",
-      "status": "partially_answerable",
+      "status": "refused",
       "expected_domains": [
         "nic.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "缺少回答要点：故障处理"
-      ]
-    },
-    {
-      "id": "nic-wifi-007",
-      "question": "如何连接校园无线网？",
-      "scene": "信息化与校园卡",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "nic.sufe.edu.cn"
+        "根据已收录的资料，关于“电子校园卡如何领取”未提及具体领取流程。资料仅说明："
       ],
-      "missing_reasons": [
-        "缺少回答要点：网络名称",
-        "缺少回答要点：适用终端",
-        "缺少回答要点：故障排查"
-      ]
-    },
-    {
-      "id": "nic-wired-008",
-      "question": "校园有线网络如何开通？",
-      "scene": "信息化与校园卡",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "nic.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：技术支持"
-      ]
-    },
-    {
-      "id": "nic-eduroam-009",
-      "question": "如何使用 Eduroam？",
-      "scene": "信息化与校园卡",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "nic.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：适用对象"
-      ]
-    },
-    {
-      "id": "nic-email-010",
-      "question": "毕业后学校邮箱和统一认证还能使用多久？",
-      "scene": "信息化与校园卡",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "nic.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：适用对象",
-        "缺少回答要点：账号状态"
-      ]
-    },
-    {
-      "id": "nic-vpn-011",
-      "question": "VPN 如何使用？",
-      "scene": "信息化与校园卡",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "nic.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：适用资源"
-      ]
-    },
-    {
-      "id": "nic-wechat-012",
-      "question": "企业微信如何绑定学校身份？",
-      "scene": "信息化与校园卡",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "nic.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：技术支持"
-      ]
-    },
-    {
-      "id": "nic-one-stop-013",
-      "question": "一网通办如何进入学生服务？",
-      "scene": "信息化与校园卡",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "nic.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：服务查找"
-      ]
-    },
-    {
-      "id": "nic-teaching-014",
-      "question": "上财教学网的登录和访问方式是什么？",
-      "scene": "信息化与校园卡",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "nic.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：适用对象",
-        "缺少回答要点：技术支持"
-      ]
-    },
-    {
-      "id": "nic-supercomputer-015",
-      "question": "学生如何申请使用超算平台？",
-      "scene": "信息化与校园卡",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "nic.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：账号申请"
-      ]
-    },
-    {
-      "id": "library-hours-001",
-      "question": "图书馆开放时间是什么？",
-      "scene": "图书馆",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "lib.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：开放校区"
-      ]
-    },
-    {
-      "id": "library-loan-003",
-      "question": "图书可以借多久？",
-      "scene": "图书馆",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "lib.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：逾期处理"
-      ]
-    },
-    {
-      "id": "library-offcampus-006",
-      "question": "校外如何访问图书馆数据库？",
-      "scene": "图书馆",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "lib.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：技术支持"
+      "top_hits": [
+        {
+          "doc_id": "fd893261ff29",
+          "title": "一、校园一卡通简介",
+          "publisher": "上海财经大学网络信息中心",
+          "source_url": "https://nic.sufe.edu.cn/17/10/c19675a268048/page.htm",
+          "document_kind": "faq",
+          "validity_status": "unknown_validity"
+        },
+        {
+          "doc_id": "bd003ceb1949",
+          "title": "大学生医保政策解读",
+          "publisher": "上海财经大学医疗健康服务中心",
+          "source_url": "https://yljk.sufe.edu.cn/5e/b1/c1400a220849/page.htm",
+          "document_kind": "procedure",
+          "validity_status": "unknown_validity"
+        },
+        {
+          "doc_id": "fd893261ff29",
+          "title": "一、校园一卡通简介",
+          "publisher": "上海财经大学网络信息中心",
+          "source_url": "https://nic.sufe.edu.cn/17/10/c19675a268048/page.htm",
+          "document_kind": "faq",
+          "validity_status": "unknown_validity"
+        }
       ]
     },
     {
       "id": "library-seat-007",
       "question": "如何预约图书馆座位？",
       "scene": "图书馆",
-      "status": "partially_answerable",
+      "status": "refused",
       "expected_domains": [
         "lib.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "缺少回答要点：违约处理"
+        "根据已收录的资料，关于“预约图书馆座位”的具体操作，资料中未提及统一的座位预约流程。但有以下相关信息可供参考："
+      ],
+      "top_hits": [
+        {
+          "doc_id": "eb36ca9f5d3f",
+          "title": "续借及预约",
+          "publisher": "上海财经大学图书馆",
+          "source_url": "https://lib.sufe.edu.cn/8353/list.htm",
+          "document_kind": "procedure",
+          "validity_status": "unknown_validity"
+        },
+        {
+          "doc_id": "dd276c8b9e5f",
+          "title": "读者须知",
+          "publisher": "上海财经大学图书馆",
+          "source_url": "https://lib.sufe.edu.cn/8366/list.htm",
+          "document_kind": "procedure",
+          "validity_status": "unknown_validity"
+        },
+        {
+          "doc_id": "2d2a7b018e73",
+          "title": "我要预约",
+          "publisher": "上海财经大学图书馆",
+          "source_url": "https://lib.sufe.edu.cn/8328/list.htm",
+          "document_kind": "service_guide",
+          "validity_status": "unknown_validity"
+        }
       ]
     },
     {
-      "id": "medical-referral-003",
-      "question": "校外就医是否需要转诊？",
-      "scene": "医疗医保",
-      "status": "partially_answerable",
+      "id": "new-traffic-006",
+      "question": "校园交通和车辆管理有哪些规定？",
+      "scene": "新生与安全",
+      "status": "refused",
       "expected_domains": [
-        "yljk.sufe.edu.cn"
+        "baoweichu.sufe.edu.cn",
+        "xsc.sufe.edu.cn",
+        "hq.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "缺少回答要点：适用医院"
+        "已收录的资料中未提及校园交通和车辆管理的具体规定。现有资料主要涉及校园秩序、控烟、勤工助学、违纪处分及无线联网等内容 [1][2][3][4][5][6][7][8]，均未包含车辆通行、停放或交通管理细则。"
+      ],
+      "top_hits": [
+        {
+          "doc_id": "26b07cd380a0",
+          "title": "高等学校校园秩序管理若干规定",
+          "publisher": "上海财经大学学生处",
+          "source_url": "https://xsc.sufe.edu.cn/39/76/c5436a80246/page.htm",
+          "document_kind": "policy",
+          "validity_status": "unknown_validity"
+        },
+        {
+          "doc_id": "26b07cd380a0",
+          "title": "高等学校校园秩序管理若干规定",
+          "publisher": "上海财经大学学生处",
+          "source_url": "https://xsc.sufe.edu.cn/39/76/c5436a80246/page.htm",
+          "document_kind": "policy",
+          "validity_status": "unknown_validity"
+        },
+        {
+          "doc_id": "26b07cd380a0",
+          "title": "高等学校校园秩序管理若干规定",
+          "publisher": "上海财经大学学生处",
+          "source_url": "https://xsc.sufe.edu.cn/39/76/c5436a80246/page.htm",
+          "document_kind": "policy",
+          "validity_status": "unknown_validity"
+        }
       ]
     },
     {
-      "id": "medical-excluded-005",
-      "question": "哪些医疗费用不能报销？",
-      "scene": "医疗医保",
-      "status": "partially_answerable",
+      "id": "new-lost-007",
+      "question": "校园失物招领如何办理？",
+      "scene": "新生与安全",
+      "status": "refused",
       "expected_domains": [
-        "yljk.sufe.edu.cn"
+        "baoweichu.sufe.edu.cn",
+        "xsc.sufe.edu.cn",
+        "hq.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "缺少回答要点：适用政策"
-      ]
-    },
-    {
-      "id": "medical-offsite-007",
-      "question": "异地就医如何办理备案或报销？",
-      "scene": "医疗医保",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "yljk.sufe.edu.cn"
+        "已收录的资料中未提及校园失物招领的具体办理流程。建议你前往学校保卫处、学生事务中心或大学生活动中心一楼服务大厅现场咨询，或查看学校官网相关通知。[依据：现有资料仅涉及学历证明、就业签约、图书馆违章、无线联网等事项，未包含失物招领信息]"
       ],
-      "missing_reasons": [
-        "缺少回答要点：适用对象"
-      ]
-    },
-    {
-      "id": "medical-download-010",
-      "question": "医疗医保常用表格在哪里下载？",
-      "scene": "医疗医保",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "yljk.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：适用事项"
-      ]
-    },
-    {
-      "id": "exchange-selection-004",
-      "question": "交换项目选拔流程是什么？",
-      "scene": "国际交流",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "ieco.sufe.edu.cn",
-        "gs.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：面试或考核",
-        "缺少回答要点：结果公示"
-      ]
-    },
-    {
-      "id": "exchange-public-009",
-      "question": "公派留学项目如何报名？",
-      "scene": "国际交流",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "ieco.sufe.edu.cn",
-        "gs.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "缺少回答要点：资助政策"
+      "top_hits": [
+        {
+          "doc_id": "7ca09eea0dba",
+          "title": "学历学位遗失证明办理说明.doc",
+          "publisher": "上海财经大学教务处",
+          "source_url": "https://jwc.sufe.edu.cn/_upload/article/files/02/16/bbbfb7da4bd1aa8e36a3052a3274/518f476b-4759-4085-8062-c34606bc1f30.doc",
+          "document_kind": "procedure",
+          "validity_status": "unknown_validity"
+        },
+        {
+          "doc_id": "a4a205afcd35",
+          "title": "2012年教职工体检报告_2013年教职工体检方案.pdf",
+          "publisher": "上海财经大学医疗健康服务中心",
+          "source_url": "https://yljk.sufe.edu.cn/_upload/article/files/5b/c5/a4eff0eb4381914026aa5386cfb8/99bf40b9-c7c3-4704-a653-862d1c8e1060.pdf",
+          "document_kind": "procedure",
+          "validity_status": "unknown_validity"
+        },
+        {
+          "doc_id": "c37e02020907",
+          "title": "2025届毕业生就业手续办理指南 | 第三步：与用人单位签约（二）纸签",
+          "publisher": "上海财经大学就业指导中心",
+          "source_url": "post+https://career.sufe.edu.cn/career/news/data/jylc/2501152140337264",
+          "document_kind": "procedure",
+          "validity_status": "unknown_validity"
+        }
       ]
     },
     {
       "id": "new-fraud-009",
       "question": "校园电信网络诈骗如何举报和求助？",
       "scene": "新生与安全",
-      "status": "partially_answerable",
+      "status": "refused",
       "expected_domains": [
         "baoweichu.sufe.edu.cn",
         "xsc.sufe.edu.cn",
         "hq.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "缺少回答要点：识别提示",
-        "缺少回答要点：紧急措施"
-      ]
-    },
-    {
-      "id": "new-download-010",
-      "question": "保卫处常用证明和表格在哪里下载？",
-      "scene": "新生与安全",
-      "status": "partially_answerable",
-      "expected_domains": [
-        "baoweichu.sufe.edu.cn",
-        "xsc.sufe.edu.cn",
-        "hq.sufe.edu.cn"
+        "根据已收录的资料，未提及校园电信网络诈骗的具体举报和求助渠道。"
       ],
-      "missing_reasons": [
-        "缺少回答要点：适用事项"
+      "top_hits": [
+        {
+          "doc_id": "7dcfaeceef5f",
+          "title": "无线联网",
+          "publisher": "上海财经大学网络信息中心",
+          "source_url": "http://nic.sufe.edu.cn/e1/58/c19675a254296/page.htm",
+          "document_kind": "procedure",
+          "validity_status": "unknown_validity"
+        },
+        {
+          "doc_id": "f32b5e004c6f",
+          "title": "20250905关于印发《上海财经大学学术行为规范及管理办法（2025年修订）》的通知",
+          "publisher": "上海财经大学",
+          "source_url": "manual://sufe-regulations/%E7%A0%94%E7%A9%B6%E7%94%9F%E6%95%99%E5%AD%A6/20250905%E5%85%B3%E4%BA%8E%E5%8D%B0%E5%8F%91%E3%80%8A%E4%B8%8A%E6%B5%B7%E8%B4%A2%E7%BB%8F%E5%A4%A7%E5%AD%A6%E5%AD%A6%E6%9C%AF%E8%A1%8C%E4%B8%BA%E8%A7%84%E8%8C%83%E5%8F%8A%E7%AE%A1%E7%90%86%E5%8A%9E%E6%B3%95%EF%BC%882025%E5%B9%B4%E4%BF%AE%E8%AE%A2%EF%BC%89%E3%80%8B%E7%9A%84%E9%80%9A%E7%9F%A5.pdf",
+          "document_kind": "policy",
+          "validity_status": "unknown_validity"
+        },
+        {
+          "doc_id": "a648ee0a55f3",
+          "title": "无线联网",
+          "publisher": "上海财经大学网络信息中心",
+          "source_url": "https://nic.sufe.edu.cn/e1/58/c19675a254296/page.htm",
+          "document_kind": "procedure",
+          "validity_status": "unknown_validity"
+        }
       ]
     }
   ]

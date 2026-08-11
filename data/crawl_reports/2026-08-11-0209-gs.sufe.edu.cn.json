@@ -1,0 +1,122 @@
+{
+ "host": "gs.sufe.edu.cn",
+ "started_at": "2026-08-11T02:09:57+00:00",
+ "categories_found": 24,
+ "list_pages_fetched": 35,
+ "categories_requires_adapter": 0,
+ "articles_found": 167,
+ "articles_downloaded": 157,
+ "attachments_found": 65,
+ "attachments_downloaded": 55,
+ "attachments_parsed": 54,
+ "scanned_pdfs": 1,
+ "legacy_docs_unparsed": 0,
+ "incomplete_documents": 10,
+ "low_quality_documents": 50,
+ "sensitive_quarantined": 0,
+ "duplicate_attachments": 1,
+ "new_documents": 13,
+ "updated_documents": 35,
+ "unchanged_documents": 73,
+ "not_seen_documents": 6,
+ "final_indexed": 121,
+ "failures": [
+  {
+   "url": "http://gs.shufe.edu.cn/yanyan/ueditor/server/upload/uploadfiles/2013-01-17-42b83d2da8-463f-478e-a617-e46c4cb2d012.pdf",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: http://gs.shufe.edu.cn/yanyan/ueditor/server/upload/uploadfiles/2013-01-17-42b83d2da8-463f-478e-a617-e46c4cb2d012.pdf"
+  },
+  {
+   "url": "http://gs.shufe.edu.cn/yanyan/ueditor/server/upload/uploadfiles/2013-01-18-54aa2e962c-3b21-496d-8cc9-9c70ec2b0c20.doc",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: http://gs.shufe.edu.cn/yanyan/ueditor/server/upload/uploadfiles/2013-01-18-54aa2e962c-3b21-496d-8cc9-9c70ec2b0c20.doc"
+  },
+  {
+   "url": "http://gs.shufe.edu.cn/yanyan/ueditor/server/upload/uploadfiles/2015-01-19-32c0f8699e-aa07-4b6c-b3e2-dff90079c5f8.pdf",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: http://gs.shufe.edu.cn/yanyan/ueditor/server/upload/uploadfiles/2015-01-19-32c0f8699e-aa07-4b6c-b3e2-dff90079c5f8.pdf"
+  },
+  {
+   "url": "http://gs.shufe.edu.cn/yanyan/ueditor/server/upload/uploadfiles/2015-12-07-036c053afb-31c8-40c2-8b5d-cb2d5ba8da4c.pdf",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: http://gs.shufe.edu.cn/yanyan/ueditor/server/upload/uploadfiles/2015-12-07-036c053afb-31c8-40c2-8b5d-cb2d5ba8da4c.pdf"
+  },
+  {
+   "url": "https://gs.sufe.edu.cn/Home/Detail/5619",
+   "stage": "attachment",
+   "status": "unsupported_mime",
+   "reason": "附件请求返回 text/html（疑似错误页或查看器）"
+  },
+  {
+   "url": "https://gs.sufe.edu.cn/Home/Detail/5586",
+   "stage": "attachment",
+   "status": "unsupported_mime",
+   "reason": "附件请求返回 text/html（疑似错误页或查看器）"
+  },
+  {
+   "url": "https://gs.sufe.edu.cn/Home/Detail/5491",
+   "stage": "attachment",
+   "status": "unsupported_mime",
+   "reason": "附件请求返回 text/html（疑似错误页或查看器）"
+  },
+  {
+   "url": "https://gs.sufe.edu.cn/Home/Detail/5490",
+   "stage": "attachment",
+   "status": "unsupported_mime",
+   "reason": "附件请求返回 text/html（疑似错误页或查看器）"
+  },
+  {
+   "url": "https://gs.sufe.edu.cn/Home/Detail/5489",
+   "stage": "attachment",
+   "status": "unsupported_mime",
+   "reason": "附件请求返回 text/html（疑似错误页或查看器）"
+  },
+  {
+   "url": "https://gs.sufe.edu.cn/Home/Detail/5488",
+   "stage": "attachment",
+   "status": "unsupported_mime",
+   "reason": "附件请求返回 text/html（疑似错误页或查看器）"
+  },
+  {
+   "url": "https://gs.sufe.edu.cn/Home/Detail/5487",
+   "stage": "attachment",
+   "status": "unsupported_mime",
+   "reason": "附件请求返回 text/html（疑似错误页或查看器）"
+  },
+  {
+   "url": "https://gs.sufe.edu.cn/Home/Detail/5486",
+   "stage": "attachment",
+   "status": "unsupported_mime",
+   "reason": "附件请求返回 text/html（疑似错误页或查看器）"
+  },
+  {
+   "url": "https://gs.sufe.edu.cn/Home/Detail/5485",
+   "stage": "attachment",
+   "status": "unsupported_mime",
+   "reason": "附件请求返回 text/html（疑似错误页或查看器）"
+  },
+  {
+   "url": "https://gs.sufe.edu.cn/Home/Detail/5484",
+   "stage": "attachment",
+   "status": "unsupported_mime",
+   "reason": "附件请求返回 text/html（疑似错误页或查看器）"
+  },
+  {
+   "url": "https://www.shmeea.edu.cn/download/20220731/01.pdf",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://www.shmeea.edu.cn/download/20220731/01.pdf"
+  },
+  {
+   "url": "https://www.shmeea.edu.cn/download/20220731/01.pdf",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://www.shmeea.edu.cn/download/20220731/01.pdf"
+  }
+ ],
+ "notes": []
+}

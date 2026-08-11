@@ -1,0 +1,32 @@
+{
+ "host": "career.sufe.edu.cn",
+ "started_at": "2026-08-10T14:29:23+00:00",
+ "categories_found": 4,
+ "list_pages_fetched": 4,
+ "categories_requires_adapter": 0,
+ "articles_found": 10,
+ "articles_downloaded": 10,
+ "attachments_found": 12,
+ "attachments_downloaded": 11,
+ "attachments_parsed": 11,
+ "scanned_pdfs": 0,
+ "legacy_docs_unparsed": 0,
+ "incomplete_documents": 1,
+ "low_quality_documents": 1,
+ "sensitive_quarantined": 0,
+ "duplicate_attachments": 0,
+ "new_documents": 5,
+ "updated_documents": 1,
+ "unchanged_documents": 9,
+ "not_seen_documents": 0,
+ "final_indexed": 15,
+ "failures": [
+  {
+   "url": "http://career.sufe.edu.cn/upload/20190517/19051708443382624217.doc",
+   "stage": "attachment",
+   "status": "http_error",
+   "reason": "HTTP 404"
+  }
+ ],
+ "notes": []
+}

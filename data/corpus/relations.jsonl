@@ -493,3 +493,12 @@
 {"parent_doc_id": "1abb4a59884f", "child_doc_id": "f32b5e004c6f", "relation": "same_content_as", "evidence": "text_hash:sha256:567c82fb31b1cfe7", "confidence": 1.0, "created_at": "2026-08-10T12:39:44+00:00"}
 {"parent_doc_id": "1f5aa08edc4d", "child_doc_id": "4e71a33624b2", "relation": "supersedes", "evidence": "标题版本标记：（2023年10月修订）", "confidence": 0.95, "created_at": ""}
 {"parent_doc_id": "74200e7e1e2b", "child_doc_id": "2a2da70ecca6", "relation": "supersedes", "evidence": "自2025 年1 月1 日起施行；修订上海财经大学学位工作细则", "confidence": 0.95, "created_at": ""}
+{"parent_doc_id": "a7484c3df4b6", "child_doc_id": "7f49cfa37d0c", "relation": "attachment_of", "evidence": "", "confidence": 1.0, "created_at": ""}
+{"parent_doc_id": "a7484c3df4b6", "child_doc_id": "738f6c4b37fa", "relation": "attachment_of", "evidence": "", "confidence": 1.0, "created_at": ""}
+{"parent_doc_id": "a7484c3df4b6", "child_doc_id": "c2920f52fb7f", "relation": "attachment_of", "evidence": "", "confidence": 1.0, "created_at": ""}
+{"parent_doc_id": "fd17fab32693", "child_doc_id": "9959312a96d1", "relation": "attachment_of", "evidence": "", "confidence": 1.0, "created_at": ""}
+{"parent_doc_id": "c38e80bbe26a", "child_doc_id": "6ab6ca0b0721", "relation": "attachment_of", "evidence": "", "confidence": 1.0, "created_at": ""}
+{"parent_doc_id": "3f22d69747b0", "child_doc_id": "96c9b13f9fe9", "relation": "attachment_of", "evidence": "", "confidence": 1.0, "created_at": ""}
+{"parent_doc_id": "37a3304adff6", "child_doc_id": "d6b353a86317", "relation": "attachment_of", "evidence": "", "confidence": 1.0, "created_at": ""}
+{"parent_doc_id": "37a3304adff6", "child_doc_id": "8eb9e41bc8bb", "relation": "attachment_of", "evidence": "", "confidence": 1.0, "created_at": ""}
+{"parent_doc_id": "37a3304adff6", "child_doc_id": "b8673e217c3a", "relation": "attachment_of", "evidence": "", "confidence": 1.0, "created_at": ""}

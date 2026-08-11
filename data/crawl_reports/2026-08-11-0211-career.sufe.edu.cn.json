@@ -1,0 +1,56 @@
+{
+ "host": "career.sufe.edu.cn",
+ "started_at": "2026-08-11T02:11:55+00:00",
+ "categories_found": 5,
+ "list_pages_fetched": 8,
+ "categories_requires_adapter": 0,
+ "articles_found": 47,
+ "articles_downloaded": 47,
+ "attachments_found": 46,
+ "attachments_downloaded": 41,
+ "attachments_parsed": 37,
+ "scanned_pdfs": 0,
+ "legacy_docs_unparsed": 0,
+ "incomplete_documents": 1,
+ "low_quality_documents": 6,
+ "sensitive_quarantined": 2,
+ "duplicate_attachments": 0,
+ "new_documents": 12,
+ "updated_documents": 3,
+ "unchanged_documents": 44,
+ "not_seen_documents": 0,
+ "final_indexed": 59,
+ "failures": [
+  {
+   "url": "http://career.sufe.edu.cn/upload/20190517/19051708443382624217.doc",
+   "stage": "attachment",
+   "status": "http_error",
+   "reason": "HTTP 404"
+  },
+  {
+   "url": "https://www.jinshan.gov.cn/upload/202109/0922_171445_750.docx",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://www.jinshan.gov.cn/upload/202109/0922_171445_750.docx"
+  },
+  {
+   "url": "https://www.jinshan.gov.cn/upload/202109/0922_190031_402.xls",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://www.jinshan.gov.cn/upload/202109/0922_190031_402.xls"
+  },
+  {
+   "url": "http://career.sufe.edu.cn/upload/20201023/20102314070157256168.doc",
+   "stage": "attachment",
+   "status": "http_error",
+   "reason": "HTTP 404"
+  },
+  {
+   "url": "http://career.sufe.edu.cn/upload/20190829/19082913322579799848.xls",
+   "stage": "attachment",
+   "status": "http_error",
+   "reason": "HTTP 404"
+  }
+ ],
+ "notes": []
+}
