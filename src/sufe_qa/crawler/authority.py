@@ -43,8 +43,13 @@ _ADAPTERS = {
 
 
 def _section_from(source: dict[str, Any], raw: dict[str, Any]) -> SectionSpec:
+    def metadata_value(value: Any) -> str:
+        if isinstance(value, bool):
+            return str(value).lower()
+        return str(value)
+
     metadata = {
-        str(key): str(value)
+        str(key): metadata_value(value)
         for key, value in raw.items()
         if key not in {"name", "list_url", "category", "max_pages", "known_page_urls"}
         and value is not None

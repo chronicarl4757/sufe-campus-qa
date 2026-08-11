@@ -202,6 +202,7 @@ def ingest_crawled_articles(
     lifecycle_date = evaluated_at or datetime.now(timezone.utc).date()
 
     article_kinds: dict[str, str] = {}
+    article_source_sections: dict[str, str] = {}
     article_candidates: dict[str, LifecycleCandidate] = {}
     attachment_kinds: dict[str, str] = {}
     attachment_candidates: dict[str, LifecycleCandidate] = {}
@@ -214,6 +215,27 @@ def ingest_crawled_articles(
         document_kind = (
             hint if hint in _DOCUMENT_KIND_HINTS else classify_document_kind(art.title, art.body_text)
         )
+        old = existing.get(doc_id)
+        same_existing_text = bool(
+            old
+            and old.quality_status == "accepted"
+            and old.content_hash
+            and old.file_path
+            and old.text_hash == sha256_text(_squash(art.body_text))
+        )
+        if (
+            not hint
+            and same_existing_text
+            and old is not None
+            and old.document_kind in _DOCUMENT_KIND_HINTS - {"incomplete", "news", "event", "promotion"}
+            and document_kind in {"incomplete", "news", "event", "promotion"}
+        ):
+            # 同一 URL 可能既由显式服务页 seed 抓到，也被普通通知栏目再次发现。
+            # 完全相同的正文不得让后一次无类型提示的发现覆盖前一次权威语义。
+            document_kind = old.document_kind
+            article_source_sections[doc_id] = old.source_section
+        else:
+            article_source_sections[doc_id] = source_section
         article_kinds[doc_id] = document_kind
         article_candidates[doc_id] = LifecycleCandidate(
             doc_id=doc_id,
@@ -267,6 +289,7 @@ def ingest_crawled_articles(
         src = _normalize_doc_url(art.final_url or art.requested_url)
         doc_id = doc_id_from(src)
         document_kind = article_kinds[doc_id]
+        article_source_section = article_source_sections[doc_id]
         lifecycle = article_lifecycle[doc_id]
         if raw_dir is not None and not dry_run:
             _save_raw_article(raw_dir, doc_id, art)
@@ -277,7 +300,13 @@ def ingest_crawled_articles(
             and getattr(a.parse, "text", "")
             for a in art.downloaded
         )
-        quality = assess_document(art.title, art.body_text, has_valid_att, art.publish_date)
+        quality = assess_document(
+            art.title,
+            art.body_text,
+            has_valid_att,
+            art.publish_date,
+            trusted_document_kind=(art.document_kind_hint or "").strip().lower(),
+        )
         if report:
             if quality.status == "incomplete_document":
                 report.incomplete_documents += 1
@@ -290,7 +319,11 @@ def ingest_crawled_articles(
                 text_hash=sha256_text(_squash(art.body_text)),
             )
 
-        if scan_sensitive(art.body_text):
+        allow_public_service_phone = (
+            document_kind == "service_guide"
+            and source_type in {"official_department", "information_disclosure", "service_platform"}
+        )
+        if scan_sensitive(art.body_text, allow_phone=allow_public_service_phone):
             if report:
                 report.sensitive_quarantined += 1
             stats.add(doc_id, "quarantined", "正文命中敏感信息", art.title)
@@ -303,7 +336,7 @@ def ingest_crawled_articles(
                         src,
                         "quarantined",
                         source_type=source_type,
-                        source_section=source_section,
+                        source_section=article_source_section,
                         scope_unit=scope_unit,
                     )
                 )
@@ -327,7 +360,7 @@ def ingest_crawled_articles(
                         src,
                         quality.status,
                         source_type=source_type,
-                        source_section=source_section,
+                        source_section=article_source_section,
                         scope_unit=scope_unit,
                     )
                 )
@@ -349,7 +382,7 @@ def ingest_crawled_articles(
                         document_kind=document_kind,
                         lifecycle=lifecycle,
                         source_type=source_type,
-                        source_section=source_section,
+                        source_section=article_source_section,
                         scope_unit=scope_unit,
                     )
                 )
@@ -378,7 +411,7 @@ def ingest_crawled_articles(
                     art.title, normalize_policy_name(art.title), scope_unit
                 ),
                 "source_type": source_type,
-                "source_section": source_section,
+                "source_section": article_source_section,
                 "scope_unit": scope_unit,
                 "publish_date_evidence": art.publish_date_evidence,
                 "publish_date_confidence": art.publish_date_confidence,
@@ -410,7 +443,7 @@ def ingest_crawled_articles(
                         document_kind=document_kind,
                         lifecycle=lifecycle,
                         source_type=source_type,
-                        source_section=source_section,
+                        source_section=article_source_section,
                         scope_unit=scope_unit,
                     )
                 )
@@ -440,7 +473,7 @@ def ingest_crawled_articles(
                 state=state,
                 raw_dir=raw_dir,
                 dry_run=dry_run,
-                source_section=source_section,
+                source_section=article_source_section,
                 scope_unit=scope_unit,
                 document_kinds=attachment_kinds,
                 lifecycle_by_doc=attachment_lifecycle,
@@ -771,6 +804,29 @@ def _ingest_attachment(
         stats.add(att_doc_id, "unchanged", "", att.filename)
         if report:
             report.unchanged_documents += 1
+        lifecycle_fields = {
+            "document_kind": document_kind,
+            "parent_doc_id": parent_doc_id,
+            "temporal_class": lifecycle.temporal_class,
+            "series_key": lifecycle.series_key,
+            "retention_status": lifecycle.retention_status,
+            "retention_reason": lifecycle.retention_reason,
+            "canonical_doc_id": lifecycle.canonical_doc_id,
+        }
+        if not dry_run and any(
+            getattr(old, key) != value for key, value in lifecycle_fields.items()
+        ):
+            metas.append(
+                _refresh_att_meta(
+                    old,
+                    att,
+                    src,
+                    parent_doc_id,
+                    parent,
+                    document_kind=document_kind,
+                    lifecycle=lifecycle,
+                )
+            )
     elif (
         old
         and old.quality_status == "accepted"

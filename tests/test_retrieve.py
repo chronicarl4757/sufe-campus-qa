@@ -8,8 +8,10 @@ from sufe_qa.ingest.inbox import ingest_inbox
 from sufe_qa.retrieve.retriever import (
     Hit,
     HybridRetriever,
+    expand_query,
     is_confident,
     recency_weight,
+    retrieval_time_weight,
     rrf_fuse,
     tokenize,
 )
@@ -51,6 +53,28 @@ def test_tokenize_drops_punctuation_and_keeps_words():
     assert toks
     assert all(t.strip("，。：！≥") == t for t in toks)
     assert any("gpa" in t or "3.5" in t for t in toks)
+
+
+def test_expand_query_adds_stable_campus_service_aliases():
+    assert expand_query("校医院在哪里，如何联系？") == (
+        "校医院在哪里，如何联系？ 门诊部 医疗健康服务中心 就诊导航 地理位置"
+    )
+    assert expand_query("毕业去向如何登记？") == (
+        "毕业去向如何登记？ 毕业去向管理 我的毕业去向 就业综合管理服务平台"
+    )
+    assert expand_query("如何申请缓考？") == "如何申请缓考？"
+
+
+def test_expand_query_maps_student_wording_to_official_terms():
+    assert "课程不及格 参评学年" in expand_query("有挂科记录还能申请奖学金吗？")
+    assert "家庭经济困难学生认定 认定程序" in expand_query(
+        "家庭经济困难学生如何认定？"
+    )
+    assert "毕业去向管理 我的毕业去向" in expand_query("灵活就业如何登记？")
+    assert "升学 交回协议书 违约改签" in expand_query("考上研究生后已签三方怎么办？")
+    assert "期末成绩 成绩发布后7日 成绩复核" in expand_query(
+        "本科生对课程成绩有异议如何申请复核？"
+    )
 
 
 def test_rrf_fuse_scores_and_order():
@@ -102,8 +126,19 @@ def test_recency_weight_decay():
     assert recency_weight("2030-01-01", today) == 1.0  # 未来日期按当年
 
 
+def test_retrieval_time_weight_only_decays_time_bound_document_kinds():
+    from datetime import date
+
+    today = date(2026, 7, 31)
+    assert retrieval_time_weight("faq", "2013-01-01", today) == 1.0
+    assert retrieval_time_weight("policy", "2013-01-01", today) == 1.0
+    assert retrieval_time_weight("service_guide", "2013-01-01", today) == 1.0
+    assert retrieval_time_weight("annual_notice", "2013-01-01", today) == 0.4
+    assert retrieval_time_weight("public_list", "2025-01-01", today) == pytest.approx(0.85)
+
+
 def test_search_recency_reranks_identical_relevance(settings):
-    """相关性相同时新版文档排在旧版之前（政策年更场景）。"""
+    """相关性相同时新版文档排在旧版之前（年度通知场景）。"""
     from sufe_qa.schema import DocMeta, append_manifest
 
     body = "推免申请的学生应为应届本科毕业生，品德良好，遵纪守法，身心健康，成绩优秀。"
@@ -121,6 +156,7 @@ def test_search_recency_reranks_identical_relevance(settings):
             fetched_at="2026-07-31T00:00:00+00:00",
             content_hash=f"sha256:{fname}",
             file_path=fname,
+            document_kind="annual_notice",
             retention_status="active",
             retention_reason="test_fixture",
         )

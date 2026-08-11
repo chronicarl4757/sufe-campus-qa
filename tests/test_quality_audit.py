@@ -499,3 +499,32 @@ def test_quality_audit_preserves_adapter_typed_official_service_guide(tmp_path):
     assert decision.document_kind == "service_guide"
     assert decision.retention_status == "active"
     assert decision.index_collection == "main_qa"
+
+
+def test_quality_audit_preserves_explicit_authority_section_document_kind(tmp_path):
+    data = tmp_path / "data"
+    corpus = data / "corpus"
+    doc_id = _add(
+        corpus,
+        url="https://lib.sufe.edu.cn/8330/list.htm",
+        title="自助打印",
+        body="自助打印服务位于图书馆一楼，读者可以使用校园卡付费打印。",
+        publish_date="2025-01-01",
+        kind="service_guide",
+        section="自助打印",
+    )
+
+    report = audit_corpus(
+        corpus / "manifest.jsonl",
+        corpus,
+        data / "raw",
+        evaluated_at=date(2026, 8, 11),
+        trusted_document_kinds={
+            ("上海财经大学研究生院", "自助打印", "service_guide")
+        },
+    )
+
+    decision = next(item for item in report.decisions if item.doc_id == doc_id)
+    assert decision.document_kind == "service_guide"
+    assert decision.retention_status == "active"
+    assert decision.index_collection == "main_qa"

@@ -167,6 +167,7 @@ def test_coverage_static_assets_define_audit_behaviors(client):
         "renderAnswerHits",
         "real_answer",
         "answer_text",
+        "answer-strong",
         "answer-status-filter",
         "probe-status-filter",
     ):

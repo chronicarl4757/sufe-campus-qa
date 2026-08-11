@@ -19,12 +19,14 @@ sources:
         list_url: https://jwc.sufe.edu.cn/5124/list.htm
         category: 学工事务
         scene: 本科教务
+        inline_article: true
 """,
         encoding="utf-8",
     )
     sources = load_authority_sources(path)
     assert len(sources) == 1
     assert sources[0].sections[0].metadata["scene"] == "本科教务"
+    assert sources[0].sections[0].metadata["inline_article"] == "true"
     assert adapter_for_source(sources[0]).__class__.__name__ == "JwcAdapter"
 
 
@@ -51,3 +53,32 @@ def test_authoritative_source_file_contains_vertical_slice_sites():
     assert policies["gs"]["招生公示"] == "recent_2_school_years"
     assert policies["gs"]["培养管理制度"] == "all_history"
     assert policies["gs"]["答辩公告"] == "current_school_year"
+
+
+def test_authoritative_sources_include_high_value_service_sections():
+    sources = {
+        source.source_id: source
+        for source in load_authority_sources("data/sources/sufe_authoritative.yaml")
+    }
+    expected_urls = {
+        "gs": {
+            "https://gs.sufe.edu.cn/Home/List/80",
+            "https://gs.sufe.edu.cn/Home/List/81",
+            "https://gs.sufe.edu.cn/Home/List/86",
+        },
+        "lib": {
+            "https://lib.sufe.edu.cn/8350/list.htm",
+            "https://lib.sufe.edu.cn/8328/list.htm",
+            "https://lib.sufe.edu.cn/8330/list.htm",
+        },
+    }
+    for source_id, urls in expected_urls.items():
+        sections = sources[source_id].sections
+        configured = {section.list_url for section in sections}
+        assert urls <= configured
+        if source_id == "gs":
+            continue
+        for section in sections:
+            if section.list_url in urls:
+                assert section.metadata["inline_article"] == "true"
+                assert section.metadata["document_kind"] in {"faq", "service_guide"}

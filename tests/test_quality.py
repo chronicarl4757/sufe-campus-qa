@@ -101,6 +101,41 @@ def test_nav_pollution_short_lines():
     assert any("导航" in reason for reason in r.reasons)
 
 
+def test_explicit_service_guide_hint_accepts_structured_short_line_table():
+    body = "\n".join(
+        [
+            "快递邮寄服务一览",
+            "单位",
+            "服务时间",
+            "地址",
+            "联系电话",
+            "菜鸟驿站",
+            "9:00-19:00",
+            "国定路校区",
+            "15800371877",
+            "三门路园区",
+            "9:00-20:00",
+            "13311833846",
+            "中山北一路校区",
+            "9:00-18:00",
+            "19921797883",
+            "国定路校区收发室",
+            "07:45-11:45",
+            "国定路777号前门卫对面",
+            "65903864",
+            "中山北一路校区收发室",
+        ]
+    )
+    result = assess_document(
+        "快递邮寄",
+        body,
+        has_valid_attachment=False,
+        trusted_document_kind="service_guide",
+    )
+
+    assert result.status == "accepted"
+
+
 def test_nav_pollution_ratio_boundary_not_triggered():
     lines = [
         "首页",

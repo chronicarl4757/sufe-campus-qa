@@ -597,16 +597,25 @@ def _cmd_quality_audit(args: argparse.Namespace) -> int:
     manifest_path = Path(args.manifest) if args.manifest else settings.manifest_path
     corpus_dir = Path(args.corpus) if args.corpus else settings.corpus_dir
     raw_root = Path(args.raw) if args.raw else settings.data_dir / "raw"
+    sources = load_authority_sources(Path(args.sources))
     policies = {
         (source.publisher, section.name): section.time_policy
-        for source in load_authority_sources(Path(args.sources))
+        for source in sources
         for section in source.sections
+    }
+    trusted_document_kinds = {
+        (source.publisher, section.name, section.metadata["document_kind"])
+        for source in sources
+        for section in source.sections
+        if section.metadata.get("inline_article") == "true"
+        and section.metadata.get("document_kind")
     }
     report = audit_corpus(
         manifest_path,
         corpus_dir,
         raw_root,
         time_policies=policies,
+        trusted_document_kinds=trusted_document_kinds,
     )
     write_quality_audit(report, Path(args.output_json), Path(args.output_md))
     print(f"质量审计 JSON: {args.output_json}")
@@ -637,7 +646,14 @@ def _cmd_rebuild_clean_corpus(args: argparse.Namespace) -> int:
 def _cmd_quality_gates(args: argparse.Namespace) -> int:
     settings = load_settings()
     coverage_path = Path(args.coverage) if args.coverage else None
-    report = verify_clean_pipeline(settings, coverage_path=coverage_path)
+    answer_report_path = Path(args.answer_report) if args.answer_report else None
+    if answer_report_path and not answer_report_path.is_file():
+        answer_report_path = None
+    report = verify_clean_pipeline(
+        settings,
+        coverage_path=coverage_path,
+        answer_report_path=answer_report_path,
+    )
     write_gate_report(report, Path(args.output))
     if args.missing_sources and coverage_path and coverage_path.is_file():
         coverage = json.loads(coverage_path.read_text(encoding="utf-8"))
@@ -648,20 +664,55 @@ def _cmd_quality_gates(args: argparse.Namespace) -> int:
                     item = json.loads(line)
                     probes[str(item["id"])] = item
         missing = []
-        for result in coverage.get("question_results") or []:
-            if result.get("status") == "answerable":
-                continue
-            probe = probes.get(str(result.get("id")), {})
-            missing.append(
-                {
-                    "id": result.get("id"),
-                    "question": result.get("question"),
-                    "scene": result.get("scene"),
-                    "status": result.get("status"),
-                    "expected_domains": probe.get("expected_domains", []),
-                    "missing_reasons": result.get("missing_reasons", []),
-                }
-            )
+        if answer_report_path:
+            answers = json.loads(answer_report_path.read_text(encoding="utf-8"))
+            for result in answers.get("results") or []:
+                if result.get("status") == "answered":
+                    continue
+                probe = probes.get(str(result.get("id")), {})
+                answer_text = str(result.get("answer_text", "")).strip()
+                first_paragraph = answer_text.split("\n\n", 1)[0] if answer_text else ""
+                reason = str(result.get("error", "")).strip() or first_paragraph
+                if not reason:
+                    reason = "检索证据不足或未通过回答置信门"
+                missing.append(
+                    {
+                        "id": result.get("id"),
+                        "question": result.get("question"),
+                        "scene": result.get("scene"),
+                        "status": result.get("status"),
+                        "expected_domains": probe.get(
+                            "expected_domains", result.get("expected_domains", [])
+                        ),
+                        "missing_reasons": [reason],
+                        "top_hits": [
+                            {
+                                "doc_id": hit.get("doc_id"),
+                                "title": hit.get("title"),
+                                "publisher": hit.get("publisher"),
+                                "source_url": hit.get("source_url"),
+                                "document_kind": hit.get("document_kind"),
+                                "validity_status": hit.get("validity_status"),
+                            }
+                            for hit in (result.get("hits") or [])[:3]
+                        ],
+                    }
+                )
+        else:
+            for result in coverage.get("question_results") or []:
+                if result.get("status") == "answerable":
+                    continue
+                probe = probes.get(str(result.get("id")), {})
+                missing.append(
+                    {
+                        "id": result.get("id"),
+                        "question": result.get("question"),
+                        "scene": result.get("scene"),
+                        "status": result.get("status"),
+                        "expected_domains": probe.get("expected_domains", []),
+                        "missing_reasons": result.get("missing_reasons", []),
+                    }
+                )
         missing_path = Path(args.missing_sources)
         missing_path.parent.mkdir(parents=True, exist_ok=True)
         missing_path.write_text(
@@ -669,6 +720,8 @@ def _cmd_quality_gates(args: argparse.Namespace) -> int:
                 {
                     "question_bank_version": coverage.get("question_bank_version"),
                     "question_bank_hash": coverage.get("question_bank_hash"),
+                    "index_fingerprint": coverage.get("index_fingerprint"),
+                    "source": "real_answers" if answer_report_path else "coverage_probe",
                     "missing_count": len(missing),
                     "items": missing,
                 },
@@ -912,6 +965,10 @@ def build_parser() -> argparse.ArgumentParser:
     qg = sub.add_parser("quality-gates", help="验证 corpus、collection、附件和固定题库质量门")
     qg.add_argument("--coverage", default="")
     qg.add_argument("--question-bank", default="")
+    qg.add_argument(
+        "--answer-report",
+        default=str(PROJECT_ROOT / "data" / "coverage" / "sufe_real_answers.json"),
+    )
     qg.add_argument(
         "--output",
         default=str(PROJECT_ROOT / "data" / "crawl_reports" / "sufe_full_report.json"),

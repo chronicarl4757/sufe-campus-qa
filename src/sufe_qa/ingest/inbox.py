@@ -16,15 +16,15 @@ from sufe_qa.ingest.lifecycle import series_key_for, temporal_class_for
 from sufe_qa.ingest.parsers import ParseError, parse_file
 from sufe_qa.schema import DocMeta, append_manifest, doc_id_from, load_manifest, sha256_text
 
-SENSITIVE_PATTERNS = [
-    re.compile(r"\d{17}[\dXx]"),  # 身份证
-    re.compile(r"(?<!\d)1[3-9]\d{9}(?!\d)"),  # 手机号
-]
+_ID_PATTERN = re.compile(r"\d{17}[\dXx]")
+_PHONE_PATTERN = re.compile(r"(?<!\d)1[3-9]\d{9}(?!\d)")
+SENSITIVE_PATTERNS = [_ID_PATTERN, _PHONE_PATTERN]
 
 
-def scan_sensitive(text: str) -> list[str]:
-    """返回命中的敏感串；空列表表示安全。"""
-    return [m.group() for pat in SENSITIVE_PATTERNS for m in pat.finditer(text)]
+def scan_sensitive(text: str, *, allow_phone: bool = False) -> list[str]:
+    """返回命中的敏感串；权威服务指南可显式保留公开服务电话。"""
+    patterns = [_ID_PATTERN] if allow_phone else SENSITIVE_PATTERNS
+    return [m.group() for pattern in patterns for m in pattern.finditer(text)]
 
 
 def slugify(title: str, max_len: int = 40) -> str:

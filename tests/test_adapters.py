@@ -106,6 +106,34 @@ def test_jwc_adapter_treats_static_process_page_as_article_with_attachments():
     assert article.source_type == "official_department"
 
 
+def test_wp3_inline_article_preserves_section_document_kind_hint():
+    section = SectionSpec(
+        section_id="hq-catering",
+        name="餐饮服务",
+        list_url="https://hq.sufe.edu.cn/2727/list.htm",
+        category="校园生活",
+        publisher="上海财经大学后勤实业发展中心",
+        source_type="official_department",
+        scope_unit="全体学生",
+        metadata={"inline_article": "true", "document_kind": "service_guide"},
+    )
+    html = """
+    <html><body><div class="wp_articlecontent">
+      <p>食堂餐饮服务信息一览，包含服务时间和联系电话。</p>
+    </div></body></html>
+    """
+    adapter = Wp3Adapter(publisher=section.publisher)
+    listing = adapter.parse_listing(_page(section.list_url, html), section)
+
+    assert listing.article_pages[0].metadata == {
+        "inline_article": "true",
+        "document_kind": "service_guide",
+        "inline": "true",
+    }
+    article = adapter.parse_article(_page(section.list_url, html), listing.article_pages[0])
+    assert article.document_kind_hint == "service_guide"
+
+
 def test_graduate_school_adapter_parses_home_list_detail_and_query_pagination():
     section = SectionSpec(
         section_id="gs-49",
@@ -382,3 +410,29 @@ def test_career_adapter_parses_json_article_with_api_attachments():
         "https://career.sufe.edu.cn/career/download/fileDownload/103"
     ]
     assert article.attachments[0].anchor_text == "毕业去向登记表.docx"
+
+
+def test_career_adapter_discovers_downloads_embedded_in_news_content():
+    from sufe_qa.crawler.adapters import CareerAdapter
+
+    payload = """
+    {"code":200,"data":{"newsTitle":"就业系统学生操作手册","releaseDate":"2024-03-12",
+     "newsContent":"<p>具体点击下载查看：<a href='/upload/image/20240312/manual.pdf' title='学生操作手册.pdf'>学生操作手册.pdf</a></p>",
+     "newsAttach":null}}
+    """
+    section = _career_section()
+    spec = PageSpec(
+        url="post+https://career.sufe.edu.cn/career/news/data/xgxz/101",
+        section_id=section.section_id,
+        page_kind="article",
+        publisher_hint=section.publisher,
+        category=section.category,
+        source_type=section.source_type,
+    )
+
+    article = CareerAdapter().parse_article(_page(spec.url, payload, mime="application/json"), spec)
+
+    assert [item.requested_url for item in article.attachments] == [
+        "https://career.sufe.edu.cn/upload/image/20240312/manual.pdf"
+    ]
+    assert article.attachments[0].anchor_text == "学生操作手册.pdf"

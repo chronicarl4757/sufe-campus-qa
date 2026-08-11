@@ -105,3 +105,68 @@ def test_quality_gates_check_files_collections_and_fixed_question_results(tmp_pa
     output = tmp_path / "full-report.json"
     write_gate_report(report, output)
     assert output.is_file()
+
+
+def test_quality_gates_use_real_answers_for_answerability_when_supplied(tmp_path):
+    settings = _settings(tmp_path)
+    _add(
+        settings,
+        "main",
+        "缓考办理办法",
+        "policy",
+        "active",
+        "# 缓考办理办法\n\n申请条件、材料和办理流程。\n",
+    )
+    update_index(settings, FakeEmbedder())
+    coverage = tmp_path / "coverage.json"
+    coverage.write_text(
+        json.dumps(
+            {
+                "question_bank_version": "test.v1",
+                "question_bank_hash": "sha256:test",
+                "index_fingerprint": "sha256:index",
+                "question_results": [
+                    {"id": f"q{i}", "status": "partially_answerable", "matched_domains": []}
+                    for i in range(150)
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+    answers = tmp_path / "answers.json"
+    answer_rows = []
+    scenes = ["本科教务", "研究生培养与学位", "奖助学金", "就业手续", "信息化与校园卡"]
+    for i in range(150):
+        answer_rows.append(
+            {
+                "id": f"q{i}",
+                "scene": scenes[i % len(scenes)],
+                "status": "answered" if i < 140 else "refused",
+                "domain_match": i < 130,
+            }
+        )
+    answers.write_text(
+        json.dumps(
+            {
+                "question_bank_version": "test.v1",
+                "question_bank_hash": "sha256:test",
+                "index_fingerprint": "sha256:index",
+                "total": 150,
+                "results": answer_rows,
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    report = verify_clean_pipeline(
+        settings,
+        coverage_path=coverage,
+        answer_report_path=answers,
+    )
+
+    assert report["real_answers"]["answered"] == 140
+    assert report["real_answers"]["authoritative_answered"] == 130
+    assert report["real_answers"]["refused"] == 10
+    assert report["gates"]["question_answerability"] is True
+    assert report["gates"]["question_authoritative_hits"] is True
+    assert report["gates"]["core_scene_answerability"] is True

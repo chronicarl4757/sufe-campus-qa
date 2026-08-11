@@ -141,6 +141,8 @@ def assess_document(
     body_text: str,
     has_valid_attachment: bool,
     publish_date: str = "unknown",
+    *,
+    trusted_document_kind: str = "",
 ) -> QualityResult:
     """评估抓取文档是否值得入库。所有规则命中都会记录 reason，status 取最高优先级。"""
     reasons: list[str] = []
@@ -167,7 +169,7 @@ def assess_document(
 
     # 3) 导航污染：短无标点行占比过高，或命中多个站点页脚词
     lines = [ln.strip() for ln in body_text.splitlines() if ln.strip()]
-    if len(lines) >= _NAV_MIN_LINES:
+    if len(lines) >= _NAV_MIN_LINES and trusted_document_kind != "service_guide":
         short = sum(1 for ln in lines if len(ln) <= _SHORT_LINE_MAX and not _PUNCT_RE.search(ln))
         if short / len(lines) > _SHORT_LINE_RATIO:
             reasons.append(f"短无标点行占比 {short / len(lines):.0%}，疑似导航样板污染")

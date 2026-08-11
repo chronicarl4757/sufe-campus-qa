@@ -10,6 +10,7 @@ Run: python -m pytest tests/test_engine_pipeline.py -v
 from __future__ import annotations
 
 import json
+from dataclasses import replace
 from types import SimpleNamespace
 
 import fitz
@@ -18,6 +19,7 @@ import pytest
 from sufe_qa.crawler.engine import (
     CrawlOptions,
     CrawlReport,
+    CrawledArticle,
     attachment_filename,
     crawl_category,
     filename_from_disposition,
@@ -26,7 +28,7 @@ from sufe_qa.crawler.fetcher import FetchResult
 from sufe_qa.crawler.state import CrawlState
 from sufe_qa.ingest.attachment_parsers import parse_attachment
 from sufe_qa.ingest.pipeline import ingest_crawled_articles
-from sufe_qa.schema import DocMeta, doc_id_from, load_manifest, load_relations
+from sufe_qa.schema import DocMeta, append_manifest, doc_id_from, load_manifest, load_relations
 
 BASE = "https://gs.sufe.edu.cn"
 
@@ -388,6 +390,40 @@ def test_parent_child_ingested_together(routes, tmp_path):
     assert report.final_indexed == 3
 
 
+def test_official_service_guide_keeps_public_contact_phone(routes, tmp_path):
+    from dataclasses import replace
+
+    arts, _, _ = _crawl(routes)
+    service = replace(
+        arts[1],
+        title="快递邮寄服务指南",
+        body_text=(
+            "学校公开快递服务信息：国定路校区菜鸟驿站服务时间为每日九时至十九时，"
+            "公开服务电话为13812345678；如需查询邮件或反馈服务问题，可在服务时间内联系。"
+            "三门路园区和中山北一路校区也分别设有快递服务点，各服务点公开地址、营业时间"
+            "和联系电话，学生应按所在校区查询，并在营业时间内凭有效取件信息办理。"
+        ),
+        document_kind_hint="service_guide",
+    )
+    corpus = tmp_path / "corpus"
+    stats = ingest_crawled_articles(
+        [service],
+        category="校园生活",
+        corpus_dir=corpus,
+        manifest_path=corpus / "manifest.jsonl",
+        relations_path=corpus / "relations.jsonl",
+        source_type="official_department",
+        source_section="快递邮寄",
+        scope_unit="全体学生",
+    )
+
+    meta = next(iter(load_manifest(corpus / "manifest.jsonl").values()))
+    assert stats.count("new") == 1
+    assert meta.document_kind == "service_guide"
+    assert meta.quality_status == "accepted"
+    assert (corpus / meta.file_path).is_file()
+
+
 def test_incomplete_document_when_attachment_fails(routes, tmp_path):
     del routes[f"{BASE}/_upload/files/impl2025.pdf"]  # 附件 404
     arts, report, _ = _crawl(routes)
@@ -414,6 +450,77 @@ def test_incremental_noop_second_run(routes, tmp_path):
     stats2 = _ingest(tmp_path, arts2)
     assert stats2.count("new") == 0 and stats2.count("updated") == 0
     assert stats2.count("unchanged") == 3
+
+
+def test_unchanged_attachment_refreshes_lifecycle_metadata(routes, tmp_path):
+    arts, _, _ = _crawl(routes)
+    _ingest(tmp_path, arts)
+    manifest_path = tmp_path / "corpus" / "manifest.jsonl"
+    attachment = next(
+        meta
+        for meta in load_manifest(manifest_path).values()
+        if meta.document_type == "attachment"
+    )
+    append_manifest(
+        manifest_path,
+        [
+            replace(
+                attachment,
+                retention_status="historical",
+                retention_reason="stale_test_state",
+                canonical_doc_id="stale-parent",
+            )
+        ],
+    )
+
+    arts2, _, _ = _crawl(routes)
+    _ingest(tmp_path, arts2)
+    refreshed = load_manifest(manifest_path)[attachment.doc_id]
+
+    assert refreshed.retention_status == "active"
+    assert refreshed.retention_reason == "all_history"
+    assert refreshed.canonical_doc_id == ""
+
+
+def test_untyped_duplicate_section_does_not_downgrade_explicit_service_guide(tmp_path):
+    body = (
+        "门诊部位于清真食堂西南侧，毗邻科研大楼。工作日开放时间为上午八点至十一点半，"
+        "下午一点半至五点。学生就诊时应携带校园卡，急诊值班电话为65904201。"
+    )
+    article = CrawledArticle(
+        requested_url="https://yljk.sufe.edu.cn/10/90/c1401a200848/page.htm",
+        final_url="https://yljk.sufe.edu.cn/10/90/c1401a200848/page.htm",
+        title="上海财经大学门诊部就诊导航",
+        publish_date="2023-05-26",
+        publisher="上海财经大学医疗健康服务中心",
+        html="",
+        body_text=body,
+        attachments=[],
+        status="ok",
+        errors=[],
+        document_kind_hint="service_guide",
+    )
+    corpus = tmp_path / "corpus"
+    common = {
+        "category": "校园生活",
+        "corpus_dir": corpus,
+        "manifest_path": corpus / "manifest.jsonl",
+        "relations_path": corpus / "relations.jsonl",
+        "source_type": "official_department",
+        "scope_unit": "全体学生",
+    }
+    ingest_crawled_articles([article], source_section="门诊部就诊导航", **common)
+    ingest_crawled_articles(
+        [replace(article, document_kind_hint="")],
+        source_section="报销通知",
+        **common,
+    )
+
+    meta = load_manifest(corpus / "manifest.jsonl")[doc_id_from(article.final_url)]
+    assert meta.document_kind == "service_guide"
+    assert meta.source_section == "门诊部就诊导航"
+    assert meta.retention_status == "active"
+    assert meta.file_path
 
 
 def test_parse_failure_keeps_previous_valid_doc(routes, tmp_path):

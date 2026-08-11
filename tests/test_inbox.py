@@ -8,6 +8,11 @@ def test_scan_sensitive_finds_id_and_phone():
     assert scan_sensitive("普通政策文本") == []
 
 
+def test_scan_sensitive_can_allow_public_service_phone_but_never_id():
+    text = "服务电话 13812345678；身份证号 310101199901011234"
+    assert scan_sensitive(text, allow_phone=True) == ["310101199901011234"]
+
+
 def test_ingest_writes_corpus_and_manifest(tmp_path):
     inbox, corpus, manifest = (
         tmp_path / "inbox",

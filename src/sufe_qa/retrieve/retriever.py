@@ -28,6 +28,38 @@ _HISTORICAL_INTENT_RE = re.compile(
 # 次级 collection 合入的命中上限，避免公示/历史内容挤占主问答证据位
 SECONDARY_COLLECTION_TOP_N = 3
 
+_TIME_BOUND_DOCUMENT_KINDS = frozenset(
+    {"annual_notice", "public_list", "news", "event", "promotion"}
+)
+
+_QUERY_EXPANSIONS = (
+    (re.compile(r"校医院"), "门诊部 医疗健康服务中心 就诊导航 地理位置"),
+    (re.compile(r"毕业去向"), "毕业去向管理 我的毕业去向 就业综合管理服务平台"),
+    (re.compile(r"挂科"), "课程不及格 参评学年 不具有申请资格"),
+    (
+        re.compile(r"家庭经济困难.*认定|困难学生.*认定"),
+        "家庭经济困难学生认定 认定程序 认定对象 申请材料",
+    ),
+    (
+        re.compile(r"灵活就业"),
+        "自由职业 其他录用形式 自主创业 毕业去向管理 我的毕业去向 毕业去向登记",
+    ),
+    (
+        re.compile(r"考上研究生.*三方|升学.*三方"),
+        "升学 交回协议书 违约改签 就业指导办公室",
+    ),
+    (
+        re.compile(r"成绩.*异议|成绩.*复核"),
+        "期末成绩 成绩发布后7日 成绩复核",
+    ),
+)
+
+
+def expand_query(question: str) -> str:
+    """补充校内稳定同义称谓；保留原问题，不改变门控阈值。"""
+    additions = [terms for pattern, terms in _QUERY_EXPANSIONS if pattern.search(question)]
+    return " ".join((question, *additions)) if additions else question
+
 
 def route_collections(question: str) -> tuple[str, ...]:
     """按问题意图选择检索的 collection；主问答库始终在首位。"""
@@ -91,6 +123,15 @@ def recency_weight(publish_date: str, today: date | None = None) -> float:
         return 0.7
     years_old = max(0, today.year - int(m.group(1)))
     return max(0.4, 0.85**years_old)
+
+
+def retrieval_time_weight(
+    document_kind: str, publish_date: str, today: date | None = None
+) -> float:
+    """仅对年度性内容做时间衰减；长期制度和指南由版本证据决定权重。"""
+    if document_kind not in _TIME_BOUND_DOCUMENT_KINDS:
+        return 1.0
+    return recency_weight(publish_date, today)
 
 
 @dataclass
@@ -180,10 +221,11 @@ class HybridRetriever:
         if total == 0:
             return []
         self._ensure_corpus(view)
+        retrieval_query = expand_query(question)
 
         # 向量路：cosine space，similarity = 1 - distance
         res = view.col.query(
-            query_embeddings=self._embedder.encode([question]),
+            query_embeddings=self._embedder.encode([retrieval_query]),
             n_results=min(s.vector_top_k, total),
             include=["distances"],
         )
@@ -193,7 +235,7 @@ class HybridRetriever:
         # 词面路：每个 collection 有自己的 BM25 语料，不跨库混合。
         bm_ids: list[str] = []
         if view.bm25 is not None:
-            scores = view.bm25.get_scores(tokenize(question))
+            scores = view.bm25.get_scores(tokenize(retrieval_query))
             ranked = sorted(range(len(scores)), key=lambda i: scores[i], reverse=True)
             bm_ids = [view.bm25_ids[i] for i in ranked[: s.bm25_top_k] if scores[i] > 0]
 
@@ -203,7 +245,14 @@ class HybridRetriever:
             candidates,
             key=lambda cid: (
                 fused[cid]
-                * recency_weight(str(view.store.get(cid, ("", {}))[1].get("publish_date", "")))
+                * retrieval_time_weight(
+                    str(
+                        view.store.get(cid, ("", {}))[1].get(
+                            "document_kind", "incomplete"
+                        )
+                    ),
+                    str(view.store.get(cid, ("", {}))[1].get("publish_date", "")),
+                )
                 * float(view.store.get(cid, ("", {}))[1].get("boost", 1.0) or 1.0)
             ),
             reverse=True,

@@ -172,15 +172,16 @@ def _load_indexable(settings: Settings) -> tuple[dict[str, _Indexable], int]:
     for group in active_series.values():
         if len(group) < 2:
             continue
-        group_ids = {item.meta.doc_id for item in group}
-        declared = {
-            item.meta.canonical_doc_id for item in group if item.meta.canonical_doc_id in group_ids
-        }
-        canonical_id = (
-            next(iter(declared))
-            if len(declared) == 1
-            else max(group, key=lambda item: (item.meta.publish_date, item.meta.doc_id)).meta.doc_id
-        )
+        canonical_id = max(
+            group,
+            key=lambda item: (
+                item.meta.validity_status == "current",
+                item.meta.publish_date,
+                len(item.text),
+                item.meta.document_type == "attachment",
+                item.meta.doc_id,
+            ),
+        ).meta.doc_id
         for item in group:
             if item.meta.doc_id == canonical_id:
                 out[item.meta.doc_id] = replace(

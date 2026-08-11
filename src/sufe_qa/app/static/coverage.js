@@ -337,11 +337,16 @@ function renderDocuments(question) {
 function renderAnswerText(answerText, hits) {
   const container = element("div", "real-answer__content");
   const hitIndexes = new Set(hits.map((hit) => Number(hit.prompt_index)));
-  const pattern = /\[(\d{1,2})\]/g;
+  const pattern = /\[(\d{1,2})\]|\*\*([^*\n]+)\*\*/g;
   let cursor = 0;
   let match;
   while ((match = pattern.exec(answerText)) !== null) {
     container.appendChild(document.createTextNode(answerText.slice(cursor, match.index)));
+    if (match[2] !== undefined) {
+      container.appendChild(element("strong", "answer-strong", match[2]));
+      cursor = pattern.lastIndex;
+      continue;
+    }
     const index = Number(match[1]);
     const cite = element("button", "answer-citation", `[${index}]`);
     cite.type = "button";

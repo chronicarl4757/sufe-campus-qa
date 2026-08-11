@@ -179,6 +179,26 @@ sources:
         category: 学工事务
         scene: 国际交流
         time_policy: all_history
+      - name: 综合服务办事指南
+        list_url: https://gs.sufe.edu.cn/Home/List/80
+        category: 学工事务
+        scene: 研究生培养与学位
+        time_policy: all_history
+      - name: 综合服务常见问答
+        list_url: https://gs.sufe.edu.cn/Home/List/81
+        category: 学工事务
+        scene: 研究生培养与学位
+        time_policy: all_history
+      - name: 综合服务下载专区
+        list_url: https://gs.sufe.edu.cn/Home/List/82
+        category: 学工事务
+        scene: 研究生培养与学位
+        time_policy: all_history
+      - name: 综合服务通知
+        list_url: https://gs.sufe.edu.cn/Home/List/86
+        category: 学工事务
+        scene: 研究生培养与学位
+        time_policy: recent_5_school_years
 
   # ---- 2026-08-06 覆盖驱动扩展：就业/信息化/图书馆/后勤/医疗/财务/国际交流 ----
   - id: career
@@ -193,6 +213,12 @@ sources:
         category: 实习就业
         scene: 就业手续
         time_policy: all_history
+      - name: 就业流程
+        list_url: https://career.sufe.edu.cn/career/news/search/jylc
+        category: 实习就业
+        scene: 就业手续
+        time_policy: recent_5_school_years
+        title_include: 就业手续|三方|协议|网签|推荐表|档案|户口|毕业去向|解约|违约|指南|手续|登记
       - name: 信息公示
         list_url: https://career.sufe.edu.cn/career/news/search/xxgs
         category: 实习就业
@@ -236,54 +262,91 @@ sources:
         scene: 图书馆
         time_policy: all_history
         inline_article: "true"
+        document_kind: service_guide
       - name: 借阅规则
         list_url: https://lib.sufe.edu.cn/8365/list.htm
         category: 校园生活
         scene: 图书馆
         time_policy: all_history
         inline_article: "true"
+        document_kind: service_guide
       - name: 读者须知
         list_url: https://lib.sufe.edu.cn/8366/list.htm
         category: 校园生活
         scene: 图书馆
         time_policy: all_history
         inline_article: "true"
+        document_kind: service_guide
       - name: 违章处理
         list_url: https://lib.sufe.edu.cn/8367/list.htm
         category: 校园生活
         scene: 图书馆
         time_policy: all_history
         inline_article: "true"
+        document_kind: service_guide
       - name: 借阅服务
         list_url: https://lib.sufe.edu.cn/8326/list.htm
         category: 校园生活
         scene: 图书馆
         time_policy: all_history
         inline_article: "true"
+        document_kind: service_guide
+      - name: 图书借还
+        list_url: https://lib.sufe.edu.cn/8351/list.htm
+        category: 校园生活
+        scene: 图书馆
+        time_policy: all_history
+        inline_article: "true"
+        document_kind: service_guide
       - name: 续借及预约
         list_url: https://lib.sufe.edu.cn/8353/list.htm
         category: 校园生活
         scene: 图书馆
         time_policy: all_history
         inline_article: "true"
+        document_kind: service_guide
       - name: 馆际互借
         list_url: https://lib.sufe.edu.cn/8327/list.htm
         category: 校园生活
         scene: 图书馆
         time_policy: all_history
         inline_article: "true"
+        document_kind: service_guide
+      - name: 我要预约
+        list_url: https://lib.sufe.edu.cn/8328/list.htm
+        category: 校园生活
+        scene: 图书馆
+        time_policy: all_history
+        inline_article: "true"
+        document_kind: service_guide
+      - name: 自助打印
+        list_url: https://lib.sufe.edu.cn/8330/list.htm
+        category: 校园生活
+        scene: 图书馆
+        time_policy: all_history
+        inline_article: "true"
+        document_kind: service_guide
+      - name: 证件办理
+        list_url: https://lib.sufe.edu.cn/8354/list.htm
+        category: 校园生活
+        scene: 图书馆
+        time_policy: all_history
+        inline_article: "true"
+        document_kind: service_guide
       - name: 校外访问
         list_url: https://lib.sufe.edu.cn/8324/list.htm
         category: 校园生活
         scene: 图书馆
         time_policy: all_history
         inline_article: "true"
+        document_kind: service_guide
       - name: 联系我们
         list_url: https://lib.sufe.edu.cn/8346/list.htm
         category: 校园生活
         scene: 图书馆
         time_policy: all_history
         inline_article: "true"
+        document_kind: service_guide
 
   - id: hq
     adapter: wp3
@@ -292,6 +355,20 @@ sources:
     source_type: official_department
     scope_unit: 全体学生
     sections:
+      - name: 餐饮服务
+        list_url: https://hq.sufe.edu.cn/2727/list.htm
+        category: 校园生活
+        scene: 宿舍后勤
+        time_policy: all_history
+        inline_article: true
+        document_kind: service_guide
+      - name: 快递邮寄
+        list_url: https://hq.sufe.edu.cn/20012/list.htm
+        category: 校园生活
+        scene: 宿舍后勤
+        time_policy: all_history
+        inline_article: true
+        document_kind: service_guide
       - name: 学生服务资料
         list_url: https://hq.sufe.edu.cn/20020/list.htm
         category: 校园生活
@@ -304,11 +381,6 @@ sources:
         time_policy: all_history
       - name: 报修服务
         list_url: https://hq.sufe.edu.cn/20007/list.htm
-        category: 校园生活
-        scene: 宿舍后勤
-        time_policy: all_history
-      - name: 快递邮寄
-        list_url: https://hq.sufe.edu.cn/20012/list.htm
         category: 校园生活
         scene: 宿舍后勤
         time_policy: all_history
@@ -340,6 +412,13 @@ sources:
     source_type: official_department
     scope_unit: 全体学生
     sections:
+      - name: 门诊部就诊导航
+        list_url: https://yljk.sufe.edu.cn/10/90/c1401a200848/page.htm
+        category: 校园生活
+        scene: 医疗医保
+        time_policy: all_history
+        inline_article: true
+        document_kind: service_guide
       - name: 大学生医保
         list_url: https://yljk.sufe.edu.cn/12542/list.htm
         category: 校园生活

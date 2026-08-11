@@ -38,6 +38,7 @@ def _add_doc(
     retention_status: str = "active",
     series_key: str = "",
     canonical_doc_id: str = "",
+    document_type: str = "article",
 ) -> str:
     doc_id = doc_id_from(source)
     rel = f"材料/{doc_id}.md"
@@ -57,6 +58,7 @@ def _add_doc(
                 fetched_at="2026-08-01T00:00:00+08:00",
                 content_hash=f"sha256:{doc_id}",
                 file_path=rel,
+                document_type=document_type,
                 document_kind=kind,
                 quality_status="accepted",
                 retention_status=retention_status,
@@ -188,6 +190,53 @@ def test_indexer_defensively_folds_active_annual_series(tmp_path):
     }
     assert main_ids == {latest_id}
     assert historical_ids == {prior_id}
+
+
+def test_indexer_prefers_richer_same_date_attachment_over_title_only_parent(tmp_path):
+    settings = _settings(tmp_path)
+    series = "xsc|学生|家庭经济困难学生认定工作"
+    parent_source = "https://xsc.sufe.edu.cn/notice/2025"
+    parent_id = doc_id_from(parent_source)
+    parent_id = _add_doc(
+        settings,
+        parent_source,
+        "关于组织开展2025-2026学年家庭经济困难学生认定工作的通知",
+        "annual_notice",
+        "具体认定流程详见附件。",
+        series_key=series,
+        canonical_doc_id=parent_id,
+    )
+    attachment_id = _add_doc(
+        settings,
+        "https://xsc.sufe.edu.cn/files/hardship-2025.pdf",
+        "关于组织开展2025-2026学年家庭经济困难学生认定工作的通知.pdf",
+        "annual_notice",
+        (
+            "认定范围包括全日制本科生和研究生。学生登录上财门户，进入学工困难生认定"
+            "模块提交申请和证明材料；班级民主评议、学院审核并公示后，由学生工作处复核。"
+        ),
+        series_key=series,
+        canonical_doc_id=parent_id,
+        document_type="attachment",
+    )
+
+    update_index(settings, FakeEmbedder())
+    client = chromadb.PersistentClient(path=str(settings.chroma_dir))
+    main_ids = {
+        meta["doc_id"]
+        for meta in client.get_collection(settings.collection_name).get(
+            include=["metadatas"]
+        )["metadatas"]
+    }
+    historical_ids = {
+        meta["doc_id"]
+        for meta in client.get_collection(settings.historical_collection_name).get(
+            include=["metadatas"]
+        )["metadatas"]
+    }
+
+    assert attachment_id in main_ids
+    assert parent_id in historical_ids
 
 
 def test_legacy_unclassified_document_is_not_promoted_to_manual(tmp_path):

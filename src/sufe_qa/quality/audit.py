@@ -191,11 +191,13 @@ def audit_corpus(
     *,
     evaluated_at: date | None = None,
     time_policies: dict[tuple[str, str], str] | None = None,
+    trusted_document_kinds: set[tuple[str, str, str]] | None = None,
     relations_path: Path | None = None,
 ) -> DataQualityAudit:
     """读取 last-wins manifest 并给出迁移决策；不写任何输入文件。"""
     evaluated_at = evaluated_at or datetime.now(timezone.utc).date()
     time_policies = time_policies or {}
+    trusted_document_kinds = trusted_document_kinds or set()
     manifest = load_manifest(manifest_path)
     bodies = {doc_id: _body_for(meta, corpus_dir) for doc_id, meta in manifest.items()}
     relations_path = relations_path or manifest_path.with_name("relations.jsonl")
@@ -240,6 +242,11 @@ def audit_corpus(
             _is_curated_manual(meta)
             or _is_nic_service_guide(meta)
             or _is_curated_service_guide(meta)
+            or (
+                meta.source_type in {"official_department", "information_disclosure"}
+                and (meta.publisher, meta.source_section, meta.document_kind)
+                in trusted_document_kinds
+            )
         ):
             kind = meta.document_kind
         else:

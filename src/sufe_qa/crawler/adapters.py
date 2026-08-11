@@ -348,7 +348,7 @@ class BaseAdapter:
             category=section.category,
             source_type=section.source_type,
             scope_unit=section.scope_unit,
-            metadata={"inline": "true"},
+            metadata={**section.metadata, "inline": "true"},
         )
         return ListingResult(
             article_pages=[inline],
@@ -677,9 +677,14 @@ class CareerAdapter(BaseAdapter):
         publish_date = publish_date if re.match(r"\d{4}-\d{2}-\d{2}", publish_date) else "unknown"
         content_html = str(payload.get("newsContent") or "")
         body = ""
+        content_soup = BeautifulSoup(content_html, "html.parser")
         if content_html.strip():
-            body = _clean(BeautifulSoup(content_html, "html.parser").get_text("\n", strip=True))
-        attachments: list[AttachmentCandidate] = []
+            body = _clean(content_soup.get_text("\n", strip=True))
+        attachments = [
+            replace(candidate, source_page_url=spec.url)
+            for candidate in discover_attachments(content_soup, _CAREER_HOST + "/career/index")
+        ]
+        attachment_urls = {candidate.requested_url for candidate in attachments}
         raw_attach = str(payload.get("newsAttach") or "").strip()
         if raw_attach:
             try:
@@ -690,16 +695,20 @@ class CareerAdapter(BaseAdapter):
                 attach_url = str((entry or {}).get("attachUrl") or "").strip()
                 if not attach_url:
                     continue
+                # attachUrl 是应用相对路径，必须补 /career 上下文前缀。
+                requested_url = urljoin(_CAREER_HOST + "/career/", attach_url.lstrip("/"))
+                if requested_url in attachment_urls:
+                    continue
                 attachments.append(
                     AttachmentCandidate(
                         source_page_url=spec.url,
-                        # attachUrl 是应用相对路径，必须补 /career 上下文前缀
-                        requested_url=urljoin(_CAREER_HOST + "/career/", attach_url.lstrip("/")),
+                        requested_url=requested_url,
                         anchor_text=_clean(str((entry or {}).get("fileName") or "")),
                         candidate_score=1.0,
                         discovery_reason=["api_attach"],
                     )
                 )
+                attachment_urls.add(requested_url)
         return ArticleSpec(
             page=spec,
             title=title,

@@ -22,6 +22,9 @@ from sufe_qa.indexing.collections import (
 from sufe_qa.schema import load_manifest, load_relations, sha256_text
 
 _ATTACHMENT_REFERENCES = ("详见附件", "见附件", "点击下载", "申请表见附件", "办法见附件")
+_CORE_ANSWER_SCENES = frozenset(
+    {"本科教务", "研究生培养与学位", "奖助学金", "就业手续", "信息化与校园卡"}
+)
 
 
 def _collection_stats(settings: Settings) -> dict[str, dict]:
@@ -71,6 +74,7 @@ def _coverage_stats(path: Path | None) -> dict:
         return {
             "question_bank_version": "missing",
             "question_bank_hash": "missing",
+            "index_fingerprint": "missing",
             "total": 0,
             "answerable": 0,
             "partially_answerable": 0,
@@ -88,12 +92,76 @@ def _coverage_stats(path: Path | None) -> dict:
     return {
         "question_bank_version": data.get("question_bank_version", "unknown"),
         "question_bank_hash": data.get("question_bank_hash", "unknown"),
+        "index_fingerprint": data.get("index_fingerprint", "unknown"),
         "total": len(results),
         "answerable": counts["answerable"],
         "partially_answerable": counts["partially_answerable"],
         "not_answerable": counts["not_answerable"],
         "authoritative_hits": counts["answerable"] + counts["partially_answerable"],
         "wrong_department_hits": wrong_department,
+    }
+
+
+def _real_answer_stats(path: Path | None) -> dict:
+    if path is None or not path.is_file():
+        return {
+            "available": False,
+            "question_bank_version": "missing",
+            "question_bank_hash": "missing",
+            "index_fingerprint": "missing",
+            "total": 0,
+            "unique": 0,
+            "answered": 0,
+            "refused": 0,
+            "citation_issues": 0,
+            "errors": 0,
+            "authoritative_answered": 0,
+            "wrong_department_answered": 0,
+            "wrong_department_ids": [],
+            "scene_stats": {},
+        }
+    data = json.loads(path.read_text(encoding="utf-8"))
+    results = data.get("results") or []
+    counts = Counter(str(row.get("status", "error")) for row in results)
+    answered_rows = [row for row in results if row.get("status") == "answered"]
+    wrong_department_ids = sorted(
+        str(row.get("id", "")) for row in answered_rows if not bool(row.get("domain_match"))
+    )
+    by_scene: dict[str, Counter] = defaultdict(Counter)
+    for row in results:
+        scene = str(row.get("scene", "unknown"))
+        by_scene[scene]["total"] += 1
+        by_scene[scene][str(row.get("status", "error"))] += 1
+    scene_stats = {
+        scene: {
+            "total": scene_counts["total"],
+            "answered": scene_counts["answered"],
+            "refused": scene_counts["refused"],
+            "citation_issues": scene_counts["answered_with_citation_issue"],
+            "errors": scene_counts["error"],
+            "answer_rate": (
+                scene_counts["answered"] / scene_counts["total"]
+                if scene_counts["total"]
+                else 0.0
+            ),
+        }
+        for scene, scene_counts in sorted(by_scene.items())
+    }
+    return {
+        "available": True,
+        "question_bank_version": data.get("question_bank_version", "unknown"),
+        "question_bank_hash": data.get("question_bank_hash", "unknown"),
+        "index_fingerprint": data.get("index_fingerprint", "unknown"),
+        "total": len(results),
+        "unique": len({str(row.get("id", "")) for row in results}),
+        "answered": counts["answered"],
+        "refused": counts["refused"],
+        "citation_issues": counts["answered_with_citation_issue"],
+        "errors": counts["error"],
+        "authoritative_answered": sum(bool(row.get("domain_match")) for row in answered_rows),
+        "wrong_department_answered": len(wrong_department_ids),
+        "wrong_department_ids": wrong_department_ids,
+        "scene_stats": scene_stats,
     }
 
 
@@ -140,6 +208,7 @@ def verify_clean_pipeline(
     settings: Settings,
     *,
     coverage_path: Path | None = None,
+    answer_report_path: Path | None = None,
 ) -> dict:
     manifest = load_manifest(settings.manifest_path)
     relations = load_relations(settings.manifest_path.with_name("relations.jsonl"))
@@ -207,6 +276,21 @@ def verify_clean_pipeline(
     duplicate_groups = [ids for ids in hashes.values() if len(ids) > 1]
     collections = _collection_stats(settings)
     coverage = _coverage_stats(coverage_path)
+    real_answers = _real_answer_stats(answer_report_path)
+    real_answer_integrity = (
+        not real_answers["available"]
+        or (
+            real_answers["total"] == 150
+            and real_answers["unique"] == 150
+            and real_answers["question_bank_hash"] == coverage["question_bank_hash"]
+            and real_answers["index_fingerprint"] == coverage["index_fingerprint"]
+        )
+    )
+    core_scene_answerability = not real_answers["available"] or all(
+        scene in real_answers["scene_stats"]
+        and real_answers["scene_stats"][scene]["answer_rate"] >= 0.9
+        for scene in _CORE_ANSWER_SCENES
+    )
     corpus = {
         "manifest_documents": len(manifest),
         "materialized_documents": len(materialized),
@@ -241,8 +325,18 @@ def verify_clean_pipeline(
         "annual_series_canonical": not duplicate_active_series,
         "collection_isolation": all(not item["invalid_documents"] for item in collections.values()),
         "attachment_completeness": not attachment_reference_violations,
-        "question_authoritative_hits": coverage["authoritative_hits"] >= 120,
-        "question_answerability": coverage["answerable"] >= 120,
+        "question_authoritative_hits": (
+            real_answers["authoritative_answered"] >= 120
+            if real_answers["available"]
+            else coverage["authoritative_hits"] >= 120
+        ),
+        "question_answerability": (
+            real_answers["answered"] >= 120
+            if real_answers["available"]
+            else coverage["answerable"] >= 120
+        ),
+        "real_answer_integrity": real_answer_integrity,
+        "core_scene_answerability": core_scene_answerability,
         "wrong_department_hits": coverage["wrong_department_hits"] == 0,
     }
     return {
@@ -253,6 +347,7 @@ def verify_clean_pipeline(
         "collections": collections,
         "crawl_sites": _crawl_report_stats(settings),
         "coverage": coverage,
+        "real_answers": real_answers,
         "gates": gates,
         "passed": all(gates.values()),
     }

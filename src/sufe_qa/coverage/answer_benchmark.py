@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import json
 import os
+import re
 import time
 import uuid
 from collections import Counter
@@ -172,6 +173,18 @@ def _snapshots(hits: list[Hit]) -> tuple[RealAnswerHit, ...]:
     return tuple(RealAnswerHit.from_hit(hit, index) for index, hit in enumerate(hits, 1))
 
 
+def _is_model_evidence_refusal(answer_text: str) -> bool:
+    """识别模型基于证据不足作出的自然语言拒答，避免误报为引用异常。"""
+    first_paragraph = re.split(r"\n\s*\n", answer_text.strip(), maxsplit=1)[0]
+    first_sentence = first_paragraph.split("。", 1)[0]
+    evidence_context = any(word in first_sentence for word in ("资料", "依据", "文档", "来源"))
+    missing_evidence = any(
+        phrase in first_sentence
+        for phrase in ("未提及", "未明确提及", "未找到", "没有找到", "无法确定", "无法从")
+    )
+    return evidence_context and missing_evidence
+
+
 def _base_result(
     probe: QuestionProbe,
     *,
@@ -229,6 +242,16 @@ def _generate_from_hits(
             "has_citation": check.has_citation,
             "invalid_refs": check.invalid_refs,
         }
+        if _is_model_evidence_refusal(answer_text):
+            return _base_result(
+                probe,
+                status="refused",
+                answer_text=answer_text,
+                refused=True,
+                citation_check=None,
+                hits=hits,
+                started=started,
+            )
         return _base_result(
             probe,
             status="answered" if check.ok else "answered_with_citation_issue",

@@ -109,6 +109,78 @@ def test_generate_real_answer_marks_missing_citations(tmp_path, monkeypatch):
     assert result.citation_check["ok"] is False
 
 
+def test_generate_real_answer_marks_model_evidence_refusal_as_refused(tmp_path, monkeypatch):
+    monkeypatch.setenv("SUFE_QA_DATA_DIR", str(tmp_path))
+    settings = load_settings()
+    result = generate_real_answer(
+        _probe(),
+        settings,
+        _Retriever([_hit()]),
+        lambda: _TextLLM(
+            "根据已收录的资料，未提及该事项的具体办理流程。建议咨询相关职能部门。"
+        ),
+    )
+
+    assert result.status == "refused"
+    assert result.refused is True
+    assert result.citation_check is None
+
+
+def test_generate_real_answer_marks_cited_evidence_refusal_as_refused(
+    tmp_path, monkeypatch
+):
+    monkeypatch.setenv("SUFE_QA_DATA_DIR", str(tmp_path))
+    settings = load_settings()
+    result = generate_real_answer(
+        _probe(),
+        settings,
+        _Retriever([_hit()]),
+        lambda: _TextLLM(
+            "已收录的资料中未提及该事项的具体办理流程[1]。建议咨询相关职能部门。"
+        ),
+    )
+
+    assert result.status == "refused"
+    assert result.refused is True
+    assert result.citation_check is None
+
+
+def test_generate_real_answer_keeps_supported_answer_with_trailing_gap_note(
+    tmp_path, monkeypatch
+):
+    monkeypatch.setenv("SUFE_QA_DATA_DIR", str(tmp_path))
+    settings = load_settings()
+    result = generate_real_answer(
+        _probe(),
+        settings,
+        _Retriever([_hit()]),
+        lambda: _TextLLM("申请人须提交医院证明并报教务处审批[1]。资料未提及办理地点。"),
+    )
+
+    assert result.status == "answered"
+    assert result.refused is False
+
+
+def test_generate_real_answer_keeps_supported_composite_answer_with_later_gap(
+    tmp_path, monkeypatch
+):
+    monkeypatch.setenv("SUFE_QA_DATA_DIR", str(tmp_path))
+    settings = load_settings()
+    result = generate_real_answer(
+        _probe(),
+        settings,
+        _Retriever([_hit()]),
+        lambda: _TextLLM(
+            "根据已收录资料，回答如下：\n\n"
+            "1. 资料未提及申请表填错的处理。\n"
+            "2. 因病申请应提交医院证明，并报教务处审批[1]。"
+        ),
+    )
+
+    assert result.status == "answered"
+    assert result.refused is False
+
+
 def test_generate_real_answer_preserves_gate_refusal_without_calling_llm(tmp_path, monkeypatch):
     monkeypatch.setenv("SUFE_QA_DATA_DIR", str(tmp_path))
     settings = load_settings()
