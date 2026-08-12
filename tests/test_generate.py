@@ -124,3 +124,21 @@ def test_gated_citation_stream_validates_tail_without_delimiter():
     assert next(it) == "完整句[1]。"
     with pytest.raises(CitationGateError):
         list(it)
+
+
+def test_validate_citations_multi_digit_and_zero_refs():
+    check = validate_citations("依据资料[100]与[999999]，结论成立。", 5)
+    assert not check.ok
+    assert check.invalid_refs == [100, 999999]
+    check = validate_citations("编号[0]越界。", 5)
+    assert check.invalid_refs == [0]
+    check = validate_citations("范围内[1][5]通过。", 5)
+    assert check.ok
+
+
+def test_gated_citation_stream_blocks_multi_digit_ref():
+    it = gated_citation_stream(iter(["第一句成立[1]。", "第二句越界[100]。"]), 3)
+    assert next(it) == "第一句成立[1]。"
+    with pytest.raises(CitationGateError) as exc_info:
+        list(it)
+    assert exc_info.value.invalid_refs == [100]

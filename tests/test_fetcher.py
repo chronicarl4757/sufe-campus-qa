@@ -264,3 +264,34 @@ def test_dns_resolution_failure_falls_through_to_network_error(monkeypatch):
     f = _fetcher(_ok_handler(), allow_private=False)
     # MockTransport 不经过真实连接，precheck 放行后由 mock 正常应答
     assert f.fetch(f"http://{HOST}/x").status == "ok"
+
+
+def test_dns_rebinding_rechecked_for_public_hostname(monkeypatch):
+    """公网解析结果不缓存：同一实例内域名 rebinding 到私网后必须拦截。"""
+    import socket
+
+    answers = [
+        [(2, 1, 6, "", ("93.184.216.34", 80))],
+        [(2, 1, 6, "", ("127.0.0.1", 80))],
+    ]
+    monkeypatch.setattr(socket, "getaddrinfo", lambda *a, **k: answers.pop(0))
+    f = _fetcher(_ok_handler(), allow_private=False)
+    assert f.fetch(f"http://{HOST}/x").status == "ok"
+    assert f.fetch(f"http://{HOST}/x").status == "private_address_blocked"
+
+
+def test_private_dns_result_sticks(monkeypatch):
+    """私网解析结果持续阻断，后续请求不再解析（缓存只记私网）。"""
+    import socket
+
+    calls = []
+
+    def fake_getaddrinfo(*a, **k):
+        calls.append(1)
+        return [(2, 1, 6, "", ("127.0.0.1", 80))]
+
+    monkeypatch.setattr(socket, "getaddrinfo", fake_getaddrinfo)
+    f = _fetcher(_ok_handler(), allow_private=False)
+    assert f.fetch(f"http://{HOST}/x").status == "private_address_blocked"
+    assert f.fetch(f"http://{HOST}/x").status == "private_address_blocked"
+    assert len(calls) == 1  # 第二次命中私网缓存，未重新解析

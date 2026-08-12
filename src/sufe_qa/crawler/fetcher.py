@@ -189,7 +189,8 @@ class SafeFetcher:
         self._sleep = sleep
         self._robots = RobotsCache(self._client, ua)
         self._last_req: dict[str, float] = {}
-        self._dns_private: dict[str, bool] = {}  # 主机名 -> DNS 解析后是否私网（按实例缓存）
+        # 主机名 -> 已确认私网（只缓存私网结果；公网结果每次重新解析，防 DNS rebinding）
+        self._dns_private: dict[str, bool] = {}
 
     def close(self) -> None:
         if self._own:
@@ -217,9 +218,13 @@ class SafeFetcher:
             return False  # 字面公网 IP，无需解析
         except ValueError:
             pass
-        if h not in self._dns_private:
-            self._dns_private[h] = any(_ip_is_private(ip) for ip in _resolve_host_ips(h))
-        return self._dns_private[h]
+        if self._dns_private.get(h):
+            return True  # 私网结果持续阻断
+        # 公网结果不缓存：DNS rebinding 后下次请求必须重新解析
+        if any(_ip_is_private(ip) for ip in _resolve_host_ips(h)):
+            self._dns_private[h] = True
+            return True
+        return False
 
     def _precheck(self, url: str, via_redirect: bool) -> str | None:
         """返回失败状态或 None（放行）。每一步重定向都要完整重跑。"""

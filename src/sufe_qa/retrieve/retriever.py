@@ -178,10 +178,8 @@ class HybridRetriever:
             name = collection_name_for(self._settings, key)
             try:
                 col = self._client.get_collection(name)
-            except ValueError as e:
-                raise RuntimeError(
-                    f"索引 collection {name} 不存在；请先运行 index 构建索引"
-                ) from e
+            except (ValueError, chromadb.errors.NotFoundError) as e:
+                raise RuntimeError(f"索引 collection {name} 不存在；请先运行 index 构建索引") from e
             view = _CollectionView(key=key, name=name, col=col)
             self._views[key] = view
         return view

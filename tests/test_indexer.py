@@ -244,3 +244,112 @@ def test_incremental_rejects_embedder_mismatch(tmp_path):
     assert r.added_docs == 1
     # 重建后同模型增量恢复可用
     assert update_index(s, OtherEmbedder()).added_docs == 0
+
+
+class _CountingEmbedder(FakeEmbedder):
+    def __init__(self) -> None:
+        super().__init__()
+        self.calls = 0
+
+    def encode(self, texts):
+        self.calls += 1
+        return super().encode(texts)
+
+
+class _RecordingEmbedder(FakeEmbedder):
+    def __init__(self) -> None:
+        super().__init__()
+        self.seen: list[str] = []
+
+    def encode(self, texts):
+        self.seen.extend(texts)
+        return super().encode(texts)
+
+
+def _append_doc_row(s, doc_id, category, fname, title, content_hash, publish_date="unknown"):
+    append_manifest(
+        s.manifest_path,
+        [
+            DocMeta(
+                doc_id=doc_id,
+                title=title,
+                source_url="inbox/x",
+                publisher="学生工作部",
+                publish_date=publish_date,
+                category=category,
+                fetched_at="t2",
+                content_hash=content_hash,
+                file_path=f"{category}/{fname}",
+                retention_status="active",
+                retention_reason="test_fixture",
+            )
+        ],
+    )
+
+
+def test_title_change_triggers_reembedding_with_new_title(tmp_path):
+    """title 是 embedding 输入前缀：正文/content_hash 不变、title 变 → 必须重 embed。"""
+    s = _settings(tmp_path)
+    _write_doc(s, "docA", "奖助学金", "a.md", "第一条 奖学金标准。", "奖学金办法", "sha256:aaaa")
+    emb = _RecordingEmbedder()
+    update_index(s, emb)
+    assert emb.seen and all(t.startswith("奖学金办法\n") for t in emb.seen)
+
+    emb.seen.clear()
+    _append_doc_row(s, "docA", "奖助学金", "a.md", "国家奖学金实施细则", "sha256:aaaa")
+    r = update_index(s, emb)
+
+    assert r.updated_docs == 1 and r.meta_updated_docs == 0
+    assert emb.seen, "title 变化必须重新 embedding"
+    assert all(t.startswith("国家奖学金实施细则\n") for t in emb.seen)
+    assert all("第一条 奖学金标准。" in t for t in emb.seen)
+
+
+def test_second_run_is_true_noop_without_reembedding(tmp_path):
+    """title/正文/metadata 全不变：第二次 index 不触发 embed，也无 metadata 刷新。"""
+    s = _settings(tmp_path)
+    _write_doc(s, "docA", "奖助学金", "a.md", "第一条 奖学金标准。", "奖学金办法", "sha256:aaaa")
+    emb = _CountingEmbedder()
+    update_index(s, emb)
+
+    emb.calls = 0
+    r = update_index(s, emb)
+    assert (r.added_docs, r.updated_docs, r.deleted_docs, r.meta_updated_docs) == (0, 0, 0, 0)
+    assert emb.calls == 0
+
+
+def test_incremental_rejects_existing_index_with_missing_metadata(tmp_path):
+    """已有 chunks 但 index_metadata.json 缺失：不得给旧索引重盖当前 metadata。"""
+    s = _settings(tmp_path)
+    _write_doc(s, "docA", "奖助学金", "a.md", "第一条 奖学金标准。", "奖学金办法", "sha256:aaaa")
+    update_index(s, FakeEmbedder())
+    (s.chroma_dir / "index_metadata.json").unlink()
+
+    with pytest.raises(RuntimeError, match="--full"):
+        update_index(s, FakeEmbedder())
+    # --full 重建后恢复
+    assert update_index(s, FakeEmbedder(), full=True).added_docs == 1
+    assert update_index(s, FakeEmbedder()).added_docs == 0
+
+
+def test_incremental_rejects_existing_index_with_corrupt_metadata(tmp_path):
+    s = _settings(tmp_path)
+    _write_doc(s, "docA", "奖助学金", "a.md", "第一条 奖学金标准。", "奖学金办法", "sha256:aaaa")
+    update_index(s, FakeEmbedder())
+    (s.chroma_dir / "index_metadata.json").write_text("{ not valid json", encoding="utf-8")
+
+    with pytest.raises(RuntimeError, match="--full"):
+        update_index(s, FakeEmbedder())
+    assert update_index(s, FakeEmbedder(), full=True).added_docs == 1
+    assert update_index(s, FakeEmbedder()).added_docs == 0
+
+
+def test_missing_metadata_with_empty_index_allows_first_build(tmp_path):
+    """无 metadata 且无 chunks 的首次构建放行（含空 manifest 场景）。"""
+    s = _settings(tmp_path)
+    assert not (s.chroma_dir / "index_metadata.json").exists()
+    r = update_index(s, FakeEmbedder())
+    assert r.added_docs == 0 and r.total_chunks == 0
+    # 空索引写出的 metadata 有效：删掉后无 chunks，仍按首次构建放行
+    (s.chroma_dir / "index_metadata.json").unlink()
+    assert update_index(s, FakeEmbedder()).added_docs == 0
