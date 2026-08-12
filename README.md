@@ -11,7 +11,7 @@ DeepSeek 生成**带 [n] 来源引用**的回答；检索不到可靠来源时�
 离线索引：
   crawler/(seeds.yaml 种子站 | discover-site 学院主页勘探→crawl-site)
   + data/inbox/(手动投放) + data/curated/(人工精编指南, front matter 元数据)
-  → SafeFetcher(安全抓取: 协议/私网/robots逐跳重检/限速/大小上限)
+  → SafeFetcher(安全抓取: 协议/私网含DNS解析/robots逐跳重检/限速/大小上限)
   → 栏目分页(listN.htm/下一页/?page=N) → 文章元数据解析(标题回退链/日期规范化)
   → 附件发现(a/iframe/embed/object 打分) → 下载(pdf.js 查看器解析) 
   → 解析(trafilatura/pymupdf/python-docx/openpyxl/LibreOffice适配)
@@ -25,7 +25,7 @@ DeepSeek 生成**带 [n] 来源引用**的回答；检索不到可靠来源时�
   → 时效重排(年更政策新版优先) × 类型权重(policy 1.1 / news 0.85)
   → 多样性截留(单文档≤3 chunk, 防长 PDF/同模板兄弟文档霸屏) → top-8
   → 向量最高相似度 < 门控阈值 → 拒答模板(不走 LLM)
-  → DeepSeek(流式, 严格引用 prompt + 后端引用编号校验) → 回答 + [n]引用 → 来源卡片
+  → DeepSeek(流式, 严格引用 prompt) → 句子级引用门禁(越界编号整答撤回) → 回答 + [n]引用 → 来源卡片
 
 Web 界面（FastAPI + SSE，app/）：
   红头档案设计语言——每次回答渲染为带文号/文武线/仿宋正文的"答复函"，
@@ -89,7 +89,7 @@ src/sufe_qa/
               inbox 收集  pipeline(父子文档入库/去重增量)
   indexing/   content_hash 增量索引（Chroma，只收 quality_status=accepted）
   retrieve/   向量 + BM25 + RRF 融合，置信门控，时效×类型重排
-  generate/   DeepSeek 流式客户端、严格引用 prompt + 引用编号校验、来源卡片
+  generate/   DeepSeek 流式客户端、严格引用 prompt + 引用编号校验/门禁、来源卡片
   evals/      评测集加载、打分、门禁
   app/        FastAPI + SSE 服务、静态前端（红头档案界面）
   cli.py      crawl / discover-site / crawl-site / crawl-report / ingest / index / ask / eval / serve

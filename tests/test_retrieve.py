@@ -88,8 +88,66 @@ def test_rrf_fuse_scores_and_order():
 
 
 def test_search_empty_index_returns_nothing(settings):
+    update_index(settings, FakeEmbedder())  # 空 manifest：索引存在但无文档
     r = HybridRetriever(settings, FakeEmbedder())
     assert r.search("推免条件") == []
+
+
+def test_retriever_fails_fast_without_index(settings):
+    """serving 不得静默创建空 collection：索引缺失时启动即报错。"""
+    with pytest.raises(RuntimeError, match="index_metadata"):
+        HybridRetriever(settings, FakeEmbedder())
+
+
+def test_retriever_fails_fast_on_embedder_mismatch(settings):
+    _seed(settings, {"tuimian.md": "推免工作实施办法 第一条 申请条件。"})
+
+    class OtherEmbedder(FakeEmbedder):
+        model_name = "other-model-v9"
+
+    with pytest.raises(RuntimeError, match="embedding_model"):
+        HybridRetriever(settings, OtherEmbedder())
+
+
+def test_hot_index_update_invalidates_corpus_cache(settings):
+    """chunk 数不变的热更新后，同一 retriever 必须读到新正文（按索引指纹失效）。"""
+    from sufe_qa.schema import DocMeta, append_manifest
+
+    doc_id = doc_id_from("test/tuimian.md")
+
+    def write(body: str, content_hash: str) -> None:
+        (settings.corpus_dir / "tuimian.md").write_text(
+            f"# 推免办法\n\n{body}\n", encoding="utf-8"
+        )
+        append_manifest(
+            settings.manifest_path,
+            [
+                DocMeta(
+                    doc_id=doc_id,
+                    title="推免办法",
+                    source_url="test/tuimian.md",
+                    publisher="测试单位",
+                    publish_date="2026-01-01",
+                    category="学工事务",
+                    fetched_at="t",
+                    content_hash=content_hash,
+                    file_path="tuimian.md",
+                    retention_status="active",
+                    retention_reason="test_fixture",
+                )
+            ],
+        )
+        update_index(settings, FakeEmbedder())
+
+    write("推免申请条件：应届本科毕业生，品德良好，遵纪守法。", "sha256:v1")
+    r = HybridRetriever(settings, FakeEmbedder())
+    hits = r.search("推免 申请 条件")
+    assert hits and "遵纪守法" in hits[0].text
+
+    # 等长改文（chunk 数不变）：旧实现按 count 判缓存，这里会读到旧正文
+    write("推免申请条件：应届本科毕业生，品德良好，学风端正。", "sha256:v2")
+    hits = r.search("推免 申请 条件")
+    assert hits and "学风端正" in hits[0].text
 
 
 def test_search_bm25_recovers_exact_terms(settings):

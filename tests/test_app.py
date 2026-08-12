@@ -388,7 +388,8 @@ class _BoomStreamLLM:
     """流中途抛错，模拟 DeepSeek 连接中断。"""
 
     def stream_chat(self, messages):
-        yield "前半段"
+        # 引用门禁按句缓冲：完整句子才下发，首段以句号结尾保证有 token 事件
+        yield "前半段[1]。"
         raise RuntimeError("模拟断流")
 
 
@@ -422,7 +423,7 @@ def test_ask_concurrency_gate(client_factory):
 def test_ask_stream_break_emits_error_event(client_factory):
     client = client_factory(llm=_BoomStreamLLM())
     ev = _events(client.post("/api/ask", json={"question": QUESTION}).text)
-    assert ev["token"][0]["text"] == "前半段"
+    assert ev["token"][0]["text"] == "前半段[1]。"
     assert "模拟断流" in ev["error"][0]["message"]
     assert "done" not in ev
     # 并发闸在 finally 释放：后续请求不被卡死
@@ -434,15 +435,50 @@ def test_ask_sources_carry_citation_check(client):
     assert ev["sources"][0]["citation_check"]["ok"] is True
 
 
-def test_ask_invalid_citation_flagged(client_factory):
+def test_ask_invalid_citation_blocked_by_gate(client_factory):
+    """越界引用句在发出前被门禁拦截：用户只看到撤回提示，看不到 [99]。"""
+
     class BadCiteLLM:
         def stream_chat(self, messages):
             yield "依据资料[1]与[99]，结论成立。"
 
     client = client_factory(llm=BadCiteLLM())
     ev = _events(client.post("/api/ask", json={"question": QUESTION}).text)
+    assert not ev.get("token"), "越界引用句不应作为 token 发出"
+    assert ev["error"][0]["kind"] == "citation_gate"
+    assert "sources" not in ev and "done" not in ev
+
+
+def test_ask_citation_gate_revokes_after_valid_prefix(client_factory):
+    """合法句已下发后才发现越界引用：整卡撤回，已发句不再展示。"""
+
+    class MixedCiteLLM:
+        def stream_chat(self, messages):
+            yield "第一句有据[1]。"
+            yield "第二句越界[9]，"
+            yield "仍继续。"
+
+    client = client_factory(llm=MixedCiteLLM())
+    ev = _events(client.post("/api/ask", json={"question": QUESTION}).text)
+    assert [t["text"] for t in ev["token"]] == ["第一句有据[1]。"]
+    assert ev["error"][0]["kind"] == "citation_gate"
+    assert "done" not in ev
+    # 并发闸在 finally 释放：后续请求不被卡死
+    assert "event: meta" in client.post("/api/ask", json={"question": QUESTION}).text
+
+
+def test_ask_no_citation_answer_warns_but_not_revoked(client_factory):
+    """全文无引用不触发门禁撤回，维持 citation_check 降级提示。"""
+
+    class NoCiteLLM:
+        def stream_chat(self, messages):
+            yield "这是一段没有引用编号的回答。"
+
+    client = client_factory(llm=NoCiteLLM())
+    ev = _events(client.post("/api/ask", json={"question": QUESTION}).text)
+    assert "error" not in ev
     check = ev["sources"][0]["citation_check"]
-    assert check["ok"] is False and check["invalid_refs"] == [99]
+    assert check["ok"] is False and check["invalid_refs"] == []
 
 
 def test_ask_refusal_citation_check_skipped(client):

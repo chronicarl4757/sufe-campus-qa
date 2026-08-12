@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import re
 from dataclasses import dataclass, field
 from datetime import date
@@ -16,7 +17,7 @@ from sufe_qa.indexing.collections import (
     collection_key_for_name,
     collection_name_for,
 )
-from sufe_qa.indexing.indexer import Embedder
+from sufe_qa.indexing.indexer import Embedder, verify_index_compatibility
 
 _WORD_RE = re.compile(r"\w+")
 
@@ -143,6 +144,8 @@ class _CollectionView:
     doc_titles: dict[str, str] = field(default_factory=dict)
     bm25: object | None = None
     bm25_ids: list[str] = field(default_factory=list)
+    # 构建 store/BM25 时的 index_fingerprint；索引重建（含 metadata-only 刷新）后失效
+    fingerprint: str = ""
 
 
 class HybridRetriever:
@@ -156,6 +159,8 @@ class HybridRetriever:
     ):
         self._settings = settings
         self._embedder = embedder
+        # 启动校验：索引缺失/与 embedder 不匹配时 fail-fast，不静默创建空库
+        verify_index_compatibility(settings, embedder)
         self._client = chromadb.PersistentClient(path=str(settings.chroma_dir))
         self._default_collection_key = collection_key_for_name(settings, collection)
         self._views: dict[str, _CollectionView] = {}
@@ -171,20 +176,41 @@ class HybridRetriever:
         view = self._views.get(key)
         if view is None:
             name = collection_name_for(self._settings, key)
-            col = self._client.get_or_create_collection(name, metadata={"hnsw:space": "cosine"})
+            try:
+                col = self._client.get_collection(name)
+            except ValueError as e:
+                raise RuntimeError(
+                    f"索引 collection {name} 不存在；请先运行 index 构建索引"
+                ) from e
             view = _CollectionView(key=key, name=name, col=col)
             self._views[key] = view
         return view
 
-    @staticmethod
-    def _ensure_corpus(view: _CollectionView) -> None:
-        """从当前 collection 拉全量文档构建独立 BM25；规模变化时重建。"""
+    def _index_fingerprint(self) -> str:
+        """当前 index_metadata.json 的指纹；缺失/损坏返回 ""（退化为 count 语义）。"""
+        try:
+            data = json.loads(
+                (self._settings.chroma_dir / "index_metadata.json").read_text(encoding="utf-8")
+            )
+        except (OSError, UnicodeError, ValueError):
+            return ""
+        if not isinstance(data, dict):
+            return ""
+        return str(data.get("index_fingerprint", ""))
+
+    def _ensure_corpus(self, view: _CollectionView) -> None:
+        """从当前 collection 拉全量文档构建独立 BM25；索引指纹或规模变化时重建。"""
         from rank_bm25 import BM25Okapi
 
+        fingerprint = self._index_fingerprint()
+        if (
+            view.bm25 is not None
+            and fingerprint == view.fingerprint
+            and view.col.count() == len(view.store)
+        ):
+            return
         data = view.col.get(include=["documents", "metadatas"])
         ids: list[str] = data.get("ids") or []
-        if len(ids) == len(view.store) and view.bm25 is not None:
-            return
         docs = data.get("documents") or []
         metas = data.get("metadatas") or []
         view.store = {cid: (d, m or {}) for cid, d, m in zip(ids, docs, metas, strict=True)}
@@ -195,6 +221,7 @@ class HybridRetriever:
                 view.doc_titles[doc_id] = str(meta.get("title", ""))
         view.bm25_ids = ids
         view.bm25 = BM25Okapi([tokenize(d) for d in docs]) if docs else None
+        view.fingerprint = fingerprint
 
     def search_routed(self, question: str) -> list[Hit]:
         """按问题意图检索多个 collection 并合并：主问答全量，次级 capped。"""

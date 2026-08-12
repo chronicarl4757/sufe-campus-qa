@@ -100,6 +100,8 @@ class IndexReport:
     collection_counts: dict[str, int] = field(default_factory=dict)
     skipped_docs: int = 0
     backup_path: str | None = None
+    # 仅 metadata 变化、未重 embed 的文档数（含 chunk 布局变化回退重建的）
+    meta_updated_docs: int = 0
 
 
 @dataclass(frozen=True)
@@ -241,8 +243,23 @@ def _chunk_metadata(item: _Indexable, collection_name: str) -> dict[str, str | i
     }
 
 
+def _metadata_signature(base_metadata: dict) -> str:
+    """doc 级 chunk metadata 的签名：判断要不要刷新 Chroma metadata（不重 embed）。
+
+    覆盖 _chunk_metadata 的全部字段（含 content_hash）；不含 fetched_at，
+    抓取时间变化不会触发刷新。
+    """
+    payload = json.dumps(base_metadata, ensure_ascii=False, sort_keys=True).encode("utf-8")
+    return "sha256:" + hashlib.sha256(payload).hexdigest()[:16]
+
+
+def _base_metadata_with_sig(item: _Indexable, collection_name: str) -> dict:
+    base = _chunk_metadata(item, collection_name)
+    return {**base, "metadata_sig": _metadata_signature(base)}
+
+
 def _upsert_item(col, item: _Indexable, embedder: Embedder, collection_name: str) -> int:
-    base_metadata = _chunk_metadata(item, collection_name)
+    base_metadata = _base_metadata_with_sig(item, collection_name)
     chunks = split_document(item.text, item.meta.doc_id, base_metadata)
     if not chunks:
         return 0
@@ -256,19 +273,113 @@ def _upsert_item(col, item: _Indexable, embedder: Embedder, collection_name: str
     return len(chunks)
 
 
-def _existing_by_collection(client, settings: Settings) -> dict[str, dict[str, str]]:
-    existing: dict[str, dict[str, str]] = {}
+def _refresh_item_metadata(col, item: _Indexable, embedder: Embedder, collection_name: str) -> int:
+    """只刷新 Chroma metadata，不重 embed；返回整篇重建的 chunks 数（回退路径）。
+
+    正文未变（content_hash 相同）时 chunk 布局应与库中一致，直接 col.update
+    各 chunk 的 metadata；布局不一致（如 splitter 已升级）无法对齐，回退
+    delete + re-upsert 整篇重建。
+    """
+    base_metadata = _base_metadata_with_sig(item, collection_name)
+    chunks = split_document(item.text, item.meta.doc_id, base_metadata)
+    if not chunks:
+        return 0
+    existing_ids = set(col.get(where={"doc_id": item.meta.doc_id}).get("ids") or [])
+    if existing_ids != {c.chunk_id for c in chunks}:
+        col.delete(where={"doc_id": item.meta.doc_id})
+        return _upsert_item(col, item, embedder, collection_name)
+    col.update(
+        ids=[c.chunk_id for c in chunks],
+        metadatas=[{**c.metadata, "heading_path": c.heading_path} for c in chunks],
+    )
+    return 0
+
+
+def _existing_by_collection(client, settings: Settings) -> dict[str, dict[str, tuple[str, str]]]:
+    """各 collection 已索引的 doc_id -> (content_hash, metadata_sig)。"""
+    existing: dict[str, dict[str, tuple[str, str]]] = {}
     for key in (MAIN_QA_COLLECTION, PUBLIC_LIST_COLLECTION, HISTORICAL_COLLECTION):
         col = client.get_or_create_collection(
             collection_name_for(settings, key), metadata={"hnsw:space": "cosine"}
         )
         rows = col.get(include=["metadatas"]).get("metadatas") or []
         existing[key] = {
-            str(row["doc_id"]): str(row.get("content_hash", ""))
+            # 旧索引无 metadata_sig 字段取 ""，首轮增量走 metadata refresh 补齐
+            str(row["doc_id"]): (
+                str(row.get("content_hash", "")),
+                str(row.get("metadata_sig", "")),
+            )
             for row in rows
             if row and row.get("doc_id")
         }
     return existing
+
+
+def _read_index_metadata(index_dir: Path) -> dict | None:
+    """读取 index_metadata.json；缺失或损坏返回 None。"""
+    path = index_dir / "index_metadata.json"
+    if not path.is_file():
+        return None
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, json.JSONDecodeError):
+        return None
+    return data if isinstance(data, dict) else None
+
+
+def _compatibility_problems(data: dict, settings: Settings, embedder: Embedder) -> list[str]:
+    """索引元数据与当前 embedder/schema 的不一致项；空列表表示兼容。"""
+    problems: list[str] = []
+    schema = str(data.get("schema_version", ""))
+    if schema != settings.collection_schema_version:
+        problems.append(f"schema_version 索引={schema!r} 当前={settings.collection_schema_version!r}")
+    model = str(data.get("embedding_model", ""))
+    current_model = str(getattr(embedder, "model_name", ""))
+    if model != current_model:
+        problems.append(f"embedding_model 索引={model!r} 当前={current_model!r}")
+    indexed_test_only = bool(data.get("test_only", False))
+    if indexed_test_only != bool(getattr(embedder, "test_only", False)):
+        problems.append(f"test_only 索引={indexed_test_only} 当前={not indexed_test_only}")
+    return problems
+
+
+def _check_incremental_compatible(
+    settings: Settings, embedder: Embedder, index_dir: Path
+) -> None:
+    """增量索引守卫：索引必须出自当前 embedder 与 schema，否则拒绝并提示 --full。
+
+    旧索引没有 index_metadata.json 时无法校验，放行（本轮结束会补写）。
+    """
+    data = _read_index_metadata(index_dir)
+    if data is None:
+        return
+    problems = _compatibility_problems(data, settings, embedder)
+    if problems:
+        raise RuntimeError(
+            "索引与当前 embedder/schema 不匹配（"
+            + "；".join(problems)
+            + "），已拒绝增量索引；请先运行 index --full 重建"
+        )
+
+
+def verify_index_compatibility(settings: Settings, embedder: Embedder) -> None:
+    """serving 启动校验：索引必须存在且出自当前 embedder 与 schema。
+
+    配错数据目录、忘了 --full 重建、或误用 test_only 索引启动服务时，
+    在这里 fail-fast，而不是静默创建一个空 collection 一直拒答。
+    """
+    data = _read_index_metadata(settings.chroma_dir)
+    if data is None:
+        raise RuntimeError(
+            f"缺少 {settings.chroma_dir}/index_metadata.json：请先运行 index 构建索引"
+        )
+    problems = _compatibility_problems(data, settings, embedder)
+    if problems:
+        raise RuntimeError(
+            "索引与当前 embedder/schema 不匹配（"
+            + "；".join(problems)
+            + "）；请运行 index --full 重建后再启动服务"
+        )
 
 
 def _write_index_metadata(
@@ -341,6 +452,7 @@ def _write_index_metadata(
 
 
 def _build_incremental(settings: Settings, embedder: Embedder, index_dir: Path) -> IndexReport:
+    _check_incremental_compatible(settings, embedder, index_dir)
     client = chromadb.PersistentClient(path=str(index_dir))
     cols = {
         key: client.get_or_create_collection(
@@ -360,17 +472,29 @@ def _build_incremental(settings: Settings, embedder: Embedder, index_dir: Path) 
     changed_global: set[str] = set()
     added_global: set[str] = set()
     updated_global: set[str] = set()
+    meta_updated_global: set[str] = set()
     total_chunks = 0
     collection_counts: dict[str, int] = {}
 
     for key, col in cols.items():
         present = existing[key]
         wanted = desired[key]
+        collection_name = collection_name_for(settings, key)
         deleted = set(present) - set(wanted)
+        # 正文变化：delete + re-upsert，重 embed
         changed = {
             doc_id
             for doc_id, item in wanted.items()
-            if present.get(doc_id) != item.meta.content_hash
+            if present.get(doc_id, ("", ""))[0] != item.meta.content_hash
+        }
+        # 仅 metadata 变化（含旧索引首次补签名）：刷新 metadata，不重 embed
+        meta_only = {
+            doc_id
+            for doc_id, item in wanted.items()
+            if doc_id in present
+            and doc_id not in changed
+            and present[doc_id][1]
+            != _metadata_signature(_chunk_metadata(item, collection_name))
         }
         for doc_id in deleted | (changed & set(present)):
             col.delete(where={"doc_id": doc_id})
@@ -379,11 +503,11 @@ def _build_incremental(settings: Settings, embedder: Embedder, index_dir: Path) 
         added_global.update(changed - existing_global)
         updated_global.update(changed & existing_global)
         for doc_id in changed:
-            total_chunks += _upsert_item(
-                col,
-                wanted[doc_id],
-                embedder,
-                collection_name_for(settings, key),
+            total_chunks += _upsert_item(col, wanted[doc_id], embedder, collection_name)
+        for doc_id in meta_only:
+            meta_updated_global.add(doc_id)
+            total_chunks += _refresh_item_metadata(
+                col, wanted[doc_id], embedder, collection_name
             )
         collection_counts[key] = col.count()
 
@@ -397,6 +521,7 @@ def _build_incremental(settings: Settings, embedder: Embedder, index_dir: Path) 
         total_chunks=total_chunks,
         collection_counts=collection_counts,
         skipped_docs=skipped,
+        meta_updated_docs=len(meta_updated_global),
     )
 
 

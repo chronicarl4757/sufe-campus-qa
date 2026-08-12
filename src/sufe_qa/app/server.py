@@ -27,7 +27,12 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
 from sufe_qa.config import Settings, load_settings
-from sufe_qa.generate.answer import answer_question, validate_citations
+from sufe_qa.generate.answer import (
+    CitationGateError,
+    answer_question,
+    gated_citation_stream,
+    validate_citations,
+)
 from sufe_qa.generate.client import LLMClient
 from sufe_qa.retrieve.retriever import HybridRetriever
 from sufe_qa.schema import load_manifest
@@ -274,7 +279,13 @@ def create_app(
                     },
                 )
                 answer_text = ""
-                for token in ans.stream:
+                # 引用门禁：句子级缓冲，越界引用句在发出前拦截；拒答模板无引用不过门
+                token_stream = (
+                    ans.stream
+                    if ans.refused
+                    else gated_citation_stream(ans.stream, len(ans.hits))
+                )
+                for token in token_stream:
                     answer_text += token
                     yield _sse("token", {"text": token})
                 cards, cite_map = ans.sources_and_map()
@@ -309,6 +320,16 @@ def create_app(
                     },
                 )
                 yield _sse("done", {"total_ms": round((time.perf_counter() - t0) * 1000, 1)})
+            except CitationGateError as gate_error:
+                # 门禁撤回：越界引用句未发出，已发出的部分由前端整卡撤除
+                logger.warning("引用门禁拦截，已撤回回答: %s", gate_error.invalid_refs)
+                yield _sse(
+                    "error",
+                    {
+                        "message": "答复未通过引用校验，已撤回。请重试或换个问法。",
+                        "kind": "citation_gate",
+                    },
+                )
             except Exception as e:  # LLM 未配置/检索异常/流中断等，统一退为 error 事件
                 logger.exception("问答失败")
                 yield _sse("error", {"message": f"答复生成失败：{e}"})

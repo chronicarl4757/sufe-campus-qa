@@ -2,7 +2,8 @@
 
 规则（对应失败状态）：
 - 只允许 http/https（unsupported_scheme）；URL 不得带用户名密码（userinfo_blocked）；
-- 自动发现模式禁止 localhost/环回/链路本地/私网/云元数据（private_address_blocked）；
+- 自动发现模式禁止 localhost/环回/链路本地/私网/云元数据（private_address_blocked），
+  主机名经 DNS 解析后任一地址命中私网同样拦截（解析在 robots 拉取之前完成）；
 - 重定向逐跳手动检查：协议、userinfo、私网、host allowlist、robots 全部重检，
   跨 allowlist 跳转与出站跳转记 redirect_blocked，环路/超限记 redirect_loop；
 - 流式读取、按 HTML/附件分别限制最大字节（oversized），不只信 Content-Length；
@@ -15,6 +16,7 @@ from __future__ import annotations
 
 import ipaddress
 import logging
+import socket
 import time
 import urllib.robotparser
 from collections.abc import Callable
@@ -44,8 +46,19 @@ _PRIVATE_HOSTNAMES = {"localhost", "ip6-localhost", "broadcasthost"}
 _METADATA_IPS = {"169.254.169.254", "100.100.2.136"}  # 云元数据（AWS/阿里）
 
 
+def _ip_is_private(ip: ipaddress.IPv4Address | ipaddress.IPv6Address) -> bool:
+    return (
+        ip.is_private
+        or ip.is_loopback
+        or ip.is_link_local
+        or ip.is_reserved
+        or ip.is_multicast
+        or ip.is_unspecified
+    )
+
+
 def _is_private_host(host: str) -> bool:
-    """字面 IP 走 ipaddress 判定；主机名只认 localhost 系（DNS 解析防护见报告边界）。"""
+    """字面 IP 与 localhost 系主机名的快速判定（不解析 DNS）。"""
     h = host.strip().lower().rstrip(".")
     if h in _PRIVATE_HOSTNAMES or h.endswith(".localhost"):
         return True
@@ -55,14 +68,22 @@ def _is_private_host(host: str) -> bool:
         ip = ipaddress.ip_address(h.strip("[]"))  # 兼容 IPv6 字面量 [::1]
     except ValueError:
         return False
-    return (
-        ip.is_private
-        or ip.is_loopback
-        or ip.is_link_local
-        or ip.is_reserved
-        or ip.is_multicast
-        or ip.is_unspecified
-    )
+    return _ip_is_private(ip)
+
+
+def _resolve_host_ips(host: str) -> list[ipaddress.IPv4Address | ipaddress.IPv6Address]:
+    """解析主机名的全部 A/AAAA 地址；解析失败返回空（连接阶段会自然报 network_error）。"""
+    try:
+        infos = socket.getaddrinfo(host, None, proto=socket.IPPROTO_TCP)
+    except (OSError, UnicodeError):
+        return []
+    ips = []
+    for info in infos:
+        try:
+            ips.append(ipaddress.ip_address(info[4][0]))
+        except ValueError:
+            continue
+    return ips
 
 
 class RobotsCache:
@@ -168,6 +189,7 @@ class SafeFetcher:
         self._sleep = sleep
         self._robots = RobotsCache(self._client, ua)
         self._last_req: dict[str, float] = {}
+        self._dns_private: dict[str, bool] = {}  # 主机名 -> DNS 解析后是否私网（按实例缓存）
 
     def close(self) -> None:
         if self._own:
@@ -181,6 +203,24 @@ class SafeFetcher:
 
     # ---- 检查链 ----
 
+    def _host_is_private(self, host: str) -> bool:
+        """完整私网判定：字面检查 + DNS 解析全部地址（任一私网即拦截）。
+
+        残余边界：解析与连接分两次进行，存在 DNS rebinding TOCTOU 窗口；
+        部署上应配合 host allowlist 收敛出站目标。
+        """
+        h = host.strip().lower().rstrip(".")
+        if _is_private_host(h):
+            return True
+        try:
+            ipaddress.ip_address(h.strip("[]"))
+            return False  # 字面公网 IP，无需解析
+        except ValueError:
+            pass
+        if h not in self._dns_private:
+            self._dns_private[h] = any(_ip_is_private(ip) for ip in _resolve_host_ips(h))
+        return self._dns_private[h]
+
     def _precheck(self, url: str, via_redirect: bool) -> str | None:
         """返回失败状态或 None（放行）。每一步重定向都要完整重跑。"""
         p = urlparse(url)
@@ -190,7 +230,7 @@ class SafeFetcher:
             return "userinfo_blocked"
         if not p.netloc:
             return "unsupported_scheme"
-        if not self._allow_private and _is_private_host(p.hostname or ""):
+        if not self._allow_private and self._host_is_private(p.hostname or ""):
             return "private_address_blocked"
         if self._allowed is not None and p.netloc not in self._allowed:
             return "redirect_blocked"

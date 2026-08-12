@@ -210,12 +210,18 @@ async function ask(question) {
       } else if (event === "done") {
         doneData = data;
       } else if (event === "error") {
-        throw new Error(data.message);
+        const err = new Error(data.message);
+        err.kind = data.kind || "";
+        throw err;
       }
     }
   } catch (e) {
     card.remove();
-    thread.appendChild(el(`<div class="err">答复未能送达：${escapeHtml(e.message)}。请检查服务与网络后重试。</div>`));
+    // 引用门禁撤回：服务端已拦截越界引用，提示与传输故障区分
+    const notice = e.kind === "citation_gate"
+      ? `${escapeHtml(e.message)}`
+      : `答复未能送达：${escapeHtml(e.message)}。请检查服务与网络后重试。`;
+    thread.appendChild(el(`<div class="err">${notice}</div>`));
     return;
   }
 

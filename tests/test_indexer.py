@@ -2,6 +2,9 @@ import json
 import sys
 from types import SimpleNamespace
 
+import chromadb
+import pytest
+
 from sufe_qa.config import Settings
 from sufe_qa.indexing.indexer import BgeEmbedder, FakeEmbedder, update_index
 from sufe_qa.schema import DocMeta, append_manifest
@@ -174,3 +177,70 @@ def test_embeds_title_prefixed_chunk(tmp_path):
     col = chromadb.PersistentClient(path=str(s.chroma_dir)).get_collection(s.collection_name)
     docs = col.get(include=["documents"])["documents"]
     assert docs and all(not d.startswith("奖学金办法\n") for d in docs)
+
+
+def test_metadata_only_update_refreshes_chroma_without_reembedding(tmp_path):
+    """正文不变、publish_date 变化时，增量索引只刷新 Chroma metadata，不重 embed。"""
+    s = _settings(tmp_path)
+    _write_doc(s, "docA", "奖助学金", "a.md", "第一条 奖学金标准。", "奖学金办法", "sha256:aaaa")
+
+    class CountingEmbedder(FakeEmbedder):
+        def __init__(self) -> None:
+            super().__init__()
+            self.calls = 0
+
+        def encode(self, texts):
+            self.calls += 1
+            return super().encode(texts)
+
+    emb = CountingEmbedder()
+    update_index(s, emb)
+    assert emb.calls > 0
+
+    # ingest 的场景：content_hash 不变，metadata 变化，append 新 manifest 行
+    append_manifest(
+        s.manifest_path,
+        [
+            DocMeta(
+                doc_id="docA",
+                title="奖学金办法",
+                source_url="inbox/x",
+                publisher="学生工作部",
+                publish_date="2026-08-01",
+                category="奖助学金",
+                fetched_at="t2",
+                content_hash="sha256:aaaa",
+                file_path="奖助学金/a.md",
+                retention_status="active",
+                retention_reason="test_fixture",
+            )
+        ],
+    )
+    emb.calls = 0
+    r = update_index(s, emb)
+
+    assert r.meta_updated_docs == 1
+    assert (r.added_docs, r.updated_docs, r.deleted_docs) == (0, 0, 0)
+    assert emb.calls == 0  # 未重跑 embedding
+    col = chromadb.PersistentClient(path=str(s.chroma_dir)).get_collection(s.collection_name)
+    metas = col.get(where={"doc_id": "docA"}, include=["metadatas"])["metadatas"]
+    assert metas and all(m["publish_date"] == "2026-08-01" for m in metas)
+    assert all(m["metadata_sig"].startswith("sha256:") for m in metas)
+
+
+def test_incremental_rejects_embedder_mismatch(tmp_path):
+    """换 embedding 模型后增量索引必须拒绝，强制走 --full。"""
+    s = _settings(tmp_path)
+    _write_doc(s, "docA", "奖助学金", "a.md", "第一条 奖学金标准。", "奖学金办法", "sha256:aaaa")
+    update_index(s, FakeEmbedder())
+
+    class OtherEmbedder(FakeEmbedder):
+        model_name = "other-model-v9"
+
+    with pytest.raises(RuntimeError, match="--full"):
+        update_index(s, OtherEmbedder())
+    # --full 显式重建不受守卫限制
+    r = update_index(s, OtherEmbedder(), full=True)
+    assert r.added_docs == 1
+    # 重建后同模型增量恢复可用
+    assert update_index(s, OtherEmbedder()).added_docs == 0

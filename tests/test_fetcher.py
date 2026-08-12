@@ -225,3 +225,42 @@ def test_post_marker_sends_post_with_xhr_header():
     assert seen["method"] == "POST"
     assert seen["xhr"] == "XMLHttpRequest"
     assert res.requested_url == f"https://{HOST}/career/news/search/tzgg/1/20"
+
+
+def test_blocks_hostname_resolving_to_private_ip(monkeypatch):
+    """DNS 解析到私网地址的主机名同样拦截（SSRF 防御不止字面 IP）。"""
+    import socket
+
+    monkeypatch.setattr(
+        socket,
+        "getaddrinfo",
+        lambda *a, **k: [(2, 1, 6, "", ("127.0.0.1", 80))],
+    )
+    f = _fetcher(_ok_handler(), allow_private=False)
+    assert f.fetch(f"http://{HOST}/x").status == "private_address_blocked"
+
+
+def test_allows_hostname_resolving_to_public_ip(monkeypatch):
+    import socket
+
+    monkeypatch.setattr(
+        socket,
+        "getaddrinfo",
+        lambda *a, **k: [(2, 1, 6, "", ("93.184.216.34", 80))],
+    )
+    f = _fetcher(_ok_handler(), allow_private=False)
+    r = f.fetch(f"http://{HOST}/x")
+    assert r.status == "ok"
+
+
+def test_dns_resolution_failure_falls_through_to_network_error(monkeypatch):
+    """DNS 解析失败不在 precheck 拦截，由连接阶段报 network_error。"""
+    import socket
+
+    def boom(*a, **k):
+        raise socket.gaierror("mocked dns failure")
+
+    monkeypatch.setattr(socket, "getaddrinfo", boom)
+    f = _fetcher(_ok_handler(), allow_private=False)
+    # MockTransport 不经过真实连接，precheck 放行后由 mock 正常应答
+    assert f.fetch(f"http://{HOST}/x").status == "ok"

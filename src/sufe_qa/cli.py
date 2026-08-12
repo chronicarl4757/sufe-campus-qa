@@ -416,10 +416,16 @@ def _cmd_index(args: argparse.Namespace) -> int:
             f"隔离 {report.skipped_chunks} chunks；旧 collection 保留"
         )
         return 0
-    report = update_index(settings, _make_embedder(settings, args.fake_embed), full=args.full)
+    try:
+        report = update_index(settings, _make_embedder(settings, args.fake_embed), full=args.full)
+    except RuntimeError as e:
+        # 索引与当前 embedder/schema 不匹配等硬性校验失败
+        print(str(e), file=sys.stderr)
+        return 2
     print(
         f"新增 {report.added_docs} 篇，更新 {report.updated_docs} 篇，"
-        f"删除 {report.deleted_docs} 篇，共 {report.total_chunks} chunks，"
+        f"删除 {report.deleted_docs} 篇，元数据更新 {report.meta_updated_docs} 篇，"
+        f"共 {report.total_chunks} chunks，"
         f"主问答 {report.collection_counts.get(MAIN_QA_COLLECTION, 0)} chunks，"
         f"公示 {report.collection_counts.get(PUBLIC_LIST_COLLECTION, 0)} chunks，"
         f"历史 {report.collection_counts.get(HISTORICAL_COLLECTION, 0)} chunks"

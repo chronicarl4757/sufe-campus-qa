@@ -2,8 +2,16 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import pytest
+
 from sufe_qa.config import Settings
-from sufe_qa.generate.answer import REFUSAL_TEMPLATE, answer_question, validate_citations
+from sufe_qa.generate.answer import (
+    REFUSAL_TEMPLATE,
+    CitationGateError,
+    answer_question,
+    gated_citation_stream,
+    validate_citations,
+)
 from sufe_qa.generate.client import FakeLLM
 from sufe_qa.generate.prompt import build_messages
 from sufe_qa.retrieve.retriever import Hit
@@ -93,3 +101,26 @@ def test_validate_citations():
     assert not none.ok and not none.has_citation
     spaced = validate_citations("见资料[ 2 ]。", 2)
     assert spaced.ok
+
+
+def test_gated_citation_stream_passes_valid_tokens():
+    tokens = iter(["申请条件", "如下[1]。", "流程", "见资料[2]。"])
+    out = "".join(gated_citation_stream(tokens, 2))
+    assert out == "申请条件如下[1]。流程见资料[2]。"
+
+
+def test_gated_citation_stream_blocks_invalid_ref_and_stops():
+    tokens = iter(["第一句成立[1]。", "第二句越界[99]。", "后续不应发出。"])
+    it = gated_citation_stream(tokens, 3)
+    assert next(it) == "第一句成立[1]。"
+    with pytest.raises(CitationGateError) as exc_info:
+        list(it)
+    assert exc_info.value.invalid_refs == [99]
+
+
+def test_gated_citation_stream_validates_tail_without_delimiter():
+    tokens = iter(["完整句[1]。", "残句越界[8]"])
+    it = gated_citation_stream(tokens, 2)
+    assert next(it) == "完整句[1]。"
+    with pytest.raises(CitationGateError):
+        list(it)
