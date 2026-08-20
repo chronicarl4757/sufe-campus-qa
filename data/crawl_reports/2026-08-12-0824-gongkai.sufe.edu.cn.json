@@ -1,0 +1,44 @@
+{
+ "host": "gongkai.sufe.edu.cn",
+ "started_at": "2026-08-12T08:24:59+00:00",
+ "categories_found": 8,
+ "list_pages_fetched": 12,
+ "categories_requires_adapter": 0,
+ "articles_found": 70,
+ "articles_downloaded": 65,
+ "attachments_found": 27,
+ "attachments_downloaded": 29,
+ "attachments_parsed": 24,
+ "scanned_pdfs": 2,
+ "legacy_docs_unparsed": 0,
+ "incomplete_documents": 4,
+ "low_quality_documents": 47,
+ "sensitive_quarantined": 0,
+ "duplicate_attachments": 0,
+ "new_documents": 4,
+ "updated_documents": 0,
+ "unchanged_documents": 1,
+ "not_seen_documents": 0,
+ "final_indexed": 5,
+ "failures": [
+  {
+   "url": "https://gongkai.sufe.edu.cn/_upload/article/files/bf/62/fc69ede240caa4aacb7df37e4f1a/effb93c6-f5df-4899-b57f-a4e60bb584ad.pdf",
+   "stage": "attachment",
+   "status": "oversized",
+   "reason": "超过 30000000 字节上限"
+  },
+  {
+   "url": "https://gongkai.sufe.edu.cn/_upload/article/files/59/f6/0a064d884150960909f1a6a14967/a7470996-bbc4-465d-b4f2-58d08083705b.xls",
+   "stage": "attachment",
+   "status": "http_error",
+   "reason": "HTTP 404"
+  },
+  {
+   "url": "https://gongkai.sufe.edu.cn/_upload/article/files/b6/12/e44759d044568a17ec146d0f7b63/7d64ebb6-affb-44af-ae18-c775b3180801.xls",
+   "stage": "attachment",
+   "status": "http_error",
+   "reason": "HTTP 404"
+  }
+ ],
+ "notes": []
+}

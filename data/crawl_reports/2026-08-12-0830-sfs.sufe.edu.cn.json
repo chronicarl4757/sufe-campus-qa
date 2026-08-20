@@ -1,0 +1,32 @@
+{
+ "host": "sfs.sufe.edu.cn",
+ "started_at": "2026-08-12T08:30:49+00:00",
+ "categories_found": 2,
+ "list_pages_fetched": 2,
+ "categories_requires_adapter": 0,
+ "articles_found": 18,
+ "articles_downloaded": 18,
+ "attachments_found": 26,
+ "attachments_downloaded": 23,
+ "attachments_parsed": 22,
+ "scanned_pdfs": 1,
+ "legacy_docs_unparsed": 0,
+ "incomplete_documents": 0,
+ "low_quality_documents": 0,
+ "sensitive_quarantined": 2,
+ "duplicate_attachments": 2,
+ "new_documents": 33,
+ "updated_documents": 0,
+ "unchanged_documents": 1,
+ "not_seen_documents": 0,
+ "final_indexed": 34,
+ "failures": [
+  {
+   "url": "https://jsj.sufe.edu.cn/_upload/article/files/52/99/3f0c0aad4e2792947b14bdc5ee29/035152cd-2336-4a28-b9f3-a88d4cc33c6f.pdf",
+   "stage": "attachment",
+   "status": "redirect_blocked",
+   "reason": "blocked: https://jsj.sufe.edu.cn/_upload/article/files/52/99/3f0c0aad4e2792947b14bdc5ee29/035152cd-2336-4a28-b9f3-a88d4cc33c6f.pdf"
+  }
+ ],
+ "notes": []
+}

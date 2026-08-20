@@ -1,0 +1,221 @@
+{
+ "mode": "seed",
+ "started_at": "2026-08-12T12:28:59+00:00",
+ "discovery_status": "ok",
+ "discovered": 25,
+ "whitelist_passed": 21,
+ "date_passed": 19,
+ "relevance_passed": 12,
+ "fetch_ok": 21,
+ "fetch_failed": 0,
+ "empty_body": 0,
+ "quality_accepted": 6,
+ "quality_rejected": 5,
+ "duplicate": 0,
+ "indexed_candidate": 6,
+ "reject_reasons": {
+  "news_noise": 7,
+  "too_old": 2,
+  "not_whitelisted": 4,
+  "quality_archived": 1,
+  "quality_rejected": 2,
+  "quality_quarantined": 3
+ },
+ "decisions": [
+  {
+   "url": "https://mp.weixin.qq.com/s/EIl-sf2UBp97t7kNNmHqqA",
+   "title": "校党委书记黄翔峰一行赴京走访交流",
+   "decision": "reject",
+   "reason": "news_noise",
+   "keyword": "news"
+  },
+  {
+   "url": "https://mp.weixin.qq.com/s/eNog1h_P9zMeJ3Ch9LcKkg",
+   "title": "四位教授受聘担任上海市政府重大行政决策咨询论证专家！",
+   "decision": "reject",
+   "reason": "news_noise",
+   "keyword": "出席+召开+合影+座谈"
+  },
+  {
+   "url": "https://mp.weixin.qq.com/s/NTVAYmNGfRQhMaW6yZNMHw",
+   "title": "千村调查｜水润江都：运河书声远，田野绿意深",
+   "decision": "reject",
+   "reason": "news_noise",
+   "keyword": "调研+走访"
+  },
+  {
+   "url": "https://mp.weixin.qq.com/s/T_I0-kZQhHGdJarw394Tpw",
+   "title": "“千企调查”进行时 | 解锁AI产业人才密码",
+   "decision": "reject",
+   "reason": "news_noise",
+   "keyword": "座谈+调研+走访"
+  },
+  {
+   "url": "https://mp.weixin.qq.com/s/dmzeJNdL6gpInA4ybAFmiA",
+   "title": "上海财经大学隆重举行2026届学生毕业典礼暨学位授予仪式",
+   "decision": "reject",
+   "reason": "news_noise",
+   "keyword": "典礼"
+  },
+  {
+   "url": "https://mp.weixin.qq.com/s/JxhLAGEeoPVMHFFMHabblA",
+   "title": "会计学院第三届“阅读之星·悦读达人”评选活动",
+   "decision": "reject",
+   "reason": "news_noise",
+   "keyword": "news"
+  },
+  {
+   "url": "https://mp.weixin.qq.com/s/_SDJu3MU-WW6UbdBVTzYZA",
+   "title": "第四届会计学院“阅读之星·悦读达人 ”评选活动",
+   "decision": "reject",
+   "reason": "news_noise",
+   "keyword": "news"
+  },
+  {
+   "url": "https://mp.weixin.qq.com/s/p8Xy_if81K0BdDibMuC6Aw",
+   "title": "会计学院“阅读之星·悦读达人”评选活动",
+   "decision": "reject",
+   "reason": "too_old",
+   "date": "2023-03-06"
+  },
+  {
+   "url": "https://mp.weixin.qq.com/s/LqTjh_OZr2INq9ohwt1CCA",
+   "title": "招生季|上海财经大学会计学院简介",
+   "decision": "reject",
+   "reason": "too_old",
+   "date": "2022-05-25"
+  },
+  {
+   "url": "https://mp.weixin.qq.com/s/_6oR-FFtqVJMzTvS8CZkTg",
+   "title": "",
+   "decision": "reject",
+   "reason": "not_whitelisted",
+   "account": "上海财经大学MBA"
+  },
+  {
+   "url": "https://mp.weixin.qq.com/s/4OpnJhKs_EUIJlv3WZmclQ",
+   "title": "",
+   "decision": "reject",
+   "reason": "not_whitelisted",
+   "account": "上海财经大学滴水湖高金MBA"
+  },
+  {
+   "url": "https://mp.weixin.qq.com/s/s8tb1KkV_Ug7dl6n_h0FSg",
+   "title": "",
+   "decision": "reject",
+   "reason": "not_whitelisted",
+   "account": "上财信息"
+  },
+  {
+   "url": "https://mp.weixin.qq.com/s/HYSYPcKBR2AH1v7JcMtoJQ",
+   "title": "",
+   "decision": "reject",
+   "reason": "not_whitelisted",
+   "account": "上财就业CEPC"
+  },
+  {
+   "url": "https://mp.weixin.qq.com/s/TUC90VeNqSyXcbnA8FUKMA",
+   "title": "首期上财周末先修学堂收官！",
+   "decision": "reject",
+   "reason": "archived",
+   "detail": "isolated_document_kind"
+  },
+  {
+   "url": "https://mp.weixin.qq.com/s/IVuypX5a2N1JvSLz2nvBTg",
+   "title": "报考必读｜上海财经大学2025年本科招生信息最全汇总",
+   "decision": "reject",
+   "reason": "rejected",
+   "detail": "短无标点行占比 62%，疑似导航样板污染"
+  },
+  {
+   "url": "https://mp.weixin.qq.com/s/yOQLnUDn8W3PDfc7zj-8HA",
+   "title": "权威发布丨上海财经大学2026年本科招生亮点",
+   "decision": "accept",
+   "reason": "new",
+   "date": "2026-06-09",
+   "account": "上财本科招生",
+   "document_kind": "annual_notice",
+   "body_chars": 122
+  },
+  {
+   "url": "https://mp.weixin.qq.com/s/LY2oXM01AlrJyR6VtjSN5A",
+   "title": "“财”子专属通道丨2026年上财本科招生分省咨询QQ群",
+   "decision": "reject",
+   "reason": "rejected",
+   "detail": "短无标点行占比 65%，疑似导航样板污染"
+  },
+  {
+   "url": "https://mp.weixin.qq.com/s/8C4se4Jg85dZvQ2xu6xb4Q",
+   "title": "上海财经大学2026年会计硕士专业学位（MPAcc）国际组织人才培养研究方向（全日制）招生简章",
+   "decision": "accept",
+   "reason": "new",
+   "date": "2025-10-12",
+   "account": "上财会计学院",
+   "document_kind": "annual_notice",
+   "body_chars": 4374
+  },
+  {
+   "url": "https://mp.weixin.qq.com/s/MSjEpBg2qcre1VizW-Szwg",
+   "title": "上海财经大学2026年会计硕士专业学位（MPAcc）会计与财务精英研究方向（非全日制）招生简章",
+   "decision": "reject",
+   "reason": "quarantined",
+   "detail": "正文命中敏感信息"
+  },
+  {
+   "url": "https://mp.weixin.qq.com/s/o7LV_Sv0vaRFiW0QAkMRjg",
+   "title": "上海财经大学2026年审计硕士专业学位（MAud）（全日制）招生简章",
+   "decision": "accept",
+   "reason": "new",
+   "date": "2025-10-11",
+   "account": "上财会计学院",
+   "document_kind": "annual_notice",
+   "body_chars": 3691
+  },
+  {
+   "url": "https://mp.weixin.qq.com/s/F3_8nTXM6PE4v2EFdbA3FQ",
+   "title": "上海财经大学2025年MPAcc（非全日制）调剂通知",
+   "decision": "reject",
+   "reason": "quarantined",
+   "detail": "正文命中敏感信息"
+  },
+  {
+   "url": "https://mp.weixin.qq.com/s/TlD8VqEBrte0Nc7ipEecgw",
+   "title": "上海财经大学“2026年现代会计研究方法大讲堂”即将启幕！",
+   "decision": "reject",
+   "reason": "quarantined",
+   "detail": "正文命中敏感信息"
+  },
+  {
+   "url": "https://mp.weixin.qq.com/s/_tJv2dR4PycXLZFlwH8bDw",
+   "title": "上海财经大学公共管理学院2026年接收推荐免试研究生（含直博生）预报名通知",
+   "decision": "accept",
+   "reason": "new",
+   "date": "2025-06-25",
+   "account": "上海财经大学研招办",
+   "document_kind": "annual_notice",
+   "body_chars": 2498
+  },
+  {
+   "url": "https://mp.weixin.qq.com/s/pFTkbwjuQb3b_WtZVSPRjQ",
+   "title": "上海财经大学金融学院2026年接收推荐免试研究生（含直博生）预推免报名通知",
+   "decision": "accept",
+   "reason": "new",
+   "date": "2025-06-17",
+   "account": "上海财经大学研招办",
+   "document_kind": "annual_notice",
+   "body_chars": 5168
+  },
+  {
+   "url": "https://mp.weixin.qq.com/s/01hp6P8YbOJianN5daPimg",
+   "title": "上海财经大学财税投资学院2026年接收推荐免试研究生（含直博生）预报名通知",
+   "decision": "accept",
+   "reason": "new",
+   "date": "2025-06-22",
+   "account": "上海财经大学研招办",
+   "document_kind": "annual_notice",
+   "body_chars": 2261
+  }
+ ],
+ "warnings": [],
+ "notes": []
+}

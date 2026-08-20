@@ -1,0 +1,256 @@
+# 上海财经大学官方微信公众号白名单（规格 §八/§九/§二十二-§二十四）。
+# 只收录人工确认过的官方账号；article.account_name 必须精确等于 account_name
+# （或 aliases 之一）才允许进入 authoritative pipeline，正文出现"上海财经大学"不算数。
+# 每个账号记录 focus（招生/推免/选拔主题）与 official_evidence_url（官方身份证据）。
+sources:
+  - id: sufe_main
+    account_name: 上海财经大学
+    publisher: 上海财经大学
+    scope_unit: 全体师生
+    category: 学工事务
+    focus:
+      - 招生
+      - 校级通知
+    official_evidence_url: https://news.sufe.edu.cn/
+    enabled: true
+    # 确认证据（2026-08-12 人工核对）：
+    # 1. 学校官方新闻网 news.sufe.edu.cn 全站侧栏固定链接该账号最新文章；
+    # 2. 该账号发布毕业典礼、招生信息汇总等校级官方内容（biz MzAwNjA3NDU2Nw==）。
+
+  - id: sufe_zs
+    account_name: 上财本科招生
+    publisher: 上海财经大学招生就业处
+    scope_unit: 本科招生
+    category: 学工事务
+    focus:
+      - 本科招生
+      - 夏令营
+      - 实验班
+    official_evidence_url: https://zs.sufe.edu.cn/
+    enabled: true
+    # 确认证据（2026-08-12 人工核对）：
+    # 1. 该账号发布《权威发布丨上海财经大学2026年本科招生亮点》等招生章程/政策内容，
+    #    文末署名"来源丨教务处、招生就业处"；
+    # 2. 本科招生网 zs.sufe.edu.cn 首页设有"上海财经大学招生咨询微信平台"扫码入口；
+    # 3. 账号 biz 稳定为 MzI3Mjk2NTgwNA==（gh_b798d206481b）。
+
+  - id: sufe_sa
+    account_name: 上财会计学院
+    publisher: 上海财经大学会计学院
+    scope_unit: 本研学生
+    category: 推免升学
+    focus:
+      - 硕士招生
+      - 推免
+      - 调剂
+    official_evidence_url: https://sa.sufe.edu.cn/16733/list.htm
+    enabled: true
+    # 确认证据（2026-08-12 人工核对）：
+    # 1. 会计学院官网 sa.sufe.edu.cn 微信栏目（/16733/list*.htm）逐篇链接该账号文章；
+    # 2. 该账号发布 MPAcc/MAud 招生简章、调剂通知等学院官方内容。
+
+  - id: sufe_yzb
+    account_name: 上海财经大学研招办
+    publisher: 上海财经大学研究生院招生办公室
+    scope_unit: 研究生
+    category: 推免升学
+    focus:
+      - 推免
+      - 硕士招生
+      - 博士招生
+    official_evidence_url: https://gs.sufe.edu.cn/
+    enabled: true
+    # 确认证据（2026-08-12 人工核对）：
+    # 1. 该账号发布各学院推免预报名通知（2026/2027 年系列），与 gs.sufe.edu.cn 通知一致；
+    # 2. 第三方转载均标注“转载自上海财经大学研招办”。
+
+  - id: sufe_sime
+    account_name: 上财信息
+    publisher: 上海财经大学信息管理与工程学院
+    scope_unit: 本研学生
+    category: 学工事务
+    focus:
+      - 推免
+      - 转专业
+      - 招生
+    official_evidence_url: https://sime.sufe.edu.cn/
+    enabled: true
+    # 确认证据（2026-08-12 人工核对）：
+    # 1. 信管学院官网 sime.sufe.edu.cn 首页“微信公众号”栏目逐篇链接该账号文章；
+    # 2. 该账号发布 2027 推免预报名、在职课程班招生简章等学院官方内容。
+
+  - id: sufe_de
+    account_name: 上海财经大学数字经济学院
+    publisher: 上海财经大学数字经济学院
+    scope_unit: 本研学生
+    category: 推免升学
+    focus:
+      - 推免
+      - 招生
+      - 夏令营
+    official_evidence_url: https://de.sufe.edu.cn/
+    enabled: true
+    # 确认证据（2026-08-12 人工核对）：
+    # 1. 数字经济学院官网 de.sufe.edu.cn 首页微信栏目逐篇链接该账号文章；
+    # 2. 该账号发布《2027年接收推荐免试研究生预推免报名的通知》（2026-07-03）。
+
+  - id: sufe_scai
+    account_name: 上财计算机与人工智能学院
+    publisher: 上海财经大学计算机与人工智能学院
+    scope_unit: 本研学生
+    category: 推免升学
+    focus:
+      - 推免
+      - 转专业
+      - 招生
+    official_evidence_url: https://scai.sufe.edu.cn/
+    enabled: true
+    # 确认证据（2026-08-12 人工核对）：
+    # 1. 计算机与人工智能学院官网 scai.sufe.edu.cn 首页微信栏目逐篇链接该账号文章；
+    # 2. 该账号发布《2027年接收推荐免试研究生（含直博生）预报名的通知》（2026-07-06）。
+
+  # 以下账号官方身份已确认（官网微信栏目链接），但当前内容以新闻/宣传为主、
+  # 暂无招生/选拔高价值主题，按 §二十一 暂不启用，保留记录待复核。
+  - id: sufe_cpi
+    account_name: 上财财税投资学院
+    publisher: 上海财经大学财税投资学院
+    scope_unit: 本研学生
+    category: 学工事务
+    focus:
+      - 推免
+      - 招生
+    official_evidence_url: https://cpi.sufe.edu.cn/
+    enabled: false
+
+  - id: sufe_cob
+    account_name: 上海财经大学商学院
+    publisher: 上海财经大学商学院
+    scope_unit: 本研学生
+    category: 学工事务
+    focus:
+      - 招生
+    official_evidence_url: https://cob.sufe.edu.cn/
+    enabled: false
+
+  - id: sufe_sppm
+    account_name: 上财公共管理学院
+    publisher: 上海财经大学公共管理学院
+    scope_unit: 本研学生
+    category: 推免升学
+    focus:
+      - 推免
+      - 招生
+    official_evidence_url: https://www.chinakaoyan.com/info/article/id/672039.shtml
+    enabled: true
+    # 确认证据（2026-08-13 人工核对）：
+    # 1. 学院 2027 推免预报名通知由该账号发布（2026-07-06），中国考研网转载标注
+    #    来源为"上海财经大学公共管理学院"并直链该账号文章；
+    # 2. sppm.sufe.edu.cn 为学院官网。
+
+  - id: sufe_marx
+    account_name: 上海财经大学马克思主义学院
+    publisher: 上海财经大学马克思主义学院
+    scope_unit: 本研学生
+    category: 推免升学
+    focus:
+      - 推免
+      - 招生
+    official_evidence_url: https://som.sufe.edu.cn/
+    enabled: true
+    # 确认证据（2026-08-13 人工核对）：
+    # 1. 学院官网 som.sufe.edu.cn 研究生报考指南标注"学院公众号：上海财经大学马克思主义学院
+    #    （微信号 sufemarx）"；
+    # 2. 该账号发布 2026/2027 推免预报名通知（biz MzIzOTQ3NDA2Ng==）。
+
+  - id: sufe_sice
+    account_name: 上财国际文化交流学院
+    publisher: 上海财经大学国际文化交流学院
+    scope_unit: 本研学生
+    category: 推免升学
+    focus:
+      - 推免
+      - 招生
+    official_evidence_url: https://www.chinakaoyan.com/graduate/info/nid/675667/schoolID/16.shtml
+    enabled: true
+    # 确认证据（2026-08-13 人工核对）：
+    # 1. 学院 2027 推免预报名通知由该账号发布（2026-07-07），转载站标注来源并直链；
+    # 2. 该账号与 2026 硕士复试办法（官网附件）属同一学院。
+
+  - id: sufe_icss
+    account_name: 上财交叉科学研究院
+    publisher: 上海财经大学交叉科学研究院
+    scope_unit: 本研学生
+    category: 推免升学
+    focus:
+      - 推免
+      - 招生
+    official_evidence_url: https://riis.sufe.edu.cn/
+    enabled: true
+    # 确认证据（2026-08-13 人工核对）：
+    # 1. 研究院官网 riis.sufe.edu.cn 2027 推免通知与公众号同文发布（2026-07-04）；
+    # 2. 中国考研网转载标注来源并直链该账号文章。
+
+  # 以下 7 个账号经研究生院 2027 推免通知"各学院预报名通知"附表官方直链确认
+  # （gs.sufe.edu.cn/Home/Detail/8021，2026-08-13 人工核对）。
+  - id: sufe_sof
+    account_name: 上财金融学院
+    publisher: 上海财经大学金融学院
+    scope_unit: 本研学生
+    category: 推免升学
+    focus: [推免, 招生]
+    official_evidence_url: https://gs.sufe.edu.cn/Home/Detail/8021
+    enabled: true
+
+  - id: sufe_cob_main
+    account_name: 上海财经大学商学院
+    publisher: 上海财经大学商学院
+    scope_unit: 本研学生
+    category: 推免升学
+    focus: [推免, 招生]
+    official_evidence_url: https://gs.sufe.edu.cn/Home/Detail/8021
+    enabled: true
+
+  - id: sufe_econ
+    account_name: 上海财经大学经济学院
+    publisher: 上海财经大学经济学院
+    scope_unit: 本研学生
+    category: 推免升学
+    focus: [推免, 招生]
+    official_evidence_url: https://gs.sufe.edu.cn/Home/Detail/8021
+    enabled: true
+
+  - id: sufe_sfl
+    account_name: 上财外国语
+    publisher: 上海财经大学外国语学院
+    scope_unit: 本研学生
+    category: 推免升学
+    focus: [推免, 招生]
+    official_evidence_url: https://gs.sufe.edu.cn/Home/Detail/8021
+    enabled: true
+
+  - id: sufe_snpi
+    account_name: 上财新闻与社会高等研究院
+    publisher: 上海财经大学新闻与社会高等研究院
+    scope_unit: 本研学生
+    category: 推免升学
+    focus: [推免, 招生]
+    official_evidence_url: https://gs.sufe.edu.cn/Home/Detail/8021
+    enabled: true
+
+  - id: sufe_gsife
+    account_name: 上财全球南方财经研究院
+    publisher: 上海财经大学全球南方财经研究院
+    scope_unit: 本研学生
+    category: 推免升学
+    focus: [推免, 招生]
+    official_evidence_url: https://gs.sufe.edu.cn/Home/Detail/8021
+    enabled: true
+
+  - id: sufe_shrj
+    account_name: 上海财经大学人文学院
+    publisher: 上海财经大学人文学院
+    scope_unit: 本研学生
+    category: 推免升学
+    focus: [推免, 招生]
+    official_evidence_url: https://gs.sufe.edu.cn/Home/Detail/8021
+    enabled: true

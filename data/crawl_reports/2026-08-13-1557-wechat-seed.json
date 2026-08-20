@@ -1,0 +1,287 @@
+{
+ "mode": "seed",
+ "started_at": "2026-08-13T15:57:07+00:00",
+ "discovery_status": "ok",
+ "discovered": 30,
+ "whitelist_passed": 9,
+ "date_passed": 7,
+ "relevance_passed": 5,
+ "direct_content": 0,
+ "fetch_ok": 9,
+ "fetch_failed": 0,
+ "empty_body": 0,
+ "quality_accepted": 4,
+ "quality_rejected": 1,
+ "duplicate": 0,
+ "indexed_candidate": 4,
+ "reject_reasons": {
+  "not_whitelisted": 21,
+  "news_noise": 2,
+  "too_old": 2,
+  "quality_quarantined": 1
+ },
+ "decisions": [
+  {
+   "url": "https://mp.weixin.qq.com/s/EIl-sf2UBp97t7kNNmHqqA",
+   "title": "",
+   "decision": "reject",
+   "reason": "not_whitelisted",
+   "account": "上海财经大学",
+   "topic": "其他"
+  },
+  {
+   "url": "https://mp.weixin.qq.com/s/eNog1h_P9zMeJ3Ch9LcKkg",
+   "title": "",
+   "decision": "reject",
+   "reason": "not_whitelisted",
+   "account": "上海财经大学",
+   "topic": "其他"
+  },
+  {
+   "url": "https://mp.weixin.qq.com/s/NTVAYmNGfRQhMaW6yZNMHw",
+   "title": "",
+   "decision": "reject",
+   "reason": "not_whitelisted",
+   "account": "上海财经大学",
+   "topic": "其他"
+  },
+  {
+   "url": "https://mp.weixin.qq.com/s/T_I0-kZQhHGdJarw394Tpw",
+   "title": "",
+   "decision": "reject",
+   "reason": "not_whitelisted",
+   "account": "上海财经大学",
+   "topic": "其他"
+  },
+  {
+   "url": "https://mp.weixin.qq.com/s/TUC90VeNqSyXcbnA8FUKMA",
+   "title": "",
+   "decision": "reject",
+   "reason": "not_whitelisted",
+   "account": "上海财经大学",
+   "topic": "其他"
+  },
+  {
+   "url": "https://mp.weixin.qq.com/s/dmzeJNdL6gpInA4ybAFmiA",
+   "title": "",
+   "decision": "reject",
+   "reason": "not_whitelisted",
+   "account": "上海财经大学",
+   "topic": "其他"
+  },
+  {
+   "url": "https://mp.weixin.qq.com/s/IVuypX5a2N1JvSLz2nvBTg",
+   "title": "",
+   "decision": "reject",
+   "reason": "not_whitelisted",
+   "account": "上海财经大学",
+   "topic": "其他"
+  },
+  {
+   "url": "https://mp.weixin.qq.com/s/yOQLnUDn8W3PDfc7zj-8HA",
+   "title": "",
+   "decision": "reject",
+   "reason": "not_whitelisted",
+   "account": "上财本科招生",
+   "topic": "其他"
+  },
+  {
+   "url": "https://mp.weixin.qq.com/s/LY2oXM01AlrJyR6VtjSN5A",
+   "title": "",
+   "decision": "reject",
+   "reason": "not_whitelisted",
+   "account": "上财本科招生",
+   "topic": "其他"
+  },
+  {
+   "url": "https://mp.weixin.qq.com/s/JxhLAGEeoPVMHFFMHabblA",
+   "title": "会计学院第三届“阅读之星·悦读达人”评选活动",
+   "decision": "reject",
+   "reason": "news_noise",
+   "keyword": "news",
+   "topic": "其他"
+  },
+  {
+   "url": "https://mp.weixin.qq.com/s/_SDJu3MU-WW6UbdBVTzYZA",
+   "title": "第四届会计学院“阅读之星·悦读达人 ”评选活动",
+   "decision": "reject",
+   "reason": "news_noise",
+   "keyword": "news",
+   "topic": "其他"
+  },
+  {
+   "url": "https://mp.weixin.qq.com/s/p8Xy_if81K0BdDibMuC6Aw",
+   "title": "会计学院“阅读之星·悦读达人”评选活动",
+   "decision": "reject",
+   "reason": "too_old",
+   "date": "2023-03-06",
+   "topic": "其他"
+  },
+  {
+   "url": "https://mp.weixin.qq.com/s/LqTjh_OZr2INq9ohwt1CCA",
+   "title": "招生季|上海财经大学会计学院简介",
+   "decision": "reject",
+   "reason": "too_old",
+   "date": "2022-05-25",
+   "topic": "硕士招生"
+  },
+  {
+   "url": "https://mp.weixin.qq.com/s/_tJv2dR4PycXLZFlwH8bDw",
+   "title": "",
+   "decision": "reject",
+   "reason": "not_whitelisted",
+   "account": "上海财经大学研招办",
+   "topic": "其他"
+  },
+  {
+   "url": "https://mp.weixin.qq.com/s/pFTkbwjuQb3b_WtZVSPRjQ",
+   "title": "",
+   "decision": "reject",
+   "reason": "not_whitelisted",
+   "account": "上海财经大学研招办",
+   "topic": "其他"
+  },
+  {
+   "url": "https://mp.weixin.qq.com/s/01hp6P8YbOJianN5daPimg",
+   "title": "",
+   "decision": "reject",
+   "reason": "not_whitelisted",
+   "account": "上海财经大学研招办",
+   "topic": "其他"
+  },
+  {
+   "url": "https://mp.weixin.qq.com/s/_6oR-FFtqVJMzTvS8CZkTg",
+   "title": "",
+   "decision": "reject",
+   "reason": "not_whitelisted",
+   "account": "上海财经大学MBA",
+   "topic": "其他"
+  },
+  {
+   "url": "https://mp.weixin.qq.com/s/4OpnJhKs_EUIJlv3WZmclQ",
+   "title": "",
+   "decision": "reject",
+   "reason": "not_whitelisted",
+   "account": "上海财经大学滴水湖高金MBA",
+   "topic": "其他"
+  },
+  {
+   "url": "https://mp.weixin.qq.com/s/s8tb1KkV_Ug7dl6n_h0FSg",
+   "title": "",
+   "decision": "reject",
+   "reason": "not_whitelisted",
+   "account": "上财信息",
+   "topic": "其他"
+  },
+  {
+   "url": "https://mp.weixin.qq.com/s/HYSYPcKBR2AH1v7JcMtoJQ",
+   "title": "",
+   "decision": "reject",
+   "reason": "not_whitelisted",
+   "account": "上财就业CEPC",
+   "topic": "其他"
+  },
+  {
+   "url": "https://mp.weixin.qq.com/s/0aoNg5Wq81K_GhDvBMXOlg",
+   "title": "",
+   "decision": "reject",
+   "reason": "not_whitelisted",
+   "account": "上财信息",
+   "topic": "其他"
+  },
+  {
+   "url": "https://mp.weixin.qq.com/s/2Fy5n43SOsLy_wlYU0ZwQA",
+   "title": "",
+   "decision": "reject",
+   "reason": "not_whitelisted",
+   "account": "上财信息",
+   "topic": "其他"
+  },
+  {
+   "url": "https://mp.weixin.qq.com/s/4XlzWWjJhrFa_afQAUUg8Q",
+   "title": "",
+   "decision": "reject",
+   "reason": "not_whitelisted",
+   "account": "上财信息",
+   "topic": "其他"
+  },
+  {
+   "url": "https://mp.weixin.qq.com/s/_bFkqfPnkEpjqBOqq8Ho2A",
+   "title": "",
+   "decision": "reject",
+   "reason": "not_whitelisted",
+   "account": "上财信息",
+   "topic": "其他"
+  },
+  {
+   "url": "https://mp.weixin.qq.com/s/bsynbAn_-sDKlJS6BFk4MA",
+   "title": "",
+   "decision": "reject",
+   "reason": "not_whitelisted",
+   "account": "上财信息",
+   "topic": "其他"
+  },
+  {
+   "url": "https://mp.weixin.qq.com/s/8C4se4Jg85dZvQ2xu6xb4Q",
+   "title": "上海财经大学2026年会计硕士专业学位（MPAcc）国际组织人才培养研究方向（全日制）招生简章",
+   "decision": "accept",
+   "reason": "unchanged",
+   "date": "2025-10-12",
+   "account": "上财会计学院",
+   "document_kind": "annual_notice",
+   "body_chars": 4374,
+   "topic": "硕士招生",
+   "doc_id": "b200d1f871f5",
+   "retention": "active"
+  },
+  {
+   "url": "https://mp.weixin.qq.com/s/MSjEpBg2qcre1VizW-Szwg",
+   "title": "上海财经大学2026年会计硕士专业学位（MPAcc）会计与财务精英研究方向（非全日制）招生简章",
+   "decision": "accept",
+   "reason": "unchanged",
+   "date": "2025-10-12",
+   "account": "上财会计学院",
+   "document_kind": "annual_notice",
+   "body_chars": 3619,
+   "topic": "硕士招生",
+   "doc_id": "01aaf45a0381",
+   "retention": "active"
+  },
+  {
+   "url": "https://mp.weixin.qq.com/s/o7LV_Sv0vaRFiW0QAkMRjg",
+   "title": "上海财经大学2026年审计硕士专业学位（MAud）（全日制）招生简章",
+   "decision": "accept",
+   "reason": "unchanged",
+   "date": "2025-10-11",
+   "account": "上财会计学院",
+   "document_kind": "annual_notice",
+   "body_chars": 3691,
+   "topic": "硕士招生",
+   "doc_id": "12d1cea953d6",
+   "retention": "active"
+  },
+  {
+   "url": "https://mp.weixin.qq.com/s/F3_8nTXM6PE4v2EFdbA3FQ",
+   "title": "上海财经大学2025年MPAcc（非全日制）调剂通知",
+   "decision": "accept",
+   "reason": "unchanged",
+   "date": "2025-03-28",
+   "account": "上财会计学院",
+   "document_kind": "annual_notice",
+   "body_chars": 1916,
+   "topic": "复试/调剂",
+   "doc_id": "5cc07f4f457b",
+   "retention": "active"
+  },
+  {
+   "url": "https://mp.weixin.qq.com/s/TlD8VqEBrte0Nc7ipEecgw",
+   "title": "上海财经大学“2026年现代会计研究方法大讲堂”即将启幕！",
+   "decision": "reject",
+   "reason": "quarantined",
+   "detail": "正文命中敏感信息",
+   "topic": "博士招生"
+  }
+ ],
+ "warnings": [],
+ "notes": []
+}

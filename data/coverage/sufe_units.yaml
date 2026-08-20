@@ -1,0 +1,419 @@
+# 上海财经大学 canonical unit registry（本轮 §四-§六）。
+# 来源：
+# - 学校官方院系设置页 www.sufe.edu.cn/yxsz/list.htm（2026-08-13 抓取）
+# - 2026 本科招生专业（类）目录（corpus 内官方文档）
+# - corpus 招生文档标题动态挖掘（研究生院体系：推免/复试/申请考核/调剂名单 2022-2026）
+# alias 只收录有真实使用证据的形式（官网/公众号/官方文档标题），不发明简称。
+# unit_type: college | academy | institute | teaching_department | special_program_unit | external
+units:
+  # ---------------- A. 本科核心学院 / 书院 ----------------
+  - unit_id: marxism
+    canonical_name: 马克思主义学院
+    aliases: [上海财经大学马克思主义学院]
+    unit_type: college
+    undergraduate: true   # 马克思主义理论+经济学双学位（2026 本科目录）
+    graduate: true        # 2025/2026 硕士复试名单；2027 推免预报名（学院公众号）
+    admission_relevant: true
+    website: https://som.sufe.edu.cn/
+    wechat: 上海财经大学马克思主义学院
+    notes: 公众号 sufemarx 已确认并启用（2026-08-13）
+
+  - unit_id: accounting
+    canonical_name: 会计学院
+    aliases: [上海财经大学会计学院, 上财会计学院]
+    unit_type: college
+    undergraduate: true
+    graduate: true
+    admission_relevant: true
+    website: https://sa.sufe.edu.cn/
+    wechat: 上财会计学院
+    notes: MPAcc/MAud/会计学硕博；公众号已确认并启用
+
+  - unit_id: finance
+    canonical_name: 金融学院
+    aliases: [上海财经大学金融学院]
+    unit_type: college
+    undergraduate: true
+    graduate: true
+    admission_relevant: true
+    website: https://sof.sufe.edu.cn/
+    wechat: ""
+    notes: 2026 推免经研招办公众号覆盖
+
+  - unit_id: cob
+    canonical_name: 商学院
+    aliases: [上海财经大学商学院, 国际工商管理学院]
+    unit_type: college
+    undergraduate: true
+    graduate: true
+    admission_relevant: true
+    website: https://cob.sufe.edu.cn/
+    wechat: 上海财经大学商学院
+    notes: 国际工商管理学院为更名前名称；公众号已确认但内容以新闻为主，enabled=false
+
+  - unit_id: econ
+    canonical_name: 经济学院
+    aliases: [上海财经大学经济学院]
+    unit_type: college
+    undergraduate: true
+    graduate: true
+    admission_relevant: true
+    website: https://econ.sufe.edu.cn/
+    wechat: ""
+    notes: ""
+
+  - unit_id: cpi
+    canonical_name: 财税投资学院
+    aliases: [上海财经大学财税投资学院, 上财财税投资学院, 公共经济与管理学院]
+    unit_type: college
+    undergraduate: true
+    graduate: true
+    admission_relevant: true
+    website: https://cpi.sufe.edu.cn/
+    wechat: 上财财税投资学院
+    notes: 公共经济与管理学院为更名前名称；2026 推免经研招办公众号覆盖；学院公众号已确认但内容以新闻为主，enabled=false
+
+  - unit_id: sppm
+    canonical_name: 公共管理学院
+    aliases: [上海财经大学公共管理学院, 上财公共管理学院, 公管学院]
+    unit_type: college
+    undergraduate: true
+    graduate: true
+    admission_relevant: true
+    website: https://sppm.sufe.edu.cn/
+    wechat: 上财公共管理学院
+    notes: 2026 推免经研招办公众号及学院账号（未启用）覆盖
+
+  - unit_id: ssds
+    canonical_name: 统计与数据科学学院
+    aliases: [上海财经大学统计与数据科学学院, 统计与管理学院, 统计学院]
+    unit_type: college
+    undergraduate: true
+    graduate: true
+    admission_relevant: true
+    website: https://ssds.sufe.edu.cn/
+    wechat: ""
+    notes: 统计与管理学院为更名前名称（2024 前招生文件）
+
+  - unit_id: sime
+    canonical_name: 信息管理与工程学院
+    aliases: [上海财经大学信息管理与工程学院, 上财信息, 信管学院]
+    unit_type: college
+    undergraduate: true
+    graduate: true
+    admission_relevant: true
+    website: https://sime.sufe.edu.cn/
+    wechat: 上财信息
+    notes: 公众号已确认并启用
+
+  - unit_id: de
+    canonical_name: 数字经济学院
+    aliases: [上海财经大学数字经济学院]
+    unit_type: college
+    undergraduate: true
+    graduate: true
+    admission_relevant: true
+    website: https://de.sufe.edu.cn/
+    wechat: 上海财经大学数字经济学院
+    notes: 公众号已确认并启用
+
+  - unit_id: scai
+    canonical_name: 计算机与人工智能学院
+    aliases: [上海财经大学计算机与人工智能学院, 上财计算机与人工智能学院, 计算机学院, SCAI]
+    unit_type: college
+    undergraduate: true
+    graduate: true
+    admission_relevant: true
+    website: https://scai.sufe.edu.cn/
+    wechat: 上财计算机与人工智能学院
+    notes: 公众号已确认并启用
+
+  - unit_id: law
+    canonical_name: 法学院
+    aliases: [上海财经大学法学院]
+    unit_type: college
+    undergraduate: true
+    graduate: true
+    admission_relevant: true
+    website: https://law.sufe.edu.cn/
+    wechat: ""
+    notes: 涉外法治实验班/财经法治卓越班
+
+  - unit_id: sfl
+    canonical_name: 外国语学院
+    aliases: [上海财经大学外国语学院]
+    unit_type: college
+    undergraduate: true
+    graduate: true
+    admission_relevant: true
+    website: https://sfs.sufe.edu.cn/
+    wechat: ""
+    notes: 商务英语/日语；英法复语实验班
+
+  - unit_id: som
+    canonical_name: 数学学院
+    aliases: [上海财经大学数学学院]
+    unit_type: college
+    undergraduate: true
+    graduate: true
+    admission_relevant: true
+    website: https://math.sufe.edu.cn/
+    wechat: ""
+    notes: 财经数学实验班
+
+  - unit_id: aiclg
+    canonical_name: 前沿交叉书院
+    aliases: [上海财经大学前沿交叉书院]
+    unit_type: academy
+    undergraduate: true   # 统计学/数据科学（前沿交叉书院）高考招生（2026 目录）
+    graduate: false
+    admission_relevant: true
+    website: https://aiclg.sufe.edu.cn/
+    wechat: ""
+    notes: 本科书院；数字前沿交叉实验班
+
+  - unit_id: kuangshi
+    canonical_name: 匡时书院
+    aliases: [上海财经大学匡时书院]
+    unit_type: academy
+    undergraduate: true   # 孙冶方班/金融科技拔尖班/数字经济拔尖班校内选拔
+    graduate: false
+    admission_relevant: true
+    website: ""
+    wechat: ""
+    notes: 本科书院；入校后二次选拔，不直接高考招生
+
+  # ---------------- B. 其他正式教学 / 研究单位 ----------------
+  - unit_id: humanities
+    canonical_name: 人文学院
+    aliases: [上海财经大学人文学院]
+    unit_type: college
+    undergraduate: false  # 2026 本科目录无人文学院
+    graduate: true        # 2023-2025 推免夏令营名单、2025 复试
+    admission_relevant: true
+    website: ""
+    wechat: ""
+    notes: 研究生招生（社会学/中国语言文学等）
+
+  - unit_id: snpi
+    canonical_name: 新闻与社会高等研究院
+    aliases: [上海财经大学新闻与社会高等研究院]
+    unit_type: institute
+    undergraduate: false
+    graduate: true        # 2027 推免预报名（社会学/新闻与传播，xsgyy.sufe.edu.cn）
+    admission_relevant: true
+    website: https://xsgyy.sufe.edu.cn/
+    wechat: ""
+    notes: 研究平台并承担研究生招生
+
+  - unit_id: gsf
+    canonical_name: 全球南方财经研究院
+    aliases: [上海财经大学全球南方财经研究院]
+    unit_type: institute
+    undergraduate: false
+    graduate: true        # 2027 推免预报名（区域国别学硕/硕博连读，gsife.sufe.edu.cn）
+    admission_relevant: true
+    website: https://gsife.sufe.edu.cn/
+    wechat: ""
+    notes: 研究平台并承担研究生招生
+
+  - unit_id: sports
+    canonical_name: 体育教学部
+    aliases: [上海财经大学体育教学部]
+    unit_type: teaching_department
+    undergraduate: false
+    graduate: false
+    admission_relevant: false
+    website: ""
+    wechat: ""
+    notes: 教学服务单位，不承担招生
+
+  - unit_id: djh
+    canonical_name: 滴水湖高级金融学院
+    aliases: [上海财经大学滴水湖高级金融学院, 滴水湖高金, 滴水湖高级金融学院（智库）]
+    unit_type: academy
+    undergraduate: false
+    graduate: true        # MF 项目、2023-2026 复试/推免名单
+    admission_relevant: true
+    website: https://dafi.sufe.edu.cn/
+    wechat: 上海财经大学滴水湖高金MF
+    notes: 研究生项目招生；2027 推免预报名见官网（MF 项目）
+
+  - unit_id: sice
+    canonical_name: 国际文化交流学院
+    aliases: [上海财经大学国际文化交流学院, 上财国际文化交流学院]
+    unit_type: college
+    undergraduate: false
+    graduate: true        # 2025/2026 硕士研究生招生考试复试办法（corpus 标题证据）
+    admission_relevant: true
+    website: ""
+    wechat: 上财国际文化交流学院
+    notes: 研究生招生（汉语国际教育等）；与国际学生招生并存，公众号未启用
+
+  - unit_id: lifelong
+    canonical_name: 终身教育学院
+    aliases: [上海财经大学终身教育学院]
+    unit_type: college
+    undergraduate: false
+    graduate: false
+    admission_relevant: false
+    website: ""
+    wechat: ""
+    notes: 继续教育/非学历培训为主
+
+  - unit_id: iqf
+    canonical_name: 国际从业资格教育学院
+    aliases: [上海财经大学国际从业资格教育学院]
+    unit_type: college
+    undergraduate: false
+    graduate: false
+    admission_relevant: false
+    website: ""
+    wechat: ""
+    notes: 从业资格/证书教育为主
+
+  - unit_id: ies
+    canonical_name: 国际教育学院
+    aliases: [上海财经大学国际教育学院]
+    unit_type: college
+    undergraduate: false
+    graduate: false
+    admission_relevant: false
+    website: ""
+    wechat: ""
+    notes: 国际学生教育为主
+
+  - unit_id: saa
+    canonical_name: 高级会计审计学院
+    aliases: [上海财经大学高级会计审计学院]
+    unit_type: academy
+    undergraduate: false
+    graduate: true        # MPAcc/MAud 研究生复试办法（2026，corpus 标题证据）
+    admission_relevant: true
+    website: ""
+    wechat: ""
+    notes: 学校院系页在列；与会计学院并存的专业学院，不合并
+
+  # ---------------- C. 官网另列院系 / 研究机构 ----------------
+  - unit_id: entrepreneurship
+    canonical_name: 创业学院
+    aliases: [上海财经大学创业学院]
+    unit_type: academy
+    undergraduate: false
+    graduate: false
+    admission_relevant: false
+    website: ""
+    wechat: ""
+    notes: 创业教育平台，无独立招生
+
+  - unit_id: cmri
+    canonical_name: 中国式现代化研究院
+    aliases: [上海财经大学中国式现代化研究院]
+    unit_type: institute
+    undergraduate: false
+    graduate: false
+    admission_relevant: false
+    website: ""
+    wechat: ""
+    notes: 研究平台
+
+  - unit_id: ftzri
+    canonical_name: 自由贸易区研究院
+    aliases: [上海财经大学自由贸易区研究院]
+    unit_type: institute
+    undergraduate: false
+    graduate: false
+    admission_relevant: false
+    website: ""
+    wechat: ""
+    notes: 研究平台
+
+  - unit_id: shdi
+    canonical_name: 上海发展研究院
+    aliases: [上海财经大学上海发展研究院]
+    unit_type: institute
+    undergraduate: false
+    graduate: false
+    admission_relevant: false
+    website: ""
+    wechat: ""
+    notes: 研究平台
+
+  # ---------------- D. 外部 / 特殊单位 ----------------
+  - unit_id: zj
+    canonical_name: 上海财经大学浙江学院
+    aliases: [上财浙院]
+    unit_type: external
+    undergraduate: false
+    graduate: false
+    admission_relevant: false
+    website: https://www.shufe-zj.edu.cn/
+    wechat: ""
+    notes: out_of_scope：独立学院，不进本部学生 QA 主 corpus
+
+  - unit_id: qd
+    canonical_name: 青岛财富管理研究院
+    aliases: [上海财经大学青岛财富管理研究院]
+    unit_type: external
+    undergraduate: false
+    graduate: false
+    admission_relevant: false
+    website: ""
+    wechat: ""
+    notes: out_of_scope：异地研究院
+
+  # ---------------- 研究生招生体系出现、学校院系页未列的单位 ----------------
+  - unit_id: siif
+    canonical_name: 上海国际金融中心研究院
+    aliases: []
+    unit_type: institute
+    undergraduate: false
+    graduate: true        # 2025/2026 硕士复试名单（corpus 标题证据）
+    admission_relevant: true
+    website: ""
+    wechat: ""
+    notes: graduate_only：学校院系页未列，研究生招生体系实际招生单位
+
+  - unit_id: keylab_econ
+    canonical_name: 数理经济学教育部重点实验室
+    aliases: [财经大学数理经济学教育部重点实验室]
+    unit_type: institute
+    undergraduate: false
+    graduate: true        # 2026 复试名单（corpus 标题证据）
+    admission_relevant: true
+    website: ""
+    wechat: ""
+    notes: graduate_only：学校院系页未列
+
+  - unit_id: djh_thinktank
+    canonical_name: 滴水湖智库
+    aliases: [上海财经大学滴水湖智库]
+    unit_type: institute
+    undergraduate: false
+    graduate: true        # 2025/2026 复试名单（corpus 标题证据）
+    admission_relevant: true
+    website: ""
+    wechat: ""
+    notes: graduate_only：学校院系页未列；与滴水湖高级金融学院并存，不合并
+
+  - unit_id: cri
+    canonical_name: 财经研究所
+    aliases: [城市与区域科学学院（财经研究所）, 上海财经大学城市与区域科学学院]
+    unit_type: institute
+    undergraduate: false
+    graduate: true        # 2022-2025 推免/复试名单（corpus 标题证据）
+    admission_relevant: true
+    website: ""
+    wechat: ""
+    notes: graduate_only：历史招生单位（城市与区域科学学院（财经研究所）），近年名单渐少，保留独立 unit 不合并
+
+  - unit_id: icss
+    canonical_name: 交叉科学研究院
+    aliases: [上海财经大学交叉科学研究院]
+    unit_type: institute
+    undergraduate: false
+    graduate: true        # 2027 推免预报名（riis.sufe.edu.cn + 上财交叉科学研究院公众号）
+    admission_relevant: true
+    website: https://riis.sufe.edu.cn/
+    wechat: 上财交叉科学研究院
+    notes: graduate_only：与前沿交叉书院（本科书院）不合并

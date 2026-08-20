@@ -404,6 +404,42 @@ sources:
         category: 校园生活
         scene: 医疗医保
         time_policy: all_history
+      # ---- 2026-08-12 数据源扩建：本科培养/专业/学籍/收费/奖惩/申诉 ----
+      - name: 学科专业设置
+        list_url: https://gongkai.sufe.edu.cn/xkzysz/list.htm
+        category: 学工事务
+        scene: 本科教务
+        time_policy: all_history
+      # “上海财经大学本科各专业培养方案”汇总页在此栏目；混研究生课程条目
+      - name: 课程与教学计划
+        list_url: https://gongkai.sufe.edu.cn/kcyjxjh/list.htm
+        category: 学工事务
+        scene: 本科教务
+        time_policy: all_history
+        title_include: 本科|培养方案
+      - name: 学籍管理
+        list_url: https://gongkai.sufe.edu.cn/xjxwgl/list.htm
+        category: 学工事务
+        scene: 本科教务
+        time_policy: all_history
+        title_exclude: 成人
+      - name: 教育收费情况
+        list_url: https://gongkai.sufe.edu.cn/jysfqk/list.htm
+        category: 学工事务
+        scene: 缴费财务
+        time_policy: all_history
+      - name: 奖励处罚办法
+        list_url: https://gongkai.sufe.edu.cn/jlcfbf/list.htm
+        category: 学工事务
+        scene: 本科教务
+        time_policy: all_history
+        title_include: 本科|试场|考试|推免|荣誉学士
+      - name: 申诉途径与处理程序
+        list_url: https://gongkai.sufe.edu.cn/sstjyclcx/list.htm
+        category: 学工事务
+        scene: 本科教务
+        time_policy: all_history
+        title_exclude: 成人
 
   - id: yljk
     adapter: wp3
@@ -515,3 +551,304 @@ sources:
         category: 学工事务
         scene: 新生与安全
         time_policy: all_history
+
+  # ---- 2026-08-12 数据源扩建 Phase 1：本科招生网 + 学院级本科培养 + 书院 ----
+  # 审计依据 data/coverage/sufe_source_gap_audit.json。学院站一律栏目 allowlist +
+  # title_include/exclude 双重过滤；名单公示（人名列表）、研究生/博士/推免/招聘/
+  # 讲座/活动新闻不进问答库。审计后 skip：会计学院 sa（无公开本科规则栏目）、
+  # 公共管理学院 spap（本科栏目为空）、数学学院、马克思主义学院（无本科规则内容）。
+
+  - id: zs
+    adapter: wp3
+    homepage: https://zs.sufe.edu.cn/
+    publisher: 上海财经大学本科招生网
+    source_type: official_department
+    scope_unit: 本科生
+    sections:
+      # 招生章程 / 当年招生专业（类）目录 / 实验班校内选拔方案
+      - name: 招生政策
+        list_url: https://zs.sufe.edu.cn/3337/list.htm
+        category: 学工事务
+        scene: 本科教务
+        time_policy: all_history
+      # 各实验班/拔尖班/专业介绍（经济学拔尖班、AI新财经实验班等）
+      - name: 专业介绍
+        list_url: https://zs.sufe.edu.cn/zyjs/list.htm
+        category: 学工事务
+        scene: 本科教务
+        time_policy: all_history
+      # 书院与“43模式”培养介绍（仅 4 篇静态文章）
+      - name: 特色介绍
+        list_url: https://zs.sufe.edu.cn/3344/list.htm
+        category: 学工事务
+        scene: 本科教务
+        time_policy: all_history
+      # 宽栏目：只收第二学士学位/校内选拔类，名单公示与特殊类型招生简章不进
+      - name: 招生动态
+        list_url: https://zs.sufe.edu.cn/3336/list.htm
+        category: 学工事务
+        scene: 本科教务
+        time_policy: recent_5_school_years
+        title_include: 第二学士|校内选拔|实验班
+        title_exclude: 名单|公示
+
+  - id: sof
+    adapter: business_school
+    homepage: https://sof.sufe.edu.cn/
+    publisher: 上海财经大学金融学院
+    source_type: official_college
+    scope_unit: 金融学院本科生
+    sections:
+      # 无独立制度栏目，规则散在新闻流：拔尖班选拔/转专业/分流/培养方案
+      - name: 本科生
+        list_url: https://sof.sufe.edu.cn/bks/list.htm
+        category: 学工事务
+        scene: 本科教务
+        time_policy: all_history
+        title_include: 选拔|转专业|分流|培养方案|培养计划|实验班|拔尖|双学位|辅修|毕业论文|学分|课程认定|导师制
+        title_exclude: 名单|公示|活动|阅读之星|年级大会|讲座|论坛|会议|获奖|喜报
+
+  - id: cob
+    adapter: cob_undergrad
+    homepage: https://cob.sufe.edu.cn/UnderGraduate
+    publisher: 上海财经大学商学院
+    source_type: official_college
+    scope_unit: 商学院本科生
+    sections:
+      # 本科主页 swiper 卡片直链 5 个专业介绍 Detail 页；
+      # 落地页同时混有重要通知列表，必须用 exclude 挡住名单/通知类条目
+      - name: 专业介绍
+        list_url: https://cob.sufe.edu.cn/UnderGraduate
+        category: 学工事务
+        scene: 本科教务
+        time_policy: all_history
+        title_include: 国际经济与贸易|市场营销|工商管理
+        title_exclude: 名单|公示|面试|选课|两证|教材|推免|邀请
+      - name: 重要通知
+        list_url: https://cob.sufe.edu.cn/UnderGraduate/List/1081
+        category: 学工事务
+        scene: 本科教务
+        time_policy: all_history
+        title_include: 实验班|选拔|面试|选课|导师制|转专业|分流|培养|毕业论文|两证|学分|课程
+        title_exclude: 名单|公示|教材|推免
+
+  - id: econ
+    adapter: business_school
+    homepage: https://econ.sufe.edu.cn/
+    publisher: 上海财经大学经济学院
+    source_type: official_college
+    scope_unit: 经济学院本科生
+    sections:
+      # 各年级经济学本科培养方案（doc/docx 附件）+ 拔尖班选拔
+      - name: 招生培养
+        list_url: https://econ.sufe.edu.cn/6932/list.htm
+        category: 学工事务
+        scene: 本科教务
+        time_policy: all_history
+      # 成绩分布/缓考/转专业/毕业论文等院级制度
+      - name: 规章制度
+        list_url: https://econ.sufe.edu.cn/6933/list.htm
+        category: 学工事务
+        scene: 本科教务
+        time_policy: all_history
+      - name: 本科生导师制
+        list_url: https://econ.sufe.edu.cn/6935/list.htm
+        category: 学工事务
+        scene: 本科教务
+        time_policy: all_history
+
+  - id: cpi
+    adapter: business_school
+    homepage: https://cpi.sufe.edu.cn/
+    publisher: 上海财经大学财税投资学院
+    source_type: official_college
+    scope_unit: 财税投资学院本科生
+    sections:
+      # 存量内容仍为原公共经济与管理学院品牌；核心为各年转专业工作细则
+      - name: 本科生工作动态
+        list_url: https://cpi.sufe.edu.cn/13314/list.htm
+        category: 学工事务
+        scene: 本科教务
+        time_policy: all_history
+        title_include: 转专业|自主选择专业|工作细则|实施细则|培养方案|分流|选拔
+        title_exclude: 名单|公示|简报|会议|讲座
+
+  - id: ssds
+    adapter: business_school
+    homepage: https://ssds.sufe.edu.cn/
+    publisher: 上海财经大学统计与数据科学学院
+    source_type: official_college
+    scope_unit: 统计与数据科学学院本科生
+    sections:
+      # 规则集中在毕业论文/模板方向；栏目混科研训练/活动新闻
+      - name: 本科生
+        list_url: https://ssds.sufe.edu.cn/721/list.htm
+        category: 学工事务
+        scene: 本科教务
+        time_policy: all_history
+        title_include: 培养方案|培养计划|毕业论文|学位论文|论文模板|工作流程|转专业|专业分流|辅修|双学位|学分|选课
+        title_exclude: 答辩|动员会|喜报|讲座|展示|举办|举行|海报|结项|中期|获奖
+
+  - id: sime
+    adapter: business_school
+    homepage: https://sime.sufe.edu.cn/
+    publisher: 上海财经大学信息管理与工程学院
+    source_type: official_college
+    scope_unit: 信息管理与工程学院本科生
+    sections:
+      - name: 专业设置
+        list_url: https://sime.sufe.edu.cn/10124/list.htm
+        category: 学工事务
+        scene: 本科教务
+        time_policy: all_history
+      - name: 规章制度
+        list_url: https://sime.sufe.edu.cn/10125/list.htm
+        category: 学工事务
+        scene: 本科教务
+        time_policy: all_history
+      # 列表半数为直链 PDF/DOC（报名表/论文规范/实习计划）
+      - name: 常用下载
+        list_url: https://sime.sufe.edu.cn/10127/list.htm
+        category: 学工事务
+        scene: 本科教务
+        time_policy: all_history
+      - name: 通知公告
+        list_url: https://sime.sufe.edu.cn/10226/list.htm
+        category: 学工事务
+        scene: 本科教务
+        time_policy: all_history
+        title_include: 转专业|微专业|联合培养|实验班|拔尖|学分|课程认定|毕业论文|实习|3\+1\+X
+        title_exclude: 博士|硕士|推免|研究生|招聘|MEM|名单|公示|讲座
+
+  - id: scai
+    adapter: business_school
+    homepage: https://scai.sufe.edu.cn/
+    publisher: 上海财经大学计算机与人工智能学院
+    source_type: official_college
+    scope_unit: 计算机与人工智能学院本科生
+    sections:
+      # 人工智能实验班/计算机/人工智能专业介绍（量小精准）
+      - name: 本科生培养
+        list_url: https://scai.sufe.edu.cn/bkspy/list.htm
+        category: 学工事务
+        scene: 本科教务
+        time_policy: all_history
+      - name: 通知公告
+        list_url: https://scai.sufe.edu.cn/17910/list.htm
+        category: 学工事务
+        scene: 本科教务
+        time_policy: all_history
+        title_include: 转专业|实验班|拔尖|选拔|培养方案|毕业论文|分流
+        title_exclude: 博士|硕士|推免|研究生|招聘|讲座|名单|公示|选聘|夏令营|学生会|分团委|候选人
+
+  # 2023 年新设学院：当前无培养规则栏目，tight filter 挂观察位（预期产量≈0）
+  - id: de
+    adapter: business_school
+    homepage: https://de.sufe.edu.cn/
+    publisher: 上海财经大学数字经济学院
+    source_type: official_college
+    scope_unit: 数字经济学院本科生
+    sections:
+      - name: 通知公告
+        list_url: https://de.sufe.edu.cn/12083/list.htm
+        category: 学工事务
+        scene: 本科教务
+        time_policy: all_history
+        title_include: 转专业|培养方案|专业分流|实施细则|选拔
+        title_exclude: 名单|公示|推免|硕士|博士|研究生|招聘|征兵|宣讲|讲座|双创|立项
+
+  - id: law
+    adapter: business_school
+    homepage: https://law.sufe.edu.cn/
+    publisher: 上海财经大学法学院
+    source_type: official_college
+    scope_unit: 法学院本科生
+    sections:
+      # 各年级法学本科培养方案（含法学+金融双学位/涉外法治实验班/第二学士学位，PDF 附件）
+      - name: 培养方案
+        list_url: https://law.sufe.edu.cn/pyfa/list.htm
+        category: 学工事务
+        scene: 本科教务
+        time_policy: all_history
+      # 招生简章 + 实验班/双学位专业介绍
+      - name: 本科生
+        list_url: https://law.sufe.edu.cn/bks/list.htm
+        category: 学工事务
+        scene: 本科教务
+        time_policy: all_history
+      - name: 相关制度
+        list_url: https://law.sufe.edu.cn/7986/list.htm
+        category: 学工事务
+        scene: 本科教务
+        time_policy: all_history
+        title_include: 法学|法律|涉外法治|卓越|双学位|转专业|毕业论文|实习|学分认定|课程认定|素质综合评价
+        title_exclude: 硕士|博士|研究生|国家奖学金|励志奖学金|助学贷款|学生管理规定|学生申诉|奖学金评比
+
+  - id: sfs
+    adapter: business_school
+    homepage: https://sfs.sufe.edu.cn/
+    publisher: 上海财经大学外国语学院
+    source_type: official_college
+    scope_unit: 外国语学院本科生
+    sections:
+      # 复语实验班选拔/海外学习学分认定学院实施细则/转专业/TEM/分级考试
+      - name: 本科生教育
+        list_url: https://sfs.sufe.edu.cn/3946/list.htm
+        category: 学工事务
+        scene: 本科教务
+        time_policy: all_history
+        title_include: 本科|商务英语|英法复语|海外学习|学分认定|课程转换|转专业|TEM|英语专业|日语专业|申请表|审批表
+        title_exclude: 研究生|推免|研思|讲座|活动|论坛|名单|公示|获奖|科创
+      # 面向全校本科生：大学英语分级考试/非英语专业外语能力培养方案/升降级
+      - name: 大学外语教学
+        list_url: https://sfs.sufe.edu.cn/3945/list.htm
+        category: 学工事务
+        scene: 本科教务
+        time_policy: all_history
+        scope_unit: 全体本科生
+        title_include: 大学英语|外语能力|分级考试|升降级|英语
+        title_exclude: 研究生|推免|讲座|活动|论坛
+
+  - id: ksc
+    adapter: business_school
+    homepage: https://ksc.sufe.edu.cn/
+    publisher: 上海财经大学匡时书院
+    source_type: official_college
+    scope_unit: 匡时书院学生
+    sections:
+      # 孙冶方班培养方案（docx 直链附件栏目）
+      - name: 培养方案
+        list_url: https://ksc.sufe.edu.cn/pyfa/list.htm
+        category: 学工事务
+        scene: 本科教务
+        time_policy: all_history
+      # 新生选拔/转专业规则所在；掺讲座、评选、媒体报道
+      - name: 通知公告
+        list_url: https://ksc.sufe.edu.cn/12220/list.htm
+        category: 学工事务
+        scene: 本科教务
+        time_policy: all_history
+        title_include: 转专业|选拔|培养方案|分流|退出|拔尖|实验班
+        title_exclude: 结果|名单|公示|讲堂|阅读之星|媒体|回顾|散文
+
+  - id: aiclg
+    adapter: business_school
+    homepage: https://aiclg.sufe.edu.cn/
+    publisher: 上海财经大学前沿交叉书院
+    source_type: official_college
+    scope_unit: 前沿交叉书院学生
+    sections:
+      # 新生校内选拔公告/笔试须知
+      - name: 招生选拔
+        list_url: https://aiclg.sufe.edu.cn/19654/list.htm
+        category: 学工事务
+        scene: 本科教务
+        time_policy: all_history
+        title_exclude: 宣讲
+      # 单篇静态栏目页：1+X+Y 培养模式 + 两个实验班专业介绍
+      - name: 招生专业
+        list_url: https://aiclg.sufe.edu.cn/19653/list.htm
+        category: 学工事务
+        scene: 本科教务
+        time_policy: all_history
+        inline_article: true

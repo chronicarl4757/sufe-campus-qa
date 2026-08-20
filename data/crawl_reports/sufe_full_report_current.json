@@ -1,0 +1,716 @@
+{
+  "schema_version": "1",
+  "evaluated_at": "2026-08-20T10:14:24+00:00",
+  "fingerprints": {
+    "manifest": "sha256:b1ddc4105163c885a936637c977e754dfd8d61f18f29f4cc012ec656d78d0b42",
+    "indexed_manifest": "sha256:b1ddc4105163c885a936637c977e754dfd8d61f18f29f4cc012ec656d78d0b42",
+    "index": "sha256:fe9f11438cb9711f58ba490ed43064adcd74da008654f4ea01466cc87bf1ae6e",
+    "coverage_index": "sha256:fe9f11438cb9711f58ba490ed43064adcd74da008654f4ea01466cc87bf1ae6e",
+    "real_answers_index": "sha256:fe9f11438cb9711f58ba490ed43064adcd74da008654f4ea01466cc87bf1ae6e"
+  },
+  "corpus": {
+    "manifest_documents": 2554,
+    "materialized_documents": 1271,
+    "retained_documents": 1271,
+    "retained_materialized_documents": 1271,
+    "valid_body_ratio": 1.0,
+    "missing_files": [],
+    "file_hash_errors": [],
+    "isolated_materialized": [],
+    "duplicate_text_groups": [
+      [
+        "045ddc88af3e",
+        "5836ee860bf9"
+      ],
+      [
+        "049a7db37997",
+        "4256e93f19b3"
+      ],
+      [
+        "05fa3b5f23c7",
+        "515983dadc61"
+      ],
+      [
+        "062a91624043",
+        "f1909ba7f342"
+      ],
+      [
+        "06f44255f23e",
+        "f829a5cc3e18"
+      ],
+      [
+        "0d50734f5379",
+        "9ab2bd4d2672"
+      ],
+      [
+        "0f15b29fb76e",
+        "b0d701864645"
+      ],
+      [
+        "0f4ff19680ec",
+        "27df0ba7eb18"
+      ],
+      [
+        "112bdfefa817",
+        "df5b9bf3429f"
+      ],
+      [
+        "114ed38217e3",
+        "e4b8fcfcb7f3"
+      ],
+      [
+        "12a95b2dc0d6",
+        "9c2f401688e4"
+      ],
+      [
+        "174989405400",
+        "f89394fb6132"
+      ],
+      [
+        "191b649f104c",
+        "e7c954c83ee8"
+      ],
+      [
+        "1e480d364f22",
+        "7bf6e0b3e173"
+      ],
+      [
+        "230e056e5422",
+        "d489e3497384"
+      ],
+      [
+        "26d365fb2ad2",
+        "67fdb7a4c3d1"
+      ],
+      [
+        "28429d197c37",
+        "9e5d6d9c3bfb"
+      ],
+      [
+        "286293e1b96f",
+        "70eb3bccf5ef"
+      ],
+      [
+        "2e8a9386b4f8",
+        "57d4620aea1b"
+      ],
+      [
+        "31b9c9b28c18",
+        "65a47cb9cf89"
+      ],
+      [
+        "3d326567cb2b",
+        "7a9338e1540f"
+      ],
+      [
+        "3e2ec161e017",
+        "861408385e90"
+      ],
+      [
+        "40aceb5a230b",
+        "862db8a80119"
+      ],
+      [
+        "44037abd2433",
+        "5ea94a839885"
+      ],
+      [
+        "4e3f5dad4eca",
+        "c45ce68fa02e"
+      ],
+      [
+        "4f814627bbf8",
+        "99f602769cd6"
+      ],
+      [
+        "51a7fd6b128b",
+        "942005a00382"
+      ],
+      [
+        "52a785d3df9c",
+        "cc4a93d90c3e"
+      ],
+      [
+        "530cd85a7763",
+        "e8769c8bc3db"
+      ],
+      [
+        "562fed52b3c2",
+        "c780a8e8115f"
+      ],
+      [
+        "567935b9ba78",
+        "9ea02f173cf6"
+      ],
+      [
+        "614f831349b2",
+        "e3375184c3ca"
+      ],
+      [
+        "65b1c0021b0d",
+        "66e45969c386"
+      ],
+      [
+        "6ba81fbb4450",
+        "e9afbbc52f88"
+      ],
+      [
+        "6c329033183e",
+        "8353ba92bfcd"
+      ],
+      [
+        "6f5486cdf6a7",
+        "a67200733dc0"
+      ],
+      [
+        "71bdd38dc689",
+        "8f4e10c82f76",
+        "ed444f3fc800"
+      ],
+      [
+        "7dcfaeceef5f",
+        "a648ee0a55f3"
+      ],
+      [
+        "8521daca4851",
+        "db9989b4e83e"
+      ],
+      [
+        "8cebd66f2b99",
+        "b4012ce3bece"
+      ],
+      [
+        "8e67932f3528",
+        "e4249ea26d5b"
+      ],
+      [
+        "8f245c042322",
+        "c738554bdeee"
+      ],
+      [
+        "98e4a621dcd5",
+        "d8ed8e6bc2e6"
+      ],
+      [
+        "a03717bf1391",
+        "b8b7c716ca80"
+      ],
+      [
+        "b52442b9f47e",
+        "e4039ac0f8c9"
+      ],
+      [
+        "c2c8afeea20f",
+        "fb33e02ea7b1"
+      ],
+      [
+        "c86551d6f299",
+        "cb5d3da734bf"
+      ],
+      [
+        "ce9f40abd3f5",
+        "d801506ea32e"
+      ]
+    ],
+    "duplicate_document_rate": 0.03855232100708104,
+    "active_annual_series_duplicates": {},
+    "unknown_validity_main_documents": 774
+  },
+  "attachments": {
+    "total": 643,
+    "parsed_and_materialized": 514,
+    "parse_success_rate": 0.7993779160186625,
+    "article_reference_violations": [],
+    "relation_count": 624
+  },
+  "collections": {
+    "main_qa": {
+      "name": "sufe_qa_main_v2",
+      "chunk_count": 8361,
+      "document_count": 787,
+      "invalid_documents": []
+    },
+    "public_list": {
+      "name": "sufe_qa_public_list_v2",
+      "chunk_count": 1462,
+      "document_count": 254,
+      "invalid_documents": []
+    },
+    "historical": {
+      "name": "sufe_qa_historical_v2",
+      "chunk_count": 1552,
+      "document_count": 230,
+      "invalid_documents": []
+    }
+  },
+  "crawl_sites": {
+    "aiclg.sufe.edu.cn": {
+      "report_file": "2026-08-12-0831-aiclg.sufe.edu.cn.json",
+      "categories_found": 2,
+      "list_pages_fetched": 2,
+      "articles_found": 3,
+      "articles_downloaded": 3,
+      "attachments_found": 0,
+      "attachments_downloaded": 0,
+      "attachments_parsed": 0,
+      "incomplete_documents": 0,
+      "low_quality_documents": 0,
+      "final_indexed": 2
+    },
+    "baoweichu.sufe.edu.cn": {
+      "report_file": "2026-08-06-1735-baoweichu.sufe.edu.cn.json",
+      "categories_found": 6,
+      "list_pages_fetched": 7,
+      "articles_found": 54,
+      "articles_downloaded": 44,
+      "attachments_found": 61,
+      "attachments_downloaded": 27,
+      "attachments_parsed": 21,
+      "incomplete_documents": 1,
+      "low_quality_documents": 34,
+      "final_indexed": 22
+    },
+    "career.sufe.edu.cn": {
+      "report_file": "2026-08-20-0944-career.sufe.edu.cn.json",
+      "categories_found": 5,
+      "list_pages_fetched": 14,
+      "articles_found": 77,
+      "articles_downloaded": 77,
+      "attachments_found": 92,
+      "attachments_downloaded": 82,
+      "attachments_parsed": 71,
+      "incomplete_documents": 1,
+      "low_quality_documents": 0,
+      "final_indexed": 132
+    },
+    "cob.sufe.edu.cn": {
+      "report_file": "2026-08-12-0904-cob.sufe.edu.cn.json",
+      "categories_found": 2,
+      "list_pages_fetched": 2,
+      "articles_found": 9,
+      "articles_downloaded": 9,
+      "attachments_found": 0,
+      "attachments_downloaded": 0,
+      "attachments_parsed": 0,
+      "incomplete_documents": 0,
+      "low_quality_documents": 0,
+      "final_indexed": 4
+    },
+    "cpi.sufe.edu.cn": {
+      "report_file": "2026-08-12-0828-cpi.sufe.edu.cn.json",
+      "categories_found": 1,
+      "list_pages_fetched": 1,
+      "articles_found": 2,
+      "articles_downloaded": 2,
+      "attachments_found": 2,
+      "attachments_downloaded": 2,
+      "attachments_parsed": 2,
+      "incomplete_documents": 0,
+      "low_quality_documents": 0,
+      "final_indexed": 2
+    },
+    "cwc.sufe.edu.cn": {
+      "report_file": "2026-08-06-1619-cwc.sufe.edu.cn.json",
+      "categories_found": 1,
+      "list_pages_fetched": 1,
+      "articles_found": 5,
+      "articles_downloaded": 5,
+      "attachments_found": 5,
+      "attachments_downloaded": 5,
+      "attachments_parsed": 5,
+      "incomplete_documents": 0,
+      "low_quality_documents": 0,
+      "final_indexed": 10
+    },
+    "de.sufe.edu.cn": {
+      "report_file": "2026-08-12-0830-de.sufe.edu.cn.json",
+      "categories_found": 1,
+      "list_pages_fetched": 2,
+      "articles_found": 0,
+      "articles_downloaded": 0,
+      "attachments_found": 0,
+      "attachments_downloaded": 0,
+      "attachments_parsed": 0,
+      "incomplete_documents": 0,
+      "low_quality_documents": 0,
+      "final_indexed": 0
+    },
+    "econ.sufe.edu.cn": {
+      "report_file": "2026-08-12-0907-econ.sufe.edu.cn.json",
+      "categories_found": 1,
+      "list_pages_fetched": 0,
+      "articles_found": 4,
+      "articles_downloaded": 4,
+      "attachments_found": 7,
+      "attachments_downloaded": 7,
+      "attachments_parsed": 7,
+      "incomplete_documents": 0,
+      "low_quality_documents": 0,
+      "final_indexed": 7
+    },
+    "gongkai.sufe.edu.cn": {
+      "report_file": "2026-08-12-0901-gongkai.sufe.edu.cn.json",
+      "categories_found": 8,
+      "list_pages_fetched": 12,
+      "articles_found": 70,
+      "articles_downloaded": 65,
+      "attachments_found": 27,
+      "attachments_downloaded": 30,
+      "attachments_parsed": 24,
+      "incomplete_documents": 4,
+      "low_quality_documents": 26,
+      "final_indexed": 32
+    },
+    "gs.sufe.edu.cn": {
+      "report_file": "2026-08-11-0209-gs.sufe.edu.cn.json",
+      "categories_found": 24,
+      "list_pages_fetched": 35,
+      "articles_found": 167,
+      "articles_downloaded": 157,
+      "attachments_found": 65,
+      "attachments_downloaded": 55,
+      "attachments_parsed": 54,
+      "incomplete_documents": 10,
+      "low_quality_documents": 50,
+      "final_indexed": 121
+    },
+    "hq.sufe.edu.cn": {
+      "report_file": "2026-08-11-0255-hq.sufe.edu.cn.json",
+      "categories_found": 5,
+      "list_pages_fetched": 5,
+      "articles_found": 13,
+      "articles_downloaded": 13,
+      "attachments_found": 10,
+      "attachments_downloaded": 10,
+      "attachments_parsed": 7,
+      "incomplete_documents": 0,
+      "low_quality_documents": 2,
+      "final_indexed": 11
+    },
+    "ieco.sufe.edu.cn": {
+      "report_file": "2026-08-06-1619-ieco.sufe.edu.cn.json",
+      "categories_found": 3,
+      "list_pages_fetched": 3,
+      "articles_found": 11,
+      "articles_downloaded": 10,
+      "attachments_found": 1,
+      "attachments_downloaded": 1,
+      "attachments_parsed": 1,
+      "incomplete_documents": 1,
+      "low_quality_documents": 0,
+      "final_indexed": 9
+    },
+    "jwc.sufe.edu.cn": {
+      "report_file": "2026-08-06-1729-jwc.sufe.edu.cn.json",
+      "categories_found": 6,
+      "list_pages_fetched": 6,
+      "articles_found": 12,
+      "articles_downloaded": 6,
+      "attachments_found": 132,
+      "attachments_downloaded": 70,
+      "attachments_parsed": 60,
+      "incomplete_documents": 0,
+      "low_quality_documents": 3,
+      "final_indexed": 47
+    },
+    "ksc.sufe.edu.cn": {
+      "report_file": "2026-08-12-0831-ksc.sufe.edu.cn.json",
+      "categories_found": 2,
+      "list_pages_fetched": 3,
+      "articles_found": 4,
+      "articles_downloaded": 3,
+      "attachments_found": 1,
+      "attachments_downloaded": 2,
+      "attachments_parsed": 2,
+      "incomplete_documents": 0,
+      "low_quality_documents": 0,
+      "final_indexed": 6
+    },
+    "law.sufe.edu.cn": {
+      "report_file": "2026-08-12-0907-law.sufe.edu.cn.json",
+      "categories_found": 3,
+      "list_pages_fetched": 0,
+      "articles_found": 12,
+      "articles_downloaded": 12,
+      "attachments_found": 12,
+      "attachments_downloaded": 12,
+      "attachments_parsed": 10,
+      "incomplete_documents": 0,
+      "low_quality_documents": 2,
+      "final_indexed": 10
+    },
+    "lib.sufe.edu.cn": {
+      "report_file": "2026-08-11-0254-lib.sufe.edu.cn.json",
+      "categories_found": 13,
+      "list_pages_fetched": 13,
+      "articles_found": 13,
+      "articles_downloaded": 13,
+      "attachments_found": 9,
+      "attachments_downloaded": 8,
+      "attachments_parsed": 7,
+      "incomplete_documents": 0,
+      "low_quality_documents": 1,
+      "final_indexed": 18
+    },
+    "nic.sufe.edu.cn": {
+      "report_file": "2026-08-11-0213-nic.sufe.edu.cn.json",
+      "categories_found": 2,
+      "list_pages_fetched": 2,
+      "articles_found": 11,
+      "articles_downloaded": 11,
+      "attachments_found": 2,
+      "attachments_downloaded": 2,
+      "attachments_parsed": 1,
+      "incomplete_documents": 0,
+      "low_quality_documents": 0,
+      "final_indexed": 12
+    },
+    "scai.sufe.edu.cn": {
+      "report_file": "2026-08-12-0907-scai.sufe.edu.cn.json",
+      "categories_found": 1,
+      "list_pages_fetched": 0,
+      "articles_found": 2,
+      "articles_downloaded": 2,
+      "attachments_found": 2,
+      "attachments_downloaded": 2,
+      "attachments_parsed": 2,
+      "incomplete_documents": 0,
+      "low_quality_documents": 0,
+      "final_indexed": 4
+    },
+    "sfs.sufe.edu.cn": {
+      "report_file": "2026-08-12-0830-sfs.sufe.edu.cn.json",
+      "categories_found": 2,
+      "list_pages_fetched": 2,
+      "articles_found": 18,
+      "articles_downloaded": 18,
+      "attachments_found": 26,
+      "attachments_downloaded": 23,
+      "attachments_parsed": 22,
+      "incomplete_documents": 0,
+      "low_quality_documents": 0,
+      "final_indexed": 34
+    },
+    "sime.sufe.edu.cn": {
+      "report_file": "2026-08-12-0907-sime.sufe.edu.cn.json",
+      "categories_found": 3,
+      "list_pages_fetched": 0,
+      "articles_found": 12,
+      "articles_downloaded": 12,
+      "attachments_found": 15,
+      "attachments_downloaded": 13,
+      "attachments_parsed": 12,
+      "incomplete_documents": 0,
+      "low_quality_documents": 0,
+      "final_indexed": 16
+    },
+    "sof.sufe.edu.cn": {
+      "report_file": "2026-08-12-0827-sof.sufe.edu.cn.json",
+      "categories_found": 1,
+      "list_pages_fetched": 2,
+      "articles_found": 1,
+      "articles_downloaded": 1,
+      "attachments_found": 0,
+      "attachments_downloaded": 0,
+      "attachments_parsed": 0,
+      "incomplete_documents": 0,
+      "low_quality_documents": 0,
+      "final_indexed": 1
+    },
+    "ssds.sufe.edu.cn": {
+      "report_file": "2026-08-12-1216-ssds.sufe.edu.cn.json",
+      "categories_found": 1,
+      "list_pages_fetched": 0,
+      "articles_found": 1,
+      "articles_downloaded": 1,
+      "attachments_found": 1,
+      "attachments_downloaded": 1,
+      "attachments_parsed": 1,
+      "incomplete_documents": 0,
+      "low_quality_documents": 0,
+      "final_indexed": 2
+    },
+    "xsc.sufe.edu.cn": {
+      "report_file": "2026-08-11-0232-xsc.sufe.edu.cn.json",
+      "categories_found": 4,
+      "list_pages_fetched": 7,
+      "articles_found": 88,
+      "articles_downloaded": 73,
+      "attachments_found": 24,
+      "attachments_downloaded": 33,
+      "attachments_parsed": 28,
+      "incomplete_documents": 1,
+      "low_quality_documents": 5,
+      "final_indexed": 106
+    },
+    "yljk.sufe.edu.cn": {
+      "report_file": "2026-08-11-0300-yljk.sufe.edu.cn.json",
+      "categories_found": 5,
+      "list_pages_fetched": 9,
+      "articles_found": 84,
+      "articles_downloaded": 82,
+      "attachments_found": 12,
+      "attachments_downloaded": 12,
+      "attachments_parsed": 12,
+      "incomplete_documents": 0,
+      "low_quality_documents": 14,
+      "final_indexed": 57
+    },
+    "zs.sufe.edu.cn": {
+      "report_file": "2026-08-12-0903-zs.sufe.edu.cn.json",
+      "categories_found": 4,
+      "list_pages_fetched": 4,
+      "articles_found": 22,
+      "articles_downloaded": 22,
+      "attachments_found": 3,
+      "attachments_downloaded": 3,
+      "attachments_parsed": 3,
+      "incomplete_documents": 0,
+      "low_quality_documents": 9,
+      "final_indexed": 10
+    }
+  },
+  "coverage": {
+    "question_bank_version": "sufe-question-bank.v1",
+    "question_bank_hash": "sha256:8a5ab6a1110531cd443d9e652a1032f4e97d25d0f083bf9728429a0c28c352f9",
+    "index_fingerprint": "sha256:fe9f11438cb9711f58ba490ed43064adcd74da008654f4ea01466cc87bf1ae6e",
+    "total": 150,
+    "answerable": 91,
+    "partially_answerable": 59,
+    "not_answerable": 0,
+    "authoritative_hits": 150,
+    "wrong_department_hits": 0
+  },
+  "real_answers": {
+    "available": true,
+    "question_bank_version": "sufe-question-bank.v1",
+    "question_bank_hash": "sha256:8a5ab6a1110531cd443d9e652a1032f4e97d25d0f083bf9728429a0c28c352f9",
+    "index_fingerprint": "sha256:fe9f11438cb9711f58ba490ed43064adcd74da008654f4ea01466cc87bf1ae6e",
+    "total": 150,
+    "unique": 150,
+    "answered": 135,
+    "refused": 15,
+    "citation_issues": 0,
+    "errors": 0,
+    "authoritative_answered": 126,
+    "wrong_department_answered": 9,
+    "wrong_department_ids": [
+      "exchange-contact-010",
+      "exchange-short-008",
+      "gs-exchange-009",
+      "gs-graduation-017",
+      "gs-phd-006",
+      "gs-scholarship-010",
+      "jwc-score-011",
+      "new-household-003",
+      "new-orientation-002"
+    ],
+    "scene_stats": {
+      "信息化与校园卡": {
+        "total": 15,
+        "answered": 14,
+        "refused": 1,
+        "citation_issues": 0,
+        "errors": 0,
+        "answer_rate": 0.9333333333333333
+      },
+      "医疗医保": {
+        "total": 10,
+        "answered": 8,
+        "refused": 2,
+        "citation_issues": 0,
+        "errors": 0,
+        "answer_rate": 0.8
+      },
+      "国际交流": {
+        "total": 10,
+        "answered": 10,
+        "refused": 0,
+        "citation_issues": 0,
+        "errors": 0,
+        "answer_rate": 1.0
+      },
+      "图书馆": {
+        "total": 10,
+        "answered": 9,
+        "refused": 1,
+        "citation_issues": 0,
+        "errors": 0,
+        "answer_rate": 0.9
+      },
+      "奖助学金": {
+        "total": 15,
+        "answered": 14,
+        "refused": 1,
+        "citation_issues": 0,
+        "errors": 0,
+        "answer_rate": 0.9333333333333333
+      },
+      "宿舍后勤": {
+        "total": 10,
+        "answered": 8,
+        "refused": 2,
+        "citation_issues": 0,
+        "errors": 0,
+        "answer_rate": 0.8
+      },
+      "就业手续": {
+        "total": 15,
+        "answered": 13,
+        "refused": 2,
+        "citation_issues": 0,
+        "errors": 0,
+        "answer_rate": 0.8666666666666667
+      },
+      "推免与招生": {
+        "total": 15,
+        "answered": 14,
+        "refused": 1,
+        "citation_issues": 0,
+        "errors": 0,
+        "answer_rate": 0.9333333333333333
+      },
+      "新生与安全": {
+        "total": 10,
+        "answered": 7,
+        "refused": 3,
+        "citation_issues": 0,
+        "errors": 0,
+        "answer_rate": 0.7
+      },
+      "本科教务": {
+        "total": 20,
+        "answered": 19,
+        "refused": 1,
+        "citation_issues": 0,
+        "errors": 0,
+        "answer_rate": 0.95
+      },
+      "研究生培养与学位": {
+        "total": 20,
+        "answered": 19,
+        "refused": 1,
+        "citation_issues": 0,
+        "errors": 0,
+        "answer_rate": 0.95
+      }
+    }
+  },
+  "gates": {
+    "corpus_integrity": true,
+    "valid_body_ratio": true,
+    "isolated_content_removed": true,
+    "annual_series_canonical": true,
+    "collection_isolation": true,
+    "attachment_completeness": true,
+    "question_authoritative_hits": true,
+    "question_answerability": true,
+    "real_answer_integrity": true,
+    "core_scene_answerability": false,
+    "wrong_department_hits": true,
+    "index_matches_manifest": true,
+    "coverage_matches_index": true,
+    "real_answers_match_index": true
+  },
+  "passed": false
+}
