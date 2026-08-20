@@ -1,6 +1,7 @@
 """Web 服务：FastAPI + SSE 流式问答 + 静态前端，无构建步骤。
 
 - GET  /               静态单页（app/static/）
+- GET  /admin          受保护的知识库管理 Dashboard
 - GET  /api/meta       馆藏档数 / 分类 / 知识库更新时间 / 示例问题
 - POST /api/ask        SSE 流：meta(文号/检索耗时) → token* → sources|refused → done
 - POST /api/feedback   批注（👍/👎）追加 data/feedback.jsonl（提交材料 #9）
@@ -27,6 +28,7 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
 from sufe_qa.config import Settings, load_settings
+from sufe_qa.app.admin import create_admin_router
 from sufe_qa.generate.answer import (
     CitationGateError,
     answer_question,
@@ -202,14 +204,22 @@ def create_app(
     from contextlib import asynccontextmanager
 
     settings = settings or load_settings()
-    state: dict = {"retriever": retriever, "llm": llm, "counter": itertools.count(1)}
+    state: dict = {
+        "retriever": retriever,
+        "embedder": getattr(retriever, "_embedder", None),
+        "llm": llm,
+        "counter": itertools.count(1),
+        "publishing": False,
+        "admin_job": None,
+    }
 
     @asynccontextmanager
     async def lifespan(_app: FastAPI):
         if state["retriever"] is None:
             from sufe_qa.indexing.indexer import BgeEmbedder
 
-            state["retriever"] = HybridRetriever(settings, BgeEmbedder(settings.embedding_model))
+            state["embedder"] = BgeEmbedder(settings.embedding_model)
+            state["retriever"] = HybridRetriever(settings, state["embedder"])
         yield
 
     app = FastAPI(title="上财校务问答", docs_url=None, redoc_url=None, lifespan=lifespan)
@@ -225,14 +235,27 @@ def create_app(
     def coverage_page() -> FileResponse:
         return FileResponse(STATIC_DIR / "coverage.html")
 
+    @app.get("/admin")
+    def admin_page() -> FileResponse:
+        return FileResponse(STATIC_DIR / "admin.html")
+
     @app.get("/api/meta")
     def meta() -> dict:
         manifest = load_manifest(settings.manifest_path)
-        updated = max((m.fetched_at for m in manifest.values()), default=None)
+        searchable = [
+            item
+            for item in manifest.values()
+            if item.quality_status == "accepted"
+            and item.retention_status in {"active", "historical"}
+            and item.index_collection != "none"
+            and item.file_path
+            and (settings.corpus_dir / item.file_path).is_file()
+        ]
+        updated = max((item.fetched_at for item in searchable), default=None)
         return {
-            "doc_count": len(manifest),
+            "doc_count": len(searchable),
             "updated_at": updated,
-            "categories": sorted({m.category for m in manifest.values()}),
+            "categories": sorted({item.category for item in searchable}),
             "examples": EXAMPLE_QUESTIONS,
         }
 
@@ -252,6 +275,8 @@ def create_app(
             return _sse_error("问题为空")
         if len(question) > settings.max_question_chars:
             return _sse_error(f"问题过长（上限 {settings.max_question_chars} 字）")
+        if state["publishing"]:
+            return _sse_error("知识库正在发布，请稍后再试")
         if not app.state.rate_limiter.allow(_client_key(request)):
             return _sse_error("请求过于频繁，请稍后再试")
         if not app.state.llm_sem.acquire(blocking=False):
@@ -260,7 +285,8 @@ def create_app(
             # 测试经 TestClient 注入组件时不走此分支；直接调用 create_app 未起 lifespan 时兜底
             from sufe_qa.indexing.indexer import BgeEmbedder
 
-            state["retriever"] = HybridRetriever(settings, BgeEmbedder(settings.embedding_model))
+            state["embedder"] = BgeEmbedder(settings.embedding_model)
+            state["retriever"] = HybridRetriever(settings, state["embedder"])
 
         def gen() -> Iterator[str]:
             # 整个生成过程（含 LLM token 流迭代）都在兜底内：
@@ -361,6 +387,7 @@ def create_app(
             )
         return {"ok": True}
 
+    app.include_router(create_admin_router(settings, state))
     app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
     return app
 

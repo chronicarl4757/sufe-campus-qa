@@ -130,6 +130,24 @@ def test_validate_citations_multi_digit_and_zero_refs():
     check = validate_citations("依据资料[100]与[999999]，结论成立。", 5)
     assert not check.ok
     assert check.invalid_refs == [100, 999999]
+
+
+def test_validate_citations_exempts_document_year_serials():
+    # 公文发文字号中的四位年份不是引用编号，不应误判为越界引用
+    ok = validate_citations("依据《研究生国家奖学金管理办法》（上财行规[2021]55号）评定[2]。", 5)
+    assert ok.ok and ok.has_citation and ok.invalid_refs == []
+    # 年份与真正的越界引用并存时，越界编号仍被拦截
+    mixed = validate_citations("按财教[2021]310号执行，详见资料[99]。", 5)
+    assert not mixed.ok and mixed.invalid_refs == [99]
+    # 全文只有文号年份、没有任何真实引用时仍判“无引用”
+    year_only = validate_citations("文号为教助中心[2025]8号。", 5)
+    assert not year_only.ok and not year_only.has_citation
+
+
+def test_gated_citation_stream_allows_document_year_serials():
+    tokens = iter(["依据上财行规[2021]55号", "评定[1]。", "后续正常发出[2]。"])
+    out = "".join(gated_citation_stream(tokens, 2))
+    assert out == "依据上财行规[2021]55号评定[1]。后续正常发出[2]。"
     check = validate_citations("编号[0]越界。", 5)
     assert check.invalid_refs == [0]
     check = validate_citations("范围内[1][5]通过。", 5)

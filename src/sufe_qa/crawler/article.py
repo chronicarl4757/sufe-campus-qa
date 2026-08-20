@@ -13,7 +13,7 @@ import re
 from dataclasses import dataclass
 from urllib.parse import unquote, urldefrag, urljoin, urlparse
 
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, NavigableString, Tag
 
 from sufe_qa.crawler.profile import ArticleProfile
 from sufe_qa.ingest.parsers import _breadcrumb_title, _strip_nav_soup
@@ -265,6 +265,23 @@ def _extract_breadcrumbs(soup: BeautifulSoup) -> list[str]:
     return []
 
 
+def _content_text(el: Tag) -> str:
+    """提取正文容器文本。<table> 按行合并单元格（每行保留为一行），
+    避免单元格碎成短行后被质量门误判为导航样板（如招生专业目录表）。
+    在副本上操作，不改调用方的 soup（附件发现仍需要表格里的原始链接）。
+    """
+    clone = BeautifulSoup(str(el), "html.parser")
+    for table in clone.find_all("table"):
+        rows = []
+        for tr in table.find_all("tr"):
+            cells = [c.get_text(" ", strip=True) for c in tr.find_all(["th", "td"])]
+            row = " ".join(c for c in cells if c)
+            if row.strip():
+                rows.append(row.strip())
+        table.replace_with(NavigableString("\n".join(rows)))
+    return clone.get_text("\n", strip=True)
+
+
 def _extract_body(soup: BeautifulSoup, raw: str, profile: ArticleProfile) -> tuple[str, object]:
     """返回 (正文, trafilatura metadata)。content_selectors 优先，trafilatura 兜底。"""
     import trafilatura
@@ -275,7 +292,7 @@ def _extract_body(soup: BeautifulSoup, raw: str, profile: ArticleProfile) -> tup
             els = soup.select(sel)
         except Exception:
             continue
-        text = "\n".join(el.get_text("\n", strip=True) for el in els if el.get_text(strip=True))
+        text = "\n".join(_content_text(el) for el in els if el.get_text(strip=True))
         if len(text) >= 50:
             return _strip_view_counts(_strip_nav_soup(text.strip())), meta
     text = trafilatura.extract(raw, include_comments=False, include_tables=True) or ""

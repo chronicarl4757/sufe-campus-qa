@@ -7,6 +7,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from sufe_qa.config import CATEGORIES
+from sufe_qa.indexing.collections import collection_for_kind
 from sufe_qa.ingest.classification import (
     classify_document_kind,
     normalize_policy_name,
@@ -20,11 +21,71 @@ _ID_PATTERN = re.compile(r"\d{17}[\dXx]")
 _PHONE_PATTERN = re.compile(r"(?<!\d)1[3-9]\d{9}(?!\d)")
 SENSITIVE_PATTERNS = [_ID_PATTERN, _PHONE_PATTERN]
 
+# 官方公开联系方式上下文（规格 §十七）：号码前 N 字符内命中即 official_public_contact，
+# 不使整篇 quarantine；私人语境（紧急联系人/家庭电话等）显式优先排除。
+# 匹配前对窗口去空白：覆盖“电 话：”“电话：\n021-…/139…”等真实排版。
+_PUBLIC_CONTACT_CONTEXT = (
+    "联系电话",
+    "咨询电话",
+    "招生咨询",
+    "报名咨询",
+    "项目咨询",
+    "咨询老师",
+    "联系老师",
+    "招生办公室",
+    "招生办",
+    "项目办公室",
+    "学院办公室",
+    "办公室电话",
+    "联系方式",
+    "联系我们",
+    "咨询邮箱",
+    "电子邮箱",
+    "咨询：",
+    "手机：",
+    "电话：",
+    "电话:",
+)
+_PRIVATE_CONTACT_CONTEXT = (
+    "紧急联系人",
+    "家庭电话",
+    "家庭住址",
+    "家长",
+    "亲属",
+    "本人身份证",
+    "银行卡",
+)
+_PUBLIC_CONTACT_WINDOW = 60
 
-def scan_sensitive(text: str, *, allow_phone: bool = False) -> list[str]:
-    """返回命中的敏感串；权威服务指南可显式保留公开服务电话。"""
-    patterns = [_ID_PATTERN] if allow_phone else SENSITIVE_PATTERNS
-    return [m.group() for pattern in patterns for m in pattern.finditer(text)]
+
+def _is_public_contact(text: str, pos: int) -> bool:
+    """号码前窗口内是否官方公开联系方式语境；私人语境优先判私。"""
+    window = re.sub(r"\s+", "", text[max(0, pos - _PUBLIC_CONTACT_WINDOW) : pos])
+    if any(k in window for k in _PRIVATE_CONTACT_CONTEXT):
+        return False
+    return any(k in window for k in _PUBLIC_CONTACT_CONTEXT)
+
+
+def scan_sensitive(
+    text: str, *, allow_phone: bool = False, allow_public_contact: bool = False
+) -> list[str]:
+    """返回命中的敏感串。
+
+    - 身份证号一律隔离（任何来源都不放行）；
+    - allow_phone：权威服务指南整体放行电话号码（既有行为）；
+    - allow_public_contact（规格 §十五-§十九）：官方来源正文中带公开联系方式
+      上下文（咨询电话/招生办公室/联系老师…）的手机号按 official_public_contact 放行，
+      无上下文或私人语境的手机号继续隔离。
+    """
+    ids = [m.group() for m in _ID_PATTERN.finditer(text)]
+    phones = []
+    for m in _PHONE_PATTERN.finditer(text):
+        if allow_phone:
+            continue
+        if allow_public_contact and _is_public_contact(text, m.start()):
+            continue
+        phones.append(m.group())
+    return ids + phones
 
 
 def slugify(title: str, max_len: int = 40) -> str:
@@ -83,16 +144,11 @@ def ingest_inbox(
             dup += 1
             continue
         doc_id = doc_id_from((source_urls or {}).get(path.name, f"inbox/{path.name}"))
-        if doc_id in existing_by_id:
-            # 同文档更新（doc_id 由来源路径锚定）：沿用旧路径原地覆盖，不留孤儿文件
-            rel_path = Path(existing_by_id[doc_id].file_path)
-        else:
-            slug = slugify(doc.title)
-            rel_path = Path(category) / f"{slug}.md"
-            if (corpus_dir / rel_path).exists():
-                # slug 撞车防御：走到这里 content_hash 必为新（相同则上面已判重），
-                # 即目标文件属于另一份内容不同的文档，追加哈希尾 6 位区分
-                rel_path = Path(category) / f"{slug}-{content_hash[-6:]}.md"
+        slug = slugify(doc.title)
+        rel_path = Path(category) / f"{slug}.md"
+        if (corpus_dir / rel_path).exists():
+            # slug 撞车或同一来源出现新正文时写不可变版本；旧 manifest 行仍可回看/回退。
+            rel_path = Path(category) / f"{slug}-{content_hash[-6:]}.md"
         out_path = corpus_dir / rel_path
         out_path.parent.mkdir(parents=True, exist_ok=True)
         out_path.write_text(final, encoding="utf-8")
@@ -114,6 +170,7 @@ def ingest_inbox(
                 policy_name=normalize_policy_name(doc.title),
                 topic_key=standardize_topic_key(doc.title, normalize_policy_name(doc.title)),
                 source_type="manual_upload",
+                index_collection=collection_for_kind(document_kind, "active") or "none",
                 temporal_class=temporal_class_for(document_kind, doc.title),
                 series_key=series_key_for(doc.title, publisher=publisher),
                 retention_status="active",

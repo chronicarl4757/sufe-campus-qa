@@ -327,7 +327,7 @@ def test_score_floor_zero_with_five_reasons():
             "English",
         ]
     )
-    body = f"详见附件\n{short_nav}\n版权所有 地址：某路 电话：021"
+    body = f"详见附件\n{short_nav}\n版权所有 地址：某路 电话：021 邮编：200433"
     r = assess_document("03a91ba5c9a8", body, has_valid_attachment=False)
     assert len(r.reasons) == 5
     assert r.score == 0.0  # 1.0 - 5*0.25 = -0.25 → 下限 0

@@ -17,6 +17,24 @@ REFUSAL_TEMPLATE = (
 )
 
 _CITE_RE = re.compile(r"\[\s*(\d+)\s*\]")  # 任意位数编号都进入统一范围校验（[0]/[99]/[100]…）
+
+
+def _citation_refs(text: str) -> set[int]:
+    """提取回答中的引用编号。
+
+    公文发文字号写作“上财行规[2021]11号”时，四位年份不是引用编号；
+    对 1900–2099 的四位年份做豁免，其余多位数编号（[99]/[100]…）照常校验，
+    避免模型引用不存在的资料编号时被放行。
+    """
+    refs: set[int] = set()
+    for m in _CITE_RE.finditer(text):
+        digits = m.group(1)
+        if len(digits) == 4 and 1900 <= int(digits) <= 2099:
+            continue
+        refs.add(int(digits))
+    return refs
+
+
 # 句子边界：引用标注附在句末，按句缓冲即可在发出前完成校验
 _SENTENCE_END_RE = re.compile(r"[。！？!?；;\n]")
 
@@ -30,9 +48,7 @@ class CitationGateError(Exception):
 
 
 def _raise_on_invalid_refs(segment: str, n_refs: int) -> None:
-    invalid = sorted(
-        {int(m.group(1)) for m in _CITE_RE.finditer(segment) if not 1 <= int(m.group(1)) <= n_refs}
-    )
+    invalid = sorted(r for r in _citation_refs(segment) if not 1 <= r <= n_refs)
     if invalid:
         raise CitationGateError(invalid)
 
@@ -75,8 +91,8 @@ def validate_citations(text: str, n_refs: int) -> CitationCheck:
     不会进入本校验；"全文无引用"判不通过，由服务端记录并随 sources 事件告知
     前端降级提示。论断是否真被资料支撑需 LLM 判分，属评测层职责，不在此校验。
     """
-    refs = [int(m.group(1)) for m in _CITE_RE.finditer(text)]
-    invalid = sorted({r for r in refs if r < 1 or r > n_refs})
+    refs = _citation_refs(text)
+    invalid = sorted(r for r in refs if r < 1 or r > n_refs)
     return CitationCheck(
         ok=bool(refs) and not invalid, has_citation=bool(refs), invalid_refs=invalid
     )

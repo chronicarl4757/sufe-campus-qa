@@ -41,6 +41,7 @@ class Settings:
     max_question_chars: int = 500  # 问题长度上限，超出直接拒绝
     rate_limit_per_minute: int = 12  # 单 IP 每分钟问答/反馈请求上限
     max_concurrent_llm: int = 8  # 全局 LLM 并发闸，保护配额与成本
+    admin_token: str = ""  # 管理 API 独立凭据；未配置时管理数据与写操作均关闭
 
 
 def _env_int(name: str, default: int) -> int:
@@ -70,6 +71,7 @@ def load_settings() -> Settings:
         max_question_chars=_env_int("SUFE_QA_MAX_QUESTION_CHARS", 500),
         rate_limit_per_minute=_env_int("SUFE_QA_RATE_LIMIT_PER_MINUTE", 12),
         max_concurrent_llm=_env_int("SUFE_QA_MAX_CONCURRENT_LLM", 8),
+        admin_token=os.getenv("SUFE_QA_ADMIN_TOKEN", "").strip(),
     )
     s.corpus_dir.mkdir(parents=True, exist_ok=True)
     s.inbox_dir.mkdir(parents=True, exist_ok=True)

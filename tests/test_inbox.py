@@ -29,6 +29,7 @@ def test_ingest_writes_corpus_and_manifest(tmp_path):
     assert len(loaded) == 1
     meta = next(iter(loaded.values()))
     assert meta.category == "奖助学金" and "国家奖学金" in meta.title
+    assert meta.index_collection == "main_qa"
     assert (corpus / meta.file_path).exists()
 
 
@@ -85,7 +86,7 @@ def test_ingest_unsupported_suffix_counted_not_crash(tmp_path):
     assert report.added == 1 and report.skipped_error == 1
 
 
-def test_ingest_update_same_file_overwrites_in_place(tmp_path):
+def test_ingest_update_same_file_keeps_immutable_versions(tmp_path):
     inbox, corpus, manifest = (
         tmp_path / "inbox",
         tmp_path / "corpus",
@@ -99,8 +100,9 @@ def test_ingest_update_same_file_overwrites_in_place(tmp_path):
     report = ingest_inbox(inbox, corpus, manifest, category="奖助学金", publisher="学生工作部")
     assert report.added == 1
     files = list((corpus / "奖助学金").glob("*.md"))
-    assert len(files) == 1  # 无孤儿副本
-    assert "新内容" in files[0].read_text(encoding="utf-8")
+    assert len(files) == 2
+    assert any("旧内容" in path.read_text(encoding="utf-8") for path in files)
+    assert any("新内容" in path.read_text(encoding="utf-8") for path in files)
     from sufe_qa.schema import load_manifest as lm
 
     assert lm(manifest)[next(iter(lm(manifest)))].title == "新标题"

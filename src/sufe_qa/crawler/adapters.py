@@ -724,6 +724,33 @@ class CareerAdapter(BaseAdapter):
         )
 
 
+_COB_ARTICLE_RE = re.compile(r"/UnderGraduate/Detail/\d+", re.I)
+_COB_TITLE_SUFFIX_RE = re.compile(r"\s*[-—–]\s*上海财经大学商学院\s*$")
+
+
+class CobUndergradAdapter(BaseAdapter):
+    """商学院本科栏目：自研 MVC 路由（/UnderGraduate/List/<id> 列表、Detail/<id> 详情），非 wp3。
+
+    列表容器为 .post-list（通知列表页）与 .swiper-slide（本科主页专业介绍卡片）；
+    详情页没有 wp3 正文选择器，正文走 trafilatura 兜底；<title> 统一带
+    “ - 上海财经大学商学院”站名后缀，入库前剥掉。列表页静态只有一页（更早内容靠
+    JS 翻页），当前只抓第一页。
+    """
+
+    listing_selectors = (".post-list", ".program-admission-list", ".swiper-slide")
+    article_url_pattern = _COB_ARTICLE_RE
+
+    def __init__(self, *, publisher: str = "商学院", scope_unit: str = "", **kwargs) -> None:
+        super().__init__(publisher=publisher, scope_unit=scope_unit, **kwargs)
+
+    def _accept_article_url(self, url: str) -> bool:
+        return bool(self.article_url_pattern.search(urlparse(url).path))
+
+    def parse_article(self, page: PageContent, spec: PageSpec) -> ArticleSpec:
+        article = super().parse_article(page, spec)
+        return replace(article, title=_COB_TITLE_SUFFIX_RE.sub("", article.title))
+
+
 class NicServiceAdapter(Wp3Adapter):
     """网络信息中心服务目录：把服务卡片和显式 tab 内容当作文章入口。"""
 

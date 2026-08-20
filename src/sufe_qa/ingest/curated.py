@@ -18,6 +18,7 @@ from pathlib import Path
 
 import yaml
 
+from sufe_qa.config import CATEGORIES
 from sufe_qa.indexing.collections import collection_for_kind
 from sufe_qa.ingest.inbox import slugify
 from sufe_qa.ingest.lifecycle import series_key_for, temporal_class_for
@@ -76,10 +77,30 @@ def ingest_curated(curated_dir: Path, corpus_dir: Path, manifest_path: Path) -> 
             continue
         title = str(fm.get("title") or "").strip() or path.stem
         subdir = rel.parts[0] if len(rel.parts) > 1 else ""
-        category = _SUBDIR_CATEGORY.get(subdir, "其他")
+        declared_category = str(fm.get("category") or "").strip()
+        category = (
+            declared_category
+            if declared_category in CATEGORIES
+            else _SUBDIR_CATEGORY.get(subdir, "其他")
+        )
         # yaml 会把 2026-08-01 解析成 date 对象，str() 后仍为 YYYY-MM-DD
         publish_date = str(fm.get("verified_at") or "unknown")
-        publisher = str(fm.get("scope_unit") or fm.get("editor") or "人工整理")
+        raw_source_ids = fm.get("source_doc_ids") or []
+        source_doc_ids = tuple(
+            str(value).strip()
+            for value in (raw_source_ids if isinstance(raw_source_ids, list) else [])
+            if str(value).strip()
+        )
+        primary_source = next(
+            (existing[doc_id] for doc_id in source_doc_ids if doc_id in existing), None
+        )
+        publisher = str(
+            fm.get("publisher")
+            or (primary_source.publisher if primary_source else "")
+            or fm.get("scope_unit")
+            or fm.get("editor")
+            or "人工整理"
+        )
         scope_unit = str(fm.get("scope_unit") or "上海财经大学")
         raw_kind = str(fm.get("document_kind") or "service_guide")
         document_kind = "service_guide" if raw_kind == "curated_guide" else raw_kind
@@ -92,13 +113,28 @@ def ingest_curated(curated_dir: Path, corpus_dir: Path, manifest_path: Path) -> 
         final = f"# {title}\n\n{body}\n"
         content_hash = sha256_text(final)
         text_hash = sha256_text(body)
+        source_url = (
+            primary_source.source_url
+            if primary_source and primary_source.source_url
+            else f"curated/{rel.as_posix()}"
+        )
 
         old = existing.get(doc_id)
-        if old and old.content_hash == content_hash:
+        if (
+            old
+            and old.content_hash == content_hash
+            and old.category == category
+            and old.publisher == publisher
+            and old.publish_date == publish_date
+            and old.source_url == source_url
+            and old.parent_doc_id == (primary_source.doc_id if primary_source else None)
+            and old.validity_status == validity_status
+        ):
             unchanged += 1
             continue
-        if old and old.file_path:
-            rel_path = Path(old.file_path)  # 同文档更新：沿用旧路径，不留孤儿文件
+        if old and old.file_path and old.content_hash == content_hash:
+            # 仅 metadata 变化可继续指向同一正文版本。
+            rel_path = Path(old.file_path)
         else:
             rel_path = Path(category) / f"{slugify(title)}.md"
             collision = corpus_dir / rel_path
@@ -111,7 +147,7 @@ def ingest_curated(curated_dir: Path, corpus_dir: Path, manifest_path: Path) -> 
             DocMeta(
                 doc_id=doc_id,
                 title=title,
-                source_url=f"curated/{rel.as_posix()}",
+                source_url=source_url,
                 publisher=publisher,
                 publish_date=publish_date,
                 category=category,
@@ -119,12 +155,14 @@ def ingest_curated(curated_dir: Path, corpus_dir: Path, manifest_path: Path) -> 
                 content_hash=content_hash,
                 file_path=rel_path.as_posix(),
                 document_type="article",
+                parent_doc_id=primary_source.doc_id if primary_source else None,
+                source_page_url=source_url if primary_source else "",
                 parse_status="ok",
                 quality_status="accepted",
                 text_hash=text_hash,
                 document_kind=document_kind,
                 source_type="manual_upload",
-                source_section="人工精编指南",
+                source_section="人工核验标准答案" if primary_source else "人工精编指南",
                 scope_unit=scope_unit,
                 topic_key=str(fm.get("topic_key") or ""),
                 validity_status=validity_status,

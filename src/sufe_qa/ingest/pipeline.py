@@ -19,6 +19,7 @@ from sufe_qa.crawler.engine import CrawledArticle, CrawlReport, DownloadedAttach
 from sufe_qa.crawler.state import CrawlState
 from sufe_qa.ingest.inbox import scan_sensitive, slugify
 from sufe_qa.ingest.classification import (
+    classify_admission_level,
     classify_document_kind,
     normalize_policy_name,
     standardize_topic_key,
@@ -172,6 +173,7 @@ def _article_meta(
         retention_status=lifecycle.retention_status,
         retention_reason=lifecycle.retention_reason,
         canonical_doc_id=lifecycle.canonical_doc_id,
+        admission_level=classify_admission_level(art.title, art.body_text),
     )
 
 
@@ -278,6 +280,31 @@ def ingest_crawled_articles(
         evaluated_at=lifecycle_date,
     )
 
+    def _ingest_downloaded_attachments(art: CrawledArticle, parent_doc_id: str) -> None:
+        """入库一篇文章的全部附件；与父文章是否被拒解耦（附件可能有独立价值）。"""
+        for att in art.downloaded:
+            _ingest_attachment(
+                att,
+                art,
+                parent_doc_id,
+                category=category,
+                corpus_dir=corpus_dir,
+                existing=existing,
+                metas=metas,
+                relations=relations,
+                binary_seen=binary_seen,
+                processed_atts=processed_atts,
+                stats=stats,
+                report=report,
+                state=state,
+                raw_dir=raw_dir,
+                dry_run=dry_run,
+                source_section=article_source_sections[parent_doc_id],
+                scope_unit=scope_unit,
+                document_kinds=attachment_kinds,
+                lifecycle_by_doc=attachment_lifecycle,
+            )
+
     for art in articles:
         if art.status == "not_modified":
             src = _normalize_doc_url(art.final_url or art.requested_url)
@@ -319,11 +346,26 @@ def ingest_crawled_articles(
                 text_hash=sha256_text(_squash(art.body_text)),
             )
 
-        allow_public_service_phone = (
-            document_kind == "service_guide"
-            and source_type in {"official_department", "information_disclosure", "service_platform"}
-        )
-        if scan_sensitive(art.body_text, allow_phone=allow_public_service_phone):
+        allow_public_service_phone = document_kind == "service_guide" and source_type in {
+            "official_department",
+            "information_disclosure",
+            "service_platform",
+            "official_wechat",
+        }
+        # 官方来源（含官网职能部门/学院/公众号）的公开联系方式上下文放行（规格 §十九）；
+        # 私人手机号、无上下文手机号、身份证号继续隔离，不全局关闭检测。
+        allow_public_contact = source_type in {
+            "official_department",
+            "official_college",
+            "official_wechat",
+            "information_disclosure",
+            "service_platform",
+        }
+        if scan_sensitive(
+            art.body_text,
+            allow_phone=allow_public_service_phone,
+            allow_public_contact=allow_public_contact,
+        ):
             if report:
                 report.sensitive_quarantined += 1
             stats.add(doc_id, "quarantined", "正文命中敏感信息", art.title)
@@ -349,22 +391,25 @@ def ingest_crawled_articles(
             # 理由（规格 §十一）：旧版本已被证明可用，保留旧行、不写审计行覆盖、不删文件
             if old and old.quality_status == "accepted" and old.content_hash:
                 stats.add(doc_id, "kept_previous", f"本轮 {quality.status}，保留旧版本", art.title)
-                continue
-            stats.add(doc_id, "rejected", ";".join(quality.reasons) or quality.status, art.title)
-            if not dry_run:
-                metas.append(
-                    _audit_meta(
-                        doc_id,
-                        art,
-                        category,
-                        src,
-                        quality.status,
-                        source_type=source_type,
-                        source_section=article_source_section,
-                        scope_unit=scope_unit,
+            else:
+                stats.add(doc_id, "rejected", ";".join(quality.reasons) or quality.status, art.title)
+                if not dry_run:
+                    metas.append(
+                        _audit_meta(
+                            doc_id,
+                            art,
+                            category,
+                            src,
+                            quality.status,
+                            source_type=source_type,
+                            source_section=article_source_section,
+                            scope_unit=scope_unit,
+                        )
                     )
-                )
-                _drop_old_file(corpus_dir, old)
+                    _drop_old_file(corpus_dir, old)
+            # 父文章被拒（薄正文壳/导航污染）不代表附件没有独立价值：
+            # 培养方案、实施细则常以“壳页 + PDF”发布，附件照常入库并保留父子关系。
+            _ingest_downloaded_attachments(art, doc_id)
             continue
 
         # 时间窗外文档保留 raw 与 manifest 审计，但不物化到 corpus。
@@ -455,29 +500,7 @@ def ingest_crawled_articles(
                 else:
                     report.new_documents += 1
 
-        # 附件入库（与父文章是否被拒解耦：附件本身可能仍有独立价值）
-        for att in art.downloaded:
-            _ingest_attachment(
-                att,
-                art,
-                doc_id,
-                category=category,
-                corpus_dir=corpus_dir,
-                existing=existing,
-                metas=metas,
-                relations=relations,
-                binary_seen=binary_seen,
-                processed_atts=processed_atts,
-                stats=stats,
-                report=report,
-                state=state,
-                raw_dir=raw_dir,
-                dry_run=dry_run,
-                source_section=article_source_section,
-                scope_unit=scope_unit,
-                document_kinds=attachment_kinds,
-                lifecycle_by_doc=attachment_lifecycle,
-            )
+        _ingest_downloaded_attachments(art, doc_id)
 
     if not dry_run:
         append_manifest(manifest_path, metas)

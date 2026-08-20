@@ -11,6 +11,7 @@ import yaml
 from sufe_qa.crawler.adapters import (
     BusinessSchoolAdapter,
     CareerAdapter,
+    CobUndergradAdapter,
     GraduateSchoolAdapter,
     JwcAdapter,
     NicServiceAdapter,
@@ -39,6 +40,7 @@ _ADAPTERS = {
     "career": CareerAdapter,
     "nic_service": NicServiceAdapter,
     "business_school": BusinessSchoolAdapter,
+    "cob_undergrad": CobUndergradAdapter,
 }
 
 

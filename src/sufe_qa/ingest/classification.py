@@ -62,6 +62,105 @@ _TOPIC_RULES = (
     (("国际交流", "公派留学", "短期交流"), "student.international_exchange"),
 )
 
+# ---------------- 招生语义层级（本轮 §二-§九） ----------------
+# 少量高精度规则；判定优先级：正文明确学历层次 > 标题明确学历层次 > 弱关键词。
+# 证据不足归 other_admission，不硬塞 master_admission；非招生文档返回 ""。
+
+ADMISSION_LEVELS = (
+    "undergraduate_admission",
+    "master_admission",
+    "doctoral_admission",
+    "recommendation_admission",
+    "reexamination",
+    "adjustment",
+    "non_degree_program",
+    "other_admission",
+)
+
+# 非学历项目证据：培训班/研修班/证书项目等（§五）；“在职”本身不构成证据（§六）
+_NON_DEGREE_RE = re.compile(
+    r"非学历教育|非学历培训|课程培训班|高级研修班|研修班|专题培训|证书项目"
+    r"|培训项目|继续教育学院|结业证书|课程班"
+)
+# 项目自明的非学历声明（“办班性质：非学历教育”）：最高强度证据，直接判定
+_EXPLICIT_NON_DEGREE_RE = re.compile(r"非学历教育|非学历培训")
+# 招生文档的标题意图：无招生意图的文档（奖学金办法/医保制度/查号表/毕业细则）
+# 不进入招生层级判定，防止正文顺带提及“继续教育学院/结业证书/招生计划”误归
+_ADMISSION_INTENT_RE = re.compile(
+    r"招生|报名|录取|推免|预推免|推荐免试|调剂|复试|夏令营|申请考核|选拔|招录|选调|简章|申报"
+)
+# 明确授予学历学位的证据（§五）：必须锚定“授予/颁发/获得”动作——
+# 学院简介里的“博士点/博士学位的教师占比”不构成项目授位证据
+_DEGREE_GRANT_RE = re.compile(
+    r"授予[^。]{0,8}(?:学士|硕士|博士)学位"
+    r"|颁发[^。]{0,8}(?:硕士|博士|本科)[^。]{0,4}(?:毕业证书|学位证书)"
+    r"|获得[^。]{0,8}学位证书"
+)
+_DOCTORAL_RE = re.compile(r"博士研究生|博士学位|博士招生|申请考核|直博")
+_DOCTORAL_BODY_RE = re.compile(r"博士研究生招生|博士学位研究生|博士招生|申请考核制|直接攻读博士")
+_MASTER_RE = re.compile(
+    r"硕士研究生|硕士学位|专业学位硕士|研究生招生|全国硕士研究生"
+    r"|MPAcc|MAud|MBA|EMBA|MF(?![A-Za-z])|金融硕士|会计硕士|审计硕士"
+)
+# 正文判定用严格形态：学院简介中的“博士点/博士学位的教师/硕士点”不构成项目层次证据
+_MASTER_BODY_RE = re.compile(
+    r"硕士研究生(?:招生|考试)|硕士学位研究生|硕士专业学位|专业学位硕士|全国硕士研究生"
+    r"|MPAcc|MAud|MBA|EMBA|金融硕士|会计硕士|审计硕士"
+)
+_UG_RE = re.compile(r"本科招生|本科生招生|普通本科|高考|本科录取|本科新生|招生计划")
+_RECOMMEND_RE = re.compile(r"推免|推荐免试|预推免|接收推免")
+_SUMMER_CAMP_RE = re.compile(r"夏令营")
+_SUMMER_CAMP_ADMISSION_RE = re.compile(r"推免|硕士|研究生|选拔|录取")
+_REEXAM_RE = re.compile(r"复试")
+_ADJUST_RE = re.compile(r"调剂")
+_ADMISSION_WEAK_RE = re.compile(r"招生|报名|录取")
+
+
+def classify_admission_level(title: str, body_text: str = "") -> str:
+    """招生类文档的学历/非学历层级（本轮 §四-§八）。
+
+    - 非学历暗示（培训班/研修班/结业证书/非学历教育）且无明确授予学位证据
+      → non_degree_program；
+    - 推免（含直博）→ recommendation_admission；夏令营须与推免/研究生选拔相关；
+    - 复试/调剂先于层次判定（更具体的业务环节）；
+    - 博士/硕士/本科：正文证据优先于标题，博士需无硕士证据才成立；
+    - 仅“招生/报名”弱词无层次证据 → other_admission；非招生 → ""。
+    """
+    title = title or ""
+    head = (body_text or "")[:1500]  # 层次证据多在开头（办班性质/报考条件/学制）
+
+    if not _ADMISSION_INTENT_RE.search(title):
+        return ""
+    if _EXPLICIT_NON_DEGREE_RE.search(head):
+        return "non_degree_program"
+    # 非学历暗示只认标题命中：正文顺带提及其他项目（“课程培训班/研修班”
+    # 出现在部门列表或项目清单里）不足以把学历招生简章翻转成 non-degree
+    if _NON_DEGREE_RE.search(title) and not _DEGREE_GRANT_RE.search(head):
+        return "non_degree_program"
+
+    if _RECOMMEND_RE.search(title):
+        return "recommendation_admission"
+    if _SUMMER_CAMP_RE.search(title) and _SUMMER_CAMP_ADMISSION_RE.search(title + head[:400]):
+        return "recommendation_admission"
+
+    if _REEXAM_RE.search(title):
+        return "reexamination"
+    if _ADJUST_RE.search(title):
+        return "adjustment"
+
+    master = bool(_MASTER_BODY_RE.search(head) or _MASTER_RE.search(title))
+    doctoral = bool(_DOCTORAL_BODY_RE.search(head) or _DOCTORAL_RE.search(title))
+    if doctoral and not master:
+        return "doctoral_admission"
+    if master:
+        return "master_admission"
+    if _UG_RE.search(head) or _UG_RE.search(title):
+        return "undergraduate_admission"
+
+    if _ADMISSION_WEAK_RE.search(title):
+        return "other_admission"
+    return ""
+
 
 def normalize_policy_name(title: str) -> str:
     text = re.sub(r"\s+", "", title or "").strip(" ：:，,。")
@@ -102,13 +201,16 @@ def classify_document_kind(
     if any(keyword in title for keyword in _PUBLIC_LIST_KWS):
         return "public_list"
     # 标题明确自称“新闻/动态”时按新闻隔离；其余宣讲会、活动回顾再归 promotion。
-    if "新闻" in title or "动态" in title:
+    # “新闻与社会高等研究院/新闻与传播（硕士）”是单位/专业名而非新闻自称（blocking 误伤：
+    # 该院 2027 推免通知曾因此被归档）。标题命中“新闻与”复合名称时跳过两条新闻规则。
+    _xinwen_in_unit_name = "新闻与" in title
+    if ("新闻" in title and not _xinwen_in_unit_name) or "动态" in title:
         return "news"
     if any(keyword in title for keyword in _PROMOTION_KWS):
         return "promotion"
     if any(keyword in title for keyword in _EVENT_KWS):
         return "event"
-    if any(keyword in title for keyword in _NEWS_KWS):
+    if any(keyword in title for keyword in _NEWS_KWS) and not _xinwen_in_unit_name:
         return "news"
     # 文号/发布日期前缀不应把“关于印发《正式制度》”误判为年度业务通知。
     # 该规则只接受书名号内带制度词的明确包装标题，不影响“2025 年复试录取办法”

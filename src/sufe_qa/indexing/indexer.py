@@ -226,6 +226,7 @@ def _chunk_metadata(item: _Indexable, collection_name: str) -> dict[str, str | i
         "scope_unit": meta.scope_unit or "",
         "policy_name": meta.policy_name or "",
         "topic_key": meta.topic_key or "",
+        "admission_level": meta.admission_level or "",
         "validity_status": meta.validity_status or "unknown_validity",
         "validity_confidence": float(meta.validity_confidence or 0.0),
         "effective_date": meta.effective_date or "unknown",
@@ -377,7 +378,9 @@ def _compatibility_problems(data: dict, settings: Settings, embedder: Embedder) 
     problems: list[str] = []
     schema = str(data.get("schema_version", ""))
     if schema != settings.collection_schema_version:
-        problems.append(f"schema_version 索引={schema!r} 当前={settings.collection_schema_version!r}")
+        problems.append(
+            f"schema_version 索引={schema!r} 当前={settings.collection_schema_version!r}"
+        )
     model = str(data.get("embedding_model", ""))
     current_model = str(getattr(embedder, "model_name", ""))
     if model != current_model:

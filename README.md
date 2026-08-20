@@ -63,6 +63,80 @@ crawl/crawl-site 通用参数：`--max-list-pages` `--max-articles` `--max-attac
 `--since YYYY-MM-DD`（跳过早于该日期的文章）`--dry-run`（只评估不写库）
 `--no-attachments` `--report-json`（输出机器可读站点报告）。
 
+## 微信公众号数据接入
+
+公众号文章是官网之外的补充官方数据源，**定位为学院级、年度性招生/推免/选拔信息**
+（推免/预推免/夏令营/复试/调剂/硕博招生/实验班/转专业/项目报名），不追求校园
+生活服务覆盖。文章**发现**与**解析**彻底解耦：
+
+```
+ArticleDiscovery（SeedURLDiscovery | WeRSSDiscovery）→ 文章 URL (+WeRSS 已存正文)
+  → 统一 normalize（页面/WeRSS content_html 同一套清洗）
+  → 白名单/时间窗/相关性门（招生选拔口径 + meaningful-facts 启发）
+  → 现有质量门 + 生命周期 + manifest（source_type=official_wechat）
+```
+
+- **只接收公开的 `mp.weixin.qq.com` 文章 URL**。不逆向微信历史消息接口，不用
+  Cookie 池/代理池/验证码与风控绕过；命中风控验证页只记 `verify_required` 跳过。
+- **Seed URL 模式可完全独立工作**：`data/sources/wechat_seed_urls.jsonl` 每行
+  `{"account": "...", "url": "https://mp.weixin.qq.com/s/...", "title": "", "publish_date": ""}`，
+  title/date 可空，由 fetcher 补齐；`force_include: true` 可豁免 2024-01-01 时间窗。
+- **We-MP-RSS 是可选的 discovery service + 正文缓存**：配置 `WERSS_BASE_URL` /
+  `WERSS_ACCESS_KEY` / `WERSS_SECRET_KEY`（见 `.env.example`）后
+  `--mode werss` 从其公开 API 发现文章——`/mps` 查订阅、`/articles` 列元数据、
+  `/articles/{id}` 取已存正文（`content_html` 优先、`content` 兜底）；有正文直接
+  normalize，**不回源微信**；无正文才 fallback `WechatArticleFetcher`。
+  未配置或服务不可用时跳过并告警，不影响其他 crawler。
+- 公众号文章须经**官方账号白名单**（`data/sources/sufe_wechat.yaml`，页面内
+  account_name 精确匹配；每账号记录 focus 主题与 official_evidence_url）
+  + 2024-01-01 时间窗 + deterministic 相关性过滤（招生/推免/选拔正向词，
+  喜报/风采/讲座回顾/党建/研讨会/成果新闻强排除；无事实元素的宣传拒绝为 no_facts）。
+- **质量判断不看图片**（公众号含海报/二维码/头图是常态），只看可提取正文中
+  是否有可引用事实（日期/数字/联系方式/报名-条件-材料类关键词）。
+- **官方公开联系方式不算敏感信息**：官方来源正文中带公开语境（咨询电话/招生办公室/
+  联系老师/“电 话：”等排版变体）的电话号码按 official_public_contact 放行；
+  私人手机号、无上下文手机号、身份证号继续隔离。
+- 权威等级：官网正式政策 > 官网办事指南 > 公众号办事解读 > 公众号新闻；
+  公众号解读与官网正式政策共存，种子可用 `related_official_url` 建立
+  `explains` 关系（官网为 canonical），同 topic_key 唯一匹配时自动建立。
+- 只按 exact text_hash 去重（不做语义去重）；doc_id 锚定 biz+mid+idx（JS 变量优先，
+  长链 URL query 兜底），退化为规范化 URL。
+- robots 说明：mp.weixin.qq.com 的 robots.txt 为 UA=* 全站 Disallow。本功能只抓
+  白名单收敛、显式给定的单篇文章 URL（默认 2 秒限速），不做站内发现式爬取；
+  `SafeFetcher(respect_robots=False)` 仅限该用途，其余安全检查不变。
+
+```bash
+sufe-qa crawl-wechat --mode seed --dry-run    # 预览：各门计数 + 话题分布 + 拒绝分布
+sufe-qa crawl-wechat --mode seed --report-json
+sufe-qa crawl-wechat --mode werss --limit 20  # 需先配置 WERSS_*
+```
+
+抓取只写 corpus/manifest；索引仍由 `sufe-qa index` 显式执行。
+
+## 管理员 Dashboard（知识库治理）
+
+`sufe-qa serve` 后访问 `http://127.0.0.1:7860/admin`（与学生问答端同进程、不同入口）。
+管理 API 使用独立 Bearer 令牌：**未配置 `SUFE_QA_ADMIN_TOKEN` 时管理接口全部拒绝**；
+令牌用密码管理器生成的长随机串（见 `.env.example`）。
+
+Dashboard 是“馆藏账本”而非统计图，覆盖非专业维护者的日常闭环：
+
+- **概览与发布状态**：当前唯一文档/可检索/已隔离三口径，manifest 与索引指纹是否一致、
+  质量报告是否过期（陈旧即显目标红）；入库时间脉冲带可按日反查当天新增/更新文档。
+- **文档治理**：列表/搜索/筛选、正文与版本历史查看；治理动作只有**可逆的隔离/恢复**
+  （追加 manifest 记录回退），不做不可逆删除。
+- **问答诊室**：输入学生问题实时复现真实链路（检索证据、拒答原因、引用校验），
+  用于判断“答得差”是缺资料还是检索问题。
+- **标准答复热修**：确认问题后可撰写人工答案，必须绑定现行可追溯资料；正文以
+  不可变版本文件保存，随后只做**单条增量索引**并自动复测该问题。
+- **资料补充**：上传单个文件或粘贴一篇公众号文章 URL（复用白名单/质量门，
+  不绕过爬虫管道）。
+- **体检与发布**：一键运行质量审计；“发布”仅在体检新鲜且阻断项为 0 时可用，
+  发布即增量索引，完成后页面显示新的索引指纹。
+
+典型日常维护顺序：补充资料（上传/公众号链接/爬虫）→ 体检 → 问答诊室抽查 → 发布。
+任何一步报错都先停下来看报告，不要重复点发布。
+
 回答末尾输出来源卡片（标题/发布单位/原文链接）。
 
 ## 评测

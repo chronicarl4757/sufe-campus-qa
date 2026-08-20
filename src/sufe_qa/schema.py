@@ -65,6 +65,10 @@ class DocMeta:
     date_conflict: bool = False
     temporal_class: str = "undated"
     series_key: str = ""
+    # 招生语义层级（degree/non-degree 区分）：undergraduate/master/doctoral/
+    # recommendation/reexamination/adjustment/non_degree_program/other_admission；
+    # 空串表示非招生类文档或未判定。classification.classify_admission_level 产出。
+    admission_level: str = ""
     # 旧 schema 无生命周期证据时默认归档，必须经迁移审计后才能进入新索引。
     retention_status: str = "archived"
     retention_reason: str = "legacy_unreviewed"

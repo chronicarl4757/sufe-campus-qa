@@ -86,7 +86,6 @@ def rebuild_clean_corpus(
                 "retention_reason": decision.retention_reason,
                 "canonical_doc_id": decision.canonical_doc_id,
                 "index_collection": decision.index_collection,
-                "fetched_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
             }
             if decision.retention_status == "archived":
                 migrated.append(replace(meta, content_hash="", file_path="", **updates))

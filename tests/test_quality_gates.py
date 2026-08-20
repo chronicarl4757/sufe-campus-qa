@@ -170,3 +170,37 @@ def test_quality_gates_use_real_answers_for_answerability_when_supplied(tmp_path
     assert report["gates"]["question_answerability"] is True
     assert report["gates"]["question_authoritative_hits"] is True
     assert report["gates"]["core_scene_answerability"] is True
+    assert report["gates"]["coverage_matches_index"] is False
+    assert report["gates"]["real_answers_match_index"] is False
+
+
+def test_quality_gates_reject_reports_from_an_old_index(tmp_path):
+    settings = _settings(tmp_path)
+    _add(
+        settings,
+        "main",
+        "缓考办理办法",
+        "policy",
+        "active",
+        "# 缓考办理办法\n\n申请条件、材料和办理流程。\n",
+    )
+    update_index(settings, FakeEmbedder())
+    metadata = json.loads((settings.chroma_dir / "index_metadata.json").read_text(encoding="utf-8"))
+    coverage = tmp_path / "coverage.json"
+    coverage.write_text(
+        json.dumps(
+            {
+                "question_bank_version": "test.v1",
+                "question_bank_hash": "sha256:test",
+                "index_fingerprint": "sha256:old",
+                "question_results": [],
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    report = verify_clean_pipeline(settings, coverage_path=coverage)
+
+    assert report["fingerprints"]["manifest"] == metadata["manifest_fingerprint"]
+    assert report["gates"]["index_matches_manifest"] is True
+    assert report["gates"]["coverage_matches_index"] is False

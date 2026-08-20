@@ -174,6 +174,7 @@ class SafeFetcher:
         max_redirects: int = 5,
         timeout: float = 15.0,
         sleep: Callable[[float], None] = time.sleep,
+        respect_robots: bool = True,
     ):
         self._own = client is None
         self._client = client or httpx.Client(
@@ -187,6 +188,10 @@ class SafeFetcher:
         self._max_att = max_attachment_bytes
         self._max_redirects = max_redirects
         self._sleep = sleep
+        # respect_robots=False 仅用于白名单收敛后的定点页面抓取（如 mp.weixin.qq.com
+        # 单篇文章页：其 robots 全站 Disallow，但文章是用户分享可直接打开的公开页）；
+        # 其余安全检查（协议/私网/host allowlist/大小上限）不受影响，限速仍按 delay 执行。
+        self._respect_robots = respect_robots
         self._robots = RobotsCache(self._client, ua)
         self._last_req: dict[str, float] = {}
         # 主机名 -> 已确认私网（只缓存私网结果；公网结果每次重新解析，防 DNS rebinding）
@@ -239,14 +244,15 @@ class SafeFetcher:
             return "private_address_blocked"
         if self._allowed is not None and p.netloc not in self._allowed:
             return "redirect_blocked"
-        if not self._robots.can_fetch(url):
+        if self._respect_robots and not self._robots.can_fetch(url):
             return "robots_denied"
         return None
 
     def _throttle(self, url: str) -> None:
         """成功与失败请求一律限速：间隔取 max(delay, robots Crawl-delay)。"""
         host = urlparse(url).netloc
-        wait = max(self._delay, self._robots.crawl_delay(url) or 0.0)
+        crawl_delay = self._robots.crawl_delay(url) if self._respect_robots else None
+        wait = max(self._delay, crawl_delay or 0.0)
         last = self._last_req.get(host)
         if last is not None:
             remain = wait - (time.monotonic() - last)

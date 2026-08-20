@@ -96,7 +96,9 @@ def test_clean_rebuild_atomically_swaps_and_keeps_archived_audit_row(tmp_path):
     assert not active_path.read_bytes().endswith(b"\n\n")
     assert all(line == line.rstrip() for line in active_path.read_text().splitlines())
     assert manifest["active"].content_hash == sha256_text(active_path.read_text(encoding="utf-8"))
+    assert manifest["active"].fetched_at == "2026-08-01T00:00:00+00:00"
     assert manifest["old"].retention_status == "archived"
+    assert manifest["old"].fetched_at == "2026-08-01T00:00:00+00:00"
     assert manifest["old"].file_path == ""
     assert manifest["old"].content_hash == ""
     assert _tree_hash(raw) == before_raw

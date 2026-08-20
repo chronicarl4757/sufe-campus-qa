@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex,nofollow">
+    <title>知识库馆藏账本｜上财校务问答</title>
+    <link rel="stylesheet" href="/static/admin.css">
+  </head>
+  <body>
+    <section class="login-shell" id="login-shell" aria-labelledby="login-title">
+      <div class="login-ledger">
+        <p class="eyebrow">SUFE QA · ADMIN ARCHIVE</p>
+        <h1 id="login-title">知识库馆藏账本</h1>
+        <p>这里管理学生问答所依据的官方资料。输入管理员令牌后，方可查看文档与执行治理操作。</p>
+        <form id="login-form">
+          <label for="admin-token">管理员令牌</label>
+          <div class="token-line">
+            <input id="admin-token" name="token" type="password" autocomplete="current-password" required>
+            <button type="submit">进入账本</button>
+          </div>
+          <p class="form-message" id="login-message" role="alert"></p>
+        </form>
+        <a href="/">返回学生问答端</a>
+      </div>
+    </section>
+
+    <div class="admin-shell" id="admin-shell" hidden>
+      <aside class="archive-rail">
+        <a class="archive-mark" href="/admin" aria-label="知识库馆藏账本首页">
+          <span>SUFE</span>
+          <strong>馆藏<br>账本</strong>
+        </a>
+        <nav aria-label="管理员导航">
+          <a href="#overview">馆藏概览</a>
+          <a href="#debug">问答诊室</a>
+          <a href="#timeline">入库时间线</a>
+          <a href="#import">导入资料</a>
+          <a href="#documents">文档账本</a>
+        </nav>
+        <div class="rail-foot">
+          <a href="/coverage">覆盖质检</a>
+          <a href="/">学生端</a>
+          <button id="logout-button" type="button">退出管理</button>
+        </div>
+      </aside>
+
+      <main>
+        <header class="admin-header">
+          <div>
+            <p class="eyebrow">知识库控制面</p>
+            <h1>馆藏是否可以安全发布？</h1>
+          </div>
+          <div class="release-controls">
+            <span class="release-state" id="release-state">正在核对</span>
+            <button class="button-secondary" id="audit-button" type="button">重新体检</button>
+            <button class="button-primary" id="publish-button" type="button">发布到问答库</button>
+          </div>
+        </header>
+
+        <section class="status-ledger" id="overview" aria-labelledby="overview-title">
+          <header class="section-heading">
+            <div>
+              <p class="section-code">卷一 · 当前馆藏</p>
+              <h2 id="overview-title">一眼看清哪些资料正在回答学生</h2>
+            </div>
+            <p id="fingerprint-note">正在读取语料与索引身份…</p>
+          </header>
+          <dl class="ledger-counts">
+            <div><dt>当前文档</dt><dd id="count-documents">—</dd><small>last-wins 唯一口径</small></div>
+            <div><dt>可检索</dt><dd id="count-searchable">—</dd><small>有正文且通过质量门</small></div>
+            <div><dt>待治理</dt><dd id="count-attention">—</dd><small>已隔离，不进入回答</small></div>
+            <div><dt>发布单位</dt><dd id="count-sources">—</dd><small>当前馆藏的来源单位</small></div>
+          </dl>
+          <div class="readiness-grid">
+            <article class="readiness-item" id="quality-readiness">
+              <span class="readiness-seal">质</span>
+              <div><strong>质量体检</strong><p>正在核对报告</p></div>
+            </article>
+            <article class="readiness-item" id="index-readiness">
+              <span class="readiness-seal">索</span>
+              <div><strong>问答索引</strong><p>正在核对版本</p></div>
+            </article>
+            <article class="readiness-item" id="gate-readiness">
+              <span class="readiness-seal">验</span>
+              <div><strong>发布验收</strong><p>正在核对门禁</p></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="clinic-section" id="debug" aria-labelledby="debug-title">
+          <header class="section-heading">
+            <div>
+              <p class="section-code">卷二 · 问答诊室</p>
+              <h2 id="debug-title">先复现坏答案，再补一条有依据的标准答复</h2>
+            </div>
+            <p>使用与学生端相同的检索、置信门控、模型和引用检查。</p>
+          </header>
+          <form class="clinic-query" id="debug-form">
+            <label for="debug-question">学生问题</label>
+            <textarea id="debug-question" maxlength="500" placeholder="例如：奖学金申请需要满足哪些条件？" required></textarea>
+            <button class="button-primary" id="debug-button" type="submit">运行真实问答</button>
+          </form>
+          <div class="clinic-result" id="debug-result" hidden>
+            <section class="answer-proof">
+              <div class="debug-status" id="debug-status">等待结果</div>
+              <h3>当前回答</h3>
+              <pre id="debug-answer"></pre>
+            </section>
+            <section class="evidence-picker">
+              <div>
+                <h3>检索证据</h3>
+                <p>勾选真正支撑标准答复的现行官方资料。</p>
+              </div>
+              <div id="evidence-list"></div>
+            </section>
+            <form class="answer-editor" id="answer-form">
+              <h3>人工核验标准答复</h3>
+              <p>标准答复会作为一份 FAQ 增量索引；没有官方依据时不能保存，请先从下方导入资料。</p>
+              <label for="curated-answer">答复正文</label>
+              <textarea id="curated-answer" maxlength="8000" placeholder="只写已由所选资料明确支持的内容……" required></textarea>
+              <div class="answer-meta">
+                <label><span>知识分类</span><select id="answer-category" required><option value="">请选择</option></select></label>
+                <label><span>核验人</span><input id="answer-editor" maxlength="80" placeholder="姓名或团队角色" required></label>
+                <button class="button-primary" id="save-answer-button" type="submit">保存并增量索引</button>
+              </div>
+              <p class="answer-note" id="answer-note">保存前会确认馆藏没有其他待发布变更，避免夹带未经审核的资料。</p>
+            </form>
+          </div>
+        </section>
+
+        <section class="timeline-section" id="timeline" aria-labelledby="timeline-title">
+          <header class="section-heading">
+            <div>
+              <p class="section-code">卷三 · 入库时间</p>
+              <h2 id="timeline-title">每一道日期戳都能回到具体文档</h2>
+            </div>
+            <button class="text-button" id="clear-day-filter" type="button" hidden>清除日期筛选</button>
+          </header>
+          <div class="timeline-ruler" id="timeline-ruler" role="list" aria-label="按最近入库时间统计"></div>
+          <p class="timeline-caption">柱高代表当天当前馆藏数量；朱砂段表示需要治理。点击日期筛选文档账本。</p>
+        </section>
+
+        <section class="category-section" aria-labelledby="category-title">
+          <header class="section-heading compact">
+            <div>
+              <p class="section-code">卷四 · 知识分类</p>
+              <h2 id="category-title">分类不是统计结果，而是查找入口</h2>
+            </div>
+          </header>
+          <div class="category-register" id="category-register"></div>
+        </section>
+
+        <section class="import-section" id="import" aria-labelledby="import-title">
+          <header class="section-heading">
+            <div>
+              <p class="section-code">卷五 · 新增资料</p>
+              <h2 id="import-title">把官方文件放进待发布馆藏</h2>
+            </div>
+            <p>导入只写入语料，不会立即影响学生端。体检通过后再发布。</p>
+          </header>
+          <form class="import-ledger" id="import-form">
+            <label class="file-field">
+              <span>资料文件</span>
+              <input id="import-file" type="file" accept=".md,.html,.htm,.pdf,.docx" required>
+              <small>支持 Markdown、HTML、PDF、DOCX，最大 25 MB</small>
+            </label>
+            <label><span>知识分类</span><select id="import-category" required><option value="">请选择</option></select></label>
+            <label><span>发布单位</span><input id="import-publisher" maxlength="200" placeholder="例如：上海财经大学教务处" required></label>
+            <label class="source-field"><span>原始官方链接</span><input id="import-source-url" type="url" maxlength="2000" placeholder="https://…" required></label>
+            <button class="button-primary" id="import-button" type="submit">检查并导入</button>
+          </form>
+          <p class="import-note" id="import-note">系统会自动解析正文、去重并检查疑似身份证号与手机号；扫描版 PDF 请先做 OCR。</p>
+          <form class="wechat-ledger" id="wechat-import-form">
+            <div>
+              <strong>同步单篇官方公众号文章</strong>
+              <span>复用现有白名单、时效、相关性和正文质量门；不绕过微信验证。</span>
+            </div>
+            <label><span>文章链接</span><input id="wechat-url" type="url" maxlength="2000" placeholder="https://mp.weixin.qq.com/s/…" required></label>
+            <button class="button-secondary" id="wechat-import-button" type="submit">抓取并入库</button>
+          </form>
+          <p class="import-note" id="wechat-import-note">当前公众号链路聚焦招生、推免、选拔等事实型文章；新闻宣传会被自动拒绝。</p>
+        </section>
+
+        <section class="document-section" id="documents" aria-labelledby="documents-title">
+          <header class="section-heading">
+            <div>
+              <p class="section-code">卷六 · 文档账本</p>
+              <h2 id="documents-title">查来源、看正文、处理异常</h2>
+            </div>
+            <p class="result-count" id="result-count">正在读取…</p>
+          </header>
+
+          <form class="filter-ledger" id="filter-form">
+            <label class="search-field">
+              <span>搜索</span>
+              <input id="search-filter" type="search" placeholder="标题、发布单位、链接或 doc_id">
+            </label>
+            <label><span>分类</span><select id="category-filter"><option value="">全部分类</option></select></label>
+            <label><span>质量状态</span><select id="quality-filter"><option value="">全部状态</option></select></label>
+            <label><span>来源类型</span><select id="source-filter"><option value="">全部来源</option></select></label>
+            <button type="reset">清除筛选</button>
+          </form>
+
+          <div class="table-wrap">
+            <table class="document-table">
+              <thead><tr><th>最近入库</th><th>文档与来源</th><th>分类</th><th>质量</th><th>去向</th></tr></thead>
+              <tbody id="document-rows"></tbody>
+            </table>
+          </div>
+          <div class="empty-state" id="empty-state" hidden>
+            <strong>没有符合条件的文档</strong>
+            <p>清除部分筛选条件，或检查搜索词。</p>
+          </div>
+          <footer class="pagination">
+            <button id="previous-page" type="button">上一页</button>
+            <span id="page-label">—</span>
+            <button id="next-page" type="button">下一页</button>
+          </footer>
+        </section>
+      </main>
+    </div>
+
+    <button class="drawer-backdrop" id="drawer-backdrop" type="button" aria-label="关闭文档详情" hidden></button>
+    <aside class="document-drawer" id="document-drawer" aria-labelledby="drawer-title" hidden>
+      <header>
+        <p class="eyebrow" id="drawer-id">文档档号</p>
+        <button id="drawer-close" type="button" aria-label="关闭">×</button>
+        <h2 id="drawer-title" tabindex="-1">文档详情</h2>
+        <p id="drawer-publisher"></p>
+      </header>
+      <div class="drawer-body">
+        <dl class="document-facts" id="document-facts"></dl>
+        <a class="source-link" id="drawer-source" target="_blank" rel="noopener">打开原始来源 ↗</a>
+        <section class="governance-box" aria-labelledby="governance-title">
+          <h3 id="governance-title">治理操作</h3>
+          <p id="governance-note">隔离后不会进入下一次索引，原正文仍保留用于恢复。</p>
+          <label for="action-reason">操作说明</label>
+          <textarea id="action-reason" maxlength="300" placeholder="例如：正文依赖附件，但附件尚未补齐"></textarea>
+          <button class="danger-button" id="document-action" type="button">隔离这份文档</button>
+        </section>
+        <section class="content-sheet">
+          <div><h3>标准化正文</h3><span id="content-note"></span></div>
+          <pre id="document-content"></pre>
+        </section>
+        <section class="history-sheet">
+          <h3>版本记录</h3>
+          <ol id="document-history"></ol>
+        </section>
+      </div>
+    </aside>
+
+    <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+    <script src="/static/admin.js" defer></script>
+  </body>
+</html>

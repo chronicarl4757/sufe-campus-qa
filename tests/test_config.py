@@ -21,6 +21,12 @@ def test_load_settings_creates_data_dirs(tmp_path, monkeypatch):
     assert s.vector_top_k == 20 and s.fusion_top_n == 8
 
 
+def test_load_settings_reads_admin_token(tmp_path, monkeypatch):
+    monkeypatch.setenv("SUFE_QA_DATA_DIR", str(tmp_path / "data"))
+    monkeypatch.setenv("SUFE_QA_ADMIN_TOKEN", "  admin-test-token  ")
+    assert load_settings().admin_token == "admin-test-token"
+
+
 def test_get_api_key_returns_env_value(monkeypatch):
     from sufe_qa.config import get_api_key
 

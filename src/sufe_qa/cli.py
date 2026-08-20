@@ -3,6 +3,7 @@
     sufe-qa crawl                      # 按 seeds.yaml 抓种子站（分页+附件+质量门）→ 入库
     sufe-qa discover-site <url>        # 学院主页勘探，生成 site profile
     sufe-qa crawl-site <host|profile>  # 按确定性 profile 整站抓取
+    sufe-qa crawl-wechat --mode seed   # 公众号文章（seed URL / WeRSS 发现 → 白名单+质量门）
     sufe-qa crawl-report [host]        # 查看最近一次抓取报告
     sufe-qa ingest --category 学工事务  # data/inbox/ 手动投放文件入库
     sufe-qa index                      # 增量索引（--full 全量重建）
@@ -71,12 +72,18 @@ from sufe_qa.quality.migrate import rebuild_clean_corpus
 from sufe_qa.quality.gates import verify_clean_pipeline, write_gate_report
 from sufe_qa.retrieve.retriever import HybridRetriever
 from sufe_qa.schema import default_relations_path
+from sufe_qa.wechat.discovery import SeedURLDiscovery, WeRSSDiscovery
+from sufe_qa.wechat.article import WechatArticleFetcher
+from sufe_qa.wechat.filters import MIN_PUBLISH_DATE, load_wechat_accounts
+from sufe_qa.wechat.runner import crawl_wechat
 
 logger = logging.getLogger(__name__)
 
 DEFAULT_SEEDS = PROJECT_ROOT / "seeds.yaml"
 DEFAULT_EVALSET = PROJECT_ROOT / "data" / "eval" / "evalset.v1.jsonl"
 DEFAULT_AUTHORITY_SOURCES = PROJECT_ROOT / "data" / "sources" / "sufe_authoritative.yaml"
+DEFAULT_WECHAT_SOURCES = PROJECT_ROOT / "data" / "sources" / "sufe_wechat.yaml"
+DEFAULT_WECHAT_SEED_URLS = PROJECT_ROOT / "data" / "sources" / "wechat_seed_urls.jsonl"
 
 
 def _make_embedder(settings: Settings, fake: bool) -> Embedder:
@@ -337,6 +344,40 @@ def _cmd_retry_attachments(args: argparse.Namespace) -> int:
     )
     for report in reports:
         print(report.summary())
+    return 0
+
+
+def _cmd_crawl_wechat(args: argparse.Namespace) -> int:
+    settings = load_settings()
+    accounts = load_wechat_accounts(Path(args.sources))
+    if args.account:
+        accounts = [a for a in accounts if a.account_id in set(args.account)]
+    if not accounts:
+        print("公众号白名单为空或未匹配 --account", file=sys.stderr)
+        return 2
+    if args.mode == "werss":
+        discovery = WeRSSDiscovery.from_env()
+        if discovery is None:
+            # We-MP-RSS 未配置是预期状态（规格 §二十三）：skip 而不是让整个 crawl 失败
+            print("未配置 WERSS_BASE_URL，跳过 WeRSS 发现（不影响其他 crawler）", file=sys.stderr)
+            return 0
+    else:
+        discovery = SeedURLDiscovery(Path(args.seed_file))
+    fetcher = WechatArticleFetcher.create(delay=args.delay)
+    report = crawl_wechat(
+        accounts=accounts,
+        discovery=discovery,
+        fetcher=fetcher,
+        corpus_dir=settings.corpus_dir,
+        manifest_path=settings.manifest_path,
+        mode=args.mode,
+        limit=args.limit,
+        min_date=args.since,
+        dry_run=args.dry_run,
+        raw_dir=settings.data_dir / "raw" / "mp.weixin.qq.com",
+        report_dir=settings.data_dir / "crawl_reports" if args.report_json else None,
+    )
+    print(report.summary())
     return 0
 
 
@@ -830,6 +871,22 @@ def build_parser() -> argparse.ArgumentParser:
     cr = sub.add_parser("crawl-report", help="查看最近一次抓取报告")
     cr.add_argument("host", nargs="?", default=None)
     cr.set_defaults(func=_cmd_crawl_report)
+
+    cw = sub.add_parser(
+        "crawl-wechat", help="抓微信公众号文章（seed URL 或 WeRSS 发现，白名单+质量门）"
+    )
+    cw.add_argument("--mode", choices=["seed", "werss"], default="seed", help="文章 URL 发现方式")
+    cw.add_argument(
+        "--seed-file", default=str(DEFAULT_WECHAT_SEED_URLS), help="seed 模式的 JSONL 文件"
+    )
+    cw.add_argument("--sources", default=str(DEFAULT_WECHAT_SOURCES), help="公众号白名单 yaml")
+    cw.add_argument("--account", action="append", help="只抓指定白名单 id，可重复")
+    cw.add_argument("--limit", type=int, default=20, help="本次最多处理文章数")
+    cw.add_argument("--since", default=MIN_PUBLISH_DATE, help="早于此日期拒绝（YYYY-MM-DD）")
+    cw.add_argument("--delay", type=float, default=2.0, help="每请求最小间隔秒数")
+    cw.add_argument("--dry-run", action="store_true", help="只评估，不写 corpus/manifest/索引")
+    cw.add_argument("--report-json", action="store_true", help="保存机器可读抓取报告")
+    cw.set_defaults(func=_cmd_crawl_wechat)
 
     i = sub.add_parser("ingest", help="data/inbox/ 手动投放文件入库")
     i.add_argument("--category", required=True)

@@ -112,8 +112,11 @@ def test_ingest_incremental_update_and_noop(tmp_path):
     assert r3.updated == 1
     d = load_manifest(manifest_path)[doc_id_from("curated/campus_services/校园卡.md")]
     assert "第二版" in (tmp_path / "corpus" / d.file_path).read_text(encoding="utf-8")
-    # 更新沿用旧路径，不产生第二个 corpus 文件
-    assert len(list((tmp_path / "corpus" / "校园生活").glob("*.md"))) == 1
+    # 正文版本不可变：旧版仍能由 manifest 历史行定位，支持管理员回看/回退。
+    files = list((tmp_path / "corpus" / "校园生活").glob("*.md"))
+    assert len(files) == 2
+    assert any("第一版" in path.read_text(encoding="utf-8") for path in files)
+    assert any("第二版" in path.read_text(encoding="utf-8") for path in files)
 
 
 def test_ingest_missing_dir_is_noop(tmp_path):

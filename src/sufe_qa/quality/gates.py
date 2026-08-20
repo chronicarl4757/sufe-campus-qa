@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 from collections import Counter, defaultdict
 from datetime import datetime, timezone
@@ -25,6 +26,22 @@ _ATTACHMENT_REFERENCES = ("详见附件", "见附件", "点击下载", "申请�
 _CORE_ANSWER_SCENES = frozenset(
     {"本科教务", "研究生培养与学位", "奖助学金", "就业手续", "信息化与校园卡"}
 )
+
+
+def _file_fingerprint(path: Path) -> str:
+    return "sha256:" + hashlib.sha256(path.read_bytes() if path.is_file() else b"").hexdigest()
+
+
+def _index_fingerprints(settings: Settings) -> dict[str, str]:
+    path = settings.chroma_dir / "index_metadata.json"
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, json.JSONDecodeError):
+        data = {}
+    return {
+        "manifest_fingerprint": str(data.get("manifest_fingerprint", "missing")),
+        "index_fingerprint": str(data.get("index_fingerprint", "missing")),
+    }
 
 
 def _collection_stats(settings: Settings) -> dict[str, dict]:
@@ -211,6 +228,8 @@ def verify_clean_pipeline(
     answer_report_path: Path | None = None,
 ) -> dict:
     manifest = load_manifest(settings.manifest_path)
+    manifest_fingerprint = _file_fingerprint(settings.manifest_path)
+    index_fingerprints = _index_fingerprints(settings)
     relations = load_relations(settings.manifest_path.with_name("relations.jsonl"))
     file_hash_errors: list[str] = []
     missing_files: list[str] = []
@@ -235,6 +254,7 @@ def verify_clean_pipeline(
         if meta.retention_status in {"active", "historical"} and meta.quality_status == "accepted"
     ]
     materialized_ids = {meta.doc_id for meta in materialized}
+    retained_materialized = sum(meta.doc_id in materialized_ids for meta in retained)
     isolated_materialized = sorted(
         meta.doc_id
         for meta in materialized
@@ -277,6 +297,22 @@ def verify_clean_pipeline(
     collections = _collection_stats(settings)
     coverage = _coverage_stats(coverage_path)
     real_answers = _real_answer_stats(answer_report_path)
+    current_index_fingerprint = index_fingerprints["index_fingerprint"]
+    index_matches_manifest = (
+        index_fingerprints["manifest_fingerprint"] == manifest_fingerprint
+    )
+    coverage_matches_index = (
+        coverage["total"] > 0
+        and current_index_fingerprint != "missing"
+        and coverage["index_fingerprint"] == current_index_fingerprint
+    )
+    real_answers_match_index = (
+        not real_answers["available"]
+        or (
+            current_index_fingerprint != "missing"
+            and real_answers["index_fingerprint"] == current_index_fingerprint
+        )
+    )
     real_answer_integrity = (
         not real_answers["available"]
         or (
@@ -295,7 +331,8 @@ def verify_clean_pipeline(
         "manifest_documents": len(manifest),
         "materialized_documents": len(materialized),
         "retained_documents": len(retained),
-        "valid_body_ratio": (len(materialized) / len(retained) if retained else 1.0),
+        "retained_materialized_documents": retained_materialized,
+        "valid_body_ratio": (retained_materialized / len(retained) if retained else 1.0),
         "missing_files": missing_files,
         "file_hash_errors": file_hash_errors,
         "isolated_materialized": isolated_materialized,
@@ -338,10 +375,20 @@ def verify_clean_pipeline(
         "real_answer_integrity": real_answer_integrity,
         "core_scene_answerability": core_scene_answerability,
         "wrong_department_hits": coverage["wrong_department_hits"] == 0,
+        "index_matches_manifest": index_matches_manifest,
+        "coverage_matches_index": coverage_matches_index,
+        "real_answers_match_index": real_answers_match_index,
     }
     return {
         "schema_version": "1",
         "evaluated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "fingerprints": {
+            "manifest": manifest_fingerprint,
+            "indexed_manifest": index_fingerprints["manifest_fingerprint"],
+            "index": current_index_fingerprint,
+            "coverage_index": coverage["index_fingerprint"],
+            "real_answers_index": real_answers["index_fingerprint"],
+        },
         "corpus": corpus,
         "attachments": attachment_stats,
         "collections": collections,
