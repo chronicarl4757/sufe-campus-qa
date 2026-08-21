@@ -719,20 +719,33 @@ async function runImport(event) {
 async function runWechatImport(event) {
   event.preventDefault();
   const button = byId("wechat-import-button");
+  const note = byId("wechat-import-note");
+  const unlistedRow = byId("wechat-unlisted-row");
+  const allowUnlisted = byId("wechat-allow-unlisted").checked;
   button.disabled = true;
   button.textContent = "抓取检查中…";
   try {
     const result = await api("/api/admin/wechat/import", {
       method: "POST",
       headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({url: byId("wechat-url").value.trim()}),
+      body: JSON.stringify({
+        url: byId("wechat-url").value.trim(),
+        allow_unlisted: allowUnlisted,
+      }),
     });
     const titles = result.documents.map((documentItem) => `《${documentItem.title}》`).join("、");
     byId("wechat-import-form").reset();
-    byId("wechat-import-note").textContent = `已入库 ${titles}。下一步：体检并发布。`;
+    unlistedRow.hidden = true;
+    note.textContent = `已入库 ${titles}。下一步：体检并发布。`;
     toast("公众号文章已通过白名单与质量门");
     state.offset = 0;
     await Promise.all([loadOverview(), loadDocuments()]);
+  } catch (error) {
+    note.textContent = error.message || "导入失败";
+    if (error.message && error.message.includes("白名单")) {
+      unlistedRow.hidden = false;
+    }
+    toast(error.message || "导入失败", true);
   } finally {
     button.disabled = false;
     button.textContent = "抓取并入库";

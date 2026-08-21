@@ -404,6 +404,13 @@ input, select, textarea { font: inherit; color: var(--ink); }
 }
 .file-field input { padding: 9px; background: #fafbfc; border-style: dashed; }
 .file-field small { color: var(--muted); font-weight: 400; }
+.confirm-row {
+  display: flex !important; align-items: center; gap: 8px;
+  padding: 10px 12px; border: 1px solid var(--warn);
+  border-radius: 6px; background: var(--warn-soft);
+  font-weight: 550 !important; color: var(--ink) !important;
+}
+.confirm-row input { width: auto; margin: 0; }
 
 /* ---------- 文档抽屉 ---------- */
 .drawer-backdrop {

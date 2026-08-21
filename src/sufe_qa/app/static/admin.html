@@ -238,6 +238,10 @@
                 <p class="panel-note">复用现有白名单、时效、相关性和正文质量门；不绕过微信验证。</p>
               </div>
               <label>文章链接<input id="wechat-url" type="url" maxlength="2000" placeholder="https://mp.weixin.qq.com/s/…" required></label>
+              <label class="confirm-row" id="wechat-unlisted-row" hidden>
+                <input id="wechat-allow-unlisted" type="checkbox">
+                <span>我已核实该公众号为学校官方账号，仍要导入</span>
+              </label>
               <button class="btn" id="wechat-import-button" type="submit">抓取并入库</button>
               <p class="panel-note" id="wechat-import-note">公众号链路聚焦招生、推免、选拔等事实型文章；新闻宣传会被自动拒绝。</p>
             </form>

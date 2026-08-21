@@ -73,6 +73,7 @@ class CuratedAnswerReq(BaseModel):
 
 class WechatImportReq(BaseModel):
     url: str = Field(min_length=20, max_length=2000)
+    allow_unlisted: bool = False
 
 
 def _fingerprint(path: Path) -> str:
@@ -290,6 +291,37 @@ def _run_quality_audit(settings: Settings) -> dict:
         settings.data_dir / "quality" / "sufe_data_quality_current.md",
     )
     return _quality_snapshot(settings, report.manifest_fingerprint)
+
+
+_WECHAT_REJECT_REASONS = {
+    "not_whitelisted": "该公众号不在官方账号白名单中。如果你已确认这是学校官方账号，勾选“我已确认账号身份”后重试。",
+    "too_old": "文章发布时间早于采集窗口（2024-01-01）。",
+    "news_noise": "标题或正文判定为新闻/宣传内容，不进入问答库。",
+    "no_facts": "正文缺少可引用的事实信息（时间、条件、流程等），可能是纯宣传或图片型文章。",
+    "empty_body": "没有抓到可用正文。",
+    "duplicate": "这篇文章已在知识库中，无需重复导入。",
+    "duplicate_text_hash": "已有内容完全相同的文章入库，无需重复导入。",
+    "fetch_failed": "文章抓取失败（可能是微信风控或链接失效），请稍后重试。",
+    "archived": "正文被判定为新闻/活动/不完整内容，按规则归档，不进入问答库。",
+    "quality_rejected": "正文未通过质量门（可能为空壳或低质量内容）。",
+    "quality_quarantined": "正文含疑似个人敏感信息，已隔离未入库。",
+}
+
+
+def _wechat_reject_detail(report) -> str:
+    """把内部拒绝状态码翻译成管理员可读的说明。"""
+    decision = report.decisions[0] if report.decisions else {}
+    reason = decision.get("reason") or report.discovery_status or "unknown"
+    base = _WECHAT_REJECT_REASONS.get(reason, f"未通过入库检查（{reason}）")
+    account = decision.get("account") or ""
+    if reason == "not_whitelisted" and account:
+        base = f"公众号“{account}”不在官方账号白名单中。如果你已核实这是学校官方账号，勾选“我已核实该公众号为学校官方账号，仍要导入”后重试。"
+    detail = decision.get("detail") or ""
+    if reason == "archived" and detail == "isolated_document_kind":
+        base = "正文被判定为新闻/活动/不完整内容，按规则归档，不进入问答库。"
+        detail = ""
+    suffix = f"（{detail}）" if detail and reason not in _WECHAT_REJECT_REASONS else ""
+    return f"公众号文章未入库：{base}{suffix}"
 
 
 def create_admin_router(settings: Settings, runtime: dict) -> APIRouter:
@@ -708,6 +740,7 @@ def create_admin_router(settings: Settings, runtime: dict) -> APIRouter:
                     limit=1,
                     raw_dir=settings.data_dir / "raw" / "mp.weixin.qq.com",
                     report_dir=settings.data_dir / "crawl_reports",
+                    allow_unlisted=req.allow_unlisted,
                 )
             accepted_ids = [
                 row.get("doc_id")
@@ -715,12 +748,7 @@ def create_admin_router(settings: Settings, runtime: dict) -> APIRouter:
                 if row.get("decision") == "accept" and row.get("doc_id")
             ]
             if not accepted_ids:
-                decision = report.decisions[0] if report.decisions else {}
-                reason = decision.get("reason") or report.discovery_status or "unknown"
-                status = decision.get("status") or ""
-                error = decision.get("error") or ""
-                detail = "；".join(part for part in (reason, status, error) if part)
-                raise HTTPException(status_code=422, detail=f"公众号文章未入库：{detail}")
+                raise HTTPException(status_code=422, detail=_wechat_reject_detail(report))
             manifest = load_manifest(settings.manifest_path)
             documents = [_doc_payload(settings, manifest[doc_id]) for doc_id in accepted_ids]
             for doc_id in accepted_ids:

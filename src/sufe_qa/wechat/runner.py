@@ -254,8 +254,13 @@ def crawl_wechat(
     report_dir: Path | None = None,
     relations_path: Path | None = None,
     now: datetime | None = None,
+    allow_unlisted: bool = False,
 ) -> WechatCrawlReport:
-    """公众号抓取主流程。任何单篇失败只记报告，不影响其他文章与其他 crawler。"""
+    """公众号抓取主流程。任何单篇失败只记报告，不影响其他文章与其他 crawler。
+
+    allow_unlisted 仅供管理员逐篇导入使用：跳过白名单关卡，以页面 account_name
+    作为发布者入库，并在报告中显式标注；自动抓取永远传 False。
+    """
     report = WechatCrawlReport(mode=mode)
     relations_path = relations_path or default_relations_path(manifest_path)
     evaluated_at = (now or datetime.now(timezone.utc)).date()
@@ -366,6 +371,15 @@ def crawl_wechat(
 
         # 5) 白名单复检：以页面内 account_name 为准（规格 §九，防止种子标注造假）
         account = match_account(article.account_name, accounts)
+        if account is None and allow_unlisted:
+            # 管理员逐篇导入的显式确认：账号不入白名单文件，仅本篇按页面账号放行
+            account = WechatAccount(
+                account_id=f"admin_unlisted:{article.account_name}",
+                account_name=article.account_name,
+                publisher=article.account_name,
+                category="其他",
+            )
+            report.warnings.append(f"管理员确认放行未列入白名单的账号: {article.account_name}")
         if account is None:
             report.reject("not_whitelisted")
             report.decide(
@@ -438,6 +452,10 @@ def crawl_wechat(
             wechat_text_hashes[text_hash] = doc_id
 
         kind = classify_wechat_kind(article.title, article.body_markdown)
+        if allow_unlisted and kind == "incomplete":
+            # 管理员显式确认的单篇导入：自动分类兜底为 incomplete 时按中性公告保留，
+            # 不再触发 incomplete 的隔离归档（正文质量门仍会拦空壳文章）
+            kind = "annual_notice"
         accepted.setdefault(account.account_id, []).append((article, item, account, kind))
 
     # 9) 按账号分组走现有质量门/生命周期/入库管线

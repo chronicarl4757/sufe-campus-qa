@@ -144,6 +144,27 @@ def test_curated_answer_is_incremental_traceable_and_versioned(admin_env: AdminE
     assert load_manifest(admin_env.settings.manifest_path)[answer_doc_id].content_hash == first_hash
 
 
+def test_wechat_reject_detail_is_actionable():
+    from sufe_qa.app.admin import _wechat_reject_detail
+
+    class _Report:
+        def __init__(self, decisions, status="ok"):
+            self.decisions = decisions
+            self.discovery_status = status
+
+    detail = _wechat_reject_detail(
+        _Report([{"decision": "reject", "reason": "not_whitelisted", "account": "上财就业CEPC"}])
+    )
+    assert "上财就业CEPC" in detail and "白名单" in detail and "仍要导入" in detail
+    assert "not_whitelisted" not in detail
+
+    detail = _wechat_reject_detail(_Report([{"decision": "reject", "reason": "too_old"}]))
+    assert "2024-01-01" in detail
+
+    detail = _wechat_reject_detail(_Report([], status="auth_required"))
+    assert "auth_required" in detail  # 未知状态码兜底透出，便于排查
+
+
 def test_import_boundaries_and_pending_changes_block_hotfix(admin_env: AdminEnv):
     invalid_wechat = admin_env.client.post(
         "/api/admin/wechat/import",
