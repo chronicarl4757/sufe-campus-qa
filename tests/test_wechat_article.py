@@ -159,3 +159,53 @@ def test_fetcher_blocks_non_wechat_host():
 
     article = _mock_fetcher(handler).fetch("https://evil.example.com/x")
     assert article.status == "redirect_blocked"
+
+
+def _img_article() -> str:
+    """正文里夹两张内容图的文章页。"""
+    body = (
+        "<p>2027届毕业生生源信息如下：</p>"
+        '<p><img data-src="https://mmbiz.qpic.cn/table1.png"></p>'
+        "<p>联系方式见下表：</p>"
+        '<p><img data-src="https://mmbiz.qpic.cn/table2.png"></p>'
+    )
+    return (
+        "<!DOCTYPE html><html><head><title></title></head><body>"
+        f'<div class="rich_media_content" id="js_content">{body}</div>'
+        "<script>"
+        "var msg_title = '生源信息发布';"
+        'var nickname = htmlDecode("上财就业CEPC");'
+        "var createTime = '2026-08-20 09:00';"
+        "</script></body></html>"
+    )
+
+
+def test_ocr_disabled_drops_images():
+    article = parse_wechat_article(_img_article(), "https://mp.weixin.qq.com/s/Img")
+    assert "图片识别" not in article.body_markdown
+    assert "生源信息" in article.body_markdown
+    assert article.image_count == 2
+
+
+def test_ocr_backfills_image_text(monkeypatch):
+    monkeypatch.setattr(
+        "sufe_qa.wechat.article.ocr_article_images",
+        lambda urls, ua: {0: "金融学院 本科生 676 人", 1: "联系电话 65908851"},
+    )
+    article = parse_wechat_article(_img_article(), "https://mp.weixin.qq.com/s/Img", ocr=True)
+    body = article.body_markdown
+    assert "[图片识别] 金融学院 本科生 676 人" in body
+    assert "[图片识别] 联系电话 65908851" in body
+    # 保持原位置：第一段识别文字在"联系方式见下表"之前
+    assert body.index("金融学院 本科生 676") < body.index("联系方式见下表")
+    assert body.index("联系电话 65908851") > body.index("联系方式见下表")
+
+
+def test_ocr_engine_missing_degrades_to_drop(monkeypatch):
+    monkeypatch.setattr(
+        "sufe_qa.wechat.article.ocr_article_images",
+        lambda urls, ua: {},
+    )
+    article = parse_wechat_article(_img_article(), "https://mp.weixin.qq.com/s/Img", ocr=True)
+    assert "图片识别" not in article.body_markdown
+    assert article.status == "ok"

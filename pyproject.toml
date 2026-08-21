@@ -24,6 +24,10 @@ dependencies = [
 [dependency-groups]
 dev = ["pytest>=8", "ruff>=0.6"]
 
+[project.optional-dependencies]
+# 公众号正文图片 OCR（crawl-wechat --ocr / 管理端单篇导入）；不装则图片按旧行为丢弃
+ocr = ["rapidocr-onnxruntime>=1.4", "opencv-python-headless>=4.8", "pillow>=10"]
+
 [project.scripts]
 sufe-qa = "sufe_qa.cli:main"
 

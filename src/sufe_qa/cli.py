@@ -363,7 +363,7 @@ def _cmd_crawl_wechat(args: argparse.Namespace) -> int:
             return 0
     else:
         discovery = SeedURLDiscovery(Path(args.seed_file))
-    fetcher = WechatArticleFetcher.create(delay=args.delay)
+    fetcher = WechatArticleFetcher.create(delay=args.delay, ocr=args.ocr)
     report = crawl_wechat(
         accounts=accounts,
         discovery=discovery,
@@ -376,6 +376,7 @@ def _cmd_crawl_wechat(args: argparse.Namespace) -> int:
         dry_run=args.dry_run,
         raw_dir=settings.data_dir / "raw" / "mp.weixin.qq.com",
         report_dir=settings.data_dir / "crawl_reports" if args.report_json else None,
+        ocr=args.ocr,
     )
     print(report.summary())
     return 0
@@ -884,6 +885,7 @@ def build_parser() -> argparse.ArgumentParser:
     cw.add_argument("--limit", type=int, default=20, help="本次最多处理文章数")
     cw.add_argument("--since", default=MIN_PUBLISH_DATE, help="早于此日期拒绝（YYYY-MM-DD）")
     cw.add_argument("--delay", type=float, default=2.0, help="每请求最小间隔秒数")
+    cw.add_argument("--ocr", action="store_true", help="识别正文图片中的文字（较慢）")
     cw.add_argument("--dry-run", action="store_true", help="只评估，不写 corpus/manifest/索引")
     cw.add_argument("--report-json", action="store_true", help="保存机器可读抓取报告")
     cw.set_defaults(func=_cmd_crawl_wechat)

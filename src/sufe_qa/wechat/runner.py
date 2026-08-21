@@ -255,11 +255,13 @@ def crawl_wechat(
     relations_path: Path | None = None,
     now: datetime | None = None,
     allow_unlisted: bool = False,
+    ocr: bool = False,
 ) -> WechatCrawlReport:
     """公众号抓取主流程。任何单篇失败只记报告，不影响其他文章与其他 crawler。
 
     allow_unlisted 仅供管理员逐篇导入使用：跳过白名单关卡，以页面 account_name
     作为发布者入库，并在报告中显式标注；自动抓取永远传 False。
+    ocr=True 时对正文内容图做文字识别回填（引擎缺失时降级为丢弃图片）。
     """
     report = WechatCrawlReport(mode=mode)
     relations_path = relations_path or default_relations_path(manifest_path)
@@ -348,6 +350,7 @@ def crawl_wechat(
                 account=item.account,
                 publish_date=item.publish_date,
                 content_text=item.content_text,
+                ocr=ocr,
             )
             if candidate.status == "ok":
                 article = candidate

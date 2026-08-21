@@ -733,7 +733,7 @@ def create_admin_router(settings: Settings, runtime: dict) -> APIRouter:
                         PROJECT_ROOT / "data" / "sources" / "sufe_wechat.yaml"
                     ),
                     discovery=SeedURLDiscovery(seed),
-                    fetcher=WechatArticleFetcher.create(delay=0),
+                    fetcher=WechatArticleFetcher.create(delay=0, ocr=True),
                     corpus_dir=settings.corpus_dir,
                     manifest_path=settings.manifest_path,
                     mode="admin-seed",
@@ -741,6 +741,7 @@ def create_admin_router(settings: Settings, runtime: dict) -> APIRouter:
                     raw_dir=settings.data_dir / "raw" / "mp.weixin.qq.com",
                     report_dir=settings.data_dir / "crawl_reports",
                     allow_unlisted=req.allow_unlisted,
+                    ocr=True,
                 )
             accepted_ids = [
                 row.get("doc_id")

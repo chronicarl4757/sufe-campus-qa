@@ -21,6 +21,7 @@ from urllib.parse import parse_qsl, urlencode, urldefrag, urlparse, urlunparse
 from bs4 import BeautifulSoup, NavigableString, Tag
 
 from sufe_qa.crawler.fetcher import SafeFetcher
+from sufe_qa.wechat.ocr import ocr_article_images
 
 logger = logging.getLogger(__name__)
 
@@ -169,20 +170,27 @@ def doc_key_for(article_url: str, biz: str = "", mid: str = "", idx: str = "") -
     return f"url:{canonical}"
 
 
-def _flatten_content(el: Tag) -> tuple[str, int]:
-    """把正文容器转成 markdown 风格纯文本；返回 (文本, 图片数)。
+def _flatten_content(el: Tag) -> tuple[str, int, list[str]]:
+    """把正文容器转成 markdown 风格纯文本；返回 (文本, 图片数, 图片 URL 列表)。
 
     - 表格按行合并（一行一格间空格分隔），名单/分数线不碎行；
     - 有序/无序列表项保留 "- " 前缀；
-    - 图片一律丢弃（MVP 不做 OCR/下载），只计数供"正文全靠图"判定；
+    - 图片不丢弃：替换为占位行 "{{WX_IMG_i}}"，URL 按序返回，供 OCR 回填；
+      未启用 OCR 时占位行会在清洗阶段被移除，行为与旧版一致；
     - 平台组件标签整体删除。
     """
     clone = BeautifulSoup(str(el), "html.parser")
     for tag in clone.find_all(_DROP_TAGS):
         tag.decompose()
-    image_count = len(clone.find_all("img"))
+    image_urls: list[str] = []
     for img in clone.find_all("img"):
-        img.decompose()
+        url = (img.get("data-src") or img.get("src") or "").strip()
+        if url.startswith("http"):
+            image_urls.append(url)
+            img.replace_with(NavigableString(f"\n{{{{WX_IMG_{len(image_urls) - 1}}}}}\n"))
+        else:
+            img.decompose()
+    image_count = len(clone.find_all("img")) + len(image_urls)
     for br in clone.find_all("br"):
         br.replace_with(NavigableString("\n"))
     for table in clone.find_all("table"):
@@ -197,7 +205,29 @@ def _flatten_content(el: Tag) -> tuple[str, int]:
         # 整体替换为单个文本节点：get_text("\n") 会把多节点拆行，破坏 "- " 前缀
         li.replace_with(NavigableString(f"- {li.get_text(' ', strip=True)}\n"))
     text = clone.get_text("\n", strip=True)
-    return text, image_count
+    return text, image_count, image_urls
+
+
+def _resolve_image_placeholders(text: str, image_urls: list[str], *, ocr: bool) -> str:
+    """把正文里的 {{WX_IMG_i}} 占位行替换为 OCR 文本；未启用 OCR 时移除占位行。"""
+    if "{{WX_IMG_" not in text:
+        return text
+    ocr_texts: dict[int, str] = {}
+    if ocr and image_urls:
+        ocr_texts = ocr_article_images(image_urls, ua=WECHAT_UA)
+    out: list[str] = []
+    for line in text.split("\n"):
+        m = re.fullmatch(r"\{\{WX_IMG_(\d+)\}\}", line.strip())
+        if m is None:
+            out.append(line)
+            continue
+        if not ocr:
+            continue  # 未启用 OCR：移除占位行，与旧版"丢弃图片"行为一致
+        content = ocr_texts.get(int(m.group(1)), "")
+        if content:
+            out.append(f"[图片识别] {content}")
+    # 压缩可能产生的连续空行
+    return re.sub(r"\n{3,}", "\n\n", "\n".join(out))
 
 
 def _clean_lines(text: str) -> str:
@@ -221,7 +251,7 @@ def _clean_lines(text: str) -> str:
     return "\n".join(out)
 
 
-def _extract_body(soup: BeautifulSoup) -> tuple[str, int, list[str]]:
+def _extract_body(soup: BeautifulSoup, *, ocr: bool = False) -> tuple[str, int, list[str]]:
     """返回 (正文 markdown, 图片数, warnings)。只在正文容器内提取。"""
     warnings: list[str] = []
     for sel in _CONTENT_SELECTORS:
@@ -231,8 +261,8 @@ def _extract_body(soup: BeautifulSoup) -> tuple[str, int, list[str]]:
             continue
         if el is None:
             continue
-        text, image_count = _flatten_content(el)
-        cleaned = _clean_lines(text)
+        text, image_count, image_urls = _flatten_content(el)
+        cleaned = _resolve_image_placeholders(_clean_lines(text), image_urls, ocr=ocr)
         if cleaned:
             if sel != _CONTENT_SELECTORS[0]:
                 warnings.append(f"正文容器回退到 {sel}")
@@ -240,7 +270,7 @@ def _extract_body(soup: BeautifulSoup) -> tuple[str, int, list[str]]:
     return "", 0, warnings
 
 
-def normalize_wechat_content(content_html: str) -> tuple[str, int, list[str]]:
+def normalize_wechat_content(content_html: str, *, ocr: bool = False) -> tuple[str, int, list[str]]:
     """统一正文 normalize（规格 §十二）：输入完整文章页或 WeRSS 已存 content_html
     片段（片段可能自带 #js_content 容器，也可能就是正文内容本身），输出
     (cleaned markdown, 图片数, warnings)。清洗规则与页面解析完全一致。
@@ -256,8 +286,12 @@ def normalize_wechat_content(content_html: str) -> tuple[str, int, list[str]]:
         if el is not None:
             root = el
             break
-    text, image_count = _flatten_content(root)
-    return _clean_lines(text), image_count, warnings
+    text, image_count, image_urls = _flatten_content(root)
+    return (
+        _resolve_image_placeholders(_clean_lines(text), image_urls, ocr=ocr),
+        image_count,
+        warnings,
+    )
 
 
 def _identity_from_url(url: str) -> tuple[str, str, str]:
@@ -274,16 +308,18 @@ def parse_wechat_content(
     account: str = "",
     publish_date: str = "",
     content_text: str = "",
+    ocr: bool = False,
 ) -> WechatArticle:
     """用 WeRSS 已存正文构建 WechatArticle（规格 §十）：content_html 优先，
     content（纯文本）兜底；元数据来自发现层，页面 JS 变量不可得时身份从长链 URL 解析。
+    ocr=True 时对 content_html 中的正文图片做文字识别回填。
     """
     source_url = normalize_wechat_url(url)
     biz, mid, idx = _identity_from_url(source_url)
     body, image_count = "", 0
     warnings: list[str] = []
     if content_html and content_html.strip():
-        body, image_count, warnings = normalize_wechat_content(content_html)
+        body, image_count, warnings = normalize_wechat_content(content_html, ocr=ocr)
     elif content_text and content_text.strip():
         body = _clean_lines(content_text)
     canonical = canonical_identity_url(source_url, biz, mid, idx)
@@ -308,11 +344,11 @@ def parse_wechat_content(
     )
 
 
-def parse_wechat_article(raw_html: str, url: str) -> WechatArticle:
+def parse_wechat_article(raw_html: str, url: str, *, ocr: bool = False) -> WechatArticle:
     """把文章页 HTML 解析为 WechatArticle；纯函数，供离线 fixture 测试。
 
     任何单个字段缺失都不导致整篇失败；只有页面级异常（验证页/删除页/无正文容器）
-    才置非 ok status。
+    才置非 ok status。ocr=True 时对正文内容图做文字识别并回填（引擎缺失时降级为丢弃）。
     """
     source_url = normalize_wechat_url(url)
     lowered = raw_html[:200000]
@@ -366,7 +402,7 @@ def parse_wechat_article(raw_html: str, url: str) -> WechatArticle:
     url_biz, url_mid, url_idx = _identity_from_url(source_url)
     biz, mid, idx = biz or url_biz, mid or url_mid, idx or url_idx
     author = _js_var(raw_html, "author")
-    body, image_count, warnings = _extract_body(soup)
+    body, image_count, warnings = _extract_body(soup, ocr=ocr)
     canonical = canonical_identity_url(source_url, biz, mid, idx)
     status, error = "ok", ""
     if not body:
@@ -395,8 +431,9 @@ def parse_wechat_article(raw_html: str, url: str) -> WechatArticle:
 class WechatArticleFetcher:
     """单篇公众号文章抓取器：SafeFetcher（host 白名单 + 限速 + 大小上限）+ 解析。"""
 
-    def __init__(self, fetcher: SafeFetcher):
+    def __init__(self, fetcher: SafeFetcher, *, ocr: bool = False):
         self._fetcher = fetcher
+        self._ocr = ocr
 
     @classmethod
     def create(
@@ -405,6 +442,7 @@ class WechatArticleFetcher:
         delay: float = 2.0,
         timeout: float = 20.0,
         client=None,
+        ocr: bool = False,
     ) -> WechatArticleFetcher:
         fetcher = SafeFetcher(
             client=client,
@@ -415,7 +453,7 @@ class WechatArticleFetcher:
             # 见模块 docstring 的 robots 说明：只抓显式给定的单篇 URL
             respect_robots=False,
         )
-        return cls(fetcher)
+        return cls(fetcher, ocr=ocr)
 
     def fetch(self, url: str) -> WechatArticle:
         res = self._fetcher.fetch(url, "html")
@@ -427,4 +465,4 @@ class WechatArticleFetcher:
                 status=res.status,
                 error=res.error,
             )
-        return parse_wechat_article(res.text(), res.final_url or url)
+        return parse_wechat_article(res.text(), res.final_url or url, ocr=self._ocr)
