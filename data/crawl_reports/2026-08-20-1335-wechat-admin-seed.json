@@ -1,0 +1,32 @@
+{
+ "mode": "admin-seed",
+ "started_at": "2026-08-20T13:35:35+00:00",
+ "discovery_status": "ok",
+ "discovered": 1,
+ "whitelist_passed": 0,
+ "date_passed": 0,
+ "relevance_passed": 0,
+ "direct_content": 0,
+ "fetch_ok": 1,
+ "fetch_failed": 0,
+ "empty_body": 0,
+ "quality_accepted": 0,
+ "quality_rejected": 0,
+ "duplicate": 0,
+ "indexed_candidate": 0,
+ "reject_reasons": {
+  "not_whitelisted": 1
+ },
+ "decisions": [
+  {
+   "url": "https://mp.weixin.qq.com/s/wskB3LpwyBAOj45IyQAYHQ",
+   "title": "上海财经大学2027届毕业生生源信息发布！",
+   "decision": "reject",
+   "reason": "not_whitelisted",
+   "account": "上财就业CEPC",
+   "topic": "其他"
+  }
+ ],
+ "warnings": [],
+ "notes": []
+}

@@ -1,0 +1,34 @@
+{
+ "mode": "admin-seed",
+ "started_at": "2026-08-20T14:07:23+00:00",
+ "discovery_status": "ok",
+ "discovered": 1,
+ "whitelist_passed": 1,
+ "date_passed": 1,
+ "relevance_passed": 1,
+ "direct_content": 0,
+ "fetch_ok": 1,
+ "fetch_failed": 0,
+ "empty_body": 0,
+ "quality_accepted": 0,
+ "quality_rejected": 0,
+ "duplicate": 0,
+ "indexed_candidate": 0,
+ "reject_reasons": {
+  "quality_archived": 1
+ },
+ "decisions": [
+  {
+   "url": "https://mp.weixin.qq.com/s/wskB3LpwyBAOj45IyQAYHQ",
+   "title": "上海财经大学2027届毕业生生源信息发布！",
+   "decision": "reject",
+   "reason": "archived",
+   "detail": "isolated_document_kind",
+   "topic": "其他"
+  }
+ ],
+ "warnings": [
+  "管理员确认放行未列入白名单的账号: 上财就业CEPC"
+ ],
+ "notes": []
+}

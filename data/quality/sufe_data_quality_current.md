@@ -2,7 +2,7 @@
 
 - 审计时间：2026-08-20
 - 文档总数：2554
-- 有正文文件：1276
+- 有正文文件：1271
 - 生命周期：active 1041 / historical 230 / archived 1283
 - 标题含年份：1682（65.9%）
 - 年度系列：431，其中重复系列 125
@@ -98,7 +98,7 @@
 | 09084df70a8f | 关于开展2022-2023学年研究生社会助学金评选工作的通知 | annual_notice | 2022-11-04 | historical | historical | prior_annual_series_version |
 | 0908a1097163 | 上海财经大学商学院关于举办2018年“上财商学院跨学科、跨专业硕博连读研究生夏令营”的通知 | incomplete | 2018-05-15 | archived | none | isolated_document_kind; archived_without_raw |
 | 0922190e2cf2 | 关于2021年硕士研究生招生报名中不符合我校有关报考规定和要求的信息提示 | annual_notice | 2020-10-28 | archived | none | outside_recent_5_school_years; archived_without_raw |
-| 0922e508be1d | 关于印发《上海财经大学研究生国家助学金管理办法》的通知（附件） | policy | unknown | active | main_qa | all_history; document_kind_reclassified |
+| 0922e508be1d | 关于印发《上海财经大学研究生国家助学金管理办法》的通知（附件） | policy | unknown | active | main_qa | all_history |
 | 092f8720dbca | 城市与区域科学学院（财经研究所）2022年硕士研究生招生考试复试办法.pdf | annual_notice | 2022-03-22 | historical | historical | prior_annual_series_version |
 | 093a3d04371e | 体育特长生比赛加分.pdf | event | unknown | archived | none | isolated_document_kind |
 | 093cbe7c42fe | 上海财经大学学位评定委员会关于授予博士、硕士学位的通告 | incomplete | 2025-01-06 | archived | none | isolated_document_kind |
@@ -267,6 +267,7 @@
 | 19b5e3e83145 | 2012级本科外省市新生体检通知 | annual_notice | 2012-08-27 | archived | none | outside_recent_5_school_years |
 | 19cc1da67a27 | 20241023关于印发《上海财经大学博士、硕士学位论文抽检结果处理办法》的通知 | policy | 2024-10-23 | active | main_qa | manual_allowlist_active |
 | 1a272a8c9c76 | 上海财经大学统计与管理学院2023年通过夏令营选拔推荐免试研究生候选人名单 | public_list | 2022-07-18 | active | public_list | recent_5_school_years |
+| 1a398793e47e | 附件3-2026年度青岛市专项招录公务员职位表.xlsx | incomplete | 2026-03-11 | archived | none | isolated_document_kind |
 | 1a3fb37b4c87 | 2020-2021学年第二学期15-16周研究生课程调停课情况公示 | public_list | 2021-07-02 | archived | none | outside_recent_5_school_years; archived_without_raw |
 | 1a4a1482ecbc | 关于报考我校2018年硕士研究生考生资格审查的详细说明 | incomplete | 2018-02-22 | archived | none | isolated_document_kind; archived_without_raw |
 | 1a5e801ecd98 | 2020-2021学年第二学期硕士学位论文答辩前匿名评审名单公示 | public_list | 2021-03-23 | archived | none | outside_recent_5_school_years; archived_without_raw |
@@ -288,6 +289,7 @@
 | 1b4c387db7e4 | 上海财经大学2016年教育收费公示表.xls | incomplete | unknown | archived | none | isolated_document_kind |
 | 1b8c05cd4a6b | 2026年全国高等学校英语专业四、八级考试（TEM）报考须知 | procedure | 2025-11-10 | active | main_qa | all_history |
 | 1b9aa14a711c | 重要通知｜上海财经大学商学院2027年接收优秀应届本科毕业生免试攻读研究生预报名的通知 | annual_notice | 2026-07-04 | active | main_qa | recent_5_school_years |
+| 1ba62aac06ab | 24122709453202811984.xlsx | manual | 2024-12-27 | active | main_qa | enduring_document |
 | 1be2da8f5d92 | 集体宿舍证明.docx | manual | unknown | active | main_qa | all_history |
 | 1bf63814b05c | 2014年高水平运动员选拔测试顺利开展 | annual_notice | 2016-09-10 | archived | none | outside_recent_5_school_years; archived_without_raw |
 | 1c1bc03d95e2 | 上海财经大学滴水湖智库金融硕士2026年硕士研究生招生调剂复试录取办法.pdf | annual_notice | 2026-03-27 | active | main_qa | recent_5_school_years |
@@ -313,6 +315,7 @@
 | 1e202aea907c | 关于开展2025年专业学位硕士研究生专项奖学金评选工作的通知 | annual_notice | 2025-11-25 | active | main_qa | recent_5_school_years |
 | 1e34012f4414 | 《上海财经大学本科生毕业论文（设计）重复率检测办法（2025年5月修订）》.pdf | policy | 2023-10-07 | active | main_qa | all_history |
 | 1e480d364f22 | 关于2024级新生下半年享受大学生医保的通知 | annual_notice | 2024-08-30 | historical | historical | prior_annual_series_version |
+| 1e573accae73 | 甘肃省2026年选调应届优秀大学毕业生报名推荐登记表.doc | annual_notice | 2025-09-22 | active | main_qa | recent_5_school_years |
 | 1e865d2e4ff2 | 上海财经大学法学院2023年通过夏令营选拔推荐免试研究生候选人名单.pdf | public_list | 2022-07-27 | active | public_list | recent_5_school_years |
 | 1ec050fd9a3f | 本科学位论文模板 | form | 2025-10-21 | active | main_qa | all_history |
 | 1eca5e3bc4b8 | 会计学院2024-2025年IPA奖学金公示名单 | public_list | 2025-12-08 | active | public_list | recent_2_school_years |
@@ -358,7 +361,7 @@
 | 22c7127ab239 | 研究生复试体检须知 | procedure | 2012-04-01 | active | main_qa | enduring_document |
 | 22f632be6d0a | 餐饮服务 | service_guide | unknown | active | main_qa | all_history |
 | 230e056e5422 | 关于印发《上海财经大学学生违纪处分规定（2023年10月修订）》的通知 | policy | 2023-12-13 | active | main_qa | all_history |
-| 231d0aa11418 | 关于印发《上海财经大学研究生国家奖学金管理办法》的通知（附件） | policy | unknown | active | main_qa | all_history; document_kind_reclassified |
+| 231d0aa11418 | 关于印发《上海财经大学研究生国家奖学金管理办法》的通知（附件） | policy | unknown | active | main_qa | all_history |
 | 2329ee30bf4a | 2021级经济学专业本科培养方案及培养计划 | incomplete | 2021-09-15 | archived | none | isolated_document_kind |
 | 2343a76b97b7 | 2020-2021学年第二学期1-6周研究生课程调停课情况公示 | public_list | 2021-04-02 | archived | none | outside_recent_5_school_years; archived_without_raw |
 | 237beaca5df0 | 关于2021年校内推免生运用“推免服务系统”申请研究生接收的操作说明 | annual_notice | 2020-10-09 | archived | none | outside_recent_5_school_years; archived_without_raw |
@@ -385,6 +388,7 @@
 | 262f8a198832 | 关于组织上海财经大学2020-2021学年秋季学期联合培养硕士研究生项目（校际短期交流）报名的通知 | annual_notice | 2020-01-16 | archived | none | outside_recent_5_school_years; archived_without_raw |
 | 26359a1a6326 | 关于大学生持卡就医结算有关事项的通知.pdf | procedure | unknown | active | main_qa | enduring_document |
 | 263d0e636431 | 02_2025年高校日语专业八级统测（NSS8）报考须知.pdf | incomplete | 2025-09-09 | archived | none | isolated_document_kind |
+| 264ea9e0cdb3 | 25022820321252012437.xlsx | manual | 2025-02-28 | active | main_qa | enduring_document |
 | 2665f505e9e4 | 上海财经大学关于2020年国家建设高水平大学公派研究生项目选拔及申请受理工作的安排 | annual_notice | 2020-01-03 | archived | none | outside_recent_5_school_years; archived_without_raw |
 | 26681a0c73ca | 上海财经大学关于2025 年国家建设高水平大学公派研究生项目选拔及申请受理工作的安排 | incomplete | 2025-02-21 | archived | none | isolated_document_kind |
 | 2675703133ac | 上海财经大学2020年招收攻读硕士学位研究生初试成绩公布后相关问题汇总（一） | procedure | 2020-02-20 | active | main_qa | enduring_document |
@@ -530,6 +534,7 @@
 | 358244cd2bcf | 上海财经大学研究生学位论文重复率检测试行办法（上财研【2016】28号） | incomplete | 2016-06-24 | archived | none | isolated_document_kind; archived_without_raw |
 | 359664a08389 | 关于印发《上海财经大学楼宇物业配置管理办法（2022年修订）》的通知.pdf | policy | 2023-01-03 | active | main_qa | all_history |
 | 359c884119b0 | 上海财经大学经济学院2025年通过夏令营选拔推荐免试研究生候选人名单 | public_list | 2024-07-15 | active | public_list | recent_5_school_years |
+| 35a66510855d | 附件2-2026年度青岛市专项招录公务员公告.docx | incomplete | 2026-03-11 | archived | none | isolated_document_kind |
 | 3628f12e5c1d | 人工智能实验班｜2025级新生校内选拔公告 | annual_notice | 2025-08-23 | active | main_qa | all_history |
 | 36481bbba58c | 上海财经大学本科学生学籍管理实施细则（修订稿）.pdf | policy | unknown | active | main_qa | all_history |
 | 364a6a65866e | SCAIers·榜样｜孙天怡：生命是一棵长满可能的树 | incomplete | 2026-03-30 | archived | none | isolated_document_kind |
@@ -717,6 +722,7 @@
 | 49d85f2dcf80 | 上海财经大学数学学院2025年通过夏令营选拔推荐免试研究生候选人名单.pdf | public_list | 2024-07-30 | active | public_list | recent_5_school_years |
 | 49d8f53c7a14 | 招生简章 | incomplete | 2025-05-15 | archived | none | isolated_document_kind; archived_without_raw |
 | 49fb73e02893 | 企业微信 | service_guide | 2015-01-01 | active | main_qa | all_history |
+| 4a04065037f9 | 25052511183493235204.xls | incomplete | 2025-05-25 | archived | none | isolated_document_kind |
 | 4a24a8bbdf92 | 关于开展2024年研究生学业奖学金评选工作的通知.pdf | annual_notice | 2024-09-10 | historical | historical | prior_annual_series_version |
 | 4a4cc9a55c9e | 2026年同等学力人员申请硕士学位全国统一考试上海财经大学考点考前提醒 | annual_notice | 2026-05-13 | active | main_qa | recent_5_school_years |
 | 4a55a40e2c3b | 上海财经大学公共经济与管理学院关于举办2018年“上财公共经济与管理夏令营”的通知 | incomplete | 2018-05-16 | archived | none | isolated_document_kind; archived_without_raw |
@@ -744,7 +750,7 @@
 | 4c4fa14d3fad | 上海财经大学数学学院关于举办2019年上海财经大学数学夏令营的通知 | incomplete | 2019-05-13 | archived | none | isolated_document_kind; archived_without_raw |
 | 4c60547218e6 | 《上海财经大学学位工作细则（2024年10月修订）》（上财行规﹝2024﹞67 号） | incomplete | 2025-04-23 | archived | none | isolated_document_kind |
 | 4c7abad073b4 | 上海财经大学2026年本科生自主选择专业（转专业）会计学院拟录取名单公示 | public_list | 2026-04-03 | active | public_list | recent_2_school_years |
-| 4cb5fd791a1a | 关于印发《上海财经大学中西部基层单位就业毕业生学费和国家助学贷款代偿管理办法》的通知（附件） | policy | unknown | active | main_qa | all_history; document_kind_reclassified |
+| 4cb5fd791a1a | 关于印发《上海财经大学中西部基层单位就业毕业生学费和国家助学贷款代偿管理办法》的通知（附件） | policy | unknown | active | main_qa | all_history |
 | 4cc221b5efe0 | 自主转专业 | procedure | unknown | active | main_qa | all_history |
 | 4cc2f3e887b7 | 上海财经大学外国语学院2026年硕士研究生招生考试复试办法.pdf | annual_notice | 2026-03-19 | active | main_qa | recent_5_school_years |
 | 4cc6ec1dbd47 | 2012年教职工健康体检指南 | incomplete | 2012-06-14 | archived | none | isolated_document_kind |
@@ -803,7 +809,7 @@
 | 51a7fd6b128b | 商学院2024级工商管理（商务分析实验班）面试通知 | annual_notice | 2025-05-19 | active | main_qa | all_history |
 | 51addf1ea6fd | 电子邮箱 | service_guide | unknown | active | main_qa | all_history |
 | 51de830ef85e | 2024-2025学年第二学期9至16周上财研究生课程调停课情况公示 | public_list | 2025-07-01 | active | public_list | recent_5_school_years |
-| 5220cf43e76b | 关于印发《上海财经大学学生勤工助学管理办法》的通知（附件） | policy | unknown | active | main_qa | all_history; document_kind_reclassified |
+| 5220cf43e76b | 关于印发《上海财经大学学生勤工助学管理办法》的通知（附件） | policy | unknown | active | main_qa | all_history |
 | 5267ddbb99f7 | 临时务工人员信息表 | incomplete | 2022-09-02 | archived | none | isolated_document_kind; archived_without_raw |
 | 5274843f4954 | 如何查看与充值寝室电费 | service_guide | 2026-08-01 | active | main_qa | all_history |
 | 52a785d3df9c | 中华人民共和国教育部令第41 号 | policy | unknown | active | main_qa | all_history |
@@ -840,6 +846,7 @@
 | 567cbbe3e3c3 | 书香蕴正气·经典启廉心——外国语学院“一站式”学生社区：“阅读之星·悦读达人”颁奖典礼暨廉洁教育活动圆满开展 | news | 2026-05-01 | archived | none | isolated_document_kind; archived_without_raw |
 | 569e7ff88e23 | 关于开展2016年本科生国家奖学金、上海市奖学金、国家励志奖学金和国家助学金评选工作的通知 | annual_notice | 2016-09-11 | archived | none | outside_recent_5_school_years; archived_without_raw |
 | 56ca70cc6a90 | 2012级研究生新生体检通知 | annual_notice | 2012-07-02 | archived | none | outside_recent_5_school_years |
+| 56d8b2b6f02b | 附件1-青岛市情简介.docx | manual | 2026-03-11 | active | main_qa | all_history |
 | 56ec2e2e6b62 | 上海财经大学数理经济学教育部重点实验室金融硕士2026年硕士研究生招生调剂复试录取办法.pdf | annual_notice | 2026-03-27 | active | main_qa | recent_5_school_years |
 | 56ed63d2db87 | 上海财经大学户政业务申请办理流程 | procedure | 2022-09-02 | active | main_qa | enduring_document |
 | 57322dbec4e3 | 统计与管理学院2020年硕士研究生招生考试复试办法.pdf | annual_notice | 2020-04-30 | archived | none | outside_recent_5_school_years; archived_without_raw |
@@ -854,13 +861,14 @@
 | 57eb15eb0f5d | 上海财经大学2023-2024学年第一学期本科课程开设总数及教学计划实施情况 | incomplete | 2024-09-05 | archived | none | isolated_document_kind |
 | 57f962accedb | 上海财经大学交叉科学研究院2020年通过夏令营选拔外校推荐免试研究生候选人名单 | public_list | 2019-07-24 | archived | none | outside_recent_5_school_years; archived_without_raw |
 | 5836ee860bf9 | 关于采集2025-2026学年生源地助学贷款受理证明回执校验码的通知 | annual_notice | 2025-09-08 | active | main_qa | recent_5_school_years |
+| 5844e5adf788 | 25040715363468211943.xlsx | manual | 2025-04-07 | active | main_qa | enduring_document |
 | 5858393773b9 | 2011年新生体检通知（本科） | incomplete | 2011-08-30 | archived | none | isolated_document_kind |
 | 58607a9d4219 | SCAIers・榜样｜张桐瑞轩： 前行路上走过的每一步都算数 | incomplete | 2026-05-16 | archived | none | isolated_document_kind |
 | 5886b5b394ba | 学位授予名单 | incomplete | 2013-01-14 | archived | none | isolated_document_kind; archived_without_raw |
 | 58b167598f8a | 【本科】计算机与人工智能学院本科生素质综合评价实施细则2025 0116 | policy | unknown | active | main_qa | manual_allowlist_active |
 | 58bf449b328d | 匡时书院2023级孙冶方班培养方案.doc_x | manual | unknown | active | main_qa | all_history |
 | 58c19e5645e2 | 联系我们 | incomplete | 2013-06-23 | archived | none | isolated_document_kind; archived_without_raw |
-| 58c34224a8c8 | 关于印发《上海财经大学学生临时困难补助管理办法》的通知（附件） | policy | unknown | active | main_qa | all_history; document_kind_reclassified |
+| 58c34224a8c8 | 关于印发《上海财经大学学生临时困难补助管理办法》的通知（附件） | policy | unknown | active | main_qa | all_history |
 | 58d94d06efa1 | 学生邀请函 | procedure | 2026-04-09 | active | main_qa | all_history |
 | 58f60d734542 | 2025法学院招生简章 | annual_notice | 2025-09-05 | active | main_qa | all_history |
 | 5908bb4b6f71 | 信息管理与工程学院党委与法学院党委开展八项规定精神学习“送课上门”宣讲和警示教育联组学习 | incomplete | 2025-06-06 | archived | none | isolated_document_kind |
@@ -989,6 +997,7 @@
 | 6493a12c440d | 2024年全国硕士研究生招生考试上海财经大学报考点（3109）网上确认须知.pdf | annual_notice | 2023-10-27 | historical | historical | prior_annual_series_version |
 | 64b251126078 | 上海财经大学2022年少数民族高层次骨干人才计划研究生招生办法 | annual_notice | 2021-10-14 | historical | historical | prior_annual_series_version |
 | 64cc65f328af | 上海财经大学2022年公派留学校内推荐候选人公示(博士学位项目) | public_list | 2022-03-07 | active | public_list | recent_5_school_years |
+| 64fbb018c7ea | 附件2：贵州省2026年度定向部分高校选调优秀毕业生报名推荐表.doc | annual_notice | 2025-10-14 | active | main_qa | recent_5_school_years |
 | 6507f17c14a4 | 上海财经大学商学院关于举办2019年“上财商学院跨学科、跨专业硕博连读研究生夏令营”的通知 | incomplete | 2019-05-13 | archived | none | isolated_document_kind; archived_without_raw |
 | 650f2d890470 | 人才培养 | incomplete | 2025-05-21 | archived | none | isolated_document_kind; archived_without_raw |
 | 65393538d453 | 2011年度上海财经大学教职工健康体检通知 | incomplete | 2011-06-15 | archived | none | isolated_document_kind |
@@ -1086,6 +1095,7 @@
 | 6eaffac2cf20 | 上海财经大学公共经济与管理学院2025年通过夏令营选拔推荐免试研究生候选人名单.pdf | public_list | 2024-07-23 | active | public_list | recent_5_school_years |
 | 6edca8853372 | 附件3-上海财经大学选调专业目录.doc | manual | 2025-11-17 | active | main_qa | all_history |
 | 6efb7fe374f0 | 上海财经大学研究生“学术之星”评选办法（2023年11月修订）.pdf | annual_notice | 2022-09-29 | active | main_qa | all_history |
+| 6efdeb34fed2 | 江苏省2026年应届优秀大学毕业生选调县级以上机关职位（名校优生）拟录用人选名单（上海财经大学）.xlsx | public_list | 2026-01-23 | active | public_list | recent_2_school_years |
 | 6efe2a85f1d8 | 2024级_法学+金融_培养方案.pdf | manual | 2024-06-15 | active | main_qa | all_history |
 | 6eff9a814e16 | 2019-2020学年第一学期5-8周研究生课程调停课情况公示 | public_list | 2019-11-07 | archived | none | outside_recent_5_school_years; archived_without_raw |
 | 6f5486cdf6a7 | 2025级本科生大学英语课程分级考试与教学安排 | annual_notice | 2025-07-04 | active | main_qa | all_history |
@@ -1106,6 +1116,7 @@
 | 718bcb401427 | 上海财经大学学生园区活动宣传申请表 | news | 2026-04-20 | archived | none | isolated_document_kind |
 | 71b61c428563 | 2012级本科外省市新生体检通知 | annual_notice | 2012-07-02 | archived | none | outside_recent_5_school_years |
 | 71bdd38dc689 | 假期离沪后学生医保电子凭证及社保卡的使用方法及注意事项 | procedure | 2025-07-10 | active | main_qa | all_history |
+| 71e07f6741dd | 25040215453356510377.doc | manual | 2025-04-02 | active | main_qa | enduring_document |
 | 71e465d8cfeb | 山西省2026年定向上海财经大学选调优秀高校毕业生拟录用人员公示 | public_list | 2026-05-09 | active | public_list | recent_2_school_years |
 | 71ebb6f5e201 | 2018-2019学年第一学期9-12周研究生课程调停课情况公示 | public_list | 2018-12-03 | archived | none | outside_recent_5_school_years; archived_without_raw |
 | 71fa6a742c73 | 关于大学生持卡就医结算有关事项的通知 | procedure | unknown | active | main_qa | enduring_document |
@@ -1125,6 +1136,7 @@
 | 7387be35c960 | 上海财经大学数学学院2026年硕士研究生招生考试复试办法.pdf | annual_notice | 2026-03-19 | active | main_qa | recent_5_school_years |
 | 738f6c4b37fa | 上海财经大学毕业生毕业去向登记表（三种去向类型）（附件） | manual | 2024-06-14 | active | main_qa | all_history |
 | 7397c6c8b08e | 上海财经大学商学院2022年通过夏令营选拔外校推荐免试硕士研究生候选人名单.pdf | public_list | 2021-07-15 | archived | none | outside_recent_5_school_years; archived_without_raw |
+| 739a53fc1334 | 25041816573701114056.xlsx | manual | 2025-04-18 | active | main_qa | enduring_document |
 | 739c8bdca878 | 2026年全国硕士研究生招生考试上海财经大学考点（代码：3109）考前提醒（二） | annual_notice | 2025-12-16 | active | main_qa | recent_5_school_years |
 | 73e0c1364b51 | 上海财经大学中山北一路校区暂行管理规定 | policy | 2016-09-26 | active | main_qa | all_history |
 | 73fef35694aa | 关于2025年硕士研究生招生报名中不符合我校有关报考规定及我校报考点（代码：3109）相关要求的信息提示.pdf | annual_notice | 2024-10-15 | historical | historical | prior_annual_series_version |
@@ -1164,10 +1176,11 @@
 | 77ae76931224 | 选课流程 | procedure | unknown | active | main_qa | all_history |
 | 77c1936246be | 本科生百分制均分证明模板（中英文）.docx | manual | 2013-11-27 | active | main_qa | all_history |
 | 77d10806304e | 关于组织开展2025-2026学年家庭经济困难学生认定工作的通知.pdf | annual_notice | 2025-09-11 | historical | historical | prior_annual_series_version |
-| 77ec547b2f2e | 关于印发《上海财经大学研究生学业奖学金管理办法》的通知（附件） | policy | unknown | active | main_qa | all_history; document_kind_reclassified |
+| 77ec547b2f2e | 关于印发《上海财经大学研究生学业奖学金管理办法》的通知（附件） | policy | unknown | active | main_qa | all_history |
 | 78532049321c | 信息管理与工程学院2022本科生转专业选拔方案 | annual_notice | 2022-05-19 | active | main_qa | all_history |
 | 786eac0eb02f | 上海财经大学教职工医疗互助金章程 | policy | 2012-02-24 | active | main_qa | all_history |
 | 789d37ba4111 | 联系我们 | incomplete | 2012-06-12 | archived | none | isolated_document_kind; archived_without_raw |
+| 78bd1fad08ad | 江西省2026年从上海财经大学选调应届优秀大学毕业生拟录用人员名单.xlsx | public_list | 2026-05-27 | active | public_list | recent_2_school_years |
 | 78d143a06fa8 | 2013年教职工健康体检通知.doc | incomplete | 2013-06-21 | archived | none | isolated_document_kind |
 | 78d6db9a14b3 | 2020年全国硕士研究生招生考试上海财经大学报考点网上确认须知 | annual_notice | 2019-10-24 | archived | none | outside_recent_5_school_years; archived_without_raw |
 | 78e9e571da45 | 上海财经大学2018年度国际组织人才培养项目招生简章 | annual_notice | 2018-07-18 | archived | none | outside_recent_5_school_years; archived_without_raw |
@@ -1212,7 +1225,7 @@
 | 7cb16061dc17 | 招生流程 | incomplete | 2015-01-19 | archived | none | isolated_document_kind |
 | 7cffac74a1f0 | 关于2025年上海财经大学研究生优秀学位论文评选结果的公示 | incomplete | 2025-10-22 | archived | none | isolated_document_kind |
 | 7d0fb722d817 | 2022-2023学年第一学期1-4周研究生课程调停课情况公示 | public_list | 2022-10-08 | active | public_list | recent_5_school_years |
-| 7d19114bb35a | 上海市金山区2022年选调生及储备人才招录公告 | incomplete | 2021-09-23 | archived | none | isolated_document_kind; document_kind_reclassified; missing_required_attachment |
+| 7d19114bb35a | 上海市金山区2022年选调生及储备人才招录公告 | incomplete | 2021-09-23 | archived | none | isolated_document_kind |
 | 7d1ace280307 | 2011年下半年学生医药费报销日程表 | incomplete | 2011-09-27 | archived | none | isolated_document_kind |
 | 7d55e323fb46 | 上海财经大学人文学院2025年通过夏令营选拔推荐免试硕士研究生候选人名单.pdf | public_list | 2024-07-05 | active | public_list | recent_5_school_years |
 | 7d6321b70a85 | 附件3：贵州省2026年度定向部分高校选调优秀.pdf | faq | 2025-10-14 | active | main_qa | all_history |
@@ -1291,6 +1304,7 @@
 | 84fa9b1e85fd | 上海财经大学外国语学院2023年商务英语专业“英法复语实验班”选拔公告 | annual_notice | 2023-08-23 | historical | historical | prior_annual_series_version |
 | 8512838d1ddb | 关于公布2024年千村调查结项及获奖名单的通知 | incomplete | 2024-11-06 | archived | none | isolated_document_kind |
 | 8521daca4851 | 关于中国银行校园地国家助学贷款合同签署的通知 | annual_notice | 2024-11-18 | historical | historical | prior_annual_series_version |
+| 8526cff56dd4 | 甘肃省2026年选调应届优秀大学毕业生选调范围.doc | manual | 2025-09-22 | active | main_qa | all_history |
 | 8561afb97eb4 | 上海财经大学本科学生因病缓考申请办法 | policy | 2014-12-09 | active | main_qa | all_history |
 | 85968f6205a2 | 上海财经大学关于举行2024年研究生招生线上宣讲会的通知 | promotion | 2023-10-07 | archived | none | isolated_document_kind; archived_without_raw |
 | 85e22cbef8d5 | 关于“医院专家进校园”的通知 | incomplete | 2012-04-16 | archived | none | isolated_document_kind |
@@ -1313,10 +1327,11 @@
 | 87989d5c98db | 金融学院2020年硕士研究生招生考试复试办法.pdf | annual_notice | 2020-04-30 | archived | none | outside_recent_5_school_years; archived_without_raw |
 | 87b515f788b9 | 政策文件 | incomplete | 2013-01-14 | archived | none | isolated_document_kind |
 | 87c1e68c357e | 新华医院体检自选加项项目报价 | incomplete | 2020-06-24 | archived | none | isolated_document_kind |
-| 87cb45995557 | 关于印发《上海财经大学上海市奖学金管理办法》的通知（附件） | policy | unknown | active | main_qa | all_history; document_kind_reclassified |
+| 87cb45995557 | 关于印发《上海财经大学上海市奖学金管理办法》的通知（附件） | policy | unknown | active | main_qa | all_history |
 | 87d0c4a62034 | 法规与政策 | incomplete | 2005-05-25 | archived | none | isolated_document_kind; archived_without_raw |
 | 87da8d3fd516 | 2017-2018学年第一学期11月研究生课程调停课情况公示 | public_list | 2017-12-05 | archived | none | outside_recent_5_school_years; archived_without_raw |
 | 88373a1c5fbc | 2020法学院招生简章 | annual_notice | 2020-01-15 | historical | historical | explicit_superseded_validity |
+| 883f9faf2b3b | 江苏省2026年应届优秀大学毕业生选调县级以上机关职位（名校优生）入围递补人选名单（上海财经大学）.xlsx | public_list | 2026-03-11 | active | public_list | recent_2_school_years |
 | 88507fa56039 | 财经数学实验班 | incomplete | 2026-06-23 | archived | none | isolated_document_kind |
 | 885525641b93 | 相关办事指南 | procedure | 2025-09-03 | active | main_qa | all_history |
 | 8885ea8bf3fa | 2016级信息管理实验班选拔笔试安排 | annual_notice | 2016-09-10 | active | main_qa | all_history |
@@ -1454,10 +1469,11 @@
 | 96a06ffd1d9c | 关于2020年硕士研究生招生预报名中不符合我校有关报考规定和要求的信息提示 | annual_notice | 2019-10-09 | archived | none | outside_recent_5_school_years; archived_without_raw |
 | 96bd20251106 | 2012年研究生复试体检安排 | incomplete | 2012-04-01 | archived | none | isolated_document_kind |
 | 96c542587937 | 关于上海财经大学第六届“学术之星”评选结果的公示 | public_list | 2021-11-26 | active | public_list | recent_5_school_years |
-| 96c9b13f9fe9 | 2025届毕业生就业手续办理指南｜第一步：毕业生基本信息核对及勘误修改（附件） | procedure | 2024-09-05 | active | main_qa | enduring_document; document_kind_reclassified |
+| 96c9b13f9fe9 | 2025届毕业生就业手续办理指南｜第一步：毕业生基本信息核对及勘误修改（附件） | procedure | 2024-09-05 | active | main_qa | enduring_document |
 | 96fceb027895 | 教学管理 | incomplete | 2013-01-19 | archived | none | isolated_document_kind |
 | 973fb5ea32f5 | 四川省面向上海财经大学选调2026届优秀大学毕业生公告 | annual_notice | 2025-09-22 | active | main_qa | recent_5_school_years |
 | 97522eae4402 | 数学学院2021年硕士研究生招生考试复试办法.pdf | annual_notice | 2021-03-16 | archived | none | outside_recent_5_school_years; archived_without_raw |
+| 975920cdc29f | 25032012394356621554.xlsx | manual | 2025-03-20 | active | main_qa | enduring_document |
 | 9763ff24f463 | 关于开展2023-2024学年本科毕业生人民奖学金评选工作的通知 | annual_notice | 2024-05-11 | historical | historical | prior_annual_series_version |
 | 977def09487f | 上海财经大学金融学院2026年接收推荐免试研究生（含直博生）预推免报名通知 | incomplete | 2025-06-17 | archived | none | isolated_document_kind |
 | 979e35ab8789 | 上海财经大学商学院关于举办2019年“上财商学院国际商务夏令营”的通知 | incomplete | 2019-05-13 | archived | none | isolated_document_kind; archived_without_raw |
@@ -1521,6 +1537,7 @@
 | 9ca4acbbef7f | 余明锋校友作“机器学习的批念和隐喻”学术报告 | incomplete | 2023-11-21 | archived | none | isolated_document_kind; archived_without_raw |
 | 9ca8c8cf0dca | 法学院法学+金融专业2025级本科培养方案.pdf | procedure | 2025-06-15 | active | main_qa | all_history |
 | 9cb4e76e74f9 | 上海财经大学公共经济与管理学院2024年通过夏令营选拔推荐免试研究生候选人名单 | public_list | 2023-07-25 | active | public_list | recent_5_school_years |
+| 9d07eb766e03 | 附件2.内蒙古自治区2026年定向选聘岗位计划表.xlsx | manual | 2025-11-06 | active | main_qa | all_history |
 | 9d0905f73dd2 | 2012级本科上海市新生体检通知 | annual_notice | 2012-08-27 | archived | none | outside_recent_5_school_years |
 | 9d10e996ae92 | 2024年千村调查优秀调研报告评审结果公示（第二批） | incomplete | 2024-11-01 | archived | none | isolated_document_kind |
 | 9d1bb3d41352 | 学位授予名单 | incomplete | 2025-06-18 | archived | none | isolated_document_kind |
@@ -1706,6 +1723,7 @@
 | adb7c3d7e8ab | 数字经济系2024年硕士研究生招生考试复试办法.pdf | annual_notice | 2024-03-19 | historical | historical | prior_annual_series_version |
 | adf80b64f4eb | 经济学院2021年硕士研究生招生考试复试办法.pdf | annual_notice | 2021-03-16 | archived | none | outside_recent_5_school_years; archived_without_raw |
 | ae0b733b1860 | 工商管理实验班（商务分析方向） | incomplete | 2025-03-24 | archived | none | isolated_document_kind |
+| ae2228398ea5 | 附件1.内蒙古自治区2026年定向选调岗位计划表.xlsx | manual | 2025-11-06 | active | main_qa | all_history |
 | ae4bec97563b | 硕士生招生.pdf | procedure | 2026-04-07 | active | main_qa | all_history |
 | ae50616eb826 | Exam_2023_solutions.pdf | manual | 2024-08-11 | active | main_qa | all_history |
 | ae54aac7e909 | 2022年全国硕士研究生招生上海财经大学报考点（代码：3109）报名公告 | annual_notice | 2021-09-24 | historical | historical | prior_annual_series_version |
@@ -1728,7 +1746,7 @@
 | afeb20c89f3f | 上海财经大学关于部分专业继续通过“推免服务系统”接收2018年推免生的通知 | annual_notice | 2017-09-30 | archived | none | outside_recent_5_school_years; archived_without_raw |
 | afee40f9de67 | 上海财经大学2021年公派留学校内推荐候选人公示(联培博士项目) | public_list | 2021-05-10 | archived | none | outside_recent_5_school_years; archived_without_raw |
 | b005e80efe0d | 办理基本医保医疗费零星报销业务需携带的相关证件和材料 | incomplete | unknown | archived | none | isolated_document_kind; archived_without_raw |
-| b04ab7aa3fc6 | 新疆维吾尔自治区和新疆生产建设兵团2026年度选调大学毕业生公告 | incomplete | 2025-10-22 | archived | none | isolated_document_kind; document_kind_reclassified; missing_required_attachment |
+| b04ab7aa3fc6 | 新疆维吾尔自治区和新疆生产建设兵团2026年度选调大学毕业生公告 | incomplete | 2025-10-22 | archived | none | isolated_document_kind |
 | b04d7d38890c | 上海财经大学2026年征兵令 | incomplete | 2022-09-02 | archived | none | isolated_document_kind; archived_without_raw |
 | b05e5a851264 | 上海财经大学学术行为规范及管理规定（2015年6月修订） | incomplete | 2018-01-16 | archived | none | isolated_document_kind |
 | b0635ffdfe86 | 2012年教职工健康体检通知 | incomplete | 2012-06-14 | archived | none | isolated_document_kind |
@@ -1767,7 +1785,7 @@
 | b2d6eb3787a7 | 上海财经大学公共经济与管理学院2022年通过夏令营选拔外校推荐免试硕士研究生候选人名单 | public_list | 2021-07-15 | archived | none | outside_recent_5_school_years; archived_without_raw |
 | b304c8098bac | 关于 2025 级本科新设专业及其他专业学费变动情况的公示 | public_list | 2025-01-01 | active | public_list | recent_5_school_years |
 | b33ac59f7332 | 2018年本科生社会奖学金获奖学生名单.xlsx | public_list | 2018-11-11 | archived | none | outside_recent_5_school_years; archived_without_raw |
-| b33e18494b4d | 青海省2026年度选调应届优秀大学毕业生公告 | incomplete | 2025-11-01 | archived | none | isolated_document_kind; document_kind_reclassified; missing_required_attachment |
+| b33e18494b4d | 青海省2026年度选调应届优秀大学毕业生公告 | incomplete | 2025-11-01 | archived | none | isolated_document_kind |
 | b34e7552a58f | 工作流程 | procedure | unknown | active | main_qa | all_history |
 | b380b2033466 | 上海财经大学2019年硕士研究生招生考试报名工作公告 | annual_notice | 2018-09-11 | archived | none | outside_recent_5_school_years; archived_without_raw |
 | b389ecf9b3df | 学位授予名单 | incomplete | 2018-06-14 | archived | none | isolated_document_kind; archived_without_raw |
@@ -1812,7 +1830,7 @@
 | b7b7c3a95753 | 受理注意事项.doc | manual | 2022-05-31 | active | main_qa | enduring_document |
 | b7e8dbcb9a17 | 关于我校参加2018年全国研究生招生现场咨询会的公告 | annual_notice | 2017-05-12 | archived | none | outside_recent_5_school_years; archived_without_raw |
 | b8038d77fd21 | 上海财经大学研究生参加高水平学术会议资助的申请办法（2024年6月修订） | policy | unknown | active | main_qa | manual_allowlist_active |
-| b815e0eefe9a | 关于印发《上海财经大学学费减免实施办法》的通知（附件） | policy | unknown | active | main_qa | all_history; document_kind_reclassified |
+| b815e0eefe9a | 关于印发《上海财经大学学费减免实施办法》的通知（附件） | policy | unknown | active | main_qa | all_history |
 | b816bbe4d294 | 上海财经大学金融学院2026年推荐免试研究生拟录取及候补资格名单 | public_list | 2025-09-20 | active | public_list | recent_2_school_years |
 | b82c9e2f699a | 附件4：上海财经大学硕士研究生短期交流项目申请人承诺书.pdf | procedure | 2020-01-16 | active | main_qa | enduring_document |
 | b854d5e5efe2 | 国际文化交流学院2024年硕士研究生招生考试复试办法.pdf | annual_notice | 2024-03-19 | historical | historical | prior_annual_series_version |
@@ -1860,7 +1878,7 @@
 | bc0451e98945 | 2017-2018学年学校开设本科课程情况 | incomplete | 2018-10-18 | archived | none | isolated_document_kind |
 | bc1c90d87c9d | 上海财经大学国际文化交流学院2026年硕士研究生招生考试复试办法.pdf | annual_notice | 2026-03-19 | active | main_qa | recent_5_school_years |
 | bc32b0be11ba | 转学审批表.xls | incomplete | 2013-11-27 | archived | none | isolated_document_kind |
-| bc408082e6a6 | 山西省2026年面向上海财经大学选调优秀高校毕业生公告 | incomplete | 2025-12-19 | archived | none | isolated_document_kind; document_kind_reclassified; missing_required_attachment |
+| bc408082e6a6 | 山西省2026年面向上海财经大学选调优秀高校毕业生公告 | incomplete | 2025-12-19 | archived | none | isolated_document_kind |
 | bc4c1877012f | 上海财经大学商学院2021年通过夏令营选拔外校推荐免试硕士研究生候选人名单 | public_list | 2020-07-23 | archived | none | outside_recent_5_school_years; archived_without_raw |
 | bc517c06b3a1 | 学位授予名单 | incomplete | 2025-01-06 | archived | none | isolated_document_kind |
 | bc698b39f07a | 学位授予名单 | incomplete | 2021-01-12 | archived | none | isolated_document_kind; archived_without_raw |
@@ -1889,7 +1907,7 @@
 | becc8e1e9607 | 广西2026年定向上海财经大学招录选调生公告 | annual_notice | 2025-10-29 | active | main_qa | recent_5_school_years |
 | bf2661977a96 | 学位授予名单 | incomplete | 2024-10-29 | archived | none | isolated_document_kind |
 | bf4ba90bc44d | 上海财经大学2019年校派联合培养博士项目拟录取名单公示 | public_list | 2019-06-25 | archived | none | outside_recent_5_school_years; archived_without_raw |
-| bf4c3073c3d4 | 上海市2026年度选调应届优秀大学毕业生公告 | incomplete | 2025-09-09 | archived | none | isolated_document_kind; document_kind_reclassified; missing_required_attachment |
+| bf4c3073c3d4 | 上海市2026年度选调应届优秀大学毕业生公告 | incomplete | 2025-09-09 | archived | none | isolated_document_kind |
 | bf5e874eb3ef | 关于组织上海财经大学2020-2021学年秋季学期联合培养硕士研究生项目（校际短期交流）报名的通知.pdf | annual_notice | 2020-01-16 | archived | none | outside_recent_5_school_years; archived_without_raw |
 | bf8d3cc75dd7 | 上海财经大学新进教职工周转房管理办法 | incomplete | 2023-09-21 | archived | none | isolated_document_kind |
 | bfb5575e6c6a | 2017年信息管理与工程学院本科生自主转专业选拨条件及程序 | incomplete | 2017-03-10 | archived | none | isolated_document_kind |
@@ -1903,6 +1921,7 @@
 | c02373cf5db5 | 2017春同等学力硕士答辩注意事项 | form | 2017-03-02 | active | main_qa | all_history |
 | c025b15792b8 | 关于办理医疗费零星报销业务需携带的相关证件和材料 | procedure | 2025-09-12 | active | main_qa | all_history |
 | c04142a500d6 | 临时校园卡集体申请表 | incomplete | 2010-05-20 | archived | none | isolated_document_kind |
+| c04448ba225a | 福建省2026年度硕本选调生招录名额计划安排表.xls | incomplete | 2025-11-25 | archived | none | isolated_document_kind |
 | c045453eb480 | 关于2023年大学生创新创业训练计划项目中期评审结果的公示 | incomplete | 2023-10-08 | archived | none | isolated_document_kind; archived_without_raw |
 | c05c410c247c | 新生_体_检_通_知（硕博）.pdf | procedure | 2010-09-07 | active | main_qa | enduring_document |
 | c070527669fd | 上海财经大学会计学院2020年通过夏令营选拔外校和本校外院推荐免试研究生候选人名单 | public_list | 2019-07-26 | archived | none | outside_recent_5_school_years; archived_without_raw |
@@ -1928,6 +1947,7 @@
 | c2920f52fb7f | 上海高校毕业生毕业去向登记表（自主创业） | manual | 2024-06-14 | active | main_qa | all_history |
 | c2967dccabc9 | 关于开展2017-2018学年本科生奖学金评选工作的通知 | annual_notice | 2018-09-14 | archived | none | outside_recent_5_school_years; archived_without_raw |
 | c2ae517cb644 | 学院召开2021级本科生年级大会暨毕业论文动员会 | news | 2024-10-24 | archived | none | isolated_document_kind; archived_without_raw |
+| c2c6b55a4e86 | 福建省2026年度硕本选调生选拔范围高校名单.doc | public_list | 2025-11-25 | active | public_list | recent_2_school_years |
 | c2c8afeea20f | 关于2021年下半年及2022年大学生门急诊医药费用报销通知 | annual_notice | 2023-02-24 | historical | historical | prior_annual_series_version |
 | c304b1fbfae8 | 上海财经大学国际组织人才培养项目2021年通过夏令营选拔本校推荐免试硕士研究生候选人名单 | public_list | 2020-08-05 | archived | none | outside_recent_5_school_years; archived_without_raw |
 | c30e9510a2d9 | 上海财经大学2023年公派留学校内推荐候选人公示(联培博士项目) | public_list | 2023-05-10 | active | public_list | recent_5_school_years |
@@ -2036,6 +2056,7 @@
 | cf416edf6597 | 上海市城镇职工基本医疗保险办法 | policy | 2009-10-29 | active | main_qa | all_history |
 | cf9a0611b831 | 2015年教职工健康体检通知 | incomplete | 2015-06-12 | archived | none | isolated_document_kind |
 | cfa2834a878e | 会计学院2022年硕士研究生招生考试复试办法.pdf | annual_notice | 2022-03-22 | historical | historical | prior_annual_series_version |
+| d017492483b1 | 25040715363470011944.doc | manual | 2025-04-07 | active | main_qa | enduring_document |
 | d02b6b58a185 | 上海财经大学首席经济学家中心2024年通过夏令营选拔推荐免试硕士研究生候选人名单.pdf | public_list | 2023-07-21 | active | public_list | recent_5_school_years |
 | d0611c22491f | 上海财经大学研究生学籍管理规定（上财研【2017】37号） | policy | 2017-08-25 | active | main_qa | all_history |
 | d073ab3850dd | 关于开展2017-2018学年本科生社会奖学金评选工作的通知 | annual_notice | 2018-10-11 | archived | none | outside_recent_5_school_years; archived_without_raw |
@@ -2530,6 +2551,7 @@
 | fe44d391f0f6 | 附件6+专业参考目录.xls | incomplete | 2025-12-03 | archived | none | isolated_document_kind |
 | fe4785a08dd8 | 上海财经大学会计学院2022年通过夏令营选拔外校及本校外院推荐免试硕士研究生候选人名单.pdf | public_list | 2021-07-23 | archived | none | outside_recent_5_school_years; archived_without_raw |
 | fe5c78f6bc75 | 有关2011级新生医药费报销的紧急通知 | annual_notice | 2011-10-08 | archived | none | outside_recent_5_school_years |
+| fe623e62a18a | 25011015435112016934.xlsx | manual | 2025-01-10 | active | main_qa | enduring_document |
 | fe84d1700332 | 20250106--统计与数据科学学院2024-2025学年本科毕业论文工作流程安排.pdf | annual_notice | 2025-01-06 | active | main_qa | recent_5_school_years |
 | fe9eaff90a2f | 学位授予名单 | incomplete | 2013-01-14 | archived | none | isolated_document_kind; archived_without_raw |
 | fed45d26cf3e | 上海财经大学交叉科学研究院2023年通过夏令营选拔推荐免试研究生候选人名单 | public_list | 2022-07-11 | active | public_list | recent_5_school_years |
@@ -2549,25 +2571,3 @@
 | ffe1af39675e | 集体宿舍证明 | procedure | unknown | active | main_qa | all_history |
 | ffe4557d5883 | 长春市面向“双一流”高校（学科）招录专业选调生工作预通知 | annual_notice | 2019-08-29 | archived | none | outside_recent_5_school_years |
 | fffdd02df4c7 | 附件1：2026年“青选计划”选聘职位及计划.pdf | manual | 2025-11-14 | active | main_qa | all_history |
-| 78bd1fad08ad | 江西省2026年从上海财经大学选调应届优秀大学毕业生拟录用人员名单.xlsx | public_list | 2026-05-27 | active | public_list | recent_2_school_years |
-| 56d8b2b6f02b | 附件1-青岛市情简介.docx | manual | 2026-03-11 | active | main_qa | all_history |
-| 35a66510855d | 附件2-2026年度青岛市专项招录公务员公告.docx | incomplete | 2026-03-11 | archived | none | isolated_document_kind |
-| 1a398793e47e | 附件3-2026年度青岛市专项招录公务员职位表.xlsx | incomplete | 2026-03-11 | archived | none | isolated_document_kind |
-| 883f9faf2b3b | 江苏省2026年应届优秀大学毕业生选调县级以上机关职位（名校优生）入围递补人选名单（上海财经大学）.xlsx | public_list | 2026-03-11 | active | public_list | recent_2_school_years |
-| 6efdeb34fed2 | 江苏省2026年应届优秀大学毕业生选调县级以上机关职位（名校优生）拟录用人选名单（上海财经大学）.xlsx | public_list | 2026-01-23 | active | public_list | recent_2_school_years |
-| c2c6b55a4e86 | 福建省2026年度硕本选调生选拔范围高校名单.doc | public_list | 2025-11-25 | active | public_list | recent_2_school_years |
-| c04448ba225a | 福建省2026年度硕本选调生招录名额计划安排表.xls | incomplete | 2025-11-25 | archived | none | isolated_document_kind |
-| ae2228398ea5 | 附件1.内蒙古自治区2026年定向选调岗位计划表.xlsx | manual | 2025-11-06 | active | main_qa | all_history |
-| 9d07eb766e03 | 附件2.内蒙古自治区2026年定向选聘岗位计划表.xlsx | manual | 2025-11-06 | active | main_qa | all_history |
-| 64fbb018c7ea | 附件2：贵州省2026年度定向部分高校选调优秀毕业生报名推荐表.doc | annual_notice | 2025-10-14 | active | main_qa | recent_5_school_years |
-| 1e573accae73 | 甘肃省2026年选调应届优秀大学毕业生报名推荐登记表.doc | annual_notice | 2025-09-22 | active | main_qa | recent_5_school_years |
-| 8526cff56dd4 | 甘肃省2026年选调应届优秀大学毕业生选调范围.doc | manual | 2025-09-22 | active | main_qa | all_history |
-| 4a04065037f9 | 25052511183493235204.xls | incomplete | 2025-05-25 | archived | none | isolated_document_kind |
-| 739a53fc1334 | 25041816573701114056.xlsx | manual | 2025-04-18 | active | main_qa | enduring_document |
-| d017492483b1 | 25040715363470011944.doc | manual | 2025-04-07 | active | main_qa | enduring_document |
-| 5844e5adf788 | 25040715363468211943.xlsx | manual | 2025-04-07 | active | main_qa | enduring_document |
-| 71e07f6741dd | 25040215453356510377.doc | manual | 2025-04-02 | active | main_qa | enduring_document |
-| 975920cdc29f | 25032012394356621554.xlsx | manual | 2025-03-20 | active | main_qa | enduring_document |
-| 264ea9e0cdb3 | 25022820321252012437.xlsx | manual | 2025-02-28 | active | main_qa | enduring_document |
-| fe623e62a18a | 25011015435112016934.xlsx | manual | 2025-01-10 | active | main_qa | enduring_document |
-| 1ba62aac06ab | 24122709453202811984.xlsx | manual | 2024-12-27 | active | main_qa | enduring_document |

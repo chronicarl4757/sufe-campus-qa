@@ -1,10 +1,10 @@
 {
   "schema_version": "1",
   "evaluated_at": "2026-08-20",
-  "manifest_fingerprint": "sha256:c4f8036b846ffb51169a80ca3bc0b07b16eead413c326549448c7890347a0cf8",
+  "manifest_fingerprint": "sha256:b1ddc4105163c885a936637c977e754dfd8d61f18f29f4cc012ec656d78d0b42",
   "total_documents": 2554,
   "accepted_documents": 2147,
-  "materialized_documents": 1276,
+  "materialized_documents": 1271,
   "active_documents": 1041,
   "historical_documents": 230,
   "archived_documents": 1283,
@@ -17,7 +17,7 @@
   "date_conflict_count": 0,
   "old_annual_count": 265,
   "old_public_count": 171,
-  "collection_contamination_count": 5,
+  "collection_contamination_count": 0,
   "unknown_type_count": 780,
   "archived_without_raw_count": 726,
   "main_qa_documents": 787,
@@ -1924,7 +1924,7 @@
       "date_evidence": "",
       "date_confidence": 0.0,
       "date_conflict": false,
-      "before_document_kind": "procedure",
+      "before_document_kind": "policy",
       "document_kind": "policy",
       "temporal_class": "enduring",
       "series_key": "上海财经大学学生处|本科生|印发《上海财经大学研究生国家助学金管理办法》的通知(附件",
@@ -1934,8 +1934,7 @@
       "index_collection": "main_qa",
       "raw_available": true,
       "reasons": [
-        "all_history",
-        "document_kind_reclassified"
+        "all_history"
       ]
     },
     {
@@ -5849,6 +5848,29 @@
       ]
     },
     {
+      "doc_id": "1a398793e47e",
+      "title": "附件3-2026年度青岛市专项招录公务员职位表.xlsx",
+      "source_url": "https://career.sufe.edu.cn/career/download/fileDownload/172081396997820416/172083257721098240",
+      "document_type": "attachment",
+      "before_publish_date": "2026-03-11",
+      "after_publish_date": "2026-03-11",
+      "date_evidence": "",
+      "date_confidence": 0.0,
+      "date_conflict": false,
+      "before_document_kind": "incomplete",
+      "document_kind": "incomplete",
+      "temporal_class": "undated",
+      "series_key": "招生就业处|毕业生|附件3-青岛市专项招录公务员职位表",
+      "retention_status": "archived",
+      "retention_reason": "isolated_document_kind",
+      "canonical_doc_id": "",
+      "index_collection": "none",
+      "raw_available": true,
+      "reasons": [
+        "isolated_document_kind"
+      ]
+    },
+    {
       "doc_id": "1a3fb37b4c87",
       "title": "2020-2021学年第二学期15-16周研究生课程调停课情况公示",
       "source_url": "https://gs.sufe.edu.cn/Home/Detail/6935",
@@ -6338,6 +6360,29 @@
       "raw_available": true,
       "reasons": [
         "recent_5_school_years"
+      ]
+    },
+    {
+      "doc_id": "1ba62aac06ab",
+      "title": "24122709453202811984.xlsx",
+      "source_url": "https://career.sufe.edu.cn/upload/image/20241227/24122709453202811984.xlsx",
+      "document_type": "attachment",
+      "before_publish_date": "2024-12-27",
+      "after_publish_date": "2024-12-27",
+      "date_evidence": "",
+      "date_confidence": 0.0,
+      "date_conflict": false,
+      "before_document_kind": "manual",
+      "document_kind": "manual",
+      "temporal_class": "enduring",
+      "series_key": "上海财经大学就业指导中心|毕业生|24122709453202811984",
+      "retention_status": "active",
+      "retention_reason": "enduring_document",
+      "canonical_doc_id": "",
+      "index_collection": "main_qa",
+      "raw_available": true,
+      "reasons": [
+        "enduring_document"
       ]
     },
     {
@@ -6919,6 +6964,29 @@
       "raw_available": true,
       "reasons": [
         "prior_annual_series_version"
+      ]
+    },
+    {
+      "doc_id": "1e573accae73",
+      "title": "甘肃省2026年选调应届优秀大学毕业生报名推荐登记表.doc",
+      "source_url": "https://career.sufe.edu.cn/career/download/fileDownload/110293819282558976/110298290922328064",
+      "document_type": "attachment",
+      "before_publish_date": "2025-09-22",
+      "after_publish_date": "2025-09-22",
+      "date_evidence": "",
+      "date_confidence": 0.0,
+      "date_conflict": false,
+      "before_document_kind": "annual_notice",
+      "document_kind": "annual_notice",
+      "temporal_class": "annual",
+      "series_key": "招生就业处|毕业生|甘肃省选调应届优秀大学毕业生报名推荐登记表",
+      "retention_status": "active",
+      "retention_reason": "recent_5_school_years",
+      "canonical_doc_id": "1e573accae73",
+      "index_collection": "main_qa",
+      "raw_available": true,
+      "reasons": [
+        "recent_5_school_years"
       ]
     },
     {
@@ -7978,7 +8046,7 @@
       "date_evidence": "",
       "date_confidence": 0.0,
       "date_conflict": false,
-      "before_document_kind": "manual",
+      "before_document_kind": "policy",
       "document_kind": "policy",
       "temporal_class": "enduring",
       "series_key": "上海财经大学学生处|本科生|印发《上海财经大学研究生国家奖学金管理办法》的通知(附件",
@@ -7988,8 +8056,7 @@
       "index_collection": "main_qa",
       "raw_available": true,
       "reasons": [
-        "all_history",
-        "document_kind_reclassified"
+        "all_history"
       ]
     },
     {
@@ -8596,6 +8663,29 @@
       "raw_available": true,
       "reasons": [
         "isolated_document_kind"
+      ]
+    },
+    {
+      "doc_id": "264ea9e0cdb3",
+      "title": "25022820321252012437.xlsx",
+      "source_url": "https://career.sufe.edu.cn/upload/image/20250228/25022820321252012437.xlsx",
+      "document_type": "attachment",
+      "before_publish_date": "2025-02-28",
+      "after_publish_date": "2025-02-28",
+      "date_evidence": "",
+      "date_confidence": 0.0,
+      "date_conflict": false,
+      "before_document_kind": "manual",
+      "document_kind": "manual",
+      "temporal_class": "enduring",
+      "series_key": "上海财经大学就业指导中心|毕业生|25022820321252012437",
+      "retention_status": "active",
+      "retention_reason": "enduring_document",
+      "canonical_doc_id": "",
+      "index_collection": "main_qa",
+      "raw_available": true,
+      "reasons": [
+        "enduring_document"
       ]
     },
     {
@@ -11980,6 +12070,29 @@
       "raw_available": false,
       "reasons": [
         "recent_5_school_years"
+      ]
+    },
+    {
+      "doc_id": "35a66510855d",
+      "title": "附件2-2026年度青岛市专项招录公务员公告.docx",
+      "source_url": "https://career.sufe.edu.cn/career/download/fileDownload/172081396997820416/172083258102779904",
+      "document_type": "attachment",
+      "before_publish_date": "2026-03-11",
+      "after_publish_date": "2026-03-11",
+      "date_evidence": "",
+      "date_confidence": 0.0,
+      "date_conflict": false,
+      "before_document_kind": "incomplete",
+      "document_kind": "incomplete",
+      "temporal_class": "undated",
+      "series_key": "招生就业处|毕业生|附件2-青岛市专项招录公务员",
+      "retention_status": "archived",
+      "retention_reason": "isolated_document_kind",
+      "canonical_doc_id": "",
+      "index_collection": "none",
+      "raw_available": true,
+      "reasons": [
+        "isolated_document_kind"
       ]
     },
     {
@@ -16346,6 +16459,29 @@
       ]
     },
     {
+      "doc_id": "4a04065037f9",
+      "title": "25052511183493235204.xls",
+      "source_url": "https://career.sufe.edu.cn/upload/image/20250525/25052511183493235204.xls",
+      "document_type": "attachment",
+      "before_publish_date": "2025-05-25",
+      "after_publish_date": "2025-05-25",
+      "date_evidence": "",
+      "date_confidence": 0.0,
+      "date_conflict": false,
+      "before_document_kind": "incomplete",
+      "document_kind": "incomplete",
+      "temporal_class": "undated",
+      "series_key": "上海财经大学就业指导中心|毕业生|25052511183493235204",
+      "retention_status": "archived",
+      "retention_reason": "isolated_document_kind",
+      "canonical_doc_id": "",
+      "index_collection": "none",
+      "raw_available": true,
+      "reasons": [
+        "isolated_document_kind"
+      ]
+    },
+    {
       "doc_id": "4a24a8bbdf92",
       "title": "关于开展2024年研究生学业奖学金评选工作的通知.pdf",
       "source_url": "https://xsc.sufe.edu.cn/_upload/article/files/d8/2d/46163ef1481fbca19fc2cee35ed7/dd862f95-918f-454b-912e-25fd980bdf2f.pdf",
@@ -16986,7 +17122,7 @@
       "date_evidence": "",
       "date_confidence": 0.0,
       "date_conflict": false,
-      "before_document_kind": "procedure",
+      "before_document_kind": "policy",
       "document_kind": "policy",
       "temporal_class": "enduring",
       "series_key": "上海财经大学学生处|本科生|印发《上海财经大学中西部基层单位就业毕业生学费和国家助学贷款代偿管理办法》的通知(附件",
@@ -16996,8 +17132,7 @@
       "index_collection": "main_qa",
       "raw_available": true,
       "reasons": [
-        "all_history",
-        "document_kind_reclassified"
+        "all_history"
       ]
     },
     {
@@ -18358,7 +18493,7 @@
       "date_evidence": "",
       "date_confidence": 0.0,
       "date_conflict": false,
-      "before_document_kind": "procedure",
+      "before_document_kind": "policy",
       "document_kind": "policy",
       "temporal_class": "enduring",
       "series_key": "上海财经大学学生处|本科生|印发《上海财经大学学生勤工助学管理办法》的通知(附件",
@@ -18368,8 +18503,7 @@
       "index_collection": "main_qa",
       "raw_available": true,
       "reasons": [
-        "all_history",
-        "document_kind_reclassified"
+        "all_history"
       ]
     },
     {
@@ -19212,6 +19346,29 @@
       ]
     },
     {
+      "doc_id": "56d8b2b6f02b",
+      "title": "附件1-青岛市情简介.docx",
+      "source_url": "https://career.sufe.edu.cn/career/download/fileDownload/172081396997820416/172083257633017856",
+      "document_type": "attachment",
+      "before_publish_date": "2026-03-11",
+      "after_publish_date": "2026-03-11",
+      "date_evidence": "",
+      "date_confidence": 0.0,
+      "date_conflict": false,
+      "before_document_kind": "manual",
+      "document_kind": "manual",
+      "temporal_class": "enduring",
+      "series_key": "招生就业处|毕业生|附件1-青岛市情简介",
+      "retention_status": "active",
+      "retention_reason": "all_history",
+      "canonical_doc_id": "",
+      "index_collection": "main_qa",
+      "raw_available": true,
+      "reasons": [
+        "all_history"
+      ]
+    },
+    {
       "doc_id": "56ec2e2e6b62",
       "title": "上海财经大学数理经济学教育部重点实验室金融硕士2026年硕士研究生招生调剂复试录取办法.pdf",
       "source_url": "https://ssd.sufe.edu.cn/index.php?mod=io&op=getStream&path=a2YtcUltMGNqYnBPYjFJR09fNFpORzZ1bzRPZzJsN3B3dHNBWGRmNUlmRVpUMTJKMDIxM1EyMHNxaU91RGR3enFwVkdxY0NjZHU1TU1R&filename=",
@@ -19538,6 +19695,29 @@
       ]
     },
     {
+      "doc_id": "5844e5adf788",
+      "title": "25040715363468211943.xlsx",
+      "source_url": "https://career.sufe.edu.cn/upload/image/20250407/25040715363468211943.xlsx",
+      "document_type": "attachment",
+      "before_publish_date": "2025-04-07",
+      "after_publish_date": "2025-04-07",
+      "date_evidence": "",
+      "date_confidence": 0.0,
+      "date_conflict": false,
+      "before_document_kind": "manual",
+      "document_kind": "manual",
+      "temporal_class": "enduring",
+      "series_key": "上海财经大学就业指导中心|毕业生|25040715363468211943",
+      "retention_status": "active",
+      "retention_reason": "enduring_document",
+      "canonical_doc_id": "",
+      "index_collection": "main_qa",
+      "raw_available": true,
+      "reasons": [
+        "enduring_document"
+      ]
+    },
+    {
       "doc_id": "5858393773b9",
       "title": "2011年新生体检通知（本科）",
       "source_url": "https://yljk.sufe.edu.cn/79/e1/c12544a31201/page.htm",
@@ -19687,7 +19867,7 @@
       "date_evidence": "",
       "date_confidence": 0.0,
       "date_conflict": false,
-      "before_document_kind": "manual",
+      "before_document_kind": "policy",
       "document_kind": "policy",
       "temporal_class": "enduring",
       "series_key": "上海财经大学学生处|本科生|印发《上海财经大学学生临时困难补助管理办法》的通知(附件",
@@ -19697,8 +19877,7 @@
       "index_collection": "main_qa",
       "raw_available": true,
       "reasons": [
-        "all_history",
-        "document_kind_reclassified"
+        "all_history"
       ]
     },
     {
@@ -22683,6 +22862,29 @@
       ]
     },
     {
+      "doc_id": "64fbb018c7ea",
+      "title": "附件2：贵州省2026年度定向部分高校选调优秀毕业生报名推荐表.doc",
+      "source_url": "https://career.sufe.edu.cn/career/download/fileDownload/118422202369576960/118424330626535424",
+      "document_type": "attachment",
+      "before_publish_date": "2025-10-14",
+      "after_publish_date": "2025-10-14",
+      "date_evidence": "",
+      "date_confidence": 0.0,
+      "date_conflict": false,
+      "before_document_kind": "annual_notice",
+      "document_kind": "annual_notice",
+      "temporal_class": "annual",
+      "series_key": "招生就业处|毕业生|附件2:贵州省定向部分高校选调优秀毕业生报名推荐表",
+      "retention_status": "active",
+      "retention_reason": "recent_5_school_years",
+      "canonical_doc_id": "64fbb018c7ea",
+      "index_collection": "main_qa",
+      "raw_available": true,
+      "reasons": [
+        "recent_5_school_years"
+      ]
+    },
+    {
       "doc_id": "6507f17c14a4",
       "title": "上海财经大学商学院关于举办2019年“上财商学院跨学科、跨专业硕博连读研究生夏令营”的通知",
       "source_url": "https://gs.sufe.edu.cn/Home/Detail/6448",
@@ -24943,6 +25145,29 @@
       ]
     },
     {
+      "doc_id": "6efdeb34fed2",
+      "title": "江苏省2026年应届优秀大学毕业生选调县级以上机关职位（名校优生）拟录用人选名单（上海财经大学）.xlsx",
+      "source_url": "https://career.sufe.edu.cn/career/download/fileDownload/154958702020005888/154959902291398656",
+      "document_type": "attachment",
+      "before_publish_date": "2026-01-23",
+      "after_publish_date": "2026-01-23",
+      "date_evidence": "",
+      "date_confidence": 0.0,
+      "date_conflict": false,
+      "before_document_kind": "public_list",
+      "document_kind": "public_list",
+      "temporal_class": "recurring_public",
+      "series_key": "招生就业处|毕业生|江苏省应届优秀大学毕业生选调县级以上机关职位(名校优生)拟录用人选名单(上海财经大学",
+      "retention_status": "active",
+      "retention_reason": "recent_2_school_years",
+      "canonical_doc_id": "",
+      "index_collection": "public_list",
+      "raw_available": true,
+      "reasons": [
+        "recent_2_school_years"
+      ]
+    },
+    {
       "doc_id": "6efe2a85f1d8",
       "title": "2024级_法学+金融_培养方案.pdf",
       "source_url": "https://law.sufe.edu.cn/_upload/article/files/20/b2/747ee1874115b7a76ef88a9d4e04/c27136cc-7b5a-4577-9d94-f97c3b057ac4.pdf",
@@ -25408,6 +25633,29 @@
       ]
     },
     {
+      "doc_id": "71e07f6741dd",
+      "title": "25040215453356510377.doc",
+      "source_url": "https://career.sufe.edu.cn/upload/image/20250402/25040215453356510377.doc",
+      "document_type": "attachment",
+      "before_publish_date": "2025-04-02",
+      "after_publish_date": "2025-04-02",
+      "date_evidence": "",
+      "date_confidence": 0.0,
+      "date_conflict": false,
+      "before_document_kind": "manual",
+      "document_kind": "manual",
+      "temporal_class": "enduring",
+      "series_key": "上海财经大学就业指导中心|毕业生|25040215453356510377",
+      "retention_status": "active",
+      "retention_reason": "enduring_document",
+      "canonical_doc_id": "",
+      "index_collection": "main_qa",
+      "raw_available": true,
+      "reasons": [
+        "enduring_document"
+      ]
+    },
+    {
       "doc_id": "71e465d8cfeb",
       "title": "山西省2026年定向上海财经大学选调优秀高校毕业生拟录用人员公示",
       "source_url": "post+https://career.sufe.edu.cn/career/news/data/dxxdnews/193125416364544000",
@@ -25848,6 +26096,29 @@
       "reasons": [
         "outside_recent_5_school_years",
         "archived_without_raw"
+      ]
+    },
+    {
+      "doc_id": "739a53fc1334",
+      "title": "25041816573701114056.xlsx",
+      "source_url": "https://career.sufe.edu.cn/upload/image/20250418/25041816573701114056.xlsx",
+      "document_type": "attachment",
+      "before_publish_date": "2025-04-18",
+      "after_publish_date": "2025-04-18",
+      "date_evidence": "",
+      "date_confidence": 0.0,
+      "date_conflict": false,
+      "before_document_kind": "manual",
+      "document_kind": "manual",
+      "temporal_class": "enduring",
+      "series_key": "上海财经大学就业指导中心|毕业生|25041816573701114056",
+      "retention_status": "active",
+      "retention_reason": "enduring_document",
+      "canonical_doc_id": "",
+      "index_collection": "main_qa",
+      "raw_available": true,
+      "reasons": [
+        "enduring_document"
       ]
     },
     {
@@ -26762,7 +27033,7 @@
       "date_evidence": "",
       "date_confidence": 0.0,
       "date_conflict": false,
-      "before_document_kind": "manual",
+      "before_document_kind": "policy",
       "document_kind": "policy",
       "temporal_class": "enduring",
       "series_key": "上海财经大学学生处|本科生|印发《上海财经大学研究生学业奖学金管理办法》的通知(附件",
@@ -26772,8 +27043,7 @@
       "index_collection": "main_qa",
       "raw_available": true,
       "reasons": [
-        "all_history",
-        "document_kind_reclassified"
+        "all_history"
       ]
     },
     {
@@ -26844,6 +27114,29 @@
       "reasons": [
         "isolated_document_kind",
         "archived_without_raw"
+      ]
+    },
+    {
+      "doc_id": "78bd1fad08ad",
+      "title": "江西省2026年从上海财经大学选调应届优秀大学毕业生拟录用人员名单.xlsx",
+      "source_url": "https://career.sufe.edu.cn/career/download/fileDownload/199928975416496128/199929834116354048",
+      "document_type": "attachment",
+      "before_publish_date": "2026-05-27",
+      "after_publish_date": "2026-05-27",
+      "date_evidence": "",
+      "date_confidence": 0.0,
+      "date_conflict": false,
+      "before_document_kind": "public_list",
+      "document_kind": "public_list",
+      "temporal_class": "recurring_public",
+      "series_key": "中共江西省委组织部|毕业生|江西省从上海财经大学选调应届优秀大学毕业生拟录用人员名单",
+      "retention_status": "active",
+      "retention_reason": "recent_2_school_years",
+      "canonical_doc_id": "",
+      "index_collection": "public_list",
+      "raw_available": true,
+      "reasons": [
+        "recent_2_school_years"
       ]
     },
     {
@@ -27880,7 +28173,7 @@
       "date_evidence": "",
       "date_confidence": 0.0,
       "date_conflict": false,
-      "before_document_kind": "annual_notice",
+      "before_document_kind": "incomplete",
       "document_kind": "incomplete",
       "temporal_class": "undated",
       "series_key": "上海财经大学就业指导中心|毕业生|上海市金山区选调生及储备人才招录",
@@ -27890,9 +28183,7 @@
       "index_collection": "none",
       "raw_available": true,
       "reasons": [
-        "isolated_document_kind",
-        "document_kind_reclassified",
-        "missing_required_attachment"
+        "isolated_document_kind"
       ]
     },
     {
@@ -29712,6 +30003,29 @@
       ]
     },
     {
+      "doc_id": "8526cff56dd4",
+      "title": "甘肃省2026年选调应届优秀大学毕业生选调范围.doc",
+      "source_url": "https://career.sufe.edu.cn/career/download/fileDownload/110293819282558976/110298290783916032",
+      "document_type": "attachment",
+      "before_publish_date": "2025-09-22",
+      "after_publish_date": "2025-09-22",
+      "date_evidence": "",
+      "date_confidence": 0.0,
+      "date_conflict": false,
+      "before_document_kind": "manual",
+      "document_kind": "manual",
+      "temporal_class": "enduring",
+      "series_key": "招生就业处|毕业生|甘肃省选调应届优秀大学毕业生选调范围",
+      "retention_status": "active",
+      "retention_reason": "all_history",
+      "canonical_doc_id": "",
+      "index_collection": "main_qa",
+      "raw_available": true,
+      "reasons": [
+        "all_history"
+      ]
+    },
+    {
       "doc_id": "8561afb97eb4",
       "title": "上海财经大学本科学生因病缓考申请办法",
       "source_url": "https://econ.sufe.edu.cn/9f/38/c6933a106296/page.htm",
@@ -30234,7 +30548,7 @@
       "date_evidence": "",
       "date_confidence": 0.0,
       "date_conflict": false,
-      "before_document_kind": "manual",
+      "before_document_kind": "policy",
       "document_kind": "policy",
       "temporal_class": "enduring",
       "series_key": "上海财经大学学生处|本科生|印发《上海财经大学上海市奖学金管理办法》的通知(附件",
@@ -30244,8 +30558,7 @@
       "index_collection": "main_qa",
       "raw_available": true,
       "reasons": [
-        "all_history",
-        "document_kind_reclassified"
+        "all_history"
       ]
     },
     {
@@ -30317,6 +30630,29 @@
       "raw_available": true,
       "reasons": [
         "explicit_superseded_validity"
+      ]
+    },
+    {
+      "doc_id": "883f9faf2b3b",
+      "title": "江苏省2026年应届优秀大学毕业生选调县级以上机关职位（名校优生）入围递补人选名单（上海财经大学）.xlsx",
+      "source_url": "https://career.sufe.edu.cn/career/download/fileDownload/172007928205807616/172008078550634496",
+      "document_type": "attachment",
+      "before_publish_date": "2026-03-11",
+      "after_publish_date": "2026-03-11",
+      "date_evidence": "",
+      "date_confidence": 0.0,
+      "date_conflict": false,
+      "before_document_kind": "public_list",
+      "document_kind": "public_list",
+      "temporal_class": "recurring_public",
+      "series_key": "中共江苏省委组织部|毕业生|江苏省应届优秀大学毕业生选调县级以上机关职位(名校优生)入围递补人选名单(上海财经大学",
+      "retention_status": "active",
+      "retention_reason": "recent_2_school_years",
+      "canonical_doc_id": "",
+      "index_collection": "public_list",
+      "raw_available": true,
+      "reasons": [
+        "recent_2_school_years"
       ]
     },
     {
@@ -33515,7 +33851,7 @@
       "date_evidence": "",
       "date_confidence": 0.0,
       "date_conflict": false,
-      "before_document_kind": "manual",
+      "before_document_kind": "procedure",
       "document_kind": "procedure",
       "temporal_class": "enduring",
       "series_key": "上海财经大学就业指导中心|毕业生|2025届毕业生就业手续办理指南|第一步:毕业生基本信息核对及勘误修改(附件",
@@ -33525,8 +33861,7 @@
       "index_collection": "main_qa",
       "raw_available": true,
       "reasons": [
-        "enduring_document",
-        "document_kind_reclassified"
+        "enduring_document"
       ]
     },
     {
@@ -33597,6 +33932,29 @@
       "reasons": [
         "outside_recent_5_school_years",
         "archived_without_raw"
+      ]
+    },
+    {
+      "doc_id": "975920cdc29f",
+      "title": "25032012394356621554.xlsx",
+      "source_url": "https://career.sufe.edu.cn/upload/image/20250320/25032012394356621554.xlsx",
+      "document_type": "attachment",
+      "before_publish_date": "2025-03-20",
+      "after_publish_date": "2025-03-20",
+      "date_evidence": "",
+      "date_confidence": 0.0,
+      "date_conflict": false,
+      "before_document_kind": "manual",
+      "document_kind": "manual",
+      "temporal_class": "enduring",
+      "series_key": "上海财经大学就业指导中心|毕业生|25032012394356621554",
+      "retention_status": "active",
+      "retention_reason": "enduring_document",
+      "canonical_doc_id": "",
+      "index_collection": "main_qa",
+      "raw_available": true,
+      "reasons": [
+        "enduring_document"
       ]
     },
     {
@@ -35065,6 +35423,29 @@
       "raw_available": false,
       "reasons": [
         "recent_5_school_years"
+      ]
+    },
+    {
+      "doc_id": "9d07eb766e03",
+      "title": "附件2.内蒙古自治区2026年定向选聘岗位计划表.xlsx",
+      "source_url": "https://career.sufe.edu.cn/career/download/fileDownload/126816175672922112/126816539335856128",
+      "document_type": "attachment",
+      "before_publish_date": "2025-11-06",
+      "after_publish_date": "2025-11-06",
+      "date_evidence": "",
+      "date_confidence": 0.0,
+      "date_conflict": false,
+      "before_document_kind": "manual",
+      "document_kind": "manual",
+      "temporal_class": "enduring",
+      "series_key": "招生就业处|毕业生|附件2.内蒙古自治区定向选聘岗位计划表",
+      "retention_status": "active",
+      "retention_reason": "all_history",
+      "canonical_doc_id": "",
+      "index_collection": "main_qa",
+      "raw_available": true,
+      "reasons": [
+        "all_history"
       ]
     },
     {
@@ -39378,6 +39759,29 @@
       ]
     },
     {
+      "doc_id": "ae2228398ea5",
+      "title": "附件1.内蒙古自治区2026年定向选调岗位计划表.xlsx",
+      "source_url": "https://career.sufe.edu.cn/career/download/fileDownload/126816175672922112/126816512664276992",
+      "document_type": "attachment",
+      "before_publish_date": "2025-11-06",
+      "after_publish_date": "2025-11-06",
+      "date_evidence": "",
+      "date_confidence": 0.0,
+      "date_conflict": false,
+      "before_document_kind": "manual",
+      "document_kind": "manual",
+      "temporal_class": "enduring",
+      "series_key": "招生就业处|毕业生|附件1.内蒙古自治区定向选调岗位计划表",
+      "retention_status": "active",
+      "retention_reason": "all_history",
+      "canonical_doc_id": "",
+      "index_collection": "main_qa",
+      "raw_available": true,
+      "reasons": [
+        "all_history"
+      ]
+    },
+    {
       "doc_id": "ae4bec97563b",
       "title": "硕士生招生.pdf",
       "source_url": "https://ssd.sufe.edu.cn/index.php?mod=io&op=getStream&path=a2YtcUltMGNqYnBPYjFBSGJ2a1dhbTZoODlDaDNWMjZ3b2dCQjlXcklLWkNTVjZMMHpvZ1RqeDctWEtzRG9jMC1NTVFfYzNNZTdJUk53&filename=",
@@ -39899,7 +40303,7 @@
       "date_evidence": "",
       "date_confidence": 0.0,
       "date_conflict": false,
-      "before_document_kind": "annual_notice",
+      "before_document_kind": "incomplete",
       "document_kind": "incomplete",
       "temporal_class": "undated",
       "series_key": "招生就业处|毕业生|新疆维吾尔自治区和新疆生产建设兵团选调大学毕业生",
@@ -39909,9 +40313,7 @@
       "index_collection": "none",
       "raw_available": true,
       "reasons": [
-        "isolated_document_kind",
-        "document_kind_reclassified",
-        "missing_required_attachment"
+        "isolated_document_kind"
       ]
     },
     {
@@ -40813,7 +41215,7 @@
       "date_evidence": "",
       "date_confidence": 0.0,
       "date_conflict": false,
-      "before_document_kind": "annual_notice",
+      "before_document_kind": "incomplete",
       "document_kind": "incomplete",
       "temporal_class": "undated",
       "series_key": "招生就业处|毕业生|青海省选调应届优秀大学毕业生",
@@ -40823,9 +41225,7 @@
       "index_collection": "none",
       "raw_available": true,
       "reasons": [
-        "isolated_document_kind",
-        "document_kind_reclassified",
-        "missing_required_attachment"
+        "isolated_document_kind"
       ]
     },
     {
@@ -41859,7 +42259,7 @@
       "date_evidence": "",
       "date_confidence": 0.0,
       "date_conflict": false,
-      "before_document_kind": "procedure",
+      "before_document_kind": "policy",
       "document_kind": "policy",
       "temporal_class": "enduring",
       "series_key": "上海财经大学学生处|本科生|印发《上海财经大学学费减免实施办法》的通知(附件",
@@ -41869,8 +42269,7 @@
       "index_collection": "main_qa",
       "raw_available": true,
       "reasons": [
-        "all_history",
-        "document_kind_reclassified"
+        "all_history"
       ]
     },
     {
@@ -42973,7 +43372,7 @@
       "date_evidence": "",
       "date_confidence": 0.0,
       "date_conflict": false,
-      "before_document_kind": "annual_notice",
+      "before_document_kind": "incomplete",
       "document_kind": "incomplete",
       "temporal_class": "undated",
       "series_key": "招生就业处|毕业生|山西省面向上海财经大学选调优秀高校毕业生",
@@ -42983,9 +43382,7 @@
       "index_collection": "none",
       "raw_available": true,
       "reasons": [
-        "isolated_document_kind",
-        "document_kind_reclassified",
-        "missing_required_attachment"
+        "isolated_document_kind"
       ]
     },
     {
@@ -43654,7 +44051,7 @@
       "date_evidence": "",
       "date_confidence": 0.0,
       "date_conflict": false,
-      "before_document_kind": "annual_notice",
+      "before_document_kind": "incomplete",
       "document_kind": "incomplete",
       "temporal_class": "undated",
       "series_key": "招生就业处|毕业生|上海市选调应届优秀大学毕业生",
@@ -43664,9 +44061,7 @@
       "index_collection": "none",
       "raw_available": true,
       "reasons": [
-        "isolated_document_kind",
-        "document_kind_reclassified",
-        "missing_required_attachment"
+        "isolated_document_kind"
       ]
     },
     {
@@ -43961,6 +44356,29 @@
       "document_kind": "incomplete",
       "temporal_class": "undated",
       "series_key": "上海财经大学后勤实业发展中心|全体学生|临时校园卡集体申请表",
+      "retention_status": "archived",
+      "retention_reason": "isolated_document_kind",
+      "canonical_doc_id": "",
+      "index_collection": "none",
+      "raw_available": true,
+      "reasons": [
+        "isolated_document_kind"
+      ]
+    },
+    {
+      "doc_id": "c04448ba225a",
+      "title": "福建省2026年度硕本选调生招录名额计划安排表.xls",
+      "source_url": "https://career.sufe.edu.cn/career/download/fileDownload/133678599759859712/133679740002373632",
+      "document_type": "attachment",
+      "before_publish_date": "2025-11-25",
+      "after_publish_date": "2025-11-25",
+      "date_evidence": "",
+      "date_confidence": 0.0,
+      "date_conflict": false,
+      "before_document_kind": "incomplete",
+      "document_kind": "incomplete",
+      "temporal_class": "undated",
+      "series_key": "招生就业处|毕业生|福建省硕本选调生招录名额计划安排表",
       "retention_status": "archived",
       "retention_reason": "isolated_document_kind",
       "canonical_doc_id": "",
@@ -44554,6 +44972,29 @@
       "reasons": [
         "isolated_document_kind",
         "archived_without_raw"
+      ]
+    },
+    {
+      "doc_id": "c2c6b55a4e86",
+      "title": "福建省2026年度硕本选调生选拔范围高校名单.doc",
+      "source_url": "https://career.sufe.edu.cn/career/download/fileDownload/133678599759859712/133679719097962496",
+      "document_type": "attachment",
+      "before_publish_date": "2025-11-25",
+      "after_publish_date": "2025-11-25",
+      "date_evidence": "",
+      "date_confidence": 0.0,
+      "date_conflict": false,
+      "before_document_kind": "public_list",
+      "document_kind": "public_list",
+      "temporal_class": "recurring_public",
+      "series_key": "招生就业处|毕业生|福建省硕本选调生选拔范围高校名单",
+      "retention_status": "active",
+      "retention_reason": "recent_2_school_years",
+      "canonical_doc_id": "",
+      "index_collection": "public_list",
+      "raw_available": true,
+      "reasons": [
+        "recent_2_school_years"
       ]
     },
     {
@@ -47070,6 +47511,29 @@
       "raw_available": true,
       "reasons": [
         "prior_annual_series_version"
+      ]
+    },
+    {
+      "doc_id": "d017492483b1",
+      "title": "25040715363470011944.doc",
+      "source_url": "https://career.sufe.edu.cn/upload/image/20250407/25040715363470011944.doc",
+      "document_type": "attachment",
+      "before_publish_date": "2025-04-07",
+      "after_publish_date": "2025-04-07",
+      "date_evidence": "",
+      "date_confidence": 0.0,
+      "date_conflict": false,
+      "before_document_kind": "manual",
+      "document_kind": "manual",
+      "temporal_class": "enduring",
+      "series_key": "上海财经大学就业指导中心|毕业生|25040715363470011944",
+      "retention_status": "active",
+      "retention_reason": "enduring_document",
+      "canonical_doc_id": "",
+      "index_collection": "main_qa",
+      "raw_available": true,
+      "reasons": [
+        "enduring_document"
       ]
     },
     {
@@ -58564,6 +59028,29 @@
       ]
     },
     {
+      "doc_id": "fe623e62a18a",
+      "title": "25011015435112016934.xlsx",
+      "source_url": "https://career.sufe.edu.cn/upload/image/20250110/25011015435112016934.xlsx",
+      "document_type": "attachment",
+      "before_publish_date": "2025-01-10",
+      "after_publish_date": "2025-01-10",
+      "date_evidence": "",
+      "date_confidence": 0.0,
+      "date_conflict": false,
+      "before_document_kind": "manual",
+      "document_kind": "manual",
+      "temporal_class": "enduring",
+      "series_key": "上海财经大学就业指导中心|毕业生|25011015435112016934",
+      "retention_status": "active",
+      "retention_reason": "enduring_document",
+      "canonical_doc_id": "",
+      "index_collection": "main_qa",
+      "raw_available": true,
+      "reasons": [
+        "enduring_document"
+      ]
+    },
+    {
       "doc_id": "fe84d1700332",
       "title": "20250106--统计与数据科学学院2024-2025学年本科毕业论文工作流程安排.pdf",
       "source_url": "https://ssds.sufe.edu.cn/_upload/article/files/51/f6/e1a5a8bf47329b0fba8c70ccb9b4/064cc808-3d24-4f66-9d5b-1f36b7c065a2.pdf",
@@ -59003,512 +59490,6 @@
       "raw_available": true,
       "reasons": [
         "all_history"
-      ]
-    },
-    {
-      "doc_id": "78bd1fad08ad",
-      "title": "江西省2026年从上海财经大学选调应届优秀大学毕业生拟录用人员名单.xlsx",
-      "source_url": "https://career.sufe.edu.cn/career/download/fileDownload/199928975416496128/199929834116354048",
-      "document_type": "attachment",
-      "before_publish_date": "2026-05-27",
-      "after_publish_date": "2026-05-27",
-      "date_evidence": "",
-      "date_confidence": 0.0,
-      "date_conflict": false,
-      "before_document_kind": "public_list",
-      "document_kind": "public_list",
-      "temporal_class": "recurring_public",
-      "series_key": "中共江西省委组织部|毕业生|江西省从上海财经大学选调应届优秀大学毕业生拟录用人员名单",
-      "retention_status": "active",
-      "retention_reason": "recent_2_school_years",
-      "canonical_doc_id": "",
-      "index_collection": "public_list",
-      "raw_available": true,
-      "reasons": [
-        "recent_2_school_years"
-      ]
-    },
-    {
-      "doc_id": "56d8b2b6f02b",
-      "title": "附件1-青岛市情简介.docx",
-      "source_url": "https://career.sufe.edu.cn/career/download/fileDownload/172081396997820416/172083257633017856",
-      "document_type": "attachment",
-      "before_publish_date": "2026-03-11",
-      "after_publish_date": "2026-03-11",
-      "date_evidence": "",
-      "date_confidence": 0.0,
-      "date_conflict": false,
-      "before_document_kind": "manual",
-      "document_kind": "manual",
-      "temporal_class": "enduring",
-      "series_key": "招生就业处|毕业生|附件1-青岛市情简介",
-      "retention_status": "active",
-      "retention_reason": "all_history",
-      "canonical_doc_id": "",
-      "index_collection": "main_qa",
-      "raw_available": true,
-      "reasons": [
-        "all_history"
-      ]
-    },
-    {
-      "doc_id": "35a66510855d",
-      "title": "附件2-2026年度青岛市专项招录公务员公告.docx",
-      "source_url": "https://career.sufe.edu.cn/career/download/fileDownload/172081396997820416/172083258102779904",
-      "document_type": "attachment",
-      "before_publish_date": "2026-03-11",
-      "after_publish_date": "2026-03-11",
-      "date_evidence": "",
-      "date_confidence": 0.0,
-      "date_conflict": false,
-      "before_document_kind": "incomplete",
-      "document_kind": "incomplete",
-      "temporal_class": "undated",
-      "series_key": "招生就业处|毕业生|附件2-青岛市专项招录公务员",
-      "retention_status": "archived",
-      "retention_reason": "isolated_document_kind",
-      "canonical_doc_id": "",
-      "index_collection": "none",
-      "raw_available": true,
-      "reasons": [
-        "isolated_document_kind"
-      ]
-    },
-    {
-      "doc_id": "1a398793e47e",
-      "title": "附件3-2026年度青岛市专项招录公务员职位表.xlsx",
-      "source_url": "https://career.sufe.edu.cn/career/download/fileDownload/172081396997820416/172083257721098240",
-      "document_type": "attachment",
-      "before_publish_date": "2026-03-11",
-      "after_publish_date": "2026-03-11",
-      "date_evidence": "",
-      "date_confidence": 0.0,
-      "date_conflict": false,
-      "before_document_kind": "incomplete",
-      "document_kind": "incomplete",
-      "temporal_class": "undated",
-      "series_key": "招生就业处|毕业生|附件3-青岛市专项招录公务员职位表",
-      "retention_status": "archived",
-      "retention_reason": "isolated_document_kind",
-      "canonical_doc_id": "",
-      "index_collection": "none",
-      "raw_available": true,
-      "reasons": [
-        "isolated_document_kind"
-      ]
-    },
-    {
-      "doc_id": "883f9faf2b3b",
-      "title": "江苏省2026年应届优秀大学毕业生选调县级以上机关职位（名校优生）入围递补人选名单（上海财经大学）.xlsx",
-      "source_url": "https://career.sufe.edu.cn/career/download/fileDownload/172007928205807616/172008078550634496",
-      "document_type": "attachment",
-      "before_publish_date": "2026-03-11",
-      "after_publish_date": "2026-03-11",
-      "date_evidence": "",
-      "date_confidence": 0.0,
-      "date_conflict": false,
-      "before_document_kind": "public_list",
-      "document_kind": "public_list",
-      "temporal_class": "recurring_public",
-      "series_key": "中共江苏省委组织部|毕业生|江苏省应届优秀大学毕业生选调县级以上机关职位(名校优生)入围递补人选名单(上海财经大学",
-      "retention_status": "active",
-      "retention_reason": "recent_2_school_years",
-      "canonical_doc_id": "",
-      "index_collection": "public_list",
-      "raw_available": true,
-      "reasons": [
-        "recent_2_school_years"
-      ]
-    },
-    {
-      "doc_id": "6efdeb34fed2",
-      "title": "江苏省2026年应届优秀大学毕业生选调县级以上机关职位（名校优生）拟录用人选名单（上海财经大学）.xlsx",
-      "source_url": "https://career.sufe.edu.cn/career/download/fileDownload/154958702020005888/154959902291398656",
-      "document_type": "attachment",
-      "before_publish_date": "2026-01-23",
-      "after_publish_date": "2026-01-23",
-      "date_evidence": "",
-      "date_confidence": 0.0,
-      "date_conflict": false,
-      "before_document_kind": "public_list",
-      "document_kind": "public_list",
-      "temporal_class": "recurring_public",
-      "series_key": "招生就业处|毕业生|江苏省应届优秀大学毕业生选调县级以上机关职位(名校优生)拟录用人选名单(上海财经大学",
-      "retention_status": "active",
-      "retention_reason": "recent_2_school_years",
-      "canonical_doc_id": "",
-      "index_collection": "public_list",
-      "raw_available": true,
-      "reasons": [
-        "recent_2_school_years"
-      ]
-    },
-    {
-      "doc_id": "c2c6b55a4e86",
-      "title": "福建省2026年度硕本选调生选拔范围高校名单.doc",
-      "source_url": "https://career.sufe.edu.cn/career/download/fileDownload/133678599759859712/133679719097962496",
-      "document_type": "attachment",
-      "before_publish_date": "2025-11-25",
-      "after_publish_date": "2025-11-25",
-      "date_evidence": "",
-      "date_confidence": 0.0,
-      "date_conflict": false,
-      "before_document_kind": "public_list",
-      "document_kind": "public_list",
-      "temporal_class": "recurring_public",
-      "series_key": "招生就业处|毕业生|福建省硕本选调生选拔范围高校名单",
-      "retention_status": "active",
-      "retention_reason": "recent_2_school_years",
-      "canonical_doc_id": "",
-      "index_collection": "public_list",
-      "raw_available": true,
-      "reasons": [
-        "recent_2_school_years"
-      ]
-    },
-    {
-      "doc_id": "c04448ba225a",
-      "title": "福建省2026年度硕本选调生招录名额计划安排表.xls",
-      "source_url": "https://career.sufe.edu.cn/career/download/fileDownload/133678599759859712/133679740002373632",
-      "document_type": "attachment",
-      "before_publish_date": "2025-11-25",
-      "after_publish_date": "2025-11-25",
-      "date_evidence": "",
-      "date_confidence": 0.0,
-      "date_conflict": false,
-      "before_document_kind": "incomplete",
-      "document_kind": "incomplete",
-      "temporal_class": "undated",
-      "series_key": "招生就业处|毕业生|福建省硕本选调生招录名额计划安排表",
-      "retention_status": "archived",
-      "retention_reason": "isolated_document_kind",
-      "canonical_doc_id": "",
-      "index_collection": "none",
-      "raw_available": true,
-      "reasons": [
-        "isolated_document_kind"
-      ]
-    },
-    {
-      "doc_id": "ae2228398ea5",
-      "title": "附件1.内蒙古自治区2026年定向选调岗位计划表.xlsx",
-      "source_url": "https://career.sufe.edu.cn/career/download/fileDownload/126816175672922112/126816512664276992",
-      "document_type": "attachment",
-      "before_publish_date": "2025-11-06",
-      "after_publish_date": "2025-11-06",
-      "date_evidence": "",
-      "date_confidence": 0.0,
-      "date_conflict": false,
-      "before_document_kind": "manual",
-      "document_kind": "manual",
-      "temporal_class": "enduring",
-      "series_key": "招生就业处|毕业生|附件1.内蒙古自治区定向选调岗位计划表",
-      "retention_status": "active",
-      "retention_reason": "all_history",
-      "canonical_doc_id": "",
-      "index_collection": "main_qa",
-      "raw_available": true,
-      "reasons": [
-        "all_history"
-      ]
-    },
-    {
-      "doc_id": "9d07eb766e03",
-      "title": "附件2.内蒙古自治区2026年定向选聘岗位计划表.xlsx",
-      "source_url": "https://career.sufe.edu.cn/career/download/fileDownload/126816175672922112/126816539335856128",
-      "document_type": "attachment",
-      "before_publish_date": "2025-11-06",
-      "after_publish_date": "2025-11-06",
-      "date_evidence": "",
-      "date_confidence": 0.0,
-      "date_conflict": false,
-      "before_document_kind": "manual",
-      "document_kind": "manual",
-      "temporal_class": "enduring",
-      "series_key": "招生就业处|毕业生|附件2.内蒙古自治区定向选聘岗位计划表",
-      "retention_status": "active",
-      "retention_reason": "all_history",
-      "canonical_doc_id": "",
-      "index_collection": "main_qa",
-      "raw_available": true,
-      "reasons": [
-        "all_history"
-      ]
-    },
-    {
-      "doc_id": "64fbb018c7ea",
-      "title": "附件2：贵州省2026年度定向部分高校选调优秀毕业生报名推荐表.doc",
-      "source_url": "https://career.sufe.edu.cn/career/download/fileDownload/118422202369576960/118424330626535424",
-      "document_type": "attachment",
-      "before_publish_date": "2025-10-14",
-      "after_publish_date": "2025-10-14",
-      "date_evidence": "",
-      "date_confidence": 0.0,
-      "date_conflict": false,
-      "before_document_kind": "annual_notice",
-      "document_kind": "annual_notice",
-      "temporal_class": "annual",
-      "series_key": "招生就业处|毕业生|附件2:贵州省定向部分高校选调优秀毕业生报名推荐表",
-      "retention_status": "active",
-      "retention_reason": "recent_5_school_years",
-      "canonical_doc_id": "64fbb018c7ea",
-      "index_collection": "main_qa",
-      "raw_available": true,
-      "reasons": [
-        "recent_5_school_years"
-      ]
-    },
-    {
-      "doc_id": "1e573accae73",
-      "title": "甘肃省2026年选调应届优秀大学毕业生报名推荐登记表.doc",
-      "source_url": "https://career.sufe.edu.cn/career/download/fileDownload/110293819282558976/110298290922328064",
-      "document_type": "attachment",
-      "before_publish_date": "2025-09-22",
-      "after_publish_date": "2025-09-22",
-      "date_evidence": "",
-      "date_confidence": 0.0,
-      "date_conflict": false,
-      "before_document_kind": "annual_notice",
-      "document_kind": "annual_notice",
-      "temporal_class": "annual",
-      "series_key": "招生就业处|毕业生|甘肃省选调应届优秀大学毕业生报名推荐登记表",
-      "retention_status": "active",
-      "retention_reason": "recent_5_school_years",
-      "canonical_doc_id": "1e573accae73",
-      "index_collection": "main_qa",
-      "raw_available": true,
-      "reasons": [
-        "recent_5_school_years"
-      ]
-    },
-    {
-      "doc_id": "8526cff56dd4",
-      "title": "甘肃省2026年选调应届优秀大学毕业生选调范围.doc",
-      "source_url": "https://career.sufe.edu.cn/career/download/fileDownload/110293819282558976/110298290783916032",
-      "document_type": "attachment",
-      "before_publish_date": "2025-09-22",
-      "after_publish_date": "2025-09-22",
-      "date_evidence": "",
-      "date_confidence": 0.0,
-      "date_conflict": false,
-      "before_document_kind": "manual",
-      "document_kind": "manual",
-      "temporal_class": "enduring",
-      "series_key": "招生就业处|毕业生|甘肃省选调应届优秀大学毕业生选调范围",
-      "retention_status": "active",
-      "retention_reason": "all_history",
-      "canonical_doc_id": "",
-      "index_collection": "main_qa",
-      "raw_available": true,
-      "reasons": [
-        "all_history"
-      ]
-    },
-    {
-      "doc_id": "4a04065037f9",
-      "title": "25052511183493235204.xls",
-      "source_url": "https://career.sufe.edu.cn/upload/image/20250525/25052511183493235204.xls",
-      "document_type": "attachment",
-      "before_publish_date": "2025-05-25",
-      "after_publish_date": "2025-05-25",
-      "date_evidence": "",
-      "date_confidence": 0.0,
-      "date_conflict": false,
-      "before_document_kind": "incomplete",
-      "document_kind": "incomplete",
-      "temporal_class": "undated",
-      "series_key": "上海财经大学就业指导中心|毕业生|25052511183493235204",
-      "retention_status": "archived",
-      "retention_reason": "isolated_document_kind",
-      "canonical_doc_id": "",
-      "index_collection": "none",
-      "raw_available": true,
-      "reasons": [
-        "isolated_document_kind"
-      ]
-    },
-    {
-      "doc_id": "739a53fc1334",
-      "title": "25041816573701114056.xlsx",
-      "source_url": "https://career.sufe.edu.cn/upload/image/20250418/25041816573701114056.xlsx",
-      "document_type": "attachment",
-      "before_publish_date": "2025-04-18",
-      "after_publish_date": "2025-04-18",
-      "date_evidence": "",
-      "date_confidence": 0.0,
-      "date_conflict": false,
-      "before_document_kind": "manual",
-      "document_kind": "manual",
-      "temporal_class": "enduring",
-      "series_key": "上海财经大学就业指导中心|毕业生|25041816573701114056",
-      "retention_status": "active",
-      "retention_reason": "enduring_document",
-      "canonical_doc_id": "",
-      "index_collection": "main_qa",
-      "raw_available": true,
-      "reasons": [
-        "enduring_document"
-      ]
-    },
-    {
-      "doc_id": "d017492483b1",
-      "title": "25040715363470011944.doc",
-      "source_url": "https://career.sufe.edu.cn/upload/image/20250407/25040715363470011944.doc",
-      "document_type": "attachment",
-      "before_publish_date": "2025-04-07",
-      "after_publish_date": "2025-04-07",
-      "date_evidence": "",
-      "date_confidence": 0.0,
-      "date_conflict": false,
-      "before_document_kind": "manual",
-      "document_kind": "manual",
-      "temporal_class": "enduring",
-      "series_key": "上海财经大学就业指导中心|毕业生|25040715363470011944",
-      "retention_status": "active",
-      "retention_reason": "enduring_document",
-      "canonical_doc_id": "",
-      "index_collection": "main_qa",
-      "raw_available": true,
-      "reasons": [
-        "enduring_document"
-      ]
-    },
-    {
-      "doc_id": "5844e5adf788",
-      "title": "25040715363468211943.xlsx",
-      "source_url": "https://career.sufe.edu.cn/upload/image/20250407/25040715363468211943.xlsx",
-      "document_type": "attachment",
-      "before_publish_date": "2025-04-07",
-      "after_publish_date": "2025-04-07",
-      "date_evidence": "",
-      "date_confidence": 0.0,
-      "date_conflict": false,
-      "before_document_kind": "manual",
-      "document_kind": "manual",
-      "temporal_class": "enduring",
-      "series_key": "上海财经大学就业指导中心|毕业生|25040715363468211943",
-      "retention_status": "active",
-      "retention_reason": "enduring_document",
-      "canonical_doc_id": "",
-      "index_collection": "main_qa",
-      "raw_available": true,
-      "reasons": [
-        "enduring_document"
-      ]
-    },
-    {
-      "doc_id": "71e07f6741dd",
-      "title": "25040215453356510377.doc",
-      "source_url": "https://career.sufe.edu.cn/upload/image/20250402/25040215453356510377.doc",
-      "document_type": "attachment",
-      "before_publish_date": "2025-04-02",
-      "after_publish_date": "2025-04-02",
-      "date_evidence": "",
-      "date_confidence": 0.0,
-      "date_conflict": false,
-      "before_document_kind": "manual",
-      "document_kind": "manual",
-      "temporal_class": "enduring",
-      "series_key": "上海财经大学就业指导中心|毕业生|25040215453356510377",
-      "retention_status": "active",
-      "retention_reason": "enduring_document",
-      "canonical_doc_id": "",
-      "index_collection": "main_qa",
-      "raw_available": true,
-      "reasons": [
-        "enduring_document"
-      ]
-    },
-    {
-      "doc_id": "975920cdc29f",
-      "title": "25032012394356621554.xlsx",
-      "source_url": "https://career.sufe.edu.cn/upload/image/20250320/25032012394356621554.xlsx",
-      "document_type": "attachment",
-      "before_publish_date": "2025-03-20",
-      "after_publish_date": "2025-03-20",
-      "date_evidence": "",
-      "date_confidence": 0.0,
-      "date_conflict": false,
-      "before_document_kind": "manual",
-      "document_kind": "manual",
-      "temporal_class": "enduring",
-      "series_key": "上海财经大学就业指导中心|毕业生|25032012394356621554",
-      "retention_status": "active",
-      "retention_reason": "enduring_document",
-      "canonical_doc_id": "",
-      "index_collection": "main_qa",
-      "raw_available": true,
-      "reasons": [
-        "enduring_document"
-      ]
-    },
-    {
-      "doc_id": "264ea9e0cdb3",
-      "title": "25022820321252012437.xlsx",
-      "source_url": "https://career.sufe.edu.cn/upload/image/20250228/25022820321252012437.xlsx",
-      "document_type": "attachment",
-      "before_publish_date": "2025-02-28",
-      "after_publish_date": "2025-02-28",
-      "date_evidence": "",
-      "date_confidence": 0.0,
-      "date_conflict": false,
-      "before_document_kind": "manual",
-      "document_kind": "manual",
-      "temporal_class": "enduring",
-      "series_key": "上海财经大学就业指导中心|毕业生|25022820321252012437",
-      "retention_status": "active",
-      "retention_reason": "enduring_document",
-      "canonical_doc_id": "",
-      "index_collection": "main_qa",
-      "raw_available": true,
-      "reasons": [
-        "enduring_document"
-      ]
-    },
-    {
-      "doc_id": "fe623e62a18a",
-      "title": "25011015435112016934.xlsx",
-      "source_url": "https://career.sufe.edu.cn/upload/image/20250110/25011015435112016934.xlsx",
-      "document_type": "attachment",
-      "before_publish_date": "2025-01-10",
-      "after_publish_date": "2025-01-10",
-      "date_evidence": "",
-      "date_confidence": 0.0,
-      "date_conflict": false,
-      "before_document_kind": "manual",
-      "document_kind": "manual",
-      "temporal_class": "enduring",
-      "series_key": "上海财经大学就业指导中心|毕业生|25011015435112016934",
-      "retention_status": "active",
-      "retention_reason": "enduring_document",
-      "canonical_doc_id": "",
-      "index_collection": "main_qa",
-      "raw_available": true,
-      "reasons": [
-        "enduring_document"
-      ]
-    },
-    {
-      "doc_id": "1ba62aac06ab",
-      "title": "24122709453202811984.xlsx",
-      "source_url": "https://career.sufe.edu.cn/upload/image/20241227/24122709453202811984.xlsx",
-      "document_type": "attachment",
-      "before_publish_date": "2024-12-27",
-      "after_publish_date": "2024-12-27",
-      "date_evidence": "",
-      "date_confidence": 0.0,
-      "date_conflict": false,
-      "before_document_kind": "manual",
-      "document_kind": "manual",
-      "temporal_class": "enduring",
-      "series_key": "上海财经大学就业指导中心|毕业生|24122709453202811984",
-      "retention_status": "active",
-      "retention_reason": "enduring_document",
-      "canonical_doc_id": "",
-      "index_collection": "main_qa",
-      "raw_available": true,
-      "reasons": [
-        "enduring_document"
       ]
     }
   ]
