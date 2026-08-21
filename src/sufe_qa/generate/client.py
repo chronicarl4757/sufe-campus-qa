@@ -35,10 +35,15 @@ class DeepSeekClient:
                 },
             },
         )
-        for chunk in stream:
-            delta = chunk.choices[0].delta.content
-            if delta:
-                yield delta
+        try:
+            for chunk in stream:
+                delta = chunk.choices[0].delta.content
+                if delta:
+                    yield delta
+        finally:
+            # 消费方中途退出（引用门禁拦截/客户端断开）时释放底层连接，
+            # 避免连接泄漏累积后新请求拿不到连接而悬挂
+            stream.close()
 
 
 class FakeLLM:

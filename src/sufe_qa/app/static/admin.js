@@ -75,7 +75,28 @@ function shortFingerprint(value) {
 async function api(path, options = {}) {
   const headers = new Headers(options.headers || {});
   headers.set("Authorization", `Bearer ${state.token}`);
-  const response = await fetch(path, {...options, headers});
+  const timeoutMs = options.timeoutMs || 0;
+  const fetchOptions = {...options, headers};
+  delete fetchOptions.timeoutMs;
+  let response;
+  if (timeoutMs > 0) {
+    const controller = new AbortController();
+    const timer = window.setTimeout(() => controller.abort(), timeoutMs);
+    try {
+      response = await fetch(path, {...fetchOptions, signal: controller.signal});
+    } catch (error) {
+      window.clearTimeout(timer);
+      if (error.name === "AbortError") {
+        const timeoutError = new Error(`请求超过 ${Math.round(timeoutMs / 1000)} 秒未响应，请重试`);
+        timeoutError.status = 0;
+        throw timeoutError;
+      }
+      throw error;
+    }
+    window.clearTimeout(timer);
+  } else {
+    response = await fetch(path, fetchOptions);
+  }
   let payload = {};
   try {
     payload = await response.json();
@@ -458,6 +479,7 @@ async function debugQuestion(question) {
     method: "POST",
     headers: {"Content-Type": "application/json"},
     body: JSON.stringify({question}),
+    timeoutMs: 90000,
   }));
 }
 
