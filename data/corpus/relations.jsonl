@@ -630,3 +630,4 @@
 {"parent_doc_id": "1b18ebac8a90", "child_doc_id": "fe623e62a18a", "relation": "attachment_of", "evidence": "", "confidence": 1.0, "created_at": ""}
 {"parent_doc_id": "f0402f2d6676", "child_doc_id": "1ba62aac06ab", "relation": "attachment_of", "evidence": "", "confidence": 1.0, "created_at": ""}
 {"parent_doc_id": "840afcabb449", "child_doc_id": "5133038bd0ed", "relation": "supersedes", "evidence": "修订信息管理与工程学院结业学生考核或答辩申请表", "confidence": 0.95, "created_at": ""}
+{"parent_doc_id": "d0ad79e7348c", "child_doc_id": "cc4a93d90c3e", "relation": "attachment_of", "evidence": "dedup:同 binary 附件顶替已隔离副本 52a785d3df9c（repair 多父关系）", "confidence": 1.0, "created_at": "2026-08-31T13:18:00+00:00"}

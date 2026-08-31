@@ -1,0 +1,105 @@
+{
+ "mode": "seed",
+ "started_at": "2026-08-21T06:47:40+00:00",
+ "discovery_status": "ok",
+ "discovered": 9,
+ "whitelist_passed": 0,
+ "date_passed": 0,
+ "relevance_passed": 0,
+ "direct_content": 0,
+ "fetch_ok": 0,
+ "fetch_failed": 9,
+ "empty_body": 0,
+ "quality_accepted": 0,
+ "quality_rejected": 0,
+ "duplicate": 0,
+ "indexed_candidate": 0,
+ "reject_reasons": {
+  "fetch_failed": 9
+ },
+ "decisions": [
+  {
+   "url": "https://mp.weixin.qq.com/s?__biz=MjM5NjM3ODg3Mg==&mid=2658958499&idx=1",
+   "title": "重要通知｜上海财经大学商学院2027年接收优秀应届本科毕业生免试攻读研究生预报名的通知",
+   "decision": "reject",
+   "reason": "fetch_failed",
+   "status": "verify_required",
+   "error": "命中微信风控验证页（环境异常/访问频繁），未绕过",
+   "topic": "其他招生"
+  },
+  {
+   "url": "https://mp.weixin.qq.com/s?__biz=Mzg4NjczODI3Ng==&mid=2247487090&idx=1",
+   "title": "上海财经大学交叉科学研究院2027年接收推荐免试研究生（含直博生）预报名的通知",
+   "decision": "reject",
+   "reason": "fetch_failed",
+   "status": "verify_required",
+   "error": "命中微信风控验证页（环境异常/访问频繁），未绕过",
+   "topic": "推免/预推免"
+  },
+  {
+   "url": "https://mp.weixin.qq.com/s?__biz=MzkzOTQzNzAwNA==&mid=2247487871&idx=1",
+   "title": "上海财经大学数字经济学院2027年接收推荐免试研究生预推免报名的通知",
+   "decision": "reject",
+   "reason": "fetch_failed",
+   "status": "verify_required",
+   "error": "命中微信风控验证页（环境异常/访问频繁），未绕过",
+   "topic": "推免/预推免"
+  },
+  {
+   "url": "https://mp.weixin.qq.com/s?__biz=MzI3Mjk2NTgwNA==&mid=2247539617&idx=1",
+   "title": "权威发布丨上海财经大学2026年本科招生亮点",
+   "decision": "reject",
+   "reason": "fetch_failed",
+   "status": "verify_required",
+   "error": "命中微信风控验证页（环境异常/访问频繁），未绕过",
+   "topic": "本科招生"
+  },
+  {
+   "url": "https://mp.weixin.qq.com/s?__biz=MjM5NTU0NTI0Ng==&mid=2651515684&idx=1",
+   "title": "上海财经大学外国语学院2027年接收优秀应届本科毕业生免试攻读研究生预报名的通知",
+   "decision": "reject",
+   "reason": "fetch_failed",
+   "status": "verify_required",
+   "error": "命中微信风控验证页（环境异常/访问频繁），未绕过",
+   "topic": "其他招生"
+  },
+  {
+   "url": "https://mp.weixin.qq.com/s?__biz=MzA3OTM1MTAyNw==&mid=2649564158&idx=2",
+   "title": "招生简章 | 2026年上海财经大学信息管理与工程学院在职课程培训班",
+   "decision": "reject",
+   "reason": "fetch_failed",
+   "status": "verify_required",
+   "error": "命中微信风控验证页（环境异常/访问频繁），未绕过",
+   "topic": "非学历项目"
+  },
+  {
+   "url": "https://mp.weixin.qq.com/s?__biz=MzA3OTM1MTAyNw==&mid=2649564220&idx=1",
+   "title": "上海财经大学信息管理与工程学院2027年接收推荐免试研究生（含直博生）预报名的通知",
+   "decision": "reject",
+   "reason": "fetch_failed",
+   "status": "verify_required",
+   "error": "命中微信风控验证页（环境异常/访问频繁），未绕过",
+   "topic": "推免/预推免"
+  },
+  {
+   "url": "https://mp.weixin.qq.com/s?__biz=MzY5NDE4MDk0NQ==&mid=2247484674&idx=1",
+   "title": "上海财经大学全球南方财经研究院2027年接收优秀应届本科毕业生免试攻读研究生预报名的通知",
+   "decision": "reject",
+   "reason": "fetch_failed",
+   "status": "verify_required",
+   "error": "命中微信风控验证页（环境异常/访问频繁），未绕过",
+   "topic": "其他招生"
+  },
+  {
+   "url": "https://mp.weixin.qq.com/s?__biz=MzkzOTQzNzAwNA==&mid=2247487949&idx=1",
+   "title": "上海财经大学数字经济学院数字经济（住企培养）项目2027年接收推荐免试研究生预报名的通知",
+   "decision": "reject",
+   "reason": "fetch_failed",
+   "status": "verify_required",
+   "error": "命中微信风控验证页（环境异常/访问频繁），未绕过",
+   "topic": "推免/预推免"
+  }
+ ],
+ "warnings": [],
+ "notes": []
+}
