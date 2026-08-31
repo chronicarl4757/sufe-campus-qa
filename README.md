@@ -23,9 +23,10 @@ DeepSeek 生成**带 [n] 来源引用**的回答；检索不到可靠来源时�
 在线问答：
   问题 → 向量 top-20 + BM25(jieba) top-20 → RRF 融合
   → 时效重排(年更政策新版优先) × 类型权重(policy 1.1 / news 0.85)
-  → 多样性截留(单文档≤3 chunk, 防长 PDF/同模板兄弟文档霸屏) → top-8
+  → 多样性截留(单文档≤3 chunk；同父公告的学院附件同样≤3，点名学院的提问豁免)
+  → 院系降权(泛问时学院级文档 ×0.85，点名该学院不降权) → top-8
   → 向量最高相似度 < 门控阈值 → 拒答模板(不走 LLM)
-  → DeepSeek(流式, 严格引用 prompt) → 句子级引用门禁(越界编号整答撤回) → 回答 + [n]引用 → 来源卡片
+  → DeepSeek(流式, 严格引用 prompt) → 句子级引用门禁(越界编号整答撤回) → 回答 + [n]引用 → 来源卡片(只展示被实际引用的文档)
 
 Web 界面（FastAPI + SSE，app/）：
   红头档案设计语言——每次回答渲染为带文号/文武线/仿宋正文的"答复函"，
@@ -145,7 +146,7 @@ Dashboard 是“馆藏账本”而非统计图，覆盖非专业维护者的日�
 
 ## 评测
 
-正式评测集 `data/eval/evalset.v1.jsonl`（9 应答题 + 3 拒答题，doc_id 锚定 manifest）随仓库提供：
+正式评测集 `data/eval/evalset.v1.jsonl`（14 应答题 + 3 拒答题，doc_id 锚定 manifest）随仓库提供：
 
 ```bash
 sufe-qa eval   # 检索命中率 / 应答题回答率 / 拒答正确率，任一不达标退出码 1
@@ -169,7 +170,10 @@ src/sufe_qa/
   retrieve/   向量 + BM25 + RRF 融合，置信门控，时效×类型重排
   generate/   DeepSeek 流式客户端、严格引用 prompt + 引用编号校验/门禁、来源卡片
   evals/      评测集加载、打分、门禁
-  app/        FastAPI + SSE 服务、静态前端（红头档案界面）
+  app/        FastAPI + SSE 服务、静态前端（红头档案界面）+ 管理端 Dashboard
+  wechat/     公众号发现(Seed/WeRSS)、白名单、正文图片可选 OCR
+  coverage/   固定题库覆盖审计、benchmark 探针
+  quality/    语料质量审计与发布门禁（quality-gates）
   cli.py      crawl / discover-site / crawl-site / crawl-report / ingest / index / ask / eval / serve
 data/
   inbox/          手动投放入口       corpus/     标准语料 + manifest + relations
@@ -180,7 +184,7 @@ data/
 
 ## 开发
 
-- `uv run pytest`：233 项测试，全程 FakeEmbedder/FakeLLM/MockTransport 离线可跑
+- `uv run pytest`：563 项测试，全程 FakeEmbedder/FakeLLM/MockTransport 离线可跑
 - `uv run ruff check && uv run ruff format`
 - CLI 的 `--fake-embed` 为离线开发开关（确定性假向量，索引与问答需同用）
 - 种子站 24 个（`seeds.yaml`）：研究生院/商学院为自建站，各学院 _wp3 站走

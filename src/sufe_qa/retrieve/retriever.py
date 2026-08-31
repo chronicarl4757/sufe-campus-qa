@@ -53,6 +53,14 @@ _QUERY_EXPANSIONS = (
         re.compile(r"成绩.*异议|成绩.*复核"),
         "期末成绩 成绩发布后7日 成绩复核",
     ),
+    (
+        re.compile(r"电子校园卡|虚拟校园卡|校园卡.*领取|领取.*校园卡"),
+        "一卡通2.0 二维码 电子卡 上财微门户 服务大厅",
+    ),
+    (
+        re.compile(r"报修|维修"),
+        "物业 维修 后勤保障中心 水电报修 服务电话",
+    ),
 )
 
 
@@ -133,6 +141,29 @@ def retrieval_time_weight(
     if document_kind not in _TIME_BOUND_DOCUMENT_KINDS:
         return 1.0
     return recency_weight(publish_date, today)
+
+
+# 学院/研究院级文档在问题未点名该院系时的排序降权（校级与职能部门文档优先）
+COLLEGE_UNNAMED_WEIGHT = 0.85
+_UNIT_RE = re.compile(r"[一-龥]{2,15}(?:学院|研究院)")
+
+
+def question_names_unit(question: str, *texts: str) -> bool:
+    """问题是否点名了文档所属学院/研究院（双向包含，兼容“经济学院”类简称）。"""
+    q_units = set(_UNIT_RE.findall(question))
+    if not q_units:
+        return False
+    doc_units = set(_UNIT_RE.findall(" ".join(texts)))
+    return any(q in d or d in q for q in q_units for d in doc_units)
+
+
+def authority_weight(question: str, publisher: str, title: str) -> float:
+    """未点名院系的泛问里，院系级文档降权；点名该院系或校级文档不降权。"""
+    if not _UNIT_RE.search(f"{publisher}{title}"):
+        return 1.0
+    if question_names_unit(question, publisher, title):
+        return 1.0
+    return COLLEGE_UNNAMED_WEIGHT
 
 
 @dataclass
@@ -266,29 +297,44 @@ class HybridRetriever:
 
         fused = rrf_fuse([vec_ids, bm_ids], s.rrf_k)
         candidates = sorted(fused, key=lambda cid: fused[cid], reverse=True)[: s.fusion_top_n * 3]
-        ranked = sorted(
-            candidates,
-            key=lambda cid: (
+
+        def _rank_score(cid: str) -> float:
+            meta = view.store.get(cid, ("", {}))[1]
+            return (
                 fused[cid]
                 * retrieval_time_weight(
-                    str(
-                        view.store.get(cid, ("", {}))[1].get(
-                            "document_kind", "incomplete"
-                        )
-                    ),
-                    str(view.store.get(cid, ("", {}))[1].get("publish_date", "")),
+                    str(meta.get("document_kind", "incomplete")),
+                    str(meta.get("publish_date", "")),
                 )
-                * float(view.store.get(cid, ("", {}))[1].get("boost", 1.0) or 1.0)
-            ),
-            reverse=True,
-        )
+                * float(meta.get("boost", 1.0) or 1.0)
+                * authority_weight(
+                    question,
+                    str(meta.get("publisher", "")),
+                    str(meta.get("title", "")),
+                )
+            )
+
+        ranked = sorted(candidates, key=_rank_score, reverse=True)
         top_ids: list[str] = []
         per_doc: dict[str, int] = {}
+        per_parent: dict[str, int] = {}
         for cid in ranked:
-            doc = str(view.store.get(cid, ("", {}))[1].get("doc_id", ""))
+            meta = view.store.get(cid, ("", {}))[1]
+            doc = str(meta.get("doc_id", ""))
             if per_doc.get(doc, 0) >= s.max_chunks_per_doc:
                 continue
+            # 同父附件兄弟文档（如同一公告的各学院复试方案 PDF）是独立 doc，
+            # 单文档截留管不到；按父级文档同样截留，防止一个公告霸屏 top-N。
+            # 例外：问题点名了该附件所属学院时（如“经济学院复试科目”），不受父级截留。
+            parent = str(meta.get("parent_doc_id", "") or "")
+            named = question_names_unit(
+                question, str(meta.get("publisher", "")), str(meta.get("title", ""))
+            )
+            if parent and not named and per_parent.get(parent, 0) >= s.max_chunks_per_doc:
+                continue
             per_doc[doc] = per_doc.get(doc, 0) + 1
+            if parent:
+                per_parent[parent] = per_parent.get(parent, 0) + 1
             top_ids.append(cid)
             if len(top_ids) >= s.fusion_top_n:
                 break

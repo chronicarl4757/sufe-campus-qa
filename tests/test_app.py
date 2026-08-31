@@ -468,7 +468,7 @@ def test_ask_citation_gate_revokes_after_valid_prefix(client_factory):
 
 
 def test_ask_no_citation_answer_warns_but_not_revoked(client_factory):
-    """全文无引用不触发门禁撤回，维持 citation_check 降级提示。"""
+    """全文无引用（软拒答/致歉）属正常应答：不触发门禁撤回，也不报校验失败。"""
 
     class NoCiteLLM:
         def stream_chat(self, messages):
@@ -477,8 +477,9 @@ def test_ask_no_citation_answer_warns_but_not_revoked(client_factory):
     client = client_factory(llm=NoCiteLLM())
     ev = _events(client.post("/api/ask", json={"question": QUESTION}).text)
     assert "error" not in ev
-    check = ev["sources"][0]["citation_check"]
-    assert check["ok"] is False and check["invalid_refs"] == []
+    # 无引用即无被引卡片：sources 为空卡片列表，citation_check 不下发降级提示
+    assert ev["sources"][0]["citation_check"] is None
+    assert ev["sources"][0]["cards"] == []
 
 
 def test_ask_refusal_citation_check_skipped(client):
