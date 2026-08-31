@@ -250,6 +250,30 @@ def test_report_counters(env):
     assert kinds["关于2026年本科生转专业工作的通知"] == "annual_notice"
 
 
+def test_allow_unlisted_imports_with_admin_confirmation(env):
+    """管理员逐篇导入可显式放行未列入白名单的账号（其他门禁不变）。"""
+    _write_seed(env["seed"], [{"account": "", "url": OTHER_ACCOUNT_URL}])
+    strict = _run(env)
+    assert strict.reject_reasons.get("not_whitelisted") == 1
+    assert strict.quality_accepted == 0
+
+    allowed = crawl_wechat(
+        accounts=env["accounts"],
+        discovery=SeedURLDiscovery(env["seed"]),
+        fetcher=env["fetcher"],
+        corpus_dir=env["corpus_dir"],
+        manifest_path=env["manifest_path"],
+        relations_path=env["relations_path"],
+        mode="admin-seed",
+        limit=1,
+        allow_unlisted=True,
+    )
+    assert allowed.quality_accepted == 1
+    assert any("未列入白名单" in w for w in allowed.warnings)
+    accepted = [d for d in allowed.decisions if d["decision"] == "accept"]
+    assert accepted[0]["account"] == "上财校园资讯"
+
+
 def test_old_article_rejected_post_fetch_when_seed_date_missing(env):
     _write_seed(env["seed"], [{"account": "上海财经大学教务处", "url": OLD_URL}])
     report = _run(env)
