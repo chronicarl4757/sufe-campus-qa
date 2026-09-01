@@ -54,6 +54,14 @@ _QUERY_EXPANSIONS = (
         "期末成绩 成绩发布后7日 成绩复核",
     ),
     (
+        re.compile(r"保研"),
+        "推荐免试 推免 免试攻读研究生",
+    ),
+    (
+        re.compile(r"预推免"),
+        "接收推荐免试研究生 报名通知",
+    ),
+    (
         re.compile(r"电子校园卡|虚拟校园卡|校园卡.*领取|领取.*校园卡"),
         "一卡通2.0 二维码 电子卡 上财微门户 服务大厅",
     ),
@@ -68,6 +76,31 @@ def expand_query(question: str) -> str:
     """补充校内稳定同义称谓；保留原问题，不改变门控阈值。"""
     additions = [terms for pattern, terms in _QUERY_EXPANSIONS if pattern.search(question)]
     return " ".join((question, *additions)) if additions else question
+
+
+def _publisher_college(publisher: str) -> str:
+    """publisher 归一出的学院级单位短名（"上海财经大学金融学院"→"金融学院"）；非学院级返回 ""。"""
+    short = publisher.removeprefix("上海财经大学").strip()
+    # "研究院"是学院级单位（交叉科学研究院）；注意"研究生院"以"究生院"结尾，天然不会误中
+    return short if short.endswith(("学院", "研究院")) else ""
+
+
+# 问题未点名该院系时，同族模板通知（去校名/学院名/年份后同标题）在 top-N 中的文档数上限：
+# 防止各学院同名年度通知挤满证据位、把校级制度文件挤出去
+_SAME_FAMILY_MAX_DOCS = 2
+
+
+def _family_key(title: str, publisher: str) -> str:
+    """同族归并键：去掉校名/学院名/年份及模板变体后标题仍足够长才视为同族，否则按原标题不截留。"""
+    text = re.sub(r"\s+", "", title).replace("上海财经大学", "")
+    college = _publisher_college(publisher)
+    if college:
+        text = text.replace(college, "")
+    text = re.sub(r"20\d{2}年(?:度)?", "", text)
+    # 各学院同模板的措辞变体归一：预推免/预报名同义、（含直博生）修饰、“的”字差异
+    text = text.replace("预推免报名", "预报名").replace("预推免", "预报名")
+    text = text.replace("（含直博生）", "").replace("的", "")
+    return text if len(text) >= 8 else title
 
 
 def route_collections(question: str) -> tuple[str, ...]:
@@ -318,6 +351,7 @@ class HybridRetriever:
         top_ids: list[str] = []
         per_doc: dict[str, int] = {}
         per_parent: dict[str, int] = {}
+        family_docs: dict[str, set[str]] = {}
         for cid in ranked:
             meta = view.store.get(cid, ("", {}))[1]
             doc = str(meta.get("doc_id", ""))
@@ -332,6 +366,14 @@ class HybridRetriever:
             )
             if parent and not named and per_parent.get(parent, 0) >= s.max_chunks_per_doc:
                 continue
+            # 问题未点名该院系时，各学院同族模板通知（去校名/学院名/年份后同标题）
+            # 限席位，防止同名年度通知挤满 top-N、把校级制度文档挤出证据位
+            if not named:
+                fam = _family_key(str(meta.get("title", "")), str(meta.get("publisher", "")))
+                docs_in_family = family_docs.setdefault(fam, set())
+                if doc not in docs_in_family and len(docs_in_family) >= _SAME_FAMILY_MAX_DOCS:
+                    continue
+                docs_in_family.add(doc)
             per_doc[doc] = per_doc.get(doc, 0) + 1
             if parent:
                 per_parent[parent] = per_parent.get(parent, 0) + 1
