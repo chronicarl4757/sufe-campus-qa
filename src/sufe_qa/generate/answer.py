@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import re
 from collections.abc import Iterator
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 
 from sufe_qa.config import Settings
 from sufe_qa.generate.client import DeepSeekClient, LLMClient
@@ -144,6 +144,21 @@ class Answer:
 
     def sources(self) -> list[SourceCard]:
         return self.sources_and_map()[0]
+
+    def cited_sources_and_map(self, answer_text: str) -> tuple[list[SourceCard], dict[int, int]]:
+        """只保留回答实际引用过的卡片，并重编号为连续序号。
+
+        未被引用的命中（相关但未支撑论断）不展示，避免无关卡片稀释可信度；
+        全文无引用（软拒答/致歉）时返回空卡片列表。
+        """
+        cards, mapping = self.sources_and_map()
+        cited_positions = {r for r in _citation_refs(answer_text) if r in mapping}
+        keep = {mapping[r] for r in cited_positions}
+        kept = [c for c in cards if c.index in keep]
+        renumber = {c.index: i for i, c in enumerate(kept, start=1)}
+        new_cards = [replace(c, index=renumber[c.index]) for c in kept]
+        new_mapping = {pos: renumber[card] for pos, card in mapping.items() if card in renumber}
+        return new_cards, new_mapping
 
 
 def answer_question(

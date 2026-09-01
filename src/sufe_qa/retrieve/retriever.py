@@ -61,6 +61,14 @@ _QUERY_EXPANSIONS = (
         re.compile(r"预推免"),
         "接收推荐免试研究生 报名通知",
     ),
+    (
+        re.compile(r"电子校园卡|虚拟校园卡|校园卡.*领取|领取.*校园卡"),
+        "一卡通2.0 二维码 电子卡 上财微门户 服务大厅",
+    ),
+    (
+        re.compile(r"报修|维修"),
+        "物业 维修 后勤保障中心 水电报修 服务电话",
+    ),
 )
 
 
@@ -77,35 +85,7 @@ def _publisher_college(publisher: str) -> str:
     return short if short.endswith(("学院", "研究院")) else ""
 
 
-def _collect_colleges(store: dict) -> list[str]:
-    """从语料 publisher 提取学院名单；长名优先，避免"金融学院"抢匹配"滴水湖高级金融学院"。"""
-    names = {
-        college
-        for _, meta in store.values()
-        if (college := _publisher_college(str(meta.get("publisher", ""))))
-    }
-    return sorted(names, key=len, reverse=True)
-
-
-def _match_colleges(question: str, colleges: list[str]) -> list[str]:
-    """识别问题中点名的学院；命中后移除已占区间，防止长短名重复计数。"""
-    matched: list[str] = []
-    rest = question
-    for name in colleges:  # colleges 已按长度降序
-        if name in rest:
-            matched.append(name)
-            rest = rest.replace(name, "")
-    return matched
-
-
-def _scope_weight(question_colleges: list[str], doc_college: str) -> float:
-    """学院层级权重：点名学院时该院提权、其他学院降权；校级部门文档不动。"""
-    if not question_colleges or not doc_college:
-        return 1.0
-    return 1.15 if doc_college in question_colleges else 0.55
-
-
-# 未点名学院时，同族模板通知（去校名/学院名/年份后同标题）在 top-N 中的文档数上限：
+# 问题未点名该院系时，同族模板通知（去校名/学院名/年份后同标题）在 top-N 中的文档数上限：
 # 防止各学院同名年度通知挤满证据位、把校级制度文件挤出去
 _SAME_FAMILY_MAX_DOCS = 2
 
@@ -196,6 +176,29 @@ def retrieval_time_weight(
     return recency_weight(publish_date, today)
 
 
+# 学院/研究院级文档在问题未点名该院系时的排序降权（校级与职能部门文档优先）
+COLLEGE_UNNAMED_WEIGHT = 0.85
+_UNIT_RE = re.compile(r"[一-龥]{2,15}(?:学院|研究院)")
+
+
+def question_names_unit(question: str, *texts: str) -> bool:
+    """问题是否点名了文档所属学院/研究院（双向包含，兼容“经济学院”类简称）。"""
+    q_units = set(_UNIT_RE.findall(question))
+    if not q_units:
+        return False
+    doc_units = set(_UNIT_RE.findall(" ".join(texts)))
+    return any(q in d or d in q for q in q_units for d in doc_units)
+
+
+def authority_weight(question: str, publisher: str, title: str) -> float:
+    """未点名院系的泛问里，院系级文档降权；点名该院系或校级文档不降权。"""
+    if not _UNIT_RE.search(f"{publisher}{title}"):
+        return 1.0
+    if question_names_unit(question, publisher, title):
+        return 1.0
+    return COLLEGE_UNNAMED_WEIGHT
+
+
 @dataclass
 class _CollectionView:
     key: str
@@ -225,8 +228,6 @@ class HybridRetriever:
         self._client = chromadb.PersistentClient(path=str(settings.chroma_dir))
         self._default_collection_key = collection_key_for_name(settings, collection)
         self._views: dict[str, _CollectionView] = {}
-        # 主问答库语料 publisher 提取的学院名单，_ensure_corpus 重建时刷新
-        self._colleges: list[str] = []
         # 兼容旧代码读取默认 collection 的内部属性；搜索本身使用 _views。
         default = self._view(self._default_collection_key)
         self._col = default.col
@@ -283,8 +284,6 @@ class HybridRetriever:
         view.bm25_ids = ids
         view.bm25 = BM25Okapi([tokenize(d) for d in docs]) if docs else None
         view.fingerprint = fingerprint
-        if view.key == self._default_collection_key:
-            self._colleges = _collect_colleges(view.store)
 
     def search_routed(self, question: str) -> list[Hit]:
         """按问题意图检索多个 collection 并合并：主问答全量，次级 capped。"""
@@ -331,9 +330,8 @@ class HybridRetriever:
 
         fused = rrf_fuse([vec_ids, bm_ids], s.rrf_k)
         candidates = sorted(fused, key=lambda cid: fused[cid], reverse=True)[: s.fusion_top_n * 3]
-        q_colleges = _match_colleges(question, self._colleges)
 
-        def rank_score(cid: str) -> float:
+        def _rank_score(cid: str) -> float:
             meta = view.store.get(cid, ("", {}))[1]
             return (
                 fused[cid]
@@ -342,26 +340,43 @@ class HybridRetriever:
                     str(meta.get("publish_date", "")),
                 )
                 * float(meta.get("boost", 1.0) or 1.0)
-                * _scope_weight(q_colleges, _publisher_college(str(meta.get("publisher", ""))))
+                * authority_weight(
+                    question,
+                    str(meta.get("publisher", "")),
+                    str(meta.get("title", "")),
+                )
             )
 
-        ranked = sorted(candidates, key=rank_score, reverse=True)
+        ranked = sorted(candidates, key=_rank_score, reverse=True)
         top_ids: list[str] = []
         per_doc: dict[str, int] = {}
+        per_parent: dict[str, int] = {}
         family_docs: dict[str, set[str]] = {}
         for cid in ranked:
             meta = view.store.get(cid, ("", {}))[1]
             doc = str(meta.get("doc_id", ""))
             if per_doc.get(doc, 0) >= s.max_chunks_per_doc:
                 continue
-            # 未点名学院时同族模板通知限席位，给校级制度文档留证据位
-            if not q_colleges:
+            # 同父附件兄弟文档（如同一公告的各学院复试方案 PDF）是独立 doc，
+            # 单文档截留管不到；按父级文档同样截留，防止一个公告霸屏 top-N。
+            # 例外：问题点名了该附件所属学院时（如“经济学院复试科目”），不受父级截留。
+            parent = str(meta.get("parent_doc_id", "") or "")
+            named = question_names_unit(
+                question, str(meta.get("publisher", "")), str(meta.get("title", ""))
+            )
+            if parent and not named and per_parent.get(parent, 0) >= s.max_chunks_per_doc:
+                continue
+            # 问题未点名该院系时，各学院同族模板通知（去校名/学院名/年份后同标题）
+            # 限席位，防止同名年度通知挤满 top-N、把校级制度文档挤出证据位
+            if not named:
                 fam = _family_key(str(meta.get("title", "")), str(meta.get("publisher", "")))
                 docs_in_family = family_docs.setdefault(fam, set())
                 if doc not in docs_in_family and len(docs_in_family) >= _SAME_FAMILY_MAX_DOCS:
                     continue
                 docs_in_family.add(doc)
             per_doc[doc] = per_doc.get(doc, 0) + 1
+            if parent:
+                per_parent[parent] = per_parent.get(parent, 0) + 1
             top_ids.append(cid)
             if len(top_ids) >= s.fusion_top_n:
                 break

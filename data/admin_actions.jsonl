@@ -2,3 +2,175 @@
 {"ts": "2026-08-21T05:35:17+00:00", "doc_id": "49e95b8ece10", "title": "上海财经大学2027届毕业生生源信息发布！", "action": "wechat_import", "reason": "管理员提交公众号链接"}
 {"ts": "2026-08-21T05:41:33+00:00", "doc_id": "49e95b8ece10", "title": "上海财经大学2027届毕业生生源信息发布！", "action": "wechat_import", "reason": "管理员提交公众号链接"}
 {"ts": "2026-08-21T06:30:10+00:00", "doc_id": "49e95b8ece10", "title": "上海财经大学2027届毕业生生源信息发布！", "action": "wechat_import", "reason": "管理员提交公众号链接"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "4411db3c1323", "title": "联系我们", "action": "quarantine", "reason": "审读:标题《联系我们》实为2013德勤招聘活动新闻,错标题+陈旧"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "4dc8cf707b4f", "title": "联系我们", "action": "quarantine", "reason": "审读:标题《联系我们》实为2013村官选聘通知,错标题+陈旧"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "b22668ebe1d5", "title": "联系我们", "action": "quarantine", "reason": "审读:标题《联系我们》实为2013西部基层计划启事,错标题+陈旧"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "f3bb8684dab0", "title": "联系我们", "action": "quarantine", "reason": "审读:标题《联系我们》实为2013转档通知,错标题+陈旧"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "448bb4756bea", "title": "人才培养", "action": "quarantine", "reason": "审读:标题《人才培养》实为2024结项答辩新闻,误标procedure"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "647a102e5788", "title": "人才培养", "action": "quarantine", "reason": "审读:标题《人才培养》实为2024讲座新闻,误标procedure"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "a627259c4687", "title": "人才培养", "action": "quarantine", "reason": "审读:标题《人才培养》实为2025答辩新闻,误标procedure"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "a926c37d06a5", "title": "人才培养", "action": "quarantine", "reason": "审读:标题《人才培养》实为2025年级大会新闻,误标procedure"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "b64f5fa6b3c5", "title": "人才培养", "action": "quarantine", "reason": "审读:标题《人才培养》实为2025讲座新闻,误标procedure"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "5c8241801dd8", "title": "保卫处", "action": "quarantine", "reason": "审读:栏目名《保卫处》当标题,2012征兵实施意见,陈旧"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "7f8293cb80ec", "title": "保卫处", "action": "quarantine", "reason": "审读:栏目名《保卫处》当标题,2012征兵通知,陈旧"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "2f80874fece8", "title": "通知", "action": "quarantine", "reason": "审读:指针页,正文仅指向门户通知公告,无实质内容"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "4ab5f593f243", "title": "通知", "action": "quarantine", "reason": "审读:指针页,正文仅指向门户通知公告,无实质内容"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "b73dbd658c3b", "title": "办事流程", "action": "quarantine", "reason": "审读:栏目导航清单页,无正文,导航污染"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "4b58e478089a", "title": "通知", "action": "quarantine", "reason": "审读:正文文件缺失的悬空记录"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "ff90e9bf1db5", "title": "献血通知", "action": "quarantine", "reason": "审读:正文文件缺失的悬空记录(2009献血通知)"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "13fd1e1e6fc7", "title": "研究生培养机制改革问答", "action": "retitle", "reason": "常见问答 -> 研究生培养机制改革问答"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "1512eceb29f5", "title": "研究生招生与培养常见问答", "action": "retitle", "reason": "常见问答 -> 研究生招生与培养常见问答"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "4f160abb07bd", "title": "研究生院证件与学籍事务问答（补办/充磁/休学）", "action": "retitle", "reason": "常见问答 -> 研究生院证件与学籍事务问答（补办/充磁/休学）"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "e9d1828c895a", "title": "研究生选课与成绩单常见问答", "action": "retitle", "reason": "常见问答 -> 研究生选课与成绩单常见问答"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "83b8da8365ee", "title": "上海财经大学国家建设高水平大学公派研究生项目实施办法（2008年修订）", "action": "retitle", "reason": "政策文件 -> 上海财经大学国家建设高水平大学公派研究生项目实施办法（2008年修订）"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "12ba57d56914", "title": "经济学院2026年“申请考核”制博士研究生招生综合考核名单公示", "action": "backfill_text_hash", "reason": ""}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "1ab5388c8ff7", "title": "教务处2025年暑假对外服务通告", "action": "backfill_text_hash", "reason": ""}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "1ec050fd9a3f", "title": "本科学位论文模板", "action": "backfill_text_hash", "reason": ""}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "1eca5e3bc4b8", "title": "会计学院2024-2025年IPA奖学金公示名单", "action": "backfill_text_hash", "reason": ""}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "28c3e09aeb31", "title": "上海财经大学金融学院2026年接收推荐免试研究生（含直博生）预推免报名通知", "action": "backfill_text_hash", "reason": ""}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "29fa24c6082a", "title": "上海财经大学会计学院2026年硕士研究生招生考试复试办法", "action": "backfill_text_hash", "reason": ""}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "2e002b0c1101", "title": "教务处2026年暑假对外服务通告", "action": "backfill_text_hash", "reason": ""}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "3045c17c186d", "title": "上海财经大学经济学院 2026 年 接收推荐免试研究生（含直博生）预报名通知", "action": "backfill_text_hash", "reason": ""}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "31abd3e97a2c", "title": "一流学科平台金融团队2026年博士研究生综合考核方案", "action": "backfill_text_hash", "reason": ""}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "3312efa2026d", "title": "【学生邀请函】春启商途 职为你来", "action": "backfill_text_hash", "reason": ""}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "3bdef9443656", "title": "上海财经大学金融学院关于调整2027年硕士研究生 招生考试（初试）部分学科专业考试科目的公告（二）", "action": "backfill_text_hash", "reason": ""}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "3c4a042b673f", "title": "金融学院2025年“申请考核”制博士研究生招生综合考核名单公示", "action": "backfill_text_hash", "reason": ""}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "422ee0d66e7e", "title": "一流学科平台金融团队2026年“申请考核”制博士研究生 拟录取及候补资格名单公示", "action": "backfill_text_hash", "reason": ""}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "435f236ef11d", "title": "会计学院2024-2025年华为奖学金公示名单", "action": "backfill_text_hash", "reason": ""}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "4b5d82daeea6", "title": "上海财经大学金融学院2026年博士研究生综合考核方案", "action": "backfill_text_hash", "reason": ""}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "4c7abad073b4", "title": "上海财经大学2026年本科生自主选择专业（转专业）会计学院拟录取名单公示", "action": "backfill_text_hash", "reason": ""}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "58d94d06efa1", "title": "学生邀请函", "action": "backfill_text_hash", "reason": ""}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "58f60d734542", "title": "2025法学院招生简章", "action": "backfill_text_hash", "reason": ""}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "5afba4d55b1a", "title": "经济学院（含应用经济学一流学科平台）2025年博士研究生综合考核方案", "action": "backfill_text_hash", "reason": ""}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "5d97e390ce5a", "title": "校企携手，人才供需合作再上新台阶——徐汇城投走进上海财经大学", "action": "backfill_text_hash", "reason": ""}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "62564bebcd33", "title": "会计学院2023-2024年IPA奖学金公示名单", "action": "backfill_text_hash", "reason": ""}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "6316c8fee1fd", "title": "经济学院2026年博士研究生综合考核方案", "action": "backfill_text_hash", "reason": ""}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "6469c0c866da", "title": "2025年上海财经大学经济学院同等学力申请硕士学位相关政策", "action": "backfill_text_hash", "reason": ""}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "6e7ded6e628d", "title": "会计学院2026年“申请考核”制博士研究生拟录取及候补资格名单公示", "action": "backfill_text_hash", "reason": ""}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "7a461a0733f2", "title": "会计学院2024-2025年徐政旦奖学金公示名单", "action": "backfill_text_hash", "reason": ""}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "7c2bc89a7943", "title": "经济学院 2025-9年级批次同等学力人员学位申请规定", "action": "backfill_text_hash", "reason": ""}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "8a48f4b7f546", "title": "经济学院2026年“申请考核”制博士研究生拟录取及候补资格名单公示", "action": "backfill_text_hash", "reason": ""}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "8dd2281e5e93", "title": "教务处2026年寒假对外服务通告", "action": "backfill_text_hash", "reason": ""}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "98044a5dc3d1", "title": "经济学院 2025-12年级批次同等学力人员学位申请规定", "action": "backfill_text_hash", "reason": ""}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "9f3ce4d927b6", "title": "2024法学院招生简章", "action": "backfill_text_hash", "reason": ""}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "9fe589b222ab", "title": "经济学院关于调整2027年硕士研究生招生考试（初试）部分学科专业考试科目的公告", "action": "backfill_text_hash", "reason": ""}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "a71401ceef13", "title": "上海财经大学应用经济学一流学科平台区域经济团队 2026 年“申请考核”制博士研究生招生综合考核名单公示", "action": "backfill_text_hash", "reason": ""}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "ad566a45acb1", "title": "2026年经济学院在职课程培训班招生简章", "action": "backfill_text_hash", "reason": ""}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "b236af9f801c", "title": "8月20日截止！上海财经大学公共管理学院2026年接收推荐免试研究生（含直博生）预报名通知", "action": "backfill_text_hash", "reason": ""}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "b816bbe4d294", "title": "上海财经大学金融学院2026年推荐免试研究生拟录取及候补资格名单", "action": "backfill_text_hash", "reason": ""}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "bcab927f57cd", "title": "会计学院2026年“申请考核”制博士研究生招生综合考核名单公示", "action": "backfill_text_hash", "reason": ""}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "c02373cf5db5", "title": "2017春同等学力硕士答辩注意事项", "action": "backfill_text_hash", "reason": ""}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "cea69423d685", "title": "金融学院2025年“申请考核”制博士研究生拟录取及候补资格名单公示", "action": "backfill_text_hash", "reason": ""}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "d085c196a02f", "title": "2026年经济学院同等学力申请硕士学位相关政策", "action": "backfill_text_hash", "reason": ""}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "d10d817dceb3", "title": "全国跳绳大众锻炼标准-一二级规定动作", "action": "backfill_text_hash", "reason": ""}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "d8083d003a19", "title": "2026级本科生大学英语课程分级考试与教学安排", "action": "backfill_text_hash", "reason": ""}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "d8a9012a46e0", "title": "上海财经大学金融学院关于调整2027年硕士研究生招生考试（初试）部分学科专业考试科目的公告", "action": "backfill_text_hash", "reason": ""}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "d8f8c4f5d07d", "title": "金融学院2026年“申请考核”制博士研究生招生综合考核名单公示", "action": "backfill_text_hash", "reason": ""}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "da639847ad45", "title": "上海财经大学公共管理学院2026年博士研究生综合考核名单公示", "action": "backfill_text_hash", "reason": ""}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "e643c1a822a5", "title": "上海财经大学经济学院2026年接收国际组织人才培养项目推荐免试研究生预推免报名的通知", "action": "backfill_text_hash", "reason": ""}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "ec97cb99d0b2", "title": "关于确定我校2026年推荐优秀应届本科毕业生免试攻读研究生名单的公告", "action": "backfill_text_hash", "reason": ""}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "ecf34f2ed61e", "title": "研思践悟 硕果纷呈", "action": "backfill_text_hash", "reason": ""}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "eeaa4e3b0b11", "title": "【企业邀请函】春启商途 职为你来", "action": "backfill_text_hash", "reason": ""}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "f184432a6a6a", "title": "上海财经大学金融学院2025年博士研究生综合考核方案", "action": "backfill_text_hash", "reason": ""}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "f619a851f3d7", "title": "“启创”首讲", "action": "backfill_text_hash", "reason": ""}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "f7c83eb40209", "title": "“数”业有为", "action": "backfill_text_hash", "reason": ""}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "f90965a66e0d", "title": "金融 学院2026年“申请考核”制博士研究生拟录取及候补资格名单公示", "action": "backfill_text_hash", "reason": ""}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "feedf0f9ae2b", "title": "会计学院2023-2024年徐政旦奖学金公示名单", "action": "backfill_text_hash", "reason": ""}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "1d0ae0f2c80a", "title": "上海财经大学发展党员流程", "action": "backfill_text_hash", "reason": ""}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "5836ee860bf9", "title": "关于采集2025-2026学年生源地助学贷款受理证明回执校验码的通知", "action": "quarantine", "reason": "dedup:与《关于采集2025-2026学年生源地助学贷款受理证明回执校验》(045ddc88af3e)内容重复"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "4256e93f19b3", "title": "关于开展2023年校园地助学贷款还款确认工作的通知", "action": "quarantine", "reason": "dedup:与《关于开展2023年校园地助学贷款还款确认工作的通知》(049a7db37997)内容重复"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "515983dadc61", "title": "关于开展2021-2022学年本科生国家奖学金和上海市奖学金评选工作的通知", "action": "quarantine", "reason": "dedup:与《关于开展2021-2022学年本科生国家奖学金和上海市奖学金》(05fa3b5f23c7)内容重复"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "f1909ba7f342", "title": "关于开展2022年研究生国家奖学金评选工作的通知", "action": "quarantine", "reason": "dedup:与《关于开展2022年研究生国家奖学金评选工作的通知》(062a91624043)内容重复"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "06f44255f23e", "title": "上海财经大学学生申诉处理实施细则", "action": "quarantine", "reason": "dedup:与《上海财经大学学生申诉处理实施细则》(f829a5cc3e18)内容重复"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "8a8095ccc193", "title": "下载2011年体检通知（硕博）.doc", "action": "quarantine", "reason": "审读:正文文件缺失的悬空记录"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "9ab2bd4d2672", "title": "关于组织开展2025-2026学年家庭经济困难学生认定工作的通知", "action": "quarantine", "reason": "dedup:与《关于组织开展2025-2026学年家庭经济困难学生认定工作的》(0d50734f5379)内容重复"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "b0d701864645", "title": "关于开展2021-2022学年本科生人民奖学金和单项奖学金评选工作的通知", "action": "quarantine", "reason": "dedup:与《关于开展2021-2022学年本科生人民奖学金和单项奖学金评》(0f15b29fb76e)内容重复"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "27df0ba7eb18", "title": "假期离沪后学生医保电子凭证及社保卡的使用方法及注意事项", "action": "quarantine", "reason": "dedup:与《假期离沪后学生医保电子凭证及社保卡的使用方法及注意事项》(0f4ff19680ec)内容重复"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "df5b9bf3429f", "title": "关于2023年高校毕业生基层就业学费补偿贷款代偿申请的通知", "action": "quarantine", "reason": "dedup:与《关于2023年高校毕业生基层就业学费补偿贷款代偿申请的通知》(112bdfefa817)内容重复"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "e4b8fcfcb7f3", "title": "办理基本医保医疗费零星报销业务需携带的相关证件和材料", "action": "quarantine", "reason": "dedup:与《办理基本医保医疗费零星报销业务需携带的相关证件和材料》(114ed38217e3)内容重复"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "9c2f401688e4", "title": "关于资助学生2025年春节返乡路费的通知", "action": "quarantine", "reason": "dedup:与《关于资助学生2025年春节返乡路费的通知》(12a95b2dc0d6)内容重复"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "f89394fb6132", "title": "关于2025年毕业生基层就业学费补偿国家助学贷款代偿申请工作的通知", "action": "quarantine", "reason": "dedup:与《关于2025年毕业生基层就业学费补偿国家助学贷款代偿申请工作》(174989405400)内容重复"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "e7c954c83ee8", "title": "风正起时｜甘肃省2026年选调应届优秀大学毕业生公告", "action": "quarantine", "reason": "dedup:与《甘肃省2026年选调应届优秀大学毕业生公告》(191b649f104c)内容重复"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "7bf6e0b3e173", "title": "关于2024级新生下半年享受大学生医保的通知", "action": "quarantine", "reason": "dedup:与《关于2024级新生下半年享受大学生医保的通知》(1e480d364f22)内容重复"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "d489e3497384", "title": "关于印发《上海财经大学学生违纪处分规定（2023年10月修订）》的通知", "action": "quarantine", "reason": "dedup:与《关于印发《上海财经大学学生违纪处分规定（2023年10月修订》(230e056e5422)内容重复"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "67fdb7a4c3d1", "title": "关于开展2024-2025学年本科毕业生优秀学生人民奖学金评选工作的通知", "action": "quarantine", "reason": "dedup:与《关于开展2024-2025学年本科毕业生优秀学生人民奖学金评》(26d365fb2ad2)内容重复"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "9e5d6d9c3bfb", "title": "关于居民医保就医结算操作介绍 （大学生2024年11月版）", "action": "quarantine", "reason": "dedup:与《关于居民医保就医结算操作介绍 （大学生2024年11月版）》(28429d197c37)内容重复"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "70eb3bccf5ef", "title": "2022年下半年大学生医药费报销通知", "action": "quarantine", "reason": "dedup:与《2022年下半年大学生医药费报销通知》(286293e1b96f)内容重复"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "57d4620aea1b", "title": "关于开展2024-2025学年本科生国家奖学金评选工作的通知", "action": "quarantine", "reason": "dedup:与《关于开展2024-2025学年本科生国家奖学金评选工作的通知》(2e8a9386b4f8)内容重复"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "65a47cb9cf89", "title": "研究生健康检查表.pdf", "action": "quarantine", "reason": "dedup:与《研究生健康检查表.pdf》(31b9c9b28c18)内容重复"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "7a9338e1540f", "title": "关于开展2022-2023学年本科生国家奖学金和上海市奖学金评选工作的通知", "action": "quarantine", "reason": "dedup:与《关于开展2022-2023学年本科生国家奖学金和上海市奖学金》(3d326567cb2b)内容重复"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "861408385e90", "title": "关于开展2024-2025学年国家励志奖学金评选工作的通知", "action": "quarantine", "reason": "dedup:与《关于开展2024-2025学年国家励志奖学金评选工作的通知》(3e2ec161e017)内容重复"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "862db8a80119", "title": "关于开展2022年退役士兵国家助学金申请的通知", "action": "quarantine", "reason": "dedup:与《关于开展2022年退役士兵国家助学金申请的通知》(40aceb5a230b)内容重复"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "44037abd2433", "title": "高等学校本科生国家奖学金管理暂行办法", "action": "quarantine", "reason": "dedup:与《高等学校本科生国家奖学金管理暂行办法》(5ea94a839885)内容重复"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "c45ce68fa02e", "title": "研究生复试体检须知", "action": "quarantine", "reason": "dedup:与《研究生复试体检须知》(4e3f5dad4eca)内容重复"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "99f602769cd6", "title": "大学生补充医保报销通知", "action": "quarantine", "reason": "dedup:与《大学生补充医保报销通知》(4f814627bbf8)内容重复"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "51a7fd6b128b", "title": "商学院2024级工商管理（商务分析实验班）面试通知", "action": "quarantine", "reason": "dedup:与《商学院 2024 级工商管理（商务分析实验班）面试通知》(942005a00382)内容重复"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "52a785d3df9c", "title": "中华人民共和国教育部令第41 号", "action": "quarantine", "reason": "dedup:与《普通高等学校学生管理规定【中华人民共和国教育部令第41号】.》(cc4a93d90c3e)内容重复"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "e8769c8bc3db", "title": "关于开展2022-2023学年本科毕业生人民奖学金评选工作的通知", "action": "quarantine", "reason": "dedup:与《关于开展2022-2023学年本科毕业生人民奖学金评选工作的》(530cd85a7763)内容重复"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "9ea02f173cf6", "title": "关于2023-2024学年校园地国家助学贷款申请工作的通知", "action": "quarantine", "reason": "dedup:与《关于2023-2024学年校园地国家助学贷款申请工作的通知》(567935b9ba78)内容重复"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "e3375184c3ca", "title": "服务时间", "action": "quarantine", "reason": "dedup:与《服务时间》(614f831349b2)内容重复"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "66e45969c386", "title": "本市大学生持卡就医结算后的一些常见问题", "action": "quarantine", "reason": "dedup:与《本市大学生持卡就医结算后的一些常见问题》(65b1c0021b0d)内容重复"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "e9afbbc52f88", "title": "关于开展2022-2023学年国家励志奖学金评选工作的通知", "action": "quarantine", "reason": "dedup:与《关于开展2022-2023学年国家励志奖学金评选工作的通知》(6ba81fbb4450)内容重复"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "8353ba92bfcd", "title": "关于开展2023-2024学年本科生人民奖学金、单项奖学金评选工作的通知", "action": "quarantine", "reason": "dedup:与《关于开展2023-2024学年本科生人民奖学金、单项奖学金评》(6c329033183e)内容重复"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "6f5486cdf6a7", "title": "2025级本科生大学英语课程分级考试与教学安排", "action": "quarantine", "reason": "dedup:与《2025级本科生大学英语课程分级考试与教学安排》(a67200733dc0)内容重复"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "8f4e10c82f76", "title": "假期离沪后学生医保电子凭证及社保卡的使用方法及注意事项", "action": "quarantine", "reason": "dedup:与《假期离沪后学生医保电子凭证及社保卡的使用方法及注意事项》(71bdd38dc689)内容重复"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "ed444f3fc800", "title": "假期离沪后学生医保电子凭证及社保卡的使用方法及注意事项", "action": "quarantine", "reason": "dedup:与《假期离沪后学生医保电子凭证及社保卡的使用方法及注意事项》(71bdd38dc689)内容重复"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "794864c47a0e", "title": "2013年教职工健康体检通知", "action": "quarantine", "reason": "审读:正文文件缺失的悬空记录"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "a648ee0a55f3", "title": "无线联网", "action": "quarantine", "reason": "dedup:与《无线联网》(7dcfaeceef5f)内容重复"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "db9989b4e83e", "title": "关于中国银行校园地国家助学贷款合同签署的通知", "action": "quarantine", "reason": "dedup:与《关于中国银行校园地国家助学贷款合同签署的通知》(8521daca4851)内容重复"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "b4012ce3bece", "title": "关于2023年秋季上海发展研究奖学金候选人招募工作的通知", "action": "quarantine", "reason": "dedup:与《关于2023年秋季上海发展研究奖学金候选人招募工作的通知》(8cebd66f2b99)内容重复"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "e4249ea26d5b", "title": "关于开展2023-2024学年本科生社会奖学金评选工作的通知", "action": "quarantine", "reason": "dedup:与《关于开展2023-2024学年本科生社会奖学金评选工作的通知》(8e67932f3528)内容重复"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "c738554bdeee", "title": "关于2025-2026学年学费减免申请工作的通知", "action": "quarantine", "reason": "dedup:与《关于2025-2026学年学费减免申请工作的通知》(8f245c042322)内容重复"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "d8ed8e6bc2e6", "title": "关于开展2024年度港澳及华侨学生奖学金、台湾学生奖学金评审工作的通知", "action": "quarantine", "reason": "dedup:与《关于开展2024年度港澳及华侨学生奖学金、台湾学生奖学金评审》(98e4a621dcd5)内容重复"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "b8b7c716ca80", "title": "关于居民医保就医结算操作介绍_（大学生）.pdf", "action": "quarantine", "reason": "dedup:与《关于居民医保就医结算操作介绍_（大学生）.pdf》(a03717bf1391)内容重复"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "b52442b9f47e", "title": "高等学校国家励志奖学金管理暂行办法", "action": "quarantine", "reason": "dedup:与《高等学校国家励志奖学金管理暂行办法》(e4039ac0f8c9)内容重复"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "dc1bf6df3cb7", "title": "下载2011年预科新生体检通知.doc", "action": "quarantine", "reason": "审读:正文文件缺失的悬空记录"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "fb33e02ea7b1", "title": "关于2021年下半年及2022年大学生门急诊医药费用报销通知", "action": "quarantine", "reason": "dedup:与《关于2021年下半年及2022年大学生门急诊医药费用报销通知》(c2c8afeea20f)内容重复"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "cb5d3da734bf", "title": "关于采集2023-2024学年生源地助学贷款受理证明回执校验码的通知", "action": "quarantine", "reason": "dedup:与《关于采集2023-2024学年生源地助学贷款受理证明回执校验》(c86551d6f299)内容重复"}
+{"ts": "2026-08-31T12:47:43+00:00", "doc_id": "d801506ea32e", "title": "离校循环表.doc", "action": "quarantine", "reason": "dedup:与《上海财经大学学生离校循环表》(ce9f40abd3f5)内容重复"}
+{"ts": "2026-08-31T13:30:07+00:00", "doc_id": "c2c8afeea20f", "title": "关于2021年下半年及2022年大学生门急诊医药费用报销通知", "action": "retention_promote", "reason": "dedup_repair:系列无 active 成员，提升最新留存副本"}
+{"ts": "2026-08-31T13:30:07+00:00", "doc_id": "174989405400", "title": "关于2025年毕业生基层就业学费补偿国家助学贷款代偿申请工作的通知", "action": "retention_promote", "reason": "dedup_repair:系列无 active 成员，提升最新留存副本"}
+{"ts": "2026-08-31T13:30:07+00:00", "doc_id": "567935b9ba78", "title": "关于2023-2024学年校园地国家助学贷款申请工作的通知", "action": "retention_promote", "reason": "dedup_repair:系列无 active 成员，提升最新留存副本"}
+{"ts": "2026-08-31T13:30:07+00:00", "doc_id": "98e4a621dcd5", "title": "关于开展2024年度港澳及华侨学生奖学金、台湾学生奖学金评审工作的通知", "action": "retention_promote", "reason": "dedup_repair:系列无 active 成员，提升最新留存副本"}
+{"ts": "2026-08-31T13:30:07+00:00", "doc_id": "b880d66272a2", "title": "关于开展2024年度港澳及华侨学生奖学金、台湾学生奖学金评审工作的通知.docx", "action": "retention_promote", "reason": "dedup_repair:随主文档提升"}
+{"ts": "2026-08-31T13:30:07+00:00", "doc_id": "286293e1b96f", "title": "2022年下半年大学生医药费报销通知", "action": "retention_promote", "reason": "dedup_repair:系列无 active 成员，提升最新留存副本"}
+{"ts": "2026-08-31T13:30:07+00:00", "doc_id": "045ddc88af3e", "title": "关于采集2025-2026学年生源地助学贷款受理证明回执校验码的通知", "action": "retention_promote", "reason": "dedup_repair:系列无 active 成员，提升最新留存副本"}
+{"ts": "2026-08-31T13:30:07+00:00", "doc_id": "6c329033183e", "title": "关于开展2023-2024学年本科生人民奖学金、单项奖学金评选工作的通知", "action": "retention_promote", "reason": "dedup_repair:系列无 active 成员，提升最新留存副本"}
+{"ts": "2026-08-31T13:30:07+00:00", "doc_id": "1067b1ad3777", "title": "关于开展2023-2024学年本科生人民奖学金、单项奖学金评选工作的通知.pdf", "action": "retention_promote", "reason": "dedup_repair:随主文档提升"}
+{"ts": "2026-08-31T13:30:07+00:00", "doc_id": "1e480d364f22", "title": "关于2024级新生下半年享受大学生医保的通知", "action": "retention_promote", "reason": "dedup_repair:系列无 active 成员，提升最新留存副本"}
+{"ts": "2026-08-31T13:30:07+00:00", "doc_id": "8cebd66f2b99", "title": "关于2023年秋季上海发展研究奖学金候选人招募工作的通知", "action": "retention_promote", "reason": "dedup_repair:系列无 active 成员，提升最新留存副本"}
+{"ts": "2026-08-31T13:30:07+00:00", "doc_id": "3d326567cb2b", "title": "关于开展2022-2023学年本科生国家奖学金和上海市奖学金评选工作的通知", "action": "retention_promote", "reason": "dedup_repair:系列无 active 成员，提升最新留存副本"}
+{"ts": "2026-08-31T13:30:07+00:00", "doc_id": "0f15b29fb76e", "title": "关于开展2021-2022学年本科生人民奖学金和单项奖学金评选工作的通知", "action": "retention_promote", "reason": "dedup_repair:系列无 active 成员，提升最新留存副本"}
+{"ts": "2026-08-31T13:30:07+00:00", "doc_id": "049a7db37997", "title": "关于开展2023年校园地助学贷款还款确认工作的通知", "action": "retention_promote", "reason": "dedup_repair:系列无 active 成员，提升最新留存副本"}
+{"ts": "2026-08-31T13:30:07+00:00", "doc_id": "2e8a9386b4f8", "title": "关于开展2024-2025学年本科生国家奖学金评选工作的通知", "action": "retention_promote", "reason": "dedup_repair:系列无 active 成员，提升最新留存副本"}
+{"ts": "2026-08-31T13:30:07+00:00", "doc_id": "942005a00382", "title": "商学院 2024 级工商管理（商务分析实验班）面试通知", "action": "retention_promote", "reason": "dedup_repair:系列无 active 成员，提升最新留存副本"}
+{"ts": "2026-08-31T13:30:07+00:00", "doc_id": "0d50734f5379", "title": "关于组织开展2025-2026学年家庭经济困难学生认定工作的通知", "action": "retention_promote", "reason": "dedup_repair:系列无 active 成员，提升最新留存副本"}
+{"ts": "2026-08-31T13:30:07+00:00", "doc_id": "77d10806304e", "title": "关于组织开展2025-2026学年家庭经济困难学生认定工作的通知.pdf", "action": "retention_promote", "reason": "dedup_repair:随主文档提升"}
+{"ts": "2026-08-31T13:30:07+00:00", "doc_id": "f829a5cc3e18", "title": "上海财经大学学生申诉处理实施细则", "action": "retention_promote", "reason": "dedup_repair:系列无 active 成员，提升最新留存副本"}
+{"ts": "2026-08-31T13:30:07+00:00", "doc_id": "8521daca4851", "title": "关于中国银行校园地国家助学贷款合同签署的通知", "action": "retention_promote", "reason": "dedup_repair:系列无 active 成员，提升最新留存副本"}
+{"ts": "2026-08-31T13:30:07+00:00", "doc_id": "8e67932f3528", "title": "关于开展2023-2024学年本科生社会奖学金评选工作的通知", "action": "retention_promote", "reason": "dedup_repair:系列无 active 成员，提升最新留存副本"}
+{"ts": "2026-08-31T13:30:07+00:00", "doc_id": "3cd9009d3563", "title": "关于开展2023-2024学年本科生社会奖学金评选工作的通知.pdf", "action": "retention_promote", "reason": "dedup_repair:随主文档提升"}
+{"ts": "2026-08-31T13:30:07+00:00", "doc_id": "3e2ec161e017", "title": "关于开展2024-2025学年国家励志奖学金评选工作的通知", "action": "retention_promote", "reason": "dedup_repair:系列无 active 成员，提升最新留存副本"}
+{"ts": "2026-08-31T13:30:07+00:00", "doc_id": "8f245c042322", "title": "关于2025-2026学年学费减免申请工作的通知", "action": "retention_promote", "reason": "dedup_repair:系列无 active 成员，提升最新留存副本"}
+{"ts": "2026-08-31T13:30:07+00:00", "doc_id": "112bdfefa817", "title": "关于2023年高校毕业生基层就业学费补偿贷款代偿申请的通知", "action": "retention_promote", "reason": "dedup_repair:系列无 active 成员，提升最新留存副本"}
+{"ts": "2026-08-31T13:30:07+00:00", "doc_id": "40aceb5a230b", "title": "关于开展2022年退役士兵国家助学金申请的通知", "action": "retention_promote", "reason": "dedup_repair:系列无 active 成员，提升最新留存副本"}
+{"ts": "2026-08-31T13:38:04+00:00", "doc_id": "d4bfe4be6af5", "title": "图书馆学习空间与座位预约", "action": "meta_fix", "reason": "meta_fix:误标publisher为后勤,标题泛化"}
+{"ts": "2026-08-31T13:38:04+00:00", "doc_id": "08eb01ac6a83", "title": "后勤物业服务信息一览（含宿舍报修电话）", "action": "meta_fix", "reason": "meta_fix:标题泛化"}
+{"ts": "2026-08-31T13:44:29+00:00", "doc_id": "36481bbba58c", "title": "上海财经大学本科学生学籍管理实施细则（修订稿）.pdf", "action": "mark_superseded", "reason": "学籍细则修订稿被2026年4月修订版取代"}
+{"ts": "2026-08-31T13:44:29+00:00", "doc_id": "464375c514e3", "title": "上海财经大学本科学生学籍管理实施细则（修订稿）", "action": "mark_superseded", "reason": "学籍细则修订稿被2026年4月修订版取代"}
+{"ts": "2026-08-31T13:44:29+00:00", "doc_id": "89e97075046b", "title": "上海财经大学本科学生学籍管理实施细则（2024年）", "action": "mark_superseded", "reason": "学籍细则2024版被2026年4月修订版取代"}
+{"ts": "2026-08-31T13:44:29+00:00", "doc_id": "b4836902351f", "title": "本科生学籍.pdf", "action": "mark_superseded", "reason": "本科生学籍.pdf(2023)被2026年4月修订版取代"}
+{"ts": "2026-08-31T13:44:29+00:00", "doc_id": "a03717bf1391", "title": "关于居民医保就医结算操作介绍_（大学生）.pdf", "action": "mark_superseded", "reason": "居民医保结算2022版被2024年11月版取代"}
+{"ts": "2026-08-31T13:44:29+00:00", "doc_id": "d40c2cbb1e37", "title": "就业政策｜就业手续办理第一步——毕业生基本信息核对及勘误修改", "action": "mark_superseded", "reason": "2023就业第一步被2025届指南第一步取代"}
+{"ts": "2026-08-31T13:44:29+00:00", "doc_id": "c1f8ce2e4219", "title": "就业政策|就业手续办理第二步——就业推荐表制作", "action": "mark_superseded", "reason": "2023就业第二步被2025届指南第二步取代"}
+{"ts": "2026-08-31T13:44:29+00:00", "doc_id": "dc06d6db272d", "title": "就业政策|就业手续办理第三步——签约（一）网签", "action": "mark_superseded", "reason": "2023就业第三步网签被2026届指南取代"}
+{"ts": "2026-08-31T13:44:29+00:00", "doc_id": "a77e8b0aa307", "title": "就业政策|就业手续办理第三步——签约（三）网签【更新版】", "action": "mark_superseded", "reason": "2024网签更新版被2026届指南第三步取代"}
+{"ts": "2026-08-31T13:44:29+00:00", "doc_id": "b491bb69424e", "title": "2025届毕业生就业手续办理指南 | 第三步：与用人单位签约（一）网签", "action": "mark_superseded", "reason": "2025届第三步网签被2026届取代"}
+{"ts": "2026-08-31T13:44:29+00:00", "doc_id": "c37e02020907", "title": "2025届毕业生就业手续办理指南 | 第三步：与用人单位签约（二）纸签", "action": "mark_superseded", "reason": "2025届第三步纸签被2026届取代"}
+{"ts": "2026-08-31T13:44:29+00:00", "doc_id": "77ae76931224", "title": "选课流程", "action": "mark_superseded", "reason": "jwc5124现行页选课锚点指向025b73b4版本,本副本为无标签残留链接且周次冲突"}
+{"ts": "2026-08-31T13:44:29+00:00", "doc_id": "c5ae3d61e34e", "title": "上海财经大学推荐优秀应届本科毕业生免试攻读研究生工作管理办法（试行）.pdf", "action": "mark_superseded", "reason": "推免办法试行版被2025年7月修订版取代"}
+{"ts": "2026-08-31T13:44:29+00:00", "doc_id": "da37c087dee9", "title": "上海财经大学推荐优秀应届本科毕业生免试攻读研究生工作管理办法（试行）", "action": "mark_superseded", "reason": "推免办法试行版被2025年7月修订版取代"}
+{"ts": "2026-08-31T13:56:26+00:00", "doc_id": "0d50734f5379", "title": "关于组织开展2025-2026学年家庭经济困难学生认定工作的通知", "action": "retention_demote", "reason": "dedup_repair:指针页文章,正文在附件,系列active由附件承担"}
+{"ts": "2026-08-31T13:56:26+00:00", "doc_id": "6c329033183e", "title": "关于开展2023-2024学年本科生人民奖学金、单项奖学金评选工作的通知", "action": "retention_demote", "reason": "dedup_repair:指针页文章,正文在附件,系列active由附件承担"}
+{"ts": "2026-08-31T13:56:26+00:00", "doc_id": "8e67932f3528", "title": "关于开展2023-2024学年本科生社会奖学金评选工作的通知", "action": "retention_demote", "reason": "dedup_repair:指针页文章,正文在附件,系列active由附件承担"}
+{"ts": "2026-08-31T13:56:26+00:00", "doc_id": "98e4a621dcd5", "title": "关于开展2024年度港澳及华侨学生奖学金、台湾学生奖学金评审工作的通知", "action": "retention_demote", "reason": "dedup_repair:指针页文章,正文在附件,系列active由附件承担"}

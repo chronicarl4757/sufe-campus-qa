@@ -67,14 +67,10 @@ def test_expand_query_adds_stable_campus_service_aliases():
 
 def test_expand_query_maps_student_wording_to_official_terms():
     assert "课程不及格 参评学年" in expand_query("有挂科记录还能申请奖学金吗？")
-    assert "家庭经济困难学生认定 认定程序" in expand_query(
-        "家庭经济困难学生如何认定？"
-    )
+    assert "家庭经济困难学生认定 认定程序" in expand_query("家庭经济困难学生如何认定？")
     assert "毕业去向管理 我的毕业去向" in expand_query("灵活就业如何登记？")
     assert "升学 交回协议书 违约改签" in expand_query("考上研究生后已签三方怎么办？")
-    assert "期末成绩 成绩发布后7日 成绩复核" in expand_query(
-        "本科生对课程成绩有异议如何申请复核？"
-    )
+    assert "期末成绩 成绩发布后7日 成绩复核" in expand_query("本科生对课程成绩有异议如何申请复核？")
 
 
 def test_expand_query_maps_colloquial_tuimian_terms():
@@ -84,8 +80,8 @@ def test_expand_query_maps_colloquial_tuimian_terms():
     assert expand_query("食堂几点开门？") == "食堂几点开门？"
 
 
-def test_publisher_college_and_question_matching():
-    from sufe_qa.retrieve.retriever import _match_colleges, _publisher_college
+def test_publisher_college():
+    from sufe_qa.retrieve.retriever import _publisher_college
 
     assert _publisher_college("上海财经大学金融学院") == "金融学院"
     assert _publisher_college("上海财经大学滴水湖高级金融学院") == "滴水湖高级金融学院"
@@ -93,20 +89,9 @@ def test_publisher_college_and_question_matching():
     assert _publisher_college("上海财经大学研究生院") == ""
     assert _publisher_college("招生就业处") == ""
 
-    colleges = ["滴水湖高级金融学院", "金融学院", "数学学院"]
-    # 长名优先：命中滴水湖高级金融学院后不应再重复计金融学院
-    assert _match_colleges("滴水湖高级金融学院预推免", colleges) == ["滴水湖高级金融学院"]
-    assert _match_colleges("金融学院预推免", colleges) == ["金融学院"]
-    assert _match_colleges("预推免什么时候报名", colleges) == []
 
-
-def test_scope_weight_and_family_key():
-    from sufe_qa.retrieve.retriever import _family_key, _scope_weight
-
-    assert _scope_weight([], "金融学院") == 1.0  # 未点名学院不干预
-    assert _scope_weight(["金融学院"], "金融学院") == 1.15
-    assert _scope_weight(["金融学院"], "数学学院") == 0.55
-    assert _scope_weight(["金融学院"], "") == 1.0  # 校级部门文档不动
+def test_family_key():
+    from sufe_qa.retrieve.retriever import _family_key
 
     # 同族归并：去校名/学院名/年份后同标题视为同族
     k1 = _family_key("上海财经大学金融学院2026年接收推荐免试研究生预推免报名通知", "上海财经大学金融学院")
@@ -159,9 +144,7 @@ def test_hot_index_update_invalidates_corpus_cache(settings):
     doc_id = doc_id_from("test/tuimian.md")
 
     def write(body: str, content_hash: str) -> None:
-        (settings.corpus_dir / "tuimian.md").write_text(
-            f"# 推免办法\n\n{body}\n", encoding="utf-8"
-        )
+        (settings.corpus_dir / "tuimian.md").write_text(f"# 推免办法\n\n{body}\n", encoding="utf-8")
         append_manifest(
             settings.manifest_path,
             [
@@ -378,8 +361,8 @@ def _append_corpus_docs(settings, docs: list[tuple[str, str, str, str]]) -> None
     update_index(settings, FakeEmbedder())
 
 
-def test_search_named_college_boosts_that_college(settings):
-    """点名学院时该院文档压过内容相同的其他学院文档（学院实体感知提降权）。"""
+def test_search_named_college_ranks_that_college_first(settings):
+    """点名学院时该院文档不被降权，压过内容相同的其他学院文档（authority_weight 命名豁免）。"""
     body = "接收推荐免试研究生预推免报名通知 申请人须提交报名表、成绩单、专家推荐信等材料。" * 3
     _append_corpus_docs(
         settings,
@@ -409,3 +392,66 @@ def test_search_unnamed_college_caps_same_family_docs(settings):
     hits = HybridRetriever(settings, FakeEmbedder()).search("预推免报名需要什么材料")
     family_doc_ids = {h.doc_id for h in hits}
     assert len(family_doc_ids) == _SAME_FAMILY_MAX_DOCS
+
+
+def test_authority_weight_penalizes_unnamed_college():
+    from sufe_qa.retrieve.retriever import authority_weight, question_names_unit
+
+    # 泛问：院系级文档降权，校级文档不降权
+    assert authority_weight("研究生复试一般考什么内容？", "上海财经大学经济学院", "复试办法") < 1.0
+    assert (
+        authority_weight("研究生复试一般考什么内容？", "上海财经大学研究生院", "复试录取办法")
+        == 1.0
+    )
+    # 点名该院系（全名/简称）不降权；附件标题中的院系名同样识别
+    assert (
+        authority_weight(
+            "经济学院2026年硕士复试的面试科目？",
+            "研究生院",
+            "附件：上海财经大学经济学院2026年复试方案",
+        )
+        == 1.0
+    )
+    assert question_names_unit("统计与数据科学学院复试怎么考？", "x", "统计与数据科学学院复试办法")
+    assert not question_names_unit("复试怎么考？", "x", "经济学院复试办法")
+
+
+def test_parent_cap_limits_sibling_attachments(settings, tmp_path):
+    """同一父公告的多个学院附件（独立 doc）在泛问检索中按父级截留，不霸屏 top-N。"""
+    from sufe_qa.schema import DocMeta, append_manifest, sha256_text
+
+    parent_id = "parent0000001"
+    metas = []
+    for i in range(5):
+        doc_id = f"att{i:09d}"
+        rel = f"学工事务/附件{i}.md"
+        text = (
+            f"# 学院{i}复试方案\n\n硕士研究生复试面试分值与科目安排，学院{i}细则如下：面试满分一百分。"
+            * 3
+        )
+        (settings.corpus_dir / rel).parent.mkdir(parents=True, exist_ok=True)
+        (settings.corpus_dir / rel).write_text(text, encoding="utf-8")
+        metas.append(
+            DocMeta(
+                doc_id=doc_id,
+                title=f"学院{i}复试方案",
+                source_url=f"https://example.com/att{i}.pdf",
+                publisher="上海财经大学研究生院",
+                publish_date="2026-03-01",
+                category="学工事务",
+                fetched_at="2026-08-31T00:00:00+00:00",
+                content_hash=sha256_text(text),
+                file_path=rel,
+                document_type="attachment",
+                parent_doc_id=parent_id,
+                document_kind="procedure",
+                retention_status="active",
+            )
+        )
+    append_manifest(settings.manifest_path, metas)
+    update_index(settings, FakeEmbedder())
+
+    hits = HybridRetriever(settings, FakeEmbedder()).search("硕士研究生复试面试分值与科目安排")
+    assert hits
+    same_parent = [h for h in hits if h.doc_id.startswith("att")]
+    assert len(same_parent) <= settings.max_chunks_per_doc

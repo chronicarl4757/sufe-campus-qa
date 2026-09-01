@@ -20,3 +20,6 @@ data/.chroma_db.staging-*/
 
 # 模板文件
 data/curated/template.md
+
+# manifest 手工治理前的本地安全备份
+*.bak-20*

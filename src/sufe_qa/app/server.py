@@ -307,18 +307,19 @@ def create_app(
                 answer_text = ""
                 # 引用门禁：句子级缓冲，越界引用句在发出前拦截；拒答模板无引用不过门
                 token_stream = (
-                    ans.stream
-                    if ans.refused
-                    else gated_citation_stream(ans.stream, len(ans.hits))
+                    ans.stream if ans.refused else gated_citation_stream(ans.stream, len(ans.hits))
                 )
                 for token in token_stream:
                     answer_text += token
                     yield _sse("token", {"text": token})
-                cards, cite_map = ans.sources_and_map()
-                # 拒答走固定模板、本就无引用，不参与校验
+                cards, cite_map = ans.cited_sources_and_map(answer_text)
+                # 拒答走固定模板、本就无引用，不参与校验；
+                # 全文无引用的软拒答（“资料未提及”类）也属正常应答，不报校验失败
                 citation_check = (
                     validate_citations(answer_text, len(ans.hits)) if not ans.refused else None
                 )
+                if citation_check is not None and not citation_check.has_citation:
+                    citation_check = None
                 if citation_check is not None and not citation_check.ok:
                     logger.warning("引用校验未通过: %s", citation_check.invalid_refs)
                 yield _sse(
