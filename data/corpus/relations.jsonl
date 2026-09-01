@@ -828,3 +828,4 @@
 {"parent_doc_id": "20f1ea72c57e", "child_doc_id": "74200e7e1e2b", "relation": "supersedes", "evidence": "自2025 年1 月1 日起施行；修订上海财经大学学位工作细则（2024年10月修订）", "confidence": 0.95, "created_at": ""}
 {"parent_doc_id": "2e570007f9e8", "child_doc_id": "6bfde081896c", "relation": "supersedes", "evidence": "标题版本标记：（2024_年_9_月修订）", "confidence": 0.95, "created_at": ""}
 {"parent_doc_id": "a874a4a76204", "child_doc_id": "9ff45143fae1", "relation": "supersedes", "evidence": "自发布之日起施行；修订上海财经大学研究生学位论文抽检及异议论文处理办法", "confidence": 0.95, "created_at": ""}
+{"parent_doc_id": "d0ad79e7348c", "child_doc_id": "cc4a93d90c3e", "relation": "attachment_of", "evidence": "dedup:同 binary 附件顶替已隔离副本 52a785d3df9c", "confidence": 1.0, "created_at": "2026-09-01T10:47:29+00:00"}

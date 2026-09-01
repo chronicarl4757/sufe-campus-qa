@@ -2,24 +2,24 @@
   "question_bank_version": "sufe-question-bank.v1",
   "question_bank_hash": "sha256:8a5ab6a1110531cd443d9e652a1032f4e97d25d0f083bf9728429a0c28c352f9",
   "retriever_config": {
-    "similarity_threshold": 0.5,
+    "similarity_threshold": 0.55,
     "vector_top_k": 20,
     "bm25_top_k": 20,
     "fusion_top_n": 8
   },
   "embedding_model": "BAAI/bge-m3",
-  "similarity_threshold": 0.5,
-  "index_fingerprint": "sha256:1dcc3d0bfcdb214f83acccd7d5b41baa17fbd612eab1fedffa6f8b28d46fcb56",
-  "evaluated_at": "2026-08-31T13:59:00+00:00",
+  "similarity_threshold": 0.55,
+  "index_fingerprint": "sha256:ec058af25bcd3e0aa20607144af48816b9390cc18a51e2fe8bd8ba3fbaf1e08e",
+  "evaluated_at": "2026-09-01T11:42:27+00:00",
   "scene_stats": {
     "本科教务": {
       "scene": "本科教务",
-      "document_count": 50,
-      "valid_policy_documents": 14,
-      "valid_procedure_documents": 18,
+      "document_count": 74,
+      "valid_policy_documents": 16,
+      "valid_procedure_documents": 17,
       "title_only_or_incomplete_documents": 0,
       "news_promotion_documents": 0,
-      "latest_valid_version_count": 21,
+      "latest_valid_version_count": 22,
       "question_count": 20,
       "answerable_question_count": 17,
       "partially_answerable_question_count": 3,
@@ -42,12 +42,12 @@
     },
     "奖助学金": {
       "scene": "奖助学金",
-      "document_count": 118,
-      "valid_policy_documents": 29,
-      "valid_procedure_documents": 1,
+      "document_count": 152,
+      "valid_policy_documents": 34,
+      "valid_procedure_documents": 2,
       "title_only_or_incomplete_documents": 0,
       "news_promotion_documents": 0,
-      "latest_valid_version_count": 46,
+      "latest_valid_version_count": 58,
       "question_count": 15,
       "answerable_question_count": 8,
       "partially_answerable_question_count": 7,
@@ -56,26 +56,26 @@
     },
     "推免与招生": {
       "scene": "推免与招生",
-      "document_count": 248,
+      "document_count": 271,
       "valid_policy_documents": 15,
-      "valid_procedure_documents": 12,
+      "valid_procedure_documents": 16,
       "title_only_or_incomplete_documents": 0,
       "news_promotion_documents": 0,
-      "latest_valid_version_count": 132,
+      "latest_valid_version_count": 92,
       "question_count": 15,
-      "answerable_question_count": 6,
-      "partially_answerable_question_count": 9,
+      "answerable_question_count": 5,
+      "partially_answerable_question_count": 10,
       "unanswerable_question_count": 0,
       "missing_authoritative_sources": []
     },
     "就业手续": {
       "scene": "就业手续",
-      "document_count": 126,
+      "document_count": 132,
       "valid_policy_documents": 0,
-      "valid_procedure_documents": 18,
+      "valid_procedure_documents": 17,
       "title_only_or_incomplete_documents": 2,
       "news_promotion_documents": 0,
-      "latest_valid_version_count": 56,
+      "latest_valid_version_count": 59,
       "question_count": 15,
       "answerable_question_count": 9,
       "partially_answerable_question_count": 6,
@@ -84,7 +84,7 @@
     },
     "宿舍后勤": {
       "scene": "宿舍后勤",
-      "document_count": 43,
+      "document_count": 45,
       "valid_policy_documents": 16,
       "valid_procedure_documents": 4,
       "title_only_or_incomplete_documents": 1,
@@ -98,7 +98,7 @@
     },
     "信息化与校园卡": {
       "scene": "信息化与校园卡",
-      "document_count": 13,
+      "document_count": 14,
       "valid_policy_documents": 0,
       "valid_procedure_documents": 2,
       "title_only_or_incomplete_documents": 0,
@@ -112,7 +112,7 @@
     },
     "图书馆": {
       "scene": "图书馆",
-      "document_count": 17,
+      "document_count": 18,
       "valid_policy_documents": 1,
       "valid_procedure_documents": 2,
       "title_only_or_incomplete_documents": 0,
@@ -126,12 +126,12 @@
     },
     "医疗医保": {
       "scene": "医疗医保",
-      "document_count": 65,
+      "document_count": 74,
       "valid_policy_documents": 8,
-      "valid_procedure_documents": 35,
+      "valid_procedure_documents": 38,
       "title_only_or_incomplete_documents": 0,
       "news_promotion_documents": 0,
-      "latest_valid_version_count": 48,
+      "latest_valid_version_count": 55,
       "question_count": 10,
       "answerable_question_count": 7,
       "partially_answerable_question_count": 3,
@@ -140,12 +140,12 @@
     },
     "国际交流": {
       "scene": "国际交流",
-      "document_count": 33,
+      "document_count": 35,
       "valid_policy_documents": 0,
-      "valid_procedure_documents": 5,
+      "valid_procedure_documents": 7,
       "title_only_or_incomplete_documents": 0,
       "news_promotion_documents": 0,
-      "latest_valid_version_count": 6,
+      "latest_valid_version_count": 8,
       "question_count": 10,
       "answerable_question_count": 8,
       "partially_answerable_question_count": 2,
@@ -154,12 +154,12 @@
     },
     "新生与安全": {
       "scene": "新生与安全",
-      "document_count": 14,
+      "document_count": 29,
       "valid_policy_documents": 3,
-      "valid_procedure_documents": 7,
+      "valid_procedure_documents": 11,
       "title_only_or_incomplete_documents": 0,
       "news_promotion_documents": 0,
-      "latest_valid_version_count": 10,
+      "latest_valid_version_count": 17,
       "question_count": 10,
       "answerable_question_count": 8,
       "partially_answerable_question_count": 2,
@@ -177,15 +177,15 @@
         "36481bbba58c",
         "282827505b9c",
         "f8892252b39b",
-        "caef95227715",
-        "b34e7552a58f"
+        "b34e7552a58f",
+        "caef95227715"
       ],
       "titles": [
         "上海财经大学本科学生学籍管理实施细则（修订稿）.pdf",
         "缓考申请表.doc",
         "本科生重修选课流程",
-        "上海财经大学学生违纪处分规定.pdf",
-        "工作流程"
+        "本科生缓考申请工作流程",
+        "上海财经大学学生违纪处分规定.pdf"
       ],
       "publishers": [
         "上海财经大学教务处",
@@ -205,8 +205,8 @@
         "policy",
         "manual",
         "procedure",
-        "policy",
-        "procedure"
+        "procedure",
+        "policy"
       ],
       "validity_statuses": [
         "superseded",
@@ -295,7 +295,7 @@
       "document_kinds": [
         "policy",
         "procedure",
-        "procedure",
+        "policy",
         "policy",
         "procedure"
       ],
@@ -386,7 +386,7 @@
       "document_kinds": [
         "policy",
         "procedure",
-        "procedure",
+        "policy",
         "policy",
         "procedure"
       ],
@@ -479,7 +479,7 @@
       "document_kinds": [
         "policy",
         "procedure",
-        "procedure",
+        "policy",
         "policy",
         "policy"
       ],
@@ -569,7 +569,7 @@
       ],
       "document_kinds": [
         "policy",
-        "procedure",
+        "policy",
         "policy",
         "policy",
         "procedure"
@@ -641,7 +641,7 @@
         "上海财经大学学生证补发申请表",
         "上海财经大学本科学生学籍管理实施细则（修订稿）.pdf",
         "上海财经大学学生考试试场规则.pdf",
-        "工作流程",
+        "本科生缓考申请工作流程",
         "上海财经大学学生违纪处分规定.pdf"
       ],
       "publishers": [
@@ -751,7 +751,7 @@
       ],
       "document_kinds": [
         "policy",
-        "procedure",
+        "policy",
         "procedure",
         "policy",
         "policy"
@@ -842,7 +842,7 @@
       ],
       "document_kinds": [
         "policy",
-        "procedure",
+        "policy",
         "policy",
         "policy",
         "policy"
@@ -935,7 +935,7 @@
         "policy",
         "procedure",
         "procedure",
-        "procedure",
+        "policy",
         "policy"
       ],
       "validity_statuses": [
@@ -1212,7 +1212,7 @@
         "procedure",
         "procedure",
         "procedure",
-        "procedure"
+        "policy"
       ],
       "validity_statuses": [
         "superseded",
@@ -1275,14 +1275,14 @@
         "6cc64e90571a",
         "c5ae3d61e34e",
         "f8892252b39b",
-        "caef95227715"
+        "3ae337422a5f"
       ],
       "titles": [
         "上海财经大学本科学生学籍管理实施细则（修订稿）.pdf",
         "办事流程（附件2）",
         "上海财经大学推荐优秀应届本科毕业生免试攻读研究生工作管理办法（试行）.pdf",
         "本科生重修选课流程",
-        "上海财经大学学生违纪处分规定.pdf"
+        "上海财经大学本科教学指导委员会规程（2018年修订）.pdf"
       ],
       "publishers": [
         "上海财经大学教务处",
@@ -1296,11 +1296,11 @@
         "unknown",
         "unknown",
         "unknown",
-        "unknown"
+        "2018-01-01"
       ],
       "document_kinds": [
         "policy",
-        "procedure",
+        "policy",
         "policy",
         "procedure",
         "policy"
@@ -1391,7 +1391,7 @@
       ],
       "document_kinds": [
         "policy",
-        "procedure",
+        "policy",
         "policy",
         "policy",
         "policy"
@@ -1578,7 +1578,7 @@
         "policy",
         "policy",
         "policy",
-        "procedure",
+        "policy",
         "procedure"
       ],
       "validity_statuses": [
@@ -1667,7 +1667,7 @@
       ],
       "document_kinds": [
         "policy",
-        "procedure",
+        "policy",
         "policy",
         "policy",
         "policy"
@@ -1737,7 +1737,7 @@
       ],
       "titles": [
         "上海财经大学本科学生学籍管理实施细则（修订稿）.pdf",
-        "工作流程",
+        "本科生缓考申请工作流程",
         "上海财经大学学生违纪处分规定.pdf",
         "申请休学",
         "上海财经大学学生考试试场规则.pdf"
@@ -1851,7 +1851,7 @@
         "policy",
         "policy",
         "procedure",
-        "procedure",
+        "policy",
         "policy"
       ],
       "validity_statuses": [
@@ -1943,7 +1943,7 @@
         "policy",
         "policy",
         "policy",
-        "procedure"
+        "policy"
       ],
       "validity_statuses": [
         "superseded",
@@ -2004,16 +2004,16 @@
       "retrieved_doc_ids": [
         "1512eceb29f5",
         "e9d1828c895a",
+        "6d22e4200998",
         "4f160abb07bd",
-        "12d8bae93ae8",
-        "1fb82cab054b"
+        "12d8bae93ae8"
       ],
       "titles": [
         "研究生招生与培养常见问答",
         "研究生选课与成绩单常见问答",
+        "上海财经大学2020年招收攻读硕士学位研究生初试成绩公布后相关问题汇总（二）",
         "研究生院证件与学籍事务问答（补办/充磁/休学）",
-        "上海财经大学2026年招收攻读硕士学位研究生初试成绩公布后相关问题汇总",
-        "上海财经大学关于2026年硕士研究生招生考试初试成绩查询及申请复核的公告"
+        "上海财经大学2026年招收攻读硕士学位研究生初试成绩公布后相关问题汇总"
       ],
       "publishers": [
         "上海财经大学研究生院",
@@ -2025,16 +2025,16 @@
       "publish_dates": [
         "2013-01-14",
         "2013-01-14",
+        "2020-02-22",
         "2013-01-14",
-        "2026-02-28",
-        "2026-02-26"
+        "2026-02-28"
       ],
       "document_kinds": [
         "faq",
         "faq",
-        "faq",
         "procedure",
-        "annual_notice"
+        "faq",
+        "procedure"
       ],
       "validity_statuses": [
         "unknown_validity",
@@ -2282,15 +2282,15 @@
         "c55834842682",
         "fdc14f69b3bb",
         "f69ff958852a",
-        "1a96324e5a8d",
-        "c8ae11c35f97"
+        "6d22e4200998",
+        "1a96324e5a8d"
       ],
       "titles": [
         "关于开展2023年研究生“学术之星”评选工作的通知",
         "关于开展2022年研究生“学术之星”评选工作的通知",
         "关于开展2021年研究生“学术之星”评选工作的通知",
-        "《国家教育考试违规处理办法》",
-        "上海财经大学博士研究生学位论文工作的基本要求（2002年9月修订）"
+        "上海财经大学2020年招收攻读硕士学位研究生初试成绩公布后相关问题汇总（二）",
+        "《国家教育考试违规处理办法》"
       ],
       "publishers": [
         "上海财经大学研究生院",
@@ -2303,15 +2303,15 @@
         "2023-12-04",
         "2022-09-23",
         "2021-10-09",
-        "2013-01-24",
+        "2020-02-22",
         "2013-01-24"
       ],
       "document_kinds": [
         "annual_notice",
         "annual_notice",
         "annual_notice",
-        "policy",
-        "procedure"
+        "procedure",
+        "policy"
       ],
       "validity_statuses": [
         "unknown_validity",
@@ -2557,17 +2557,17 @@
       "status": "answerable",
       "retrieved_doc_ids": [
         "1512eceb29f5",
+        "4dd7bf5f3713",
         "c0c2a73030c1",
-        "354be832f02e",
-        "a50221cc7070",
-        "e6d269205cb4"
+        "26681a0c73ca",
+        "fbda571db9af"
       ],
       "titles": [
         "研究生招生与培养常见问答",
+        "上海财经大学关于2026年国家建设高水平大学公派研究生项目选拔及申请受理工作的安排",
         "上海财经大学2026年少数民族高层次骨干人才计划研究生招生办法",
-        "上海财经大学2024年少数民族高层次骨干人才计划研究生招生办法",
-        "上海财经大学关于2022年国家建设高水平大学公派研究生项目选拔及申请受理工作的安排",
-        "上海财经大学会计学院关于举办“第十一届全国优秀大学生夏令营”的通知"
+        "上海财经大学关于2025 年国家建设高水平大学公派研究生项目选拔及申请受理工作的安排",
+        "上海财经大学关于2024年国家建设高水平大学公派研究生项目选拔及申请受理工作的安排"
       ],
       "publishers": [
         "上海财经大学研究生院",
@@ -2578,17 +2578,17 @@
       ],
       "publish_dates": [
         "2013-01-14",
+        "2026-02-28",
         "2025-10-13",
-        "2023-11-17",
-        "2022-02-23",
-        "2020-06-04"
+        "2025-02-21",
+        "2024-02-23"
       ],
       "document_kinds": [
         "faq",
         "annual_notice",
         "annual_notice",
         "annual_notice",
-        "procedure"
+        "annual_notice"
       ],
       "validity_statuses": [
         "unknown_validity",
@@ -2605,8 +2605,8 @@
         {
           "point": "申请对象",
           "status": "supported",
-          "evidence_doc_id": "c0c2a73030c1",
-          "evidence_excerpt": "# 上海财经大学2026年少数民族高层次骨干人才计划研究生招生办法 根据教育部相关文件精神，现就我校2026年少数民族高层次骨干人才计划（以下简称骨干计划）研究生招生办法公布如下： 一、招生计划 | 层次 | 计划类别 | 生源省份 | 招生计划 | | 博士 | 中国石油大学（北京）克拉玛依校区联合培养专项 | 新疆",
+          "evidence_doc_id": "4dd7bf5f3713",
+          "evidence_excerpt": "年；曾享受国家留学基金资助出国留学、回国后服务尚不满两年。项目有特殊规定的，按相关规定执行。 （二）申请对象 1．攻读博士学位研究生项目 申请对象为我校优秀在读硕士研究生、应届硕士毕业生、应届本科毕业生。申请时年龄不超过35 周岁（1990 年1 月 1 日以后出生）。在读硕士研究生和应届硕士毕业生应具备一定的科研能力和科研成",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -2650,15 +2650,15 @@
         "1512eceb29f5",
         "13fd1e1e6fc7",
         "c8ae11c35f97",
-        "18470ac98c09",
-        "83b8da8365ee"
+        "fb503f36add4",
+        "b07c48270139"
       ],
       "titles": [
         "研究生招生与培养常见问答",
         "研究生培养机制改革问答",
         "上海财经大学博士研究生学位论文工作的基本要求（2002年9月修订）",
-        "中华人民共和国学位条例暂行实施办法",
-        "上海财经大学国家建设高水平大学公派研究生项目实施办法（2008年修订）"
+        "关于做好2025年上海财经大学研究生优秀学位论文评选工作的通知",
+        "关于做好2024年上海财经大学研究生优秀学位论文评选工作的通知"
       ],
       "publishers": [
         "上海财经大学研究生院",
@@ -2671,15 +2671,15 @@
         "2013-01-14",
         "2013-01-28",
         "2013-01-24",
-        "2013-01-24",
-        "2013-01-14"
+        "2025-05-12",
+        "2024-09-19"
       ],
       "document_kinds": [
         "faq",
         "faq",
         "procedure",
-        "policy",
-        "policy"
+        "annual_notice",
+        "annual_notice"
       ],
       "validity_statuses": [
         "unknown_validity",
@@ -2740,18 +2740,18 @@
       "scene": "研究生培养与学位",
       "status": "partially_answerable",
       "retrieved_doc_ids": [
+        "4dd7bf5f3713",
         "f511bc1fc4a2",
+        "26681a0c73ca",
         "f8015ab6e16f",
-        "220adadfc5cc",
-        "0ee8ebbdf902",
-        "26beb38fef3e"
+        "220adadfc5cc"
       ],
       "titles": [
+        "上海财经大学关于2026年国家建设高水平大学公派研究生项目选拔及申请受理工作的安排",
         "上海财经大学关于做好2026年博士生导师短期出国交流项目申请工作的通知",
+        "上海财经大学关于2025 年国家建设高水平大学公派研究生项目选拔及申请受理工作的安排",
         "上海财经大学关于做好2025年博士生导师短期出国交流项目申请工作的通知",
-        "上海财经大学关于做好2024年博士生导师短期出国交流项目申请工作的通知",
-        "上海财经大学关于做好2023年博士生导师短期出国交流项目申请工作的通知",
-        "上海财经大学关于做好2022年博士生导师短期出国交流项目申请工作的通知"
+        "上海财经大学关于做好2024年博士生导师短期出国交流项目申请工作的通知"
       ],
       "publishers": [
         "上海财经大学研究生院",
@@ -2762,10 +2762,10 @@
       ],
       "publish_dates": [
         "2026-02-28",
+        "2026-02-28",
         "2025-02-21",
-        "2024-02-23",
-        "2023-01-04",
-        "2022-02-23"
+        "2025-02-21",
+        "2024-02-23"
       ],
       "document_kinds": [
         "annual_notice",
@@ -2788,18 +2788,18 @@
       "point_evidence": [
         {
           "point": "项目对象",
-          "status": "unsupported",
-          "evidence_doc_id": null,
-          "evidence_excerpt": "",
-          "reason": "未找到正文证据",
-          "confidence": 0.0,
+          "status": "supported",
+          "evidence_doc_id": "4dd7bf5f3713",
+          "evidence_excerpt": "# 上海财经大学关于2026年国家建设高水平大学公派研究生项目选拔及申请受理工作的安排 根据国家留学基金管理委员会《2026年国家建设高水平大学公派研究生项目指南》（https://www.csc.edu.cn/article/4034）之要求，现制定上海财经大学2026年国家建设高水平大学公派研究生选拔及申请受理工作",
+          "reason": "正文包含回答要点",
+          "confidence": 0.75,
           "checker": "deterministic"
         },
         {
           "point": "申请材料",
           "status": "supported",
-          "evidence_doc_id": "f511bc1fc4a2",
-          "evidence_excerpt": "排国内的教学科研工作，按期派出。 三、申请流程 （一）2月28日-3月3日，申请人向所在院（所）提交申请材料。 （二）3月9日前，各院（所）审核，提交材料至研究生院。 （三）3月17日前，研究生院审核确定推荐候选人并公示 （四）3月17日—3月 31 日，获推荐的候选人登陆国家留学基金管理委员会网页（https://sa.cs",
+          "evidence_doc_id": "4dd7bf5f3713",
+          "evidence_excerpt": "申请人登陆上财门户—国际化信息管理系统完成项目申请（操作方法参见附件1），并向所在院（所）提交完整的申请材料。 （二）3月9日前，各院（所）审核申请材料，完成选拔推荐。 （三）3月17日前，研究生院审核确定推荐候选人并公示。 （四）3月17日至3月31日，公示无异议的推荐候选人登录国家公派留学管理信息平台（https://sa",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -2807,8 +2807,8 @@
         {
           "point": "选拔流程",
           "status": "supported",
-          "evidence_doc_id": "f511bc1fc4a2",
-          "evidence_excerpt": "# 上海财经大学关于做好2026年博士生导师短期出国交流项目申请工作的通知 各院（所）及相关博士生导师： 为进一步推动国家建设高水平大学公派研究生项目实施工作，充分调动博士生导师积极性；加强对派出博士生专业学习方面的检查和指导；促进国内外学科交流及科研合作项目的建立与开展，国家留学基金管理委员会特设博士生导师短期出国交",
+          "evidence_doc_id": "4dd7bf5f3713",
+          "evidence_excerpt": "# 上海财经大学关于2026年国家建设高水平大学公派研究生项目选拔及申请受理工作的安排 根据国家留学基金管理委员会《2026年国家建设高水平大学公派研究生项目指南》（https://www.csc.edu.cn/article/4034）之要求，现制定上海财经大学2026年国家建设高水平大学公派研究生选拔及申请受理工作",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -2824,7 +2824,6 @@
         }
       ],
       "missing_reasons": [
-        "缺少回答要点：项目对象",
         "缺少回答要点：资助或学分"
       ]
     },
@@ -2835,17 +2834,17 @@
       "status": "partially_answerable",
       "retrieved_doc_ids": [
         "13fd1e1e6fc7",
-        "a50221cc7070",
-        "e6d269205cb4",
-        "83b8da8365ee",
-        "0ee8ebbdf902"
+        "4dd7bf5f3713",
+        "26681a0c73ca",
+        "fbda571db9af",
+        "bc8ce2fd6ad8"
       ],
       "titles": [
         "研究生培养机制改革问答",
-        "上海财经大学关于2022年国家建设高水平大学公派研究生项目选拔及申请受理工作的安排",
-        "上海财经大学会计学院关于举办“第十一届全国优秀大学生夏令营”的通知",
-        "上海财经大学国家建设高水平大学公派研究生项目实施办法（2008年修订）",
-        "上海财经大学关于做好2023年博士生导师短期出国交流项目申请工作的通知"
+        "上海财经大学关于2026年国家建设高水平大学公派研究生项目选拔及申请受理工作的安排",
+        "上海财经大学关于2025 年国家建设高水平大学公派研究生项目选拔及申请受理工作的安排",
+        "上海财经大学关于2024年国家建设高水平大学公派研究生项目选拔及申请受理工作的安排",
+        "上海财经大学关于2023年国家建设高水平大学公派研究生项目选拔及申请受理工作的安排"
       ],
       "publishers": [
         "上海财经大学研究生院",
@@ -2856,16 +2855,16 @@
       ],
       "publish_dates": [
         "2013-01-28",
-        "2022-02-23",
-        "2020-06-04",
-        "2013-01-14",
+        "2026-02-28",
+        "2025-02-21",
+        "2024-02-23",
         "2023-01-04"
       ],
       "document_kinds": [
         "faq",
         "annual_notice",
-        "procedure",
-        "policy",
+        "annual_notice",
+        "annual_notice",
         "annual_notice"
       ],
       "validity_statuses": [
@@ -3022,17 +3021,17 @@
       "status": "answerable",
       "retrieved_doc_ids": [
         "c8ae11c35f97",
-        "a50221cc7070",
-        "60f9a164fe20",
-        "1512eceb29f5",
-        "4f160abb07bd"
+        "4dd7bf5f3713",
+        "26681a0c73ca",
+        "fbda571db9af",
+        "bc8ce2fd6ad8"
       ],
       "titles": [
         "上海财经大学博士研究生学位论文工作的基本要求（2002年9月修订）",
-        "上海财经大学关于2022年国家建设高水平大学公派研究生项目选拔及申请受理工作的安排",
-        "上海财经大学博士研究生中期考核办法",
-        "研究生招生与培养常见问答",
-        "研究生院证件与学籍事务问答（补办/充磁/休学）"
+        "上海财经大学关于2026年国家建设高水平大学公派研究生项目选拔及申请受理工作的安排",
+        "上海财经大学关于2025 年国家建设高水平大学公派研究生项目选拔及申请受理工作的安排",
+        "上海财经大学关于2024年国家建设高水平大学公派研究生项目选拔及申请受理工作的安排",
+        "上海财经大学关于2023年国家建设高水平大学公派研究生项目选拔及申请受理工作的安排"
       ],
       "publishers": [
         "上海财经大学研究生院",
@@ -3043,17 +3042,17 @@
       ],
       "publish_dates": [
         "2013-01-24",
-        "2022-02-23",
-        "2013-01-23",
-        "2013-01-14",
-        "2013-01-14"
+        "2026-02-28",
+        "2025-02-21",
+        "2024-02-23",
+        "2023-01-04"
       ],
       "document_kinds": [
         "procedure",
         "annual_notice",
-        "policy",
-        "faq",
-        "faq"
+        "annual_notice",
+        "annual_notice",
+        "annual_notice"
       ],
       "validity_statuses": [
         "unknown_validity",
@@ -3390,15 +3389,15 @@
         "e6d269205cb4",
         "f900e2c94b7f",
         "12d8bae93ae8",
-        "c0c2a73030c1",
-        "397ea76bef2e"
+        "4dd7bf5f3713",
+        "c0c2a73030c1"
       ],
       "titles": [
         "上海财经大学会计学院关于举办“第十一届全国优秀大学生夏令营”的通知",
         "关于上海财经大学2027年接收优秀应届本科毕业生免试攻读研究生（含直博生）预报名的通知",
         "上海财经大学2026年招收攻读硕士学位研究生初试成绩公布后相关问题汇总",
-        "上海财经大学2026年少数民族高层次骨干人才计划研究生招生办法",
-        "关于上海财经大学2026年接收优秀应届本科毕业生免试攻读研究生（含直博生）预报名的通知"
+        "上海财经大学关于2026年国家建设高水平大学公派研究生项目选拔及申请受理工作的安排",
+        "上海财经大学2026年少数民族高层次骨干人才计划研究生招生办法"
       ],
       "publishers": [
         "上海财经大学研究生院",
@@ -3411,8 +3410,8 @@
         "2020-06-04",
         "2026-07-02",
         "2026-02-28",
-        "2025-10-13",
-        "2025-06-16"
+        "2026-02-28",
+        "2025-10-13"
       ],
       "document_kinds": [
         "procedure",
@@ -3479,17 +3478,17 @@
       "status": "answerable",
       "retrieved_doc_ids": [
         "1512eceb29f5",
-        "a50221cc7070",
-        "c0c2a73030c1",
-        "354be832f02e",
-        "64b251126078"
+        "4dd7bf5f3713",
+        "26681a0c73ca",
+        "fbda571db9af",
+        "bc8ce2fd6ad8"
       ],
       "titles": [
         "研究生招生与培养常见问答",
-        "上海财经大学关于2022年国家建设高水平大学公派研究生项目选拔及申请受理工作的安排",
-        "上海财经大学2026年少数民族高层次骨干人才计划研究生招生办法",
-        "上海财经大学2024年少数民族高层次骨干人才计划研究生招生办法",
-        "上海财经大学2022年少数民族高层次骨干人才计划研究生招生办法"
+        "上海财经大学关于2026年国家建设高水平大学公派研究生项目选拔及申请受理工作的安排",
+        "上海财经大学关于2025 年国家建设高水平大学公派研究生项目选拔及申请受理工作的安排",
+        "上海财经大学关于2024年国家建设高水平大学公派研究生项目选拔及申请受理工作的安排",
+        "上海财经大学关于2023年国家建设高水平大学公派研究生项目选拔及申请受理工作的安排"
       ],
       "publishers": [
         "上海财经大学研究生院",
@@ -3500,10 +3499,10 @@
       ],
       "publish_dates": [
         "2013-01-14",
-        "2022-02-23",
-        "2025-10-13",
-        "2023-11-17",
-        "2021-10-14"
+        "2026-02-28",
+        "2025-02-21",
+        "2024-02-23",
+        "2023-01-04"
       ],
       "document_kinds": [
         "faq",
@@ -3571,16 +3570,16 @@
       "retrieved_doc_ids": [
         "4f160abb07bd",
         "c8ae11c35f97",
+        "6d22e4200998",
         "1512eceb29f5",
-        "f900e2c94b7f",
-        "12d8bae93ae8"
+        "f900e2c94b7f"
       ],
       "titles": [
         "研究生院证件与学籍事务问答（补办/充磁/休学）",
         "上海财经大学博士研究生学位论文工作的基本要求（2002年9月修订）",
+        "上海财经大学2020年招收攻读硕士学位研究生初试成绩公布后相关问题汇总（二）",
         "研究生招生与培养常见问答",
-        "关于上海财经大学2027年接收优秀应届本科毕业生免试攻读研究生（含直博生）预报名的通知",
-        "上海财经大学2026年招收攻读硕士学位研究生初试成绩公布后相关问题汇总"
+        "关于上海财经大学2027年接收优秀应届本科毕业生免试攻读研究生（含直博生）预报名的通知"
       ],
       "publishers": [
         "上海财经大学研究生院",
@@ -3592,16 +3591,16 @@
       "publish_dates": [
         "2013-01-14",
         "2013-01-24",
+        "2020-02-22",
         "2013-01-14",
-        "2026-07-02",
-        "2026-02-28"
+        "2026-07-02"
       ],
       "document_kinds": [
         "faq",
         "procedure",
+        "procedure",
         "faq",
-        "annual_notice",
-        "procedure"
+        "annual_notice"
       ],
       "validity_statuses": [
         "unknown_validity",
@@ -3664,14 +3663,14 @@
         "4f160abb07bd",
         "12d8bae93ae8",
         "844338d7d8e8",
-        "2675703133ac"
+        "79f5c32bb2d9"
       ],
       "titles": [
         "研究生招生与培养常见问答",
         "研究生院证件与学籍事务问答（补办/充磁/休学）",
         "上海财经大学2026年招收攻读硕士学位研究生初试成绩公布后相关问题汇总",
         "上海财经大学2025年招收攻读硕士学位研究生初试成绩公布后相关问题汇总",
-        "上海财经大学2020年招收攻读硕士学位研究生初试成绩公布后相关问题汇总（一）"
+        "上海财经大学2021年招收攻读硕士学位研究生初试成绩公布后相关问题汇总"
       ],
       "publishers": [
         "上海财经大学研究生院",
@@ -3685,7 +3684,7 @@
         "2013-01-14",
         "2026-02-28",
         "2025-02-24",
-        "2020-02-20"
+        "2021-02-27"
       ],
       "document_kinds": [
         "faq",
@@ -3756,15 +3755,15 @@
         "83b8da8365ee",
         "c8ae11c35f97",
         "1512eceb29f5",
-        "c55834842682",
-        "fdc14f69b3bb"
+        "026ad6517067",
+        "c55834842682"
       ],
       "titles": [
         "上海财经大学国家建设高水平大学公派研究生项目实施办法（2008年修订）",
         "上海财经大学博士研究生学位论文工作的基本要求（2002年9月修订）",
         "研究生招生与培养常见问答",
-        "关于开展2023年研究生“学术之星”评选工作的通知",
-        "关于开展2022年研究生“学术之星”评选工作的通知"
+        "关于开展2024年研究生“学术之星”评选工作的通知",
+        "关于开展2023年研究生“学术之星”评选工作的通知"
       ],
       "publishers": [
         "上海财经大学研究生院",
@@ -3777,8 +3776,8 @@
         "2013-01-14",
         "2013-01-24",
         "2013-01-14",
-        "2023-12-04",
-        "2022-09-23"
+        "2024-09-12",
+        "2023-12-04"
       ],
       "document_kinds": [
         "policy",
@@ -3844,9 +3843,9 @@
       "scene": "奖助学金",
       "status": "answerable",
       "retrieved_doc_ids": [
-        "3e2ec161e017",
+        "861408385e90",
         "87cb45995557",
-        "2e8a9386b4f8",
+        "57d4620aea1b",
         "145349451521",
         "b880d66272a2"
       ],
@@ -3893,7 +3892,7 @@
         {
           "point": "评选对象",
           "status": "supported",
-          "evidence_doc_id": "3e2ec161e017",
+          "evidence_doc_id": "861408385e90",
           "evidence_excerpt": " [2025]41 号）（附件 2 ）实施。各学院按照学校工作文件精神及要求制定评选实施细则。 二、评选对象 20 22 -202 4 级本科生 ， 且 2024-2025 学年被认定为家庭经济困难学生。 三、评选条件 申请条件： 1. 具有中华人民共和国国籍； 2. 热爱社会主义祖国，拥护中国共产党的领导； 3. 遵守宪法和",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
@@ -3902,7 +3901,7 @@
         {
           "point": "基本条件",
           "status": "supported",
-          "evidence_doc_id": "3e2ec161e017",
+          "evidence_doc_id": "861408385e90",
           "evidence_excerpt": "# 关于开展2024-2025学年国家励志奖学金评选工作的通知 关于开展 202 4 -202 5 学年国家励志奖学金评选工作的通知 各学院： 根据《关于下达 202 5 年中央高校国家奖助学金名额的通知》（教助中心〔 202 5 〕 18 号），为切实做好我校 20 24 -202 5 学年国家励志奖学金评选工作，现",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
@@ -3911,7 +3910,7 @@
         {
           "point": "成绩或综合表现要求",
           "status": "supported",
-          "evidence_doc_id": "3e2ec161e017",
+          "evidence_doc_id": "861408385e90",
           "evidence_excerpt": "# 关于开展2024-2025学年国家励志奖学金评选工作的通知 关于开展 202 4 -202 5 学年国家励志奖学金评选工作的通知 各学院： 根据《关于下达 202 5 年中央高校国家奖助学金名额的通知》（教助中心〔 202 5 〕 18 号），为切实做好我校 20 24 -202 5 学年国家励志奖学金评选工作，现",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
@@ -3920,7 +3919,7 @@
         {
           "point": "申请材料",
           "status": "supported",
-          "evidence_doc_id": "3e2ec161e017",
+          "evidence_doc_id": "861408385e90",
           "evidence_excerpt": "# 关于开展2024-2025学年国家励志奖学金评选工作的通知 关于开展 202 4 -202 5 学年国家励志奖学金评选工作的通知 各学院： 根据《关于下达 202 5 年中央高校国家奖助学金名额的通知》（教助中心〔 202 5 〕 18 号），为切实做好我校 20 24 -202 5 学年国家励志奖学金评选工作，现",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
@@ -3939,14 +3938,14 @@
         "231d0aa11418",
         "77ec547b2f2e",
         "87cb45995557",
-        "3e2ec161e017"
+        "ba83658755d9"
       ],
       "titles": [
         "关于印发《上海财经大学本科生奖学金评选管理办法》的通知（上财行规[2025]22号）.pdf",
         "关于印发《上海财经大学研究生国家奖学金管理办法》的通知（附件）",
         "关于印发《上海财经大学研究生学业奖学金管理办法》的通知（附件）",
         "关于印发《上海财经大学上海市奖学金管理办法》的通知（附件）",
-        "关于开展2024-2025学年国家励志奖学金评选工作的通知"
+        "关于开展2024-2025学年本科生社会奖学金评选工作的通知"
       ],
       "publishers": [
         "上海财经大学学生处",
@@ -3960,7 +3959,7 @@
         "unknown",
         "unknown",
         "unknown",
-        "2025-10-16"
+        "2025-11-17"
       ],
       "document_kinds": [
         "policy",
@@ -4030,7 +4029,7 @@
       "status": "answerable",
       "retrieved_doc_ids": [
         "b815e0eefe9a",
-        "3e2ec161e017",
+        "861408385e90",
         "77d10806304e",
         "145349451521",
         "fe0181791af1"
@@ -4214,8 +4213,8 @@
         "1f5aa08edc4d",
         "5220cf43e76b",
         "d9ef5485306b",
-        "3e2ec161e017",
-        "045ddc88af3e"
+        "861408385e90",
+        "5836ee860bf9"
       ],
       "titles": [
         "关于印发《上海财经大学学生违纪处分规定（2023年10月修订）》的通知.pdf",
@@ -4306,16 +4305,16 @@
       "retrieved_doc_ids": [
         "e8b2b9918594",
         "87cb45995557",
-        "3e2ec161e017",
-        "145349451521",
-        "77ec547b2f2e"
+        "ba83658755d9",
+        "861408385e90",
+        "145349451521"
       ],
       "titles": [
         "关于印发《上海财经大学本科生奖学金评选管理办法》的通知（上财行规[2025]22号）.pdf",
         "关于印发《上海财经大学上海市奖学金管理办法》的通知（附件）",
+        "关于开展2024-2025学年本科生社会奖学金评选工作的通知",
         "关于开展2024-2025学年国家励志奖学金评选工作的通知",
-        "关于开展2024-2025学年本科生国家助学金及社会助学金评选工作的通知.doc",
-        "关于印发《上海财经大学研究生学业奖学金管理办法》的通知（附件）"
+        "关于开展2024-2025学年本科生国家助学金及社会助学金评选工作的通知.doc"
       ],
       "publishers": [
         "上海财经大学学生处",
@@ -4327,16 +4326,16 @@
       "publish_dates": [
         "2025-06-09",
         "unknown",
+        "2025-11-17",
         "2025-10-16",
-        "2024-11-06",
-        "unknown"
+        "2024-11-06"
       ],
       "document_kinds": [
         "policy",
         "policy",
         "annual_notice",
         "annual_notice",
-        "policy"
+        "annual_notice"
       ],
       "validity_statuses": [
         "unknown_validity",
@@ -4397,7 +4396,7 @@
       "scene": "奖助学金",
       "status": "partially_answerable",
       "retrieved_doc_ids": [
-        "3e2ec161e017",
+        "861408385e90",
         "a7ba514b5aec",
         "b880d66272a2",
         "1067b1ad3777",
@@ -4455,7 +4454,7 @@
         {
           "point": "计算规则",
           "status": "supported",
-          "evidence_doc_id": "3e2ec161e017",
+          "evidence_doc_id": "861408385e90",
           "evidence_excerpt": "# 关于开展2024-2025学年国家励志奖学金评选工作的通知 关于开展 202 4 -202 5 学年国家励志奖学金评选工作的通知 各学院： 根据《关于下达 202 5 年中央高校国家奖助学金名额的通知》（教助中心〔 202 5 〕 18 号），为切实做好我校 20 24 -202 5 学年国家励志奖学金评选工作，现",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
@@ -4464,7 +4463,7 @@
         {
           "point": "适用对象",
           "status": "supported",
-          "evidence_doc_id": "3e2ec161e017",
+          "evidence_doc_id": "861408385e90",
           "evidence_excerpt": "# 关于开展2024-2025学年国家励志奖学金评选工作的通知 关于开展 202 4 -202 5 学年国家励志奖学金评选工作的通知 各学院： 根据《关于下达 202 5 年中央高校国家奖助学金名额的通知》（教助中心〔 202 5 〕 18 号），为切实做好我校 20 24 -202 5 学年国家励志奖学金评选工作，现",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
@@ -4473,7 +4472,7 @@
         {
           "point": "成绩或材料来源",
           "status": "supported",
-          "evidence_doc_id": "3e2ec161e017",
+          "evidence_doc_id": "861408385e90",
           "evidence_excerpt": "# 关于开展2024-2025学年国家励志奖学金评选工作的通知 关于开展 202 4 -202 5 学年国家励志奖学金评选工作的通知 各学院： 根据《关于下达 202 5 年中央高校国家奖助学金名额的通知》（教助中心〔 202 5 〕 18 号），为切实做好我校 20 24 -202 5 学年国家励志奖学金评选工作，现",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
@@ -4492,16 +4491,16 @@
       "retrieved_doc_ids": [
         "1ab2328b6329",
         "4a24a8bbdf92",
-        "3e2ec161e017",
-        "2e8a9386b4f8",
-        "8de8b980d655"
+        "ba83658755d9",
+        "861408385e90",
+        "57d4620aea1b"
       ],
       "titles": [
         "关于开展2024年研究生国家奖学金评选工作的通知.pdf",
         "关于开展2024年研究生学业奖学金评选工作的通知.pdf",
+        "关于开展2024-2025学年本科生社会奖学金评选工作的通知",
         "关于开展2024-2025学年国家励志奖学金评选工作的通知",
-        "关于开展2024-2025学年本科生国家奖学金评选工作的通知",
-        "关于开展2024-2025学年本科毕业生优秀学生人民奖学金评选工作的通知.pdf"
+        "关于开展2024-2025学年本科生国家奖学金评选工作的通知"
       ],
       "publishers": [
         "上海财经大学学生处",
@@ -4513,9 +4512,9 @@
       "publish_dates": [
         "2024-09-23",
         "2024-09-10",
+        "2025-11-17",
         "2025-10-16",
-        "2025-09-28",
-        "2025-06-09"
+        "2025-09-28"
       ],
       "document_kinds": [
         "annual_notice",
@@ -4584,7 +4583,7 @@
         "145349451521",
         "4cb5fd791a1a",
         "87cb45995557",
-        "3e2ec161e017",
+        "861408385e90",
         "1f5aa08edc4d"
       ],
       "titles": [
@@ -4674,7 +4673,7 @@
       "retrieved_doc_ids": [
         "4cb5fd791a1a",
         "b815e0eefe9a",
-        "8f245c042322",
+        "c738554bdeee",
         "6727ac48ce4e",
         "ad82461a66c4"
       ],
@@ -4763,18 +4762,18 @@
       "scene": "奖助学金",
       "status": "answerable",
       "retrieved_doc_ids": [
+        "4ff558a986d5",
         "ee98c67e0dbc",
         "1f5aa08edc4d",
-        "049a7db37997",
-        "280b436e0a52",
-        "4cb5fd791a1a"
+        "4256e93f19b3",
+        "280b436e0a52"
       ],
       "titles": [
+        "关于印发《上海财经大学校园地国家助学贷款管理办法（2025年5月修订）》的通知",
         "关于申请2022年中西部基层单位就业学费补偿国家助学贷款代偿的通知",
         "关于印发《上海财经大学学生违纪处分规定（2023年10月修订）》的通知.pdf",
         "关于开展2023年校园地助学贷款还款确认工作的通知",
-        "2021年校园地国家助学贷款申请、提额资格审核通过名单及签署合同的通知",
-        "关于印发《上海财经大学中西部基层单位就业毕业生学费和国家助学贷款代偿管理办法》的通知（附件）"
+        "2021年校园地国家助学贷款申请、提额资格审核通过名单及签署合同的通知"
       ],
       "publishers": [
         "上海财经大学学生处",
@@ -4784,23 +4783,23 @@
         "上海财经大学学生处"
       ],
       "publish_dates": [
+        "unknown",
         "2022-05-31",
         "2023-12-13",
         "2023-05-12",
-        "2021-11-24",
-        "unknown"
+        "2021-11-24"
       ],
       "document_kinds": [
+        "policy",
         "annual_notice",
         "policy",
         "annual_notice",
-        "public_list",
-        "policy"
+        "public_list"
       ],
       "validity_statuses": [
         "unknown_validity",
-        "current",
         "unknown_validity",
+        "current",
         "unknown_validity",
         "unknown_validity"
       ],
@@ -4812,8 +4811,8 @@
         {
           "point": "申请条件",
           "status": "supported",
-          "evidence_doc_id": "ee98c67e0dbc",
-          "evidence_excerpt": "象 全日制本科生、研究生应届毕业生。定向、委培以及在校学习期间已享受免除学费政策的学生除外。 三、对申请条件涉及的概念的具体解释 （一）就业地区 西部地区是指西藏、内蒙古、广西、重庆、四川、贵州、云南、陕西、甘肃、青海、宁夏、新疆12个省（自治区、直辖市）。 中部地区是指河北、山西、吉林、黑龙江、安徽、江西、河南、湖北、湖南、",
+          "evidence_doc_id": "4ff558a986d5",
+          "evidence_excerpt": "# 关于印发《上海财经大学校园地国家助学贷款管理办法（2025年5月修订）》的通知 栏目“部门制度”公开发布材料“关于印发《上海财经大学校园地国家助学贷款管理办法（2025年5月修订）》的通知”。该材料的具体条件、材料和办理要求见附件正文。原始发布栏目：https://xsc.sufe.edu.cn/5437/list",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -4821,8 +4820,8 @@
         {
           "point": "材料",
           "status": "supported",
-          "evidence_doc_id": "ee98c67e0dbc",
-          "evidence_excerpt": "； 3.毕业时自愿到中西部地区和艰苦边远地区基层单位工作、服务期在3年以上（含3年）。 四、申请所需材料 1.学生本人填写的《基层就业学费补偿国家助学贷款代偿申请表》（一式两份） 2. 毕业生本人、就业单位与学校三方签署的到中西部地区和艰苦边远地区基层单位服务3年以上的就业协议。（一式两份） 3.《就业证明》（一份。存在二",
+          "evidence_doc_id": "4ff558a986d5",
+          "evidence_excerpt": "印发《上海财经大学校园地国家助学贷款管理办法（2025年5月修订）》的通知 栏目“部门制度”公开发布材料“关于印发《上海财经大学校园地国家助学贷款管理办法（2025年5月修订）》的通知”。该材料的具体条件、材料和办理要求见附件正文。原始发布栏目：https://xsc.sufe.edu.cn/5437/list.htm。",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -4830,8 +4829,8 @@
         {
           "point": "办理流程",
           "status": "supported",
-          "evidence_doc_id": "ee98c67e0dbc",
-          "evidence_excerpt": "# 关于申请2022年中西部基层单位就业学费补偿国家助学贷款代偿的通知 各学院（所）： 根据《财政部 教育部 人力资源社会保障部 退役军人部 中央军委国防动员部关于印发《学生资助资金管理办法》的通知（财教〔2021〕310号），为做好2022年毕业生基层就业学费补偿和国家助学贷款代偿工作，现将有关申报事项通知如下： 一",
+          "evidence_doc_id": "4ff558a986d5",
+          "evidence_excerpt": "# 关于印发《上海财经大学校园地国家助学贷款管理办法（2025年5月修订）》的通知 栏目“部门制度”公开发布材料“关于印发《上海财经大学校园地国家助学贷款管理办法（2025年5月修订）》的通知”。该材料的具体条件、材料和办理要求见附件正文。原始发布栏目：https://xsc.sufe.edu.cn/5437/list",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -4839,8 +4838,8 @@
         {
           "point": "经办部门",
           "status": "supported",
-          "evidence_doc_id": "ee98c67e0dbc",
-          "evidence_excerpt": "# 关于申请2022年中西部基层单位就业学费补偿国家助学贷款代偿的通知 各学院（所）： 根据《财政部 教育部 人力资源社会保障部 退役军人部 中央军委国防动员部关于印发《学生资助资金管理办法》的通知（财教〔2021〕310号），为做好2022年毕业生基层就业学费补偿和国家助学贷款代偿工作，现将有关申报事项通知如下： 一",
+          "evidence_doc_id": "4ff558a986d5",
+          "evidence_excerpt": "# 关于印发《上海财经大学校园地国家助学贷款管理办法（2025年5月修订）》的通知 栏目“部门制度”公开发布材料“关于印发《上海财经大学校园地国家助学贷款管理办法（2025年5月修订）》的通知”。该材料的具体条件、材料和办理要求见附件正文。原始发布栏目：https://xsc.sufe.edu.cn/5437/list",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -4855,17 +4854,17 @@
       "status": "partially_answerable",
       "retrieved_doc_ids": [
         "ee98c67e0dbc",
-        "045ddc88af3e",
+        "1693b45a1775",
+        "5836ee860bf9",
         "204cdd70a17d",
-        "4cb5fd791a1a",
-        "c86551d6f299"
+        "4cb5fd791a1a"
       ],
       "titles": [
         "关于申请2022年中西部基层单位就业学费补偿国家助学贷款代偿的通知",
+        "关于2025年国家开发银行生源地助学贷款毕业确认工作的通知",
         "关于采集2025-2026学年生源地助学贷款受理证明回执校验码的通知",
         "关于采集2022-2023学年生源地助学贷款受理证明回执校验码的通知",
-        "关于印发《上海财经大学中西部基层单位就业毕业生学费和国家助学贷款代偿管理办法》的通知（附件）",
-        "关于采集2023-2024学年生源地助学贷款受理证明回执校验码的通知"
+        "关于印发《上海财经大学中西部基层单位就业毕业生学费和国家助学贷款代偿管理办法》的通知（附件）"
       ],
       "publishers": [
         "上海财经大学学生处",
@@ -4876,17 +4875,17 @@
       ],
       "publish_dates": [
         "2022-05-31",
+        "2025-05-22",
         "2025-09-08",
         "2022-09-01",
-        "unknown",
-        "2023-09-01"
+        "unknown"
       ],
       "document_kinds": [
         "annual_notice",
         "annual_notice",
         "annual_notice",
-        "policy",
-        "annual_notice"
+        "annual_notice",
+        "policy"
       ],
       "validity_statuses": [
         "unknown_validity",
@@ -4947,18 +4946,18 @@
       "scene": "奖助学金",
       "status": "answerable",
       "retrieved_doc_ids": [
+        "bb5bbb0e9e8c",
         "77ec547b2f2e",
+        "4f21705d51ca",
         "145349451521",
-        "1ab2328b6329",
-        "0922e508be1d",
-        "231d0aa11418"
+        "1ab2328b6329"
       ],
       "titles": [
+        "关于印发《上海财经大学服兵役学生国家教育资助实施办法（2025年5月修订）》的通知",
         "关于印发《上海财经大学研究生学业奖学金管理办法》的通知（附件）",
+        "关于组织学生开展2025年千村调查工作的通知",
         "关于开展2024-2025学年本科生国家助学金及社会助学金评选工作的通知.doc",
-        "关于开展2024年研究生国家奖学金评选工作的通知.pdf",
-        "关于印发《上海财经大学研究生国家助学金管理办法》的通知（附件）",
-        "关于印发《上海财经大学研究生国家奖学金管理办法》的通知（附件）"
+        "关于开展2024年研究生国家奖学金评选工作的通知.pdf"
       ],
       "publishers": [
         "上海财经大学学生处",
@@ -4969,17 +4968,17 @@
       ],
       "publish_dates": [
         "unknown",
-        "2024-11-06",
-        "2024-09-23",
         "unknown",
-        "unknown"
+        "2025-04-28",
+        "2024-11-06",
+        "2024-09-23"
       ],
       "document_kinds": [
         "policy",
-        "annual_notice",
-        "annual_notice",
         "policy",
-        "policy"
+        "annual_notice",
+        "annual_notice",
+        "annual_notice"
       ],
       "validity_statuses": [
         "unknown_validity",
@@ -5005,8 +5004,8 @@
         {
           "point": "材料",
           "status": "supported",
-          "evidence_doc_id": "77ec547b2f2e",
-          "evidence_excerpt": "# 关于印发《上海财经大学研究生学业奖学金管理办法》的通知（附件） 所属通知：关于印发《上海财经大学研究生学业奖学金管理办法》的通知 发布日期：unknown 发布单位：上海财经大学学生处 原发布页：https://xsc.sufe.edu.cn/5437/list.htm?source_attachment=77ec",
+          "evidence_doc_id": "bb5bbb0e9e8c",
+          "evidence_excerpt": "《上海财经大学服兵役学生国家教育资助实施办法（2025年5月修订）》的通知 栏目“部门制度”公开发布材料“关于印发《上海财经大学服兵役学生国家教育资助实施办法（2025年5月修订）》的通知”。该材料的具体条件、材料和办理要求见附件正文。原始发布栏目：https://xsc.sufe.edu.cn/5437/list.htm",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -5014,8 +5013,8 @@
         {
           "point": "办理流程",
           "status": "supported",
-          "evidence_doc_id": "77ec547b2f2e",
-          "evidence_excerpt": "# 关于印发《上海财经大学研究生学业奖学金管理办法》的通知（附件） 所属通知：关于印发《上海财经大学研究生学业奖学金管理办法》的通知 发布日期：unknown 发布单位：上海财经大学学生处 原发布页：https://xsc.sufe.edu.cn/5437/list.htm?source_attachment=77ec",
+          "evidence_doc_id": "bb5bbb0e9e8c",
+          "evidence_excerpt": "# 关于印发《上海财经大学服兵役学生国家教育资助实施办法（2025年5月修订）》的通知 栏目“部门制度”公开发布材料“关于印发《上海财经大学服兵役学生国家教育资助实施办法（2025年5月修订）》的通知”。该材料的具体条件、材料和办理要求见附件正文。原始发布栏目：https://xsc.sufe.edu.cn/5437/",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -5023,8 +5022,8 @@
         {
           "point": "截止时间",
           "status": "supported",
-          "evidence_doc_id": "77ec547b2f2e",
-          "evidence_excerpt": "# 关于印发《上海财经大学研究生学业奖学金管理办法》的通知（附件） 所属通知：关于印发《上海财经大学研究生学业奖学金管理办法》的通知 发布日期：unknown 发布单位：上海财经大学学生处 原发布页：https://xsc.sufe.edu.cn/5437/list.htm?source_attachment=77ec",
+          "evidence_doc_id": "bb5bbb0e9e8c",
+          "evidence_excerpt": "# 关于印发《上海财经大学服兵役学生国家教育资助实施办法（2025年5月修订）》的通知 栏目“部门制度”公开发布材料“关于印发《上海财经大学服兵役学生国家教育资助实施办法（2025年5月修订）》的通知”。该材料的具体条件、材料和办理要求见附件正文。原始发布栏目：https://xsc.sufe.edu.cn/5437/",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -5131,18 +5130,18 @@
       "scene": "奖助学金",
       "status": "partially_answerable",
       "retrieved_doc_ids": [
+        "ba83658755d9",
         "145349451521",
         "3cd9009d3563",
-        "3e2ec161e017",
-        "2e8a9386b4f8",
-        "e8b2b9918594"
+        "861408385e90",
+        "57d4620aea1b"
       ],
       "titles": [
+        "关于开展2024-2025学年本科生社会奖学金评选工作的通知",
         "关于开展2024-2025学年本科生国家助学金及社会助学金评选工作的通知.doc",
         "关于开展2023-2024学年本科生社会奖学金评选工作的通知.pdf",
         "关于开展2024-2025学年国家励志奖学金评选工作的通知",
-        "关于开展2024-2025学年本科生国家奖学金评选工作的通知",
-        "关于印发《上海财经大学本科生奖学金评选管理办法》的通知（上财行规[2025]22号）.pdf"
+        "关于开展2024-2025学年本科生国家奖学金评选工作的通知"
       ],
       "publishers": [
         "上海财经大学学生处",
@@ -5152,18 +5151,18 @@
         "上海财经大学学生处"
       ],
       "publish_dates": [
+        "2025-11-17",
         "2024-11-06",
         "2024-11-01",
         "2025-10-16",
-        "2025-09-28",
-        "2025-06-09"
+        "2025-09-28"
       ],
       "document_kinds": [
         "annual_notice",
         "annual_notice",
         "annual_notice",
         "annual_notice",
-        "policy"
+        "annual_notice"
       ],
       "validity_statuses": [
         "unknown_validity",
@@ -5180,8 +5179,8 @@
         {
           "point": "评选对象",
           "status": "supported",
-          "evidence_doc_id": "145349451521",
-          "evidence_excerpt": "]11号)及社会助学金捐赠协议相关要求进行。各学院按照学校工作文件精神及要求制定评选实施细则。 二、评选对象 参加2024-2025学年家庭经济困难学生认定并审核通过的本科生。超过基本修业年限的学生不具备国家助学金申请资格。退役士兵家庭经济困难学生已享受退役士兵国家助学金，不能同时申请本科生国家助学金。 三、评选条件 1.具有",
+          "evidence_doc_id": "ba83658755d9",
+          "evidence_excerpt": "行规 [2025]22 号 ） 及捐赠协议相关要求进行。各学院根据实际情况，制定学院评选实施细则。 评选对象及申请资格 （ 一 ） 评选对象 2 02 2 级、 2 02 3 级、 2 02 4 级的全日制 在校本科生 （二）申请资格 1. 2 02 4 -202 5 学年 人民奖学金 一、二、三等奖 获得者 ； 2. 未发生",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -5189,8 +5188,8 @@
         {
           "point": "申请材料",
           "status": "supported",
-          "evidence_doc_id": "145349451521",
-          "evidence_excerpt": "月15日下班前，学院通过学工管理系统将初审结果报学生工作处审核。 4.学生工作处核查申请学生资格，对申请材料进行审查。 5.学生工作处将审核通过的国家助学金申请材料报送全国学生资助中心；将审核通过的社会助学金申请材料报送学校教育发展基金会，捐赠单位审核确定最终受助名单。 五、线上系统操作 1.11月7日起，申请学生在“上财门户",
+          "evidence_doc_id": "ba83658755d9",
+          "evidence_excerpt": "# 关于开展2024-2025学年本科生社会奖学金评选工作的通知 关于开展 20 2 4 - 202 5 学年本科生社会奖学金评选工作的通知 各 学 院： 202 4 -202 5 学 年 本科生社会奖学金 评选工作 即日启动 ， 请各学院按照工作要求组织开展评选工作。 一、名额分配及评选办法 各项社会奖学金评选条件及",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -5198,8 +5197,8 @@
         {
           "point": "评选流程",
           "status": "supported",
-          "evidence_doc_id": "145349451521",
-          "evidence_excerpt": "# 关于开展2024-2025学年本科生国家助学金及社会助学金评选工作的通知.doc 所属通知：关于开展2024-2025学年本科生国家助学金及社会助学金评选工作的通知 发布日期：2024-11-06 发布单位：上海财经大学学生处 原发布页：https://xsc.sufe.edu.cn/b0/c2/c19081a24",
+          "evidence_doc_id": "ba83658755d9",
+          "evidence_excerpt": "# 关于开展2024-2025学年本科生社会奖学金评选工作的通知 关于开展 20 2 4 - 202 5 学年本科生社会奖学金评选工作的通知 各 学 院： 202 4 -202 5 学 年 本科生社会奖学金 评选工作 即日启动 ， 请各学院按照工作要求组织开展评选工作。 一、名额分配及评选办法 各项社会奖学金评选条件及",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -5412,45 +5411,45 @@
       "status": "partially_answerable",
       "retrieved_doc_ids": [
         "c5ae3d61e34e",
+        "79f5c32bb2d9",
         "2675703133ac",
         "1512eceb29f5",
-        "36481bbba58c",
-        "1fb82cab054b"
+        "36481bbba58c"
       ],
       "titles": [
         "上海财经大学推荐优秀应届本科毕业生免试攻读研究生工作管理办法（试行）.pdf",
+        "上海财经大学2021年招收攻读硕士学位研究生初试成绩公布后相关问题汇总",
         "上海财经大学2020年招收攻读硕士学位研究生初试成绩公布后相关问题汇总（一）",
         "研究生招生与培养常见问答",
-        "上海财经大学本科学生学籍管理实施细则（修订稿）.pdf",
-        "上海财经大学关于2026年硕士研究生招生考试初试成绩查询及申请复核的公告"
+        "上海财经大学本科学生学籍管理实施细则（修订稿）.pdf"
       ],
       "publishers": [
         "上海财经大学教务处",
         "上海财经大学研究生院",
         "上海财经大学研究生院",
-        "上海财经大学教务处",
-        "上海财经大学研究生院"
+        "上海财经大学研究生院",
+        "上海财经大学教务处"
       ],
       "publish_dates": [
         "unknown",
+        "2021-02-27",
         "2020-02-20",
         "2013-01-14",
-        "unknown",
-        "2026-02-26"
+        "unknown"
       ],
       "document_kinds": [
         "policy",
         "procedure",
+        "procedure",
         "faq",
-        "policy",
-        "annual_notice"
+        "policy"
       ],
       "validity_statuses": [
         "superseded",
         "unknown_validity",
         "unknown_validity",
-        "superseded",
-        "unknown_validity"
+        "unknown_validity",
+        "superseded"
       ],
       "has_attachment": true,
       "matched_domains": [
@@ -5506,45 +5505,45 @@
       "scene": "推免与招生",
       "status": "partially_answerable",
       "retrieved_doc_ids": [
+        "79f5c32bb2d9",
         "e6d269205cb4",
         "2675703133ac",
         "c5ae3d61e34e",
-        "3db4ae2f926a",
-        "12d8bae93ae8"
+        "3db4ae2f926a"
       ],
       "titles": [
+        "上海财经大学2021年招收攻读硕士学位研究生初试成绩公布后相关问题汇总",
         "上海财经大学会计学院关于举办“第十一届全国优秀大学生夏令营”的通知",
         "上海财经大学2020年招收攻读硕士学位研究生初试成绩公布后相关问题汇总（一）",
         "上海财经大学推荐优秀应届本科毕业生免试攻读研究生工作管理办法（试行）.pdf",
-        "上海财经大学2026年硕士研究生招生复试录取办法",
-        "上海财经大学2026年招收攻读硕士学位研究生初试成绩公布后相关问题汇总"
+        "上海财经大学2026年硕士研究生招生复试录取办法"
       ],
       "publishers": [
         "上海财经大学研究生院",
         "上海财经大学研究生院",
-        "上海财经大学教务处",
         "上海财经大学研究生院",
+        "上海财经大学教务处",
         "上海财经大学研究生院"
       ],
       "publish_dates": [
+        "2021-02-27",
         "2020-06-04",
         "2020-02-20",
         "unknown",
-        "2026-03-19",
-        "2026-02-28"
+        "2026-03-19"
       ],
       "document_kinds": [
         "procedure",
         "procedure",
+        "procedure",
         "policy",
-        "annual_notice",
-        "procedure"
+        "annual_notice"
       ],
       "validity_statuses": [
         "unknown_validity",
         "unknown_validity",
-        "superseded",
         "unknown_validity",
+        "superseded",
         "unknown_validity"
       ],
       "has_attachment": true,
@@ -5556,8 +5555,8 @@
         {
           "point": "排名规则",
           "status": "supported",
-          "evidence_doc_id": "e6d269205cb4",
-          "evidence_excerpt": "# 上海财经大学会计学院关于举办“第十一届全国优秀大学生夏令营”的通知 重要提示：本次夏令营仅面向外校和本校外院的本科在读大三学生，是上海财经大学会计学院选拔2021年外校和本校外院推荐免试研究生的唯一方式（国家、上海市或学校政策另有特殊规定的除外）。热忱欢迎广大优秀学子报名参加！ 上海财经大学会计学院是一所具有悠久历",
+          "evidence_doc_id": "79f5c32bb2d9",
+          "evidence_excerpt": "# 上海财经大学2021年招收攻读硕士学位研究生初试成绩公布后相关问题汇总 一、初试成绩复核相关问题 1.对统考科目初试成绩有异议，如何申请复核？复核结果什么时候可以知道？ 全国统考科目（思想政治理论、管理类联考综合能力、英语（一）、俄语、日语、英语（二）、数学（一）、数学（三）、经济类专业学位联考综合能力、法硕联考专",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -5583,8 +5582,8 @@
         {
           "point": "公示方式",
           "status": "supported",
-          "evidence_doc_id": "e6d269205cb4",
-          "evidence_excerpt": "# 上海财经大学会计学院关于举办“第十一届全国优秀大学生夏令营”的通知 重要提示：本次夏令营仅面向外校和本校外院的本科在读大三学生，是上海财经大学会计学院选拔2021年外校和本校外院推荐免试研究生的唯一方式（国家、上海市或学校政策另有特殊规定的除外）。热忱欢迎广大优秀学子报名参加！ 上海财经大学会计学院是一所具有悠久历",
+          "evidence_doc_id": "79f5c32bb2d9",
+          "evidence_excerpt": "# 上海财经大学2021年招收攻读硕士学位研究生初试成绩公布后相关问题汇总 一、初试成绩复核相关问题 1.对统考科目初试成绩有异议，如何申请复核？复核结果什么时候可以知道？ 全国统考科目（思想政治理论、管理类联考综合能力、英语（一）、俄语、日语、英语（二）、数学（一）、数学（三）、经济类专业学位联考综合能力、法硕联考专",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -5692,39 +5691,39 @@
       "scene": "推免与招生",
       "status": "partially_answerable",
       "retrieved_doc_ids": [
+        "79f5c32bb2d9",
         "e6d269205cb4",
-        "1512eceb29f5",
-        "f900e2c94b7f",
-        "ec97cb99d0b2",
-        "397ea76bef2e"
+        "f5148ca0ead0",
+        "a991a2e9ee0b",
+        "1512eceb29f5"
       ],
       "titles": [
+        "上海财经大学2021年招收攻读硕士学位研究生初试成绩公布后相关问题汇总",
         "上海财经大学会计学院关于举办“第十一届全国优秀大学生夏令营”的通知",
-        "研究生招生与培养常见问答",
-        "关于上海财经大学2027年接收优秀应届本科毕业生免试攻读研究生（含直博生）预报名的通知",
-        "关于确定我校2026年推荐优秀应届本科毕业生免试攻读研究生名单的公告",
-        "关于上海财经大学2026年接收优秀应届本科毕业生免试攻读研究生（含直博生）预报名的通知"
+        "上海财经大学会计学院关于举办“第十届全国优秀大学生夏令营”的通知",
+        "上海财经大学会计学院关于举办“第九届全国优秀大学生夏令营”的通知",
+        "研究生招生与培养常见问答"
       ],
       "publishers": [
         "上海财经大学研究生院",
         "上海财经大学研究生院",
         "上海财经大学研究生院",
-        "上海财经大学教务处",
+        "上海财经大学研究生院",
         "上海财经大学研究生院"
       ],
       "publish_dates": [
+        "2021-02-27",
         "2020-06-04",
-        "2013-01-14",
-        "2026-07-02",
-        "2025-09-19",
-        "2025-06-16"
+        "2019-05-13",
+        "2018-05-17",
+        "2013-01-14"
       ],
       "document_kinds": [
         "procedure",
-        "faq",
-        "annual_notice",
-        "public_list",
-        "annual_notice"
+        "procedure",
+        "procedure",
+        "procedure",
+        "faq"
       ],
       "validity_statuses": [
         "unknown_validity",
@@ -5735,8 +5734,7 @@
       ],
       "has_attachment": false,
       "matched_domains": [
-        "gs.sufe.edu.cn",
-        "jwc.sufe.edu.cn"
+        "gs.sufe.edu.cn"
       ],
       "point_evidence": [
         {
@@ -5751,8 +5749,8 @@
         {
           "point": "学院审核",
           "status": "supported",
-          "evidence_doc_id": "e6d269205cb4",
-          "evidence_excerpt": "# 上海财经大学会计学院关于举办“第十一届全国优秀大学生夏令营”的通知 重要提示：本次夏令营仅面向外校和本校外院的本科在读大三学生，是上海财经大学会计学院选拔2021年外校和本校外院推荐免试研究生的唯一方式（国家、上海市或学校政策另有特殊规定的除外）。热忱欢迎广大优秀学子报名参加！ 上海财经大学会计学院是一所具有悠久历",
+          "evidence_doc_id": "79f5c32bb2d9",
+          "evidence_excerpt": "# 上海财经大学2021年招收攻读硕士学位研究生初试成绩公布后相关问题汇总 一、初试成绩复核相关问题 1.对统考科目初试成绩有异议，如何申请复核？复核结果什么时候可以知道？ 全国统考科目（思想政治理论、管理类联考综合能力、英语（一）、俄语、日语、英语（二）、数学（一）、数学（三）、经济类专业学位联考综合能力、法硕联考专",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -6153,20 +6151,20 @@
       "id": "admit-master-book-011",
       "question": "硕士研究生招生简章在哪里查询？",
       "scene": "推免与招生",
-      "status": "answerable",
+      "status": "partially_answerable",
       "retrieved_doc_ids": [
         "2675703133ac",
         "12d8bae93ae8",
         "844338d7d8e8",
-        "a195015394f5",
-        "c0c2a73030c1"
+        "79f5c32bb2d9",
+        "6d22e4200998"
       ],
       "titles": [
         "上海财经大学2020年招收攻读硕士学位研究生初试成绩公布后相关问题汇总（一）",
         "上海财经大学2026年招收攻读硕士学位研究生初试成绩公布后相关问题汇总",
         "上海财经大学2025年招收攻读硕士学位研究生初试成绩公布后相关问题汇总",
-        "上海财经大学关于2026年硕士研究生调剂复试工作公告",
-        "上海财经大学2026年少数民族高层次骨干人才计划研究生招生办法"
+        "上海财经大学2021年招收攻读硕士学位研究生初试成绩公布后相关问题汇总",
+        "上海财经大学2020年招收攻读硕士学位研究生初试成绩公布后相关问题汇总（二）"
       ],
       "publishers": [
         "上海财经大学研究生院",
@@ -6179,15 +6177,15 @@
         "2020-02-20",
         "2026-02-28",
         "2025-02-24",
-        "2026-03-27",
-        "2025-10-13"
+        "2021-02-27",
+        "2020-02-22"
       ],
       "document_kinds": [
         "procedure",
         "procedure",
         "procedure",
-        "annual_notice",
-        "annual_notice"
+        "procedure",
+        "procedure"
       ],
       "validity_statuses": [
         "unknown_validity",
@@ -6203,11 +6201,11 @@
       "point_evidence": [
         {
           "point": "招生对象",
-          "status": "supported",
-          "evidence_doc_id": "c0c2a73030c1",
-          "evidence_excerpt": "计学专业。 具体招生专业详见我校2026年招收攻读博士学位、硕士学位研究生简章与相关网上公告。 三、招生对象 报考我校骨干计划的考生应符合教育部和我校2026年招收攻读博士学位及硕士学位研究生简章规定的报考条件。 1．中国石油大学（北京）克拉玛依校区研究生联合培养专项，招生对象不限民族，为生源地在新疆（含兵团）的各族考生或在新",
-          "reason": "正文包含回答要点",
-          "confidence": 0.75,
+          "status": "unsupported",
+          "evidence_doc_id": null,
+          "evidence_excerpt": "",
+          "reason": "未找到正文证据",
+          "confidence": 0.0,
           "checker": "deterministic"
         },
         {
@@ -6238,7 +6236,9 @@
           "checker": "deterministic"
         }
       ],
-      "missing_reasons": []
+      "missing_reasons": [
+        "缺少回答要点：招生对象"
+      ]
     },
     {
       "id": "admit-doctor-book-012",
@@ -6340,15 +6340,15 @@
         "1512eceb29f5",
         "12d8bae93ae8",
         "844338d7d8e8",
-        "2675703133ac",
-        "f1ea04ce7270"
+        "79f5c32bb2d9",
+        "2675703133ac"
       ],
       "titles": [
         "研究生招生与培养常见问答",
         "上海财经大学2026年招收攻读硕士学位研究生初试成绩公布后相关问题汇总",
         "上海财经大学2025年招收攻读硕士学位研究生初试成绩公布后相关问题汇总",
-        "上海财经大学2020年招收攻读硕士学位研究生初试成绩公布后相关问题汇总（一）",
-        "关于我校外国语学院部分专业（研究方向）调整招生考试方式的公告"
+        "上海财经大学2021年招收攻读硕士学位研究生初试成绩公布后相关问题汇总",
+        "上海财经大学2020年招收攻读硕士学位研究生初试成绩公布后相关问题汇总（一）"
       ],
       "publishers": [
         "上海财经大学研究生院",
@@ -6361,15 +6361,15 @@
         "2013-01-14",
         "2026-02-28",
         "2025-02-24",
-        "2020-02-20",
-        "2026-04-15"
+        "2021-02-27",
+        "2020-02-20"
       ],
       "document_kinds": [
         "faq",
         "procedure",
         "procedure",
         "procedure",
-        "annual_notice"
+        "procedure"
       ],
       "validity_statuses": [
         "unknown_validity",
@@ -6624,35 +6624,35 @@
         "8148b7313c10",
         "afe7f43ac179",
         "c1f8ce2e4219",
-        "91d57e91aa8d"
+        "bc408082e6a6"
       ],
       "titles": [
         "附件4+报考指南.doc",
         "山东省面向上海财经大学定向招录2026届选调生公告",
         "2025届毕业生就业手续办理指南 | 第二步：就业推荐表制作",
         "就业政策|就业手续办理第二步——就业推荐表制作",
-        "附件1-江西省2026年度选调应届优秀大学毕业生报考须知.pdf"
+        "山西省2026年面向上海财经大学选调优秀高校毕业生公告"
       ],
       "publishers": [
         "招生就业处",
         "招生就业处",
         "上海财经大学就业指导中心",
         "上海财经大学就业指导中心",
-        "中共江西省委组织部    "
+        "招生就业处"
       ],
       "publish_dates": [
         "2025-12-03",
         "2025-11-10",
         "2024-09-29",
         "2023-10-23",
-        "2025-11-17"
+        "2025-12-19"
       ],
       "document_kinds": [
         "manual",
         "annual_notice",
         "procedure",
         "procedure",
-        "procedure"
+        "annual_notice"
       ],
       "validity_statuses": [
         "unknown_validity",
@@ -7081,30 +7081,30 @@
       "retrieved_doc_ids": [
         "b2ada26c2482",
         "babc771033e4",
+        "bc408082e6a6",
         "1ddf06568d3f",
-        "48cefabc4b23",
-        "41c92321e929"
+        "48cefabc4b23"
       ],
       "titles": [
         "附件4+报考指南.doc",
         "2026年度青岛市专项招录公务员公告",
+        "山西省2026年面向上海财经大学选调优秀高校毕业生公告",
         "河北省2026年度定向选调生招录公告",
-        "广东省2026年度选调优秀大学毕业生公告",
-        "江西省2026年度面向上海财经大学 选调应届优秀大学毕业生公告"
+        "广东省2026年度选调优秀大学毕业生公告"
       ],
       "publishers": [
         "招生就业处",
         "招生就业处",
-        "河北省人事考试网",
         "招生就业处",
-        "中共江西省委组织部    "
+        "河北省人事考试网",
+        "招生就业处"
       ],
       "publish_dates": [
         "2025-12-03",
         "2026-03-11",
+        "2025-12-19",
         "2025-12-17",
-        "2025-12-03",
-        "2025-11-17"
+        "2025-12-03"
       ],
       "document_kinds": [
         "manual",
@@ -7266,43 +7266,43 @@
         "91d57e91aa8d",
         "43f455f9817c",
         "c37e02020907",
-        "28cf1ba96325",
-        "b491bb69424e"
+        "b33e18494b4d",
+        "28cf1ba96325"
       ],
       "titles": [
         "附件1-江西省2026年度选调应届优秀大学毕业生报考须知.pdf",
         "2026届毕业生就业手续办理指南 | 第三步——签约（二）网签",
         "2025届毕业生就业手续办理指南 | 第三步：与用人单位签约（二）纸签",
-        "2026年度宁夏招录选调生公告",
-        "2025届毕业生就业手续办理指南 | 第三步：与用人单位签约（一）网签"
+        "青海省2026年度选调应届优秀大学毕业生公告",
+        "2026年度宁夏招录选调生公告"
       ],
       "publishers": [
         "中共江西省委组织部    ",
         "招生就业处",
         "上海财经大学就业指导中心",
         "招生就业处",
-        "上海财经大学就业指导中心"
+        "招生就业处"
       ],
       "publish_dates": [
         "2025-11-17",
         "2025-10-22",
         "2024-10-15",
-        "2025-10-25",
-        "2024-10-11"
+        "2025-11-01",
+        "2025-10-25"
       ],
       "document_kinds": [
         "procedure",
         "manual",
         "procedure",
         "annual_notice",
-        "procedure"
+        "annual_notice"
       ],
       "validity_statuses": [
         "unknown_validity",
         "unknown_validity",
         "superseded",
         "unknown_validity",
-        "superseded"
+        "unknown_validity"
       ],
       "has_attachment": true,
       "matched_domains": [
@@ -7361,14 +7361,14 @@
         "a77e8b0aa307",
         "dc06d6db272d",
         "babc771033e4",
-        "b2ada26c2482"
+        "bc408082e6a6"
       ],
       "titles": [
         "2025届毕业生就业手续办理指南 | 第三步：与用人单位签约（一）网签",
         "就业政策|就业手续办理第三步——签约（三）网签【更新版】",
         "就业政策|就业手续办理第三步——签约（一）网签",
         "2026年度青岛市专项招录公务员公告",
-        "附件4+报考指南.doc"
+        "山西省2026年面向上海财经大学选调优秀高校毕业生公告"
       ],
       "publishers": [
         "上海财经大学就业指导中心",
@@ -7382,14 +7382,14 @@
         "2024-02-28",
         "2023-10-23",
         "2026-03-11",
-        "2025-12-03"
+        "2025-12-19"
       ],
       "document_kinds": [
         "procedure",
         "procedure",
         "procedure",
         "annual_notice",
-        "manual"
+        "annual_notice"
       ],
       "validity_statuses": [
         "superseded",
@@ -7398,7 +7398,7 @@
         "unknown_validity",
         "unknown_validity"
       ],
-      "has_attachment": true,
+      "has_attachment": false,
       "matched_domains": [
         "career.sufe.edu.cn"
       ],
@@ -7540,37 +7540,37 @@
       "status": "partially_answerable",
       "retrieved_doc_ids": [
         "babc771033e4",
+        "bc408082e6a6",
         "1ddf06568d3f",
         "964187cd9859",
-        "995be6076c48",
-        "e94d97669641"
+        "995be6076c48"
       ],
       "titles": [
         "2026年度青岛市专项招录公务员公告",
+        "山西省2026年面向上海财经大学选调优秀高校毕业生公告",
         "河北省2026年度定向选调生招录公告",
         "上海财经大学公告.docx",
-        "云南省2026年面向上海财经大学选调 优秀毕业生公告",
-        "内蒙古自治区面向上海财经大学定向招录2026届选调生公告"
+        "云南省2026年面向上海财经大学选调 优秀毕业生公告"
       ],
       "publishers": [
         "招生就业处",
+        "招生就业处",
         "河北省人事考试网",
         "中共云南省委组织部",
-        "中共云南省委组织部",
-        "招生就业处"
+        "中共云南省委组织部"
       ],
       "publish_dates": [
         "2026-03-11",
+        "2025-12-19",
         "2025-12-17",
         "2025-11-18",
-        "2025-11-18",
-        "2025-11-06"
+        "2025-11-18"
       ],
       "document_kinds": [
         "annual_notice",
         "annual_notice",
-        "procedure",
         "annual_notice",
+        "procedure",
         "annual_notice"
       ],
       "validity_statuses": [
@@ -7910,36 +7910,36 @@
         "9959312a96d1",
         "babc771033e4",
         "43f455f9817c",
-        "1ddf06568d3f",
-        "b2ada26c2482"
+        "bc408082e6a6",
+        "1ddf06568d3f"
       ],
       "titles": [
         "上海财经大学学生就业综合管理服务平台-学生操作手册（附件）",
         "2026年度青岛市专项招录公务员公告",
         "2026届毕业生就业手续办理指南 | 第三步——签约（二）网签",
-        "河北省2026年度定向选调生招录公告",
-        "附件4+报考指南.doc"
+        "山西省2026年面向上海财经大学选调优秀高校毕业生公告",
+        "河北省2026年度定向选调生招录公告"
       ],
       "publishers": [
         "上海财经大学就业指导中心",
         "招生就业处",
         "招生就业处",
-        "河北省人事考试网",
-        "招生就业处"
+        "招生就业处",
+        "河北省人事考试网"
       ],
       "publish_dates": [
         "2018-09-18",
         "2026-03-11",
         "2025-10-22",
-        "2025-12-17",
-        "2025-12-03"
+        "2025-12-19",
+        "2025-12-17"
       ],
       "document_kinds": [
         "manual",
         "annual_notice",
         "manual",
         "annual_notice",
-        "manual"
+        "annual_notice"
       ],
       "validity_statuses": [
         "unknown_validity",
@@ -8000,16 +8000,16 @@
       "retrieved_doc_ids": [
         "15168f896ce6",
         "42f392c24fff",
-        "89e97075046b",
-        "80399e020f5e",
-        "ea761011a45f"
+        "da47a2527b39",
+        "5c11d569d419",
+        "89e97075046b"
       ],
       "titles": [
         "上海财经大学学生宿舍管理办法.pdf",
         "上海财经大学2021年教育收费公示表.pdf",
-        "上海财经大学本科学生学籍管理实施细则（2024年）",
-        "上海财经大学2025年教育收费公示表.pdf",
-        "上海财经大学2024年教育收费公示表.pdf"
+        "上海财经大学2026年教育收费公示表_20260827165843.pdf",
+        "上海财经大学2026年教育收费公示表.xlsx",
+        "上海财经大学本科学生学籍管理实施细则（2024年）"
       ],
       "publishers": [
         "上海财经大学信息公开网",
@@ -8021,23 +8021,23 @@
       "publish_dates": [
         "2018-05-10",
         "unknown",
-        "2025-09-03",
-        "2025-09-01",
-        "2024-09-04"
+        "2026-08-27",
+        "2026-08-27",
+        "2025-09-03"
       ],
       "document_kinds": [
         "policy",
         "public_list",
-        "policy",
         "public_list",
-        "public_list"
+        "public_list",
+        "policy"
       ],
       "validity_statuses": [
         "unknown_validity",
         "unknown_validity",
-        "superseded",
         "unknown_validity",
-        "unknown_validity"
+        "unknown_validity",
+        "superseded"
       ],
       "has_attachment": true,
       "matched_domains": [
@@ -8184,15 +8184,15 @@
         "73e0c1364b51",
         "cd2f0a2c4d74",
         "42f392c24fff",
-        "89e97075046b",
-        "80399e020f5e"
+        "da47a2527b39",
+        "5c11d569d419"
       ],
       "titles": [
         "上海财经大学中山北一路校区暂行管理规定",
         "学生宿舍日常办事指南",
         "上海财经大学2021年教育收费公示表.pdf",
-        "上海财经大学本科学生学籍管理实施细则（2024年）",
-        "上海财经大学2025年教育收费公示表.pdf"
+        "上海财经大学2026年教育收费公示表_20260827165843.pdf",
+        "上海财经大学2026年教育收费公示表.xlsx"
       ],
       "publishers": [
         "上海财经大学信息公开网",
@@ -8205,21 +8205,21 @@
         "2016-09-26",
         "2022-10-21",
         "unknown",
-        "2025-09-03",
-        "2025-09-01"
+        "2026-08-27",
+        "2026-08-27"
       ],
       "document_kinds": [
         "policy",
         "procedure",
         "public_list",
-        "policy",
+        "public_list",
         "public_list"
       ],
       "validity_statuses": [
         "unknown_validity",
         "unknown_validity",
         "unknown_validity",
-        "superseded",
+        "unknown_validity",
         "unknown_validity"
       ],
       "has_attachment": true,
@@ -8368,14 +8368,14 @@
         "b4836902351f",
         "15168f896ce6",
         "73e0c1364b51",
-        "80399e020f5e"
+        "da47a2527b39"
       ],
       "titles": [
         "上海财经大学本科学生学籍管理实施细则（2024年）",
         "本科生学籍.pdf",
         "上海财经大学学生宿舍管理办法.pdf",
         "上海财经大学中山北一路校区暂行管理规定",
-        "上海财经大学2025年教育收费公示表.pdf"
+        "上海财经大学2026年教育收费公示表_20260827165843.pdf"
       ],
       "publishers": [
         "上海财经大学信息公开网",
@@ -8389,7 +8389,7 @@
         "2023-10-09",
         "2018-05-10",
         "2016-09-26",
-        "2025-09-01"
+        "2026-08-27"
       ],
       "document_kinds": [
         "policy",
@@ -8647,14 +8647,14 @@
         "fc4db938e9a8",
         "73e0c1364b51",
         "42f392c24fff",
-        "3c5e513820cf"
+        "da47a2527b39"
       ],
       "titles": [
         "上海财经大学“爱心小屋”临时住宿协议.doc",
         "大学生医保问答及相关管理办法",
         "上海财经大学中山北一路校区暂行管理规定",
         "上海财经大学2021年教育收费公示表.pdf",
-        "1.哲学本科专业设置申请表"
+        "上海财经大学2026年教育收费公示表_20260827165843.pdf"
       ],
       "publishers": [
         "上海财经大学后勤实业发展中心",
@@ -8668,14 +8668,14 @@
         "2023-10-09",
         "2016-09-26",
         "unknown",
-        "2026-07-24"
+        "2026-08-27"
       ],
       "document_kinds": [
         "procedure",
         "faq",
         "policy",
         "public_list",
-        "procedure"
+        "public_list"
       ],
       "validity_statuses": [
         "unknown_validity",
@@ -9201,14 +9201,14 @@
         "fd893261ff29",
         "5047ad905af6",
         "7dcfaeceef5f",
-        "f4504c68982d"
+        "a648ee0a55f3"
       ],
       "titles": [
         "统一认证",
         "一、校园一卡通简介",
         "Eduroam",
         "无线联网",
-        "文档云平台"
+        "无线联网"
       ],
       "publishers": [
         "上海财经大学网络信息中心",
@@ -9222,14 +9222,14 @@
         "unknown",
         "unknown",
         "unknown",
-        "2019-01-01"
+        "unknown"
       ],
       "document_kinds": [
         "service_guide",
         "service_guide",
         "service_guide",
         "procedure",
-        "procedure"
+        "service_guide"
       ],
       "validity_statuses": [
         "unknown_validity",
@@ -9292,14 +9292,14 @@
         "9e36c2f95bfe",
         "077ec1d6692d",
         "7dcfaeceef5f",
-        "f4504c68982d"
+        "a648ee0a55f3"
       ],
       "titles": [
         "一、校园一卡通简介",
         "统一认证",
         "上财教学网",
         "无线联网",
-        "文档云平台"
+        "无线联网"
       ],
       "publishers": [
         "上海财经大学网络信息中心",
@@ -9313,14 +9313,14 @@
         "unknown",
         "unknown",
         "unknown",
-        "2019-01-01"
+        "unknown"
       ],
       "document_kinds": [
         "service_guide",
         "service_guide",
         "service_guide",
         "procedure",
-        "procedure"
+        "service_guide"
       ],
       "validity_statuses": [
         "unknown_validity",
@@ -9473,17 +9473,17 @@
       "status": "partially_answerable",
       "retrieved_doc_ids": [
         "7dcfaeceef5f",
+        "a648ee0a55f3",
         "5047ad905af6",
         "3a12c66406ab",
-        "077ec1d6692d",
-        "fd893261ff29"
+        "077ec1d6692d"
       ],
       "titles": [
         "无线联网",
+        "无线联网",
         "Eduroam",
         "有线联网",
-        "上财教学网",
-        "一、校园一卡通简介"
+        "上财教学网"
       ],
       "publishers": [
         "上海财经大学网络信息中心",
@@ -9495,8 +9495,8 @@
       "publish_dates": [
         "unknown",
         "unknown",
-        "2005-01-01",
         "unknown",
+        "2005-01-01",
         "unknown"
       ],
       "document_kinds": [
@@ -9568,17 +9568,17 @@
       "status": "partially_answerable",
       "retrieved_doc_ids": [
         "7dcfaeceef5f",
+        "a648ee0a55f3",
         "3a12c66406ab",
         "fd893261ff29",
-        "077ec1d6692d",
-        "9e36c2f95bfe"
+        "077ec1d6692d"
       ],
       "titles": [
         "无线联网",
+        "无线联网",
         "有线联网",
         "一、校园一卡通简介",
-        "上财教学网",
-        "统一认证"
+        "上财教学网"
       ],
       "publishers": [
         "上海财经大学网络信息中心",
@@ -9589,8 +9589,8 @@
       ],
       "publish_dates": [
         "unknown",
-        "2005-01-01",
         "unknown",
+        "2005-01-01",
         "unknown",
         "unknown"
       ],
@@ -10316,15 +10316,15 @@
         "2d2a7b018e73",
         "eb36ca9f5d3f",
         "59b3b5517051",
-        "614f831349b2",
-        "8eb9e41bc8bb"
+        "8eb9e41bc8bb",
+        "e3375184c3ca"
       ],
       "titles": [
         "我要预约",
         "续借及预约",
         "馆际互借",
-        "服务时间",
-        "临时性用户开通图书馆服务暂行条例.pdf"
+        "临时性用户开通图书馆服务暂行条例.pdf",
+        "服务时间"
       ],
       "publishers": [
         "上海财经大学图书馆",
@@ -10344,8 +10344,8 @@
         "service_guide",
         "service_guide",
         "service_guide",
-        "service_guide",
-        "policy"
+        "policy",
+        "service_guide"
       ],
       "validity_statuses": [
         "unknown_validity",
@@ -12150,36 +12150,36 @@
         "7d86bdf70ff8",
         "440e560398ab",
         "c688036c17e7",
-        "bdd807dfb79a",
-        "2675703133ac"
+        "09d3ee14ffcf",
+        "bdd807dfb79a"
       ],
       "titles": [
         "2026年学生境外学习项目概览",
         "Q&A | 境外学习常见问题解答",
         "Q&A | 2026-2027学年海外交流学习常见问题答疑",
-        "远航沙龙│2024-2025学年海外学习项目报名开放预通知",
-        "上海财经大学2020年招收攻读硕士学位研究生初试成绩公布后相关问题汇总（一）"
+        "本科生赴国_(境_）外学习手册（2026版）.pdf",
+        "远航沙龙│2024-2025学年海外学习项目报名开放预通知"
       ],
       "publishers": [
         "上海财经大学国际交流与合作处",
         "上海财经大学国际交流与合作处",
         "上海财经大学国际交流与合作处",
         "上海财经大学国际交流与合作处",
-        "上海财经大学研究生院"
+        "上海财经大学国际交流与合作处"
       ],
       "publish_dates": [
         "2026-01-13",
         "2025-08-29",
         "2026-01-13",
-        "2023-11-27",
-        "2020-02-20"
+        "2026-08-27",
+        "2023-11-27"
       ],
       "document_kinds": [
         "procedure",
         "faq",
         "faq",
-        "annual_notice",
-        "procedure"
+        "procedure",
+        "annual_notice"
       ],
       "validity_statuses": [
         "unknown_validity",
@@ -12188,9 +12188,8 @@
         "unknown_validity",
         "unknown_validity"
       ],
-      "has_attachment": false,
+      "has_attachment": true,
       "matched_domains": [
-        "gs.sufe.edu.cn",
         "ieco.sufe.edu.cn"
       ],
       "point_evidence": [
@@ -12241,36 +12240,36 @@
       "retrieved_doc_ids": [
         "c688036c17e7",
         "440e560398ab",
-        "f511bc1fc4a2",
-        "7d86bdf70ff8",
-        "f8015ab6e16f"
+        "09d3ee14ffcf",
+        "4dd7bf5f3713",
+        "f511bc1fc4a2"
       ],
       "titles": [
         "Q&A | 2026-2027学年海外交流学习常见问题答疑",
         "Q&A | 境外学习常见问题解答",
-        "上海财经大学关于做好2026年博士生导师短期出国交流项目申请工作的通知",
-        "2026年学生境外学习项目概览",
-        "上海财经大学关于做好2025年博士生导师短期出国交流项目申请工作的通知"
+        "本科生赴国_(境_）外学习手册（2026版）.pdf",
+        "上海财经大学关于2026年国家建设高水平大学公派研究生项目选拔及申请受理工作的安排",
+        "上海财经大学关于做好2026年博士生导师短期出国交流项目申请工作的通知"
       ],
       "publishers": [
         "上海财经大学国际交流与合作处",
         "上海财经大学国际交流与合作处",
-        "上海财经大学研究生院",
         "上海财经大学国际交流与合作处",
+        "上海财经大学研究生院",
         "上海财经大学研究生院"
       ],
       "publish_dates": [
         "2026-01-13",
         "2025-08-29",
+        "2026-08-27",
         "2026-02-28",
-        "2026-01-13",
-        "2025-02-21"
+        "2026-02-28"
       ],
       "document_kinds": [
         "faq",
         "faq",
-        "annual_notice",
         "procedure",
+        "annual_notice",
         "annual_notice"
       ],
       "validity_statuses": [
@@ -12280,7 +12279,7 @@
         "unknown_validity",
         "unknown_validity"
       ],
-      "has_attachment": false,
+      "has_attachment": true,
       "matched_domains": [
         "gs.sufe.edu.cn",
         "ieco.sufe.edu.cn"
@@ -12331,39 +12330,39 @@
       "scene": "国际交流",
       "status": "answerable",
       "retrieved_doc_ids": [
+        "09d3ee14ffcf",
         "440e560398ab",
         "c688036c17e7",
         "bdd807dfb79a",
-        "1512eceb29f5",
-        "f900e2c94b7f"
+        "1512eceb29f5"
       ],
       "titles": [
+        "本科生赴国_(境_）外学习手册（2026版）.pdf",
         "Q&A | 境外学习常见问题解答",
         "Q&A | 2026-2027学年海外交流学习常见问题答疑",
         "远航沙龙│2024-2025学年海外学习项目报名开放预通知",
-        "研究生招生与培养常见问答",
-        "关于上海财经大学2027年接收优秀应届本科毕业生免试攻读研究生（含直博生）预报名的通知"
+        "研究生招生与培养常见问答"
       ],
       "publishers": [
         "上海财经大学国际交流与合作处",
         "上海财经大学国际交流与合作处",
         "上海财经大学国际交流与合作处",
-        "上海财经大学研究生院",
+        "上海财经大学国际交流与合作处",
         "上海财经大学研究生院"
       ],
       "publish_dates": [
+        "2026-08-27",
         "2025-08-29",
         "2026-01-13",
         "2023-11-27",
-        "2013-01-14",
-        "2026-07-02"
+        "2013-01-14"
       ],
       "document_kinds": [
+        "procedure",
         "faq",
         "faq",
         "annual_notice",
-        "faq",
-        "annual_notice"
+        "faq"
       ],
       "validity_statuses": [
         "unknown_validity",
@@ -12372,7 +12371,7 @@
         "unknown_validity",
         "unknown_validity"
       ],
-      "has_attachment": false,
+      "has_attachment": true,
       "matched_domains": [
         "gs.sufe.edu.cn",
         "ieco.sufe.edu.cn"
@@ -12381,8 +12380,8 @@
         {
           "point": "材料清单",
           "status": "supported",
-          "evidence_doc_id": "440e560398ab",
-          "evidence_excerpt": "# Q&A | 境外学习常见问题解答 你是否对境外院校不够了解？ 对于申请流程，还有诸多疑问？ 对于学分转化，困惑多多？ 转眼2024年即将过去，2025-2026学年国际及港澳台学习交流即将开启，面对丰富多样的项目和院校，同学们应该仍有许多疑惑吧，我们把日常同学们最关心及疑问最多的问题汇总解答如下，请同学们仔细阅读了",
+          "evidence_doc_id": "09d3ee14ffcf",
+          "evidence_excerpt": "# 本科生赴国_(境_）外学习手册（2026版）.pdf 所属通知：本科生赴国（境）外学习手册（2026版） 发布日期：2026-08-27 发布单位：上海财经大学国际交流与合作处 原发布页：https://ieco.sufe.edu.cn/18/33/c18858a268339/page.htm 附件下载地址：htt",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -12390,8 +12389,8 @@
         {
           "point": "提交方式",
           "status": "supported",
-          "evidence_doc_id": "440e560398ab",
-          "evidence_excerpt": "# Q&A | 境外学习常见问题解答 你是否对境外院校不够了解？ 对于申请流程，还有诸多疑问？ 对于学分转化，困惑多多？ 转眼2024年即将过去，2025-2026学年国际及港澳台学习交流即将开启，面对丰富多样的项目和院校，同学们应该仍有许多疑惑吧，我们把日常同学们最关心及疑问最多的问题汇总解答如下，请同学们仔细阅读了",
+          "evidence_doc_id": "09d3ee14ffcf",
+          "evidence_excerpt": "# 本科生赴国_(境_）外学习手册（2026版）.pdf 所属通知：本科生赴国（境）外学习手册（2026版） 发布日期：2026-08-27 发布单位：上海财经大学国际交流与合作处 原发布页：https://ieco.sufe.edu.cn/18/33/c18858a268339/page.htm 附件下载地址：htt",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -12399,8 +12398,8 @@
         {
           "point": "截止时间",
           "status": "supported",
-          "evidence_doc_id": "440e560398ab",
-          "evidence_excerpt": "际处暨港澳台办”、 上财门户等发布的各类项目官方报名通知： 报名时间 项目类型 报名 开始时间 报名截止时间 交换 项目 2025-2026秋季学期项 2025年 1月15日 2025年3月下旬 2025-2026春季学期 2025年8月底 访问 项目 2025-2026秋季学期及一学年 2025年 1月6日 2025年3月下",
+          "evidence_doc_id": "09d3ee14ffcf",
+          "evidence_excerpt": "# 本科生赴国_(境_）外学习手册（2026版）.pdf 所属通知：本科生赴国（境）外学习手册（2026版） 发布日期：2026-08-27 发布单位：上海财经大学国际交流与合作处 原发布页：https://ieco.sufe.edu.cn/18/33/c18858a268339/page.htm 附件下载地址：htt",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -12408,8 +12407,8 @@
         {
           "point": "格式要求",
           "status": "supported",
-          "evidence_doc_id": "440e560398ab",
-          "evidence_excerpt": "# Q&A | 境外学习常见问题解答 你是否对境外院校不够了解？ 对于申请流程，还有诸多疑问？ 对于学分转化，困惑多多？ 转眼2024年即将过去，2025-2026学年国际及港澳台学习交流即将开启，面对丰富多样的项目和院校，同学们应该仍有许多疑惑吧，我们把日常同学们最关心及疑问最多的问题汇总解答如下，请同学们仔细阅读了",
+          "evidence_doc_id": "09d3ee14ffcf",
+          "evidence_excerpt": "# 本科生赴国_(境_）外学习手册（2026版）.pdf 所属通知：本科生赴国（境）外学习手册（2026版） 发布日期：2026-08-27 发布单位：上海财经大学国际交流与合作处 原发布页：https://ieco.sufe.edu.cn/18/33/c18858a268339/page.htm 附件下载地址：htt",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -12423,39 +12422,39 @@
       "scene": "国际交流",
       "status": "partially_answerable",
       "retrieved_doc_ids": [
+        "09d3ee14ffcf",
         "440e560398ab",
         "bdd807dfb79a",
         "c688036c17e7",
-        "1512eceb29f5",
-        "7d86bdf70ff8"
+        "1512eceb29f5"
       ],
       "titles": [
+        "本科生赴国_(境_）外学习手册（2026版）.pdf",
         "Q&A | 境外学习常见问题解答",
         "远航沙龙│2024-2025学年海外学习项目报名开放预通知",
         "Q&A | 2026-2027学年海外交流学习常见问题答疑",
-        "研究生招生与培养常见问答",
-        "2026年学生境外学习项目概览"
+        "研究生招生与培养常见问答"
       ],
       "publishers": [
         "上海财经大学国际交流与合作处",
         "上海财经大学国际交流与合作处",
         "上海财经大学国际交流与合作处",
-        "上海财经大学研究生院",
-        "上海财经大学国际交流与合作处"
+        "上海财经大学国际交流与合作处",
+        "上海财经大学研究生院"
       ],
       "publish_dates": [
+        "2026-08-27",
         "2025-08-29",
         "2023-11-27",
         "2026-01-13",
-        "2013-01-14",
-        "2026-01-13"
+        "2013-01-14"
       ],
       "document_kinds": [
+        "procedure",
         "faq",
         "annual_notice",
         "faq",
-        "faq",
-        "procedure"
+        "faq"
       ],
       "validity_statuses": [
         "unknown_validity",
@@ -12464,7 +12463,7 @@
         "unknown_validity",
         "unknown_validity"
       ],
-      "has_attachment": false,
+      "has_attachment": true,
       "matched_domains": [
         "gs.sufe.edu.cn",
         "ieco.sufe.edu.cn"
@@ -12473,8 +12472,8 @@
         {
           "point": "报名",
           "status": "supported",
-          "evidence_doc_id": "440e560398ab",
-          "evidence_excerpt": "sufe.edu.cn/Home/List/67 ，我校研究生院已发布2025-2026年相关项目的报名通知，请同学们前往查询。 许多通知和沟通，将在企业微信上进行，请同学们 定期查看企业微信 ，以免错漏信息！ 2.申请及截止日期 境外学习主要在大三年级进行，即大二秋季学期末/春季学期初开始申请， 大三派出 （研究生请参考",
+          "evidence_doc_id": "09d3ee14ffcf",
+          "evidence_excerpt": "国 美国 英国 瑞士 韩国 芬兰 法国 新加坡 西班牙 如何申请项目 国际（港澳台）事务平台： 查看报名和资助通知、项目详情、申请要求，并完成在线报名， 下载海外学习手册等材料。 链接：isys2.sufe.edu.cn 企业微信“国际处暨港澳台办”： 及时接收项目通知、报名提醒与最新动态。 “上财国际” 查看学长学姐项目",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -12482,8 +12481,8 @@
         {
           "point": "资格审核",
           "status": "supported",
-          "evidence_doc_id": "440e560398ab",
-          "evidence_excerpt": "# Q&A | 境外学习常见问题解答 你是否对境外院校不够了解？ 对于申请流程，还有诸多疑问？ 对于学分转化，困惑多多？ 转眼2024年即将过去，2025-2026学年国际及港澳台学习交流即将开启，面对丰富多样的项目和院校，同学们应该仍有许多疑惑吧，我们把日常同学们最关心及疑问最多的问题汇总解答如下，请同学们仔细阅读了",
+          "evidence_doc_id": "09d3ee14ffcf",
+          "evidence_excerpt": "# 本科生赴国_(境_）外学习手册（2026版）.pdf 所属通知：本科生赴国（境）外学习手册（2026版） 发布日期：2026-08-27 发布单位：上海财经大学国际交流与合作处 原发布页：https://ieco.sufe.edu.cn/18/33/c18858a268339/page.htm 附件下载地址：htt",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -12518,35 +12517,35 @@
       "scene": "国际交流",
       "status": "answerable",
       "retrieved_doc_ids": [
-        "a50221cc7070",
-        "f511bc1fc4a2",
-        "f8015ab6e16f",
-        "220adadfc5cc",
-        "0ee8ebbdf902"
+        "09d3ee14ffcf",
+        "4dd7bf5f3713",
+        "26681a0c73ca",
+        "fbda571db9af",
+        "bc8ce2fd6ad8"
       ],
       "titles": [
-        "上海财经大学关于2022年国家建设高水平大学公派研究生项目选拔及申请受理工作的安排",
-        "上海财经大学关于做好2026年博士生导师短期出国交流项目申请工作的通知",
-        "上海财经大学关于做好2025年博士生导师短期出国交流项目申请工作的通知",
-        "上海财经大学关于做好2024年博士生导师短期出国交流项目申请工作的通知",
-        "上海财经大学关于做好2023年博士生导师短期出国交流项目申请工作的通知"
+        "本科生赴国_(境_）外学习手册（2026版）.pdf",
+        "上海财经大学关于2026年国家建设高水平大学公派研究生项目选拔及申请受理工作的安排",
+        "上海财经大学关于2025 年国家建设高水平大学公派研究生项目选拔及申请受理工作的安排",
+        "上海财经大学关于2024年国家建设高水平大学公派研究生项目选拔及申请受理工作的安排",
+        "上海财经大学关于2023年国家建设高水平大学公派研究生项目选拔及申请受理工作的安排"
       ],
       "publishers": [
-        "上海财经大学研究生院",
+        "上海财经大学国际交流与合作处",
         "上海财经大学研究生院",
         "上海财经大学研究生院",
         "上海财经大学研究生院",
         "上海财经大学研究生院"
       ],
       "publish_dates": [
-        "2022-02-23",
+        "2026-08-27",
         "2026-02-28",
         "2025-02-21",
         "2024-02-23",
         "2023-01-04"
       ],
       "document_kinds": [
-        "annual_notice",
+        "procedure",
         "annual_notice",
         "annual_notice",
         "annual_notice",
@@ -12559,16 +12558,17 @@
         "unknown_validity",
         "unknown_validity"
       ],
-      "has_attachment": false,
+      "has_attachment": true,
       "matched_domains": [
-        "gs.sufe.edu.cn"
+        "gs.sufe.edu.cn",
+        "ieco.sufe.edu.cn"
       ],
       "point_evidence": [
         {
           "point": "资助对象",
           "status": "supported",
-          "evidence_doc_id": "a50221cc7070",
-          "evidence_excerpt": "# 上海财经大学关于2022年国家建设高水平大学公派研究生项目选拔及申请受理工作的安排 根据国家留学基金管理委员会《2022年国家留学基金资助出国留学人员选派简章》（以下简称《选派简章》）、《2022年国家建设高水平大学公派研究生项目选派办法》之要求，现制定上海财经大学2022年国家建设高水平大学公派研究生选拔及申请受",
+          "evidence_doc_id": "4dd7bf5f3713",
+          "evidence_excerpt": "# 上海财经大学关于2026年国家建设高水平大学公派研究生项目选拔及申请受理工作的安排 根据国家留学基金管理委员会《2026年国家建设高水平大学公派研究生项目指南》（https://www.csc.edu.cn/article/4034）之要求，现制定上海财经大学2026年国家建设高水平大学公派研究生选拔及申请受理工作",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -12576,8 +12576,8 @@
         {
           "point": "资助范围",
           "status": "supported",
-          "evidence_doc_id": "a50221cc7070",
-          "evidence_excerpt": "# 上海财经大学关于2022年国家建设高水平大学公派研究生项目选拔及申请受理工作的安排 根据国家留学基金管理委员会《2022年国家留学基金资助出国留学人员选派简章》（以下简称《选派简章》）、《2022年国家建设高水平大学公派研究生项目选派办法》之要求，现制定上海财经大学2022年国家建设高水平大学公派研究生选拔及申请受",
+          "evidence_doc_id": "09d3ee14ffcf",
+          "evidence_excerpt": "# 本科生赴国_(境_）外学习手册（2026版）.pdf 所属通知：本科生赴国（境）外学习手册（2026版） 发布日期：2026-08-27 发布单位：上海财经大学国际交流与合作处 原发布页：https://ieco.sufe.edu.cn/18/33/c18858a268339/page.htm 附件下载地址：htt",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -12585,8 +12585,8 @@
         {
           "point": "申请材料",
           "status": "supported",
-          "evidence_doc_id": "a50221cc7070",
-          "evidence_excerpt": "申请人登陆上财门户—国际化信息管理系统完成项目申请（操作方法参见附件1），并向所在院（所）提交完整的申请材料。 （二）3月1日至3月4日，各院（所）审核申请材料，完成选拔推荐。 （三）3月7日至3月10日，研究生院审核确定推荐候选人并公示。 （四）3月10日至3月31日，公示无异议的推荐候选人登录国家公派留学管理信息平台（ht",
+          "evidence_doc_id": "09d3ee14ffcf",
+          "evidence_excerpt": "# 本科生赴国_(境_）外学习手册（2026版）.pdf 所属通知：本科生赴国（境）外学习手册（2026版） 发布日期：2026-08-27 发布单位：上海财经大学国际交流与合作处 原发布页：https://ieco.sufe.edu.cn/18/33/c18858a268339/page.htm 附件下载地址：htt",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -12594,8 +12594,8 @@
         {
           "point": "发放方式",
           "status": "supported",
-          "evidence_doc_id": "a50221cc7070",
-          "evidence_excerpt": "# 上海财经大学关于2022年国家建设高水平大学公派研究生项目选拔及申请受理工作的安排 根据国家留学基金管理委员会《2022年国家留学基金资助出国留学人员选派简章》（以下简称《选派简章》）、《2022年国家建设高水平大学公派研究生项目选派办法》之要求，现制定上海财经大学2022年国家建设高水平大学公派研究生选拔及申请受",
+          "evidence_doc_id": "09d3ee14ffcf",
+          "evidence_excerpt": "# 本科生赴国_(境_）外学习手册（2026版）.pdf 所属通知：本科生赴国（境）外学习手册（2026版） 发布日期：2026-08-27 发布单位：上海财经大学国际交流与合作处 原发布页：https://ieco.sufe.edu.cn/18/33/c18858a268339/page.htm 附件下载地址：htt",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -12611,16 +12611,16 @@
       "retrieved_doc_ids": [
         "c688036c17e7",
         "440e560398ab",
+        "4dd7bf5f3713",
         "f511bc1fc4a2",
-        "f8015ab6e16f",
-        "220adadfc5cc"
+        "26681a0c73ca"
       ],
       "titles": [
         "Q&A | 2026-2027学年海外交流学习常见问题答疑",
         "Q&A | 境外学习常见问题解答",
+        "上海财经大学关于2026年国家建设高水平大学公派研究生项目选拔及申请受理工作的安排",
         "上海财经大学关于做好2026年博士生导师短期出国交流项目申请工作的通知",
-        "上海财经大学关于做好2025年博士生导师短期出国交流项目申请工作的通知",
-        "上海财经大学关于做好2024年博士生导师短期出国交流项目申请工作的通知"
+        "上海财经大学关于2025 年国家建设高水平大学公派研究生项目选拔及申请受理工作的安排"
       ],
       "publishers": [
         "上海财经大学国际交流与合作处",
@@ -12633,8 +12633,8 @@
         "2026-01-13",
         "2025-08-29",
         "2026-02-28",
-        "2025-02-21",
-        "2024-02-23"
+        "2026-02-28",
+        "2025-02-21"
       ],
       "document_kinds": [
         "faq",
@@ -12703,37 +12703,37 @@
       "retrieved_doc_ids": [
         "c688036c17e7",
         "440e560398ab",
+        "09d3ee14ffcf",
         "e6d269205cb4",
-        "60f9a164fe20",
-        "f900e2c94b7f"
+        "f5148ca0ead0"
       ],
       "titles": [
         "Q&A | 2026-2027学年海外交流学习常见问题答疑",
         "Q&A | 境外学习常见问题解答",
+        "本科生赴国_(境_）外学习手册（2026版）.pdf",
         "上海财经大学会计学院关于举办“第十一届全国优秀大学生夏令营”的通知",
-        "上海财经大学博士研究生中期考核办法",
-        "关于上海财经大学2027年接收优秀应届本科毕业生免试攻读研究生（含直博生）预报名的通知"
+        "上海财经大学会计学院关于举办“第十届全国优秀大学生夏令营”的通知"
       ],
       "publishers": [
         "上海财经大学国际交流与合作处",
         "上海财经大学国际交流与合作处",
-        "上海财经大学研究生院",
+        "上海财经大学国际交流与合作处",
         "上海财经大学研究生院",
         "上海财经大学研究生院"
       ],
       "publish_dates": [
         "2026-01-13",
         "2025-08-29",
+        "2026-08-27",
         "2020-06-04",
-        "2013-01-23",
-        "2026-07-02"
+        "2019-05-13"
       ],
       "document_kinds": [
         "faq",
         "faq",
         "procedure",
-        "policy",
-        "annual_notice"
+        "procedure",
+        "procedure"
       ],
       "validity_statuses": [
         "unknown_validity",
@@ -12742,7 +12742,7 @@
         "unknown_validity",
         "unknown_validity"
       ],
-      "has_attachment": false,
+      "has_attachment": true,
       "matched_domains": [
         "gs.sufe.edu.cn",
         "ieco.sufe.edu.cn"
@@ -12793,39 +12793,39 @@
       "scene": "国际交流",
       "status": "answerable",
       "retrieved_doc_ids": [
+        "09d3ee14ffcf",
         "440e560398ab",
+        "4dd7bf5f3713",
         "f511bc1fc4a2",
-        "c688036c17e7",
-        "f8015ab6e16f",
-        "220adadfc5cc"
+        "c688036c17e7"
       ],
       "titles": [
+        "本科生赴国_(境_）外学习手册（2026版）.pdf",
         "Q&A | 境外学习常见问题解答",
+        "上海财经大学关于2026年国家建设高水平大学公派研究生项目选拔及申请受理工作的安排",
         "上海财经大学关于做好2026年博士生导师短期出国交流项目申请工作的通知",
-        "Q&A | 2026-2027学年海外交流学习常见问题答疑",
-        "上海财经大学关于做好2025年博士生导师短期出国交流项目申请工作的通知",
-        "上海财经大学关于做好2024年博士生导师短期出国交流项目申请工作的通知"
+        "Q&A | 2026-2027学年海外交流学习常见问题答疑"
       ],
       "publishers": [
         "上海财经大学国际交流与合作处",
-        "上海财经大学研究生院",
         "上海财经大学国际交流与合作处",
         "上海财经大学研究生院",
-        "上海财经大学研究生院"
+        "上海财经大学研究生院",
+        "上海财经大学国际交流与合作处"
       ],
       "publish_dates": [
+        "2026-08-27",
         "2025-08-29",
         "2026-02-28",
-        "2026-01-13",
-        "2025-02-21",
-        "2024-02-23"
+        "2026-02-28",
+        "2026-01-13"
       ],
       "document_kinds": [
+        "procedure",
         "faq",
         "annual_notice",
-        "faq",
         "annual_notice",
-        "annual_notice"
+        "faq"
       ],
       "validity_statuses": [
         "unknown_validity",
@@ -12834,7 +12834,7 @@
         "unknown_validity",
         "unknown_validity"
       ],
-      "has_attachment": false,
+      "has_attachment": true,
       "matched_domains": [
         "gs.sufe.edu.cn",
         "ieco.sufe.edu.cn"
@@ -12852,8 +12852,8 @@
         {
           "point": "申请条件",
           "status": "supported",
-          "evidence_doc_id": "440e560398ab",
-          "evidence_excerpt": "未满员的项目自动进入第二轮申请，第二轮申请会持续到项目截止时间、或后续名额满员自动结项。补选阶段符合申请条件的同学 先到先得 ，系统会记录同学的提交时间，学校根据先后顺序依次审核。 【第二轮申请小贴士】 参照往年情况来看，第二轮申请中产生“名额竞争”的概率相较首轮较低，符合申请要求的同学入选成功率较高。但可选择的院校和名额一般",
+          "evidence_doc_id": "09d3ee14ffcf",
+          "evidence_excerpt": "# 本科生赴国_(境_）外学习手册（2026版）.pdf 所属通知：本科生赴国（境）外学习手册（2026版） 发布日期：2026-08-27 发布单位：上海财经大学国际交流与合作处 原发布页：https://ieco.sufe.edu.cn/18/33/c18858a268339/page.htm 附件下载地址：htt",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -12861,8 +12861,8 @@
         {
           "point": "材料",
           "status": "supported",
-          "evidence_doc_id": "440e560398ab",
-          "evidence_excerpt": "同学，不要着急或担心，请耐心等待，后续提名和申请依照外方要求分批进行，请留意查收邮件并按外方要求完成材料递交手续。没有护照的同学安排时间，尽快办理护照。 3. 是否提供宿舍？后勤类相关信息 外方基本会在后续邮件中提供住宿等具体信息，也可提前至官网查看。部分院校提供校内住宿申请，如访问项目中的英国院校；美国院校多数不提供校内",
+          "evidence_doc_id": "09d3ee14ffcf",
+          "evidence_excerpt": "际（港澳台）事务平台： 查看报名和资助通知、项目详情、申请要求，并完成在线报名， 下载海外学习手册等材料。 链接：isys2.sufe.edu.cn 企业微信“国际处暨港澳台办”： 及时接收项目通知、报名提醒与最新动态。 “上财国际” 查看学长学姐项目攻略、申请经验与海外生活分享。 “上财国际” 国际处（港澳台办） 官网项",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -12870,8 +12870,8 @@
         {
           "point": "时间节点",
           "status": "supported",
-          "evidence_doc_id": "440e560398ab",
-          "evidence_excerpt": "# Q&A | 境外学习常见问题解答 你是否对境外院校不够了解？ 对于申请流程，还有诸多疑问？ 对于学分转化，困惑多多？ 转眼2024年即将过去，2025-2026学年国际及港澳台学习交流即将开启，面对丰富多样的项目和院校，同学们应该仍有许多疑惑吧，我们把日常同学们最关心及疑问最多的问题汇总解答如下，请同学们仔细阅读了",
+          "evidence_doc_id": "09d3ee14ffcf",
+          "evidence_excerpt": "# 本科生赴国_(境_）外学习手册（2026版）.pdf 所属通知：本科生赴国（境）外学习手册（2026版） 发布日期：2026-08-27 发布单位：上海财经大学国际交流与合作处 原发布页：https://ieco.sufe.edu.cn/18/33/c18858a268339/page.htm 附件下载地址：htt",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -12885,39 +12885,39 @@
       "scene": "国际交流",
       "status": "partially_answerable",
       "retrieved_doc_ids": [
-        "a50221cc7070",
-        "f511bc1fc4a2",
-        "1512eceb29f5",
-        "94b61196bf6e",
-        "440e560398ab"
+        "4dd7bf5f3713",
+        "26681a0c73ca",
+        "fbda571db9af",
+        "bc8ce2fd6ad8",
+        "a50221cc7070"
       ],
       "titles": [
-        "上海财经大学关于2022年国家建设高水平大学公派研究生项目选拔及申请受理工作的安排",
-        "上海财经大学关于做好2026年博士生导师短期出国交流项目申请工作的通知",
-        "研究生招生与培养常见问答",
-        "上海财经大学2026年公派留学校内推荐候选人公示(联培博士项目)",
-        "Q&A | 境外学习常见问题解答"
+        "上海财经大学关于2026年国家建设高水平大学公派研究生项目选拔及申请受理工作的安排",
+        "上海财经大学关于2025 年国家建设高水平大学公派研究生项目选拔及申请受理工作的安排",
+        "上海财经大学关于2024年国家建设高水平大学公派研究生项目选拔及申请受理工作的安排",
+        "上海财经大学关于2023年国家建设高水平大学公派研究生项目选拔及申请受理工作的安排",
+        "上海财经大学关于2022年国家建设高水平大学公派研究生项目选拔及申请受理工作的安排"
       ],
       "publishers": [
         "上海财经大学研究生院",
         "上海财经大学研究生院",
         "上海财经大学研究生院",
         "上海财经大学研究生院",
-        "上海财经大学国际交流与合作处"
+        "上海财经大学研究生院"
       ],
       "publish_dates": [
-        "2022-02-23",
         "2026-02-28",
-        "2013-01-14",
-        "2026-03-13",
-        "2025-08-29"
+        "2025-02-21",
+        "2024-02-23",
+        "2023-01-04",
+        "2022-02-23"
       ],
       "document_kinds": [
         "annual_notice",
         "annual_notice",
-        "faq",
-        "public_list",
-        "faq"
+        "annual_notice",
+        "annual_notice",
+        "annual_notice"
       ],
       "validity_statuses": [
         "unknown_validity",
@@ -12928,15 +12928,14 @@
       ],
       "has_attachment": false,
       "matched_domains": [
-        "gs.sufe.edu.cn",
-        "ieco.sufe.edu.cn"
+        "gs.sufe.edu.cn"
       ],
       "point_evidence": [
         {
           "point": "项目条件",
           "status": "supported",
-          "evidence_doc_id": "a50221cc7070",
-          "evidence_excerpt": "# 上海财经大学关于2022年国家建设高水平大学公派研究生项目选拔及申请受理工作的安排 根据国家留学基金管理委员会《2022年国家留学基金资助出国留学人员选派简章》（以下简称《选派简章》）、《2022年国家建设高水平大学公派研究生项目选派办法》之要求，现制定上海财经大学2022年国家建设高水平大学公派研究生选拔及申请受",
+          "evidence_doc_id": "4dd7bf5f3713",
+          "evidence_excerpt": "# 上海财经大学关于2026年国家建设高水平大学公派研究生项目选拔及申请受理工作的安排 根据国家留学基金管理委员会《2026年国家建设高水平大学公派研究生项目指南》（https://www.csc.edu.cn/article/4034）之要求，现制定上海财经大学2026年国家建设高水平大学公派研究生选拔及申请受理工作",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -12944,8 +12943,8 @@
         {
           "point": "报名材料",
           "status": "supported",
-          "evidence_doc_id": "a50221cc7070",
-          "evidence_excerpt": "# 上海财经大学关于2022年国家建设高水平大学公派研究生项目选拔及申请受理工作的安排 根据国家留学基金管理委员会《2022年国家留学基金资助出国留学人员选派简章》（以下简称《选派简章》）、《2022年国家建设高水平大学公派研究生项目选派办法》之要求，现制定上海财经大学2022年国家建设高水平大学公派研究生选拔及申请受",
+          "evidence_doc_id": "4dd7bf5f3713",
+          "evidence_excerpt": "方确认后陆续公布。 六、申请材料 各项申请材料清单见附件：2026年上海财经大学高水平公派研究生项目报名材料清单（校内使用）.pdf 具体要求详见“2026 年国家建设高水平大学公派研究生项目 应提交的申请材料及说明（国内申请人用） ” （https://www.csc.edu. cn/article/4035）。相关表格查阅",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -12953,8 +12952,8 @@
         {
           "point": "选拔流程",
           "status": "supported",
-          "evidence_doc_id": "a50221cc7070",
-          "evidence_excerpt": "# 上海财经大学关于2022年国家建设高水平大学公派研究生项目选拔及申请受理工作的安排 根据国家留学基金管理委员会《2022年国家留学基金资助出国留学人员选派简章》（以下简称《选派简章》）、《2022年国家建设高水平大学公派研究生项目选派办法》之要求，现制定上海财经大学2022年国家建设高水平大学公派研究生选拔及申请受",
+          "evidence_doc_id": "4dd7bf5f3713",
+          "evidence_excerpt": "# 上海财经大学关于2026年国家建设高水平大学公派研究生项目选拔及申请受理工作的安排 根据国家留学基金管理委员会《2026年国家建设高水平大学公派研究生项目指南》（https://www.csc.edu.cn/article/4034）之要求，现制定上海财经大学2026年国家建设高水平大学公派研究生选拔及申请受理工作",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -13072,38 +13071,38 @@
       "status": "answerable",
       "retrieved_doc_ids": [
         "5220cf43e76b",
+        "2f9626a7abb4",
         "2fe0ae1e3ab7",
         "4cb5fd791a1a",
-        "b815e0eefe9a",
-        "a7ba514b5aec"
+        "b815e0eefe9a"
       ],
       "titles": [
         "关于印发《上海财经大学学生勤工助学管理办法》的通知（附件）",
+        "上海财经大学集体户口管理相关规定（202412）.pdf",
         "上海财经大学2016年征兵工作通知",
         "关于印发《上海财经大学中西部基层单位就业毕业生学费和国家助学贷款代偿管理办法》的通知（附件）",
-        "关于印发《上海财经大学学费减免实施办法》的通知（附件）",
-        "关于开展2023-2024学年研究生社会奖学金评选工作的通知.pdf"
+        "关于印发《上海财经大学学费减免实施办法》的通知（附件）"
       ],
       "publishers": [
         "上海财经大学学生处",
         "上海财经大学保卫处",
-        "上海财经大学学生处",
+        "上海财经大学保卫处",
         "上海财经大学学生处",
         "上海财经大学学生处"
       ],
       "publish_dates": [
         "unknown",
         "2022-09-02",
+        "2022-09-02",
         "unknown",
-        "unknown",
-        "2024-11-01"
+        "unknown"
       ],
       "document_kinds": [
         "policy",
+        "policy",
         "annual_notice",
         "policy",
-        "policy",
-        "annual_notice"
+        "policy"
       ],
       "validity_statuses": [
         "unknown_validity",
@@ -13164,38 +13163,38 @@
       "status": "answerable",
       "retrieved_doc_ids": [
         "5220cf43e76b",
+        "59c52c36ac90",
+        "4ae6290eaaab",
         "418fee24b2e9",
-        "480760984ceb",
-        "a6a7b44dd541",
-        "2fe0ae1e3ab7"
+        "480760984ceb"
       ],
       "titles": [
         "关于印发《上海财经大学学生勤工助学管理办法》的通知（附件）",
+        "关于征集2025年大学生创新创业训练计划项目选题的通知",
+        "关于征集2024年大学生创新创业训练计划项目选题的通知",
         "2023年千村调查非毕业班结项公示名单20231121.xlsx",
-        "关于上海财经大学新能源充电桩系统使用申请事宜.doc",
-        "关于印发《上海财经大学本科生素质综合评价实施办法》的通知.pdf",
-        "上海财经大学2016年征兵工作通知"
+        "关于上海财经大学新能源充电桩系统使用申请事宜.doc"
       ],
       "publishers": [
         "上海财经大学学生处",
         "上海财经大学学生处",
-        "上海财经大学后勤实业发展中心",
         "上海财经大学学生处",
-        "上海财经大学保卫处"
+        "上海财经大学学生处",
+        "上海财经大学后勤实业发展中心"
       ],
       "publish_dates": [
         "unknown",
+        "2024-12-30",
+        "2024-04-17",
         "2023-11-21",
-        "2020-01-06",
-        "2024-01-12",
-        "2022-09-02"
+        "2020-01-06"
       ],
       "document_kinds": [
         "policy",
+        "annual_notice",
+        "annual_notice",
         "public_list",
-        "manual",
-        "policy",
-        "annual_notice"
+        "manual"
       ],
       "validity_statuses": [
         "unknown_validity",
@@ -13206,7 +13205,6 @@
       ],
       "has_attachment": true,
       "matched_domains": [
-        "baoweichu.sufe.edu.cn",
         "hq.sufe.edu.cn",
         "xsc.sufe.edu.cn"
       ],
@@ -13258,37 +13256,37 @@
       "retrieved_doc_ids": [
         "1f5aa08edc4d",
         "2fe0ae1e3ab7",
+        "2f9626a7abb4",
         "5220cf43e76b",
-        "eed57bcd7dd7",
-        "3e2ec161e017"
+        "eed57bcd7dd7"
       ],
       "titles": [
         "关于印发《上海财经大学学生违纪处分规定（2023年10月修订）》的通知.pdf",
         "上海财经大学2016年征兵工作通知",
+        "上海财经大学集体户口管理相关规定（202412）.pdf",
         "关于印发《上海财经大学学生勤工助学管理办法》的通知（附件）",
-        "上海财经大学学生住宿申请表.doc",
-        "关于开展2024-2025学年国家励志奖学金评选工作的通知"
+        "上海财经大学学生住宿申请表.doc"
       ],
       "publishers": [
         "上海财经大学学生处",
         "上海财经大学保卫处",
+        "上海财经大学保卫处",
         "上海财经大学学生处",
-        "上海财经大学后勤实业发展中心",
-        "上海财经大学学生处"
+        "上海财经大学后勤实业发展中心"
       ],
       "publish_dates": [
         "2023-12-13",
         "2022-09-02",
+        "2022-09-02",
         "unknown",
-        "2026-04-20",
-        "2025-10-16"
+        "2026-04-20"
       ],
       "document_kinds": [
         "policy",
         "annual_notice",
         "policy",
-        "procedure",
-        "annual_notice"
+        "policy",
+        "procedure"
       ],
       "validity_statuses": [
         "current",
@@ -13353,35 +13351,35 @@
         "0922e508be1d",
         "4cb5fd791a1a",
         "b815e0eefe9a",
-        "a52286f6863a"
+        "bb5bbb0e9e8c"
       ],
       "titles": [
         "上海财经大学2016年征兵工作通知",
         "关于印发《上海财经大学研究生国家助学金管理办法》的通知（附件）",
         "关于印发《上海财经大学中西部基层单位就业毕业生学费和国家助学贷款代偿管理办法》的通知（附件）",
         "关于印发《上海财经大学学费减免实施办法》的通知（附件）",
-        "上海财经大学“爱心小屋”临时住宿协议.doc"
+        "关于印发《上海财经大学服兵役学生国家教育资助实施办法（2025年5月修订）》的通知"
       ],
       "publishers": [
         "上海财经大学保卫处",
         "上海财经大学学生处",
         "上海财经大学学生处",
         "上海财经大学学生处",
-        "上海财经大学后勤实业发展中心"
+        "上海财经大学学生处"
       ],
       "publish_dates": [
         "2022-09-02",
         "unknown",
         "unknown",
         "unknown",
-        "2026-04-20"
+        "unknown"
       ],
       "document_kinds": [
         "annual_notice",
         "policy",
         "policy",
         "policy",
-        "procedure"
+        "policy"
       ],
       "validity_statuses": [
         "unknown_validity",
@@ -13393,7 +13391,6 @@
       "has_attachment": true,
       "matched_domains": [
         "baoweichu.sufe.edu.cn",
-        "hq.sufe.edu.cn",
         "xsc.sufe.edu.cn"
       ],
       "point_evidence": [
@@ -13443,8 +13440,8 @@
       "status": "answerable",
       "retrieved_doc_ids": [
         "2fe0ae1e3ab7",
-        "2e8a9386b4f8",
-        "8f245c042322",
+        "57d4620aea1b",
+        "c738554bdeee",
         "a6a7b44dd541",
         "5220cf43e76b"
       ],
@@ -13534,38 +13531,38 @@
       "scene": "新生与安全",
       "status": "answerable",
       "retrieved_doc_ids": [
+        "4ae6290eaaab",
         "2fe0ae1e3ab7",
+        "d96b67872d0a",
         "9525c214a5a9",
-        "4cb5fd791a1a",
-        "5220cf43e76b",
-        "1f5aa08edc4d"
+        "4cb5fd791a1a"
       ],
       "titles": [
+        "关于征集2024年大学生创新创业训练计划项目选题的通知",
         "上海财经大学2016年征兵工作通知",
+        "上海财经大学电动自行车校内通行标识牌申请表.docx",
         "上海财经大学总机查号表.pdf",
-        "关于印发《上海财经大学中西部基层单位就业毕业生学费和国家助学贷款代偿管理办法》的通知（附件）",
-        "关于印发《上海财经大学学生勤工助学管理办法》的通知（附件）",
-        "关于印发《上海财经大学学生违纪处分规定（2023年10月修订）》的通知.pdf"
+        "关于印发《上海财经大学中西部基层单位就业毕业生学费和国家助学贷款代偿管理办法》的通知（附件）"
       ],
       "publishers": [
+        "上海财经大学学生处",
+        "上海财经大学保卫处",
         "上海财经大学保卫处",
         "上海财经大学后勤实业发展中心",
-        "上海财经大学学生处",
-        "上海财经大学学生处",
         "上海财经大学学生处"
       ],
       "publish_dates": [
+        "2024-04-17",
+        "2022-09-02",
         "2022-09-02",
         "2012-09-12",
-        "unknown",
-        "unknown",
-        "2023-12-13"
+        "unknown"
       ],
       "document_kinds": [
         "annual_notice",
+        "annual_notice",
+        "procedure",
         "manual",
-        "policy",
-        "policy",
         "policy"
       ],
       "validity_statuses": [
@@ -13573,7 +13570,7 @@
         "unknown_validity",
         "unknown_validity",
         "unknown_validity",
-        "current"
+        "unknown_validity"
       ],
       "has_attachment": true,
       "matched_domains": [
@@ -13585,8 +13582,8 @@
         {
           "point": "适用范围",
           "status": "supported",
-          "evidence_doc_id": "2fe0ae1e3ab7",
-          "evidence_excerpt": "# 上海财经大学2016年征兵工作通知 校属各有关单位： 根据上海市政府征兵办、上海市教委征兵工作文件精神， 及 4 月 26 日教育部、国防动员部召开的 “ 全国大学生征兵工作网络视频会议 ” 精神等文件要求，为做好今年的征兵工作，现将 2016 年大学生征兵工作有关事项通知如下 ： 一、指导思想 以习近平主席系列讲",
+          "evidence_doc_id": "4ae6290eaaab",
+          "evidence_excerpt": "# 关于征集2024年大学生创新创业训练计划项目选题的通知 为深入学习贯彻落实党的二十大精神，落实立德树人根本任务，培养拔尖卓越创新人才,落实学校“43”拔尖卓越创新人才培养模式，提升大学生创新创业训练计划项目（以下简称“大创项目”）质量，建设创新创业校园文化，学校启动2024年大创项目选题征集。现将有关事项通知如下：",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -13594,8 +13591,8 @@
         {
           "point": "办理入口",
           "status": "supported",
-          "evidence_doc_id": "2fe0ae1e3ab7",
-          "evidence_excerpt": "# 上海财经大学2016年征兵工作通知 校属各有关单位： 根据上海市政府征兵办、上海市教委征兵工作文件精神， 及 4 月 26 日教育部、国防动员部召开的 “ 全国大学生征兵工作网络视频会议 ” 精神等文件要求，为做好今年的征兵工作，现将 2016 年大学生征兵工作有关事项通知如下 ： 一、指导思想 以习近平主席系列讲",
+          "evidence_doc_id": "4ae6290eaaab",
+          "evidence_excerpt": "# 关于征集2024年大学生创新创业训练计划项目选题的通知 为深入学习贯彻落实党的二十大精神，落实立德树人根本任务，培养拔尖卓越创新人才,落实学校“43”拔尖卓越创新人才培养模式，提升大学生创新创业训练计划项目（以下简称“大创项目”）质量，建设创新创业校园文化，学校启动2024年大创项目选题征集。现将有关事项通知如下：",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -13603,8 +13600,8 @@
         {
           "point": "通行要求",
           "status": "supported",
-          "evidence_doc_id": "2fe0ae1e3ab7",
-          "evidence_excerpt": "# 上海财经大学2016年征兵工作通知 校属各有关单位： 根据上海市政府征兵办、上海市教委征兵工作文件精神， 及 4 月 26 日教育部、国防动员部召开的 “ 全国大学生征兵工作网络视频会议 ” 精神等文件要求，为做好今年的征兵工作，现将 2016 年大学生征兵工作有关事项通知如下 ： 一、指导思想 以习近平主席系列讲",
+          "evidence_doc_id": "4ae6290eaaab",
+          "evidence_excerpt": "# 关于征集2024年大学生创新创业训练计划项目选题的通知 为深入学习贯彻落实党的二十大精神，落实立德树人根本任务，培养拔尖卓越创新人才,落实学校“43”拔尖卓越创新人才培养模式，提升大学生创新创业训练计划项目（以下简称“大创项目”）质量，建设创新创业校园文化，学校启动2024年大创项目选题征集。现将有关事项通知如下：",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -13612,8 +13609,8 @@
         {
           "point": "联系方式",
           "status": "supported",
-          "evidence_doc_id": "2fe0ae1e3ab7",
-          "evidence_excerpt": "征入伍后，因本人思想原因而被退兵，将按《中华人民共和国兵役法》第六十六条处罚。 八、报名时间、地点及联系方式 报名时间： 2016 年 4 月 26 日至 2016 年 6 月 20 日。 报名地点：上海财经大学武装部保卫处三楼（武东路校区） 联系人：马龙涛办公电话： 65904716. 施 勇 办公电话： 65904565 ",
+          "evidence_doc_id": "4ae6290eaaab",
+          "evidence_excerpt": "# 关于征集2024年大学生创新创业训练计划项目选题的通知 为深入学习贯彻落实党的二十大精神，落实立德树人根本任务，培养拔尖卓越创新人才,落实学校“43”拔尖卓越创新人才培养模式，提升大学生创新创业训练计划项目（以下简称“大创项目”）质量，建设创新创业校园文化，学校启动2024年大创项目选题征集。现将有关事项通知如下：",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -13630,36 +13627,36 @@
         "5220cf43e76b",
         "1f5aa08edc4d",
         "2fe0ae1e3ab7",
-        "ee98c67e0dbc",
-        "26b07cd380a0"
+        "d96b67872d0a",
+        "ee98c67e0dbc"
       ],
       "titles": [
         "关于印发《上海财经大学学生勤工助学管理办法》的通知（附件）",
         "关于印发《上海财经大学学生违纪处分规定（2023年10月修订）》的通知.pdf",
         "上海财经大学2016年征兵工作通知",
-        "关于申请2022年中西部基层单位就业学费补偿国家助学贷款代偿的通知",
-        "高等学校校园秩序管理若干规定"
+        "上海财经大学电动自行车校内通行标识牌申请表.docx",
+        "关于申请2022年中西部基层单位就业学费补偿国家助学贷款代偿的通知"
       ],
       "publishers": [
         "上海财经大学学生处",
         "上海财经大学学生处",
         "上海财经大学保卫处",
-        "上海财经大学学生处",
+        "上海财经大学保卫处",
         "上海财经大学学生处"
       ],
       "publish_dates": [
         "unknown",
         "2023-12-13",
         "2022-09-02",
-        "2022-05-31",
-        "2015-03-01"
+        "2022-09-02",
+        "2022-05-31"
       ],
       "document_kinds": [
         "policy",
         "policy",
         "annual_notice",
-        "annual_notice",
-        "policy"
+        "procedure",
+        "annual_notice"
       ],
       "validity_statuses": [
         "unknown_validity",
@@ -13720,38 +13717,38 @@
       "status": "answerable",
       "retrieved_doc_ids": [
         "1f5aa08edc4d",
+        "4f21705d51ca",
         "418fee24b2e9",
         "5220cf43e76b",
-        "2fe0ae1e3ab7",
-        "26b07cd380a0"
+        "8a577bcbb15e"
       ],
       "titles": [
         "关于印发《上海财经大学学生违纪处分规定（2023年10月修订）》的通知.pdf",
+        "关于组织学生开展2025年千村调查工作的通知",
         "2023年千村调查非毕业班结项公示名单20231121.xlsx",
         "关于印发《上海财经大学学生勤工助学管理办法》的通知（附件）",
-        "上海财经大学2016年征兵工作通知",
-        "高等学校校园秩序管理若干规定"
+        "关于开展2025年千村调查定点带队教师招募的通知"
       ],
       "publishers": [
         "上海财经大学学生处",
         "上海财经大学学生处",
         "上海财经大学学生处",
-        "上海财经大学保卫处",
+        "上海财经大学学生处",
         "上海财经大学学生处"
       ],
       "publish_dates": [
         "2023-12-13",
+        "2025-04-28",
         "2023-11-21",
         "unknown",
-        "2022-09-02",
-        "2015-03-01"
+        "2025-04-22"
       ],
       "document_kinds": [
         "policy",
+        "annual_notice",
         "public_list",
         "policy",
-        "annual_notice",
-        "policy"
+        "annual_notice"
       ],
       "validity_statuses": [
         "current",
@@ -13762,7 +13759,6 @@
       ],
       "has_attachment": true,
       "matched_domains": [
-        "baoweichu.sufe.edu.cn",
         "xsc.sufe.edu.cn"
       ],
       "point_evidence": [
@@ -13907,50 +13903,49 @@
       "retrieved_doc_ids": [
         "1be2da8f5d92",
         "b5e1c6ef7ecd",
+        "2f9626a7abb4",
         "16392d954e77",
-        "eed57bcd7dd7",
-        "1f5aa08edc4d"
+        "eed57bcd7dd7"
       ],
       "titles": [
         "集体宿舍证明.docx",
         "上海财经大学毕业生学籍情况证明.docx",
+        "上海财经大学集体户口管理相关规定（202412）.pdf",
         "上海财经大学物品出门单.docx",
-        "上海财经大学学生住宿申请表.doc",
-        "关于印发《上海财经大学学生违纪处分规定（2023年10月修订）》的通知.pdf"
+        "上海财经大学学生住宿申请表.doc"
       ],
       "publishers": [
         "上海财经大学保卫处",
         "上海财经大学保卫处",
         "上海财经大学保卫处",
-        "上海财经大学后勤实业发展中心",
-        "上海财经大学学生处"
+        "上海财经大学保卫处",
+        "上海财经大学后勤实业发展中心"
       ],
       "publish_dates": [
         "unknown",
         "2022-09-02",
+        "2022-09-02",
         "unknown",
-        "2026-04-20",
-        "2023-12-13"
+        "2026-04-20"
       ],
       "document_kinds": [
         "manual",
         "procedure",
+        "policy",
         "manual",
-        "procedure",
-        "policy"
+        "procedure"
       ],
       "validity_statuses": [
         "unknown_validity",
         "unknown_validity",
         "unknown_validity",
         "unknown_validity",
-        "current"
+        "unknown_validity"
       ],
       "has_attachment": true,
       "matched_domains": [
         "baoweichu.sufe.edu.cn",
-        "hq.sufe.edu.cn",
-        "xsc.sufe.edu.cn"
+        "hq.sufe.edu.cn"
       ],
       "point_evidence": [
         {
@@ -13995,5 +13990,5 @@
       ]
     }
   ],
-  "corpus_document_count": 749
+  "corpus_document_count": 866
 }
