@@ -4,8 +4,8 @@
 - question_bank_hash: `sha256:8a5ab6a1110531cd443d9e652a1032f4e97d25d0f083bf9728429a0c28c352f9`
 - embedding_model: `BAAI/bge-m3`
 - similarity_threshold: `0.55`
-- index_fingerprint: `sha256:3ce3df0a5b9812c04f81928ec3a5baaeea0b570e661eda9ae4feff6c5473f97a`
-- evaluated_at: `2026-09-01T13:05:39+00:00`
+- index_fingerprint: `sha256:9ac04b2748dc6c02c38dfdb5525806611a0b1a48bf42958e529315d4e60741c7`
+- evaluated_at: `2026-09-01T14:10:05+00:00`
 
 ## 场景统计
 

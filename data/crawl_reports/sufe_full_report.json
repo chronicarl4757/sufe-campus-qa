@@ -1,18 +1,18 @@
 {
   "schema_version": "1",
-  "evaluated_at": "2026-09-01T13:05:43+00:00",
+  "evaluated_at": "2026-09-01T14:13:22+00:00",
   "fingerprints": {
-    "manifest": "sha256:eb00436718e9d8cb32d5b246fe90ace52a189bbaae33b85cee457fce1c238c2a",
-    "indexed_manifest": "sha256:eb00436718e9d8cb32d5b246fe90ace52a189bbaae33b85cee457fce1c238c2a",
-    "index": "sha256:3ce3df0a5b9812c04f81928ec3a5baaeea0b570e661eda9ae4feff6c5473f97a",
-    "coverage_index": "sha256:3ce3df0a5b9812c04f81928ec3a5baaeea0b570e661eda9ae4feff6c5473f97a",
-    "real_answers_index": "sha256:3ce3df0a5b9812c04f81928ec3a5baaeea0b570e661eda9ae4feff6c5473f97a"
+    "manifest": "sha256:200caf751c618dfd379d2e84e9839781c4d48cc4fcdd5fd2e4cb3b34828b670f",
+    "indexed_manifest": "sha256:200caf751c618dfd379d2e84e9839781c4d48cc4fcdd5fd2e4cb3b34828b670f",
+    "index": "sha256:9ac04b2748dc6c02c38dfdb5525806611a0b1a48bf42958e529315d4e60741c7",
+    "coverage_index": "sha256:9ac04b2748dc6c02c38dfdb5525806611a0b1a48bf42958e529315d4e60741c7",
+    "real_answers_index": "sha256:9ac04b2748dc6c02c38dfdb5525806611a0b1a48bf42958e529315d4e60741c7"
   },
   "corpus": {
-    "manifest_documents": 2764,
-    "materialized_documents": 1408,
-    "retained_documents": 1408,
-    "retained_materialized_documents": 1408,
+    "manifest_documents": 2765,
+    "materialized_documents": 1409,
+    "retained_documents": 1409,
+    "retained_materialized_documents": 1409,
     "valid_body_ratio": 1.0,
     "missing_files": [],
     "file_hash_errors": [],
@@ -23,7 +23,7 @@
         "c780a8e8115f"
       ]
     ],
-    "duplicate_document_rate": 0.0007102272727272727,
+    "duplicate_document_rate": 0.0007097232079489,
     "active_annual_series_duplicates": {},
     "unknown_validity_main_documents": 651
   },
@@ -115,8 +115,8 @@
   "collections": {
     "main_qa": {
       "name": "sufe_qa_main_v2",
-      "chunk_count": 9006,
-      "document_count": 859,
+      "chunk_count": 9007,
+      "document_count": 860,
       "invalid_documents": []
     },
     "public_list": {
@@ -566,7 +566,7 @@
   "coverage": {
     "question_bank_version": "sufe-question-bank.v1",
     "question_bank_hash": "sha256:8a5ab6a1110531cd443d9e652a1032f4e97d25d0f083bf9728429a0c28c352f9",
-    "index_fingerprint": "sha256:3ce3df0a5b9812c04f81928ec3a5baaeea0b570e661eda9ae4feff6c5473f97a",
+    "index_fingerprint": "sha256:9ac04b2748dc6c02c38dfdb5525806611a0b1a48bf42958e529315d4e60741c7",
     "total": 150,
     "answerable": 91,
     "partially_answerable": 59,
@@ -578,14 +578,14 @@
     "available": true,
     "question_bank_version": "sufe-question-bank.v1",
     "question_bank_hash": "sha256:8a5ab6a1110531cd443d9e652a1032f4e97d25d0f083bf9728429a0c28c352f9",
-    "index_fingerprint": "sha256:3ce3df0a5b9812c04f81928ec3a5baaeea0b570e661eda9ae4feff6c5473f97a",
+    "index_fingerprint": "sha256:9ac04b2748dc6c02c38dfdb5525806611a0b1a48bf42958e529315d4e60741c7",
     "total": 150,
     "unique": 150,
-    "answered": 142,
-    "refused": 8,
+    "answered": 141,
+    "refused": 9,
     "citation_issues": 0,
     "errors": 0,
-    "authoritative_answered": 132,
+    "authoritative_answered": 131,
     "wrong_department_answered": 10,
     "wrong_department_ids": [
       "admit-fail-003",
@@ -674,11 +674,11 @@
       },
       "本科教务": {
         "total": 20,
-        "answered": 20,
-        "refused": 0,
+        "answered": 19,
+        "refused": 1,
         "citation_issues": 0,
         "errors": 0,
-        "answer_rate": 1.0
+        "answer_rate": 0.95
       },
       "研究生培养与学位": {
         "total": 20,
