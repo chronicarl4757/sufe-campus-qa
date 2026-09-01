@@ -279,6 +279,17 @@ class HybridRetriever:
             and view.col.count() == len(view.store)
         ):
             return
+        if fingerprint and view.fingerprint and fingerprint != view.fingerprint:
+            # 索引被（本进程或外部 CLI）重建/更新：Chroma 按路径共享内存 HNSW，
+            # 新建 client 仍会拿到旧的内存索引，必须先清系统缓存再重建 client。
+            from chromadb.api.client import SharedSystemClient
+
+            SharedSystemClient.clear_system_cache()
+            self._client = chromadb.PersistentClient(path=str(self._settings.chroma_dir))
+            for key, old in self._views.items():
+                old.col = self._client.get_collection(old.name)
+                old.store = {}
+            view = self._views[view.key]
         data = view.col.get(include=["documents", "metadatas"])
         ids: list[str] = data.get("ids") or []
         docs = data.get("documents") or []

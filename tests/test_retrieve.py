@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import pytest
 
+import os
+
 from sufe_qa.config import load_settings
 from sufe_qa.indexing.indexer import FakeEmbedder, update_index
 from sufe_qa.ingest.inbox import ingest_inbox
@@ -94,12 +96,22 @@ def test_family_key():
     from sufe_qa.retrieve.retriever import _family_key
 
     # 同族归并：去校名/学院名/年份后同标题视为同族
-    k1 = _family_key("上海财经大学金融学院2026年接收推荐免试研究生预推免报名通知", "上海财经大学金融学院")
-    k2 = _family_key("上海财经大学数学学院2027年接收推荐免试研究生预推免报名通知", "上海财经大学数学学院")
+    k1 = _family_key(
+        "上海财经大学金融学院2026年接收推荐免试研究生预推免报名通知", "上海财经大学金融学院"
+    )
+    k2 = _family_key(
+        "上海财经大学数学学院2027年接收推荐免试研究生预推免报名通知", "上海财经大学数学学院"
+    )
     assert k1 == k2
     # 模板措辞变体（预推免/预报名、含直博生修饰、"的"）也归并到同族
-    k3 = _family_key("上海财经大学数字经济学院2027年接收推荐免试研究生预推免报名的通知", "上海财经大学数字经济学院")
-    k4 = _family_key("上海财经大学交叉科学研究院2027年接收推荐免试研究生（含直博生）预报名的通知", "上海财经大学交叉科学研究院")
+    k3 = _family_key(
+        "上海财经大学数字经济学院2027年接收推荐免试研究生预推免报名的通知",
+        "上海财经大学数字经济学院",
+    )
+    k4 = _family_key(
+        "上海财经大学交叉科学研究院2027年接收推荐免试研究生（含直博生）预报名的通知",
+        "上海财经大学交叉科学研究院",
+    )
     assert k3 == k4 == k1
     # 太短或校级文档不按同族截留
     assert _family_key("重要通知", "上海财经大学金融学院") == "重要通知"
@@ -384,9 +396,24 @@ def test_search_unnamed_college_caps_same_family_docs(settings):
     _append_corpus_docs(
         settings,
         [
-            ("jr.md", "上海财经大学金融学院2026年接收推荐免试研究生预推免报名通知", "上海财经大学金融学院", body),
-            ("sx.md", "上海财经大学数学学院2026年接收推荐免试研究生预推免报名通知", "上海财经大学数学学院", body),
-            ("kj.md", "上海财经大学会计学院2026年接收推荐免试研究生预推免报名通知", "上海财经大学会计学院", body),
+            (
+                "jr.md",
+                "上海财经大学金融学院2026年接收推荐免试研究生预推免报名通知",
+                "上海财经大学金融学院",
+                body,
+            ),
+            (
+                "sx.md",
+                "上海财经大学数学学院2026年接收推荐免试研究生预推免报名通知",
+                "上海财经大学数学学院",
+                body,
+            ),
+            (
+                "kj.md",
+                "上海财经大学会计学院2026年接收推荐免试研究生预推免报名通知",
+                "上海财经大学会计学院",
+                body,
+            ),
         ],
     )
     hits = HybridRetriever(settings, FakeEmbedder()).search("预推免报名需要什么材料")
@@ -455,3 +482,35 @@ def test_parent_cap_limits_sibling_attachments(settings, tmp_path):
     assert hits
     same_parent = [h for h in hits if h.doc_id.startswith("att")]
     assert len(same_parent) <= settings.max_chunks_per_doc
+
+
+def test_hot_index_update_adds_new_doc_to_vector_route(settings):
+    """索引被外部进程更新后，同一 retriever 必须读到新文档（含向量路）。
+
+    Chroma collection 句柄的内存 HNSW 不随外部写入热更新；仅靠 store/BM25 重建
+    会让新文档只有词面路没有向量路（vector_similarity=None）。
+    """
+    import subprocess
+    import sys as _sys
+
+    _seed(settings, {"old.md": "# 推免办法\n\n推免申请条件：应届本科毕业生，品德良好。\n" * 3})
+    r = HybridRetriever(settings, FakeEmbedder())
+    assert r.search("推免 申请 条件")
+
+    # 外部进程执行增量索引（模拟 sufe-qa index / 另一台机器发布后同步）
+    script = (
+        "import os;"
+        "from sufe_qa.config import load_settings;"
+        "s=load_settings();"
+        "p=s.inbox_dir/'new.md';nl=chr(10);p.write_text('# 缓考细则'+nl+nl+'缓考申请：因病须持医院诊断证明，经审批后报教务处备案。'+nl,encoding='utf-8');"
+        "from sufe_qa.ingest.inbox import ingest_inbox;"
+        "ingest_inbox(s.inbox_dir,s.corpus_dir,s.manifest_path,'学工事务','测试单位');"
+        "from sufe_qa.indexing.indexer import update_index, FakeEmbedder;"
+        "update_index(s,FakeEmbedder())"
+    )
+    env = dict(os.environ, SUFE_QA_DATA_DIR=str(settings.data_dir))
+    subprocess.run([_sys.executable, "-c", script], env=env, check=True, capture_output=True)
+
+    hits = r.search("缓考 申请 诊断证明")
+    vec_hits = [h for h in hits if "缓考细则" in h.title and h.vector_similarity is not None]
+    assert vec_hits, "外部进程索引更新后，新文档未进入向量路（HNSW 句柄未随指纹变化重载）"
