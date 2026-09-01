@@ -265,9 +265,7 @@ def test_isolated_event_attachment_is_not_revived_by_active_parent(tmp_path):
         corpus,
         data / "raw",
         evaluated_at=date(2026, 8, 6),
-        time_policies={
-            ("上海财经大学研究生院", "培养管理制度"): "all_history"
-        },
+        time_policies={("上海财经大学研究生院", "培养管理制度"): "all_history"},
     )
 
     decision = next(item for item in report.decisions if item.doc_id == attachment_id)
@@ -382,9 +380,7 @@ def test_manual_allowlist_historical_policy_stays_historical(tmp_path):
         corpus,
         data / "raw",
         evaluated_at=date(2026, 8, 6),
-        time_policies={
-            ("上海财经大学研究生院", "研究生学位"): "all_history"
-        },
+        time_policies={("上海财经大学研究生院", "研究生学位"): "all_history"},
     )
 
     decision = next(item for item in report.decisions if item.doc_id == doc_id)
@@ -519,9 +515,7 @@ def test_quality_audit_preserves_explicit_authority_section_document_kind(tmp_pa
         corpus,
         data / "raw",
         evaluated_at=date(2026, 8, 11),
-        trusted_document_kinds={
-            ("上海财经大学研究生院", "自助打印", "service_guide")
-        },
+        trusted_document_kinds={("上海财经大学研究生院", "自助打印", "service_guide")},
     )
 
     decision = next(item for item in report.decisions if item.doc_id == doc_id)

@@ -116,9 +116,7 @@ def test_generate_real_answer_marks_model_evidence_refusal_as_refused(tmp_path, 
         _probe(),
         settings,
         _Retriever([_hit()]),
-        lambda: _TextLLM(
-            "根据已收录的资料，未提及该事项的具体办理流程。建议咨询相关职能部门。"
-        ),
+        lambda: _TextLLM("根据已收录的资料，未提及该事项的具体办理流程。建议咨询相关职能部门。"),
     )
 
     assert result.status == "refused"
@@ -126,18 +124,14 @@ def test_generate_real_answer_marks_model_evidence_refusal_as_refused(tmp_path, 
     assert result.citation_check is None
 
 
-def test_generate_real_answer_marks_cited_evidence_refusal_as_refused(
-    tmp_path, monkeypatch
-):
+def test_generate_real_answer_marks_cited_evidence_refusal_as_refused(tmp_path, monkeypatch):
     monkeypatch.setenv("SUFE_QA_DATA_DIR", str(tmp_path))
     settings = load_settings()
     result = generate_real_answer(
         _probe(),
         settings,
         _Retriever([_hit()]),
-        lambda: _TextLLM(
-            "已收录的资料中未提及该事项的具体办理流程[1]。建议咨询相关职能部门。"
-        ),
+        lambda: _TextLLM("已收录的资料中未提及该事项的具体办理流程[1]。建议咨询相关职能部门。"),
     )
 
     assert result.status == "refused"
@@ -145,9 +139,7 @@ def test_generate_real_answer_marks_cited_evidence_refusal_as_refused(
     assert result.citation_check is None
 
 
-def test_generate_real_answer_keeps_supported_answer_with_trailing_gap_note(
-    tmp_path, monkeypatch
-):
+def test_generate_real_answer_keeps_supported_answer_with_trailing_gap_note(tmp_path, monkeypatch):
     monkeypatch.setenv("SUFE_QA_DATA_DIR", str(tmp_path))
     settings = load_settings()
     result = generate_real_answer(
@@ -200,9 +192,7 @@ def test_generate_real_answer_preserves_gate_refusal_without_calling_llm(tmp_pat
 def test_generate_real_answer_captures_provider_error(tmp_path, monkeypatch):
     monkeypatch.setenv("SUFE_QA_DATA_DIR", str(tmp_path))
     settings = load_settings()
-    result = generate_real_answer(
-        _probe(), settings, _Retriever([_hit()]), lambda: _BoomLLM()
-    )
+    result = generate_real_answer(_probe(), settings, _Retriever([_hit()]), lambda: _BoomLLM())
     assert result.status == "error"
     assert result.answer_text == ""
     assert "provider unavailable" in result.error

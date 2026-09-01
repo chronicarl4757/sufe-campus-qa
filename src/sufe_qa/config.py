@@ -34,9 +34,7 @@ class Settings:
     # 最终 top-N 中同一文档的 chunk 数上限：防止单文档/同模板兄弟文档霸占全部
     # 生成上下文槽位（长 PDF FAQ、各学院同名"复试办法"的真实故障形态）
     max_chunks_per_doc: int = 3
-    vector_min_similarity: float = (
-        0.55  # 以 data/eval/evalset.v1.jsonl 标定（2026-08 扩库后重标）：应答题最低 0.619，垃圾问题最高 0.530
-    )
+    vector_min_similarity: float = 0.55  # 以 data/eval/evalset.v1.jsonl 标定（2026-08 扩库后重标）：应答题最低 0.619，垃圾问题最高 0.530
     llm_timeout: float = 60.0  # DeepSeek 请求超时（秒），防止流式连接悬挂
     max_question_chars: int = 500  # 问题长度上限，超出直接拒绝
     rate_limit_per_minute: int = 12  # 单 IP 每分钟问答/反馈请求上限

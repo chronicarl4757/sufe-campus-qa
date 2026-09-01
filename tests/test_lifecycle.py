@@ -112,17 +112,11 @@ def test_annual_window_archives_old_and_selects_one_active_series_version():
 
 
 def test_global_canonicalization_folds_series_resolved_under_different_policies():
-    older = _candidate(
-        "older", "2024年研究生奖学金评选通知", "annual_notice", "2024-09-01"
-    )
-    latest = _candidate(
-        "latest", "2025年研究生奖学金评选通知", "annual_notice", "2025-09-01"
-    )
+    older = _candidate("older", "2024年研究生奖学金评选通知", "annual_notice", "2024-09-01")
+    latest = _candidate("latest", "2025年研究生奖学金评选通知", "annual_notice", "2025-09-01")
     candidates = [older, latest]
     decisions = {
-        **resolve_lifecycle(
-            [older], time_policy="all_history", evaluated_at=date(2026, 8, 6)
-        ),
+        **resolve_lifecycle([older], time_policy="all_history", evaluated_at=date(2026, 8, 6)),
         **resolve_lifecycle(
             [latest], time_policy="recent_5_school_years", evaluated_at=date(2026, 8, 6)
         ),
@@ -138,12 +132,8 @@ def test_global_canonicalization_folds_series_resolved_under_different_policies(
 
 
 def test_unknown_publish_date_never_replaces_dated_annual_canonical():
-    dated = _candidate(
-        "dated", "研究生奖学金评选通知", "annual_notice", "2025-09-01"
-    )
-    undated = _candidate(
-        "undated", "研究生奖学金评选通知", "annual_notice", "unknown"
-    )
+    dated = _candidate("dated", "研究生奖学金评选通知", "annual_notice", "2025-09-01")
+    undated = _candidate("undated", "研究生奖学金评选通知", "annual_notice", "unknown")
 
     decisions = resolve_lifecycle(
         [dated, undated],

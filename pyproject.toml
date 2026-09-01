@@ -40,3 +40,8 @@ packages = ["src/sufe_qa"]
 
 [tool.ruff]
 line-length = 100
+
+# 固定包索引为清华镜像：两台开发机环境一致，避免 uv.lock 因 UV_INDEX_URL 差异来回漂移
+[[tool.uv.index]]
+url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+default = true

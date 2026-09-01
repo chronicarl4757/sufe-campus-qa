@@ -1,4 +1,4 @@
-# 评测集 v1（正式门禁集）：14 应答题 + 3 拒答题，doc_id 锚定 data/corpus/manifest.jsonl。
+# 评测集 v1（正式门禁集）：19 应答题 + 3 拒答题，doc_id 锚定 data/corpus/manifest.jsonl。
 # 其中 q-att-* 5 题为附件依赖题：答案只在附件原文、发布页正文不可得，expected_doc_ids 指向附件文档。
 # 应答题命中任一 expected_doc_id 且未被拒答才算正确；门禁线：命中率>=90%、回答率=100%、拒答率=100%。
 # 拒答题语义：知识库无此领域内容、应在检索层被拦下的问题（如美食/股票/体育闲聊）；
@@ -8,7 +8,7 @@
 {"id": "q-shenqing-kaohe", "question": "博士研究生申请考核制的实施办法是怎样的？", "expected_doc_ids": ["5ab32bcce4a9", "4b5d82daeea6", "31abd3e97a2c", "6316c8fee1fd"], "should_refuse": false, "answer_points": ["申请考核流程", "材料与考核环节"]}
 {"id": "q-dangtuan", "question": "研究生新生党团组织关系怎么转接？", "expected_doc_ids": ["e4939049e910"], "should_refuse": false, "answer_points": ["转接流程", "所需介绍信或线上操作"]}
 {"id": "q-tiaoji", "question": "2026年硕士调剂复试考生名单出来了吗？", "expected_doc_ids": ["7f0702a08178"], "should_refuse": false, "answer_points": ["名单已发布"]}
-{"id": "q-english-place", "question": "本科新生大学英语分级考试怎么安排？", "expected_doc_ids": ["d8083d003a19"], "should_refuse": false, "answer_points": ["分级考试安排", "教学分班规则"]}
+{"id": "q-english-place", "question": "本科新生大学英语分级考试怎么安排？", "expected_doc_ids": ["61ac1c564f63"], "should_refuse": false, "answer_points": ["分级考试安排", "教学分班规则"]}
 {"id": "q-zhuanye", "question": "会计学院转专业拟录取名单公示了吗？", "expected_doc_ids": ["4c7abad073b4"], "should_refuse": false, "answer_points": ["拟录取名单已公示"]}
 {"id": "q-zhaosheng-guizhang", "question": "学校研究生招生工作管理规定是哪一年修订的？", "expected_doc_ids": ["ee59bf8f4c11", "374e60732d97"], "should_refuse": false, "answer_points": ["2019年修订"]}
 {"id": "q-zhengshen", "question": "政审调档要寄什么材料？", "expected_doc_ids": ["a44ebdc27934", "ae4bec97563b"], "should_refuse": false, "answer_points": ["政审表", "调档函与寄送要求"]}
@@ -20,3 +20,8 @@
 {"id": "q-att-econ-interview", "question": "经济学院2026年硕士复试的面试科目和分值是怎样安排的？", "expected_doc_ids": ["6acf5c8a58d6"], "should_refuse": false, "answer_points": ["面试100分", "专业面试70分", "英语听说30分"]}
 {"id": "q-att-biz-ratio", "question": "商学院2026年硕士研究生复试的差额比例是多少？", "expected_doc_ids": ["0818c4475c4e"], "should_refuse": false, "answer_points": ["差额比例不少于130%"]}
 {"id": "q-att-mba-remote", "question": "商学院MBA调剂复试采用什么方式进行、面试成绩是多少分？", "expected_doc_ids": ["7b69fb8be5e8"], "should_refuse": false, "answer_points": ["网络远程复试", "面试200分"]}
+{"id": "q-hardship-recognition", "question": "家庭经济困难学生如何认定？", "expected_doc_ids": ["77d10806304e"], "should_refuse": false, "answer_points": ["个人申请", "民主评议", "学院认定工作组审核", "认定管理办法（上财行规2019-10号）"]}
+{"id": "q-loan-school-confirm", "question": "生源地助学贷款如何办理学校确认？", "expected_doc_ids": ["5836ee860bf9"], "should_refuse": false, "answer_points": ["回执校验码", "线上问卷采集", "截止时间", "弘毅楼209室资助中心"]}
+{"id": "q-discipline-version", "question": "学生违纪处分规定是哪一年修订的？", "expected_doc_ids": ["1f5aa08edc4d"], "should_refuse": false, "answer_points": ["2023年10月修订"]}
+{"id": "q-party-flow", "question": "入党流程是怎样的？", "expected_doc_ids": ["1d0ae0f2c80a"], "should_refuse": false, "answer_points": ["入党申请书", "入党积极分子", "发展对象", "预备党员", "转正"]}
+{"id": "q-sport-bonus", "question": "体育特长生比赛加分如何申请？", "expected_doc_ids": ["c945ddfcb9bc"], "should_refuse": false, "answer_points": ["体育特长生", "获奖", "加分"]}

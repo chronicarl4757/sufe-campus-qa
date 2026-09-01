@@ -691,6 +691,17 @@ def _cmd_rebuild_clean_corpus(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_curate(args: argparse.Namespace) -> int:
+    """语料治理入口：逻辑在 scripts/corpus_governance.py（含人工审读清单），此处做薄封装。"""
+    script = PROJECT_ROOT / "scripts" / "corpus_governance.py"
+    if not script.is_file():
+        print(f"治理脚本不存在: {script}", file=sys.stderr)
+        return 1
+    sys.argv = [str(script)] + (["--apply"] if args.apply else [])
+    exec(script.read_text(encoding="utf-8"), {"__name__": "__main__", "__file__": str(script)})
+    return 0
+
+
 def _cmd_quality_gates(args: argparse.Namespace) -> int:
     settings = load_settings()
     coverage_path = Path(args.coverage) if args.coverage else None
@@ -895,9 +906,7 @@ def build_parser() -> argparse.ArgumentParser:
     i.add_argument("--publisher", default="手动投放")
     i.set_defaults(func=_cmd_ingest)
 
-    ia = sub.add_parser(
-        "ingest-authority-files", help="按显式 allowlist 审计并导入本地权威资料"
-    )
+    ia = sub.add_parser("ingest-authority-files", help="按显式 allowlist 审计并导入本地权威资料")
     ia.add_argument("--source", required=True, help="待审计资料根目录")
     ia.add_argument("--rules", required=True, help="精确文件 allowlist YAML")
     ia.add_argument("--report", required=True, help="逐文件 JSON 审计报告")
@@ -1043,6 +1052,12 @@ def build_parser() -> argparse.ArgumentParser:
         default=str(PROJECT_ROOT / "data" / "crawl_reports" / "sufe_missing_sources.json"),
     )
     qg.set_defaults(func=_cmd_quality_gates)
+
+    cu = sub.add_parser(
+        "curate", help="语料治理（scripts/corpus_governance.py：隔离/去重/版本收敛，幂等可重跑）"
+    )
+    cu.add_argument("--apply", action="store_true", help="确认后写入 manifest（默认 dry-run）")
+    cu.set_defaults(func=_cmd_curate)
 
     s = sub.add_parser("serve", help="启动 Web 问答界面")
     s.add_argument("--host", default="127.0.0.1")

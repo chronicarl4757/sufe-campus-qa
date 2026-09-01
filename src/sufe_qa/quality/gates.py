@@ -157,9 +157,7 @@ def _real_answer_stats(path: Path | None) -> dict:
             "citation_issues": scene_counts["answered_with_citation_issue"],
             "errors": scene_counts["error"],
             "answer_rate": (
-                scene_counts["answered"] / scene_counts["total"]
-                if scene_counts["total"]
-                else 0.0
+                scene_counts["answered"] / scene_counts["total"] if scene_counts["total"] else 0.0
             ),
         }
         for scene, scene_counts in sorted(by_scene.items())
@@ -298,29 +296,21 @@ def verify_clean_pipeline(
     coverage = _coverage_stats(coverage_path)
     real_answers = _real_answer_stats(answer_report_path)
     current_index_fingerprint = index_fingerprints["index_fingerprint"]
-    index_matches_manifest = (
-        index_fingerprints["manifest_fingerprint"] == manifest_fingerprint
-    )
+    index_matches_manifest = index_fingerprints["manifest_fingerprint"] == manifest_fingerprint
     coverage_matches_index = (
         coverage["total"] > 0
         and current_index_fingerprint != "missing"
         and coverage["index_fingerprint"] == current_index_fingerprint
     )
-    real_answers_match_index = (
-        not real_answers["available"]
-        or (
-            current_index_fingerprint != "missing"
-            and real_answers["index_fingerprint"] == current_index_fingerprint
-        )
+    real_answers_match_index = not real_answers["available"] or (
+        current_index_fingerprint != "missing"
+        and real_answers["index_fingerprint"] == current_index_fingerprint
     )
-    real_answer_integrity = (
-        not real_answers["available"]
-        or (
-            real_answers["total"] == 150
-            and real_answers["unique"] == 150
-            and real_answers["question_bank_hash"] == coverage["question_bank_hash"]
-            and real_answers["index_fingerprint"] == coverage["index_fingerprint"]
-        )
+    real_answer_integrity = not real_answers["available"] or (
+        real_answers["total"] == 150
+        and real_answers["unique"] == 150
+        and real_answers["question_bank_hash"] == coverage["question_bank_hash"]
+        and real_answers["index_fingerprint"] == coverage["index_fingerprint"]
     )
     core_scene_answerability = not real_answers["available"] or all(
         scene in real_answers["scene_stats"]

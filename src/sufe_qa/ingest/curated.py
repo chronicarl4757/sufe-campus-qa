@@ -174,9 +174,7 @@ def ingest_curated(curated_dir: Path, corpus_dir: Path, manifest_path: Path) -> 
                 applicable_school_year=str(fm.get("applicable_school_year") or ""),
                 index_collection=collection_for_kind(document_kind, "active") or "none",
                 publish_date_evidence=(
-                    f"front matter verified_at：{publish_date}"
-                    if publish_date != "unknown"
-                    else ""
+                    f"front matter verified_at：{publish_date}" if publish_date != "unknown" else ""
                 ),
                 publish_date_confidence=1.0 if publish_date != "unknown" else 0.0,
                 temporal_class=temporal_class_for(document_kind, title),

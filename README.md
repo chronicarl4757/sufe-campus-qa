@@ -147,7 +147,7 @@ Dashboard 是“馆藏账本”而非统计图，覆盖非专业维护者的日�
 
 ## 评测
 
-正式评测集 `data/eval/evalset.v1.jsonl`（14 应答题 + 3 拒答题，doc_id 锚定 manifest）随仓库提供：
+正式评测集 `data/eval/evalset.v1.jsonl`（19 应答题 + 3 拒答题，doc_id 锚定 manifest）随仓库提供：
 
 ```bash
 sufe-qa eval   # 检索命中率 / 应答题回答率 / 拒答正确率，任一不达标退出码 1

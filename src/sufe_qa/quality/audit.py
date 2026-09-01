@@ -337,12 +337,15 @@ def audit_corpus(
             ),
         )
         own = lifecycle[doc_id]
-        if own.retention_status == "archived" and parent_lifecycle.retention_status in {
-            "active",
-            "historical",
-        } and collection_for_kind(
-            kinds[doc_id], parent_lifecycle.retention_status
-        ) is not None:
+        if (
+            own.retention_status == "archived"
+            and parent_lifecycle.retention_status
+            in {
+                "active",
+                "historical",
+            }
+            and collection_for_kind(kinds[doc_id], parent_lifecycle.retention_status) is not None
+        ):
             lifecycle[doc_id] = replace(
                 own,
                 series_key=parent_lifecycle.series_key,

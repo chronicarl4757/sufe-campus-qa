@@ -224,9 +224,9 @@ def test_indexer_prefers_richer_same_date_attachment_over_title_only_parent(tmp_
     client = chromadb.PersistentClient(path=str(settings.chroma_dir))
     main_ids = {
         meta["doc_id"]
-        for meta in client.get_collection(settings.collection_name).get(
-            include=["metadatas"]
-        )["metadatas"]
+        for meta in client.get_collection(settings.collection_name).get(include=["metadatas"])[
+            "metadatas"
+        ]
     }
     historical_ids = {
         meta["doc_id"]

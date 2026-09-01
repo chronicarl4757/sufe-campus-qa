@@ -789,11 +789,9 @@ class NicServiceAdapter(Wp3Adapter):
             r"新闻|动态|活动|回顾|通知|公告|公示|讲座|论坛|会议|招聘|获奖|宣传",
             title,
         )
-        is_student_catalog = (
-            urlparse(page.final_url or page.requested_url).netloc.lower()
-            == "nic.sufe.edu.cn"
-            and spec.section_id.startswith("nic-")
-        )
+        is_student_catalog = urlparse(
+            page.final_url or page.requested_url
+        ).netloc.lower() == "nic.sufe.edu.cn" and spec.section_id.startswith("nic-")
         if isolated or not is_student_catalog:
             return article
         return replace(article, document_kind_hint="service_guide")

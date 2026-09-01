@@ -215,7 +215,9 @@ def ingest_crawled_articles(
         doc_id = doc_id_from(src)
         hint = (art.document_kind_hint or "").strip().lower()
         document_kind = (
-            hint if hint in _DOCUMENT_KIND_HINTS else classify_document_kind(art.title, art.body_text)
+            hint
+            if hint in _DOCUMENT_KIND_HINTS
+            else classify_document_kind(art.title, art.body_text)
         )
         old = existing.get(doc_id)
         same_existing_text = bool(
@@ -229,7 +231,8 @@ def ingest_crawled_articles(
             not hint
             and same_existing_text
             and old is not None
-            and old.document_kind in _DOCUMENT_KIND_HINTS - {"incomplete", "news", "event", "promotion"}
+            and old.document_kind
+            in _DOCUMENT_KIND_HINTS - {"incomplete", "news", "event", "promotion"}
             and document_kind in {"incomplete", "news", "event", "promotion"}
         ):
             # 同一 URL 可能既由显式服务页 seed 抓到，也被普通通知栏目再次发现。
@@ -392,7 +395,9 @@ def ingest_crawled_articles(
             if old and old.quality_status == "accepted" and old.content_hash:
                 stats.add(doc_id, "kept_previous", f"本轮 {quality.status}，保留旧版本", art.title)
             else:
-                stats.add(doc_id, "rejected", ";".join(quality.reasons) or quality.status, art.title)
+                stats.add(
+                    doc_id, "rejected", ";".join(quality.reasons) or quality.status, art.title
+                )
                 if not dry_run:
                     metas.append(
                         _audit_meta(

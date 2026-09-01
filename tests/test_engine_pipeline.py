@@ -457,9 +457,7 @@ def test_unchanged_attachment_refreshes_lifecycle_metadata(routes, tmp_path):
     _ingest(tmp_path, arts)
     manifest_path = tmp_path / "corpus" / "manifest.jsonl"
     attachment = next(
-        meta
-        for meta in load_manifest(manifest_path).values()
-        if meta.document_type == "attachment"
+        meta for meta in load_manifest(manifest_path).values() if meta.document_type == "attachment"
     )
     append_manifest(
         manifest_path,

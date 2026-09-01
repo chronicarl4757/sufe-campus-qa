@@ -24,9 +24,7 @@ from sufe_qa.generate.prompt import SYSTEM_PROMPT, build_messages
 from sufe_qa.retrieve.retriever import Hit, HybridRetriever, is_confident
 
 SCHEMA_VERSION = "1"
-REAL_ANSWER_STATUSES = frozenset(
-    {"answered", "answered_with_citation_issue", "refused", "error"}
-)
+REAL_ANSWER_STATUSES = frozenset({"answered", "answered_with_citation_issue", "refused", "error"})
 
 
 class ResumeMismatchError(ValueError):
@@ -166,7 +164,9 @@ def load_index_metadata(settings: Settings) -> dict:
 
 
 def _domains(hits: list[Hit]) -> tuple[str, ...]:
-    return tuple(sorted({urlparse(hit.source_url).netloc.lower() for hit in hits if hit.source_url}))
+    return tuple(
+        sorted({urlparse(hit.source_url).netloc.lower() for hit in hits if hit.source_url})
+    )
 
 
 def _snapshots(hits: list[Hit]) -> tuple[RealAnswerHit, ...]:
@@ -224,7 +224,9 @@ def _generate_from_hits(
     started: float,
 ) -> RealAnswerResult:
     try:
-        answer_text = "".join(llm_factory().stream_chat(build_messages(probe.question, hits))).strip()
+        answer_text = "".join(
+            llm_factory().stream_chat(build_messages(probe.question, hits))
+        ).strip()
         if not answer_text:
             return _base_result(
                 probe,

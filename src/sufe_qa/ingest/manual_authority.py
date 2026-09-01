@@ -193,7 +193,9 @@ def _revision_year(title: str) -> int | None:
 def _write_report(path: Path, report: ManualImportReport) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     tmp = path.with_suffix(path.suffix + ".tmp")
-    tmp.write_text(json.dumps(report.to_dict(), ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    tmp.write_text(
+        json.dumps(report.to_dict(), ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
     tmp.replace(path)
 
 
@@ -551,9 +553,7 @@ def import_manual_authority_files(
         existing_by_text[text_hash] = doc_id
 
     for relative_path in sorted(set(entries) - discovered_paths):
-        decisions.append(
-            ManualImportDecision(relative_path, "missing", "allowlisted_file_missing")
-        )
+        decisions.append(ManualImportDecision(relative_path, "missing", "allowlisted_file_missing"))
 
     for relative_path, old in sorted(stale_by_path.items()):
         if (
