@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 
 import pytest
 from fastapi.testclient import TestClient
@@ -36,6 +36,9 @@ def admin_env(tmp_path, monkeypatch) -> AdminEnv:
     monkeypatch.setenv("SUFE_QA_DATA_DIR", str(tmp_path / "data"))
     monkeypatch.setenv("SUFE_QA_ADMIN_TOKEN", "admin-secret")
     settings = load_settings()
+    # FakeEmbedder 哈希假向量的相似度约 0.50，低于真实库标定的 0.55 门控；
+    # 本组用例针对标准答复闭环而非门控阈值标定，测试环境放宽阈值
+    settings = replace(settings, vector_min_similarity=0.4)
     source = settings.inbox_dir / "scholarship.md"
     source.write_text(DOC, encoding="utf-8")
     ingest_inbox(
