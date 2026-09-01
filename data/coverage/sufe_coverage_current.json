@@ -9,8 +9,8 @@
   },
   "embedding_model": "BAAI/bge-m3",
   "similarity_threshold": 0.55,
-  "index_fingerprint": "sha256:ec058af25bcd3e0aa20607144af48816b9390cc18a51e2fe8bd8ba3fbaf1e08e",
-  "evaluated_at": "2026-09-01T11:42:27+00:00",
+  "index_fingerprint": "sha256:3ce3df0a5b9812c04f81928ec3a5baaeea0b570e661eda9ae4feff6c5473f97a",
+  "evaluated_at": "2026-09-01T13:05:39+00:00",
   "scene_stats": {
     "本科教务": {
       "scene": "本科教务",
@@ -213,7 +213,7 @@
         "unknown_validity",
         "unknown_validity",
         "unknown_validity",
-        "unknown_validity"
+        "superseded"
       ],
       "has_attachment": true,
       "matched_domains": [
@@ -303,7 +303,7 @@
         "superseded",
         "unknown_validity",
         "unknown_validity",
-        "unknown_validity",
+        "superseded",
         "unknown_validity"
       ],
       "has_attachment": true,
@@ -488,7 +488,7 @@
         "unknown_validity",
         "unknown_validity",
         "superseded",
-        "unknown_validity"
+        "superseded"
       ],
       "has_attachment": true,
       "matched_domains": [
@@ -577,7 +577,7 @@
       "validity_statuses": [
         "superseded",
         "unknown_validity",
-        "unknown_validity",
+        "superseded",
         "superseded",
         "unknown_validity"
       ],
@@ -670,7 +670,7 @@
         "superseded",
         "unknown_validity",
         "unknown_validity",
-        "unknown_validity"
+        "superseded"
       ],
       "has_attachment": true,
       "matched_domains": [
@@ -760,8 +760,8 @@
         "superseded",
         "unknown_validity",
         "unknown_validity",
-        "unknown_validity",
-        "unknown_validity"
+        "superseded",
+        "superseded"
       ],
       "has_attachment": true,
       "matched_domains": [
@@ -851,8 +851,8 @@
         "superseded",
         "unknown_validity",
         "superseded",
-        "unknown_validity",
-        "unknown_validity"
+        "superseded",
+        "superseded"
       ],
       "has_attachment": true,
       "matched_domains": [
@@ -943,7 +943,7 @@
         "unknown_validity",
         "unknown_validity",
         "unknown_validity",
-        "unknown_validity"
+        "superseded"
       ],
       "has_attachment": true,
       "matched_domains": [
@@ -1033,8 +1033,8 @@
         "superseded",
         "unknown_validity",
         "superseded",
-        "unknown_validity",
-        "unknown_validity"
+        "superseded",
+        "superseded"
       ],
       "has_attachment": true,
       "matched_domains": [
@@ -1126,8 +1126,8 @@
       "validity_statuses": [
         "superseded",
         "superseded",
-        "unknown_validity",
-        "unknown_validity",
+        "superseded",
+        "superseded",
         "unknown_validity"
       ],
       "has_attachment": true,
@@ -1399,9 +1399,9 @@
       "validity_statuses": [
         "superseded",
         "unknown_validity",
+        "superseded",
         "unknown_validity",
-        "unknown_validity",
-        "unknown_validity"
+        "superseded"
       ],
       "has_attachment": true,
       "matched_domains": [
@@ -1491,7 +1491,7 @@
         "manual"
       ],
       "validity_statuses": [
-        "unknown_validity",
+        "superseded",
         "unknown_validity",
         "superseded",
         "unknown_validity",
@@ -1583,7 +1583,7 @@
       ],
       "validity_statuses": [
         "superseded",
-        "unknown_validity",
+        "superseded",
         "superseded",
         "unknown_validity",
         "unknown_validity"
@@ -1676,8 +1676,8 @@
         "superseded",
         "unknown_validity",
         "unknown_validity",
-        "unknown_validity",
-        "unknown_validity"
+        "superseded",
+        "superseded"
       ],
       "has_attachment": true,
       "matched_domains": [
@@ -1766,7 +1766,7 @@
       "validity_statuses": [
         "superseded",
         "unknown_validity",
-        "unknown_validity",
+        "superseded",
         "unknown_validity",
         "unknown_validity"
       ],
@@ -1856,7 +1856,7 @@
       ],
       "validity_statuses": [
         "superseded",
-        "unknown_validity",
+        "superseded",
         "unknown_validity",
         "unknown_validity",
         "superseded"
@@ -1947,7 +1947,7 @@
       ],
       "validity_statuses": [
         "superseded",
-        "unknown_validity",
+        "superseded",
         "superseded",
         "unknown_validity",
         "unknown_validity"
@@ -3240,9 +3240,9 @@
       ],
       "validity_statuses": [
         "unknown_validity",
-        "unknown_validity",
-        "unknown_validity",
-        "unknown_validity",
+        "superseded",
+        "superseded",
+        "superseded",
         "unknown_validity"
       ],
       "has_attachment": false,
@@ -5261,7 +5261,7 @@
         "unknown_validity",
         "unknown_validity",
         "superseded",
-        "unknown_validity",
+        "superseded",
         "unknown_validity"
       ],
       "has_attachment": true,

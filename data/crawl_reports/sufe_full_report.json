@@ -1,12 +1,12 @@
 {
   "schema_version": "1",
-  "evaluated_at": "2026-09-01T11:50:31+00:00",
+  "evaluated_at": "2026-09-01T13:05:43+00:00",
   "fingerprints": {
-    "manifest": "sha256:d701afac2ae2f055c991fc3a6cb02e56725daed165fbecbfbe87d3fd77b33aac",
-    "indexed_manifest": "sha256:d701afac2ae2f055c991fc3a6cb02e56725daed165fbecbfbe87d3fd77b33aac",
-    "index": "sha256:ec058af25bcd3e0aa20607144af48816b9390cc18a51e2fe8bd8ba3fbaf1e08e",
-    "coverage_index": "sha256:ec058af25bcd3e0aa20607144af48816b9390cc18a51e2fe8bd8ba3fbaf1e08e",
-    "real_answers_index": "sha256:ec058af25bcd3e0aa20607144af48816b9390cc18a51e2fe8bd8ba3fbaf1e08e"
+    "manifest": "sha256:eb00436718e9d8cb32d5b246fe90ace52a189bbaae33b85cee457fce1c238c2a",
+    "indexed_manifest": "sha256:eb00436718e9d8cb32d5b246fe90ace52a189bbaae33b85cee457fce1c238c2a",
+    "index": "sha256:3ce3df0a5b9812c04f81928ec3a5baaeea0b570e661eda9ae4feff6c5473f97a",
+    "coverage_index": "sha256:3ce3df0a5b9812c04f81928ec3a5baaeea0b570e661eda9ae4feff6c5473f97a",
+    "real_answers_index": "sha256:3ce3df0a5b9812c04f81928ec3a5baaeea0b570e661eda9ae4feff6c5473f97a"
   },
   "corpus": {
     "manifest_documents": 2764,
@@ -25,7 +25,7 @@
     ],
     "duplicate_document_rate": 0.0007102272727272727,
     "active_annual_series_duplicates": {},
-    "unknown_validity_main_documents": 663
+    "unknown_validity_main_documents": 651
   },
   "attachments": {
     "total": 813,
@@ -115,8 +115,8 @@
   "collections": {
     "main_qa": {
       "name": "sufe_qa_main_v2",
-      "chunk_count": 9125,
-      "document_count": 871,
+      "chunk_count": 9006,
+      "document_count": 859,
       "invalid_documents": []
     },
     "public_list": {
@@ -127,8 +127,8 @@
     },
     "historical": {
       "name": "sufe_qa_historical_v2",
-      "chunk_count": 1757,
-      "document_count": 236,
+      "chunk_count": 1876,
+      "document_count": 248,
       "invalid_documents": []
     }
   },
@@ -566,7 +566,7 @@
   "coverage": {
     "question_bank_version": "sufe-question-bank.v1",
     "question_bank_hash": "sha256:8a5ab6a1110531cd443d9e652a1032f4e97d25d0f083bf9728429a0c28c352f9",
-    "index_fingerprint": "sha256:ec058af25bcd3e0aa20607144af48816b9390cc18a51e2fe8bd8ba3fbaf1e08e",
+    "index_fingerprint": "sha256:3ce3df0a5b9812c04f81928ec3a5baaeea0b570e661eda9ae4feff6c5473f97a",
     "total": 150,
     "answerable": 91,
     "partially_answerable": 59,
@@ -578,15 +578,15 @@
     "available": true,
     "question_bank_version": "sufe-question-bank.v1",
     "question_bank_hash": "sha256:8a5ab6a1110531cd443d9e652a1032f4e97d25d0f083bf9728429a0c28c352f9",
-    "index_fingerprint": "sha256:ec058af25bcd3e0aa20607144af48816b9390cc18a51e2fe8bd8ba3fbaf1e08e",
+    "index_fingerprint": "sha256:3ce3df0a5b9812c04f81928ec3a5baaeea0b570e661eda9ae4feff6c5473f97a",
     "total": 150,
     "unique": 150,
     "answered": 142,
     "refused": 8,
     "citation_issues": 0,
     "errors": 0,
-    "authoritative_answered": 131,
-    "wrong_department_answered": 11,
+    "authoritative_answered": 132,
+    "wrong_department_answered": 10,
     "wrong_department_ids": [
       "admit-fail-003",
       "admit-materials-005",
@@ -595,7 +595,6 @@
       "gs-exchange-009",
       "gs-phd-006",
       "gs-scholarship-010",
-      "jwc-double-008",
       "jwc-gpa-017",
       "jwc-sports-018",
       "new-orientation-002"
