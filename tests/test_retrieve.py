@@ -77,6 +77,49 @@ def test_expand_query_maps_student_wording_to_official_terms():
     )
 
 
+def test_expand_query_maps_colloquial_tuimian_terms():
+    """口语词映射到正式文书用语：保研→推荐免试，预推免→通知标题用语。"""
+    assert "推荐免试 推免 免试攻读研究生" in expand_query("保研资格是什么？")
+    assert "接收推荐免试研究生 报名通知" in expand_query("金融学院预推免")
+    assert expand_query("食堂几点开门？") == "食堂几点开门？"
+
+
+def test_publisher_college_and_question_matching():
+    from sufe_qa.retrieve.retriever import _match_colleges, _publisher_college
+
+    assert _publisher_college("上海财经大学金融学院") == "金融学院"
+    assert _publisher_college("上海财经大学滴水湖高级金融学院") == "滴水湖高级金融学院"
+    assert _publisher_college("上海财经大学交叉科学研究院") == "交叉科学研究院"
+    assert _publisher_college("上海财经大学研究生院") == ""
+    assert _publisher_college("招生就业处") == ""
+
+    colleges = ["滴水湖高级金融学院", "金融学院", "数学学院"]
+    # 长名优先：命中滴水湖高级金融学院后不应再重复计金融学院
+    assert _match_colleges("滴水湖高级金融学院预推免", colleges) == ["滴水湖高级金融学院"]
+    assert _match_colleges("金融学院预推免", colleges) == ["金融学院"]
+    assert _match_colleges("预推免什么时候报名", colleges) == []
+
+
+def test_scope_weight_and_family_key():
+    from sufe_qa.retrieve.retriever import _family_key, _scope_weight
+
+    assert _scope_weight([], "金融学院") == 1.0  # 未点名学院不干预
+    assert _scope_weight(["金融学院"], "金融学院") == 1.15
+    assert _scope_weight(["金融学院"], "数学学院") == 0.55
+    assert _scope_weight(["金融学院"], "") == 1.0  # 校级部门文档不动
+
+    # 同族归并：去校名/学院名/年份后同标题视为同族
+    k1 = _family_key("上海财经大学金融学院2026年接收推荐免试研究生预推免报名通知", "上海财经大学金融学院")
+    k2 = _family_key("上海财经大学数学学院2027年接收推荐免试研究生预推免报名通知", "上海财经大学数学学院")
+    assert k1 == k2
+    # 模板措辞变体（预推免/预报名、含直博生修饰、"的"）也归并到同族
+    k3 = _family_key("上海财经大学数字经济学院2027年接收推荐免试研究生预推免报名的通知", "上海财经大学数字经济学院")
+    k4 = _family_key("上海财经大学交叉科学研究院2027年接收推荐免试研究生（含直博生）预报名的通知", "上海财经大学交叉科学研究院")
+    assert k3 == k4 == k1
+    # 太短或校级文档不按同族截留
+    assert _family_key("重要通知", "上海财经大学金融学院") == "重要通知"
+
+
 def test_rrf_fuse_scores_and_order():
     scores = rrf_fuse([["a", "b"], ["c"]], k=60)
     assert scores["a"] == pytest.approx(1 / 61)
@@ -305,3 +348,64 @@ def test_search_routed_finds_public_list_only_with_intent(settings):
     plain = r.search("转专业申请条件")
     assert plain
     assert all("公示" not in h.title for h in plain)
+
+
+def _append_corpus_docs(settings, docs: list[tuple[str, str, str, str]]) -> None:
+    """直接落 corpus + manifest 后索引；docs 为 (文件名, 标题, publisher, 正文)。"""
+    from sufe_qa.schema import DocMeta, append_manifest
+
+    for fname, title, publisher, body in docs:
+        (settings.corpus_dir / fname).write_text(f"# {title}\n\n{body}\n", encoding="utf-8")
+    append_manifest(
+        settings.manifest_path,
+        [
+            DocMeta(
+                doc_id=doc_id_from(f"test/{fname}"),
+                title=title,
+                source_url=f"test/{fname}",
+                publisher=publisher,
+                publish_date="2026-01-01",
+                category="学工事务",
+                fetched_at="2026-07-31T00:00:00+00:00",
+                content_hash=f"sha256:{fname}",
+                file_path=fname,
+                retention_status="active",
+                retention_reason="test_fixture",
+            )
+            for fname, title, publisher, _ in docs
+        ],
+    )
+    update_index(settings, FakeEmbedder())
+
+
+def test_search_named_college_boosts_that_college(settings):
+    """点名学院时该院文档压过内容相同的其他学院文档（学院实体感知提降权）。"""
+    body = "接收推荐免试研究生预推免报名通知 申请人须提交报名表、成绩单、专家推荐信等材料。" * 3
+    _append_corpus_docs(
+        settings,
+        [
+            ("jr.md", "接收推荐免试研究生预推免报名通知", "上海财经大学金融学院", body),
+            ("sx.md", "接收推荐免试研究生预推免报名通知", "上海财经大学数学学院", body),
+        ],
+    )
+    hits = HybridRetriever(settings, FakeEmbedder()).search("金融学院预推免怎么报名")
+    assert hits
+    assert hits[0].doc_id == doc_id_from("test/jr.md")
+
+
+def test_search_unnamed_college_caps_same_family_docs(settings):
+    """未点名学院时同族模板通知最多占 _SAME_FAMILY_MAX_DOCS 个文档席位。"""
+    from sufe_qa.retrieve.retriever import _SAME_FAMILY_MAX_DOCS
+
+    body = "接收推荐免试研究生预推免报名通知 申请人须提交报名表、成绩单、专家推荐信等材料。" * 3
+    _append_corpus_docs(
+        settings,
+        [
+            ("jr.md", "上海财经大学金融学院2026年接收推荐免试研究生预推免报名通知", "上海财经大学金融学院", body),
+            ("sx.md", "上海财经大学数学学院2026年接收推荐免试研究生预推免报名通知", "上海财经大学数学学院", body),
+            ("kj.md", "上海财经大学会计学院2026年接收推荐免试研究生预推免报名通知", "上海财经大学会计学院", body),
+        ],
+    )
+    hits = HybridRetriever(settings, FakeEmbedder()).search("预推免报名需要什么材料")
+    family_doc_ids = {h.doc_id for h in hits}
+    assert len(family_doc_ids) == _SAME_FAMILY_MAX_DOCS
