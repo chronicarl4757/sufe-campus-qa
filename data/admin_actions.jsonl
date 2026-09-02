@@ -350,3 +350,15 @@
 {"ts": "2026-09-01T12:54:53+00:00", "doc_id": "01e7a801900a", "title": "《上海财经大学学生校内申诉处理实施细则（2017年6月修订)》（校发【2017】49号）.pdf", "action": "mark_superseded", "reason": "校内申诉处理实施细则(2017.6修订)被学生申诉处理实施细则(2017-09-01施行)取代"}
 {"ts": "2026-09-01T12:54:53+00:00", "doc_id": "5e968e11f5cd", "title": "《上海财经大学学生校内申诉处理实施细则（2017年6月修订)》（校发【2017】49号）", "action": "mark_superseded", "reason": "同上(文章)"}
 {"ts": "2026-09-01T13:53:11+00:00", "doc_id": "c945ddfcb9bc", "title": "体育特长生比赛加分", "action": "backfill_text_hash", "reason": ""}
+{"ts": "2026-09-02T10:23:52+00:00", "doc_id": "b4eb4372a162", "title": "服务规范", "action": "source_url_fix", "reason": "meta_fix:补登记真实来源URL(inbox投放时缺省)"}
+{"ts": "2026-09-02T10:23:52+00:00", "doc_id": "3021c9128de6", "title": "【平安上财】 防诈骗安全提示", "action": "source_url_fix", "reason": "meta_fix:补登记真实来源URL(inbox投放时缺省)"}
+{"ts": "2026-09-02T10:23:52+00:00", "doc_id": "1d0ae0f2c80a", "title": "上海财经大学发展党员流程", "action": "source_url_fix", "reason": "meta_fix:补登记真实来源URL(inbox投放时缺省)"}
+{"ts": "2026-09-02T10:23:52+00:00", "doc_id": "d4bfe4be6af5", "title": "图书馆学习空间与座位预约", "action": "source_url_fix", "reason": "meta_fix:补登记真实来源URL(inbox投放时缺省)"}
+{"ts": "2026-09-02T10:23:52+00:00", "doc_id": "08eb01ac6a83", "title": "后勤物业服务信息一览（含宿舍报修电话）", "action": "source_url_fix", "reason": "meta_fix:补登记真实来源URL(inbox投放时缺省)"}
+{"ts": "2026-09-02T10:28:40+00:00", "doc_id": "eb5ff9f77cdf", "title": "标准答复｜校医院在哪里，如何联系？", "action": "curate_answer", "reason": "AI辅助整理 核验；依据 2 份"}
+{"ts": "2026-09-02T10:28:44+00:00", "doc_id": "c3f7212acb72", "title": "标准答复｜灵活就业如何登记？", "action": "curate_answer", "reason": "AI辅助整理 核验；依据 3 份"}
+{"ts": "2026-09-02T10:28:47+00:00", "doc_id": "5efa161dd4b8", "title": "标准答复｜不就业登记如何办理？", "action": "curate_answer", "reason": "AI辅助整理 核验；依据 1 份"}
+{"ts": "2026-09-02T10:28:49+00:00", "doc_id": "ef26ed931434", "title": "标准答复｜医疗医保常用表格在哪里下载？", "action": "curate_answer", "reason": "AI辅助整理 核验；依据 2 份"}
+{"ts": "2026-09-02T10:28:52+00:00", "doc_id": "f38fe16168a4", "title": "标准答复｜国际交流项目的咨询联系方式是什么？", "action": "curate_answer", "reason": "AI辅助整理 核验；依据 2 份"}
+{"ts": "2026-09-02T10:28:55+00:00", "doc_id": "cb5c48f5a97d", "title": "标准答复｜校园失物招领如何办理？", "action": "curate_answer", "reason": "AI辅助整理 核验；依据 2 份"}
+{"ts": "2026-09-02T10:28:57+00:00", "doc_id": "c4efb8bf3268", "title": "标准答复｜校园电信网络诈骗如何举报和求助？", "action": "curate_answer", "reason": "AI辅助整理 核验；依据 2 份"}

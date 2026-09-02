@@ -9,8 +9,8 @@
   },
   "embedding_model": "BAAI/bge-m3",
   "similarity_threshold": 0.55,
-  "index_fingerprint": "sha256:9ac04b2748dc6c02c38dfdb5525806611a0b1a48bf42958e529315d4e60741c7",
-  "evaluated_at": "2026-09-01T14:10:05+00:00",
+  "index_fingerprint": "sha256:3f767a3e9e13b37dde15f3358900c0391da1b2fc81746e49af97836810908d1e",
+  "evaluated_at": "2026-09-02T10:33:58+00:00",
   "scene_stats": {
     "本科教务": {
       "scene": "本科教务",
@@ -70,7 +70,7 @@
     },
     "就业手续": {
       "scene": "就业手续",
-      "document_count": 132,
+      "document_count": 134,
       "valid_policy_documents": 0,
       "valid_procedure_documents": 17,
       "title_only_or_incomplete_documents": 2,
@@ -84,7 +84,7 @@
     },
     "宿舍后勤": {
       "scene": "宿舍后勤",
-      "document_count": 45,
+      "document_count": 46,
       "valid_policy_documents": 16,
       "valid_procedure_documents": 4,
       "title_only_or_incomplete_documents": 1,
@@ -112,7 +112,7 @@
     },
     "图书馆": {
       "scene": "图书馆",
-      "document_count": 18,
+      "document_count": 19,
       "valid_policy_documents": 1,
       "valid_procedure_documents": 2,
       "title_only_or_incomplete_documents": 0,
@@ -126,7 +126,7 @@
     },
     "医疗医保": {
       "scene": "医疗医保",
-      "document_count": 74,
+      "document_count": 76,
       "valid_policy_documents": 8,
       "valid_procedure_documents": 38,
       "title_only_or_incomplete_documents": 0,
@@ -140,7 +140,7 @@
     },
     "国际交流": {
       "scene": "国际交流",
-      "document_count": 35,
+      "document_count": 36,
       "valid_policy_documents": 0,
       "valid_procedure_documents": 7,
       "title_only_or_incomplete_documents": 0,
@@ -154,12 +154,12 @@
     },
     "新生与安全": {
       "scene": "新生与安全",
-      "document_count": 29,
+      "document_count": 33,
       "valid_policy_documents": 3,
-      "valid_procedure_documents": 11,
+      "valid_procedure_documents": 12,
       "title_only_or_incomplete_documents": 0,
       "news_promotion_documents": 0,
-      "latest_valid_version_count": 17,
+      "latest_valid_version_count": 18,
       "question_count": 10,
       "answerable_question_count": 8,
       "partially_answerable_question_count": 2,
@@ -6988,42 +6988,42 @@
       "scene": "就业手续",
       "status": "answerable",
       "retrieved_doc_ids": [
+        "c3f7212acb72",
         "43f455f9817c",
         "738f6c4b37fa",
         "7f49cfa37d0c",
-        "c2920f52fb7f",
-        "9959312a96d1"
+        "c2920f52fb7f"
       ],
       "titles": [
+        "标准答复｜灵活就业如何登记？",
         "2026届毕业生就业手续办理指南 | 第三步——签约（二）网签",
         "上海财经大学毕业生毕业去向登记表（三种去向类型）（附件）",
         "上海高校毕业生毕业去向登记表（其他录用形式就业）",
-        "上海高校毕业生毕业去向登记表（自主创业）",
-        "上海财经大学学生就业综合管理服务平台-学生操作手册（附件）"
+        "上海高校毕业生毕业去向登记表（自主创业）"
       ],
       "publishers": [
-        "招生就业处",
         "上海财经大学就业指导中心",
+        "招生就业处",
         "上海财经大学就业指导中心",
         "上海财经大学就业指导中心",
         "上海财经大学就业指导中心"
       ],
       "publish_dates": [
+        "2026-09-02",
         "2025-10-22",
         "2024-06-14",
         "2024-06-14",
-        "2024-06-14",
-        "2018-09-18"
+        "2024-06-14"
       ],
       "document_kinds": [
-        "manual",
+        "faq",
         "manual",
         "manual",
         "manual",
         "manual"
       ],
       "validity_statuses": [
-        "unknown_validity",
+        "current",
         "unknown_validity",
         "unknown_validity",
         "unknown_validity",
@@ -7037,8 +7037,8 @@
         {
           "point": "登记入口",
           "status": "supported",
-          "evidence_doc_id": "43f455f9817c",
-          "evidence_excerpt": "# 2026届毕业生就业手续办理指南 | 第三步——签约（二）网签 就业手续|第三步：与用人单位签约（二）网签 一、 什么是签三方？ 我们俗称的 “签三方”，即学生与用人单位签订 就业协议书 （全称《上海高校毕业生、毕业研究生就业协议书》，下文简称 “协议书”），是明确毕业生、用人单位和学校三方在毕业生就业工作中权利和",
+          "evidence_doc_id": "c3f7212acb72",
+          "evidence_excerpt": "# 标准答复｜灵活就业如何登记？ # 适用问题 灵活就业如何登记？ # 经核验答复 灵活就业在毕业去向登记中按“自由职业”或“其他录用形式就业”填报：1）登录学生就业综合管理服务平台（上财门户-管理中心，或春华秋韵就业网校内用户入口），进入【毕业去向管理】；2）选择对应去向类别，填写《上海高校毕业生毕业去向登记表（自由",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -7055,8 +7055,8 @@
         {
           "point": "截止时间",
           "status": "supported",
-          "evidence_doc_id": "43f455f9817c",
-          "evidence_excerpt": "# 2026届毕业生就业手续办理指南 | 第三步——签约（二）网签 就业手续|第三步：与用人单位签约（二）网签 一、 什么是签三方？ 我们俗称的 “签三方”，即学生与用人单位签订 就业协议书 （全称《上海高校毕业生、毕业研究生就业协议书》，下文简称 “协议书”），是明确毕业生、用人单位和学校三方在毕业生就业工作中权利和",
+          "evidence_doc_id": "c3f7212acb72",
+          "evidence_excerpt": "# 标准答复｜灵活就业如何登记？ # 适用问题 灵活就业如何登记？ # 经核验答复 灵活就业在毕业去向登记中按“自由职业”或“其他录用形式就业”填报：1）登录学生就业综合管理服务平台（上财门户-管理中心，或春华秋韵就业网校内用户入口），进入【毕业去向管理】；2）选择对应去向类别，填写《上海高校毕业生毕业去向登记表（自由",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -7064,8 +7064,8 @@
         {
           "point": "审核部门",
           "status": "supported",
-          "evidence_doc_id": "43f455f9817c",
-          "evidence_excerpt": "# 2026届毕业生就业手续办理指南 | 第三步——签约（二）网签 就业手续|第三步：与用人单位签约（二）网签 一、 什么是签三方？ 我们俗称的 “签三方”，即学生与用人单位签订 就业协议书 （全称《上海高校毕业生、毕业研究生就业协议书》，下文简称 “协议书”），是明确毕业生、用人单位和学校三方在毕业生就业工作中权利和",
+          "evidence_doc_id": "c3f7212acb72",
+          "evidence_excerpt": "# 标准答复｜灵活就业如何登记？ # 适用问题 灵活就业如何登记？ # 经核验答复 灵活就业在毕业去向登记中按“自由职业”或“其他录用形式就业”填报：1）登录学生就业综合管理服务平台（上财门户-管理中心，或春华秋韵就业网校内用户入口），进入【毕业去向管理】；2）选择对应去向类别，填写《上海高校毕业生毕业去向登记表（自由",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -7357,45 +7357,45 @@
       "scene": "就业手续",
       "status": "answerable",
       "retrieved_doc_ids": [
+        "5efa161dd4b8",
         "b491bb69424e",
         "a77e8b0aa307",
         "dc06d6db272d",
-        "babc771033e4",
-        "bc408082e6a6"
+        "babc771033e4"
       ],
       "titles": [
+        "标准答复｜不就业登记如何办理？",
         "2025届毕业生就业手续办理指南 | 第三步：与用人单位签约（一）网签",
         "就业政策|就业手续办理第三步——签约（三）网签【更新版】",
         "就业政策|就业手续办理第三步——签约（一）网签",
-        "2026年度青岛市专项招录公务员公告",
-        "山西省2026年面向上海财经大学选调优秀高校毕业生公告"
+        "2026年度青岛市专项招录公务员公告"
       ],
       "publishers": [
         "上海财经大学就业指导中心",
         "上海财经大学就业指导中心",
         "上海财经大学就业指导中心",
-        "招生就业处",
+        "上海财经大学就业指导中心",
         "招生就业处"
       ],
       "publish_dates": [
+        "2026-09-02",
         "2024-10-11",
         "2024-02-28",
         "2023-10-23",
-        "2026-03-11",
-        "2025-12-19"
+        "2026-03-11"
       ],
       "document_kinds": [
+        "faq",
         "procedure",
         "procedure",
         "procedure",
-        "annual_notice",
         "annual_notice"
       ],
       "validity_statuses": [
+        "current",
         "superseded",
         "superseded",
         "superseded",
-        "unknown_validity",
         "unknown_validity"
       ],
       "has_attachment": false,
@@ -7415,8 +7415,8 @@
         {
           "point": "登记入口",
           "status": "supported",
-          "evidence_doc_id": "b491bb69424e",
-          "evidence_excerpt": "# 2025届毕业生就业手续办理指南 | 第三步：与用人单位签约（一）网签 就业 手续办理 | 第三 步 ：与用人单位签约（一）网签 一、 什么是签三方？ 我们俗称的 “签三方”，即学生与用人单位签订 就业协议书 （全称《上海高校毕业生、毕业研究生就业协议书》，下文简称 “协议书”），是明确毕业生、用人单位和学校三方在",
+          "evidence_doc_id": "5efa161dd4b8",
+          "evidence_excerpt": "# 标准答复｜不就业登记如何办理？ # 适用问题 不就业登记如何办理？ # 经核验答复 暂不就业的毕业生，登录学生就业综合管理服务平台（上财门户-管理中心，或春华秋韵就业网校内用户入口），在【毕业去向管理】-【我的毕业去向】中将去向类别登记为“不就业”并提交。去向类别后续如发生变化（例如由不就业变为签订协议书），可直接",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -7448,44 +7448,44 @@
       "scene": "就业手续",
       "status": "answerable",
       "retrieved_doc_ids": [
+        "c3f7212acb72",
         "b2ada26c2482",
         "7d6321b70a85",
         "b491bb69424e",
-        "a77e8b0aa307",
-        "dc06d6db272d"
+        "a77e8b0aa307"
       ],
       "titles": [
+        "标准答复｜灵活就业如何登记？",
         "附件4+报考指南.doc",
         "附件3：贵州省2026年度定向部分高校选调优秀.pdf",
         "2025届毕业生就业手续办理指南 | 第三步：与用人单位签约（一）网签",
-        "就业政策|就业手续办理第三步——签约（三）网签【更新版】",
-        "就业政策|就业手续办理第三步——签约（一）网签"
+        "就业政策|就业手续办理第三步——签约（三）网签【更新版】"
       ],
       "publishers": [
-        "招生就业处",
-        "招生就业处",
         "上海财经大学就业指导中心",
+        "招生就业处",
+        "招生就业处",
         "上海财经大学就业指导中心",
         "上海财经大学就业指导中心"
       ],
       "publish_dates": [
+        "2026-09-02",
         "2025-12-03",
         "2025-10-14",
         "2024-10-11",
-        "2024-02-28",
-        "2023-10-23"
+        "2024-02-28"
       ],
       "document_kinds": [
+        "faq",
         "manual",
         "faq",
-        "procedure",
         "procedure",
         "procedure"
       ],
       "validity_statuses": [
+        "current",
         "unknown_validity",
         "unknown_validity",
-        "superseded",
         "superseded",
         "superseded"
       ],
@@ -7515,8 +7515,8 @@
         {
           "point": "材料",
           "status": "supported",
-          "evidence_doc_id": "b2ada26c2482",
-          "evidence_excerpt": "栏中诚信填报，若不明确应及时咨询就读高校的相关部门。网上资格审核阶段需提供就读高校有关部门的相关证明材料。 5. Ⅱ、Ⅲ类高校应届本科毕业生的学习成绩在专业或班级排名前50%如何把握？ Ⅱ、Ⅲ类高校2026年应届本科毕业生，近3学年的总学习成绩应在专业或班级排名前50%。网上资格审核阶段需提供高校教务部门或院系出具的相关证",
+          "evidence_doc_id": "c3f7212acb72",
+          "evidence_excerpt": "对应去向类别，填写《上海高校毕业生毕业去向登记表（自由职业）》或《（其他录用形式就业）》；3）附佐证材料：自由职业需工作收入流水等收入情况证明，其他录用形式就业需聘用证明或单位盖章的录用通知书（离校后聘用期限不低于 6 个月）；4）提交后待学院与学校审核，审核通过即完成登记。",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -7524,8 +7524,8 @@
         {
           "point": "审核部门",
           "status": "supported",
-          "evidence_doc_id": "b2ada26c2482",
-          "evidence_excerpt": "# 附件4+报考指南.doc 所属通知：广东省2026年度选调优秀大学毕业生公告 发布日期：2025-12-03 发布单位：招生就业处 原发布页：post+https://career.sufe.edu.cn/career/news/data/dxxdnews/136613423537590272 附件下载地址：htt",
+          "evidence_doc_id": "c3f7212acb72",
+          "evidence_excerpt": "# 标准答复｜灵活就业如何登记？ # 适用问题 灵活就业如何登记？ # 经核验答复 灵活就业在毕业去向登记中按“自由职业”或“其他录用形式就业”填报：1）登录学生就业综合管理服务平台（上财门户-管理中心，或春华秋韵就业网校内用户入口），进入【毕业去向管理】；2）选择对应去向类别，填写《上海高校毕业生毕业去向登记表（自由",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -7636,42 +7636,42 @@
         "b2ada26c2482",
         "8439b4f46be6",
         "dc06d6db272d",
-        "43f455f9817c"
+        "c3f7212acb72"
       ],
       "titles": [
         "就业政策|就业手续办理第三步——签约（三）网签【更新版】",
         "附件4+报考指南.doc",
         "2.2026年度宁夏招录选调生职位表（一）.xlsx",
         "就业政策|就业手续办理第三步——签约（一）网签",
-        "2026届毕业生就业手续办理指南 | 第三步——签约（二）网签"
+        "标准答复｜灵活就业如何登记？"
       ],
       "publishers": [
         "上海财经大学就业指导中心",
         "招生就业处",
         "招生就业处",
         "上海财经大学就业指导中心",
-        "招生就业处"
+        "上海财经大学就业指导中心"
       ],
       "publish_dates": [
         "2024-02-28",
         "2025-12-03",
         "2025-10-25",
         "2023-10-23",
-        "2025-10-22"
+        "2026-09-02"
       ],
       "document_kinds": [
         "procedure",
         "manual",
         "procedure",
         "procedure",
-        "manual"
+        "faq"
       ],
       "validity_statuses": [
         "superseded",
         "unknown_validity",
         "unknown_validity",
         "superseded",
-        "unknown_validity"
+        "current"
       ],
       "has_attachment": true,
       "matched_domains": [
@@ -7723,46 +7723,46 @@
       "scene": "就业手续",
       "status": "answerable",
       "retrieved_doc_ids": [
+        "c3f7212acb72",
         "9959312a96d1",
         "43f455f9817c",
-        "738f6c4b37fa",
-        "7f49cfa37d0c",
-        "a77e8b0aa307"
+        "5efa161dd4b8",
+        "738f6c4b37fa"
       ],
       "titles": [
+        "标准答复｜灵活就业如何登记？",
         "上海财经大学学生就业综合管理服务平台-学生操作手册（附件）",
         "2026届毕业生就业手续办理指南 | 第三步——签约（二）网签",
-        "上海财经大学毕业生毕业去向登记表（三种去向类型）（附件）",
-        "上海高校毕业生毕业去向登记表（其他录用形式就业）",
-        "就业政策|就业手续办理第三步——签约（三）网签【更新版】"
+        "标准答复｜不就业登记如何办理？",
+        "上海财经大学毕业生毕业去向登记表（三种去向类型）（附件）"
       ],
       "publishers": [
         "上海财经大学就业指导中心",
-        "招生就业处",
         "上海财经大学就业指导中心",
+        "招生就业处",
         "上海财经大学就业指导中心",
         "上海财经大学就业指导中心"
       ],
       "publish_dates": [
+        "2026-09-02",
         "2018-09-18",
         "2025-10-22",
-        "2024-06-14",
-        "2024-06-14",
-        "2024-02-28"
+        "2026-09-02",
+        "2024-06-14"
       ],
       "document_kinds": [
+        "faq",
         "manual",
         "manual",
-        "manual",
-        "manual",
-        "procedure"
+        "faq",
+        "manual"
       ],
       "validity_statuses": [
+        "current",
         "unknown_validity",
         "unknown_validity",
-        "unknown_validity",
-        "unknown_validity",
-        "superseded"
+        "current",
+        "unknown_validity"
       ],
       "has_attachment": true,
       "matched_domains": [
@@ -7772,8 +7772,8 @@
         {
           "point": "变更条件",
           "status": "supported",
-          "evidence_doc_id": "9959312a96d1",
-          "evidence_excerpt": "# 上海财经大学学生就业综合管理服务平台-学生操作手册（附件） 所属通知：上海财经大学学生就业综合管理服务平台-学生操作手册 发布日期：2018-09-18 发布单位：上海财经大学就业指导中心 原发布页：post+https://career.sufe.edu.cn/career/news/data/xgxz/1809",
+          "evidence_doc_id": "c3f7212acb72",
+          "evidence_excerpt": "# 标准答复｜灵活就业如何登记？ # 适用问题 灵活就业如何登记？ # 经核验答复 灵活就业在毕业去向登记中按“自由职业”或“其他录用形式就业”填报：1）登录学生就业综合管理服务平台（上财门户-管理中心，或春华秋韵就业网校内用户入口），进入【毕业去向管理】；2）选择对应去向类别，填写《上海高校毕业生毕业去向登记表（自由",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -7781,8 +7781,8 @@
         {
           "point": "材料",
           "status": "supported",
-          "evidence_doc_id": "9959312a96d1",
-          "evidence_excerpt": "# 上海财经大学学生就业综合管理服务平台-学生操作手册（附件） 所属通知：上海财经大学学生就业综合管理服务平台-学生操作手册 发布日期：2018-09-18 发布单位：上海财经大学就业指导中心 原发布页：post+https://career.sufe.edu.cn/career/news/data/xgxz/1809",
+          "evidence_doc_id": "c3f7212acb72",
+          "evidence_excerpt": "对应去向类别，填写《上海高校毕业生毕业去向登记表（自由职业）》或《（其他录用形式就业）》；3）附佐证材料：自由职业需工作收入流水等收入情况证明，其他录用形式就业需聘用证明或单位盖章的录用通知书（离校后聘用期限不低于 6 个月）；4）提交后待学院与学校审核，审核通过即完成登记。",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -7790,8 +7790,8 @@
         {
           "point": "办理入口",
           "status": "supported",
-          "evidence_doc_id": "9959312a96d1",
-          "evidence_excerpt": "# 上海财经大学学生就业综合管理服务平台-学生操作手册（附件） 所属通知：上海财经大学学生就业综合管理服务平台-学生操作手册 发布日期：2018-09-18 发布单位：上海财经大学就业指导中心 原发布页：post+https://career.sufe.edu.cn/career/news/data/xgxz/1809",
+          "evidence_doc_id": "c3f7212acb72",
+          "evidence_excerpt": "# 标准答复｜灵活就业如何登记？ # 适用问题 灵活就业如何登记？ # 经核验答复 灵活就业在毕业去向登记中按“自由职业”或“其他录用形式就业”填报：1）登录学生就业综合管理服务平台（上财门户-管理中心，或春华秋韵就业网校内用户入口），进入【毕业去向管理】；2）选择对应去向类别，填写《上海高校毕业生毕业去向登记表（自由",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -7799,8 +7799,8 @@
         {
           "point": "受理部门",
           "status": "supported",
-          "evidence_doc_id": "9959312a96d1",
-          "evidence_excerpt": "# 上海财经大学学生就业综合管理服务平台-学生操作手册（附件） 所属通知：上海财经大学学生就业综合管理服务平台-学生操作手册 发布日期：2018-09-18 发布单位：上海财经大学就业指导中心 原发布页：post+https://career.sufe.edu.cn/career/news/data/xgxz/1809",
+          "evidence_doc_id": "c3f7212acb72",
+          "evidence_excerpt": "# 标准答复｜灵活就业如何登记？ # 适用问题 灵活就业如何登记？ # 经核验答复 灵活就业在毕业去向登记中按“自由职业”或“其他录用形式就业”填报：1）登录学生就业综合管理服务平台（上财门户-管理中心，或春华秋韵就业网校内用户入口），进入【毕业去向管理】；2）选择对应去向类别，填写《上海高校毕业生毕业去向登记表（自由",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -8831,35 +8831,35 @@
         "a39636ba008a",
         "3c5e513820cf",
         "480760984ceb",
-        "15168f896ce6"
+        "08eb01ac6a83"
       ],
       "titles": [
         "大学生医保问答及相关管理办法",
         "关于印发《上海财经大学生活垃圾分类管理实施办法》的通知.pdf",
         "1.哲学本科专业设置申请表",
         "关于上海财经大学新能源充电桩系统使用申请事宜.doc",
-        "上海财经大学学生宿舍管理办法.pdf"
+        "后勤物业服务信息一览（含宿舍报修电话）"
       ],
       "publishers": [
         "上海财经大学信息公开网",
         "上海财经大学信息公开网",
         "上海财经大学信息公开网",
         "上海财经大学后勤实业发展中心",
-        "上海财经大学信息公开网"
+        "上海财经大学后勤保障中心"
       ],
       "publish_dates": [
         "2023-10-09",
         "2024-09-24",
         "2026-07-24",
         "2020-01-06",
-        "2018-05-10"
+        "unknown"
       ],
       "document_kinds": [
         "faq",
         "policy",
         "procedure",
         "manual",
-        "policy"
+        "manual"
       ],
       "validity_statuses": [
         "unknown_validity",
@@ -10315,16 +10315,16 @@
       "retrieved_doc_ids": [
         "2d2a7b018e73",
         "eb36ca9f5d3f",
+        "d4bfe4be6af5",
         "59b3b5517051",
-        "8eb9e41bc8bb",
-        "e3375184c3ca"
+        "8eb9e41bc8bb"
       ],
       "titles": [
         "我要预约",
         "续借及预约",
+        "图书馆学习空间与座位预约",
         "馆际互借",
-        "临时性用户开通图书馆服务暂行条例.pdf",
-        "服务时间"
+        "临时性用户开通图书馆服务暂行条例.pdf"
       ],
       "publishers": [
         "上海财经大学图书馆",
@@ -10343,9 +10343,9 @@
       "document_kinds": [
         "service_guide",
         "service_guide",
+        "manual",
         "service_guide",
-        "policy",
-        "service_guide"
+        "policy"
       ],
       "validity_statuses": [
         "unknown_validity",
@@ -10962,14 +10962,14 @@
         "eb36ca9f5d3f",
         "10cc83bd33cd",
         "59b3b5517051",
-        "8eb9e41bc8bb"
+        "d4bfe4be6af5"
       ],
       "titles": [
         "我要预约",
         "续借及预约",
         "校外访问",
         "馆际互借",
-        "临时性用户开通图书馆服务暂行条例.pdf"
+        "图书馆学习空间与座位预约"
       ],
       "publishers": [
         "上海财经大学图书馆",
@@ -10990,7 +10990,7 @@
         "service_guide",
         "service_guide",
         "service_guide",
-        "policy"
+        "manual"
       ],
       "validity_statuses": [
         "unknown_validity",
@@ -10999,7 +10999,7 @@
         "unknown_validity",
         "unknown_validity"
       ],
-      "has_attachment": true,
+      "has_attachment": false,
       "matched_domains": [
         "lib.sufe.edu.cn"
       ],
@@ -11690,18 +11690,18 @@
       "scene": "医疗医保",
       "status": "answerable",
       "retrieved_doc_ids": [
+        "eb5ff9f77cdf",
         "157e8ee4461b",
         "e932c31dd548",
         "a82ebc6cabb7",
-        "e0674f67c4bd",
-        "f27b1443e10a"
+        "e0674f67c4bd"
       ],
       "titles": [
+        "标准答复｜校医院在哪里，如何联系？",
         "2024秋季开学校园传染性疾病宣教及处置流程",
         "上海财经大学医疗健康服务中心医保管理制度",
         "大学生医疗保障及就医服务相关问题解答",
-        "下载上海财经大学接种第一类疫苗知情同意书.doc",
-        "2014年教职工健康体检指南"
+        "下载上海财经大学接种第一类疫苗知情同意书.doc"
       ],
       "publishers": [
         "上海财经大学医疗健康服务中心",
@@ -11711,21 +11711,21 @@
         "上海财经大学医疗健康服务中心"
       ],
       "publish_dates": [
+        "2026-09-02",
         "2024-08-30",
         "2024-07-16",
         "2016-09-13",
-        "2015-09-10",
-        "2014-06-10"
+        "2015-09-10"
       ],
       "document_kinds": [
+        "faq",
         "procedure",
         "procedure",
         "procedure",
-        "manual",
-        "procedure"
+        "manual"
       ],
       "validity_statuses": [
-        "unknown_validity",
+        "current",
         "unknown_validity",
         "unknown_validity",
         "unknown_validity",
@@ -11739,8 +11739,8 @@
         {
           "point": "地址",
           "status": "supported",
-          "evidence_doc_id": "157e8ee4461b",
-          "evidence_excerpt": "# 2024秋季开学校园传染性疾病宣教及处置流程 为了保障大学校园内师生的健康与安全，特制定本传染性疾病宣教及处置流程。本流程主要涉及猴痘、肺结核、水痘、诺如病毒等常见传染性疾病，旨在指导辅导员及学生群体正确应对和预防这些疾病。 一、 传染性疾病分类及特点 1. 猴痘 特点： 近期新兴传染病，与猴痘病例密切接触、长时间",
+          "evidence_doc_id": "eb5ff9f77cdf",
+          "evidence_excerpt": "# 标准答复｜校医院在哪里，如何联系？ # 适用问题 校医院在哪里，如何联系？ # 经核验答复 校医院（医疗健康服务中心/门诊部）位于国定路校区清真食堂西南侧、毗邻科研大楼的砖红色小楼。日常门诊时间为工作日 8:00-11:30、13:30-17:00，学生持医保卡或医保电子凭证挂号就诊。急诊全年 24 小时值班，咨询",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -11748,8 +11748,8 @@
         {
           "point": "门诊时间",
           "status": "supported",
-          "evidence_doc_id": "157e8ee4461b",
-          "evidence_excerpt": "# 2024秋季开学校园传染性疾病宣教及处置流程 为了保障大学校园内师生的健康与安全，特制定本传染性疾病宣教及处置流程。本流程主要涉及猴痘、肺结核、水痘、诺如病毒等常见传染性疾病，旨在指导辅导员及学生群体正确应对和预防这些疾病。 一、 传染性疾病分类及特点 1. 猴痘 特点： 近期新兴传染病，与猴痘病例密切接触、长时间",
+          "evidence_doc_id": "eb5ff9f77cdf",
+          "evidence_excerpt": "答复 校医院（医疗健康服务中心/门诊部）位于国定路校区清真食堂西南侧、毗邻科研大楼的砖红色小楼。日常门诊时间为工作日 8:00-11:30、13:30-17:00，学生持医保卡或医保电子凭证挂号就诊。急诊全年 24 小时值班，咨询电话 021-65904201；突发急重症请先拨打 120，附近医院为长海医院、新华医院、岳阳医院",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -11757,8 +11757,8 @@
         {
           "point": "联系方式",
           "status": "supported",
-          "evidence_doc_id": "157e8ee4461b",
-          "evidence_excerpt": "# 2024秋季开学校园传染性疾病宣教及处置流程 为了保障大学校园内师生的健康与安全，特制定本传染性疾病宣教及处置流程。本流程主要涉及猴痘、肺结核、水痘、诺如病毒等常见传染性疾病，旨在指导辅导员及学生群体正确应对和预防这些疾病。 一、 传染性疾病分类及特点 1. 猴痘 特点： 近期新兴传染病，与猴痘病例密切接触、长时间",
+          "evidence_doc_id": "eb5ff9f77cdf",
+          "evidence_excerpt": "# 标准答复｜校医院在哪里，如何联系？ # 适用问题 校医院在哪里，如何联系？ # 经核验答复 校医院（医疗健康服务中心/门诊部）位于国定路校区清真食堂西南侧、毗邻科研大楼的砖红色小楼。日常门诊时间为工作日 8:00-11:30、13:30-17:00，学生持医保卡或医保电子凭证挂号就诊。急诊全年 24 小时值班，咨询",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -11766,8 +11766,8 @@
         {
           "point": "服务范围",
           "status": "supported",
-          "evidence_doc_id": "157e8ee4461b",
-          "evidence_excerpt": "# 2024秋季开学校园传染性疾病宣教及处置流程 为了保障大学校园内师生的健康与安全，特制定本传染性疾病宣教及处置流程。本流程主要涉及猴痘、肺结核、水痘、诺如病毒等常见传染性疾病，旨在指导辅导员及学生群体正确应对和预防这些疾病。 一、 传染性疾病分类及特点 1. 猴痘 特点： 近期新兴传染病，与猴痘病例密切接触、长时间",
+          "evidence_doc_id": "eb5ff9f77cdf",
+          "evidence_excerpt": "# 标准答复｜校医院在哪里，如何联系？ # 适用问题 校医院在哪里，如何联系？ # 经核验答复 校医院（医疗健康服务中心/门诊部）位于国定路校区清真食堂西南侧、毗邻科研大楼的砖红色小楼。日常门诊时间为工作日 8:00-11:30、13:30-17:00，学生持医保卡或医保电子凭证挂号就诊。急诊全年 24 小时值班，咨询",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -12054,18 +12054,18 @@
       "scene": "医疗医保",
       "status": "partially_answerable",
       "retrieved_doc_ids": [
+        "ef26ed931434",
         "28429d197c37",
         "65b1c0021b0d",
         "bd003ceb1949",
-        "a03717bf1391",
-        "26359a1a6326"
+        "a03717bf1391"
       ],
       "titles": [
+        "标准答复｜医疗医保常用表格在哪里下载？",
         "关于居民医保就医结算操作介绍 （大学生2024年11月版）",
         "本市大学生持卡就医结算后的一些常见问题",
         "大学生医保政策解读",
-        "关于居民医保就医结算操作介绍_（大学生）.pdf",
-        "关于大学生持卡就医结算有关事项的通知.pdf"
+        "关于居民医保就医结算操作介绍_（大学生）.pdf"
       ],
       "publishers": [
         "上海财经大学医疗健康服务中心",
@@ -12075,25 +12075,25 @@
         "上海财经大学医疗健康服务中心"
       ],
       "publish_dates": [
+        "2026-09-02",
         "2024-11-26",
         "2024-08-30",
         "2024-07-16",
-        "2022-09-20",
-        "unknown"
+        "2022-09-20"
       ],
       "document_kinds": [
-        "procedure",
         "faq",
         "procedure",
+        "faq",
         "procedure",
         "procedure"
       ],
       "validity_statuses": [
+        "current",
         "unknown_validity",
         "unknown_validity",
         "unknown_validity",
-        "superseded",
-        "unknown_validity"
+        "superseded"
       ],
       "has_attachment": true,
       "matched_domains": [
@@ -12103,8 +12103,8 @@
         {
           "point": "下载入口",
           "status": "supported",
-          "evidence_doc_id": "28429d197c37",
-          "evidence_excerpt": "# 关于居民医保就医结算操作介绍 （大学生2024年11月版） 1. 本市居民医保中的 “大学生”是指哪些人？ 本市居民医保中的 “大学生”是指未参加其他基本医疗保险（包括未参加本市及外省市基本医疗保险），且在本市各类高等学校、科研院所中接受普通高等学历教育的全日制本科学生、高职高专学生以及非在职研究生（以下简称“大学",
+          "evidence_doc_id": "ef26ed931434",
+          "evidence_excerpt": "# 标准答复｜医疗医保常用表格在哪里下载？ # 适用问题 医疗医保常用表格在哪里下载？ # 经核验答复 医保类业务多数可线上办理，无需下载纸质表格：门急诊就医记录册的申领与补办、医保电子凭证（医保码）申领、异地就医备案等事项，可通过“随申办”APP 或上海“一网通办”平台搜索对应事项办理，办理口径见《大学生医保政策解读",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -12121,8 +12121,8 @@
         {
           "point": "提交方式",
           "status": "supported",
-          "evidence_doc_id": "28429d197c37",
-          "evidence_excerpt": "# 关于居民医保就医结算操作介绍 （大学生2024年11月版） 1. 本市居民医保中的 “大学生”是指哪些人？ 本市居民医保中的 “大学生”是指未参加其他基本医疗保险（包括未参加本市及外省市基本医疗保险），且在本市各类高等学校、科研院所中接受普通高等学历教育的全日制本科学生、高职高专学生以及非在职研究生（以下简称“大学",
+          "evidence_doc_id": "ef26ed931434",
+          "evidence_excerpt": "# 标准答复｜医疗医保常用表格在哪里下载？ # 适用问题 医疗医保常用表格在哪里下载？ # 经核验答复 医保类业务多数可线上办理，无需下载纸质表格：门急诊就医记录册的申领与补办、医保电子凭证（医保码）申领、异地就医备案等事项，可通过“随申办”APP 或上海“一网通办”平台搜索对应事项办理，办理口径见《大学生医保政策解读",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -12130,8 +12130,8 @@
         {
           "point": "联系方式",
           "status": "supported",
-          "evidence_doc_id": "28429d197c37",
-          "evidence_excerpt": "# 关于居民医保就医结算操作介绍 （大学生2024年11月版） 1. 本市居民医保中的 “大学生”是指哪些人？ 本市居民医保中的 “大学生”是指未参加其他基本医疗保险（包括未参加本市及外省市基本医疗保险），且在本市各类高等学校、科研院所中接受普通高等学历教育的全日制本科学生、高职高专学生以及非在职研究生（以下简称“大学",
+          "evidence_doc_id": "ef26ed931434",
+          "evidence_excerpt": "# 标准答复｜医疗医保常用表格在哪里下载？ # 适用问题 医疗医保常用表格在哪里下载？ # 经核验答复 医保类业务多数可线上办理，无需下载纸质表格：门急诊就医记录册的申领与补办、医保电子凭证（医保码）申领、异地就医备案等事项，可通过“随申办”APP 或上海“一网通办”平台搜索对应事项办理，办理口径见《大学生医保政策解读",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -12978,42 +12978,42 @@
       "scene": "国际交流",
       "status": "answerable",
       "retrieved_doc_ids": [
+        "f38fe16168a4",
         "c688036c17e7",
         "440e560398ab",
         "f8015ab6e16f",
-        "220adadfc5cc",
-        "0ee8ebbdf902"
+        "220adadfc5cc"
       ],
       "titles": [
+        "标准答复｜国际交流项目的咨询联系方式是什么？",
         "Q&A | 2026-2027学年海外交流学习常见问题答疑",
         "Q&A | 境外学习常见问题解答",
         "上海财经大学关于做好2025年博士生导师短期出国交流项目申请工作的通知",
-        "上海财经大学关于做好2024年博士生导师短期出国交流项目申请工作的通知",
-        "上海财经大学关于做好2023年博士生导师短期出国交流项目申请工作的通知"
+        "上海财经大学关于做好2024年博士生导师短期出国交流项目申请工作的通知"
       ],
       "publishers": [
         "上海财经大学国际交流与合作处",
         "上海财经大学国际交流与合作处",
-        "上海财经大学研究生院",
+        "上海财经大学国际交流与合作处",
         "上海财经大学研究生院",
         "上海财经大学研究生院"
       ],
       "publish_dates": [
+        "2026-09-02",
         "2026-01-13",
         "2025-08-29",
         "2025-02-21",
-        "2024-02-23",
-        "2023-01-04"
+        "2024-02-23"
       ],
       "document_kinds": [
         "faq",
         "faq",
-        "annual_notice",
+        "faq",
         "annual_notice",
         "annual_notice"
       ],
       "validity_statuses": [
-        "unknown_validity",
+        "current",
         "unknown_validity",
         "unknown_validity",
         "unknown_validity",
@@ -13028,8 +13028,8 @@
         {
           "point": "联系方式",
           "status": "supported",
-          "evidence_doc_id": "c688036c17e7",
-          "evidence_excerpt": "# Q&A | 2026-2027学年海外交流学习常见问题答疑 2026-2027学年国际及港澳台学习交流已火热开启，面对丰富多样的项目和院校，同学们应该仍有许多疑惑吧，我们把同学们最关心及疑问最多的问题汇总解答如下，请同学们仔细阅读了解，希望A-Z级别的保姆手册可以为大家的境外学习保驾护航！ 项目申请问题 项目分类 ",
+          "evidence_doc_id": "f38fe16168a4",
+          "evidence_excerpt": "# 标准答复｜国际交流项目的咨询联系方式是什么？ # 适用问题 国际交流项目的咨询联系方式是什么？ # 经核验答复 国际交流项目咨询渠道：1）线上：关注企业微信“国际处暨港澳台办”获取项目推文与通知，或登录国际（港澳台）事务平台（https://isys2.s",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -13037,8 +13037,8 @@
         {
           "point": "负责部门",
           "status": "supported",
-          "evidence_doc_id": "c688036c17e7",
-          "evidence_excerpt": "# Q&A | 2026-2027学年海外交流学习常见问题答疑 2026-2027学年国际及港澳台学习交流已火热开启，面对丰富多样的项目和院校，同学们应该仍有许多疑惑吧，我们把同学们最关心及疑问最多的问题汇总解答如下，请同学们仔细阅读了解，希望A-Z级别的保姆手册可以为大家的境外学习保驾护航！ 项目申请问题 项目分类 ",
+          "evidence_doc_id": "f38fe16168a4",
+          "evidence_excerpt": "# 标准答复｜国际交流项目的咨询联系方式是什么？ # 适用问题 国际交流项目的咨询联系方式是什么？ # 经核验答复 国际交流项目咨询渠道：1）线上：关注企业微信“国际处暨港澳台办”获取项目推文与通知，或登录国际（港澳台）事务平台（https://isys2.sufe.edu.cn/）查看各项目要求；2）现场：国际处老师",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -13046,8 +13046,8 @@
         {
           "point": "服务范围",
           "status": "supported",
-          "evidence_doc_id": "c688036c17e7",
-          "evidence_excerpt": "# Q&A | 2026-2027学年海外交流学习常见问题答疑 2026-2027学年国际及港澳台学习交流已火热开启，面对丰富多样的项目和院校，同学们应该仍有许多疑惑吧，我们把同学们最关心及疑问最多的问题汇总解答如下，请同学们仔细阅读了解，希望A-Z级别的保姆手册可以为大家的境外学习保驾护航！ 项目申请问题 项目分类 ",
+          "evidence_doc_id": "f38fe16168a4",
+          "evidence_excerpt": "# 标准答复｜国际交流项目的咨询联系方式是什么？ # 适用问题 国际交流项目的咨询联系方式是什么？ # 经核验答复 国际交流项目咨询渠道：1）线上：关注企业微信“国际处暨港澳台办”获取项目推文与通知，或登录国际（港澳台）事务平台（https://isys2.sufe.edu.cn/）查看各项目要求；2）现场：国际处老师",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -13055,8 +13055,8 @@
         {
           "point": "办公时间",
           "status": "supported",
-          "evidence_doc_id": "c688036c17e7",
-          "evidence_excerpt": "# Q&A | 2026-2027学年海外交流学习常见问题答疑 2026-2027学年国际及港澳台学习交流已火热开启，面对丰富多样的项目和院校，同学们应该仍有许多疑惑吧，我们把同学们最关心及疑问最多的问题汇总解答如下，请同学们仔细阅读了解，希望A-Z级别的保姆手册可以为大家的境外学习保驾护航！ 项目申请问题 项目分类 ",
+          "evidence_doc_id": "f38fe16168a4",
+          "evidence_excerpt": "事务平台（https://isys2.sufe.edu.cn/）查看各项目要求；2）现场：国际处老师办公时间可现场咨询（每周二、三下午，201 办公室）；3）学分转换类问题咨询学院教务办公室或教务处学籍管理科（021-65904921，xjglk@sufe.edu.cn）。",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -13624,44 +13624,44 @@
       "scene": "新生与安全",
       "status": "answerable",
       "retrieved_doc_ids": [
+        "cb5c48f5a97d",
         "5220cf43e76b",
         "1f5aa08edc4d",
         "2fe0ae1e3ab7",
-        "d96b67872d0a",
-        "ee98c67e0dbc"
+        "d96b67872d0a"
       ],
       "titles": [
+        "标准答复｜校园失物招领如何办理？",
         "关于印发《上海财经大学学生勤工助学管理办法》的通知（附件）",
         "关于印发《上海财经大学学生违纪处分规定（2023年10月修订）》的通知.pdf",
         "上海财经大学2016年征兵工作通知",
-        "上海财经大学电动自行车校内通行标识牌申请表.docx",
-        "关于申请2022年中西部基层单位就业学费补偿国家助学贷款代偿的通知"
+        "上海财经大学电动自行车校内通行标识牌申请表.docx"
       ],
       "publishers": [
+        "上海财经大学保卫处",
         "上海财经大学学生处",
         "上海财经大学学生处",
         "上海财经大学保卫处",
-        "上海财经大学保卫处",
-        "上海财经大学学生处"
+        "上海财经大学保卫处"
       ],
       "publish_dates": [
+        "2026-09-02",
         "unknown",
         "2023-12-13",
         "2022-09-02",
-        "2022-09-02",
-        "2022-05-31"
+        "2022-09-02"
       ],
       "document_kinds": [
+        "faq",
         "policy",
         "policy",
         "annual_notice",
-        "procedure",
-        "annual_notice"
+        "procedure"
       ],
       "validity_statuses": [
-        "unknown_validity",
         "current",
         "unknown_validity",
+        "current",
         "unknown_validity",
         "unknown_validity"
       ],
@@ -13674,8 +13674,8 @@
         {
           "point": "提交方式",
           "status": "supported",
-          "evidence_doc_id": "5220cf43e76b",
-          "evidence_excerpt": "# 关于印发《上海财经大学学生勤工助学管理办法》的通知（附件） 所属通知：关于印发《上海财经大学学生勤工助学管理办法》的通知 发布日期：unknown 发布单位：上海财经大学学生处 原发布页：https://xsc.sufe.edu.cn/5437/list.htm?source_attachment=5220cf43",
+          "evidence_doc_id": "cb5c48f5a97d",
+          "evidence_excerpt": "# 标准答复｜校园失物招领如何办理？ # 适用问题 校园失物招领如何办理？ # 经核验答复 校园失物招领由保卫处负责。丢失物品可携带有效证件到保卫处治安管理科咨询登记，联系电话 65904069；拾获物品可交至保卫处或各楼宇物业值班室（国定、武东校区物业办公室电话 65904212，武川校区学生宿舍物业 6590488",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -13683,8 +13683,8 @@
         {
           "point": "认领流程",
           "status": "supported",
-          "evidence_doc_id": "5220cf43e76b",
-          "evidence_excerpt": "# 关于印发《上海财经大学学生勤工助学管理办法》的通知（附件） 所属通知：关于印发《上海财经大学学生勤工助学管理办法》的通知 发布日期：unknown 发布单位：上海财经大学学生处 原发布页：https://xsc.sufe.edu.cn/5437/list.htm?source_attachment=5220cf43",
+          "evidence_doc_id": "cb5c48f5a97d",
+          "evidence_excerpt": "# 标准答复｜校园失物招领如何办理？ # 适用问题 校园失物招领如何办理？ # 经核验答复 校园失物招领由保卫处负责。丢失物品可携带有效证件到保卫处治安管理科咨询登记，联系电话 65904069；拾获物品可交至保卫处或各楼宇物业值班室（国定、武东校区物业办公室电话 65904212，武川校区学生宿舍物业 6590488",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -13692,8 +13692,8 @@
         {
           "point": "办理地点",
           "status": "supported",
-          "evidence_doc_id": "5220cf43e76b",
-          "evidence_excerpt": "# 关于印发《上海财经大学学生勤工助学管理办法》的通知（附件） 所属通知：关于印发《上海财经大学学生勤工助学管理办法》的通知 发布日期：unknown 发布单位：上海财经大学学生处 原发布页：https://xsc.sufe.edu.cn/5437/list.htm?source_attachment=5220cf43",
+          "evidence_doc_id": "cb5c48f5a97d",
+          "evidence_excerpt": "# 标准答复｜校园失物招领如何办理？ # 适用问题 校园失物招领如何办理？ # 经核验答复 校园失物招领由保卫处负责。丢失物品可携带有效证件到保卫处治安管理科咨询登记，联系电话 65904069；拾获物品可交至保卫处或各楼宇物业值班室（国定、武东校区物业办公室电话 65904212，武川校区学生宿舍物业 6590488",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -13701,8 +13701,8 @@
         {
           "point": "联系方式",
           "status": "supported",
-          "evidence_doc_id": "5220cf43e76b",
-          "evidence_excerpt": "# 关于印发《上海财经大学学生勤工助学管理办法》的通知（附件） 所属通知：关于印发《上海财经大学学生勤工助学管理办法》的通知 发布日期：unknown 发布单位：上海财经大学学生处 原发布页：https://xsc.sufe.edu.cn/5437/list.htm?source_attachment=5220cf43",
+          "evidence_doc_id": "cb5c48f5a97d",
+          "evidence_excerpt": "# 标准答复｜校园失物招领如何办理？ # 适用问题 校园失物招领如何办理？ # 经核验答复 校园失物招领由保卫处负责。丢失物品可携带有效证件到保卫处治安管理科咨询登记，联系电话 65904069；拾获物品可交至保卫处或各楼宇物业值班室（国定、武东校区物业办公室电话 65904212，武川校区学生宿舍物业 6590488",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -13716,57 +13716,58 @@
       "scene": "新生与安全",
       "status": "answerable",
       "retrieved_doc_ids": [
+        "c4efb8bf3268",
         "1f5aa08edc4d",
         "4f21705d51ca",
         "418fee24b2e9",
-        "5220cf43e76b",
-        "8a577bcbb15e"
+        "5220cf43e76b"
       ],
       "titles": [
+        "标准答复｜校园电信网络诈骗如何举报和求助？",
         "关于印发《上海财经大学学生违纪处分规定（2023年10月修订）》的通知.pdf",
         "关于组织学生开展2025年千村调查工作的通知",
         "2023年千村调查非毕业班结项公示名单20231121.xlsx",
-        "关于印发《上海财经大学学生勤工助学管理办法》的通知（附件）",
-        "关于开展2025年千村调查定点带队教师招募的通知"
+        "关于印发《上海财经大学学生勤工助学管理办法》的通知（附件）"
       ],
       "publishers": [
-        "上海财经大学学生处",
+        "上海财经大学保卫处",
         "上海财经大学学生处",
         "上海财经大学学生处",
         "上海财经大学学生处",
         "上海财经大学学生处"
       ],
       "publish_dates": [
+        "2026-09-02",
         "2023-12-13",
         "2025-04-28",
         "2023-11-21",
-        "unknown",
-        "2025-04-22"
+        "unknown"
       ],
       "document_kinds": [
+        "faq",
         "policy",
         "annual_notice",
         "public_list",
-        "policy",
-        "annual_notice"
+        "policy"
       ],
       "validity_statuses": [
         "current",
-        "unknown_validity",
+        "current",
         "unknown_validity",
         "unknown_validity",
         "unknown_validity"
       ],
       "has_attachment": true,
       "matched_domains": [
+        "baoweichu.sufe.edu.cn",
         "xsc.sufe.edu.cn"
       ],
       "point_evidence": [
         {
           "point": "报告渠道",
           "status": "supported",
-          "evidence_doc_id": "1f5aa08edc4d",
-          "evidence_excerpt": "# 关于印发《上海财经大学学生违纪处分规定（2023年10月修订）》的通知.pdf 所属通知：关于印发《上海财经大学学生违纪处分规定（2023年10月修订）》的通知 发布日期：2023-12-13 发布单位：上海财经大学学生处 原发布页：https://xsc.sufe.edu.cn/37/b9/c5437a21087",
+          "evidence_doc_id": "c4efb8bf3268",
+          "evidence_excerpt": "# 标准答复｜校园电信网络诈骗如何举报和求助？ # 适用问题 校园电信网络诈骗如何举报和求助？ # 经核验答复 遭遇电信网络诈骗：1）立即拨打 110 报警，保存好转账记录、聊天记录、对方账号等证据；2）同时向学校保卫处报告备案：治安管理科电话 65904069，安全管理科电话 65903896；3）日常防范可参阅保卫",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -13774,8 +13775,8 @@
         {
           "point": "紧急联系方式",
           "status": "supported",
-          "evidence_doc_id": "1f5aa08edc4d",
-          "evidence_excerpt": "# 关于印发《上海财经大学学生违纪处分规定（2023年10月修订）》的通知.pdf 所属通知：关于印发《上海财经大学学生违纪处分规定（2023年10月修订）》的通知 发布日期：2023-12-13 发布单位：上海财经大学学生处 原发布页：https://xsc.sufe.edu.cn/37/b9/c5437a21087",
+          "evidence_doc_id": "c4efb8bf3268",
+          "evidence_excerpt": "# 标准答复｜校园电信网络诈骗如何举报和求助？ # 适用问题 校园电信网络诈骗如何举报和求助？ # 经核验答复 遭遇电信网络诈骗：1）立即拨打 110 报警，保存好转账记录、聊天记录、对方账号等证据；2）同时向学校保卫处报告备案：治安管理科电话 65904069，安全管理科电话 65903896；3）日常防范可参阅保卫",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -13792,8 +13793,8 @@
         {
           "point": "负责部门",
           "status": "supported",
-          "evidence_doc_id": "1f5aa08edc4d",
-          "evidence_excerpt": "# 关于印发《上海财经大学学生违纪处分规定（2023年10月修订）》的通知.pdf 所属通知：关于印发《上海财经大学学生违纪处分规定（2023年10月修订）》的通知 发布日期：2023-12-13 发布单位：上海财经大学学生处 原发布页：https://xsc.sufe.edu.cn/37/b9/c5437a21087",
+          "evidence_doc_id": "c4efb8bf3268",
+          "evidence_excerpt": "# 标准答复｜校园电信网络诈骗如何举报和求助？ # 适用问题 校园电信网络诈骗如何举报和求助？ # 经核验答复 遭遇电信网络诈骗：1）立即拨打 110 报警，保存好转账记录、聊天记录、对方账号等证据；2）同时向学校保卫处报告备案：治安管理科电话 65904069，安全管理科电话 65903896；3）日常防范可参阅保卫",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -13807,49 +13808,50 @@
       "scene": "新生与安全",
       "status": "partially_answerable",
       "retrieved_doc_ids": [
+        "c4efb8bf3268",
         "1f5aa08edc4d",
         "418fee24b2e9",
         "5220cf43e76b",
-        "13fe448b5b0b",
-        "62b23136b79a"
+        "cb5c48f5a97d"
       ],
       "titles": [
+        "标准答复｜校园电信网络诈骗如何举报和求助？",
         "关于印发《上海财经大学学生违纪处分规定（2023年10月修订）》的通知.pdf",
         "2023年千村调查非毕业班结项公示名单20231121.xlsx",
         "关于印发《上海财经大学学生勤工助学管理办法》的通知（附件）",
-        "附件1：关于2025年毕业生基层就业学费补偿国家助学贷款代偿申请工作的通知.pdf",
-        "2023年千村调查（毕业班）调研报告公示名单.xlsx"
+        "标准答复｜校园失物招领如何办理？"
       ],
       "publishers": [
+        "上海财经大学保卫处",
         "上海财经大学学生处",
         "上海财经大学学生处",
         "上海财经大学学生处",
-        "上海财经大学学生处",
-        "上海财经大学学生处"
+        "上海财经大学保卫处"
       ],
       "publish_dates": [
+        "2026-09-02",
         "2023-12-13",
         "2023-11-21",
         "unknown",
-        "2025-06-13",
-        "2023-09-13"
+        "2026-09-02"
       ],
       "document_kinds": [
+        "faq",
         "policy",
         "public_list",
         "policy",
-        "annual_notice",
-        "public_list"
+        "faq"
       ],
       "validity_statuses": [
         "current",
+        "current",
         "unknown_validity",
         "unknown_validity",
-        "unknown_validity",
-        "unknown_validity"
+        "current"
       ],
       "has_attachment": true,
       "matched_domains": [
+        "baoweichu.sufe.edu.cn",
         "xsc.sufe.edu.cn"
       ],
       "point_evidence": [
@@ -13865,8 +13867,8 @@
         {
           "point": "报告渠道",
           "status": "supported",
-          "evidence_doc_id": "1f5aa08edc4d",
-          "evidence_excerpt": "# 关于印发《上海财经大学学生违纪处分规定（2023年10月修订）》的通知.pdf 所属通知：关于印发《上海财经大学学生违纪处分规定（2023年10月修订）》的通知 发布日期：2023-12-13 发布单位：上海财经大学学生处 原发布页：https://xsc.sufe.edu.cn/37/b9/c5437a21087",
+          "evidence_doc_id": "c4efb8bf3268",
+          "evidence_excerpt": "# 标准答复｜校园电信网络诈骗如何举报和求助？ # 适用问题 校园电信网络诈骗如何举报和求助？ # 经核验答复 遭遇电信网络诈骗：1）立即拨打 110 报警，保存好转账记录、聊天记录、对方账号等证据；2）同时向学校保卫处报告备案：治安管理科电话 65904069，安全管理科电话 65903896；3）日常防范可参阅保卫",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -13883,8 +13885,8 @@
         {
           "point": "负责部门",
           "status": "supported",
-          "evidence_doc_id": "1f5aa08edc4d",
-          "evidence_excerpt": "# 关于印发《上海财经大学学生违纪处分规定（2023年10月修订）》的通知.pdf 所属通知：关于印发《上海财经大学学生违纪处分规定（2023年10月修订）》的通知 发布日期：2023-12-13 发布单位：上海财经大学学生处 原发布页：https://xsc.sufe.edu.cn/37/b9/c5437a21087",
+          "evidence_doc_id": "c4efb8bf3268",
+          "evidence_excerpt": "# 标准答复｜校园电信网络诈骗如何举报和求助？ # 适用问题 校园电信网络诈骗如何举报和求助？ # 经核验答复 遭遇电信网络诈骗：1）立即拨打 110 报警，保存好转账记录、聊天记录、对方账号等证据；2）同时向学校保卫处报告备案：治安管理科电话 65904069，安全管理科电话 65903896；3）日常防范可参阅保卫",
           "reason": "正文包含回答要点",
           "confidence": 0.75,
           "checker": "deterministic"
@@ -13990,5 +13992,5 @@
       ]
     }
   ],
-  "corpus_document_count": 866
+  "corpus_document_count": 877
 }

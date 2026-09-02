@@ -1,9 +1,9 @@
 {
   "question_bank_version": "sufe-question-bank.v1",
   "question_bank_hash": "sha256:8a5ab6a1110531cd443d9e652a1032f4e97d25d0f083bf9728429a0c28c352f9",
-  "index_fingerprint": "sha256:9ac04b2748dc6c02c38dfdb5525806611a0b1a48bf42958e529315d4e60741c7",
+  "index_fingerprint": "sha256:3f767a3e9e13b37dde15f3358900c0391da1b2fc81746e49af97836810908d1e",
   "source": "real_answers",
-  "missing_count": 9,
+  "missing_count": 3,
   "items": [
     {
       "id": "jwc-plan-014",
@@ -14,7 +14,7 @@
         "jwc.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "根据已收录资料，本科生培养方案和学分要求的具体查询渠道未明确提及。资料中仅涉及："
+        "根据已收录资料，本科生培养方案和学分要求的具体查询入口**未明确提及**。资料中仅涉及以下相关内容："
       ],
       "top_hits": [
         {
@@ -52,7 +52,7 @@
         "gs.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "关于研究生免修免考，已收录资料中未提及具体申请流程。现有资料主要涉及："
+        "关于研究生免修免考，已收录资料中未提及专门针对研究生的免修免考申请流程。现有资料主要涉及本科生课程免修和推免研究生政策，具体如下："
       ],
       "top_hits": [
         {
@@ -82,271 +82,38 @@
       ]
     },
     {
-      "id": "career-unemployed-009",
-      "question": "不就业登记如何办理？",
-      "scene": "就业手续",
+      "id": "nic-supercomputer-015",
+      "question": "学生如何申请使用超算平台？",
+      "scene": "信息化与校园卡",
       "status": "refused",
       "expected_domains": [
-        "career.sufe.edu.cn"
+        "nic.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "根据已收录的资料，未提及“不就业登记”的具体办理流程。资料主要涉及毕业生就业推荐表制作、网签、医保等内容 [1][2][4][6][8]，未包含不就业登记的相关规定。"
+        "根据已收录资料，超算平台目前**仅对统招博士、硕士生及教职工开放**，未提及本科生申请权限 [2]。申请及使用流程如下："
       ],
       "top_hits": [
         {
-          "doc_id": "cf416edf6597",
-          "title": "上海市城镇职工基本医疗保险办法",
-          "publisher": "上海财经大学医疗健康服务中心",
-          "source_url": "https://yljk.sufe.edu.cn/7a/2d/c1400a31277/page.htm",
-          "document_kind": "policy",
-          "validity_status": "unknown_validity"
-        },
-        {
-          "doc_id": "43f455f9817c",
-          "title": "2026届毕业生就业手续办理指南 | 第三步——签约（二）网签",
-          "publisher": "招生就业处",
-          "source_url": "post+https://career.sufe.edu.cn/career/news/data/jylc/121285618717298688",
-          "document_kind": "manual",
-          "validity_status": "unknown_validity"
-        },
-        {
-          "doc_id": "9959312a96d1",
-          "title": "上海财经大学学生就业综合管理服务平台-学生操作手册（附件）",
-          "publisher": "上海财经大学就业指导中心",
-          "source_url": "https://career.sufe.edu.cn/upload/image/20240312/24031210463782716139.pdf",
-          "document_kind": "manual",
-          "validity_status": "unknown_validity"
-        }
-      ]
-    },
-    {
-      "id": "career-flexible-010",
-      "question": "灵活就业如何登记？",
-      "scene": "就业手续",
-      "status": "refused",
-      "expected_domains": [
-        "career.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "根据已收录资料，关于“灵活就业”登记的具体流程，资料中未明确提及。现有资料主要涉及以下毕业去向类型："
-      ],
-      "top_hits": [
-        {
-          "doc_id": "c2920f52fb7f",
-          "title": "上海高校毕业生毕业去向登记表（自主创业）",
-          "publisher": "上海财经大学就业指导中心",
-          "source_url": "https://career.sufe.edu.cn/upload/image/20240614/24061414264577911667.docx",
-          "document_kind": "manual",
-          "validity_status": "unknown_validity"
-        },
-        {
-          "doc_id": "c2920f52fb7f",
-          "title": "上海高校毕业生毕业去向登记表（自主创业）",
-          "publisher": "上海财经大学就业指导中心",
-          "source_url": "https://career.sufe.edu.cn/upload/image/20240614/24061414264577911667.docx",
-          "document_kind": "manual",
-          "validity_status": "unknown_validity"
-        },
-        {
-          "doc_id": "7f49cfa37d0c",
-          "title": "上海高校毕业生毕业去向登记表（其他录用形式就业）",
-          "publisher": "上海财经大学就业指导中心",
-          "source_url": "https://career.sufe.edu.cn/upload/image/20240614/24061414260068311664.docx",
-          "document_kind": "manual",
-          "validity_status": "unknown_validity"
-        }
-      ]
-    },
-    {
-      "id": "medical-location-006",
-      "question": "校医院在哪里，如何联系？",
-      "scene": "医疗医保",
-      "status": "refused",
-      "expected_domains": [
-        "yljk.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "根据已收录资料，校医院（医疗健康服务中心）的具体地址未提及，但可提供以下联系与就诊信息："
-      ],
-      "top_hits": [
-        {
-          "doc_id": "149aed414858",
-          "title": "学生普通门急诊",
-          "publisher": "上海财经大学医疗健康服务中心",
-          "source_url": "https://yljk.sufe.edu.cn/7a/38/c1400a31288/page.htm",
-          "document_kind": "procedure",
-          "validity_status": "unknown_validity"
-        },
-        {
-          "doc_id": "a82ebc6cabb7",
-          "title": "大学生医疗保障及就医服务相关问题解答",
-          "publisher": "上海财经大学医疗健康服务中心",
-          "source_url": "https://yljk.sufe.edu.cn/a5/96/c1401a42390/page.htm",
-          "document_kind": "procedure",
-          "validity_status": "unknown_validity"
-        },
-        {
-          "doc_id": "a82ebc6cabb7",
-          "title": "大学生医疗保障及就医服务相关问题解答",
-          "publisher": "上海财经大学医疗健康服务中心",
-          "source_url": "https://yljk.sufe.edu.cn/a5/96/c1401a42390/page.htm",
-          "document_kind": "procedure",
-          "validity_status": "unknown_validity"
-        }
-      ]
-    },
-    {
-      "id": "medical-download-010",
-      "question": "医疗医保常用表格在哪里下载？",
-      "scene": "医疗医保",
-      "status": "refused",
-      "expected_domains": [
-        "yljk.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "根据已收录资料，未提及医疗医保常用表格的下载位置。资料中仅说明就医记录册申领、零星报销等业务的线上办理渠道（如“随申办”APP、“一网通办”PC端）[1][2]，但未列出表格下载入口。"
-      ],
-      "top_hits": [
-        {
-          "doc_id": "28429d197c37",
-          "title": "关于居民医保就医结算操作介绍 （大学生2024年11月版）",
-          "publisher": "上海财经大学医疗健康服务中心",
-          "source_url": "https://yljk.sufe.edu.cn/7d/96/c12542a228758/page.htm",
-          "document_kind": "procedure",
-          "validity_status": "unknown_validity"
-        },
-        {
-          "doc_id": "28429d197c37",
-          "title": "关于居民医保就医结算操作介绍 （大学生2024年11月版）",
-          "publisher": "上海财经大学医疗健康服务中心",
-          "source_url": "https://yljk.sufe.edu.cn/7d/96/c12542a228758/page.htm",
-          "document_kind": "procedure",
-          "validity_status": "unknown_validity"
-        },
-        {
-          "doc_id": "28429d197c37",
-          "title": "关于居民医保就医结算操作介绍 （大学生2024年11月版）",
-          "publisher": "上海财经大学医疗健康服务中心",
-          "source_url": "https://yljk.sufe.edu.cn/7d/96/c12542a228758/page.htm",
-          "document_kind": "procedure",
-          "validity_status": "unknown_validity"
-        }
-      ]
-    },
-    {
-      "id": "exchange-contact-010",
-      "question": "国际交流项目的咨询联系方式是什么？",
-      "scene": "国际交流",
-      "status": "refused",
-      "expected_domains": [
-        "ieco.sufe.edu.cn",
-        "gs.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "已收录的资料中未提及国际交流项目的咨询联系方式。资料[1][2]仅提供了国际研究生奖学金信息说明会的组委会联系方式（学生参会咨询：010-66411821-635/698；邮箱：edufair@cscdf.org），并非国际交流项目。建议您查看研究生院或国际交流与合作处官网，或到现场咨询。"
-      ],
-      "top_hits": [
-        {
-          "doc_id": "e1dad848bd06",
-          "title": "附件：第九届国际研究生奖学金信息说明会参会说明.pdf",
-          "publisher": "上海财经大学研究生院",
-          "source_url": "https://ssd.sufe.edu.cn/index.php?mod=io&op=getStream&path=a2YtcUltMGNqYnBPYjFCVk9Qc1pPVy1xcDlIMWoxcV9rWThNQ1lQOElxRk9HZy1BMFc5M0dUd3BfSFRfRDRZMnFKRVVfcy1iSzdJV01B&filename=",
-          "document_kind": "procedure",
-          "validity_status": "unknown_validity"
-        },
-        {
-          "doc_id": "25526c8b43f4",
-          "title": "附件：第十届国际研究生奖学金信息说明会参会说明.pdf",
-          "publisher": "上海财经大学研究生院",
-          "source_url": "https://ssd.sufe.edu.cn/index.php?mod=io&op=getStream&path=a2YtcUltMGNqYnBPYndKUlB2b1pQRy11b29meTNnenNrSXBaRGRQNkpxSk1IbHpmMFdBalRHZ3JyaS1wRGRvM19aRkdfOHZKZXVZV09n&filename=",
-          "document_kind": "procedure",
-          "validity_status": "unknown_validity"
-        },
-        {
-          "doc_id": "bd003ceb1949",
-          "title": "大学生医保政策解读",
-          "publisher": "上海财经大学医疗健康服务中心",
-          "source_url": "https://yljk.sufe.edu.cn/5e/b1/c1400a220849/page.htm",
-          "document_kind": "procedure",
-          "validity_status": "unknown_validity"
-        }
-      ]
-    },
-    {
-      "id": "new-lost-007",
-      "question": "校园失物招领如何办理？",
-      "scene": "新生与安全",
-      "status": "refused",
-      "expected_domains": [
-        "baoweichu.sufe.edu.cn",
-        "xsc.sufe.edu.cn",
-        "hq.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "已收录的资料中未提及校园失物招领的具体办理流程。建议您前往学校保卫处、学生事务中心或相关职能部门现场咨询，或查看其官网获取最新信息。"
-      ],
-      "top_hits": [
-        {
-          "doc_id": "a4a205afcd35",
-          "title": "2012年教职工体检报告_2013年教职工体检方案.pdf",
-          "publisher": "上海财经大学医疗健康服务中心",
-          "source_url": "https://yljk.sufe.edu.cn/_upload/article/files/5b/c5/a4eff0eb4381914026aa5386cfb8/99bf40b9-c7c3-4704-a653-862d1c8e1060.pdf",
-          "document_kind": "procedure",
-          "validity_status": "unknown_validity"
-        },
-        {
-          "doc_id": "7ca09eea0dba",
-          "title": "学历学位遗失证明办理说明.doc",
-          "publisher": "上海财经大学教务处",
-          "source_url": "https://jwc.sufe.edu.cn/_upload/article/files/02/16/bbbfb7da4bd1aa8e36a3052a3274/518f476b-4759-4085-8062-c34606bc1f30.doc",
-          "document_kind": "procedure",
-          "validity_status": "unknown_validity"
-        },
-        {
-          "doc_id": "7ca09eea0dba",
-          "title": "学历学位遗失证明办理说明.doc",
-          "publisher": "上海财经大学教务处",
-          "source_url": "https://jwc.sufe.edu.cn/_upload/article/files/02/16/bbbfb7da4bd1aa8e36a3052a3274/518f476b-4759-4085-8062-c34606bc1f30.doc",
-          "document_kind": "procedure",
-          "validity_status": "unknown_validity"
-        }
-      ]
-    },
-    {
-      "id": "new-fraud-009",
-      "question": "校园电信网络诈骗如何举报和求助？",
-      "scene": "新生与安全",
-      "status": "refused",
-      "expected_domains": [
-        "baoweichu.sufe.edu.cn",
-        "xsc.sufe.edu.cn",
-        "hq.sufe.edu.cn"
-      ],
-      "missing_reasons": [
-        "根据已收录资料，未提及校园电信网络诈骗的具体举报和求助流程。资料中仅涉及以下相关举报规定："
-      ],
-      "top_hits": [
-        {
-          "doc_id": "7dcfaeceef5f",
-          "title": "无线联网",
+          "doc_id": "434f98ee0dd5",
+          "title": "超算平台",
           "publisher": "上海财经大学网络信息中心",
-          "source_url": "http://nic.sufe.edu.cn/e1/58/c19675a254296/page.htm",
-          "document_kind": "procedure",
+          "source_url": "https://nic.sufe.edu.cn/e2/58/c19675a254552/page.htm",
+          "document_kind": "service_guide",
           "validity_status": "unknown_validity"
         },
         {
-          "doc_id": "f32b5e004c6f",
-          "title": "20250905关于印发《上海财经大学学术行为规范及管理办法（2025年修订）》的通知",
-          "publisher": "上海财经大学",
-          "source_url": "manual://sufe-regulations/%E7%A0%94%E7%A9%B6%E7%94%9F%E6%95%99%E5%AD%A6/20250905%E5%85%B3%E4%BA%8E%E5%8D%B0%E5%8F%91%E3%80%8A%E4%B8%8A%E6%B5%B7%E8%B4%A2%E7%BB%8F%E5%A4%A7%E5%AD%A6%E5%AD%A6%E6%9C%AF%E8%A1%8C%E4%B8%BA%E8%A7%84%E8%8C%83%E5%8F%8A%E7%AE%A1%E7%90%86%E5%8A%9E%E6%B3%95%EF%BC%882025%E5%B9%B4%E4%BF%AE%E8%AE%A2%EF%BC%89%E3%80%8B%E7%9A%84%E9%80%9A%E7%9F%A5.pdf",
-          "document_kind": "policy",
-          "validity_status": "unknown_validity"
-        },
-        {
-          "doc_id": "a648ee0a55f3",
-          "title": "无线联网",
+          "doc_id": "434f98ee0dd5",
+          "title": "超算平台",
           "publisher": "上海财经大学网络信息中心",
-          "source_url": "https://nic.sufe.edu.cn/e1/58/c19675a254296/page.htm",
+          "source_url": "https://nic.sufe.edu.cn/e2/58/c19675a254552/page.htm",
+          "document_kind": "service_guide",
+          "validity_status": "unknown_validity"
+        },
+        {
+          "doc_id": "434f98ee0dd5",
+          "title": "超算平台",
+          "publisher": "上海财经大学网络信息中心",
+          "source_url": "https://nic.sufe.edu.cn/e2/58/c19675a254552/page.htm",
           "document_kind": "service_guide",
           "validity_status": "unknown_validity"
         }

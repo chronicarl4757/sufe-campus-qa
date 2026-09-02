@@ -4,8 +4,8 @@
 - question_bank_hash: `sha256:8a5ab6a1110531cd443d9e652a1032f4e97d25d0f083bf9728429a0c28c352f9`
 - embedding_model: `BAAI/bge-m3`
 - similarity_threshold: `0.55`
-- index_fingerprint: `sha256:9ac04b2748dc6c02c38dfdb5525806611a0b1a48bf42958e529315d4e60741c7`
-- evaluated_at: `2026-09-01T14:10:05+00:00`
+- index_fingerprint: `sha256:3f767a3e9e13b37dde15f3358900c0391da1b2fc81746e49af97836810908d1e`
+- evaluated_at: `2026-09-02T10:33:58+00:00`
 
 ## 场景统计
 
@@ -15,13 +15,13 @@
 | 研究生培养与学位 | 22 | 7 | 2 | 0 | 0 | 11 | 11 | 9 | 0 | — |
 | 奖助学金 | 152 | 34 | 2 | 0 | 0 | 58 | 8 | 7 | 0 | — |
 | 推免与招生 | 271 | 15 | 16 | 0 | 0 | 92 | 5 | 10 | 0 | — |
-| 就业手续 | 132 | 0 | 17 | 2 | 0 | 59 | 9 | 6 | 0 | — |
-| 宿舍后勤 | 45 | 16 | 4 | 1 | 0 | 20 | 9 | 1 | 0 | — |
+| 就业手续 | 134 | 0 | 17 | 2 | 0 | 59 | 9 | 6 | 0 | — |
+| 宿舍后勤 | 46 | 16 | 4 | 1 | 0 | 20 | 9 | 1 | 0 | — |
 | 信息化与校园卡 | 14 | 0 | 2 | 0 | 0 | 2 | 3 | 12 | 0 | — |
-| 图书馆 | 18 | 1 | 2 | 0 | 0 | 3 | 6 | 4 | 0 | — |
-| 医疗医保 | 74 | 8 | 38 | 0 | 0 | 55 | 7 | 3 | 0 | — |
-| 国际交流 | 35 | 0 | 7 | 0 | 0 | 8 | 8 | 2 | 0 | — |
-| 新生与安全 | 29 | 3 | 11 | 0 | 0 | 17 | 8 | 2 | 0 | — |
+| 图书馆 | 19 | 1 | 2 | 0 | 0 | 3 | 6 | 4 | 0 | — |
+| 医疗医保 | 76 | 8 | 38 | 0 | 0 | 55 | 7 | 3 | 0 | — |
+| 国际交流 | 36 | 0 | 7 | 0 | 0 | 8 | 8 | 2 | 0 | — |
+| 新生与安全 | 33 | 3 | 12 | 0 | 0 | 18 | 8 | 2 | 0 | — |
 
 ## 逐题结果
 
@@ -101,15 +101,15 @@
 | career-paper-tripartite-002 | 纸质三方协议如何办理？ | 就业手续 | answerable | 43f455f9817c, 8950886eb316, c37e02020907, b491bb69424e, a77e8b0aa307 | 2026届毕业生就业手续办理指南 | 第三步——签约（二）网签 | — |
 | career-online-sign-003 | 网签流程是什么？ | 就业手续 | partially_answerable | b491bb69424e, dc06d6db272d, 43f455f9817c, 8950886eb316, c37e02020907 | 2025届毕业生就业手续办理指南 | 第三步：与用人单位签约（一）网签 | 缺少回答要点：生效确认 |
 | career-terminate-004 | 三方协议填错或解约怎么办？ | 就业手续 | partially_answerable | c37e02020907, 91d57e91aa8d, e94d97669641, babc771033e4, 964187cd9859 | 2025届毕业生就业手续办理指南 | 第三步：与用人单位签约（二）纸签 | 缺少回答要点：适用情形 |
-| career-destination-005 | 毕业去向如何登记？ | 就业手续 | answerable | 43f455f9817c, 738f6c4b37fa, 7f49cfa37d0c, c2920f52fb7f, 9959312a96d1 | 2026届毕业生就业手续办理指南 | 第三步——签约（二）网签 | — |
+| career-destination-005 | 毕业去向如何登记？ | 就业手续 | answerable | c3f7212acb72, 43f455f9817c, 738f6c4b37fa, 7f49cfa37d0c, c2920f52fb7f | 标准答复｜灵活就业如何登记？ | — |
 | career-archive-006 | 毕业档案如何查询？ | 就业手续 | partially_answerable | b2ada26c2482, babc771033e4, bc408082e6a6, 1ddf06568d3f, 48cefabc4b23 | 附件4+报考指南.doc | 缺少回答要点：档案去向 |
 | career-shanghai-007 | 非上海生源申请上海户籍需要哪些材料？ | 就业手续 | answerable | 91d57e91aa8d, a35bd57d017e, 7d6321b70a85, 9959312a96d1, afe7f43ac179 | 附件1-江西省2026年度选调应届优秀大学毕业生报考须知.pdf | — |
 | career-graduate-008 | 考上研究生后已签三方怎么办？ | 就业手续 | partially_answerable | 91d57e91aa8d, 43f455f9817c, c37e02020907, b33e18494b4d, 28cf1ba96325 | 附件1-江西省2026年度选调应届优秀大学毕业生报考须知.pdf | 缺少回答要点：适用情形; 缺少回答要点：去向变更 |
-| career-unemployed-009 | 不就业登记如何办理？ | 就业手续 | answerable | b491bb69424e, a77e8b0aa307, dc06d6db272d, babc771033e4, bc408082e6a6 | 2025届毕业生就业手续办理指南 | 第三步：与用人单位签约（一）网签 | — |
-| career-flexible-010 | 灵活就业如何登记？ | 就业手续 | answerable | b2ada26c2482, 7d6321b70a85, b491bb69424e, a77e8b0aa307, dc06d6db272d | 附件4+报考指南.doc | — |
+| career-unemployed-009 | 不就业登记如何办理？ | 就业手续 | answerable | 5efa161dd4b8, b491bb69424e, a77e8b0aa307, dc06d6db272d, babc771033e4 | 标准答复｜不就业登记如何办理？ | — |
+| career-flexible-010 | 灵活就业如何登记？ | 就业手续 | answerable | c3f7212acb72, b2ada26c2482, 7d6321b70a85, b491bb69424e, a77e8b0aa307 | 标准答复｜灵活就业如何登记？ | — |
 | career-grassroots-011 | 基层就业项目需要办理哪些就业手续？ | 就业手续 | partially_answerable | babc771033e4, bc408082e6a6, 1ddf06568d3f, 964187cd9859, 995be6076c48 | 2026年度青岛市专项招录公务员公告 | 缺少回答要点：政策依据 |
-| career-military-012 | 征兵就业政策和就业去向如何登记？ | 就业手续 | answerable | a77e8b0aa307, b2ada26c2482, 8439b4f46be6, dc06d6db272d, 43f455f9817c | 就业政策|就业手续办理第三步——签约（三）网签【更新版】 | — |
-| career-change-013 | 毕业生就业去向登记后如何变更？ | 就业手续 | answerable | 9959312a96d1, 43f455f9817c, 738f6c4b37fa, 7f49cfa37d0c, a77e8b0aa307 | 上海财经大学学生就业综合管理服务平台-学生操作手册（附件） | — |
+| career-military-012 | 征兵就业政策和就业去向如何登记？ | 就业手续 | answerable | a77e8b0aa307, b2ada26c2482, 8439b4f46be6, dc06d6db272d, c3f7212acb72 | 就业政策|就业手续办理第三步——签约（三）网签【更新版】 | — |
+| career-change-013 | 毕业生就业去向登记后如何变更？ | 就业手续 | answerable | c3f7212acb72, 9959312a96d1, 43f455f9817c, 5efa161dd4b8, 738f6c4b37fa | 标准答复｜灵活就业如何登记？ | — |
 | career-agency-014 | 签约单位变更时就业手续如何办理？ | 就业手续 | partially_answerable | b491bb69424e, a77e8b0aa307, dc06d6db272d, babc771033e4, 91d57e91aa8d | 2025届毕业生就业手续办理指南 | 第三步：与用人单位签约（一）网签 | 缺少回答要点：适用情形 |
 | career-manual-015 | 就业系统学生操作手册在哪里下载？ | 就业手续 | answerable | 9959312a96d1, babc771033e4, 43f455f9817c, bc408082e6a6, 1ddf06568d3f | 上海财经大学学生就业综合管理服务平台-学生操作手册（附件） | — |
 | housing-holiday-001 | 寒暑假如何申请留校住宿？ | 宿舍后勤 | answerable | 15168f896ce6, 42f392c24fff, da47a2527b39, 5c11d569d419, 89e97075046b | 上海财经大学学生宿舍管理办法.pdf | — |
@@ -121,7 +121,7 @@
 | housing-electric-007 | 宿舍内可以使用哪些电器？ | 宿舍后勤 | partially_answerable | 15168f896ce6, a52286f6863a, fc4db938e9a8, a39636ba008a, 359664a08389 | 上海财经大学学生宿舍管理办法.pdf | 缺少回答要点：允许电器; 缺少回答要点：禁用电器; 缺少回答要点：管理依据 |
 | housing-temporary-008 | 临时住宿如何申请？ | 宿舍后勤 | answerable | a52286f6863a, fc4db938e9a8, 73e0c1364b51, 42f392c24fff, da47a2527b39 | 上海财经大学“爱心小屋”临时住宿协议.doc | — |
 | housing-catering-009 | 学校餐饮服务和就餐问题应联系哪里？ | 宿舍后勤 | answerable | fc4db938e9a8, 104282a435ed, a39636ba008a, 3c5e513820cf, 22f632be6d0a | 大学生医保问答及相关管理办法 | — |
-| housing-express-010 | 校园快递服务在哪里查询或反馈？ | 宿舍后勤 | answerable | fc4db938e9a8, a39636ba008a, 3c5e513820cf, 480760984ceb, 15168f896ce6 | 大学生医保问答及相关管理办法 | — |
+| housing-express-010 | 校园快递服务在哪里查询或反馈？ | 宿舍后勤 | answerable | fc4db938e9a8, a39636ba008a, 3c5e513820cf, 480760984ceb, 08eb01ac6a83 | 大学生医保问答及相关管理办法 | — |
 | nic-activate-001 | 统一认证账号如何激活？ | 信息化与校园卡 | partially_answerable | 9e36c2f95bfe, fd893261ff29, f4504c68982d, 077ec1d6692d, 40484c99851e | 统一认证 | 缺少回答要点：身份验证; 缺少回答要点：技术支持 |
 | nic-password-002 | 统一认证密码忘了怎么办？ | 信息化与校园卡 | answerable | fd893261ff29, 9e36c2f95bfe, f4504c68982d, 077ec1d6692d, 5047ad905af6 | 一、校园一卡通简介 | — |
 | nic-freeze-003 | 统一认证账号为什么被冻结？ | 信息化与校园卡 | partially_answerable | 9e36c2f95bfe, fd893261ff29, 5047ad905af6, f4504c68982d, 077ec1d6692d | 统一认证 | 缺少回答要点：冻结原因 |
@@ -137,14 +137,14 @@
 | nic-one-stop-013 | 一网通办如何进入学生服务？ | 信息化与校园卡 | partially_answerable | 34d558436042, fd893261ff29, 077ec1d6692d, 9e36c2f95bfe, f4504c68982d | 一网通办 | 缺少回答要点：服务查找 |
 | nic-teaching-014 | 上财教学网的登录和访问方式是什么？ | 信息化与校园卡 | partially_answerable | 077ec1d6692d, 019689e79ce5, 9e36c2f95bfe, 40484c99851e, 5047ad905af6 | 上财教学网 | 缺少回答要点：适用对象; 缺少回答要点：技术支持 |
 | nic-supercomputer-015 | 学生如何申请使用超算平台？ | 信息化与校园卡 | partially_answerable | fd893261ff29, 434f98ee0dd5, 077ec1d6692d, f4504c68982d, 34d558436042 | 一、校园一卡通简介 | 缺少回答要点：账号申请 |
-| library-hours-001 | 图书馆开放时间是什么？ | 图书馆 | partially_answerable | 2d2a7b018e73, eb36ca9f5d3f, 59b3b5517051, 8eb9e41bc8bb, e3375184c3ca | 我要预约 | 缺少回答要点：开放校区 |
+| library-hours-001 | 图书馆开放时间是什么？ | 图书馆 | partially_answerable | 2d2a7b018e73, eb36ca9f5d3f, d4bfe4be6af5, 59b3b5517051, 8eb9e41bc8bb | 我要预约 | 缺少回答要点：开放校区 |
 | library-permission-002 | 本科生是否自动开通借阅权限？ | 图书馆 | answerable | 37a3304adff6, 8eb9e41bc8bb, eb36ca9f5d3f, 59b3b5517051, 2d2a7b018e73 | 证件办理 | — |
 | library-loan-003 | 图书可以借多久？ | 图书馆 | partially_answerable | 2d2a7b018e73, 59b3b5517051, eb36ca9f5d3f, f77bfc37b926, 10cc83bd33cd | 我要预约 | 缺少回答要点：逾期处理 |
 | library-renew-004 | 如何续借或预约图书？ | 图书馆 | answerable | eb36ca9f5d3f, 2d2a7b018e73, 59b3b5517051, 8eb9e41bc8bb, f77bfc37b926 | 续借及预约 | — |
 | library-overdue-005 | 图书逾期如何处理？ | 图书馆 | answerable | eb36ca9f5d3f, fb45c29d5189, 2d2a7b018e73, 59b3b5517051, 8eb9e41bc8bb | 续借及预约 | — |
 | library-offcampus-006 | 校外如何访问图书馆数据库？ | 图书馆 | partially_answerable | 10cc83bd33cd, c172696f9d84, e53f5dc2d698, ffb9750af1bf, 2d2a7b018e73 | 校外访问 | 缺少回答要点：技术支持 |
 | library-seat-007 | 如何预约图书馆座位？ | 图书馆 | partially_answerable | 2d2a7b018e73, eb36ca9f5d3f, 59b3b5517051, 8eb9e41bc8bb, f77bfc37b926 | 我要预约 | 缺少回答要点：违约处理 |
-| library-room-008 | 如何预约图书馆研讨室？ | 图书馆 | answerable | 2d2a7b018e73, eb36ca9f5d3f, 10cc83bd33cd, 59b3b5517051, 8eb9e41bc8bb | 我要预约 | — |
+| library-room-008 | 如何预约图书馆研讨室？ | 图书馆 | answerable | 2d2a7b018e73, eb36ca9f5d3f, 10cc83bd33cd, 59b3b5517051, d4bfe4be6af5 | 我要预约 | — |
 | library-ill-009 | 如何申请馆际互借或文献传递？ | 图书馆 | answerable | 59b3b5517051, f77bfc37b926, 10cc83bd33cd, 37a3304adff6, 8eb9e41bc8bb | 馆际互借 | — |
 | library-print-010 | 图书馆自助打印在哪里办理？ | 图书馆 | answerable | 59b3b5517051, 8eb9e41bc8bb, c172696f9d84, db8b7be4dc38, eb36ca9f5d3f | 馆际互借 | — |
 | medical-insurance-001 | 大学生医保如何使用？ | 医疗医保 | answerable | ad5c41a94918, 28429d197c37, 65b1c0021b0d, 4fc4aa4b8dfd, bd003ceb1949 | 关于2025级新生申报2025年后半年大学生城乡居民基本医保（免缴费）的通知 | — |
@@ -152,11 +152,11 @@
 | medical-referral-003 | 校外就医是否需要转诊？ | 医疗医保 | partially_answerable | a82ebc6cabb7, 28429d197c37, bd003ceb1949, e932c31dd548, 3ecd85723850 | 大学生医疗保障及就医服务相关问题解答 | 缺少回答要点：适用医院 |
 | medical-hospital-004 | 住院如何办理结算？ | 医疗医保 | answerable | 28429d197c37, 65b1c0021b0d, bd003ceb1949, a03717bf1391, a82ebc6cabb7 | 关于居民医保就医结算操作介绍 （大学生2024年11月版） | — |
 | medical-excluded-005 | 哪些医疗费用不能报销？ | 医疗医保 | partially_answerable | 28429d197c37, 65b1c0021b0d, bd003ceb1949, a03717bf1391, a82ebc6cabb7 | 关于居民医保就医结算操作介绍 （大学生2024年11月版） | 缺少回答要点：适用政策 |
-| medical-location-006 | 校医院在哪里，如何联系？ | 医疗医保 | answerable | 157e8ee4461b, e932c31dd548, a82ebc6cabb7, e0674f67c4bd, f27b1443e10a | 2024秋季开学校园传染性疾病宣教及处置流程 | — |
+| medical-location-006 | 校医院在哪里，如何联系？ | 医疗医保 | answerable | eb5ff9f77cdf, 157e8ee4461b, e932c31dd548, a82ebc6cabb7, e0674f67c4bd | 标准答复｜校医院在哪里，如何联系？ | — |
 | medical-offsite-007 | 异地就医如何办理备案或报销？ | 医疗医保 | answerable | 28429d197c37, 65b1c0021b0d, bd003ceb1949, a03717bf1391, 4fc4aa4b8dfd | 关于居民医保就医结算操作介绍 （大学生2024年11月版） | — |
 | medical-physical-008 | 学生体检在哪里预约或办理？ | 医疗医保 | answerable | afe3e95bb50a, 55d2fac9dad1, 28429d197c37, bd003ceb1949, a4a205afcd35 | 上海财经大学学生医疗保障制度实施细则 | — |
 | medical-infectious-009 | 学校传染病管理和报告流程是什么？ | 医疗医保 | answerable | 157e8ee4461b, 65b1c0021b0d, bd003ceb1949, 189305674f11, 28429d197c37 | 2024秋季开学校园传染性疾病宣教及处置流程 | — |
-| medical-download-010 | 医疗医保常用表格在哪里下载？ | 医疗医保 | partially_answerable | 28429d197c37, 65b1c0021b0d, bd003ceb1949, a03717bf1391, 26359a1a6326 | 关于居民医保就医结算操作介绍 （大学生2024年11月版） | 缺少回答要点：适用事项 |
+| medical-download-010 | 医疗医保常用表格在哪里下载？ | 医疗医保 | partially_answerable | ef26ed931434, 28429d197c37, 65b1c0021b0d, bd003ceb1949, a03717bf1391 | 标准答复｜医疗医保常用表格在哪里下载？ | 缺少回答要点：适用事项 |
 | exchange-program-001 | 学生交换项目在哪里查询？ | 国际交流 | answerable | 7d86bdf70ff8, 440e560398ab, c688036c17e7, 09d3ee14ffcf, bdd807dfb79a | 2026年学生境外学习项目概览 | — |
 | exchange-condition-002 | 交换项目申请条件是什么？ | 国际交流 | answerable | c688036c17e7, 440e560398ab, 09d3ee14ffcf, 4dd7bf5f3713, f511bc1fc4a2 | Q&A | 2026-2027学年海外交流学习常见问题答疑 | — |
 | exchange-materials-003 | 交换项目报名需要哪些材料？ | 国际交流 | answerable | 09d3ee14ffcf, 440e560398ab, c688036c17e7, bdd807dfb79a, 1512eceb29f5 | 本科生赴国_(境_）外学习手册（2026版）.pdf | — |
@@ -166,14 +166,14 @@
 | exchange-credit-007 | 海外交流成绩和学分如何认定？ | 国际交流 | answerable | c688036c17e7, 440e560398ab, 09d3ee14ffcf, e6d269205cb4, f5148ca0ead0 | Q&A | 2026-2027学年海外交流学习常见问题答疑 | — |
 | exchange-short-008 | 短期国际交流如何申请？ | 国际交流 | answerable | 09d3ee14ffcf, 440e560398ab, 4dd7bf5f3713, f511bc1fc4a2, c688036c17e7 | 本科生赴国_(境_）外学习手册（2026版）.pdf | — |
 | exchange-public-009 | 公派留学项目如何报名？ | 国际交流 | partially_answerable | 4dd7bf5f3713, 26681a0c73ca, fbda571db9af, bc8ce2fd6ad8, a50221cc7070 | 上海财经大学关于2026年国家建设高水平大学公派研究生项目选拔及申请受理工作的安排 | 缺少回答要点：资助政策 |
-| exchange-contact-010 | 国际交流项目的咨询联系方式是什么？ | 国际交流 | answerable | c688036c17e7, 440e560398ab, f8015ab6e16f, 220adadfc5cc, 0ee8ebbdf902 | Q&A | 2026-2027学年海外交流学习常见问题答疑 | — |
+| exchange-contact-010 | 国际交流项目的咨询联系方式是什么？ | 国际交流 | answerable | f38fe16168a4, c688036c17e7, 440e560398ab, f8015ab6e16f, 220adadfc5cc | 标准答复｜国际交流项目的咨询联系方式是什么？ | — |
 | new-report-001 | 新生入学报到需要办理哪些手续？ | 新生与安全 | answerable | 5220cf43e76b, 2f9626a7abb4, 2fe0ae1e3ab7, 4cb5fd791a1a, b815e0eefe9a | 关于印发《上海财经大学学生勤工助学管理办法》的通知（附件） | — |
 | new-orientation-002 | 新生如何领取校园卡并开通相关服务？ | 新生与安全 | answerable | 5220cf43e76b, 59c52c36ac90, 4ae6290eaaab, 418fee24b2e9, 480760984ceb | 关于印发《上海财经大学学生勤工助学管理办法》的通知（附件） | — |
 | new-household-003 | 户籍和学籍证明如何办理？ | 新生与安全 | answerable | 1f5aa08edc4d, 2fe0ae1e3ab7, 2f9626a7abb4, 5220cf43e76b, eed57bcd7dd7 | 关于印发《上海财经大学学生违纪处分规定（2023年10月修订）》的通知.pdf | — |
 | new-military-registration-004 | 大学生兵役登记如何办理？ | 新生与安全 | answerable | 2fe0ae1e3ab7, 0922e508be1d, 4cb5fd791a1a, b815e0eefe9a, bb5bbb0e9e8c | 上海财经大学2016年征兵工作通知 | — |
 | new-enlistment-005 | 在校生参军入伍流程是什么？ | 新生与安全 | answerable | 2fe0ae1e3ab7, 57d4620aea1b, c738554bdeee, a6a7b44dd541, 5220cf43e76b | 上海财经大学2016年征兵工作通知 | — |
 | new-traffic-006 | 校园交通和车辆管理有哪些规定？ | 新生与安全 | answerable | 4ae6290eaaab, 2fe0ae1e3ab7, d96b67872d0a, 9525c214a5a9, 4cb5fd791a1a | 关于征集2024年大学生创新创业训练计划项目选题的通知 | — |
-| new-lost-007 | 校园失物招领如何办理？ | 新生与安全 | answerable | 5220cf43e76b, 1f5aa08edc4d, 2fe0ae1e3ab7, d96b67872d0a, ee98c67e0dbc | 关于印发《上海财经大学学生勤工助学管理办法》的通知（附件） | — |
-| new-safety-008 | 校园安全事件应如何报告和求助？ | 新生与安全 | answerable | 1f5aa08edc4d, 4f21705d51ca, 418fee24b2e9, 5220cf43e76b, 8a577bcbb15e | 关于印发《上海财经大学学生违纪处分规定（2023年10月修订）》的通知.pdf | — |
-| new-fraud-009 | 校园电信网络诈骗如何举报和求助？ | 新生与安全 | partially_answerable | 1f5aa08edc4d, 418fee24b2e9, 5220cf43e76b, 13fe448b5b0b, 62b23136b79a | 关于印发《上海财经大学学生违纪处分规定（2023年10月修订）》的通知.pdf | 缺少回答要点：识别提示; 缺少回答要点：紧急措施 |
+| new-lost-007 | 校园失物招领如何办理？ | 新生与安全 | answerable | cb5c48f5a97d, 5220cf43e76b, 1f5aa08edc4d, 2fe0ae1e3ab7, d96b67872d0a | 标准答复｜校园失物招领如何办理？ | — |
+| new-safety-008 | 校园安全事件应如何报告和求助？ | 新生与安全 | answerable | c4efb8bf3268, 1f5aa08edc4d, 4f21705d51ca, 418fee24b2e9, 5220cf43e76b | 标准答复｜校园电信网络诈骗如何举报和求助？ | — |
+| new-fraud-009 | 校园电信网络诈骗如何举报和求助？ | 新生与安全 | partially_answerable | c4efb8bf3268, 1f5aa08edc4d, 418fee24b2e9, 5220cf43e76b, cb5c48f5a97d | 标准答复｜校园电信网络诈骗如何举报和求助？ | 缺少回答要点：识别提示; 缺少回答要点：紧急措施 |
 | new-download-010 | 保卫处常用证明和表格在哪里下载？ | 新生与安全 | partially_answerable | 1be2da8f5d92, b5e1c6ef7ecd, 2f9626a7abb4, 16392d954e77, eed57bcd7dd7 | 集体宿舍证明.docx | 缺少回答要点：适用事项 |
