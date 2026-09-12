@@ -140,9 +140,16 @@ def _gate_snapshot(settings: Settings, manifest_fingerprint: str) -> dict:
         return {"available": False, "fresh": False, "failed": []}
     fingerprints = report.get("fingerprints") or {}
     gates = report.get("gates") or {}
+    # manifest 未变但索引后来重建（或反向）都算过期：两个指纹都要对得上
+    current_index = str(_index_metadata(settings).get("index_fingerprint") or "")
+    fresh = (
+        fingerprints.get("manifest") == manifest_fingerprint
+        and bool(current_index)
+        and fingerprints.get("index") == current_index
+    )
     return {
         "available": True,
-        "fresh": fingerprints.get("manifest") == manifest_fingerprint,
+        "fresh": fresh,
         "passed": bool(report.get("passed")),
         "evaluated_at": report.get("evaluated_at"),
         "failed": [name for name, passed in gates.items() if not passed],
@@ -670,7 +677,8 @@ def create_admin_router(settings: Settings, runtime: dict) -> APIRouter:
                         parent_doc_id=source.doc_id,
                         child_doc_id=answer_doc_id,
                         relation="derived_from",
-                        evidence="管理员核验标准答案",
+                        # 记录核验时刻的正文版本：来源日后同 URL 换内容时，治理侧可据此判失效
+                        evidence=f"管理员核验标准答案；source_content_hash:{source.content_hash}",
                         confidence=1.0,
                     )
                     for source in usable_sources

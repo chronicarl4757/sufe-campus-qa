@@ -536,9 +536,13 @@ def main() -> None:
     # 任一依据被取代/隔离/下架后，答复降为 unknown_validity 待人工复核（管理端重新确认恢复）
     stale_n = 0
     derived_children = collections.defaultdict(list)
+    derived_hash: dict[tuple[str, str], str] = {}
     for r in rels:
         if r["relation"] == "derived_from":
             derived_children[r["child_doc_id"]].append(r["parent_doc_id"])
+            m = re.search(r"source_content_hash:(\S+)", r.get("evidence", ""))
+            if m:
+                derived_hash[(r["child_doc_id"], r["parent_doc_id"])] = m.group(1)
     for meta in list(latest.values()):
         if not meta.topic_key.startswith("curated.answer."):
             continue
@@ -552,6 +556,11 @@ def main() -> None:
             or p.quality_status != "accepted"
             or p.retention_status != "active"
             or p.validity_status in {"superseded", "historical"}
+            # 同 URL 正文换版也算失效：核验时记录的快照 hash 与当前不一致
+            or (
+                derived_hash.get((meta.doc_id, p.doc_id)) is not None
+                and derived_hash[(meta.doc_id, p.doc_id)] != p.content_hash
+            )
         ]
         if not bad:
             continue

@@ -91,7 +91,7 @@ def ingest_curated(curated_dir: Path, corpus_dir: Path, manifest_path: Path) -> 
         source_doc_ids = tuple(
             str(value).strip()
             for value in (raw_source_ids if isinstance(raw_source_ids, list) else [])
-            if str(value).strip()
+            if value is not None and str(value).strip() and str(value).strip() != "None"
         )
         primary_source = next(
             (existing[doc_id] for doc_id in source_doc_ids if doc_id in existing), None
@@ -110,6 +110,11 @@ def ingest_curated(curated_dir: Path, corpus_dir: Path, manifest_path: Path) -> 
             document_kind = "service_guide"
         validity_status = str(fm.get("validity_status") or "unknown_validity")
         if validity_status not in {"current", "superseded", "historical", "unknown_validity"}:
+            validity_status = "unknown_validity"
+        # 无官方依据（source_doc_ids）的人工指南不得自称"现行制度"：
+        # 降为 unknown_validity、置信 0，与绑定官方资料的标准答复拉开可信等级
+        official_backed = bool(source_doc_ids)
+        if not official_backed and validity_status == "current":
             validity_status = "unknown_validity"
         doc_id = doc_id_from(f"curated/{rel.as_posix()}")
         final = f"# {title}\n\n{body}\n"
@@ -168,7 +173,9 @@ def ingest_curated(curated_dir: Path, corpus_dir: Path, manifest_path: Path) -> 
                 scope_unit=scope_unit,
                 topic_key=str(fm.get("topic_key") or ""),
                 validity_status=validity_status,
-                validity_confidence=1.0 if validity_status != "unknown_validity" else 0.0,
+                validity_confidence=(
+                    1.0 if validity_status != "unknown_validity" and official_backed else 0.0
+                ),
                 validity_evidence=(f"人工校验日期：{verified_at}" if verified_at else ""),
                 applicable_student_type=str(fm.get("applicable_student_type") or ""),
                 applicable_school_year=str(fm.get("applicable_school_year") or ""),

@@ -1,12 +1,12 @@
 {
   "schema_version": "1",
-  "evaluated_at": "2026-09-12T04:17:34+00:00",
+  "evaluated_at": "2026-09-12T04:53:20+00:00",
   "fingerprints": {
-    "manifest": "sha256:c5c70fd286488a47f1d6a0ad694ef256eb13d8d067c689d51bc22a81ebf1a159",
-    "indexed_manifest": "sha256:c518e24c5f66c02bb95c3ce9e81e2f4bf8f50decdd31447c46c1b8af4d3d5293",
-    "index": "sha256:3f767a3e9e13b37dde15f3358900c0391da1b2fc81746e49af97836810908d1e",
-    "coverage_index": "sha256:3f767a3e9e13b37dde15f3358900c0391da1b2fc81746e49af97836810908d1e",
-    "real_answers_index": "sha256:3f767a3e9e13b37dde15f3358900c0391da1b2fc81746e49af97836810908d1e"
+    "manifest": "sha256:ebc4e7dafd9b0caf24aaaed83ebc241e6ebbc56f18215de2ca02f60b889987e2",
+    "indexed_manifest": "sha256:ebc4e7dafd9b0caf24aaaed83ebc241e6ebbc56f18215de2ca02f60b889987e2",
+    "index": "sha256:b63b7c68a83a80a4724b2143d0844a30586fcd29dedbe5c58f7f5e655abe36f6",
+    "coverage_index": "sha256:b63b7c68a83a80a4724b2143d0844a30586fcd29dedbe5c58f7f5e655abe36f6",
+    "real_answers_index": "sha256:b63b7c68a83a80a4724b2143d0844a30586fcd29dedbe5c58f7f5e655abe36f6"
   },
   "corpus": {
     "manifest_documents": 2772,
@@ -25,7 +25,7 @@
     ],
     "duplicate_document_rate": 0.0007062146892655367,
     "active_annual_series_duplicates": {},
-    "unknown_validity_main_documents": 651
+    "unknown_validity_main_documents": 654
   },
   "attachments": {
     "total": 813,
@@ -566,7 +566,7 @@
   "coverage": {
     "question_bank_version": "sufe-question-bank.v1",
     "question_bank_hash": "sha256:8a5ab6a1110531cd443d9e652a1032f4e97d25d0f083bf9728429a0c28c352f9",
-    "index_fingerprint": "sha256:3f767a3e9e13b37dde15f3358900c0391da1b2fc81746e49af97836810908d1e",
+    "index_fingerprint": "sha256:b63b7c68a83a80a4724b2143d0844a30586fcd29dedbe5c58f7f5e655abe36f6",
     "total": 150,
     "answerable": 91,
     "partially_answerable": 59,
@@ -578,15 +578,15 @@
     "available": true,
     "question_bank_version": "sufe-question-bank.v1",
     "question_bank_hash": "sha256:8a5ab6a1110531cd443d9e652a1032f4e97d25d0f083bf9728429a0c28c352f9",
-    "index_fingerprint": "sha256:3f767a3e9e13b37dde15f3358900c0391da1b2fc81746e49af97836810908d1e",
+    "index_fingerprint": "sha256:b63b7c68a83a80a4724b2143d0844a30586fcd29dedbe5c58f7f5e655abe36f6",
     "total": 150,
     "unique": 150,
-    "answered": 147,
-    "refused": 3,
+    "answered": 138,
+    "refused": 12,
     "citation_issues": 0,
     "errors": 0,
-    "authoritative_answered": 138,
-    "wrong_department_answered": 9,
+    "authoritative_answered": 130,
+    "wrong_department_answered": 8,
     "wrong_department_ids": [
       "admit-fail-003",
       "admit-materials-005",
@@ -595,8 +595,7 @@
       "gs-phd-006",
       "gs-scholarship-010",
       "jwc-gpa-017",
-      "jwc-sports-018",
-      "new-orientation-002"
+      "jwc-sports-018"
     ],
     "scene_stats": {
       "信息化与校园卡": {
@@ -609,35 +608,35 @@
       },
       "医疗医保": {
         "total": 10,
-        "answered": 10,
-        "refused": 0,
+        "answered": 9,
+        "refused": 1,
         "citation_issues": 0,
         "errors": 0,
-        "answer_rate": 1.0
+        "answer_rate": 0.9
       },
       "国际交流": {
         "total": 10,
-        "answered": 10,
-        "refused": 0,
+        "answered": 8,
+        "refused": 2,
         "citation_issues": 0,
         "errors": 0,
-        "answer_rate": 1.0
+        "answer_rate": 0.8
       },
       "图书馆": {
         "total": 10,
-        "answered": 10,
-        "refused": 0,
+        "answered": 9,
+        "refused": 1,
         "citation_issues": 0,
         "errors": 0,
-        "answer_rate": 1.0
+        "answer_rate": 0.9
       },
       "奖助学金": {
         "total": 15,
-        "answered": 15,
-        "refused": 0,
+        "answered": 14,
+        "refused": 1,
         "citation_issues": 0,
         "errors": 0,
-        "answer_rate": 1.0
+        "answer_rate": 0.9333333333333333
       },
       "宿舍后勤": {
         "total": 10,
@@ -657,35 +656,35 @@
       },
       "推免与招生": {
         "total": 15,
-        "answered": 15,
-        "refused": 0,
+        "answered": 14,
+        "refused": 1,
         "citation_issues": 0,
         "errors": 0,
-        "answer_rate": 1.0
+        "answer_rate": 0.9333333333333333
       },
       "新生与安全": {
         "total": 10,
-        "answered": 10,
-        "refused": 0,
+        "answered": 9,
+        "refused": 1,
         "citation_issues": 0,
         "errors": 0,
-        "answer_rate": 1.0
+        "answer_rate": 0.9
       },
       "本科教务": {
         "total": 20,
-        "answered": 19,
-        "refused": 1,
+        "answered": 18,
+        "refused": 2,
         "citation_issues": 0,
         "errors": 0,
-        "answer_rate": 0.95
+        "answer_rate": 0.9
       },
       "研究生培养与学位": {
         "total": 20,
-        "answered": 19,
-        "refused": 1,
+        "answered": 18,
+        "refused": 2,
         "citation_issues": 0,
         "errors": 0,
-        "answer_rate": 0.95
+        "answer_rate": 0.9
       }
     }
   },
@@ -701,7 +700,7 @@
     "real_answer_integrity": true,
     "core_scene_answerability": true,
     "wrong_department_hits": true,
-    "index_matches_manifest": false,
+    "index_matches_manifest": true,
     "coverage_matches_index": true,
     "real_answers_match_index": true
   },

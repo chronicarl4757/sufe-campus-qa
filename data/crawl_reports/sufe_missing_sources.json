@@ -1,10 +1,48 @@
 {
   "question_bank_version": "sufe-question-bank.v1",
   "question_bank_hash": "sha256:8a5ab6a1110531cd443d9e652a1032f4e97d25d0f083bf9728429a0c28c352f9",
-  "index_fingerprint": "sha256:3f767a3e9e13b37dde15f3358900c0391da1b2fc81746e49af97836810908d1e",
+  "index_fingerprint": "sha256:b63b7c68a83a80a4724b2143d0844a30586fcd29dedbe5c58f7f5e655abe36f6",
   "source": "real_answers",
-  "missing_count": 3,
+  "missing_count": 12,
   "items": [
+    {
+      "id": "jwc-double-008",
+      "question": "本科生如何申请双专业学习？",
+      "scene": "本科教务",
+      "status": "refused",
+      "expected_domains": [
+        "jwc.sufe.edu.cn"
+      ],
+      "missing_reasons": [
+        "已收录资料中未提及“双专业”的申请办法，仅涉及“双学士学位”项目，两者可能不同，请注意区分。"
+      ],
+      "top_hits": [
+        {
+          "doc_id": "ec40f6248aeb",
+          "title": "双学位管理.pdf",
+          "publisher": "上海财经大学信息公开网",
+          "source_url": "https://gongkai.sufe.edu.cn/_upload/article/files/ec/d9/db3d419e45ebbb623d2aa5a33f36/43a198d1-7e6a-4646-af94-5019ad53b09a.pdf",
+          "document_kind": "policy",
+          "validity_status": "unknown_validity"
+        },
+        {
+          "doc_id": "9ca8c8cf0dca",
+          "title": "法学院法学+金融专业2025级本科培养方案.pdf",
+          "publisher": "上海财经大学法学院",
+          "source_url": "https://law.sufe.edu.cn/_upload/article/files/27/0f/4b016c9f4c5ca42bef5b4c739f33/4e1c0767-ed6e-4d94-a09b-43c10731b32c.pdf",
+          "document_kind": "procedure",
+          "validity_status": "unknown_validity"
+        },
+        {
+          "doc_id": "3662bbcc56a3",
+          "title": "附件1：上海财经大学经济学--信息与计算科学双学士学位项目培养方案（2022级）.doc",
+          "publisher": "上海财经大学经济学院",
+          "source_url": "https://econ.sufe.edu.cn/_upload/article/files/c7/cc/fe3765e34ecba15783cf4c67543f/39c1dd5a-3d67-4e2a-ae8f-6cf7de56ac1d.doc",
+          "document_kind": "manual",
+          "validity_status": "unknown_validity"
+        }
+      ]
+    },
     {
       "id": "jwc-plan-014",
       "question": "在哪里可以查询本科生培养方案和学分要求？",
@@ -14,7 +52,7 @@
         "jwc.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "根据已收录资料，本科生培养方案和学分要求的具体查询入口**未明确提及**。资料中仅涉及以下相关内容："
+        "已收录的资料中未提及本科生培养方案和学分要求的查询入口。"
       ],
       "top_hits": [
         {
@@ -44,6 +82,44 @@
       ]
     },
     {
+      "id": "gs-plan-011",
+      "question": "研究生培养方案和学分要求在哪里查询？",
+      "scene": "研究生培养与学位",
+      "status": "refused",
+      "expected_domains": [
+        "gs.sufe.edu.cn"
+      ],
+      "missing_reasons": [
+        "已收录资料中未提及研究生培养方案和学分要求的具体查询入口。可参考以下相关信息："
+      ],
+      "top_hits": [
+        {
+          "doc_id": "a9ea3b1e4817",
+          "title": "关于印发《上海财经大学研究生招生工作管理规定》的通知.pdf",
+          "publisher": "上海财经大学研究生院",
+          "source_url": "https://ssd.sufe.edu.cn/index.php?mod=io&op=getStream&path=a2YtcUltMGNqYnBPYndJR2FQTkxOVy10OW9LbGoxSHVsdHRlV29YNmN2Rk1TUURiM21seFNHOHEtaUQ4WElZeDhaUkhfSjNOZnVkR01R&filename=",
+          "document_kind": "policy",
+          "validity_status": "unknown_validity"
+        },
+        {
+          "doc_id": "cbb4bee4ccff",
+          "title": "关于印发《上海财经大学研究生素质综合评价实施办法》的通知.pdf",
+          "publisher": "上海财经大学学生处",
+          "source_url": "https://xsc.sufe.edu.cn/_upload/article/files/d7/a4/8c49e2b943cead7d58a81ca68d91/34b2b42a-733e-4ab5-be90-48016548b8b6.pdf",
+          "document_kind": "policy",
+          "validity_status": "unknown_validity"
+        },
+        {
+          "doc_id": "a0510d383516",
+          "title": "上海财经大学研究生学分认定管理办法（试行）",
+          "publisher": "上海财经大学研究生院",
+          "source_url": "https://gs.sufe.edu.cn/Home/Detail/6104",
+          "document_kind": "policy",
+          "validity_status": "unknown_validity"
+        }
+      ]
+    },
+    {
       "id": "gs-exemption-016",
       "question": "研究生免修免考如何申请？",
       "scene": "研究生培养与学位",
@@ -52,7 +128,7 @@
         "gs.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "关于研究生免修免考，已收录资料中未提及专门针对研究生的免修免考申请流程。现有资料主要涉及本科生课程免修和推免研究生政策，具体如下："
+        "已收录的资料中，关于\"研究生免修免考\"的申请办法未提及。"
       ],
       "top_hits": [
         {
@@ -82,38 +158,309 @@
       ]
     },
     {
-      "id": "nic-supercomputer-015",
-      "question": "学生如何申请使用超算平台？",
+      "id": "aid-grant-009",
+      "question": "本科生国家助学金如何申请？",
+      "scene": "奖助学金",
+      "status": "refused",
+      "expected_domains": [
+        "xsc.sufe.edu.cn"
+      ],
+      "missing_reasons": [
+        "已收录资料中未提及完整的申请流程，仅能找到以下相关要点："
+      ],
+      "top_hits": [
+        {
+          "doc_id": "0922e508be1d",
+          "title": "关于印发《上海财经大学研究生国家助学金管理办法》的通知（附件）",
+          "publisher": "上海财经大学学生处",
+          "source_url": "https://xsc.sufe.edu.cn/_upload/article/files/e1/63/20040f014a519d0f2aae1654cf46/d993c56d-f948-45aa-8685-9bf99190224c.pdf",
+          "document_kind": "policy",
+          "validity_status": "unknown_validity"
+        },
+        {
+          "doc_id": "5ea94a839885",
+          "title": "高等学校本科生国家奖学金管理暂行办法",
+          "publisher": "上海财经大学法学院",
+          "source_url": "https://law.sufe.edu.cn/0e/ca/c7986a134858/page.htm",
+          "document_kind": "policy",
+          "validity_status": "current"
+        },
+        {
+          "doc_id": "145349451521",
+          "title": "关于开展2024-2025学年本科生国家助学金及社会助学金评选工作的通知.doc",
+          "publisher": "上海财经大学学生处",
+          "source_url": "https://xsc.sufe.edu.cn/_upload/article/files/ff/51/4223a01b4336bb0aaacda5550962/d6cb4b17-3d65-4ef8-808c-35265d301a3f.doc",
+          "document_kind": "annual_notice",
+          "validity_status": "unknown_validity"
+        }
+      ]
+    },
+    {
+      "id": "admit-backup-007",
+      "question": "推免候补资格如何确定？",
+      "scene": "推免与招生",
+      "status": "refused",
+      "expected_domains": [
+        "gs.sufe.edu.cn",
+        "jwc.sufe.edu.cn"
+      ],
+      "missing_reasons": [
+        "已收录的资料中未提及\"推免候补资格\"的确定方式。"
+      ],
+      "top_hits": [
+        {
+          "doc_id": "ff83c85e1a14",
+          "title": "关于印发《上海财经大学推荐优秀应届本科毕业生免试攻读研究生工作管理办法（2025年7月修订）》的通知.pdf",
+          "publisher": "上海财经大学研究生院",
+          "source_url": "https://ssd.sufe.edu.cn/index.php?mod=io&op=getStream&path=a2YtcUltMGNqYnBPYjE0RU9meE5QR2FwOElQeDMxSHBrSWNBQnRMOEt2ZExHQTZQZ0drZ1RHWjdvSFR3Q280OXJaa2RxOHJPZi1kTllB&filename=",
+          "document_kind": "policy",
+          "validity_status": "unknown_validity"
+        },
+        {
+          "doc_id": "ff83c85e1a14",
+          "title": "关于印发《上海财经大学推荐优秀应届本科毕业生免试攻读研究生工作管理办法（2025年7月修订）》的通知.pdf",
+          "publisher": "上海财经大学研究生院",
+          "source_url": "https://ssd.sufe.edu.cn/index.php?mod=io&op=getStream&path=a2YtcUltMGNqYnBPYjE0RU9meE5QR2FwOElQeDMxSHBrSWNBQnRMOEt2ZExHQTZQZ0drZ1RHWjdvSFR3Q280OXJaa2RxOHJPZi1kTllB&filename=",
+          "document_kind": "policy",
+          "validity_status": "unknown_validity"
+        },
+        {
+          "doc_id": "68e0067fbb9a",
+          "title": "关于印发《上海财经大学接收优秀应届本科毕业生免试攻读研究生工作管理办法（2020年9月修订）》的通知.pdf",
+          "publisher": "上海财经大学研究生院",
+          "source_url": "https://ssd.sufe.edu.cn/index.php?mod=io&op=getStream&path=a2YtcUltMGNqYnBPYjFWWGJhOUlPMmFnb295bjMxdnJ5NGdPRE5hdmRxTVlFZ3VCMFRzZ1QyOHRyQ1g5WEk1aXFzTVFfY3ljS3U1R053&filename=",
+          "document_kind": "policy",
+          "validity_status": "unknown_validity"
+        }
+      ]
+    },
+    {
+      "id": "nic-ecard-006",
+      "question": "电子校园卡如何领取？",
       "scene": "信息化与校园卡",
       "status": "refused",
       "expected_domains": [
         "nic.sufe.edu.cn"
       ],
       "missing_reasons": [
-        "根据已收录资料，超算平台目前**仅对统招博士、硕士生及教职工开放**，未提及本科生申请权限 [2]。申请及使用流程如下："
+        "已收录资料中未提及\"领取\"电子校园卡的具体操作，仅说明以下相关入口与信息："
       ],
       "top_hits": [
         {
-          "doc_id": "434f98ee0dd5",
-          "title": "超算平台",
+          "doc_id": "fd893261ff29",
+          "title": "一、校园一卡通简介",
           "publisher": "上海财经大学网络信息中心",
-          "source_url": "https://nic.sufe.edu.cn/e2/58/c19675a254552/page.htm",
+          "source_url": "https://nic.sufe.edu.cn/17/10/c19675a268048/page.htm",
           "document_kind": "service_guide",
           "validity_status": "unknown_validity"
         },
         {
-          "doc_id": "434f98ee0dd5",
-          "title": "超算平台",
-          "publisher": "上海财经大学网络信息中心",
-          "source_url": "https://nic.sufe.edu.cn/e2/58/c19675a254552/page.htm",
+          "doc_id": "2fa7bef4ec22",
+          "title": "如何使用学生卡",
+          "publisher": "上海财经大学",
+          "source_url": "curated/freshman_knowhow/如何使用学生卡.md",
           "document_kind": "service_guide",
           "validity_status": "unknown_validity"
         },
         {
-          "doc_id": "434f98ee0dd5",
-          "title": "超算平台",
+          "doc_id": "fd893261ff29",
+          "title": "一、校园一卡通简介",
           "publisher": "上海财经大学网络信息中心",
-          "source_url": "https://nic.sufe.edu.cn/e2/58/c19675a254552/page.htm",
+          "source_url": "https://nic.sufe.edu.cn/17/10/c19675a268048/page.htm",
+          "document_kind": "service_guide",
+          "validity_status": "unknown_validity"
+        }
+      ]
+    },
+    {
+      "id": "library-seat-007",
+      "question": "如何预约图书馆座位？",
+      "scene": "图书馆",
+      "status": "refused",
+      "expected_domains": [
+        "lib.sufe.edu.cn"
+      ],
+      "missing_reasons": [
+        "关于图书馆座位预约，已收录资料中未提及具体预约流程，仅涉及以下相关信息："
+      ],
+      "top_hits": [
+        {
+          "doc_id": "2d2a7b018e73",
+          "title": "我要预约",
+          "publisher": "上海财经大学图书馆",
+          "source_url": "https://lib.sufe.edu.cn/8328/list.htm",
+          "document_kind": "service_guide",
+          "validity_status": "unknown_validity"
+        },
+        {
+          "doc_id": "2d2a7b018e73",
+          "title": "我要预约",
+          "publisher": "上海财经大学图书馆",
+          "source_url": "https://lib.sufe.edu.cn/8328/list.htm",
+          "document_kind": "service_guide",
+          "validity_status": "unknown_validity"
+        },
+        {
+          "doc_id": "2d2a7b018e73",
+          "title": "我要预约",
+          "publisher": "上海财经大学图书馆",
+          "source_url": "https://lib.sufe.edu.cn/8328/list.htm",
+          "document_kind": "service_guide",
+          "validity_status": "unknown_validity"
+        }
+      ]
+    },
+    {
+      "id": "medical-physical-008",
+      "question": "学生体检在哪里预约或办理？",
+      "scene": "医疗医保",
+      "status": "refused",
+      "expected_domains": [
+        "yljk.sufe.edu.cn"
+      ],
+      "missing_reasons": [
+        "已收录的资料中未提及学生体检的预约或办理方式。"
+      ],
+      "top_hits": [
+        {
+          "doc_id": "b415a642f70b",
+          "title": "2009年度职工健康注意事项.doc",
+          "publisher": "上海财经大学医疗健康服务中心",
+          "source_url": "https://yljk.sufe.edu.cn/_upload/article/files/be/9c/1b996393441e92545c3fa00dd0ba/bcd21481-54f8-40a6-a381-bcadfb27e57f.doc",
+          "document_kind": "procedure",
+          "validity_status": "unknown_validity"
+        },
+        {
+          "doc_id": "aeb480ec022c",
+          "title": "2013年教职工健康体检指南.doc",
+          "publisher": "上海财经大学医疗健康服务中心",
+          "source_url": "https://yljk.sufe.edu.cn/_upload/article/files/0d/18/7e9bc80e4d15bab5227bd5a4b1aa/bb3c87a5-6e56-4b1c-a39f-895469bfc67f.doc",
+          "document_kind": "procedure",
+          "validity_status": "unknown_validity"
+        },
+        {
+          "doc_id": "8a32fb4b8d91",
+          "title": "下载2011年教职工健康体检指南.pdf",
+          "publisher": "上海财经大学医疗健康服务中心",
+          "source_url": "https://yljk.sufe.edu.cn/_upload/article/files/92/ce/2304b5c04dfd84b7b8243ede3260/472dea1c-f4eb-4910-9a54-8218a68b477b.pdf",
+          "document_kind": "procedure",
+          "validity_status": "unknown_validity"
+        }
+      ]
+    },
+    {
+      "id": "exchange-materials-003",
+      "question": "交换项目报名需要哪些材料？",
+      "scene": "国际交流",
+      "status": "refused",
+      "expected_domains": [
+        "ieco.sufe.edu.cn",
+        "gs.sufe.edu.cn"
+      ],
+      "missing_reasons": [
+        "已收录资料中未提及交换项目报名所需的完整材料清单，仅能找到以下相关零散信息："
+      ],
+      "top_hits": [
+        {
+          "doc_id": "09d3ee14ffcf",
+          "title": "本科生赴国_(境_）外学习手册（2026版）.pdf",
+          "publisher": "上海财经大学国际交流与合作处",
+          "source_url": "https://ieco.sufe.edu.cn/_upload/article/files/bc/bb/36adeaf144f88c5b5ac6fd778862/7056e14d-2682-4faa-9de4-ee9f7d71ad5b.pdf",
+          "document_kind": "procedure",
+          "validity_status": "unknown_validity"
+        },
+        {
+          "doc_id": "440e560398ab",
+          "title": "Q&A | 境外学习常见问题解答",
+          "publisher": "上海财经大学国际交流与合作处",
+          "source_url": "https://ieco.sufe.edu.cn/bf/81/c18858a245633/page.htm",
+          "document_kind": "faq",
+          "validity_status": "unknown_validity"
+        },
+        {
+          "doc_id": "c688036c17e7",
+          "title": "Q&A | 2026-2027学年海外交流学习常见问题答疑",
+          "publisher": "上海财经大学国际交流与合作处",
+          "source_url": "https://ieco.sufe.edu.cn/e5/97/c18858a255383/page.htm",
+          "document_kind": "faq",
+          "validity_status": "unknown_validity"
+        }
+      ]
+    },
+    {
+      "id": "exchange-funding-005",
+      "question": "学生交流项目有哪些资助？",
+      "scene": "国际交流",
+      "status": "refused",
+      "expected_domains": [
+        "ieco.sufe.edu.cn",
+        "gs.sufe.edu.cn"
+      ],
+      "missing_reasons": [
+        "已收录的资料中未提及学生交流项目的资助信息。"
+      ],
+      "top_hits": [
+        {
+          "doc_id": "6cc64e90571a",
+          "title": "办事流程（附件2）",
+          "publisher": "上海财经大学教务处",
+          "source_url": "https://jwc.sufe.edu.cn/_upload/article/files/e1/8d/e775793944139cb2dd3bff8cf37a/2fb18367-7103-4ec4-bf14-e2605e87f0a9.pdf",
+          "document_kind": "policy",
+          "validity_status": "unknown_validity"
+        },
+        {
+          "doc_id": "c688036c17e7",
+          "title": "Q&A | 2026-2027学年海外交流学习常见问题答疑",
+          "publisher": "上海财经大学国际交流与合作处",
+          "source_url": "https://ieco.sufe.edu.cn/e5/97/c18858a255383/page.htm",
+          "document_kind": "faq",
+          "validity_status": "unknown_validity"
+        },
+        {
+          "doc_id": "de506d1b5579",
+          "title": "表1：外国语学院本科生申请境外学习课程审批表.docx",
+          "publisher": "上海财经大学外国语学院",
+          "source_url": "https://sfs.sufe.edu.cn/_upload/article/files/6f/2c/f496fbdb456fac201bd969ab29f0/f8b085fb-43e0-4708-9027-0e646a9c3c9b.docx",
+          "document_kind": "manual",
+          "validity_status": "unknown_validity"
+        }
+      ]
+    },
+    {
+      "id": "new-orientation-002",
+      "question": "新生如何领取校园卡并开通相关服务？",
+      "scene": "新生与安全",
+      "status": "refused",
+      "expected_domains": [
+        "baoweichu.sufe.edu.cn",
+        "xsc.sufe.edu.cn",
+        "hq.sufe.edu.cn"
+      ],
+      "missing_reasons": [
+        "已收录资料中未提及新生领取校园卡的具体流程，仅涉及以下相关服务信息："
+      ],
+      "top_hits": [
+        {
+          "doc_id": "fd893261ff29",
+          "title": "一、校园一卡通简介",
+          "publisher": "上海财经大学网络信息中心",
+          "source_url": "https://nic.sufe.edu.cn/17/10/c19675a268048/page.htm",
+          "document_kind": "service_guide",
+          "validity_status": "unknown_validity"
+        },
+        {
+          "doc_id": "2fa7bef4ec22",
+          "title": "如何使用学生卡",
+          "publisher": "上海财经大学",
+          "source_url": "curated/freshman_knowhow/如何使用学生卡.md",
+          "document_kind": "service_guide",
+          "validity_status": "unknown_validity"
+        },
+        {
+          "doc_id": "fd893261ff29",
+          "title": "一、校园一卡通简介",
+          "publisher": "上海财经大学网络信息中心",
+          "source_url": "https://nic.sufe.edu.cn/17/10/c19675a268048/page.htm",
           "document_kind": "service_guide",
           "validity_status": "unknown_validity"
         }

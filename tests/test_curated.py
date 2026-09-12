@@ -79,8 +79,9 @@ def test_ingest_maps_front_matter_and_subdir(tmp_path):
     assert d1.topic_key == "room.connect.connect_to_campus_network"
     assert d1.applicable_student_type == "freshman"
     assert d1.scope_unit == "上海财经大学"
-    assert d1.validity_status == "current"
-    assert d1.validity_confidence == 1.0
+    # 无官方依据（source_doc_ids 为空）不得自称"现行"：自动降级
+    assert d1.validity_status == "unknown_validity"
+    assert d1.validity_confidence == 0.0
     assert d1.index_collection == "main_qa"
     assert d1.retention_status == "active"
     assert d1.text_hash
@@ -124,3 +125,15 @@ def test_ingest_incremental_update_and_noop(tmp_path):
 def test_ingest_missing_dir_is_noop(tmp_path):
     report = ingest_curated(tmp_path / "nope", tmp_path / "corpus", tmp_path / "m.jsonl")
     assert report.added == 0
+
+
+def test_ingest_official_backed_guide_keeps_current(tmp_path):
+    curated = tmp_path / "curated"
+    backed = GUIDE.replace("source_doc_ids:\n  -", "source_doc_ids:\n  - some-doc-id")
+    _write(curated, "freshman_knowhow/如何连上校园网.md", backed)
+    report = ingest_curated(curated, tmp_path / "corpus", tmp_path / "corpus" / "manifest.jsonl")
+    assert report.added == 1
+    manifest = load_manifest(tmp_path / "corpus" / "manifest.jsonl")
+    d = manifest[doc_id_from("curated/freshman_knowhow/如何连上校园网.md")]
+    assert d.validity_status == "current"
+    assert d.validity_confidence == 1.0
