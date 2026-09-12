@@ -51,7 +51,7 @@ const labels = {
   unknown_validity: "有效性待确认",
 };
 
-const VIEWS = ["overview", "documents", "clinic", "import"];
+const VIEWS = ["overview", "documents", "clinic", "gold", "import"];
 
 function element(tag, className, text) {
   const item = document.createElement(tag);
@@ -151,6 +151,7 @@ function showView(name, {updateHash = true} = {}) {
   if (updateHash && `#/${name}` !== location.hash) {
     history.replaceState(null, "", `#/${name}`);
   }
+  if (name === "gold") loadGold();
 }
 
 /* ---------- 概览 ---------- */
@@ -895,3 +896,159 @@ if (state.token) {
       : "上次管理会话已失效，请重新输入。";
   });
 }
+
+/* ---------- 金标复核 ---------- */
+
+async function loadGold() {
+  const list = byId("gold-list");
+  list.textContent = "载入中…";
+  try {
+    const data = await api("/api/admin/gold");
+    renderGold(data.entries || [], data.issues || {});
+  } catch (error) {
+    list.textContent = "";
+    list.appendChild(element("p", "panel-note", `加载失败：${error.message}`));
+  }
+}
+
+function _goldBadge(entry) {
+  const wrap = element("span", "gold-badges");
+  const ai = String(entry.reviewer || "").includes("ai-draft");
+  wrap.appendChild(
+    element("span", ai ? "tag tag-warn" : "tag tag-ok", ai ? "待复核" : `已复核 ${entry.reviewer}`)
+  );
+  if (entry.should_refuse) wrap.appendChild(element("span", "tag", "拒答样例"));
+  if (!entry.should_answer && !entry.should_refuse)
+    wrap.appendChild(element("span", "tag", "资料不足题"));
+  if (entry.needs_clarification) wrap.appendChild(element("span", "tag", "需追问"));
+  return wrap;
+}
+
+function renderGold(entries, issues) {
+  const list = byId("gold-list");
+  list.textContent = "";
+  if (!entries.length) {
+    list.appendChild(element("p", "panel-note", "gold 集为空。用 sufe-qa gold-draft 起草后到这里复核。"));
+    return;
+  }
+  for (const entry of entries) {
+    const card = element("div", "panel gold-card");
+    const head = element("div", "panel-head");
+    head.appendChild(element("h2", "", entry.question || entry.id));
+    head.appendChild(_goldBadge(entry));
+    card.appendChild(head);
+
+    const meta = element(
+      "p",
+      "panel-note",
+      `${entry.id} ｜ ${entry.scene || ""} ｜ ${entry.question_intent || ""} ｜ ${entry.student_type || ""} ｜ 版本:${entry.validity_status || ""} ｜ ${entry.reviewed_at || ""}`
+    );
+    card.appendChild(meta);
+
+    for (const issue of issues[entry.id] || []) {
+      card.appendChild(
+        element("p", issue.level === "error" ? "gold-issue is-error" : "gold-issue is-warn",
+          `${issue.level === "error" ? "✗" : "!"} ${issue.message}`)
+      );
+    }
+
+    if (entry.gold_answer) {
+      const ans = element("div", "answer-box");
+      ans.textContent = entry.gold_answer;
+      card.appendChild(ans);
+    }
+    const points = element("ul", "gold-points");
+    for (const point of entry.required_answer_points || []) {
+      points.appendChild(element("li", "", point));
+    }
+    if (points.children.length) {
+      card.appendChild(element("p", "panel-note", "必答要点"));
+      card.appendChild(points);
+    }
+    for (const ev of entry.evidence || []) {
+      card.appendChild(
+        element("p", "panel-note",
+          `证据 ${ev.doc_id}${ev.heading ? " " + ev.heading : ""}：${ev.evidence_text}`)
+      );
+    }
+    if (entry.validity_note)
+      card.appendChild(element("p", "panel-note", `版本说明：${entry.validity_note}`));
+
+    const actions = element("div", "gold-actions");
+    const confirmBtn = element("button", "btn btn-primary", "确认复核");
+    confirmBtn.type = "button";
+    confirmBtn.onclick = async () => {
+      const reviewer = byId("gold-reviewer").value.trim();
+      if (!reviewer) {
+        alert("先在顶部填复核人署名");
+        return;
+      }
+      try {
+        await api(`/api/admin/gold/${encodeURIComponent(entry.id)}/confirm`, {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify({reviewer}),
+        });
+        await loadGold();
+      } catch (error) {
+        alert(`确认失败：${error.message}`);
+      }
+    };
+    actions.appendChild(confirmBtn);
+
+    const editBtn = element("button", "btn", "编辑 JSON");
+    editBtn.type = "button";
+    editBtn.onclick = () => {
+      const existing = card.querySelector("textarea");
+      if (existing) {
+        existing.remove();
+        editBtn.textContent = "编辑 JSON";
+        return;
+      }
+      const area = element("textarea", "gold-editor");
+      area.value = JSON.stringify(entry, null, 2);
+      card.appendChild(area);
+      const saveBtn = element("button", "btn", "保存（先校验）");
+      saveBtn.type = "button";
+      saveBtn.onclick = async () => {
+        let parsed;
+        try {
+          parsed = JSON.parse(area.value);
+        } catch {
+          alert("不是合法 JSON");
+          return;
+        }
+        try {
+          await api(`/api/admin/gold/${encodeURIComponent(entry.id)}`, {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({entry: parsed}),
+          });
+          await loadGold();
+        } catch (error) {
+          alert(`保存被拒：${error.message}`);
+        }
+      };
+      card.appendChild(saveBtn);
+      editBtn.textContent = "收起";
+    };
+    actions.appendChild(editBtn);
+
+    const delBtn = element("button", "btn btn-danger", "打回删除");
+    delBtn.type = "button";
+    delBtn.onclick = async () => {
+      if (!window.confirm(`确认从 gold 集删除「${entry.question}」？`)) return;
+      try {
+        await api(`/api/admin/gold/${encodeURIComponent(entry.id)}`, {method: "DELETE"});
+        await loadGold();
+      } catch (error) {
+        alert(`删除失败：${error.message}`);
+      }
+    };
+    actions.appendChild(delBtn);
+    card.appendChild(actions);
+    list.appendChild(card);
+  }
+}
+
+byId("gold-reload").addEventListener("click", loadGold);

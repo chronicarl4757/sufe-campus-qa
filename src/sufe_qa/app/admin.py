@@ -71,6 +71,14 @@ class CuratedAnswerReq(BaseModel):
     source_doc_ids: list[str] = Field(min_length=1, max_length=12)
 
 
+class GoldConfirmReq(BaseModel):
+    reviewer: str = Field(min_length=2, max_length=80)
+
+
+class GoldReplaceReq(BaseModel):
+    entry: dict
+
+
 class WechatImportReq(BaseModel):
     url: str = Field(min_length=20, max_length=2000)
     allow_unlisted: bool = False
@@ -237,7 +245,9 @@ def _timeline(documents: list[DocMeta]) -> tuple[list[dict], list[dict]]:
     return days, recent
 
 
-def _append_admin_action(settings: Settings, *, meta: DocMeta, action: str, reason: str) -> None:
+def _append_admin_action(
+    settings: Settings, *, meta: DocMeta | None, action: str, reason: str
+) -> None:
     path = settings.data_dir / "admin_actions.jsonl"
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("a", encoding="utf-8") as handle:
@@ -245,8 +255,8 @@ def _append_admin_action(settings: Settings, *, meta: DocMeta, action: str, reas
             json.dumps(
                 {
                     "ts": datetime.now(timezone.utc).isoformat(timespec="seconds"),
-                    "doc_id": meta.doc_id,
-                    "title": meta.title,
+                    "doc_id": meta.doc_id if meta else "",
+                    "title": meta.title if meta else "",
                     "action": action,
                     "reason": reason,
                 },
@@ -591,6 +601,100 @@ def create_admin_router(settings: Settings, runtime: dict) -> APIRouter:
                 for hit in candidates
             ],
         }
+
+    def _gold_path() -> Path:
+        return settings.data_dir / "eval" / "gold.v1.jsonl"
+
+    @router.get("/api/admin/gold")
+    def gold_list(response: Response, _: None = Depends(require_admin)) -> dict:
+        """金标复核页：全部条目 + 逐条校验结果。"""
+        no_store(response)
+        from sufe_qa.evals.gold import load_gold_rows, validate_gold
+
+        path = _gold_path()
+        report = validate_gold(path, settings.manifest_path, settings.corpus_dir)
+        issues: dict[str, list[dict]] = {}
+        for issue in report.issues:
+            issues.setdefault(issue.id, []).append({"level": issue.level, "message": issue.message})
+        return {
+            "entries": load_gold_rows(path),
+            "issues": issues,
+            "path": str(path),
+        }
+
+    @router.post("/api/admin/gold/{entry_id}/confirm")
+    def gold_confirm(
+        entry_id: str,
+        req: GoldConfirmReq,
+        response: Response,
+        _: None = Depends(require_admin),
+    ) -> dict:
+        """复核确认：翻转署名（ai-draft → 复核人）。"""
+        no_store(response)
+        from sufe_qa.evals.gold import confirm_gold_entry
+
+        row = confirm_gold_entry(
+            _gold_path(),
+            entry_id,
+            req.reviewer.strip(),
+            datetime.now(timezone.utc).date().isoformat(),
+        )
+        if row is None:
+            raise HTTPException(status_code=404, detail="条目不存在")
+        _append_admin_action(
+            settings,
+            meta=None,
+            action="gold_confirm",
+            reason=f"{entry_id} ← {req.reviewer.strip()}",
+        )  # noqa: E501
+        return {"ok": True, "entry": row}
+
+    @router.post("/api/admin/gold/{entry_id}")
+    def gold_replace(
+        entry_id: str,
+        req: GoldReplaceReq,
+        response: Response,
+        _: None = Depends(require_admin),
+    ) -> dict:
+        """编辑条目：先在临时文件整库校验，无错误才落盘（不落脏数据）。"""
+        no_store(response)
+        from sufe_qa.evals.gold import load_gold_rows, replace_gold_entry, validate_gold
+
+        path = _gold_path()
+        rows = load_gold_rows(path)
+        if not any(row.get("id") == entry_id for row in rows):
+            raise HTTPException(status_code=404, detail="条目不存在")
+        candidate = [
+            dict(req.entry, id=entry_id) if row.get("id") == entry_id else row for row in rows
+        ]
+        tmp = path.with_suffix(".candidate.jsonl")
+        tmp.write_text(
+            "\n".join(json.dumps(r, ensure_ascii=False) for r in candidate) + "\n",
+            encoding="utf-8",
+        )
+        report = validate_gold(tmp, settings.manifest_path, settings.corpus_dir)
+        tmp.unlink(missing_ok=True)
+        errors = [i.message for i in report.errors]
+        if errors:
+            raise HTTPException(status_code=422, detail="；".join(errors[:5]))
+        replace_gold_entry(path, entry_id, req.entry)
+        _append_admin_action(settings, meta=None, action="gold_edit", reason=entry_id)
+        return {"ok": True}
+
+    @router.delete("/api/admin/gold/{entry_id}")
+    def gold_delete(
+        entry_id: str,
+        response: Response,
+        _: None = Depends(require_admin),
+    ) -> dict:
+        """打回：从 gold 集删除该条目。"""
+        no_store(response)
+        from sufe_qa.evals.gold import delete_gold_entry
+
+        if not delete_gold_entry(_gold_path(), entry_id):
+            raise HTTPException(status_code=404, detail="条目不存在")
+        _append_admin_action(settings, meta=None, action="gold_delete", reason=entry_id)
+        return {"ok": True}
 
     @router.post("/api/admin/answers")
     def save_curated_answer(

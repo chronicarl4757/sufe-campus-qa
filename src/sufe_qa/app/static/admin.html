@@ -42,6 +42,10 @@
             <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="4.5" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M10.5 10.5 14 14" stroke="currentColor" stroke-width="1.4"/></svg>
             问答诊室
           </a>
+          <a href="#/gold" data-view="gold" class="nav-item">
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5 6.5 12 13 4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+            金标复核
+          </a>
           <a href="#/import" data-view="import" class="nav-item">
             <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 10V2M5 7l3 3 3-3M2.5 12.5h11" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
             导入资料
@@ -167,6 +171,21 @@
                 <button class="btn" id="next-page" type="button">下一页</button>
               </footer>
             </div>
+          </section>
+
+          <section class="view" id="view-gold" data-title="金标复核" hidden>
+            <div class="panel">
+              <div class="panel-head">
+                <h2>金标集复核</h2>
+                <p class="panel-note">机器起草（ai-draft）的 gold 条目在此复核：确认无误后署名入库；有问题可编辑或打回。</p>
+              </div>
+              <div class="clinic-query">
+                <label for="gold-reviewer">复核人署名</label>
+                <input id="gold-reviewer" maxlength="80" placeholder="你的名字（确认前必填）" />
+                <button class="btn" id="gold-reload" type="button">刷新</button>
+              </div>
+            </div>
+            <div id="gold-list"></div>
           </section>
 
           <section class="view" id="view-clinic" data-title="问答诊室" hidden>

@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import json
+
 from dataclasses import dataclass, replace
 
 import pytest
@@ -203,3 +205,61 @@ def test_import_boundaries_and_pending_changes_block_hotfix(admin_env: AdminEnv)
     )
     assert blocked.status_code == 409
     assert "未发布变更" in blocked.json()["detail"]
+
+
+def test_gold_review_api_roundtrip(admin_env: AdminEnv):
+    """金标复核页 API：列表→编辑（校验拦截脏数据）→确认→打回。"""
+    gold_path = admin_env.settings.data_dir / "eval" / "gold.v1.jsonl"
+    gold_path.parent.mkdir(parents=True, exist_ok=True)
+    entry = {
+        "id": "gold-t-001",
+        "question": "奖学金怎么申请？",
+        "scene": "奖助学金",
+        "topic_key": "t",
+        "question_intent": "流程",
+        "student_type": "本科",
+        "should_answer": True,
+        "should_refuse": False,
+        "needs_clarification": False,
+        "needs_current_version": True,
+        "expected_domains": [],
+        "expected_doc_ids": [],
+        "expected_publishers": [],
+        "required_answer_points": [],
+        "evidence": [],
+        "gold_answer": "",
+        "validity_status": "unknown_validity",
+        "reviewer": "ai-draft",
+        "reviewed_at": "2026-09-12",
+    }
+    # 应答题缺 expected_doc_ids 会被校验拦，但列表要能读
+    gold_path.write_text(json.dumps(entry, ensure_ascii=False) + "\n", encoding="utf-8")
+
+    listed = admin_env.client.get("/api/admin/gold", headers=admin_env.headers).json()
+    assert [e["id"] for e in listed["entries"]] == ["gold-t-001"]
+    assert any("expected_doc_ids" in i["message"] for i in listed["issues"]["gold-t-001"])
+
+    # 确认署名
+    ok = admin_env.client.post(
+        "/api/admin/gold/gold-t-001/confirm",
+        headers=admin_env.headers,
+        json={"reviewer": "测试复核员"},
+    ).json()
+    assert ok["entry"]["reviewer"] == "测试复核员"
+
+    # 编辑：写入非法条目被拒（422），原条目保留
+    bad = admin_env.client.post(
+        "/api/admin/gold/gold-t-001",
+        headers=admin_env.headers,
+        json={"entry": {**entry, "should_answer": True, "expected_doc_ids": ["missing-doc"]}},
+    )
+    assert bad.status_code == 422
+    still = admin_env.client.get("/api/admin/gold", headers=admin_env.headers).json()
+    assert still["entries"][0]["reviewer"] == "测试复核员"
+
+    # 打回删除
+    deleted = admin_env.client.delete("/api/admin/gold/gold-t-001", headers=admin_env.headers)
+    assert deleted.json()["ok"] is True
+    assert (
+        admin_env.client.get("/api/admin/gold", headers=admin_env.headers).json()["entries"] == []
+    )

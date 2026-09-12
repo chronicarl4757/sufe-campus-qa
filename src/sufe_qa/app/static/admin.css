@@ -509,3 +509,16 @@ input, select, textarea { font: inherit; color: var(--ink); }
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; }
 }
+
+/* 金标复核 */
+.gold-card h2 { font-size: 15px; }
+.gold-badges { display: flex; gap: 6px; flex-wrap: wrap; }
+.tag { padding: 1px 8px; border-radius: 999px; font-size: 12px; background: var(--line, #e5e5e5); }
+.tag-ok { background: #d9f2e3; color: #1a7f4b; }
+.tag-warn { background: #fdeacc; color: #a35c00; }
+.gold-issue { font-size: 13px; margin: 4px 0; }
+.gold-issue.is-error { color: #b42318; }
+.gold-issue.is-warn { color: #a35c00; }
+.gold-points { margin: 4px 0 8px; padding-left: 20px; font-size: 13px; }
+.gold-actions { display: flex; gap: 8px; margin-top: 10px; }
+.gold-editor { width: 100%; min-height: 320px; font-family: monospace; font-size: 12px; margin-top: 10px; }

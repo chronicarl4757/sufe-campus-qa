@@ -321,10 +321,14 @@ def draft_gold_entry(
         prompt = _draft_prompt(question, docs, sorted(SCENES))
         if last_error:
             prompt += f"\n\n上一次起草未通过校验：{last_error}。请修正（evidence_text 必须逐字复制原文）。"
-        raw = "".join(llm.stream_chat([
-            {"role": "system", "content": DRAFT_SYSTEM},
-            {"role": "user", "content": prompt},
-        ]))
+        raw = "".join(
+            llm.stream_chat(
+                [
+                    {"role": "system", "content": DRAFT_SYSTEM},
+                    {"role": "user", "content": prompt},
+                ]
+            )
+        )
         try:
             draft = _parse_draft_json(raw)
         except ValueError as e:
@@ -344,10 +348,17 @@ def draft_gold_entry(
             "needs_current_version": True,
             "expected_domains": [],
             "expected_doc_ids": [
-                str(d["doc_id"]) for d in docs if d["doc_id"] in {str(e.get("doc_id")) for e in draft.get("evidence") or []}
-            ] or [primary["doc_id"]],
+                str(d["doc_id"])
+                for d in docs
+                if d["doc_id"] in {str(e.get("doc_id")) for e in draft.get("evidence") or []}
+            ]
+            or [primary["doc_id"]],
             "expected_publishers": sorted(
-                {d["publisher"] for d in docs if d["doc_id"] in {str(e.get("doc_id")) for e in draft.get("evidence") or []}}
+                {
+                    d["publisher"]
+                    for d in docs
+                    if d["doc_id"] in {str(e.get("doc_id")) for e in draft.get("evidence") or []}
+                }
                 or {docs[0]["publisher"]}
             ),
             "required_answer_points": [str(p) for p in draft.get("required_answer_points") or []],
@@ -374,3 +385,62 @@ def draft_gold_entry(
             return entry, report
         last_error = "；".join(i.message for i in report.errors[:3])
     return entry, report  # 返回最后草稿与未过校验的报告，由人工定夺
+
+
+# ---------------------------------------------------------------------------
+# 管理端金标复核页：读改写 gold 集（复核确认 / 编辑 / 打回）
+# ---------------------------------------------------------------------------
+
+
+def load_gold_rows(path: Path) -> list[dict]:
+    if not path.is_file():
+        return []
+    return [
+        json.loads(line)
+        for line in path.read_text(encoding="utf-8").splitlines()
+        if line.strip() and not line.lstrip().startswith("#")
+    ]
+
+
+def write_gold_rows(path: Path, rows: list[dict]) -> None:
+    """原子写：临时文件 + replace。"""
+    import os
+
+    path.parent.mkdir(parents=True, exist_ok=True)
+    tmp = path.with_suffix(path.suffix + ".tmp")
+    tmp.write_text(
+        "\n".join(json.dumps(r, ensure_ascii=False) for r in rows) + "\n", encoding="utf-8"
+    )
+    os.replace(tmp, path)
+
+
+def confirm_gold_entry(path: Path, entry_id: str, reviewer: str, today: str) -> dict | None:
+    """复核确认：翻转署名。返回更新后的条目；不存在返回 None。"""
+    rows = load_gold_rows(path)
+    for row in rows:
+        if row.get("id") == entry_id:
+            row["reviewer"] = reviewer
+            row["reviewed_at"] = today
+            write_gold_rows(path, rows)
+            return row
+    return None
+
+
+def replace_gold_entry(path: Path, entry_id: str, entry: dict) -> bool:
+    rows = load_gold_rows(path)
+    for i, row in enumerate(rows):
+        if row.get("id") == entry_id:
+            entry["id"] = entry_id
+            rows[i] = entry
+            write_gold_rows(path, rows)
+            return True
+    return False
+
+
+def delete_gold_entry(path: Path, entry_id: str) -> bool:
+    rows = load_gold_rows(path)
+    kept = [row for row in rows if row.get("id") != entry_id]
+    if len(kept) == len(rows):
+        return False
+    write_gold_rows(path, kept)
+    return True
