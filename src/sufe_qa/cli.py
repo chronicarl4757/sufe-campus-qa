@@ -494,6 +494,32 @@ def _cmd_ask(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_gold_suggest(args: argparse.Namespace) -> int:
+    from sufe_qa.evals.gold import suggest_candidates
+
+    settings = load_settings()
+    retriever = HybridRetriever(settings, _make_embedder(settings, args.fake_embed))
+    for c in suggest_candidates(args.question, retriever):
+        print(
+            f"[{c['doc_id']}] {c['title']}（{c['publisher']}，{c['publish_date']}，"
+            f"{c['validity_status']}，sim={c['similarity']}）"
+        )
+        print(f"    {c['snippet']}")
+    return 0
+
+
+def _cmd_gold_check(args: argparse.Namespace) -> int:
+    from sufe_qa.evals.gold import validate_gold
+
+    settings = load_settings()
+    report = validate_gold(Path(args.gold), settings.manifest_path)
+    for issue in report.issues:
+        mark = "✗" if issue.level == "error" else "!"
+        print(f"{mark} [{issue.id}] {issue.message}")
+    print(f"gold 共 {report.total} 题：{len(report.errors)} 错误，{len(report.warnings)} 警告")
+    return 0 if report.ok else 1
+
+
 def _cmd_eval(args: argparse.Namespace) -> int:
     evalset = Path(args.evalset)
     if not evalset.exists():
@@ -944,6 +970,17 @@ def build_parser() -> argparse.ArgumentParser:
     e.add_argument("--min-refusal", type=float, default=1.0, help="拒答正确率达标线")
     e.add_argument("--fake-embed", action="store_true", help=argparse.SUPPRESS)
     e.set_defaults(func=_cmd_eval)
+
+    gs = sub.add_parser("gold-suggest", help="人工打标：对问题跑真实检索，列出 gold 来源候选")
+    gs.add_argument("question")
+    gs.add_argument("--fake-embed", action="store_true", help=argparse.SUPPRESS)
+    gs.set_defaults(func=_cmd_gold_suggest)
+
+    gc = sub.add_parser(
+        "gold-check", help="人工打标：校验 gold 集（schema/现行性/evidence 逐字核对）"
+    )
+    gc.add_argument("--gold", default=str(PROJECT_ROOT / "data" / "eval" / "gold.v1.jsonl"))
+    gc.set_defaults(func=_cmd_gold_check)
 
     ca = sub.add_parser("coverage-audit", help="生成固定题库分母的语料覆盖审计")
     ca.add_argument("--question-bank", required=True)
