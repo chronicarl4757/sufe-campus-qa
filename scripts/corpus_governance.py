@@ -531,6 +531,43 @@ def main() -> None:
         actions.append((old_id, "mark_superseded", evidence))
         superseded_n += 1
 
+    # ---- H. 标准答复依赖失效传播 ----
+    # curated 标准答复（topic_key=curated.answer.*）经 derived_from 依赖官方资料；
+    # 任一依据被取代/隔离/下架后，答复降为 unknown_validity 待人工复核（管理端重新确认恢复）
+    stale_n = 0
+    derived_children = collections.defaultdict(list)
+    for r in rels:
+        if r["relation"] == "derived_from":
+            derived_children[r["child_doc_id"]].append(r["parent_doc_id"])
+    for meta in list(latest.values()):
+        if not meta.topic_key.startswith("curated.answer."):
+            continue
+        if meta.quality_status != "accepted" or meta.validity_status != "current":
+            continue
+        parents = [latest.get(pid) for pid in derived_children.get(meta.doc_id, [])]
+        bad = [
+            p
+            for p in parents
+            if p is None
+            or p.quality_status != "accepted"
+            or p.retention_status != "active"
+            or p.validity_status in {"superseded", "historical"}
+        ]
+        if not bad:
+            continue
+        records.append(
+            replace(
+                meta,
+                validity_status="unknown_validity",
+                validity_confidence=0.0,
+                validity_evidence="依赖资料失效，待人工复核",
+                retention_reason=f"dependency_stale:{','.join(p.doc_id[:8] for p in bad if p)}",
+                fetched_at=now,
+            )
+        )
+        actions.append((meta.doc_id, "dependency_stale", meta.title[:40]))
+        stale_n += 1
+
     # ---- 汇总 ----
     print(
         f"A 隔离审读垃圾: {sum(1 for a in actions if a[1] == 'quarantine' and not a[2].startswith('dedup'))}"
@@ -541,7 +578,7 @@ def main() -> None:
     print(
         f"E1 提升 active: {promoted} | E2 指针页降级: {demoted} | E3 系列收敛: {converged} | E4 兜底: {e4}"
     )
-    print(f"F 标记旧版: {superseded_n}")
+    print(f"F 标记旧版: {superseded_n} | H 依赖失效: {stale_n}")
     print(f"manifest 追加记录总数: {len(records)}")
     if not apply:
         print("DRY-RUN，加 --apply 生效")

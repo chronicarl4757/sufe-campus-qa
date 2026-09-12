@@ -186,7 +186,11 @@ def _crawl_report_stats(settings: Settings) -> dict[str, dict]:
     if not reports_dir.is_dir():
         return {}
     for path in reports_dir.glob("*.json"):
-        if path.name in {"sufe_full_report.json", "sufe_missing_sources.json"}:
+        if path.name in {
+            "sufe_full_report.json",
+            "sufe_full_report_current.json",
+            "sufe_missing_sources.json",
+        }:
             continue
         try:
             data = json.loads(path.read_text(encoding="utf-8"))
@@ -391,5 +395,10 @@ def verify_clean_pipeline(
 
 
 def write_gate_report(report: dict, path: Path) -> None:
+    """原子写入：临时文件 + os.replace，避免读者拿到半写报告。"""
+    import os
+
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    tmp = path.with_suffix(path.suffix + ".tmp")
+    tmp.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    os.replace(tmp, path)

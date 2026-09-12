@@ -116,7 +116,9 @@ def _hash_rows(rows: list[dict]) -> str:
     return "sha256:" + hashlib.sha256(canonical.encode("utf-8")).hexdigest()
 
 
-def load_question_bank(path: Path) -> QuestionBank:
+def load_question_bank(path: Path, *, enforce_quota: bool = True) -> QuestionBank:
+    """加载固定题库。enforce_quota=False 用于 holdout 隔离评测集等非配额场景。"""
+
     if not path.exists():
         raise FileNotFoundError(f"问题库不存在: {path}")
     rows: list[dict] = []
@@ -136,6 +138,8 @@ def load_question_bank(path: Path) -> QuestionBank:
     ids = [item.id for item in items]
     if len(ids) != len(set(ids)):
         raise ValueError("问题库存在重复 id")
+    if not enforce_quota:
+        return QuestionBank(tuple(items), version=str(path.stem), content_hash=_hash_rows(rows))
     counts = {scene: len([item for item in items if item.scene == scene]) for scene in SCENE_QUOTAS}
     if counts != SCENE_QUOTAS:
         raise ValueError(f"问题场景配额不符: {counts}，期望 {SCENE_QUOTAS}")

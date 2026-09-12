@@ -546,7 +546,9 @@ def _cmd_coverage_audit(args: argparse.Namespace) -> int:
 
 def _cmd_answer_benchmark(args: argparse.Namespace) -> int:
     settings = load_settings()
-    bank = load_question_bank(Path(args.bank))
+    # 场景配额只约束固定 150 题库；holdout/自定义评测集不强制
+    enforce = Path(args.bank).name == "sufe_question_bank.jsonl"
+    bank = load_question_bank(Path(args.bank), enforce_quota=enforce)
     index_metadata = load_index_metadata(settings)
     if index_metadata.get("test_only") and not args.fake_embed:
         print("拒绝使用 test-only embedding 索引生成正式答案", file=sys.stderr)
@@ -1045,7 +1047,8 @@ def build_parser() -> argparse.ArgumentParser:
     )
     qg.add_argument(
         "--output",
-        default=str(PROJECT_ROOT / "data" / "crawl_reports" / "sufe_full_report.json"),
+        # canonical 报告与管理后台同源（sufe_full_report_current.json），杜绝双真源漂移
+        default=str(PROJECT_ROOT / "data" / "crawl_reports" / "sufe_full_report_current.json"),
     )
     qg.add_argument(
         "--missing-sources",

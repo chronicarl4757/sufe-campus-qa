@@ -68,7 +68,9 @@ def test_ingest_maps_front_matter_and_subdir(tmp_path):
     d1 = manifest[doc_id_from("curated/freshman_knowhow/如何连上校园网.md")]
     assert d1.title == "如何连上校园网"
     assert d1.category == "校园生活"
-    assert d1.publish_date == "2026-08-01"  # yaml date 对象转字符串
+    # verified_at 是人工核验日期，不再伪装成官方发布日期
+    assert d1.publish_date == "unknown"
+    assert "人工校验日期：2026-08-01" in d1.validity_evidence
     assert d1.publisher == "上海财经大学"
     assert d1.document_type == "article"
     assert d1.document_kind == "service_guide"

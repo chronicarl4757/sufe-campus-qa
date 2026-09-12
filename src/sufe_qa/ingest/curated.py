@@ -83,8 +83,10 @@ def ingest_curated(curated_dir: Path, corpus_dir: Path, manifest_path: Path) -> 
             if declared_category in CATEGORIES
             else _SUBDIR_CATEGORY.get(subdir, "其他")
         )
-        # yaml 会把 2026-08-01 解析成 date 对象，str() 后仍为 YYYY-MM-DD
-        publish_date = str(fm.get("verified_at") or "unknown")
+        # verified_at 是人工核验日期，不是官方发布日期：不得写入 publish_date，
+        # 否则人工整理稿会被时效重排与来源卡片当成"当年最新发布"。时效锚点进 validity_evidence。
+        verified_at = str(fm.get("verified_at") or "")
+        publish_date = "unknown"
         raw_source_ids = fm.get("source_doc_ids") or []
         source_doc_ids = tuple(
             str(value).strip()
@@ -167,9 +169,7 @@ def ingest_curated(curated_dir: Path, corpus_dir: Path, manifest_path: Path) -> 
                 topic_key=str(fm.get("topic_key") or ""),
                 validity_status=validity_status,
                 validity_confidence=1.0 if validity_status != "unknown_validity" else 0.0,
-                validity_evidence=(
-                    f"人工校验日期：{publish_date}" if publish_date != "unknown" else ""
-                ),
+                validity_evidence=(f"人工校验日期：{verified_at}" if verified_at else ""),
                 applicable_student_type=str(fm.get("applicable_student_type") or ""),
                 applicable_school_year=str(fm.get("applicable_school_year") or ""),
                 index_collection=collection_for_kind(document_kind, "active") or "none",

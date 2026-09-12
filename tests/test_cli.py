@@ -169,7 +169,7 @@ def test_answer_benchmark_cli_writes_real_answer_and_resumes(
             type(self).calls += 1
             return [hit]
 
-    monkeypatch.setattr(cli, "load_question_bank", lambda path: bank)
+    monkeypatch.setattr(cli, "load_question_bank", lambda path, **kwargs: bank)
     monkeypatch.setattr(
         cli,
         "load_index_metadata",

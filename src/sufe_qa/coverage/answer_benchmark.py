@@ -97,6 +97,9 @@ class RealAnswerResult:
     generated_at: str
     latency_ms: float
     error: str = ""
+    # 回答对 required_answer_points 的覆盖率（None=无要点/未作答）；仅作披露，不作门禁
+    points_covered: int | None = None
+    points_total: int | None = None
 
     @classmethod
     def from_dict(cls, data: dict) -> RealAnswerResult:
@@ -116,6 +119,8 @@ class RealAnswerResult:
             generated_at=str(data.get("generated_at", "")),
             latency_ms=float(data.get("latency_ms", 0.0)),
             error=str(data.get("error", "")),
+            points_covered=data.get("points_covered"),
+            points_total=data.get("points_total"),
         )
 
 
@@ -141,9 +146,31 @@ class RealAnswerReport:
         counts = Counter(result.status for result in self.results)
         return {status: counts[status] for status in sorted(counts) if counts[status]}
 
+    @property
+    def points_coverage(self) -> dict | None:
+        """已作答题目对要求要点的字面覆盖率（披露用，不进门禁）。"""
+        rows = [
+            (r.points_covered, r.points_total)
+            for r in self.results
+            if r.points_covered is not None and r.points_total
+        ]
+        if not rows:
+            return None
+        covered = sum(c for c, _ in rows)
+        total = sum(t for _, t in rows)
+        full = sum(1 for c, t in rows if c == t)
+        return {
+            "questions_with_points": len(rows),
+            "points_covered": covered,
+            "points_total": total,
+            "coverage_ratio": round(covered / total, 4) if total else None,
+            "fully_covered_questions": full,
+        }
+
     def to_dict(self) -> dict:
         data = asdict(self)
         data["status_counts"] = self.status_counts
+        data["points_coverage"] = self.points_coverage
         return data
 
     def to_json(self) -> str:
@@ -173,6 +200,18 @@ def _snapshots(hits: list[Hit]) -> tuple[RealAnswerHit, ...]:
     return tuple(RealAnswerHit.from_hit(hit, index) for index, hit in enumerate(hits, 1))
 
 
+def _points_coverage(answer_text: str, points: tuple[str, ...]) -> tuple[int, int] | None:
+    """回答文本对要求要点的字面覆盖（squash 后子串匹配）。
+
+    只回答"答没说"这一层；论断是否真被引用资料支撑需 LLM 判分，不在此列。
+    """
+    if not points:
+        return None
+    squashed = re.sub(r"\s+", "", answer_text)
+    covered = sum(1 for p in points if re.sub(r"\s+", "", p) in squashed)
+    return covered, len(points)
+
+
 def _is_model_evidence_refusal(answer_text: str) -> bool:
     """识别模型基于证据不足作出的自然语言拒答，避免误报为引用异常。"""
     first_paragraph = re.split(r"\n\s*\n", answer_text.strip(), maxsplit=1)[0]
@@ -188,6 +227,7 @@ def _is_model_evidence_refusal(answer_text: str) -> bool:
 def _base_result(
     probe: QuestionProbe,
     *,
+    points: tuple[int, int] | None = None,
     status: str,
     answer_text: str,
     refused: bool,
@@ -214,6 +254,8 @@ def _base_result(
         generated_at=_now(),
         latency_ms=round((time.perf_counter() - started) * 1000, 1),
         error=error,
+        points_covered=points[0] if points else None,
+        points_total=points[1] if points else None,
     )
 
 
@@ -256,6 +298,7 @@ def _generate_from_hits(
             )
         return _base_result(
             probe,
+            points=_points_coverage(answer_text, probe.required_answer_points),
             status="answered" if check.ok else "answered_with_citation_issue",
             answer_text=answer_text,
             refused=False,
