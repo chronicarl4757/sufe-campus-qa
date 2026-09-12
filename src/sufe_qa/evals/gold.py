@@ -13,6 +13,7 @@ import re
 from dataclasses import dataclass, field
 from pathlib import Path
 
+from sufe_qa.indexing.collections import collection_for_kind
 from sufe_qa.schema import load_manifest
 
 SCENES = {
@@ -124,8 +125,9 @@ def validate_gold(path: Path, manifest_path: Path, corpus_dir: Path | None = Non
                 err(
                     f"gold 来源不是现行文档: {doc_id}（{meta.quality_status}/{meta.retention_status}）"
                 )
-            if meta.index_collection == "none":
-                err(f"gold 来源不在检索索引: {doc_id}")
+            # 以 kind+retention 实时判定是否入索引（manifest 的 index_collection 字段可能过期）
+            if collection_for_kind(meta.document_kind, meta.retention_status) is None:
+                err(f"gold 来源按其类型不会进入检索索引: {doc_id}")
             if meta.validity_status in {"superseded", "historical"}:
                 warn(f"gold 来源已是旧版（{meta.validity_status}），确认是否应换现行版: {doc_id}")
         publishers = {manifest[d].publisher for d in doc_ids if d in manifest}
@@ -166,6 +168,10 @@ def validate_gold(path: Path, manifest_path: Path, corpus_dir: Path | None = Non
             if not (30 <= n <= 300):
                 warn(f"gold_answer 建议 50~150 字（当前 {n} 字）")
 
+        # ---- 5.5 机器起草必须有人工复核署名 ----
+        if "ai-draft" in str(row.get("reviewer", "")):
+            warn("机器起草待人工复核：复核通过后把 reviewer 改为复核人署名")
+
         # ---- 6. 版本有效性人工确认 ----
         vs = str(row.get("validity_status") or "")
         if vs and vs not in VALIDITY:
@@ -192,3 +198,179 @@ def suggest_candidates(question: str, retriever, n: int = 8) -> list[dict]:
             }
         )
     return out
+
+
+# ---------------------------------------------------------------------------
+# 机器起草：人只做复核确认，不手写 JSON
+# ---------------------------------------------------------------------------
+
+DRAFT_SYSTEM = """你是校务问答评测集的标注助手。根据给定的官方资料为问题起草 gold 标注。
+硬性要求：
+1. 只输出一个 JSON 对象，不要输出任何其他文字；
+2. evidence_text 必须逐字复制资料原文（连续片段，可跨标点），禁止改写；
+3. required_answer_points 必须是资料直接支撑的具体事实句（含主语和关键值），禁止"申请/流程"式泛词；
+4. gold_answer 50~150 字，只写资料支持的内容；
+5. question_intent 只能从 条件/材料/流程/时间/地点/金额/资格 中选一个；
+6. scene 只能从给定场景词表中选一个；
+7. 资料不足以完整回答时，insufficient=true，其余字段尽量给出。"""
+
+
+def _draft_prompt(question: str, docs: list[dict], scenes: list[str]) -> str:
+    blocks = "\n\n".join(
+        f"资料 {d['doc_id']}《{d['title']}》（{d['publisher']}，{d['publish_date']}，{d['validity_status']}）\n{d['body'][:3000]}"
+        for d in docs
+    )
+    return f"""问题：{question}
+
+场景词表：{"、".join(scenes)}
+
+{blocks}
+
+请输出 JSON，字段：
+{{"question_intent":"流程","scene":"本科教务","student_type":"本科",
+ "insufficient":false,
+ "required_answer_points":["…"],"evidence":[{{"doc_id":"…","heading":"第X条或空","evidence_text":"…"}}],
+ "gold_answer":"…","validity_note":"一句话版本依据说明"}}
+student_type 只能从 本科/硕士/博士/全体 中选。evidence 的 doc_id 必须来自上面资料的编号。"""
+
+
+def _parse_draft_json(text: str) -> dict:
+    m = re.search(r"\{.*\}", text, re.S)
+    if not m:
+        raise ValueError("模型未返回 JSON")
+    return json.loads(m.group(0))
+
+
+def draft_gold_entry(
+    question: str,
+    settings,
+    retriever,
+    llm,
+    *,
+    manifest_path: Path,
+    corpus_dir: Path,
+    reviewer: str = "ai-draft",
+    today: str,
+    next_seq: int = 1,
+) -> tuple[dict, GoldReport]:
+    """检索 + LLM 起草 gold 记录；返回 (entry, 校验报告)。人只需复核确认。"""
+    from sufe_qa.retrieve.retriever import is_confident
+
+    hits = retriever.search_routed(question)
+    confident = bool(hits) and is_confident(hits, settings.vector_min_similarity)
+    manifest = load_manifest(manifest_path)
+
+    if not confident:
+        entry = {
+            "id": f"gold-auto-{next_seq:03d}",
+            "question": question,
+            "scene": "本科教务",
+            "topic_key": "auto.unverified.topic",
+            "question_intent": "流程",
+            "student_type": "全体",
+            "should_answer": False,
+            "should_refuse": True,
+            "needs_clarification": False,
+            "needs_current_version": False,
+            "expected_domains": [],
+            "expected_doc_ids": [],
+            "expected_publishers": [],
+            "required_answer_points": [],
+            "evidence": [],
+            "gold_answer": "",
+            "validity_status": "unknown_validity",
+            "validity_note": "检索无可靠来源，起草为拒答样例，待人工确认",
+            "reviewer": reviewer,
+            "reviewed_at": today,
+        }
+        # 场景/意图留给人工复核修改；先过基本校验
+        tmp = corpus_dir / f".gold_draft_{next_seq}.jsonl"
+        tmp.write_text(json.dumps(entry, ensure_ascii=False) + "\n", encoding="utf-8")
+        report = validate_gold(tmp, manifest_path, corpus_dir)
+        tmp.unlink(missing_ok=True)
+        return entry, report
+
+    # 选候选文档：现行优先，按命中序去重，最多 3 份
+    seen: set[str] = set()
+    docs: list[dict] = []
+    for h in hits:
+        if h.doc_id in seen:
+            continue
+        meta = manifest.get(h.doc_id)
+        if meta is None or not meta.file_path:
+            continue
+        body_path = corpus_dir / meta.file_path
+        if not body_path.is_file():
+            continue
+        seen.add(h.doc_id)
+        docs.append(
+            {
+                "doc_id": h.doc_id,
+                "title": h.title,
+                "publisher": h.publisher,
+                "publish_date": h.publish_date,
+                "validity_status": h.validity_status,
+                "body": body_path.read_text(encoding="utf-8", errors="replace"),
+            }
+        )
+        if len(docs) >= 3:
+            break
+
+    last_error = ""
+    for _attempt in range(2):  # 证据逐字校验失败时带错误信息重试一次
+        prompt = _draft_prompt(question, docs, sorted(SCENES))
+        if last_error:
+            prompt += f"\n\n上一次起草未通过校验：{last_error}。请修正（evidence_text 必须逐字复制原文）。"
+        raw = "".join(llm.stream_chat([
+            {"role": "system", "content": DRAFT_SYSTEM},
+            {"role": "user", "content": prompt},
+        ]))
+        try:
+            draft = _parse_draft_json(raw)
+        except ValueError as e:
+            last_error = str(e)
+            continue
+        primary = docs[0]
+        entry = {
+            "id": f"gold-auto-{next_seq:03d}",
+            "question": question,
+            "scene": str(draft.get("scene") or "本科教务"),
+            "topic_key": f"auto.{primary['doc_id'][:8]}",
+            "question_intent": str(draft.get("question_intent") or "流程"),
+            "student_type": str(draft.get("student_type") or "全体"),
+            "should_answer": not bool(draft.get("insufficient")),
+            "should_refuse": bool(draft.get("insufficient")),
+            "needs_clarification": False,
+            "needs_current_version": True,
+            "expected_domains": [],
+            "expected_doc_ids": [
+                str(d["doc_id"]) for d in docs if d["doc_id"] in {str(e.get("doc_id")) for e in draft.get("evidence") or []}
+            ] or [primary["doc_id"]],
+            "expected_publishers": sorted(
+                {d["publisher"] for d in docs if d["doc_id"] in {str(e.get("doc_id")) for e in draft.get("evidence") or []}}
+                or {docs[0]["publisher"]}
+            ),
+            "required_answer_points": [str(p) for p in draft.get("required_answer_points") or []],
+            "evidence": [
+                {
+                    "doc_id": str(e.get("doc_id", "")),
+                    "heading": str(e.get("heading", "")),
+                    "evidence_text": str(e.get("evidence_text", "")),
+                }
+                for e in draft.get("evidence") or []
+                if str(e.get("doc_id")) in {d["doc_id"] for d in docs}
+            ],
+            "gold_answer": str(draft.get("gold_answer") or ""),
+            "validity_status": "current",
+            "validity_note": str(draft.get("validity_note") or ""),
+            "reviewer": reviewer,
+            "reviewed_at": today,
+        }
+        tmp = corpus_dir / f".gold_draft_{next_seq}.jsonl"
+        tmp.write_text(json.dumps(entry, ensure_ascii=False) + "\n", encoding="utf-8")
+        report = validate_gold(tmp, manifest_path, corpus_dir)
+        tmp.unlink(missing_ok=True)
+        if report.ok:
+            return entry, report
+        last_error = "；".join(i.message for i in report.errors[:3])
+    return entry, report  # 返回最后草稿与未过校验的报告，由人工定夺

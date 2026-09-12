@@ -65,31 +65,32 @@
   看标题与正文里的"X 年 X 月修订/施行/废止"字样；**确认不了就标 unknown_validity，不要硬标 current**。
 - **gold_answer**：50~150 字，只写来源支持的内容。它是人工对照用的，不要求模型逐字一致。
 
-## 三、手把手工作流
+## 三、日常工作流（机器起草、人只复核）
 
-1. **选题**：从上面配额里挑一道。
-2. **找来源候选**：
+**不需要手写 JSON。** 起草由检索 + DeepSeek 自动完成：
 
-   ```bash
-   .venv/bin/sufe-qa gold-suggest "本科生怎么申请休学？"
-   ```
+```bash
+# 单题：起草并打印校验结果（不入库）
+.venv/bin/sufe-qa gold-draft "本科生怎么申请休学？"
 
-   输出每条候选的 `[doc_id] 标题（发布单位，发布日期，版本状态，相似度）+ 正文片段`。
-   对候选不放心就到管理端 Dashboard（`http://127.0.0.1:7860/admin`）查文档全文与版本历史。
+# 批量：每行一题；校验通过的自动追加进 gold.v1.jsonl
+.venv/bin/sufe-qa gold-draft --from-file topics.txt --yes
+```
 
-3. **读原文定来源**：把候选 doc_id 在 `data/corpus/manifest.jsonl` 里确认
-   `quality_status=accepted`、`retention_status=active`、`index_collection≠none`、
-   版本为现行（gold-check 会替你硬查这四项）。
-4. **写要点与证据**：要点写成事实句；证据从原文复制。复制时随手核对一下上下文年份。
-5. **写 gold_answer** 与 validity 结论。
-6. **校验**：
+草稿字段全部由机器填：来源候选（真实检索 top 文档）、要点与逐字证据（LLM 从原文抽取）、
+参考答案、场景/意图/学生类型。`gold-check` 在入库前已自动跑过一遍——**校验不通过的草稿
+不会入库**，只会打印出来供人工处理。
 
-   ```bash
-   .venv/bin/sufe-qa gold-check            # 默认校验 data/eval/gold.v1.jsonl
-   ```
+人只做三件事：
 
-   全绿（0 错误）才算标完。警告（!）逐条看一眼，能修就修。
-7. **提交**：gold.v1.jsonl 随 git 提交，commit message 写 `data(gold): …`。
+1. **读一遍草稿**：`gold_answer` 是否属实、`required_answer_points` 是否真是该题必须答到的点。
+2. **确认来源**：`gold-suggest`/`gold-draft` 给的 doc_id 是否确实是当前权威版本
+   （Dashboard 可查全文与版本历史）。
+3. **署名翻转**：草稿 `reviewer` 默认 `ai-draft`（=待人工复核）。复核通过就把该字段改成
+   你的名字并更新 `reviewed_at`。这是"机器起草、人工负责"的边界——`gold-check` 会对
+   `ai-draft` 署名给警告，金标集里不应长期残留未复核草稿。
+
+需要手工新增/修改时（拒答题、追问题）：字段含义见上节；`gold-check` 全绿才算完成。
 
 ## 四、维护纪律
 

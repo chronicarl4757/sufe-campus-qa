@@ -101,3 +101,9 @@ def test_answerable_requires_doc_ids(tmp_path):
     row = _row(expected_doc_ids=[])
     report = _check(tmp_path, row, manifest)
     assert any("expected_doc_ids" in i.message for i in report.errors)
+
+
+def test_ai_draft_signature_warns(tmp_path):
+    manifest = _seed_manifest(tmp_path)
+    report = _check(tmp_path, _row(reviewer="ai-draft"), manifest)
+    assert any("待人工复核" in i.message for i in report.warnings)

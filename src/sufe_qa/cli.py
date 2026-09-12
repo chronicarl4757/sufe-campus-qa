@@ -508,6 +508,64 @@ def _cmd_gold_suggest(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_gold_draft(args: argparse.Namespace) -> int:
+    """机器起草 gold 记录：检索候选官方文档 → LLM 抽取要点/逐字证据/参考答案 → 自动校验。"""
+    from datetime import date
+
+    from sufe_qa.evals.gold import draft_gold_entry
+    from sufe_qa.generate.client import DeepSeekClient
+
+    questions = [args.question] if args.question else []
+    if args.from_file:
+        questions += [
+            line.strip()
+            for line in Path(args.from_file).read_text(encoding="utf-8").splitlines()
+            if line.strip() and not line.startswith("#")
+        ]
+    if not questions:
+        print("请提供问题或 --from-file", file=sys.stderr)
+        return 1
+
+    settings = load_settings()
+    retriever = HybridRetriever(settings, _make_embedder(settings, args.fake_embed))
+    llm = DeepSeekClient(settings)
+    gold_path = PROJECT_ROOT / "data" / "eval" / "gold.v1.jsonl"
+    existing = 0
+    if gold_path.is_file():
+        existing = sum(
+            1
+            for line in gold_path.read_text(encoding="utf-8").splitlines()
+            if line.strip() and not line.lstrip().startswith("#")
+        )
+
+    ok_n = 0
+    for i, question in enumerate(questions, 1):
+        entry, report = draft_gold_entry(
+            question,
+            settings,
+            retriever,
+            llm,
+            manifest_path=settings.manifest_path,
+            corpus_dir=settings.corpus_dir,
+            reviewer=args.reviewer,
+            today=date.today().isoformat(),
+            next_seq=existing + i,
+        )
+        if report.ok:
+            ok_n += 1
+            print(f"[{i}/{len(questions)}] 通过校验: {question[:36]}", flush=True)
+            if args.yes:
+                with gold_path.open("a", encoding="utf-8") as fh:
+                    fh.write(json.dumps(entry, ensure_ascii=False) + "\n")
+        else:
+            print(f"[{i}/{len(questions)}] 待人工处理: {question[:36]}", flush=True)
+            for issue in report.errors[:3]:
+                print(f"    ✗ {issue.message}")
+            print("    草稿（未入库）:", json.dumps(entry, ensure_ascii=False)[:400])
+    print(f"完成：{ok_n}/{len(questions)} 通过校验" + ("并已入库" if args.yes else ""))
+    return 0 if ok_n == len(questions) else 1
+
+
 def _cmd_gold_check(args: argparse.Namespace) -> int:
     from sufe_qa.evals.gold import validate_gold
 
@@ -981,6 +1039,14 @@ def build_parser() -> argparse.ArgumentParser:
     )
     gc.add_argument("--gold", default=str(PROJECT_ROOT / "data" / "eval" / "gold.v1.jsonl"))
     gc.set_defaults(func=_cmd_gold_check)
+
+    gd = sub.add_parser("gold-draft", help="机器起草 gold 记录（检索+LLM），人只复核确认")
+    gd.add_argument("question", nargs="?", help="单个问题；或用 --from-file 批量")
+    gd.add_argument("--from-file", default="", help="每行一个问题的批量起草清单")
+    gd.add_argument("--yes", action="store_true", help="校验通过即追加进 gold 集")
+    gd.add_argument("--reviewer", default="ai-draft", help="复核人署名（默认 ai-draft=待人工复核）")
+    gd.add_argument("--fake-embed", action="store_true", help=argparse.SUPPRESS)
+    gd.set_defaults(func=_cmd_gold_draft)
 
     ca = sub.add_parser("coverage-audit", help="生成固定题库分母的语料覆盖审计")
     ca.add_argument("--question-bank", required=True)
