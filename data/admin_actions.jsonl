@@ -362,3 +362,7 @@
 {"ts": "2026-09-02T10:28:52+00:00", "doc_id": "f38fe16168a4", "title": "标准答复｜国际交流项目的咨询联系方式是什么？", "action": "curate_answer", "reason": "AI辅助整理 核验；依据 2 份"}
 {"ts": "2026-09-02T10:28:55+00:00", "doc_id": "cb5c48f5a97d", "title": "标准答复｜校园失物招领如何办理？", "action": "curate_answer", "reason": "AI辅助整理 核验；依据 2 份"}
 {"ts": "2026-09-02T10:28:57+00:00", "doc_id": "c4efb8bf3268", "title": "标准答复｜校园电信网络诈骗如何举报和求助？", "action": "curate_answer", "reason": "AI辅助整理 核验；依据 2 份"}
+{"ts": "2026-09-12T06:50:04+00:00", "doc_id": "", "title": "", "action": "gold_confirm", "reason": "gold-auto-002 ← 测试员001"}
+{"ts": "2026-09-12T06:50:31+00:00", "doc_id": "", "title": "", "action": "gold_confirm", "reason": "gold-auto-003 ← 测试员001"}
+{"ts": "2026-09-12T06:51:16+00:00", "doc_id": "", "title": "", "action": "gold_confirm", "reason": "gold-auto-006 ← 测试员001"}
+{"ts": "2026-09-12T06:55:42+00:00", "doc_id": "a19ea11ab6f1", "title": "【经验分享·第110期】迎着阳光盛大逃亡", "action": "wechat_import", "reason": "管理员提交公众号链接"}

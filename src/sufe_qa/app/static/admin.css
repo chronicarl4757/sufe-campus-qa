@@ -522,3 +522,15 @@ input, select, textarea { font: inherit; color: var(--ink); }
 .gold-points { margin: 4px 0 8px; padding-left: 20px; font-size: 13px; }
 .gold-actions { display: flex; gap: 8px; margin-top: 10px; }
 .gold-editor { width: 100%; min-height: 320px; font-family: monospace; font-size: 12px; margin-top: 10px; }
+
+/* 金标复核表单 */
+.gold-form { display: grid; gap: 10px; margin-top: 10px; }
+.gold-field { display: grid; gap: 4px; font-size: 13px; }
+.gold-field > span { color: var(--muted, #666); }
+.gold-field input, .gold-field select, .gold-field textarea {
+  font: inherit; padding: 6px 8px; border: 1px solid var(--line, #ddd); border-radius: 6px; width: 100%;
+}
+.gold-flags { display: flex; gap: 16px; flex-wrap: wrap; font-size: 13px; }
+.gold-check-line { display: flex; align-items: center; gap: 6px; }
+.gold-evidence-row { display: grid; grid-template-columns: 180px 120px 1fr 40px; gap: 6px; margin-bottom: 8px; align-items: start; }
+.gold-evidence-row textarea { font-size: 12px; }

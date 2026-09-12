@@ -899,12 +899,24 @@ if (state.token) {
 
 /* ---------- 金标复核 ---------- */
 
+const GOLD_SCENES = ["本科教务", "研究生培养与学位", "奖助学金", "推免与招生", "就业手续", "宿舍后勤", "信息化与校园卡", "图书馆", "医疗医保", "国际交流", "新生与安全"];
+const GOLD_INTENTS = ["条件", "材料", "流程", "时间", "地点", "金额", "资格"];
+const GOLD_STUDENT_TYPES = ["本科", "硕士", "博士", "全体"];
+const GOLD_VALIDITY = [
+  ["current", "现行有效"],
+  ["unknown_validity", "有效性待确认"],
+  ["superseded", "已被替代"],
+  ["historical", "历史版本"],
+];
+
 async function loadGold() {
   const list = byId("gold-list");
+  const scrollY = window.scrollY;
   list.textContent = "载入中…";
   try {
     const data = await api("/api/admin/gold");
     renderGold(data.entries || [], data.issues || {});
+    window.scrollTo(0, scrollY);
   } catch (error) {
     list.textContent = "";
     list.appendChild(element("p", "panel-note", `加载失败：${error.message}`));
@@ -924,6 +936,133 @@ function _goldBadge(entry) {
   return wrap;
 }
 
+function _field(labelText, input) {
+  const label = element("label", "gold-field");
+  label.appendChild(element("span", "", labelText));
+  label.appendChild(input);
+  return label;
+}
+
+function _input(value) {
+  const el = document.createElement("input");
+  el.value = value || "";
+  return el;
+}
+
+function _select(options, value) {
+  const el = document.createElement("select");
+  for (const [val, text] of options) {
+    const opt = element("option", "", text);
+    opt.value = val;
+    if (val === value) opt.selected = true;
+    el.appendChild(opt);
+  }
+  return el;
+}
+
+function _textarea(value, rows) {
+  const el = document.createElement("textarea");
+  el.value = value || "";
+  el.rows = rows;
+  return el;
+}
+
+function _checkbox(checked, text) {
+  const box = document.createElement("input");
+  box.type = "checkbox";
+  box.checked = !!checked;
+  const label = element("label", "gold-check-line");
+  label.appendChild(box);
+  label.appendChild(document.createTextNode(text));
+  return {box, label};
+}
+
+function buildGoldForm(entry) {
+  const form = element("div", "gold-form");
+  const f = {};
+  f.question = _field("问题", _input(entry.question));
+  f.topic_key = _field("topic_key", _input(entry.topic_key));
+  f.scene = _field("场景", _select(GOLD_SCENES.map((s) => [s, s]), entry.scene));
+  f.question_intent = _field("问题意图", _select(GOLD_INTENTS.map((s) => [s, s]), entry.question_intent));
+  f.student_type = _field("学生类型", _select(GOLD_STUDENT_TYPES.map((s) => [s, s]), entry.student_type));
+  f.validity_status = _field("版本有效性", _select(GOLD_VALIDITY, entry.validity_status || "unknown_validity"));
+  form.append(
+    f.question, f.topic_key, f.scene, f.question_intent, f.student_type, f.validity_status
+  );
+
+  const flags = element("div", "gold-flags");
+  f.should_answer = _checkbox(entry.should_answer, "应回答");
+  f.should_refuse = _checkbox(entry.should_refuse, "应拒答");
+  f.needs_clarification = _checkbox(entry.needs_clarification, "需追问");
+  f.needs_current_version = _checkbox(entry.needs_current_version !== false, "依赖现行版本");
+  for (const c of [f.should_answer, f.should_refuse, f.needs_clarification, f.needs_current_version])
+    flags.appendChild(c.label);
+  form.appendChild(flags);
+
+  f.expected_doc_ids = _field("权威来源 doc_id（空格分隔）", _input((entry.expected_doc_ids || []).join(" ")));
+  f.expected_publishers = _field("期望发布单位（顿号分隔）", _input((entry.expected_publishers || []).join("、")));
+  f.expected_domains = _field("期望域名（空格分隔）", _input((entry.expected_domains || []).join(" ")));
+  form.append(f.expected_doc_ids, f.expected_publishers, f.expected_domains);
+
+  f.required_answer_points = _field(
+    "必答要点（每行一条，写可检查的事实句）",
+    _textarea((entry.required_answer_points || []).join("\n"), 4)
+  );
+  f.gold_answer = _field("参考答案（50~150 字）", _textarea(entry.gold_answer, 4));
+  f.validity_note = _field("版本说明", _input(entry.validity_note));
+  form.append(f.required_answer_points, f.gold_answer, f.validity_note);
+
+  // 证据块：可增删
+  f.evidenceBox = element("div", "gold-evidence");
+  const addEvidence = (ev) => {
+    const row = element("div", "gold-evidence-row");
+    row._doc = _input(ev && ev.doc_id);
+    row._doc.placeholder = "doc_id";
+    row._heading = _input(ev && ev.heading);
+    row._heading.placeholder = "条款号（如第十四条，可空）";
+    row._text = _textarea(ev && ev.evidence_text, 2);
+    row._text.placeholder = "证据原文（必须与文档逐字一致）";
+    const del = element("button", "btn", "删");
+    del.type = "button";
+    del.onclick = () => row.remove();
+    row.append(row._doc, row._heading, row._text, del);
+    f.evidenceBox.appendChild(row);
+  };
+  for (const ev of entry.evidence || []) addEvidence(ev);
+  const addBtn = element("button", "btn", "+ 加一条证据");
+  addBtn.type = "button";
+  addBtn.onclick = () => addEvidence(null);
+  form.appendChild(element("p", "panel-note", "证据（doc_id + 原文片段）"));
+  form.appendChild(f.evidenceBox);
+  form.appendChild(addBtn);
+
+  form.collect = () => ({
+    ...entry,
+    question: f.question.querySelector("input").value.trim(),
+    topic_key: f.topic_key.querySelector("input").value.trim(),
+    scene: f.scene.querySelector("select").value,
+    question_intent: f.question_intent.querySelector("select").value,
+    student_type: f.student_type.querySelector("select").value,
+    validity_status: f.validity_status.querySelector("select").value,
+    should_answer: f.should_answer.box.checked,
+    should_refuse: f.should_refuse.box.checked,
+    needs_clarification: f.needs_clarification.box.checked,
+    needs_current_version: f.needs_current_version.box.checked,
+    expected_doc_ids: f.expected_doc_ids.querySelector("input").value.split(/\s+/).filter(Boolean),
+    expected_publishers: f.expected_publishers.querySelector("input").value.split(/[、,，]/).map((s) => s.trim()).filter(Boolean),
+    expected_domains: f.expected_domains.querySelector("input").value.split(/\s+/).filter(Boolean),
+    required_answer_points: f.required_answer_points.querySelector("textarea").value.split("\n").map((s) => s.trim()).filter(Boolean),
+    gold_answer: f.gold_answer.querySelector("textarea").value.trim(),
+    validity_note: f.validity_note.querySelector("input").value.trim(),
+    evidence: [...f.evidenceBox.querySelectorAll(".gold-evidence-row")].map((row) => ({
+      doc_id: row._doc.value.trim(),
+      heading: row._heading.value.trim(),
+      evidence_text: row._text.value.trim(),
+    })).filter((ev) => ev.doc_id && ev.evidence_text),
+  });
+  return form;
+}
+
 function renderGold(entries, issues) {
   const list = byId("gold-list");
   list.textContent = "";
@@ -933,6 +1072,7 @@ function renderGold(entries, issues) {
   }
   for (const entry of entries) {
     const card = element("div", "panel gold-card");
+    card.dataset.goldId = entry.id;
     const head = element("div", "panel-head");
     head.appendChild(element("h2", "", entry.question || entry.id));
     head.appendChild(_goldBadge(entry));
@@ -983,53 +1123,59 @@ function renderGold(entries, issues) {
         alert("先在顶部填复核人署名");
         return;
       }
+      confirmBtn.disabled = true;
       try {
-        await api(`/api/admin/gold/${encodeURIComponent(entry.id)}/confirm`, {
+        const result = await api(`/api/admin/gold/${encodeURIComponent(entry.id)}/confirm`, {
           method: "POST",
           headers: {"Content-Type": "application/json"},
           body: JSON.stringify({reviewer}),
         });
-        await loadGold();
+        // 就地更新徽章，不整页重载、不丢滚动位置
+        entry.reviewer = result.entry.reviewer;
+        entry.reviewed_at = result.entry.reviewed_at;
+        const badges = card.querySelector(".gold-badges");
+        if (badges) badges.replaceWith(_goldBadge(entry));
       } catch (error) {
         alert(`确认失败：${error.message}`);
+      } finally {
+        confirmBtn.disabled = false;
       }
     };
     actions.appendChild(confirmBtn);
 
-    const editBtn = element("button", "btn", "编辑 JSON");
+    const editBtn = element("button", "btn", "编辑");
     editBtn.type = "button";
     editBtn.onclick = () => {
-      const existing = card.querySelector("textarea");
+      const existing = card.querySelector(".gold-form");
       if (existing) {
         existing.remove();
-        editBtn.textContent = "编辑 JSON";
+        editBtn.textContent = "编辑";
         return;
       }
-      const area = element("textarea", "gold-editor");
-      area.value = JSON.stringify(entry, null, 2);
-      card.appendChild(area);
-      const saveBtn = element("button", "btn", "保存（先校验）");
+      const form = buildGoldForm(entry);
+      const saveBtn = element("button", "btn btn-primary", "保存（先校验）");
       saveBtn.type = "button";
       saveBtn.onclick = async () => {
-        let parsed;
-        try {
-          parsed = JSON.parse(area.value);
-        } catch {
-          alert("不是合法 JSON");
-          return;
-        }
+        saveBtn.disabled = true;
+        const scrollY = window.scrollY;
         try {
           await api(`/api/admin/gold/${encodeURIComponent(entry.id)}`, {
             method: "POST",
             headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({entry: parsed}),
+            body: JSON.stringify({entry: form.collect()}),
           });
           await loadGold();
+          window.scrollTo(0, scrollY);
         } catch (error) {
           alert(`保存被拒：${error.message}`);
+        } finally {
+          saveBtn.disabled = false;
         }
       };
-      card.appendChild(saveBtn);
+      const wrap = element("div", "");
+      wrap.appendChild(form);
+      wrap.appendChild(saveBtn);
+      card.appendChild(wrap);
       editBtn.textContent = "收起";
     };
     actions.appendChild(editBtn);
@@ -1038,9 +1184,11 @@ function renderGold(entries, issues) {
     delBtn.type = "button";
     delBtn.onclick = async () => {
       if (!window.confirm(`确认从 gold 集删除「${entry.question}」？`)) return;
+      const scrollY = window.scrollY;
       try {
         await api(`/api/admin/gold/${encodeURIComponent(entry.id)}`, {method: "DELETE"});
         await loadGold();
+        window.scrollTo(0, scrollY);
       } catch (error) {
         alert(`删除失败：${error.message}`);
       }

@@ -1,0 +1,37 @@
+{
+ "mode": "admin-seed",
+ "started_at": "2026-09-12T06:55:33+00:00",
+ "discovery_status": "ok",
+ "discovered": 1,
+ "whitelist_passed": 1,
+ "date_passed": 1,
+ "relevance_passed": 1,
+ "direct_content": 0,
+ "fetch_ok": 1,
+ "fetch_failed": 0,
+ "empty_body": 0,
+ "quality_accepted": 1,
+ "quality_rejected": 0,
+ "duplicate": 0,
+ "indexed_candidate": 1,
+ "reject_reasons": {},
+ "decisions": [
+  {
+   "url": "https://mp.weixin.qq.com/s/0nSFkmkzXWFE2X6_CnjDcw?click_id=1",
+   "title": "【经验分享·第110期】迎着阳光盛大逃亡",
+   "decision": "accept",
+   "reason": "new",
+   "date": "2026-05-10",
+   "account": "上财FOS",
+   "document_kind": "procedure",
+   "body_chars": 2357,
+   "topic": "实验班/选拔",
+   "doc_id": "a19ea11ab6f1",
+   "retention": "active"
+  }
+ ],
+ "warnings": [
+  "管理员确认放行未列入白名单的账号: 上财FOS"
+ ],
+ "notes": []
+}
