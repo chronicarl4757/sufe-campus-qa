@@ -15,6 +15,8 @@ from docx import Document
 
 from sufe_qa.ingest.attachment_parsers import _detect_format, parse_attachment
 
+FIXTURES = __import__("pathlib").Path(__file__).parent / "fixtures"
+
 OLE2_HEAD = b"\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1" + b"\x00" * 512
 
 _LONG_PAGE = (
@@ -235,7 +237,6 @@ def test_parse_xlsx_corrupt_returns_parse_failed():
 @pytest.mark.parametrize(
     "filename,content,fmt",
     [
-        ("表格.xls", OLE2_HEAD, "xls"),
         ("幻灯片.ppt", OLE2_HEAD, "ppt"),
         ("幻灯片.pptx", b"PK\x03\x04 junk", "pptx"),
         ("说明.txt", b"plain text", "unknown"),
@@ -247,3 +248,21 @@ def test_unsupported_formats_return_status_without_content(filename, content, fm
     assert r.parse_status == "unsupported_format"
     assert r.text == ""
     assert r.char_count == 0
+
+
+def test_corrupt_xls_reports_parse_failed():
+    """.xls 已走 xlrd 真解析：垃圾内容应 parse_failed 而非静默 unsupported。"""
+    r = parse_attachment("表格.xls", OLE2_HEAD)
+    assert r.fmt == "xls"
+    assert r.parse_status == "parse_failed"
+    assert r.text == ""
+
+
+def test_legacy_xls_parsed_via_xlrd():
+    """.xls（OLE2 老格式）经 xlrd 纯 Python 解析出表格内容，不依赖 LibreOffice。"""
+    content = (FIXTURES / "sample.xls").read_bytes()
+    result = parse_attachment("sample.xls", content)
+    assert result.fmt == "xls"
+    assert result.parse_status == "ok"
+    assert "差旅费" in result.text and "100" in result.text
+    assert result.sheet_count == 1

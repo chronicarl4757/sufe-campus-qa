@@ -204,7 +204,7 @@ data/
   接口 JS 渲染（未逆向），以首页为种子；career 就业网为招聘系统不抓——相关
   政策可投 `data/inbox/`
 - 附件链路：文章页 a/iframe/embed/object 打分发现 → 下载（魔数识别）→ PDF/DOCX/
-  XLSX 解析（扫描 PDF 与旧 DOC 标状态保留原件）→ 附件文档带父级上下文入库，
+  XLSX/XLS 解析（XLS 走 xlrd 纯 Python，部署无需 LibreOffice；扫描 PDF 与旧 DOC 标状态保留原件）→ 附件文档带父级上下文入库，
   同 binary 多父只嵌一份正文、relations.jsonl 记全部引用
 - 换 embedding 模型：改 `config.py` 的 `embedding_model` + `index --full` 重建
 

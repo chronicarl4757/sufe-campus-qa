@@ -165,6 +165,48 @@ def _extract_doc(result: AttachmentParseResult, content: bytes) -> None:
         result.notes.append("经 LibreOffice 转换后按 DOCX 解析")
 
 
+def _extract_xls(result: AttachmentParseResult, content: bytes) -> None:
+    """legacy .xls 适配器：xlrd 纯 Python 解析（部署环境不装 LibreOffice 也可用）。"""
+    try:
+        import xlrd  # 可选依赖见 pyproject [xlrd]；未安装则按既有状态标注
+    except ImportError:
+        result.parse_status = "legacy_doc_unparsed"
+        result.notes.append("未安装 xlrd，跳过 .xls 内容解析")
+        return
+    try:
+        book = xlrd.open_workbook(file_contents=content)
+    except Exception as e:
+        result.parse_status = "parse_failed"
+        result.notes.append(f"xlrd 打开失败: {type(e).__name__}: {e}")
+        return
+    lines: list[str] = []
+    truncated = False
+    for sheet in book.sheets():
+        lines.append(f"## {sheet.name}")
+        prev = None
+        for r in range(sheet.nrows):
+            cells = [str(sheet.cell_value(r, c)).strip() for c in range(sheet.ncols)]
+            while cells and not cells[-1]:
+                cells.pop()
+            if not cells:
+                continue
+            line = " | ".join(cells)
+            if line == prev:  # 连续重复表头行去重
+                continue
+            prev = line
+            lines.append(line)
+            if len(lines) >= _MAX_SHEET_ROWS:
+                truncated = True
+                break
+        if truncated:
+            break
+    result.text = "\n".join(lines)
+    result.sheet_count = book.nsheets
+    result.notes.append("经 xlrd 解析 legacy .xls")
+    if truncated:
+        result.notes.append(f"超过 {_MAX_SHEET_ROWS} 行上限，已截断")
+
+
 def _fmt_cell(value: object) -> str:
     """单元格显示值：日期 ISO 化，其余 str()；None（含无缓存值的公式）记空。"""
     if value is None:
@@ -257,8 +299,10 @@ def parse_attachment(filename: str, content: bytes) -> AttachmentParseResult:
             _extract_doc(result, content)
         elif result.fmt == "xlsx":
             _extract_xlsx(result, content)
+        elif result.fmt == "xls":
+            _extract_xls(result, content)
         else:
-            # xls/ppt/pptx/unknown：识别格式但不解析内容
+            # ppt/pptx/unknown：识别格式但不解析内容
             result.parse_status = "unsupported_format"
             result.notes.append(f"暂不支持解析 {result.fmt} 格式的内容")
     except Exception as e:
